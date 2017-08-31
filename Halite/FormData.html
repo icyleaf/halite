@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/icyleaf/halite">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Halite::FormData - github.com/icyleaf/halite</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite" data-name="halite">
+      <a href="../Halite.html">Halite</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Chainable" data-name="halite::chainable">
+      <a href="../Halite/Chainable.html">Chainable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Client" data-name="halite::client">
+      <a href="../Halite/Client.html">Client</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext" data-name="halite::ext">
+      <a href="../Halite/Ext.html">Ext</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPHeaders" data-name="halite::ext::httpheaders">
+      <a href="../Halite/Ext/HTTPHeaders.html">HTTPHeaders</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPHeaders/Escape" data-name="halite::ext::httpheaders::escape">
+      <a href="../Halite/Ext/HTTPHeaders/Escape.html">Escape</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPParams" data-name="halite::ext::httpparams">
+      <a href="../Halite/Ext/HTTPParams.html">HTTPParams</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPParams/Escape" data-name="halite::ext::httpparams::escape">
+      <a href="../Halite/Ext/HTTPParams/Escape.html">Escape</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
+      <a href="../Halite/FormData.html">FormData</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Options" data-name="halite::options">
+      <a href="../Halite/Options.html">Options</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Type" data-name="halite::options::type">
+      <a href="../Halite/Options/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Request" data-name="halite::request">
+      <a href="../Halite/Request.html">Request</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Request/Data" data-name="halite::request::data">
+      <a href="../Halite/Request/Data.html">Data</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Response" data-name="halite::response">
+      <a href="../Halite/Response.html">Response</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/HTTP" data-name="http">
+      <a href="../HTTP.html">HTTP</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/HTTP/Headers" data-name="http::headers">
+      <a href="../HTTP/Headers.html">Headers</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/HTTP/Params" data-name="http::params">
+      <a href="../HTTP/Params.html">Params</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">module</span> Halite::FormData
+
+</h1>
+
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>Utility-belt to build form data request bodies.</p>
+
+<p>Provides support for <code>application/x-www-form-urlencoded</code> and
+<code>multipart/form-data</code> types.</p>
+
+<pre><code>form <span class="o">=</span> <span class="t">FormData</span>.create({
+  <span class="s">&quot;name&quot;</span>  => <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
+  <span class="s">&quot;skill&quot;</span> => [ <span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span> ],
+  <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar.png&quot;</span>), <span class="c"># &#61;&gt; &quot;image binary data&quot;</span>
+})
+
+form.body <span class="c"># &#61;&gt; &quot;----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;name\&quot;\r\n\r\nLizeth Gusikowski\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;skill\&quot;\r\n\r\nruby\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;skill\&quot;\r\n\r\ncrystal\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;avatar\&quot;; filename&#61;\&quot;avatar.png\&quot;\r\n\r\nimage binary data\n\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN--&quot;</span>
+form.headers <span class="c"># &#61;&gt; HTTP::Headers&#123;&quot;Content-Type&quot; &#61;&gt; &quot;multipart/form-data; boundary&#61;\&quot;--------------------------SS0a9QKeM_6fcj2CE5D4d0LQ\&quot;&quot;&#125;</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/icyleaf/halite/blob/3102627227ce48f7d67fda15c9723b6ba539a385/src/halite/form_data.cr#L20" target="_blank">halite/form_data.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#create%28data%3AHash%28String%2COptions%3A%3AType%29%3D%7B%7DofString%3D%3EOptions%3A%3AType%29%3AHalite%3A%3ARequest%3A%3AData-class-method" class="signature"><strong>.create</strong>(data : Hash(String, Options::Type) = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Options</span><span class="t">::</span><span class="t">Type</span>) : Halite::Request::Data</a>
+        
+          <div class="summary"><p>FormData factory.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+
+
+<div class="methods-inherited">
+  
+</div>
+
+
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="create&#40;data:Hash&#40;String,Options::Type&#41;&#61;&#123;&#125;ofString&#61;&gt;Options::Type&#41;:Halite::Request::Data-class-method">
+      <div class="signature">
+        
+        def self.<strong>create</strong>(data : Hash(String, <a href="../Halite/Options/Type.html">Options::Type</a>) = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Options</span><span class="t">::</span><span class="t">Type</span>) : <a href="../Halite/Request/Data.html">Halite::Request::Data</a>
+
+        <a class="method-permalink" href="#create%28data%3AHash%28String%2COptions%3A%3AType%29%3D%7B%7DofString%3D%3EOptions%3A%3AType%29%3AHalite%3A%3ARequest%3A%3AData-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>FormData factory. Automatically selects best type depending on given <code>data</code> Hash</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/3102627227ce48f7d67fda15c9723b6ba539a385/src/halite/form_data.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+
+</div>
+
+</body>
+</html>
