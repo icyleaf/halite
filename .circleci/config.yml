@@ -3,6 +3,11 @@ jobs:
   build:
     docker:
       - image: crystallang/crystal
+    environment:
+      DOCS_PATH: "doc"
+      GIT_USER: "icyleaf"
+      GIT_EMAIL: "icyleaf.cn@gmail.com"
+      GIT_REPO: "git@github.com:icyleaf/halite.git"
     branches:
       ignore:
         - gh-pages
@@ -12,3 +17,19 @@ jobs:
       - run:
           name: "Spec"
           command: crystal spec
+      - run:
+          name: "Generate API documents"
+          command: crystal doc
+      - deploy:
+          name: "Upload to gh-page"
+          command: |
+            git config --global user.name "$GIT_USER"
+            git config --global user.email "$GIT_EMAIL"
+            cd "${DOCS_PATH}"
+            git init
+            git remote add origin $GIT_REPO
+            git fetch origin
+            git reset origin/gh-pages
+            git add -A .
+            git commit --allow-empty -m "Updating documents"
+            git push origin HEAD:gh-pages
