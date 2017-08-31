@@ -1,2 +1,2 @@
 require "spec"
-require "../src/request"
+require "../src/halite"
