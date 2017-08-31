@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: crystallang/crystal
+    branches:
+      ignore:
+        - gh-pages
+    working_directory: ~/halite
+    steps:
+      - checkout
+      - run:
+          name: "Spec"
+          command: crystal spec
