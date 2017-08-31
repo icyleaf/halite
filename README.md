@@ -61,7 +61,7 @@ Halite.patch("http://httpbin.org/anything", json: { "firstname" => "Olen", "last
 
 Haltie.delete("http://httpbin.org/delete", params: { "user_id" => 234234 })
 
-Halite.head("http://httpbin.org/anything", json: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
+Halite.headers("http://httpbin.org/anything", json: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
 ```
 
 ### Passing Parameters
@@ -150,7 +150,7 @@ Halite.auth("Bearer dXNlcjpwQHNz").get("http://httpbin.org/get")
 
 > TODO
 
-## Help and Disscuation
+## Help and Discussion
 
 You can browese the API documents:
 
