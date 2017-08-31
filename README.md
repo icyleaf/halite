@@ -150,6 +150,16 @@ Halite.auth("Bearer dXNlcjpwQHNz").get("http://httpbin.org/get")
 
 > TODO
 
+## Help and Disscuation
+
+You can browese the API documents:
+
+https://icyleaf.github.io/halite/
+
+If you have found a bug, please create a issue here:
+
+https://github.com/icyleaf/halite/issues/new
+
 ## Contributing
 
 1. Fork it ( https://github.com/icyleaf/halite/fork )
