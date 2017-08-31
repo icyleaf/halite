@@ -25,7 +25,7 @@ module Halite
     end
 
     # Returns [Option]() self with the headers, params, form and json of this hash and other combined.
-    def merge(options : Hash(Type, _) | NamedTuple)
+    def merge(options : Hash(Type, _) | NamedTuple) : Halite::Options
       if headers = parse_headers(options)
         @headers.not_nil!.merge!(headers)
       end
@@ -45,17 +45,17 @@ module Halite
       self
     end
 
-    def with_headers(**headers)
+    def with_headers(**headers) : Halite::Options
       @headers.not_nil!.merge! parse_headers({"headers" => headers})
       self
     end
 
-    def with_headers(headers : Hash(Type, _) | NamedTuple)
+    def with_headers(headers : Hash(Type, _) | NamedTuple) : Halite::Options
       @headers.not_nil!.merge! parse_headers({"headers" => headers})
       self
     end
 
-    private def parse_headers(options : (Hash(Type, _) | NamedTuple))
+    private def parse_headers(options : (Hash(Type, _) | NamedTuple)) : Array(String, String)
       headers = {} of String => String
       if data = options["headers"]?
         headers = HTTP::Headers.escape(data)
@@ -65,7 +65,7 @@ module Halite
     end
 
     {% for attr in %w(params form json) %}
-      private def parse_{{ attr.id }}(options : Hash(Type, _) | NamedTuple)
+      private def parse_{{ attr.id }}(options : Hash(Type, _) | NamedTuple) : Hash(String, Halite::Options::Type)
         new_{{ attr.id }} = {} of String => Type
         if (data = options[{{ attr.id.stringify }}]?) && !data.empty?
           data.each do |k, v|
@@ -89,11 +89,11 @@ module Halite
       end
     {% end %}
 
-    private def parse_cookies(headers : Halite::Headers)
-      Halite::Cookies.from_headers(headers)
+    private def parse_cookies(headers : Halite::Headers) : HTTP::Cookies
+      HTTP::Cookies.from_headers(headers)
     end
 
-    private def default_headers
+    private def default_headers : HTTP::Headers
       HTTP::Headers{
         "User-Agent"      => USER_AGENT,
         "Accept-Encoding" => %w(gzip deflate).join(", "),

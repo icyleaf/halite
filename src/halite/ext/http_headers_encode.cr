@@ -14,7 +14,7 @@ module Halite::Ext::HTTPHeaders::Escape
   # })
   # # => "HTTP::Headers{"Content-Type" => "application/json"}"
   # ```
-  def escape(data : Hash(String, _) | NamedTuple)
+  def escape(data : Hash(String, _) | NamedTuple) : HTTP::Headers
     ::HTTP::Headers.new.tap do |builder|
       data = data.is_a?(NamedTuple) ? data.to_h : data
       data.each do |key, value|

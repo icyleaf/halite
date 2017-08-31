@@ -15,7 +15,7 @@ module Halite
     end
 
     # @return [URI] URI with all componentes but query being normalized.
-    def normalize_uri(uri : String)
+    def normalize_uri(uri : String) : URI
       URI.parse(uri)
     end
 
