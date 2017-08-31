@@ -4,8 +4,8 @@ require "./response"
 require "http/client"
 
 module Halite
+  # Clients make requests and receive responses
   class Client
-    include Utils
     include Chainable
 
     @default_options : Halite::Options
@@ -17,26 +17,29 @@ module Halite
       @default_options = Options.new(default_options)
     end
 
-    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil})
+    # Make an HTTP request
+    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil}) : Halite::Response
       options = @default_options.merge(options)
 
-      uri = make_halite_uri(uri, options)
-      body, content_type = make_halite_body(options)
-      headers = make_halite_headers(options, content_type)
+      uri = make_request_uri(uri, options)
+      body = make_request_body(options)
+      headers = make_request_headers(options, body.headers)
 
-      request = Request.new(verb, uri, headers, body)
+      request = Request.new(verb, uri, headers, body.body)
       perform(request, options)
     end
 
-    def perform(request, options)
+    # Perform a single (no follow) HTTP request
+    def perform(request, options) : Halite::Response
       conn = HTTP::Client.exec(request.verb, request.uri, request.headers, request.body)
       Response.new(conn)
     end
 
-    private def make_halite_uri(uri : String, options : Halite::Options)
+    # Merges query params if needed
+    private def make_request_uri(uri : String, options : Halite::Options) : String
       uri = URI.parse uri
       if params = options.params
-        query = encode_www_form(params)
+        query = HTTP::Params.escape(params)
         uri.query = [uri.query, query].compact.join("&") unless query.empty?
       end
 
@@ -44,32 +47,36 @@ module Halite
       uri.to_s
     end
 
-    private def make_halite_headers(options : Halite::Options, content_type : String)
-      HTTP::Headers.new.tap do |builder|
-        builder.add "Content-Type", content_type unless content_type.empty?
-
-        if headers = options.headers
-          headers.each do |k, v|
-            builder.add k.to_s, v.to_s
-          end
-        end
+    # Merges request headers
+    private def make_request_headers(options : Halite::Options, content_type : String) : HTTP::Headers
+      headers = options.headers
+      if !content_type.empty?
+        headers.add("Content-Type", content_type)
       end
+
+      headers
     end
 
-    private def make_halite_body(options : Halite::Options)
-      content_type = ""
-      body = ""
+    private def make_request_headers(options : Halite::Options, headers : HTTP::Headers?) : HTTP::Headers
+      if headers
+        return options.headers.merge!(headers)
+      end
 
+      options.headers
+    end
+
+    # Create the request body object to send
+    private def make_request_body(options : Halite::Options) : Halite::Request::Data
       if (form = options.form) && !form.empty?
-        body, content_type = FormData.create form
+        return FormData.create form
       elsif (hash = options.json) && !hash.empty?
         body = JSON.build do |builder|
           hash.to_json(builder)
         end
-        content_type = "application/json"
+        return Halite::Request::Data.new(body, { "Content-Type" => "application/json" })
       end
 
-      [body, content_type]
+      Halite::Request::Data.new("", {} of String => String)
     end
   end
 end

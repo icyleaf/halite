@@ -38,7 +38,7 @@ Halite.get("http://httpbin.org/get", params: { language: "crystal", shard: "hali
 Halite.get("http://httpbin.org/get", params: { "language" => "crystal", "shard" => "halite" }, headers: { private_token: "T0k3n" })
 
 # And support chainable
-Halite.header(private_token: "T0k3n").get(url, params: { "language" => "crystal", "shard" => "halite" })
+Halite.header(private_token: "T0k3n").get("http://httpbin.org/get", params: { "language" => "crystal", "shard" => "halite" })
 ```
 
 Many other HTTP methods are avaiabled as well:

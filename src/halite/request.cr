@@ -14,8 +14,22 @@ module Halite
       end
     end
 
+    # @return [URI] URI with all componentes but query being normalized.
     def normalize_uri(uri : String)
       URI.parse(uri)
+    end
+
+    # Request data of body
+    struct Data
+      getter body : String
+      getter headers : HTTP::Headers
+
+      def self.new(body : String, headers : Hash(String, _))
+        new(body, HTTP::Headers.escape(headers))
+      end
+
+      def initialize(@body : String, @headers : HTTP::Headers)
+      end
     end
   end
 end

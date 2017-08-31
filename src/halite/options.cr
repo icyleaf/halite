@@ -4,15 +4,19 @@ module Halite
 
     alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(Type, Type)
 
-    # property cookies : Halite::Cookies
-
-    property headers : Hash(String, String)?
-    property params : Hash(String, Type)?
-    property form : Hash(String, Type)?
-    property json : Hash(String, Type)?
+    getter headers : HTTP::Headers #Hash(String, String)?
+    getter params : Hash(String, Type)?
+    getter form : Hash(String, Type)?
+    getter json : Hash(String, Type)?
+    # getter cookies : Halite::Cookies
 
     def initialize(options : (Hash(Type, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil})
-      @headers = default_headers.merge(parse_headers(options))
+      @headers = if headers = options["headers"]?
+        default_headers.merge!(HTTP::Headers.escape(headers)) # options["headers"]?))#   parse_headers(options))
+      else
+        default_headers
+      end
+
       @params = parse_params(options)
       @form = parse_form(options)
       @json = parse_json(options)
@@ -20,21 +24,22 @@ module Halite
       # @cookies = parse_cookies(@headers)
     end
 
+    # Returns [Option]() self with the headers, params, form and json of this hash and other combined.
     def merge(options : Hash(Type, _) | NamedTuple)
       if headers = parse_headers(options)
-        @headers.not_nil!.merge! headers
+        @headers.not_nil!.merge!(headers)
       end
 
       if params = parse_params(options)
-        @params.not_nil!.merge! params
+        @params.not_nil!.merge!(params)
       end
 
       if form = parse_form(options)
-        @form.not_nil!.merge! form
+        @form.not_nil!.merge!(form)
       end
 
       if json = parse_json(options)
-        @json.not_nil!.merge! json
+        @json.not_nil!.merge!(json)
       end
 
       self
@@ -50,20 +55,17 @@ module Halite
       self
     end
 
-    def parse_headers(options : (Hash(Type, _) | NamedTuple))
-      new_headers = {} of String => String
-      if headers = options["headers"]?
-        headers = headers.is_a?(NamedTuple) ? headers.to_h : headers
-        headers.as(Hash).each do |k, v|
-          new_headers[header_key(k.as(Type))] = v.as(Type).to_s
-        end
+    private def parse_headers(options : (Hash(Type, _) | NamedTuple))
+      headers = {} of String => String
+      if data = options["headers"]?
+        headers = HTTP::Headers.escape(data)
       end
 
-      new_headers
+      headers
     end
 
     {% for attr in %w(params form json) %}
-      def parse_{{ attr.id }}(options : Hash(Type, _) | NamedTuple)
+      private def parse_{{ attr.id }}(options : Hash(Type, _) | NamedTuple)
         new_{{ attr.id }} = {} of String => Type
         if (data = options[{{ attr.id.stringify }}]?) && !data.empty?
           data.each do |k, v|
@@ -87,21 +89,17 @@ module Halite
       end
     {% end %}
 
-    def parse_cookies(headers : Halite::Headers)
+    private def parse_cookies(headers : Halite::Headers)
       Halite::Cookies.from_headers(headers)
     end
 
-    private def header_key(key)
-      key.to_s.gsub("_", "-").split("-").map { |v| v.capitalize }.join("-")
-    end
-
     private def default_headers
-      {
+      HTTP::Headers{
         "User-Agent"      => USER_AGENT,
         "Accept-Encoding" => %w(gzip deflate).join(", "),
         "Accept"          => "*/*",
         "Connection"      => "keep-alive",
-      } of String => String
+      } #of String => String
     end
   end
 end

@@ -13,10 +13,12 @@ module Halite
       # @cookies = @conn.cookies
     end
 
-    forward_missing_to @conn
-    # delegate status_code, to: @conn
-    # delegate version, to: @conn
-    # delegate headers, to: @conn
-    # delegate cookies, to: @conn
+    # forward_missing_to @conn
+    delegate status_code, to: @conn
+    delegate version, to: @conn
+    delegate headers, to: @conn
+    delegate cookies, to: @conn
+    delegate body, to: @conn
+    delegate body_io, to: @conn
   end
 end
