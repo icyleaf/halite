@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/icyleaf/halite">
+  <link href="../../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../../js/doc.js"></script>
+  <title>Halite::Errors::UnprocessableEntityError - github.com/icyleaf/halite</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite" data-name="halite">
+      <a href="../../Halite.html">Halite</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Chainable" data-name="halite::chainable">
+      <a href="../../Halite/Chainable.html">Chainable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Client" data-name="halite::client">
+      <a href="../../Halite/Client.html">Client</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Errors" data-name="halite::errors">
+      <a href="../../Halite/Errors.html">Errors</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/AcceptedError" data-name="halite::errors::acceptederror">
+      <a href="../../Halite/Errors/AcceptedError.html">AcceptedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/AlreadyReportedError" data-name="halite::errors::alreadyreportederror">
+      <a href="../../Halite/Errors/AlreadyReportedError.html">AlreadyReportedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/BadGatewayError" data-name="halite::errors::badgatewayerror">
+      <a href="../../Halite/Errors/BadGatewayError.html">BadGatewayError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/BadRequestError" data-name="halite::errors::badrequesterror">
+      <a href="../../Halite/Errors/BadRequestError.html">BadRequestError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/BandwidthLimitExceededError" data-name="halite::errors::bandwidthlimitexceedederror">
+      <a href="../../Halite/Errors/BandwidthLimitExceededError.html">BandwidthLimitExceededError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/BlockedByWindowsParentalControlsError" data-name="halite::errors::blockedbywindowsparentalcontrolserror">
+      <a href="../../Halite/Errors/BlockedByWindowsParentalControlsError.html">BlockedByWindowsParentalControlsError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/ConflictError" data-name="halite::errors::conflicterror">
+      <a href="../../Halite/Errors/ConflictError.html">ConflictError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/ContinueError" data-name="halite::errors::continueerror">
+      <a href="../../Halite/Errors/ContinueError.html">ContinueError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/CreatedError" data-name="halite::errors::createderror">
+      <a href="../../Halite/Errors/CreatedError.html">CreatedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/Error" data-name="halite::errors::error">
+      <a href="../../Halite/Errors/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/ExpectationFailedError" data-name="halite::errors::expectationfailederror">
+      <a href="../../Halite/Errors/ExpectationFailedError.html">ExpectationFailedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/FailedDependencyError" data-name="halite::errors::faileddependencyerror">
+      <a href="../../Halite/Errors/FailedDependencyError.html">FailedDependencyError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/ForbiddenError" data-name="halite::errors::forbiddenerror">
+      <a href="../../Halite/Errors/ForbiddenError.html">ForbiddenError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/FoundError" data-name="halite::errors::founderror">
+      <a href="../../Halite/Errors/FoundError.html">FoundError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/GatewayTimeoutError" data-name="halite::errors::gatewaytimeouterror">
+      <a href="../../Halite/Errors/GatewayTimeoutError.html">GatewayTimeoutError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/GoneError" data-name="halite::errors::goneerror">
+      <a href="../../Halite/Errors/GoneError.html">GoneError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/HTTPVersionNotSupportedError" data-name="halite::errors::httpversionnotsupportederror">
+      <a href="../../Halite/Errors/HTTPVersionNotSupportedError.html">HTTPVersionNotSupportedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/ImATeapotError" data-name="halite::errors::imateapoterror">
+      <a href="../../Halite/Errors/ImATeapotError.html">ImATeapotError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/IMUsedError" data-name="halite::errors::imusederror">
+      <a href="../../Halite/Errors/IMUsedError.html">IMUsedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/InsufficientStorageError" data-name="halite::errors::insufficientstorageerror">
+      <a href="../../Halite/Errors/InsufficientStorageError.html">InsufficientStorageError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/InternalServerErrorError" data-name="halite::errors::internalservererrorerror">
+      <a href="../../Halite/Errors/InternalServerErrorError.html">InternalServerErrorError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/LengthRequiredError" data-name="halite::errors::lengthrequirederror">
+      <a href="../../Halite/Errors/LengthRequiredError.html">LengthRequiredError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/LockedError" data-name="halite::errors::lockederror">
+      <a href="../../Halite/Errors/LockedError.html">LockedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/LoopDetectedError" data-name="halite::errors::loopdetectederror">
+      <a href="../../Halite/Errors/LoopDetectedError.html">LoopDetectedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/MethodNotAllowedError" data-name="halite::errors::methodnotallowederror">
+      <a href="../../Halite/Errors/MethodNotAllowedError.html">MethodNotAllowedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/MovedPermanentlyError" data-name="halite::errors::movedpermanentlyerror">
+      <a href="../../Halite/Errors/MovedPermanentlyError.html">MovedPermanentlyError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/MultipleChoicesError" data-name="halite::errors::multiplechoiceserror">
+      <a href="../../Halite/Errors/MultipleChoicesError.html">MultipleChoicesError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/MultiStatusError" data-name="halite::errors::multistatuserror">
+      <a href="../../Halite/Errors/MultiStatusError.html">MultiStatusError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/NetworkAuthenticationRequiredError" data-name="halite::errors::networkauthenticationrequirederror">
+      <a href="../../Halite/Errors/NetworkAuthenticationRequiredError.html">NetworkAuthenticationRequiredError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/NoContentError" data-name="halite::errors::nocontenterror">
+      <a href="../../Halite/Errors/NoContentError.html">NoContentError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/NonAuthoritativeInformationError" data-name="halite::errors::nonauthoritativeinformationerror">
+      <a href="../../Halite/Errors/NonAuthoritativeInformationError.html">NonAuthoritativeInformationError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/NotAcceptableError" data-name="halite::errors::notacceptableerror">
+      <a href="../../Halite/Errors/NotAcceptableError.html">NotAcceptableError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/NotExtendedError" data-name="halite::errors::notextendederror">
+      <a href="../../Halite/Errors/NotExtendedError.html">NotExtendedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/NotFoundError" data-name="halite::errors::notfounderror">
+      <a href="../../Halite/Errors/NotFoundError.html">NotFoundError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/NotImplementedError" data-name="halite::errors::notimplementederror">
+      <a href="../../Halite/Errors/NotImplementedError.html">NotImplementedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/NotModifiedError" data-name="halite::errors::notmodifiederror">
+      <a href="../../Halite/Errors/NotModifiedError.html">NotModifiedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/OKError" data-name="halite::errors::okerror">
+      <a href="../../Halite/Errors/OKError.html">OKError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/PartialContentError" data-name="halite::errors::partialcontenterror">
+      <a href="../../Halite/Errors/PartialContentError.html">PartialContentError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/PayloadTooLargeError" data-name="halite::errors::payloadtoolargeerror">
+      <a href="../../Halite/Errors/PayloadTooLargeError.html">PayloadTooLargeError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/PaymentRequiredError" data-name="halite::errors::paymentrequirederror">
+      <a href="../../Halite/Errors/PaymentRequiredError.html">PaymentRequiredError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/PermanentRedirectError" data-name="halite::errors::permanentredirecterror">
+      <a href="../../Halite/Errors/PermanentRedirectError.html">PermanentRedirectError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/PreconditionFailedError" data-name="halite::errors::preconditionfailederror">
+      <a href="../../Halite/Errors/PreconditionFailedError.html">PreconditionFailedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/PreconditionRequiredError" data-name="halite::errors::preconditionrequirederror">
+      <a href="../../Halite/Errors/PreconditionRequiredError.html">PreconditionRequiredError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/ProcessingError" data-name="halite::errors::processingerror">
+      <a href="../../Halite/Errors/ProcessingError.html">ProcessingError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/ProxyAuthenticationRequiredError" data-name="halite::errors::proxyauthenticationrequirederror">
+      <a href="../../Halite/Errors/ProxyAuthenticationRequiredError.html">ProxyAuthenticationRequiredError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/RangeNotSatisfiableError" data-name="halite::errors::rangenotsatisfiableerror">
+      <a href="../../Halite/Errors/RangeNotSatisfiableError.html">RangeNotSatisfiableError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/RequestHeaderFieldsTooLargeError" data-name="halite::errors::requestheaderfieldstoolargeerror">
+      <a href="../../Halite/Errors/RequestHeaderFieldsTooLargeError.html">RequestHeaderFieldsTooLargeError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/RequestTimeoutError" data-name="halite::errors::requesttimeouterror">
+      <a href="../../Halite/Errors/RequestTimeoutError.html">RequestTimeoutError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/ResetContentError" data-name="halite::errors::resetcontenterror">
+      <a href="../../Halite/Errors/ResetContentError.html">ResetContentError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/RetryWithError" data-name="halite::errors::retrywitherror">
+      <a href="../../Halite/Errors/RetryWithError.html">RetryWithError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/SeeOtherError" data-name="halite::errors::seeothererror">
+      <a href="../../Halite/Errors/SeeOtherError.html">SeeOtherError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/ServiceUnavailableError" data-name="halite::errors::serviceunavailableerror">
+      <a href="../../Halite/Errors/ServiceUnavailableError.html">ServiceUnavailableError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/SwitchingProtocolsError" data-name="halite::errors::switchingprotocolserror">
+      <a href="../../Halite/Errors/SwitchingProtocolsError.html">SwitchingProtocolsError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/SwitchProxyError" data-name="halite::errors::switchproxyerror">
+      <a href="../../Halite/Errors/SwitchProxyError.html">SwitchProxyError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/TemporaryRedirectError" data-name="halite::errors::temporaryredirecterror">
+      <a href="../../Halite/Errors/TemporaryRedirectError.html">TemporaryRedirectError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/TooManyConnectionsFromThisIPError" data-name="halite::errors::toomanyconnectionsfromthisiperror">
+      <a href="../../Halite/Errors/TooManyConnectionsFromThisIPError.html">TooManyConnectionsFromThisIPError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/TooManyRequestsError" data-name="halite::errors::toomanyrequestserror">
+      <a href="../../Halite/Errors/TooManyRequestsError.html">TooManyRequestsError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/UnauthorizedError" data-name="halite::errors::unauthorizederror">
+      <a href="../../Halite/Errors/UnauthorizedError.html">UnauthorizedError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/UnorderedCollectionError" data-name="halite::errors::unorderedcollectionerror">
+      <a href="../../Halite/Errors/UnorderedCollectionError.html">UnorderedCollectionError</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Errors/UnprocessableEntityError" data-name="halite::errors::unprocessableentityerror">
+      <a href="../../Halite/Errors/UnprocessableEntityError.html">UnprocessableEntityError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/UnsupportedMediaTypeError" data-name="halite::errors::unsupportedmediatypeerror">
+      <a href="../../Halite/Errors/UnsupportedMediaTypeError.html">UnsupportedMediaTypeError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/UpgradeRequiredError" data-name="halite::errors::upgraderequirederror">
+      <a href="../../Halite/Errors/UpgradeRequiredError.html">UpgradeRequiredError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/URITooLongError" data-name="halite::errors::uritoolongerror">
+      <a href="../../Halite/Errors/URITooLongError.html">URITooLongError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/UseProxyError" data-name="halite::errors::useproxyerror">
+      <a href="../../Halite/Errors/UseProxyError.html">UseProxyError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/VariantAlsoNegotiatesError" data-name="halite::errors::variantalsonegotiateserror">
+      <a href="../../Halite/Errors/VariantAlsoNegotiatesError.html">VariantAlsoNegotiatesError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext" data-name="halite::ext">
+      <a href="../../Halite/Ext.html">Ext</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPHeaders" data-name="halite::ext::httpheaders">
+      <a href="../../Halite/Ext/HTTPHeaders.html">HTTPHeaders</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPHeaders/Escape" data-name="halite::ext::httpheaders::escape">
+      <a href="../../Halite/Ext/HTTPHeaders/Escape.html">Escape</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPParams" data-name="halite::ext::httpparams">
+      <a href="../../Halite/Ext/HTTPParams.html">HTTPParams</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPParams/Escape" data-name="halite::ext::httpparams::escape">
+      <a href="../../Halite/Ext/HTTPParams/Escape.html">Escape</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
+      <a href="../../Halite/FormData.html">FormData</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Options" data-name="halite::options">
+      <a href="../../Halite/Options.html">Options</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Type" data-name="halite::options::type">
+      <a href="../../Halite/Options/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Request" data-name="halite::request">
+      <a href="../../Halite/Request.html">Request</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Request/Data" data-name="halite::request::data">
+      <a href="../../Halite/Request/Data.html">Data</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Response" data-name="halite::response">
+      <a href="../../Halite/Response.html">Response</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/HTTP" data-name="http">
+      <a href="../../HTTP.html">HTTP</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/HTTP/Headers" data-name="http::headers">
+      <a href="../../HTTP/Headers.html">Headers</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/HTTP/Params" data-name="http::params">
+      <a href="../../HTTP/Params.html">Params</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Halite::Errors::UnprocessableEntityError
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Errors/UnprocessableEntityError.html">Halite::Errors::UnprocessableEntityError</a></li><li class="superclass"><a href="../../Halite/Errors/Error.html">Halite::Errors::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/icyleaf/halite/blob/a7f6ffe085b30e5fba2b81b798f21a1e57e8f3b3/src/halite/error.cr#L76" target="_blank">halite/error.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+</body>
+</html>
