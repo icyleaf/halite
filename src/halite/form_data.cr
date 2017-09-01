@@ -9,12 +9,12 @@ module Halite
   #
   # ```
   # form = FormData.create({
-  #   "name"  => "Lizeth Gusikowski",
-  #   "skill" => [ "ruby", "crystal" ],
+  #   "name"   => "Lizeth Gusikowski",
+  #   "skill"  => ["ruby", "crystal"],
   #   "avatar" => File.open("avatar.png"), # => "image binary data"
   # })
   #
-  # form.body # => "----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\nLizeth Gusikowski\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\"skill\"\r\n\r\nruby\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\"skill\"\r\n\r\ncrystal\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\"avatar\"; filename=\"avatar.png\"\r\n\r\nimage binary data\n\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN--"
+  # form.body    # => "----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\nLizeth Gusikowski\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\"skill\"\r\n\r\nruby\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\"skill\"\r\n\r\ncrystal\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\"avatar\"; filename=\"avatar.png\"\r\n\r\nimage binary data\n\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN--"
   # form.headers # => HTTP::Headers{"Content-Type" => "multipart/form-data; boundary=\"--------------------------SS0a9QKeM_6fcj2CE5D4d0LQ\""}
   # ```
   module FormData
@@ -37,12 +37,12 @@ module Halite
         end
         builder.finish
 
-        Halite::Request::Data.new(io.to_s, headers: { "Content-Type" => builder.content_type })
+        Halite::Request::Data.new(io.to_s, headers: {"Content-Type" => builder.content_type})
       else
         content_type = "application/x-www-form-urlencoded"
         body = HTTP::Params.escape(data)
 
-        Halite::Request::Data.new(body, headers: { "Content-Type" => content_type })
+        Halite::Request::Data.new(body, headers: {"Content-Type" => content_type})
       end
     end
 

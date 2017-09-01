@@ -32,7 +32,10 @@ module Halite
     # Perform a single (no follow) HTTP request
     def perform(request, options) : Halite::Response
       conn = HTTP::Client.exec(request.verb, request.uri, request.headers, request.body)
-      Response.new(conn)
+      response = Response.new(conn)
+      # if response.code >= 400
+      #   raise Halite::Error.new
+      # end
     end
 
     # Merges query params if needed
@@ -73,7 +76,7 @@ module Halite
         body = JSON.build do |builder|
           hash.to_json(builder)
         end
-        return Halite::Request::Data.new(body, { "Content-Type" => "application/json" })
+        return Halite::Request::Data.new(body, {"Content-Type" => "application/json"})
       end
 
       Halite::Request::Data.new("", {} of String => String)

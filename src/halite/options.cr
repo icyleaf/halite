@@ -4,19 +4,15 @@ module Halite
 
     alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(Type, Type)
 
-    getter headers : HTTP::Headers #Hash(String, String)?
+    getter headers : HTTP::Headers # Hash(String, String)?
     getter params : Hash(String, Type)?
     getter form : Hash(String, Type)?
     getter json : Hash(String, Type)?
+
     # getter cookies : Halite::Cookies
 
     def initialize(options : (Hash(Type, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil})
-      @headers = if headers = options["headers"]?
-        default_headers.merge!(HTTP::Headers.escape(headers)) # options["headers"]?))#   parse_headers(options))
-      else
-        default_headers
-      end
-
+      @headers = parse_headers(options)
       @params = parse_params(options)
       @form = parse_form(options)
       @json = parse_json(options)
@@ -55,10 +51,12 @@ module Halite
       self
     end
 
-    private def parse_headers(options : (Hash(Type, _) | NamedTuple)) : Array(String, String)
-      headers = {} of String => String
+    private def parse_headers(options : (Hash(Type, _) | NamedTuple)) : HTTP::Headers
+      headers = HTTP::Headers.new
       if data = options["headers"]?
         headers = HTTP::Headers.escape(data)
+      else
+        headers = default_headers
       end
 
       headers
@@ -99,7 +97,7 @@ module Halite
         "Accept-Encoding" => %w(gzip deflate).join(", "),
         "Accept"          => "*/*",
         "Connection"      => "keep-alive",
-      } #of String => String
+      }
     end
   end
 end

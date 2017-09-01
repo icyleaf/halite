@@ -5,8 +5,8 @@ module Halite::Ext::HTTPParams::Escape
   #
   # ```
   # HTTP::Params.escape({
-  #   "name"  => "Lizeth Gusikowski",
-  #   "skill" => [ "ruby", "crystal" ],
+  #   "name"    => "Lizeth Gusikowski",
+  #   "skill"   => ["ruby", "crystal"],
   #   "company" => {
   #     "name" => "Keeling Inc",
   #   },
@@ -38,8 +38,8 @@ module Halite::Ext::HTTPParams::Escape
   #
   # ```
   # HTTP::Params.escape({
-  #   "name"  => "Lizeth Gusikowski",
-  #   "skill" => [ "ruby", "crystal" ],
+  #   "name"    => "Lizeth Gusikowski",
+  #   "skill"   => ["ruby", "crystal"],
   #   "company" => {
   #     "name" => "Keeling Inc",
   #   },

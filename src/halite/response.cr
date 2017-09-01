@@ -30,11 +30,11 @@ module Halite
     end
 
     # Return String eagerly consume the entire body as a string
-    def to_s : String
-      @conn.body? ? @conn.body : @conn.body_io
+    def to_s
+      @conn.body? ? @conn.body : @conn.body_io.to_s
     end
 
-    def to_s(io) : String
+    def to_s(io)
       io << to_s
     end
   end
