@@ -21,7 +21,11 @@ module Halite
 
     # @return `URI` with the scheme, user, password, port and host combined
     def domain
-      URI.parse(@uri.to_s.sub(@uri.full_path, "").sub("##{@uri.fragment}", ""))
+      domain = @uri.to_s
+      domain = domain.sub(@uri.full_path, "") if @uri.full_path != "/"
+      domain = domain.sub("##{@uri.fragment}", "") if @uri.fragment
+
+      URI.parse(domain)
     end
 
     # @return `String` with the path, query and fragment combined
