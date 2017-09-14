@@ -35,6 +35,8 @@ module Halite
 
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
       response = Response.new(conn_response)
+    rescue ex : IO::Timeout
+      raise TimeoutError.new(ex.message)
     end
 
     # Merges query params if needed

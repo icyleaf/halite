@@ -1,4 +1,4 @@
-# halite
+# Halite
 
 ![Status](https://img.shields.io/badge/status-WIP-yellow.svg)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/icyleaf/halite/blob/master/LICENSE)
