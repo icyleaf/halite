@@ -60,12 +60,10 @@ module Halite
       headers
     end
 
+    # Merges request headers
     private def make_request_headers(options : Halite::Options, headers : HTTP::Headers?) : HTTP::Headers
-      if headers
-        return options.headers.merge!(headers)
-      end
-
-      options.headers
+      headers = headers ? options.headers.merge!(headers) : options.headers
+      options.cookies.add_request_headers(headers)
     end
 
     # Create the request body object to send

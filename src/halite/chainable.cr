@@ -49,12 +49,20 @@ module Halite
 
     # Make a request with the given headers
     def headers(headers : Hash(String, _) | NamedTuple) : Halite::Client
-      branch default_options.with_headers(headers)
+      branch DEFAULT_OPTIONS.with_headers(headers)
     end
 
     # Make a request with the given headers
     def headers(**kargs) : Halite::Client
-      branch default_options.with_headers(kargs)
+      branch DEFAULT_OPTIONS.with_headers(kargs)
+    end
+
+    def cookies(cookies : Hash(String, _) | NamedTuple) : Halite::Client
+      branch DEFAULT_OPTIONS.with_cookies(cookies)
+    end
+
+    def cookies(**kargs) : Halite::Client
+      branch DEFAULT_OPTIONS.with_cookies(kargs)
     end
 
     # Make an HTTP request with the given verb
@@ -62,10 +70,8 @@ module Halite
       branch(options).request verb, uri
     end
 
-    # Get options for HTTP
-    def default_options : Halite::Options
-      Halite::Options.new
-    end
+    # :nodoc:
+    DEFAULT_OPTIONS = Halite::Options.new
 
     # :nodoc:
     private def branch(options : Hash(String, _) | NamedTuple | Options) : Halite::Client

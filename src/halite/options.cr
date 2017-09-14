@@ -4,26 +4,27 @@ module Halite
 
     alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(Type, Type)
 
-    getter headers : HTTP::Headers # Hash(String, String)?
+    getter headers : HTTP::Headers
+    getter cookies : HTTP::Cookies
+
     getter params : Hash(String, Type)?
     getter form : Hash(String, Type)?
     getter json : Hash(String, Type)?
 
-    # getter cookies : Halite::Cookies
-
     def initialize(options : (Hash(Type, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil})
       @headers = parse_headers(options)
+      @cookies = parse_cookies(@headers)
+
       @params = parse_params(options)
       @form = parse_form(options)
       @json = parse_json(options)
-
-      # @cookies = parse_cookies(@headers)
     end
 
     # Returns [Option]() self with the headers, params, form and json of this hash and other combined.
     def merge(options : Hash(Type, _) | NamedTuple) : Halite::Options
       if headers = parse_headers(options)
         @headers.not_nil!.merge!(headers)
+        @cookies.fill_from_headers(@headers)
       end
 
       if params = parse_params(options)
@@ -48,6 +49,36 @@ module Halite
 
     def with_headers(headers : Hash(Type, _) | NamedTuple) : Halite::Options
       @headers.not_nil!.merge! parse_headers({"headers" => headers})
+      self
+    end
+
+    def with_cookies(cookies : Hash(Type, _) | NamedTuple) : Halite::Options
+      cookies.each do |key, value|
+        @cookies[key.to_s] = value.to_s
+      end
+
+      self
+    end
+
+    def with_cookies(**cookies) : Halite::Options
+      cookies.each do |key, value|
+        @cookies[key.to_s] = values.to_s
+      end
+
+      self
+    end
+
+    def with_cookies(cookies : HTTP::Cookies) : Halite::Options
+      cookies.each do |c|
+        with_cookies(c)
+      end
+
+      self
+    end
+
+    def with_cookies(cookie : HTTP::Cookie) : Halite::Options
+      @headers.not_nil!.merge! cookie.to_set_cookie_header
+      @cookies.fill_from_headers @headers
       self
     end
 
@@ -87,7 +118,7 @@ module Halite
       end
     {% end %}
 
-    private def parse_cookies(headers : Halite::Headers) : HTTP::Cookies
+    private def parse_cookies(headers : HTTP::Headers) : HTTP::Cookies
       HTTP::Cookies.from_headers(headers)
     end
 

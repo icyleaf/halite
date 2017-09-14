@@ -140,7 +140,24 @@ Halite.auth("Bearer dXNlcjpwQHNz").get("http://httpbin.org/get")
 
 #### Cookies
 
-> TODO
+##### Passing cookies in requests
+
+The `Halite.cookies` option can be used to configure cookies for a given request:
+
+```crystal
+Halite.cookies(session_cookie: "6abaef100b77808ceb7fe26a3bcff1d0")
+      .get("httpbin.org/headers")
+```
+
+##### Get cookies in requests
+
+To obtain the cookies(cookie jar) for a given response, call the `#cookies` method:
+
+```crystal
+r = Halite.get("http://httpbin.org/cookies?set?session_cookie=6abaef100b77808ceb7fe26a3bcff1d0")
+pp r.cookies
+# => #<HTTP::Cookies:0x10dbed980 @cookies={"session_cookie" =>#<HTTP::Cookie:0x10ec20f00 @domain=nil, @expires=nil, @extension=nil, @http_only=false, @name="session_cookie", @path="/", @secure=false, @value="6abaef100b77808ceb7fe26a3bcff1d0">}>
+```
 
 ### Response Handling
 
