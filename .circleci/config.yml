@@ -8,6 +8,7 @@ jobs:
       GIT_USER: "icyleaf"
       GIT_EMAIL: "icyleaf.cn@gmail.com"
       GIT_REPO: "git@github.com:icyleaf/halite.git"
+      GH_REF: "github.com/icyleaf/gitlab.cr"
     branches:
       ignore:
         - gh-pages
@@ -19,7 +20,12 @@ jobs:
           command: crystal spec
       - run:
           name: "Generate API documents"
-          command: crystal doc
+          command: |
+            COMMIT_HASH=$(git rev-parse --short HEAD)
+            COMMIT_DATE=$(git log -1 --format=%ci)
+            COMMIT_STATUS="[${COMMIT_HASH}](https://${GH_REF}/commit/${COMMIT_HASH})"
+            sed -i -e "s/latest commit/$(echo ${COMMIT_STATUS} | sed -e "s/\//\\\\\//g") (${COMMIT_DATE})/" README.md
+            crystal doc
       - deploy:
           name: "Upload to gh-page"
           command: |

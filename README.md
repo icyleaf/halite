@@ -7,6 +7,8 @@
 
 Yet another simple HTTP and REST client writes with Crystal. Inspired from the Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem.
 
+Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
+
 ## Installation
 
 Add this to your application's `shard.yml`:
