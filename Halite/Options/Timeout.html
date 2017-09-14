@@ -5,7 +5,7 @@
   <meta id="repository-name" content="github.com/icyleaf/halite">
   <link href="../../css/style.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="../../js/doc.js"></script>
-  <title>Halite::Errors::PreconditionFailedError - github.com/icyleaf/halite</title>
+  <title>Halite::Options::Timeout - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -35,7 +35,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Errors" data-name="halite::errors">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Errors" data-name="halite::errors">
       <a href="../../Halite/Errors.html">Errors</a>
       
         <ul>
@@ -245,7 +245,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Errors/PreconditionFailedError" data-name="halite::errors::preconditionfailederror">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Errors/PreconditionFailedError" data-name="halite::errors::preconditionfailederror">
       <a href="../../Halite/Errors/PreconditionFailedError.html">PreconditionFailedError</a>
       
     </li>
@@ -415,12 +415,12 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Options" data-name="halite::options">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Options" data-name="halite::options">
       <a href="../../Halite/Options.html">Options</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Timeout" data-name="halite::options::timeout">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Options/Timeout" data-name="halite::options::timeout">
       <a href="../../Halite/Options/Timeout.html">Timeout</a>
       
     </li>
@@ -487,15 +487,19 @@
 <div id="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Halite::Errors::PreconditionFailedError
+  <span class="kind">struct</span> Halite::Options::Timeout
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Errors/PreconditionFailedError.html">Halite::Errors::PreconditionFailedError</a></li><li class="superclass"><a href="../../Halite/Errors/Error.html">Halite::Errors::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Options/Timeout.html">Halite::Options::Timeout</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
+
+  <h2>Overview</h2>
+
+  <p>Timeout struct</p>
 
 
 
@@ -513,7 +517,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/error.cr#L76" target="_blank">halite/error.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/options.cr#L174" target="_blank">halite/options.cr</a>
     
     <br/>
   
@@ -522,9 +526,49 @@
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28connect%3AFloat64%3F%3Dnil%2Cread%3AFloat64%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(connect : Float64? = <span class="n">nil</span>, read : Float64? = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28connect%3ATime%3A%3ASpan%3F%3Dnil%2Cread%3ATime%3A%3ASpan%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(connect : Time::Span? = <span class="n">nil</span>, read : Time::Span? = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#connect%3AFloat64%3F-instance-method" class="signature"><strong>#connect</strong> : Float64?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#connect%3D%28connect%29-instance-method" class="signature"><strong>#connect=</strong>(connect)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read%3AFloat64%3F-instance-method" class="signature"><strong>#read</strong> : Float64?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read%3D%28read%29-instance-method" class="signature"><strong>#read=</strong>(read)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -562,22 +606,114 @@
 
 
   
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new&#40;connect:Float64?&#61;nil,read:Float64?&#61;nil&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(connect : Float64? = <span class="n">nil</span>, read : Float64? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28connect%3AFloat64%3F%3Dnil%2Cread%3AFloat64%3F%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/options.cr#L176" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;connect:Time::Span?&#61;nil,read:Time::Span?&#61;nil&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(connect : Time::Span? = <span class="n">nil</span>, read : Time::Span? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28connect%3ATime%3A%3ASpan%3F%3Dnil%2Cread%3ATime%3A%3ASpan%3F%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/options.cr#L179" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="connect:Float64?-instance-method">
+      <div class="signature">
+        
+        def <strong>connect</strong> : Float64?
+
+        <a class="method-permalink" href="#connect%3AFloat64%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/options.cr#L175" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="connect&#61;&#40;connect&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>connect=</strong>(connect)
+
+        <a class="method-permalink" href="#connect%3D%28connect%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/options.cr#L175" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read:Float64?-instance-method">
+      <div class="signature">
+        
+        def <strong>read</strong> : Float64?
+
+        <a class="method-permalink" href="#read%3AFloat64%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/options.cr#L175" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read&#61;&#40;read&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>read=</strong>(read)
+
+        <a class="method-permalink" href="#read%3D%28read%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/options.cr#L175" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

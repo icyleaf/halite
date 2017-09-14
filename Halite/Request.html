@@ -420,6 +420,11 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Timeout" data-name="halite::options::timeout">
+      <a href="../Halite/Options/Timeout.html">Timeout</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Type" data-name="halite::options::type">
       <a href="../Halite/Options/Type.html">Type</a>
       
@@ -508,7 +513,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/7ba43e42bf7b76d9193d121532a908b78e59298d/src/halite/request.cr#L2" target="_blank">halite/request.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/request.cr#L2" target="_blank">halite/request.cr</a>
     
     <br/>
   
@@ -540,14 +545,21 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#headers%3AHTTP%3A%3AHeaders-instance-method" class="signature"><strong>#headers</strong> : HTTP::Headers</a>
+        <a href="#domain-instance-method" class="signature"><strong>#domain</strong></a>
+        
+          <div class="summary"><p>@return <code>URI</code> with the scheme, user, password, port and host combined</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#normalize_uri%28uri%3AString%29%3AURI-instance-method" class="signature"><strong>#normalize_uri</strong>(uri : String) : URI</a>
+        <a href="#full_path-instance-method" class="signature"><strong>#full_path</strong></a>
         
-          <div class="summary"><p>@return [URI] URI with all componentes but query being normalized.</p></div>
+          <div class="summary"><p>@return <code>String</code> with the path, query and fragment combined</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#headers%3AHTTP%3A%3AHeaders-instance-method" class="signature"><strong>#headers</strong> : HTTP::Headers</a>
         
       </li>
     
@@ -610,7 +622,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7ba43e42bf7b76d9193d121532a908b78e59298d/src/halite/request.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/request.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -633,7 +645,43 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7ba43e42bf7b76d9193d121532a908b78e59298d/src/halite/request.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/request.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="domain-instance-method">
+      <div class="signature">
+        
+        def <strong>domain</strong>
+
+        <a class="method-permalink" href="#domain-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>@return <code>URI</code> with the scheme, user, password, port and host combined</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/request.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="full_path-instance-method">
+      <div class="signature">
+        
+        def <strong>full_path</strong>
+
+        <a class="method-permalink" href="#full_path-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>@return <code>String</code> with the path, query and fragment combined</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/request.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -649,25 +697,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7ba43e42bf7b76d9193d121532a908b78e59298d/src/halite/request.cr#L6" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="normalize_uri&#40;uri:String&#41;:URI-instance-method">
-      <div class="signature">
-        
-        def <strong>normalize_uri</strong>(uri : String) : URI
-
-        <a class="method-permalink" href="#normalize_uri%28uri%3AString%29%3AURI-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>@return [URI] URI with all componentes but query being normalized.</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/7ba43e42bf7b76d9193d121532a908b78e59298d/src/halite/request.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/request.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -683,7 +713,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7ba43e42bf7b76d9193d121532a908b78e59298d/src/halite/request.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/request.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -699,7 +729,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7ba43e42bf7b76d9193d121532a908b78e59298d/src/halite/request.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/request.cr#L4" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -715,7 +745,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7ba43e42bf7b76d9193d121532a908b78e59298d/src/halite/request.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e343e2405ead4551170aed5014981c10c3b8b15d/src/halite/request.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>

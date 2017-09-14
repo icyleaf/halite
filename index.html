@@ -420,6 +420,11 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Timeout" data-name="halite::options::timeout">
+      <a href="Halite/Options/Timeout.html">Timeout</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Type" data-name="halite::options::type">
       <a href="Halite/Options/Type.html">Type</a>
       
@@ -600,7 +605,7 @@
 <p>The <code>Halite.cookies</code> option can be used to configure cookies for a given request:</p>
 
 <pre><code class='language-crystal'><span class="t">Halite</span>.cookies(session_cookie: <span class="s">&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
-      .get(<span class="s">&quot;httpbin.org/headers&quot;</span>)</code></pre>
+      .get(<span class="s">&quot;http://httpbin.org/headers&quot;</span>)</code></pre>
 
 <h5>Get cookies in requests</h5>
 
@@ -609,6 +614,23 @@
 <pre><code class='language-crystal'>r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/cookies?set?session_cookie&#61;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
 pp r.cookies
 <span class="c"># &#61;&gt; #&lt;HTTP::Cookies:0x10dbed980 &#64;cookies&#61;&#123;&quot;session_cookie&quot; &#61;&gt;#&lt;HTTP::Cookie:0x10ec20f00 &#64;domain&#61;nil, &#64;expires&#61;nil, &#64;extension&#61;nil, &#64;http_only&#61;false, &#64;name&#61;&quot;session_cookie&quot;, &#64;path&#61;&quot;/&quot;, &#64;secure&#61;false, &#64;value&#61;&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;&gt;&#125;&gt;</span></code></pre>
+
+<h4>Timeout</h4>
+
+<p>By default, the Halite does not enforce timeout on a request. You can enable per operation timeouts by configuring them through the chaining API.</p>
+
+<p>The <code>connect</code> timeout is the number of seconds Halite will wait for your client to establish a connection to a remote server call on the socket.</p>
+
+<p>Once your client has connected to the server and sent the HTTP request, the <code>read</code> timeout is the number of seconds the client will wait for the server to send a response.</p>
+
+<pre><code class='language-crystal'><span class="c"># Separate set connect and read timeout</span>
+<span class="t">Halite</span>.timeout(connect: <span class="n">3.0</span>, read: <span class="n">2</span>.minutes)
+      .get(<span class="s">&quot;http://httpbin.org/anything&quot;</span>)
+
+<span class="c"># Boath set connect and read timeout</span>
+<span class="c"># The timeout value will be applied to both the connect and the read timeouts.</span>
+<span class="t">Halite</span>.timeout(<span class="n">5</span>)
+      .get(<span class="s">&quot;http://httpbin.org/anything&quot;</span>)</code></pre>
 
 <h3>Response Handling</h3>
 
