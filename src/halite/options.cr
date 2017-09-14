@@ -164,7 +164,7 @@ module Halite
     private def default_headers : HTTP::Headers
       HTTP::Headers{
         "User-Agent"      => USER_AGENT,
-        "Accept-Encoding" => %w(gzip deflate).join(", "),
+        # "Accept-Encoding" => %w(gzip deflate).join(", "),
         "Accept"          => "*/*",
         "Connection"      => "keep-alive",
       }
