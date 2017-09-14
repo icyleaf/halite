@@ -508,7 +508,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/ff5d5c170792865be4bedc94057babfc6bdb40a7/src/halite/options.cr#L2" target="_blank">halite/options.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L2" target="_blank">halite/options.cr</a>
     
     <br/>
   
@@ -547,6 +547,11 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#cookies%3AHTTP%3A%3ACookies-instance-method" class="signature"><strong>#cookies</strong> : HTTP::Cookies</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#form%3AHash%28String%2CType%29%3F-instance-method" class="signature"><strong>#form</strong> : Hash(String, Type)?</a>
         
       </li>
@@ -571,7 +576,25 @@
       <li class="entry-summary">
         <a href="#params%3AHash%28String%2CType%29%3F-instance-method" class="signature"><strong>#params</strong> : Hash(String, Type)?</a>
         
-          <div class="summary"><p>Hash(String, String)?</p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_cookies%28cookies%3AHash%28Type%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : Hash(Type, _) | NamedTuple) : Halite::Options</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : HTTP::Cookies) : Halite::Options</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_cookies%28cookie%3AHTTP%3A%3ACookie%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(cookie : HTTP::Cookie) : Halite::Options</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_cookies%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong> : Halite::Options</a>
         
       </li>
     
@@ -629,7 +652,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/ff5d5c170792865be4bedc94057babfc6bdb40a7/src/halite/options.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -640,6 +663,22 @@
 
 
   <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="cookies:HTTP::Cookies-instance-method">
+      <div class="signature">
+        
+        def <strong>cookies</strong> : HTTP::Cookies
+
+        <a class="method-permalink" href="#cookies%3AHTTP%3A%3ACookies-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
   
     <div class="entry-detail" id="form:Hash&#40;String,Type&#41;?-instance-method">
       <div class="signature">
@@ -652,7 +691,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/ff5d5c170792865be4bedc94057babfc6bdb40a7/src/halite/options.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -668,7 +707,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/ff5d5c170792865be4bedc94057babfc6bdb40a7/src/halite/options.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -684,7 +723,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/ff5d5c170792865be4bedc94057babfc6bdb40a7/src/halite/options.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -702,7 +741,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/ff5d5c170792865be4bedc94057babfc6bdb40a7/src/halite/options.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -715,12 +754,74 @@
         <a class="method-permalink" href="#params%3AHash%28String%2CType%29%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Hash(String, String)?</p></div>
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_cookies&#40;cookies:Hash&#40;Type,_&#41;|NamedTuple&#41;:Halite::Options-instance-method">
+      <div class="signature">
+        
+        def <strong>with_cookies</strong>(cookies : Hash(<a href="../Halite/Options/Type.html">Type</a>, _) | NamedTuple) : <a href="../Halite/Options.html">Halite::Options</a>
+
+        <a class="method-permalink" href="#with_cookies%28cookies%3AHash%28Type%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method">#</a>
+      </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/ff5d5c170792865be4bedc94057babfc6bdb40a7/src/halite/options.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L55" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_cookies&#40;cookies:HTTP::Cookies&#41;:Halite::Options-instance-method">
+      <div class="signature">
+        
+        def <strong>with_cookies</strong>(cookies : HTTP::Cookies) : <a href="../Halite/Options.html">Halite::Options</a>
+
+        <a class="method-permalink" href="#with_cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AOptions-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L71" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_cookies&#40;cookie:HTTP::Cookie&#41;:Halite::Options-instance-method">
+      <div class="signature">
+        
+        def <strong>with_cookies</strong>(cookie : HTTP::Cookie) : <a href="../Halite/Options.html">Halite::Options</a>
+
+        <a class="method-permalink" href="#with_cookies%28cookie%3AHTTP%3A%3ACookie%29%3AHalite%3A%3AOptions-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_cookies:Halite::Options-instance-method">
+      <div class="signature">
+        
+        def <strong>with_cookies</strong> : <a href="../Halite/Options.html">Halite::Options</a>
+
+        <a class="method-permalink" href="#with_cookies%3AHalite%3A%3AOptions-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -736,7 +837,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/ff5d5c170792865be4bedc94057babfc6bdb40a7/src/halite/options.cr#L49" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L50" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -752,7 +853,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/ff5d5c170792865be4bedc94057babfc6bdb40a7/src/halite/options.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/c09fc03347ad684ce6df90ae32b73024ee3b559d/src/halite/options.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>

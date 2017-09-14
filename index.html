@@ -595,7 +595,20 @@
 
 <h4>Cookies</h4>
 
-<blockquote>TODO</blockquote>
+<h5>Passing cookies in requests</h5>
+
+<p>The <code>Halite.cookies</code> option can be used to configure cookies for a given request:</p>
+
+<pre><code class='language-crystal'><span class="t">Halite</span>.cookies(session_cookie: <span class="s">&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
+      .get(<span class="s">&quot;httpbin.org/headers&quot;</span>)</code></pre>
+
+<h5>Get cookies in requests</h5>
+
+<p>To obtain the cookies(cookie jar) for a given response, call the <code>#cookies</code> method:</p>
+
+<pre><code class='language-crystal'>r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/cookies?set?session_cookie&#61;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
+pp r.cookies
+<span class="c"># &#61;&gt; #&lt;HTTP::Cookies:0x10dbed980 &#64;cookies&#61;&#123;&quot;session_cookie&quot; &#61;&gt;#&lt;HTTP::Cookie:0x10ec20f00 &#64;domain&#61;nil, &#64;expires&#61;nil, &#64;extension&#61;nil, &#64;http_only&#61;false, &#64;name&#61;&quot;session_cookie&quot;, &#64;path&#61;&quot;/&quot;, &#64;secure&#61;false, &#64;value&#61;&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;&gt;&#125;&gt;</span></code></pre>
 
 <h3>Response Handling</h3>
 
