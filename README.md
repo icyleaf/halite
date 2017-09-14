@@ -182,11 +182,23 @@ Halite.timeout(5)
 
 ### Response Handling
 
-> TODO
+After an HTTP request, `Halite::Response` object have several useful methods. (Also see the [API documentation](https://icyleaf.github.io/halite/Halite/Response.html)).
+
+- **#body**: The response body.
+- **#body_io**: The response body io.
+- **#code**: The HTTP status code.
+- **#content_type**: The content type of the response.
+- **#content_length**: The content length of the response.
+- **#cookies**: A `HTTP::Cookies` set by server.
+- **#headers**: The `HTTP::Headers` of the response.
+- **#version**: The HTTP version.
+- **#to_a**: A `Hash` of status code, response headers and body as a string.
+- **#to_s**: Return response body as a string.
 
 #### Error Handling
 
-> TODO
+- For any status code, a `Halite::Response` will be returned
+- If request timeout, a `Halite::TimeoutError` will be raised.
 
 ## Help and Discussion
 
