@@ -169,7 +169,7 @@
 
 <p>Yet another simple HTTP and REST client writes with Crystal. Inspired from the Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/cc5a0b9" target="_blank">cc5a0b9</a> (2017-09-14 17:20:07 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/a696c10" target="_blank">a696c10</a> (2017-09-14 17:37:28 +0800).</p>
 
 <h2>Installation</h2>
 
@@ -311,11 +311,13 @@ pp r.cookies
 
 <h3>Response Handling</h3>
 
-<blockquote>TODO</blockquote>
+<p>After an HTTP request, <code><a href="Halite/Response.html">Halite::Response</a></code> object have several useful methods. (Also see the <a href="https://icyleaf.github.io/halite/Halite/Response.html" target="_blank">API documentation</a>).</p>
+
+<ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io.</li><li><strong>#code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: The <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#version</strong>: The HTTP version.</li><li><strong>#to_a</strong>: A <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li></ul>
 
 <h4>Error Handling</h4>
 
-<blockquote>TODO</blockquote>
+<ul><li>For any status code, a <code><a href="Halite/Response.html">Halite::Response</a></code> will be returned</li><li>If request timeout, a <code><a href="Halite/TimeoutError.html">Halite::TimeoutError</a></code> will be raised.</li></ul>
 
 <h2>Help and Discussion</h2>
 
