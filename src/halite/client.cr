@@ -8,9 +8,7 @@ module Halite
   class Client
     include Chainable
 
-    @default_options : Halite::Options
-
-    def initialize(@default_options = Optionns.new)
+    def initialize(@default_options : Halite::Options = Optionns.new)
     end
 
     def initialize(default_options : (Hash(String, _) | NamedTuple) = {} of String => String)
@@ -30,12 +28,13 @@ module Halite
     end
 
     # Perform a single (no follow) HTTP request
-    def perform(request, options) : Halite::Response
-      conn = HTTP::Client.exec(request.verb, request.uri, request.headers, request.body)
-      response = Response.new(conn)
-      # if response.code >= 400
-      #   raise Halite::Error.new
-      # end
+    private def perform(request, options) : Halite::Response
+      conn = HTTP::Client.new(request.domain)
+      conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
+      conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
+
+      conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
+      response = Response.new(conn_response)
     end
 
     # Merges query params if needed

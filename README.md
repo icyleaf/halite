@@ -146,7 +146,7 @@ The `Halite.cookies` option can be used to configure cookies for a given request
 
 ```crystal
 Halite.cookies(session_cookie: "6abaef100b77808ceb7fe26a3bcff1d0")
-      .get("httpbin.org/headers")
+      .get("http://httpbin.org/headers")
 ```
 
 ##### Get cookies in requests
@@ -157,6 +157,25 @@ To obtain the cookies(cookie jar) for a given response, call the `#cookies` meth
 r = Halite.get("http://httpbin.org/cookies?set?session_cookie=6abaef100b77808ceb7fe26a3bcff1d0")
 pp r.cookies
 # => #<HTTP::Cookies:0x10dbed980 @cookies={"session_cookie" =>#<HTTP::Cookie:0x10ec20f00 @domain=nil, @expires=nil, @extension=nil, @http_only=false, @name="session_cookie", @path="/", @secure=false, @value="6abaef100b77808ceb7fe26a3bcff1d0">}>
+```
+
+#### Timeout
+
+By default, the Halite does not enforce timeout on a request. You can enable per operation timeouts by configuring them through the chaining API.
+
+The `connect` timeout is the number of seconds Halite will wait for your client to establish a connection to a remote server call on the socket.
+
+Once your client has connected to the server and sent the HTTP request, the `read` timeout is the number of seconds the client will wait for the server to send a response.
+
+```crystal
+# Separate set connect and read timeout
+Halite.timeout(connect: 3.0, read: 2.minutes)
+      .get("http://httpbin.org/anything")
+
+# Boath set connect and read timeout
+# The timeout value will be applied to both the connect and the read timeouts.
+Halite.timeout(5)
+      .get("http://httpbin.org/anything")
 ```
 
 ### Response Handling

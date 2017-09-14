@@ -14,9 +14,19 @@ module Halite
       end
     end
 
-    # @return [URI] URI with all componentes but query being normalized.
-    def normalize_uri(uri : String) : URI
+    # @return `URI` with all componentes but query being normalized.
+    private def normalize_uri(uri : String) : URI
       URI.parse(uri)
+    end
+
+    # @return `URI` with the scheme, user, password, port and host combined
+    def domain
+      URI.parse(@uri.to_s.sub(@uri.full_path, "").sub("##{@uri.fragment}", ""))
+    end
+
+    # @return `String` with the path, query and fragment combined
+    def full_path
+      "#{@uri.full_path}##{@uri.fragment}"
     end
 
     # Request data of body
