@@ -147,10 +147,10 @@ module Halite
     # ```
     # # Automatically following redirects.
     # Halite.follow
-    #       .get("http://httpbin.org/get")
+    #       .get("http://httpbin.org/relative-redirect/5")
     #
-    # # Only redirect in strict policy
-    # Halite.follow
+    # # Always redirect with any request methods
+    # Halite.follow(strict: false)
     #       .get("http://httpbin.org/get")
     # ```
     def follow(strict = Options::FOLLOW_STRICT) : Halite::Client
@@ -162,7 +162,11 @@ module Halite
     # ```
     # # Max hops 3 times
     # Halite.follow(3)
-    #       .get("http://httpbin.org/get")
+    #       .get("http://httpbin.org/relative-redirect/3")
+    #
+    # # Always redirect with any request methods
+    # Halite.follow(4, strict: false)
+    #       .get("http://httpbin.org/relative-redirect/4")
     # ```
     def follow(hops : Int32, strict = Options::FOLLOW_STRICT) : Halite::Client
       branch DEFAULT_OPTIONS.with_follow(hops, strict)
