@@ -1,6 +1,5 @@
 module Halite
   class Response
-
     getter uri
 
     def initialize(@uri : URI, @conn : HTTP::Client::Response)

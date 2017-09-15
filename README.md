@@ -161,6 +161,55 @@ pp r.cookies
 # => #<HTTP::Cookies:0x10dbed980 @cookies={"session_cookie" =>#<HTTP::Cookie:0x10ec20f00 @domain=nil, @expires=nil, @extension=nil, @http_only=false, @name="session_cookie", @path="/", @secure=false, @value="6abaef100b77808ceb7fe26a3bcff1d0">}>
 ```
 
+#### Sessions
+
+As like [requests.Session](http://docs.python-requests.org/en/master/user/advanced/#session-objects), Halite built-in session by default.
+
+Let's persist some cookies across requests:
+
+```crystal
+client = Halite::Client.new
+
+client.get("http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0")
+r = client.get("http://httpbin.org/cookies")
+
+pp r.body
+```
+
+All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/Chainable.html) in the other examples list in [requests.Session](http://docs.python-requests.org/en/master/user/advanced/#session-objects).
+
+#### Redirects
+
+##### Automatically following redirects
+
+The `Halite.follow` method can be used for automatically following redirects(Max up to 5 times):
+
+```crystal
+# Set the cookie and redirect to http://httpbin.org/cookies
+Halite.follow
+      .get("http://httpbin.org/cookies/set/name/foo")
+```
+
+##### Limiting number of redirects
+
+As above, set over 5 times, it will raise a `Halite::TooManyRedirectsError`, but you can change less if you can:
+
+```crystal
+Halite.follow(2)
+      .get("http://httpbin.org/relative-redirect/5")
+```
+
+##### Disabling unsafe redirects
+
+It only redirects with `GET`, `HEAD` request and returns a `300`, `301`, `302` by default, otherwise it will raise a `Halite::StateError`.
+You can diasble it to set `:strict` to `false` if you want any method(verb) requests, in which case the `GET` method(verb) will be used for
+that redirect:
+
+```crystal
+Halite.follow(strict: false)
+      .post("http://httpbin.org/relative-redirect/5")
+```
+
 #### Timeout
 
 By default, the Halite does not enforce timeout on a request. You can enable per operation timeouts by configuring them through the chaining API.

@@ -1,5 +1,6 @@
 require "./request"
 require "./response"
+require "./redirector"
 
 require "http/client"
 
@@ -31,13 +32,13 @@ module Halite
     # ```
     # options = Halite::Options.new({
     #   "headers" => {
-    #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4"
-    #   }
+    #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
+    #   },
     # })
     #
     # client = Halite::Client.new(options)
     # ```
-    def initialize(@options : Halite::Options = Optionns.new)
+    def initialize(@options : Halite::Options = Options.new)
     end
 
     # Instance a new client
@@ -45,8 +46,8 @@ module Halite
     # ```
     # Halite::Client.new({
     #   "headers" => {
-    #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4"
-    #   }
+    #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
+    #   },
     # })
     # ```
     def initialize(options : (Hash(String, _) | NamedTuple) = {} of String => String)
@@ -62,7 +63,13 @@ module Halite
       headers = make_request_headers(options, body.headers)
 
       request = Request.new(verb, uri, headers, body.body)
-      perform(request, options)
+      response = perform(request, options)
+
+      return response if options.follow.zero?
+
+      Redirector.new(request, response, options.follow, options.follow_strict).perform do |req|
+        perform(req, options)
+      end
     end
 
     # Perform a single (no follow) HTTP request
@@ -73,6 +80,11 @@ module Halite
 
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
       response = Response.new(request.uri, conn_response)
+
+      # Merge headers and cookies from response
+      @options = merge_option_from_response(options, response)
+
+      response
     rescue ex : IO::Timeout
       raise TimeoutError.new(ex.message)
     end
@@ -117,6 +129,12 @@ module Halite
       end
 
       Halite::Request::Data.new("", {} of String => String)
+    end
+
+    private def merge_option_from_response(options : Halite::Options, response : Halite::Response) : Halite::Options
+      return options unless response.headers
+
+      options.merge({"headers" => response.headers})
     end
   end
 end

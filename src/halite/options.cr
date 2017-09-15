@@ -1,21 +1,33 @@
 module Halite
   class Options
+    # Request user-agent by default
     USER_AGENT = "Halite/#{Halite::VERSION}"
 
+    # A maximum of 5 subsequent redirects
+    FOLLOW_MAX_HOPS = 5
+
+    # Redirector hops policy
+    FOLLOW_STRICT = true
+
+    # Types of options in a Hash
     alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(Type, Type)
 
-    getter headers : HTTP::Headers
-    getter cookies : HTTP::Cookies
-    getter timeout : Timeout
+    property headers : HTTP::Headers
+    property cookies : HTTP::Cookies
+    property timeout : Timeout
+    property follow : Int32
+    property follow_strict : Bool
 
-    getter params : Hash(String, Type)?
-    getter form : Hash(String, Type)?
-    getter json : Hash(String, Type)?
+    property params : Hash(String, Type)?
+    property form : Hash(String, Type)?
+    property json : Hash(String, Type)?
 
     def initialize(options : (Hash(Type, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil})
       @headers = parse_headers(options)
       @cookies = parse_cookies(@headers)
       @timeout = parse_timeout(options)
+      @follow = 0 # No follow by default
+      @follow_strict = FOLLOW_STRICT
 
       @params = parse_params(options)
       @form = parse_form(options)
@@ -90,28 +102,44 @@ module Halite
       self
     end
 
+    # Returns `Options` self with gived max hops of redirect times.
+    #
+    # ```
+    # # Automatically following redirects
+    # options.with_follow
+    # # A maximum of 3 subsequent redirects
+    # options.with_follow(3)
+    # # Set subsequent redirects
+    # options.with_follow(3)
+    # ```
+    def with_follow(follow : Int32 = FOLLOW_MAX_HOPS, strict : Bool = FOLLOW_STRICT) : Halite::Options
+      @follow = follow
+      @follow_strict = strict
+      self
+    end
+
     # Returns this collection as a plain Hash.
     def to_h
       {
-        "headers" => @headers.to_h,
-        "cookies" => @cookies.to_h,
-        "params" => @params ? @params.not_nil!.to_h : nil,
-        "form" => @form ? @form.not_nil!.to_h : nil,
-        "json" => @form ? @json.not_nil!.to_h : nil,
+        "headers"         => @headers.to_h,
+        "cookies"         => @cookies.to_h,
+        "params"          => @params ? @params.not_nil!.to_h : nil,
+        "form"            => @form ? @form.not_nil!.to_h : nil,
+        "json"            => @form ? @json.not_nil!.to_h : nil,
         "connect_timeout" => @timeout.connect,
-        "read_timeout" => @timeout.read,
+        "read_timeout"    => @timeout.read,
       }
     end
 
     private def parse_headers(options : (Hash(Type, _) | NamedTuple)) : HTTP::Headers
-      headers = HTTP::Headers.new
-      if data = options["headers"]?
-        headers = HTTP::Headers.escape(data)
+      case (headers = options["headers"]?)
+      when Hash
+        HTTP::Headers.escape(headers)
+      when HTTP::Headers
+        headers
       else
-        headers = default_headers
+        default_headers
       end
-
-      headers
     end
 
     {% for attr in %w(params form json) %}
@@ -166,15 +194,16 @@ module Halite
     # Auto accept gzip deflate encoding by [HTTP::Client](https://crystal-lang.org/api/0.23.1/HTTP/Client.html)
     private def default_headers : HTTP::Headers
       HTTP::Headers{
-        "User-Agent"      => USER_AGENT,
-        "Accept"          => "*/*",
-        "Connection"      => "keep-alive",
+        "User-Agent" => USER_AGENT,
+        "Accept"     => "*/*",
+        "Connection" => "keep-alive",
       }
     end
 
     # Timeout struct
     struct Timeout
       property connect, read
+
       def initialize(@connect : Float64? = nil, @read : Float64? = nil)
       end
 

@@ -119,7 +119,7 @@ module Halite
     # Halite.timeout(2.minutes)
     #       .post("http://httpbin.org/post", form: {file: "file.txt"})
     # ```
-    def timeout(connect_and_read : Int32 | Float64 | Time::Span)
+    def timeout(connect_and_read : Int32 | Float64 | Time::Span) : Halite::Client
       timeout(connect_and_read, connect_and_read)
     end
 
@@ -135,11 +135,37 @@ module Halite
     # Halite.timeout(3.04, 64)
     #       .get("http://httpbin.org/get")
     # ```
-    def timeout(connect : (Int32 | Float64 | Time::Span)?, read : (Int32 | Float64 | Time::Span)?)
+    def timeout(connect : (Int32 | Float64 | Time::Span)?, read : (Int32 | Float64 | Time::Span)?) : Halite::Client
       DEFAULT_OPTIONS.timeout.connect = connect.to_f if connect
       DEFAULT_OPTIONS.timeout.read = read.to_f if read
 
       branch DEFAULT_OPTIONS
+    end
+
+    # Returns `Options` self with automatically following redirects.
+    #
+    # ```
+    # # Automatically following redirects.
+    # Halite.follow
+    #       .get("http://httpbin.org/get")
+    #
+    # # Only redirect in strict policy
+    # Halite.follow
+    #       .get("http://httpbin.org/get")
+    # ```
+    def follow(strict = Options::FOLLOW_STRICT) : Halite::Client
+      branch DEFAULT_OPTIONS.with_follow(strict: strict)
+    end
+
+    # Returns `Options` self with gived max hops of redirect times.
+    #
+    # ```
+    # # Max hops 3 times
+    # Halite.follow(3)
+    #       .get("http://httpbin.org/get")
+    # ```
+    def follow(hops : Int32, strict = Options::FOLLOW_STRICT) : Halite::Client
+      branch DEFAULT_OPTIONS.with_follow(hops, strict)
     end
 
     # Make an HTTP request with the given verb

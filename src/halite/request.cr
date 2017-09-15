@@ -8,15 +8,18 @@ module Halite
 
     def initialize(verb : String, uri : String, @headers : HTTP::Headers, @body : String?)
       @verb = verb.upcase
-      @uri = normalize_uri uri
+      @uri = normalize_uri(uri)
       if scheme = @uri.scheme
         @scheme = scheme
       end
     end
 
-    # @return `URI` with all componentes but query being normalized.
-    private def normalize_uri(uri : String) : URI
-      URI.parse(uri)
+    # Returns new Request with updated uri
+    def redirect(uri : String, verb = @verb)
+      headers = self.headers.dup
+      headers.delete("Host")
+
+      Request.new(verb, join_uri(domain, uri).to_s, headers, body)
     end
 
     # @return `URI` with the scheme, user, password, port and host combined
@@ -31,6 +34,17 @@ module Halite
     # @return `String` with the path, query and fragment combined
     def full_path
       "#{@uri.full_path}##{@uri.fragment}"
+    end
+
+    # @return `URI` with all componentes but query being normalized.
+    private def normalize_uri(uri : String) : URI
+      URI.parse(uri)
+    end
+
+    private def join_uri(source : URI, uri : String) : URI
+      source.dup.tap do |u|
+        u.path = uri
+      end
     end
 
     # Request data of body
