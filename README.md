@@ -287,7 +287,8 @@ client = Halite::Client.new
 client.get("http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0")
 r = client.get("http://httpbin.org/cookies")
 
-pp r.body
+puts r.body
+# => "{\n  \"cookies\": {\n    \"private_token\": \"6abaef100b77808ceb7fe26a3bcff1d0\"\n  }\n}\n"
 ```
 
 ## Help and Discussion
