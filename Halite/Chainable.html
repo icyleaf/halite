@@ -35,6 +35,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/EndlessRedirectError" data-name="halite::endlessredirecterror">
+      <a href="../Halite/EndlessRedirectError.html">EndlessRedirectError</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Error" data-name="halite::error">
       <a href="../Halite/Error.html">Error</a>
       
@@ -105,6 +110,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Redirector" data-name="halite::redirector">
+      <a href="../Halite/Redirector.html">Redirector</a>
+      
+    </li>
+  
   <li class="parent " data-id="github.com/icyleaf/halite/Halite/Request" data-name="halite::request">
       <a href="../Halite/Request.html">Request</a>
       
@@ -120,13 +130,33 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/RequestError" data-name="halite::requesterror">
+      <a href="../Halite/RequestError.html">RequestError</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Response" data-name="halite::response">
       <a href="../Halite/Response.html">Response</a>
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/ResponseError" data-name="halite::responseerror">
+      <a href="../Halite/ResponseError.html">ResponseError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/StateError" data-name="halite::stateerror">
+      <a href="../Halite/StateError.html">StateError</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/TimeoutError" data-name="halite::timeouterror">
       <a href="../Halite/TimeoutError.html">TimeoutError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/TooManyRedirectsError" data-name="halite::toomanyredirectserror">
+      <a href="../Halite/TooManyRedirectsError.html">TooManyRedirectsError</a>
       
     </li>
   
@@ -193,7 +223,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L4" target="_blank">halite/chainable.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L4" target="_blank">halite/chainable.cr</a>
     
     <br/>
   
@@ -245,6 +275,20 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#follow%28hops%3AInt32%2Cstrict%3DOptions%3A%3AFOLLOW_STRICT%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#follow</strong>(hops : Int32, strict = <span class="t">Options</span><span class="t">::</span><span class="t">FOLLOW_STRICT</span>) : Halite::Client</a>
+        
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with gived max hops of redirect times.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#follow%28strict%3DOptions%3A%3AFOLLOW_STRICT%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#follow</strong>(strict = <span class="t">Options</span><span class="t">::</span><span class="t">FOLLOW_STRICT</span>) : Halite::Client</a>
+        
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with automatically following redirects.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#get%28uri%3AString%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#get</strong>(uri : String, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>) : Halite::Response</a>
         
           <div class="summary"><p>Get a resource</p></div>
@@ -287,14 +331,14 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method" class="signature"><strong>#timeout</strong>(connect : Int32 | Float64 | Time::Span?, read : Int32 | Float64 | Time::Span?)</a>
+        <a href="#timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#timeout</strong>(connect : Int32 | Float64 | Time::Span?, read : Int32 | Float64 | Time::Span?) : Halite::Client</a>
         
           <div class="summary"><p>Adds a timeout to the request.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method" class="signature"><strong>#timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span)</a>
+        <a href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span) : Halite::Client</a>
         
           <div class="summary"><p>Adds a timeout to the request.</p></div>
         
@@ -333,7 +377,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L61" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -356,7 +400,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -380,7 +424,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L97" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L97" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -401,7 +445,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L107" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L107" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -424,7 +468,55 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="follow&#40;hops:Int32,strict&#61;Options::FOLLOW_STRICT&#41;:Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>follow</strong>(hops : Int32, strict = <span class="t">Options</span><span class="t">::</span><span class="t">FOLLOW_STRICT</span>) : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#follow%28hops%3AInt32%2Cstrict%3DOptions%3A%3AFOLLOW_STRICT%29%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with gived max hops of redirect times.</p>
+
+<pre><code><span class="c"># Max hops 3 times</span>
+<span class="t">Halite</span>.follow(<span class="n">3</span>)
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L167" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="follow&#40;strict&#61;Options::FOLLOW_STRICT&#41;:Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>follow</strong>(strict = <span class="t">Options</span><span class="t">::</span><span class="t">FOLLOW_STRICT</span>) : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#follow%28strict%3DOptions%3A%3AFOLLOW_STRICT%29%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with automatically following redirects.</p>
+
+<pre><code><span class="c"># Automatically following redirects.</span>
+<span class="t">Halite</span>.follow
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+
+<span class="c"># Only redirect in strict policy</span>
+<span class="t">Halite</span>.follow
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L156" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -447,7 +539,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -470,7 +562,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -494,7 +586,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L74" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -515,7 +607,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L84" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L84" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -538,7 +630,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -561,17 +653,17 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="timeout&#40;connect:Int32|Float64|Time::Span?,read:Int32|Float64|Time::Span?&#41;-instance-method">
+    <div class="entry-detail" id="timeout&#40;connect:Int32|Float64|Time::Span?,read:Int32|Float64|Time::Span?&#41;:Halite::Client-instance-method">
       <div class="signature">
         
-        def <strong>timeout</strong>(connect : Int32 | Float64 | Time::Span?, read : Int32 | Float64 | Time::Span?)
+        def <strong>timeout</strong>(connect : Int32 | Float64 | Time::Span?, read : Int32 | Float64 | Time::Span?) : <a href="../Halite/Client.html">Halite::Client</a>
 
-        <a class="method-permalink" href="#timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method">#</a>
+        <a class="method-permalink" href="#timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29%3AHalite%3A%3AClient-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Adds a timeout to the request.</p>
@@ -588,17 +680,17 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L138" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L138" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="timeout&#40;connect_and_read:Int32|Float64|Time::Span&#41;-instance-method">
+    <div class="entry-detail" id="timeout&#40;connect_and_read:Int32|Float64|Time::Span&#41;:Halite::Client-instance-method">
       <div class="signature">
         
-        def <strong>timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span)
+        def <strong>timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span) : <a href="../Halite/Client.html">Halite::Client</a>
 
-        <a class="method-permalink" href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method">#</a>
+        <a class="method-permalink" href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Adds a timeout to the request.</p>
@@ -614,7 +706,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7467481512c89d7bac254bdb0db03fbfa1a59612/src/halite/chainable.cr#L122" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/chainable.cr#L122" target="_blank">View source</a>]
         
       </div>
     </div>

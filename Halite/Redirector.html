@@ -5,7 +5,7 @@
   <meta id="repository-name" content="github.com/icyleaf/halite">
   <link href="../css/style.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="../js/doc.js"></script>
-  <title>Halite::FormData - github.com/icyleaf/halite</title>
+  <title>Halite::Redirector - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -85,7 +85,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
       <a href="../Halite/FormData.html">FormData</a>
       
     </li>
@@ -110,7 +110,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Redirector" data-name="halite::redirector">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Redirector" data-name="halite::redirector">
       <a href="../Halite/Redirector.html">Redirector</a>
       
     </li>
@@ -192,29 +192,15 @@
 <div id="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Halite::FormData
+  <span class="kind">class</span> Halite::Redirector
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/Redirector.html">Halite::Redirector</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
-  <h2>Overview</h2>
-
-  <p>Utility-belt to build form data request bodies.</p>
-
-<p>Provides support for <code>application/x-www-form-urlencoded</code> and
-<code>multipart/form-data</code> types.</p>
-
-<pre><code>form <span class="o">=</span> <span class="t">FormData</span>.create({
-  <span class="s">&quot;name&quot;</span>   => <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
-  <span class="s">&quot;skill&quot;</span>  => [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
-  <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar.png&quot;</span>), <span class="c"># &#61;&gt; &quot;image binary data&quot;</span>
-})
-
-form.body    <span class="c"># &#61;&gt; &quot;----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;name\&quot;\r\n\r\nLizeth Gusikowski\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;skill\&quot;\r\n\r\nruby\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;skill\&quot;\r\n\r\ncrystal\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;avatar\&quot;; filename&#61;\&quot;avatar.png\&quot;\r\n\r\nimage binary data\n\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN--&quot;</span>
-form.headers <span class="c"># &#61;&gt; HTTP::Headers&#123;&quot;Content-Type&quot; &#61;&gt; &quot;multipart/form-data; boundary&#61;\&quot;--------------------------SS0a9QKeM_6fcj2CE5D4d0LQ\&quot;&quot;&#125;</span></code></pre>
 
 
 
@@ -232,24 +218,67 @@ form.headers <span class="c"># &#61;&gt; HTTP::Headers&#123;&quot;Content-Type&q
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/form_data.cr#L20" target="_blank">halite/form_data.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/redirector.cr#L2" target="_blank">halite/redirector.cr</a>
     
     <br/>
   
 
 
 
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="REDIRECT_CODES">
+        <strong>REDIRECT_CODES</strong> = <code>[<span class="n">300</span>, <span class="n">301</span>, <span class="n">302</span>, <span class="n">303</span>, <span class="n">307</span>, <span class="n">308</span>]</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>HTTP status codes which indicate redirects</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="SEE_OTHER_ALLOWED_VERBS">
+        <strong>SEE_OTHER_ALLOWED_VERBS</strong> = <code>[<span class="s">&quot;GET&quot;</span>, <span class="s">&quot;HEAD&quot;</span>] <span class="k">of</span> <span class="t">::</span><span class="t">String</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Verbs which will remain unchanged upon See Other response.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="STRICT_SENSITIVE_CODES">
+        <strong>STRICT_SENSITIVE_CODES</strong> = <code>[<span class="n">300</span>, <span class="n">301</span>, <span class="n">302</span>]</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Codes which which should raise StateError in strict mode if original
+request was any of {UNSAFE_VERBS}</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="UNSAFE_VERBS">
+        <strong>UNSAFE_VERBS</strong> = <code>[<span class="s">&quot;PUT&quot;</span>, <span class="s">&quot;DELETE&quot;</span>, <span class="s">&quot;POST&quot;</span>] <span class="k">of</span> <span class="t">::</span><span class="t">String</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Insecure http verbs, which should trigger StateError in strict mode
+upon {STRICT_SENSITIVE_CODES}</p>
+      </dd>
+      
+    
+  </dl>
 
 
 
-
-  <h2>Class Method Summary</h2>
+  <h2>Constructors</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#create%28data%3AHash%28String%2COptions%3A%3AType%29%3D%7B%7DofString%3D%3EOptions%3A%3AType%29%3AHalite%3A%3ARequest%3A%3AData-class-method" class="signature"><strong>.create</strong>(data : Hash(String, Options::Type) = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Options</span><span class="t">::</span><span class="t">Type</span>) : Halite::Request::Data</a>
+        <a href="#new%28request%3ARequest%2Cresponse%3AResponse%2Cmax_hops%3AInt32%2Cstrict%3Dtrue%29-class-method" class="signature"><strong>.new</strong>(request : Request, response : Response, max_hops : Int32, strict = <span class="n">true</span>)</a>
         
-          <div class="summary"><p>FormData factory.</p></div>
+          <div class="summary"><p>Instance a new Redirector</p></div>
         
       </li>
     
@@ -259,37 +288,117 @@ form.headers <span class="c"># &#61;&gt; HTTP::Headers&#123;&quot;Content-Type&q
 
 
 
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#endless_loop%3F-instance-method" class="signature"><strong>#endless_loop?</strong></a>
+        
+          <div class="summary"><p>Check if we got into an endless loop</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#perform%28%26block%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#perform</strong>(&block) : Halite::Response</a>
+        
+          <div class="summary"><p>Follows redirects until non-redirect response found</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
 
 
 <div class="methods-inherited">
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
-
-
-  <h2>Class Method Detail</h2>
+  <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="create&#40;data:Hash&#40;String,Options::Type&#41;&#61;&#123;&#125;ofString&#61;&gt;Options::Type&#41;:Halite::Request::Data-class-method">
+    <div class="entry-detail" id="new&#40;request:Request,response:Response,max_hops:Int32,strict&#61;true&#41;-class-method">
       <div class="signature">
         
-        def self.<strong>create</strong>(data : Hash(String, <a href="../Halite/Options/Type.html">Options::Type</a>) = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Options</span><span class="t">::</span><span class="t">Type</span>) : <a href="../Halite/Request/Data.html">Halite::Request::Data</a>
+        def self.<strong>new</strong>(request : <a href="../Halite/Request.html">Request</a>, response : <a href="../Halite/Response.html">Response</a>, max_hops : Int32, strict = <span class="n">true</span>)
 
-        <a class="method-permalink" href="#create%28data%3AHash%28String%2COptions%3A%3AType%29%3D%7B%7DofString%3D%3EOptions%3A%3AType%29%3AHalite%3A%3ARequest%3A%3AData-class-method">#</a>
+        <a class="method-permalink" href="#new%28request%3ARequest%2Cresponse%3AResponse%2Cmax_hops%3AInt32%2Cstrict%3Dtrue%29-class-method">#</a>
       </div>
       
-        <div class="doc"><p>FormData factory. Automatically selects best type depending on given <code>data</code> Hash</p></div>
+        <div class="doc"><p>Instance a new Redirector</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/form_data.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/redirector.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="endless_loop?-instance-method">
+      <div class="signature">
+        
+        def <strong>endless_loop?</strong>
+
+        <a class="method-permalink" href="#endless_loop%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Check if we got into an endless loop</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/redirector.cr#L59" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="perform&#40;&amp;block&#41;:Halite::Response-instance-method">
+      <div class="signature">
+        
+        def <strong>perform</strong>(&block) : <a href="../Halite/Response.html">Halite::Response</a>
+
+        <a class="method-permalink" href="#perform%28%26block%29%3AHalite%3A%3AResponse-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Follows redirects until non-redirect response found</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/27f439327c19339d19a8806ac65acedc47ad2124/src/halite/redirector.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

@@ -35,6 +35,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/EndlessRedirectError" data-name="halite::endlessredirecterror">
+      <a href="Halite/EndlessRedirectError.html">EndlessRedirectError</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Error" data-name="halite::error">
       <a href="Halite/Error.html">Error</a>
       
@@ -105,6 +110,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Redirector" data-name="halite::redirector">
+      <a href="Halite/Redirector.html">Redirector</a>
+      
+    </li>
+  
   <li class="parent " data-id="github.com/icyleaf/halite/Halite/Request" data-name="halite::request">
       <a href="Halite/Request.html">Request</a>
       
@@ -120,13 +130,33 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/RequestError" data-name="halite::requesterror">
+      <a href="Halite/RequestError.html">RequestError</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Response" data-name="halite::response">
       <a href="Halite/Response.html">Response</a>
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/ResponseError" data-name="halite::responseerror">
+      <a href="Halite/ResponseError.html">ResponseError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/StateError" data-name="halite::stateerror">
+      <a href="Halite/StateError.html">StateError</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/TimeoutError" data-name="halite::timeouterror">
       <a href="Halite/TimeoutError.html">TimeoutError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/TooManyRedirectsError" data-name="halite::toomanyredirectserror">
+      <a href="Halite/TooManyRedirectsError.html">TooManyRedirectsError</a>
       
     </li>
   
@@ -169,7 +199,7 @@
 
 <p>Yet another simple HTTP and REST client writes with Crystal. Inspired from the Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/7467481" target="_blank">7467481</a> (2017-09-15 12:09:14 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/27f4393" target="_blank">27f4393</a> (2017-09-15 17:02:21 +0800).</p>
 
 <h2>Installation</h2>
 
@@ -291,6 +321,47 @@
 <pre><code class='language-crystal'>r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/cookies?set?session_cookie&#61;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
 pp r.cookies
 <span class="c"># &#61;&gt; #&lt;HTTP::Cookies:0x10dbed980 &#64;cookies&#61;&#123;&quot;session_cookie&quot; &#61;&gt;#&lt;HTTP::Cookie:0x10ec20f00 &#64;domain&#61;nil, &#64;expires&#61;nil, &#64;extension&#61;nil, &#64;http_only&#61;false, &#64;name&#61;&quot;session_cookie&quot;, &#64;path&#61;&quot;/&quot;, &#64;secure&#61;false, &#64;value&#61;&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;&gt;&#125;&gt;</span></code></pre>
+
+<h4>Sessions</h4>
+
+<p>As like <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session</a>, Halite built-in session by default.</p>
+
+<p>Let's persist some cookies across requests:</p>
+
+<pre><code class='language-crystal'>client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
+
+client.get(<span class="s">&quot;http://httpbin.org/cookies/set?private_token&#61;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
+r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
+
+pp r.body</code></pre>
+
+<p>All it support with <a href="https://icyleaf.github.io/halite/Halite/Chainable.html" target="_blank">chainable methods</a> in the other examples list in <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session</a>.</p>
+
+<h4>Redirects</h4>
+
+<h5>Automatically following redirects</h5>
+
+<p>The <code>Halite.follow</code> method can be used for automatically following redirects(Max up to 5 times):</p>
+
+<pre><code class='language-crystal'><span class="c"># Set the cookie and redirect to http://httpbin.org/cookies</span>
+<span class="t">Halite</span>.follow
+      .get(<span class="s">&quot;http://httpbin.org/cookies/set/name/foo&quot;</span>)</code></pre>
+
+<h5>Limiting number of redirects</h5>
+
+<p>As above, set over 5 times, it will raise a <code><a href="Halite/TooManyRedirectsError.html">Halite::TooManyRedirectsError</a></code>, but you can change less if you can:</p>
+
+<pre><code class='language-crystal'><span class="t">Halite</span>.follow(<span class="n">2</span>)
+      .get(<span class="s">&quot;http://httpbin.org/relative-redirect/5&quot;</span>)</code></pre>
+
+<h5>Disabling unsafe redirects</h5>
+
+<p>It only redirects with <code>GET</code>, <code>HEAD</code> request and returns a <code>300</code>, <code>301</code>, <code>302</code> by default, otherwise it will raise a <code><a href="Halite/StateError.html">Halite::StateError</a></code>.
+You can diasble it to set <code>:strict</code> to <code>false</code> if you want any method(verb) requests, in which case the <code>GET</code> method(verb) will be used for
+that redirect:</p>
+
+<pre><code class='language-crystal'><span class="t">Halite</span>.follow(strict: <span class="n">false</span>)
+      .post(<span class="s">&quot;http://httpbin.org/relative-redirect/5&quot;</span>)</code></pre>
 
 <h4>Timeout</h4>
 
