@@ -197,9 +197,10 @@
 <a href="https://shards.rocks/github/icyleaf/halite" target="_blank"><img src="https://shards.rocks/badge/github/icyleaf/halite/status.svg" alt="Dependency Status"/></a>
 <a href="https://circleci.com/gh/icyleaf/halite" target="_blank"><img src="https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat" alt="Build Status"/></a></p>
 
-<p>Yet another simple HTTP and REST client writes with Crystal. Inspired from the Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem.</p>
+<p>Yet another simple HTTP and REST client with a chainable API, built-in sessions support and timeouts, writes with Crystal.
+Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/fe79ccc" target="_blank">fe79ccc</a> (2017-09-15 17:08:23 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/b6c0232" target="_blank">b6c0232</a> (2017-09-15 17:19:23 +0800).</p>
 
 <h2>Table of Contents</h2>
 
@@ -231,10 +232,12 @@
 })
 
 <span class="c"># Also support Array as query params</span>
-<span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {
-  <span class="s">&quot;language&quot;</span> => <span class="s">&quot;crystal&quot;</span>,
-  <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span>
-})
+<span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, headers: {
+    <span class="s">&quot;Private-Token&quot;</span> => <span class="s">&quot;T0k3n&quot;</span>
+  }, params: {
+    <span class="s">&quot;language&quot;</span> => <span class="s">&quot;crystal&quot;</span>,
+    <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span>
+  })
 
 <span class="c"># And support chainable</span>
 <span class="t">Halite</span>.header(private_token: <span class="s">&quot;T0k3n&quot;</span>)
@@ -242,6 +245,8 @@
         <span class="s">&quot;language&quot;</span> => <span class="s">&quot;crystal&quot;</span>,
         <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span>
       })</code></pre>
+
+<p>See also all <a href="https://icyleaf.github.io/halite/Halite/Chainable.html" target="_blank">chainable methods</a>.</p>
 
 <p>Many other HTTP methods are avaiabled as well:</p>
 
@@ -409,6 +414,10 @@ that redirect:</p>
 <p>You can browese the API documents:</p>
 
 <p>https://icyleaf.github.io/halite/</p>
+
+<p>You can browse the all chainable methods:</p>
+
+<p>https://icyleaf.github.io/halite/Halite/Chainable.html</p>
 
 <p>If you have found a bug, please create a issue here:</p>
 
