@@ -5,8 +5,9 @@
 [![Dependency Status](https://shards.rocks/badge/github/icyleaf/halite/status.svg)](https://shards.rocks/github/icyleaf/halite)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
 
-Yet another simple HTTP and REST client with a chainable API, built-in sessions support and timeouts, writes with Crystal.
-Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem and Python's [requests](https://github.com/requests/requests).
+Yet another simple HTTP and REST client with a chainable API, built-in sessions and timeouts written by [Crystal](https://crystal-lang.org/).
+Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem
+and Python's [requests](https://github.com/requests/requests).
 
 Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
 
