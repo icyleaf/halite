@@ -53,13 +53,23 @@ Make a GET request:
 Halite.get("http://httpbin.org/get")
 
 # Support NamedTuple as query params
-Halite.get("http://httpbin.org/get", params: { language: "crystal", shard: "halite" })
+Halite.get("http://httpbin.org/get", params: {
+  language: "crystal",
+  shard: "halite"
+})
 
 # Also support Array as query params
-Halite.get("http://httpbin.org/get", params: { "language" => "crystal", "shard" => "halite" }, headers: { private_token: "T0k3n" })
+Halite.get("http://httpbin.org/get", params: {
+  "language" => "crystal",
+  "shard" => "halite"
+})
 
 # And support chainable
-Halite.header(private_token: "T0k3n").get("http://httpbin.org/get", params: { "language" => "crystal", "shard" => "halite" })
+Halite.header(private_token: "T0k3n")
+      .get("http://httpbin.org/get", params: {
+        "language" => "crystal",
+        "shard" => "halite"
+      })
 ```
 
 Many other HTTP methods are avaiabled as well:
