@@ -1,12 +1,20 @@
 module Halite
   class Response
-    def initialize(@conn : HTTP::Client::Response)
+
+    getter uri
+
+    def initialize(@uri : URI, @conn : HTTP::Client::Response)
     end
 
-    delegate status_code, to: @conn
     delegate version, to: @conn
+    delegate status_code, to: @conn
+    delegate status_message, to: @conn
+    delegate success?, to: @conn
+
     delegate headers, to: @conn
-    delegate cookies, to: @conn
+    delegate content_type, to: @conn
+    delegate charset, to: @conn
+
     delegate body, to: @conn
     delegate body_io, to: @conn
 
@@ -16,12 +24,16 @@ module Halite
       end
     end
 
-    def content_type : String?
-      @conn.headers["Content-Type"]?
-    end
+    def cookies : HTTP::Cookies?
+      cookies = @conn.cookies ? @conn.cookies : HTTP::Cookies.from_headers(@conn.headers)
 
-    def cookies : HTTP::Cookies
-      HTTP::Cookies.from_headers(@conn.headers)
+      # Try to fix empty domain
+      cookies.map do |cookie|
+        cookie.domain = @uri.host unless cookie.domain
+        cookie
+      end
+
+      cookies
     end
 
     # Return status_code, headers and body in a array

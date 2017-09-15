@@ -5,19 +5,57 @@ require "http/client"
 
 module Halite
   # Clients make requests and receive responses
+  #
+  # Support call `Chainable` methods.
+  #
+  # ```
+  # options = Optionns.new({
+  #   "headers" = {
+  #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4"
+  #   }
+  # })
+  #
+  # client = Halite::Client.new(options)
+  # client.auth(private_token: "bdf39d82661358f80b31b67e6f89fee4").
+  #       .get("http://httpbin.org/get", params: {
+  #         name: "icyleaf"
+  #       })
+  # ```
   class Client
     include Chainable
 
-    def initialize(@default_options : Halite::Options = Optionns.new)
+    property options
+
+    # Instance a new client
+    #
+    # ```
+    # options = Halite::Options.new({
+    #   "headers" => {
+    #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4"
+    #   }
+    # })
+    #
+    # client = Halite::Client.new(options)
+    # ```
+    def initialize(@options : Halite::Options = Optionns.new)
     end
 
-    def initialize(default_options : (Hash(String, _) | NamedTuple) = {} of String => String)
-      @default_options = Options.new(default_options)
+    # Instance a new client
+    #
+    # ```
+    # Halite::Client.new({
+    #   "headers" => {
+    #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4"
+    #   }
+    # })
+    # ```
+    def initialize(options : (Hash(String, _) | NamedTuple) = {} of String => String)
+      @options = Options.new(options)
     end
 
     # Make an HTTP request
     def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil}) : Halite::Response
-      options = @default_options.merge(options)
+      options = @options.merge(options)
 
       uri = make_request_uri(uri, options)
       body = make_request_body(options)
@@ -34,7 +72,7 @@ module Halite
       conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
 
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
-      response = Response.new(conn_response)
+      response = Response.new(request.uri, conn_response)
     rescue ex : IO::Timeout
       raise TimeoutError.new(ex.message)
     end

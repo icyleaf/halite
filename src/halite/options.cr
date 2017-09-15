@@ -1,6 +1,6 @@
 module Halite
   class Options
-    USER_AGENT = "Halite/#{Halite::VERSION} Crystal/#{Crystal::VERSION}"
+    USER_AGENT = "Halite/#{Halite::VERSION}"
 
     alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(Type, Type)
 
@@ -161,10 +161,12 @@ module Halite
       end
     end
 
+    # Return default headers
+    #
+    # Auto accept gzip deflate encoding by [HTTP::Client](https://crystal-lang.org/api/0.23.1/HTTP/Client.html)
     private def default_headers : HTTP::Headers
       HTTP::Headers{
         "User-Agent"      => USER_AGENT,
-        # "Accept-Encoding" => %w(gzip deflate).join(", "),
         "Accept"          => "*/*",
         "Connection"      => "keep-alive",
       }
