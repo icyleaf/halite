@@ -223,7 +223,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L4" target="_blank">halite/chainable.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L4" target="_blank">halite/chainable.cr</a>
     
     <br/>
   
@@ -377,7 +377,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L61" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -400,7 +400,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -424,7 +424,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L97" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L97" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -445,7 +445,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L107" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L107" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -468,7 +468,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -485,12 +485,16 @@
 
 <pre><code><span class="c"># Max hops 3 times</span>
 <span class="t">Halite</span>.follow(<span class="n">3</span>)
-      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+      .get(<span class="s">&quot;http://httpbin.org/relative-redirect/3&quot;</span>)
+
+<span class="c"># Always redirect with any request methods</span>
+<span class="t">Halite</span>.follow(<span class="n">4</span>, strict: <span class="n">false</span>)
+      .get(<span class="s">&quot;http://httpbin.org/relative-redirect/4&quot;</span>)</code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L167" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L171" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -507,16 +511,16 @@
 
 <pre><code><span class="c"># Automatically following redirects.</span>
 <span class="t">Halite</span>.follow
-      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+      .get(<span class="s">&quot;http://httpbin.org/relative-redirect/5&quot;</span>)
 
-<span class="c"># Only redirect in strict policy</span>
-<span class="t">Halite</span>.follow
+<span class="c"># Always redirect with any request methods</span>
+<span class="t">Halite</span>.follow(strict: <span class="n">false</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L156" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L156" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -539,7 +543,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -562,7 +566,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -586,7 +590,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L74" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -607,7 +611,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L84" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L84" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -630,7 +634,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -653,7 +657,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -680,7 +684,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L138" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L138" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -706,7 +710,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/61a6cf63706b1842e7dcd332675c90fa2e1fd530/src/halite/chainable.cr#L122" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/4431b025b53c7dadc049568448b5af1467c81ad5/src/halite/chainable.cr#L122" target="_blank">View source</a>]
         
       </div>
     </div>
