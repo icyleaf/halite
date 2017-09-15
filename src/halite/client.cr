@@ -8,7 +8,7 @@ require "json"
 module Halite
   # Clients make requests and receive responses
   #
-  # Support call `Chainable` methods.
+  # Support all `Chainable` methods.
   #
   # ```
   # options = Optionns.new({
