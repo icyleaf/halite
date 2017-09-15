@@ -201,7 +201,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/6993994" target="_blank">6993994</a> (2017-09-15 21:44:18 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/82c4383" target="_blank">82c4383</a> (2017-09-15 21:46:34 +0800).</p>
 
 <p>&lt;hr /></p>
 
@@ -413,7 +413,8 @@ that redirect:</p>
 client.get(<span class="s">&quot;http://httpbin.org/cookies/set?private_token&#61;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
 r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 
-pp r.body</code></pre>
+puts r.body
+<span class="c"># &#61;&gt; &quot;&#123;\n  \&quot;cookies\&quot;: &#123;\n    \&quot;private_token\&quot;: \&quot;6abaef100b77808ceb7fe26a3bcff1d0\&quot;\n  &#125;\n&#125;\n&quot;</span></code></pre>
 
 <h2>Help and Discussion</h2>
 
