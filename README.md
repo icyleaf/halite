@@ -200,8 +200,6 @@ pp r.cookies
 # => #<HTTP::Cookies:0x10dbed980 @cookies={"session_cookie" =>#<HTTP::Cookie:0x10ec20f00 @domain=nil, @expires=nil, @extension=nil, @http_only=false, @name="session_cookie", @path="/", @secure=false, @value="6abaef100b77808ceb7fe26a3bcff1d0">}>
 ```
 
-All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/Chainable.html) in the other examples list in [requests.Session](http://docs.python-requests.org/en/master/user/advanced/#session-objects).
-
 #### Redirects
 
 ##### Automatically following redirects
@@ -290,6 +288,8 @@ r = client.get("http://httpbin.org/cookies")
 puts r.body
 # => "{\n  \"cookies\": {\n    \"private_token\": \"6abaef100b77808ceb7fe26a3bcff1d0\"\n  }\n}\n"
 ```
+
+All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/Chainable.html) in the other examples list in [requests.Session](http://docs.python-requests.org/en/master/user/advanced/#session-objects).
 
 ## Help and Discussion
 
