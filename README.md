@@ -11,7 +11,7 @@ and Python's [requests](https://github.com/requests/requests).
 
 Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
 
-## Table of Contents
+<hr />
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -25,10 +25,12 @@ Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
     - [Redirects](#redirects)
     - [Timeout](#timeout)
   - [Response Handling](#response-handling)
-    - [Error Handling](#error-handling)
+  - [Error Handling](#error-handling)
 - [Help and Discussion](#help-and-discussion)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
+
+<hr />
 
 ## Installation
 
@@ -280,7 +282,7 @@ After an HTTP request, `Halite::Response` object have several useful methods. (A
 - **#to_a**: A `Hash` of status code, response headers and body as a string.
 - **#to_s**: Return response body as a string.
 
-#### Error Handling
+### Error Handling
 
 - For any status code, a `Halite::Response` will be returned
 - If request timeout, a `Halite::TimeoutError` will be raised.
