@@ -201,11 +201,11 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/632a5dc" target="_blank">632a5dc</a> (2017-09-15 18:37:33 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/6993994" target="_blank">6993994</a> (2017-09-15 21:44:18 +0800).</p>
 
 <p>&lt;hr /></p>
 
-<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#redirects" target="_blank">Redirects</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
+<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects" target="_blank">Redirects</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
 
 <p>&lt;hr /></p>
 
@@ -345,19 +345,6 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 pp r.cookies
 <span class="c"># &#61;&gt; #&lt;HTTP::Cookies:0x10dbed980 &#64;cookies&#61;&#123;&quot;session_cookie&quot; &#61;&gt;#&lt;HTTP::Cookie:0x10ec20f00 &#64;domain&#61;nil, &#64;expires&#61;nil, &#64;extension&#61;nil, &#64;http_only&#61;false, &#64;name&#61;&quot;session_cookie&quot;, &#64;path&#61;&quot;/&quot;, &#64;secure&#61;false, &#64;value&#61;&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;&gt;&#125;&gt;</span></code></pre>
 
-<h4>Sessions</h4>
-
-<p>As like <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session</a>, Halite built-in session by default.</p>
-
-<p>Let's persist some cookies across requests:</p>
-
-<pre><code class='language-crystal'>client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
-
-client.get(<span class="s">&quot;http://httpbin.org/cookies/set?private_token&#61;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
-r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
-
-pp r.body</code></pre>
-
 <p>All it support with <a href="https://icyleaf.github.io/halite/Halite/Chainable.html" target="_blank">chainable methods</a> in the other examples list in <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session</a>.</p>
 
 <h4>Redirects</h4>
@@ -412,6 +399,21 @@ that redirect:</p>
 <h3>Error Handling</h3>
 
 <ul><li>For any status code, a <code><a href="Halite/Response.html">Halite::Response</a></code> will be returned</li><li>If request timeout, a <code><a href="Halite/TimeoutError.html">Halite::TimeoutError</a></code> will be raised.</li></ul>
+
+<h2>Advanced Usage</h2>
+
+<h3>Sessions</h3>
+
+<p>As like <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session()</a>, Halite built-in session by default.</p>
+
+<p>Let's persist some cookies across requests:</p>
+
+<pre><code class='language-crystal'>client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
+
+client.get(<span class="s">&quot;http://httpbin.org/cookies/set?private_token&#61;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
+r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
+
+pp r.body</code></pre>
 
 <h2>Help and Discussion</h2>
 
