@@ -199,7 +199,7 @@
 
 <p>Yet another simple HTTP and REST client writes with Crystal. Inspired from the Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/6318310" target="_blank">6318310</a> (2017-09-15 17:06:57 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/fe79ccc" target="_blank">fe79ccc</a> (2017-09-15 17:08:23 +0800).</p>
 
 <h2>Table of Contents</h2>
 
@@ -225,13 +225,23 @@
 <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 
 <span class="c"># Support NamedTuple as query params</span>
-<span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: { language: <span class="s">&quot;crystal&quot;</span>, shard: <span class="s">&quot;halite&quot;</span> })
+<span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {
+  language: <span class="s">&quot;crystal&quot;</span>,
+  shard: <span class="s">&quot;halite&quot;</span>
+})
 
 <span class="c"># Also support Array as query params</span>
-<span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: { <span class="s">&quot;language&quot;</span> => <span class="s">&quot;crystal&quot;</span>, <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span> }, headers: { private_token: <span class="s">&quot;T0k3n&quot;</span> })
+<span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {
+  <span class="s">&quot;language&quot;</span> => <span class="s">&quot;crystal&quot;</span>,
+  <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span>
+})
 
 <span class="c"># And support chainable</span>
-<span class="t">Halite</span>.header(private_token: <span class="s">&quot;T0k3n&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: { <span class="s">&quot;language&quot;</span> => <span class="s">&quot;crystal&quot;</span>, <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span> })</code></pre>
+<span class="t">Halite</span>.header(private_token: <span class="s">&quot;T0k3n&quot;</span>)
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {
+        <span class="s">&quot;language&quot;</span> => <span class="s">&quot;crystal&quot;</span>,
+        <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span>
+      })</code></pre>
 
 <p>Many other HTTP methods are avaiabled as well:</p>
 
