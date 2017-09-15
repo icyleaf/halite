@@ -9,6 +9,8 @@ Yet another simple HTTP and REST client writes with Crystal. Inspired from the R
 
 Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
 
+## Table of Contents
+
 - [Installation](#installation)
 - [Usage](#usage)
   - [Making Requests](#making-requests)
