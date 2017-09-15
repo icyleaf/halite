@@ -3,6 +3,7 @@ require "./response"
 require "./redirector"
 
 require "http/client"
+require "json"
 
 module Halite
   # Clients make requests and receive responses

@@ -38,6 +38,7 @@ Add this to your application's `shard.yml`:
 dependencies:
   halite:
     github: icyleaf/halite
+    branch: master
 ```
 
 ## Usage
