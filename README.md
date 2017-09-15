@@ -5,7 +5,8 @@
 [![Dependency Status](https://shards.rocks/badge/github/icyleaf/halite/status.svg)](https://shards.rocks/github/icyleaf/halite)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
 
-Yet another simple HTTP and REST client writes with Crystal. Inspired from the Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem.
+Yet another simple HTTP and REST client with a chainable API, built-in sessions support and timeouts, writes with Crystal.
+Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem and Python's [requests](https://github.com/requests/requests).
 
 Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
 
@@ -59,10 +60,12 @@ Halite.get("http://httpbin.org/get", params: {
 })
 
 # Also support Array as query params
-Halite.get("http://httpbin.org/get", params: {
-  "language" => "crystal",
-  "shard" => "halite"
-})
+Halite.get("http://httpbin.org/get", headers: {
+    "Private-Token" => "T0k3n"
+  }, params: {
+    "language" => "crystal",
+    "shard" => "halite"
+  })
 
 # And support chainable
 Halite.header(private_token: "T0k3n")
@@ -71,6 +74,8 @@ Halite.header(private_token: "T0k3n")
         "shard" => "halite"
       })
 ```
+
+See also all [chainable methods](https://icyleaf.github.io/halite/Halite/Chainable.html).
 
 Many other HTTP methods are avaiabled as well:
 
@@ -283,6 +288,10 @@ After an HTTP request, `Halite::Response` object have several useful methods. (A
 You can browese the API documents:
 
 https://icyleaf.github.io/halite/
+
+You can browse the all chainable methods:
+
+https://icyleaf.github.io/halite/Halite/Chainable.html
 
 If you have found a bug, please create a issue here:
 
