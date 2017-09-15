@@ -9,6 +9,23 @@ Yet another simple HTTP and REST client writes with Crystal. Inspired from the R
 
 Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
 
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Making Requests](#making-requests)
+  - [Passing Parameters](#passing-parameters)
+  - [Passing advanced options](#passing-advanced-options)
+    - [Headers](#headers)
+    - [Auth](#auth)
+    - [Cookies](#cookies)
+    - [Sessions](#sessions)
+    - [Redirects](#redirects)
+    - [Timeout](#timeout)
+  - [Response Handling](#response-handling)
+    - [Error Handling](#error-handling)
+- [Help and Discussion](#help-and-discussion)
+- [Contributing](#contributing)
+- [Contributors](#contributors)
+
 ## Installation
 
 Add this to your application's `shard.yml`:
