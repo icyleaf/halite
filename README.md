@@ -21,11 +21,12 @@ Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
     - [Headers](#headers)
     - [Auth](#auth)
     - [Cookies](#cookies)
-    - [Sessions](#sessions)
     - [Redirects](#redirects)
     - [Timeout](#timeout)
   - [Response Handling](#response-handling)
   - [Error Handling](#error-handling)
+- [Advanced Usage](#advanced-usage)
+  - [Sessions](#sessions)
 - [Help and Discussion](#help-and-discussion)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
@@ -199,21 +200,6 @@ pp r.cookies
 # => #<HTTP::Cookies:0x10dbed980 @cookies={"session_cookie" =>#<HTTP::Cookie:0x10ec20f00 @domain=nil, @expires=nil, @extension=nil, @http_only=false, @name="session_cookie", @path="/", @secure=false, @value="6abaef100b77808ceb7fe26a3bcff1d0">}>
 ```
 
-#### Sessions
-
-As like [requests.Session](http://docs.python-requests.org/en/master/user/advanced/#session-objects), Halite built-in session by default.
-
-Let's persist some cookies across requests:
-
-```crystal
-client = Halite::Client.new
-
-client.get("http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0")
-r = client.get("http://httpbin.org/cookies")
-
-pp r.body
-```
-
 All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/Chainable.html) in the other examples list in [requests.Session](http://docs.python-requests.org/en/master/user/advanced/#session-objects).
 
 #### Redirects
@@ -286,6 +272,23 @@ After an HTTP request, `Halite::Response` object have several useful methods. (A
 
 - For any status code, a `Halite::Response` will be returned
 - If request timeout, a `Halite::TimeoutError` will be raised.
+
+## Advanced Usage
+
+### Sessions
+
+As like [requests.Session()](http://docs.python-requests.org/en/master/user/advanced/#session-objects), Halite built-in session by default.
+
+Let's persist some cookies across requests:
+
+```crystal
+client = Halite::Client.new
+
+client.get("http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0")
+r = client.get("http://httpbin.org/cookies")
+
+pp r.body
+```
 
 ## Help and Discussion
 
