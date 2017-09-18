@@ -2,30 +2,11 @@ require "base64"
 
 module Halite
   module Chainable
-    {% for verb in %w(get head) %}
+    {% for verb in %w(get put head post patch delete) %}
       # {{ verb.id.capitalize }} a resource
       #
       # ```
       # Halite.{{ verb.id }}("http://httpbin.org/anything", params: {
-      #   first_name: "foo",
-      #   last_name:  "bar"
-      # })
-      # ```
-      def {{ verb.id }}(uri : String, headers : (Hash(String, _) | NamedTuple)? = nil, params : (Hash(String, _) | NamedTuple)? = nil) : Halite::Response
-        request {{ verb }}, uri, {
-          "headers" => headers,
-          "params" => params,
-          "form" => nil,
-          "json" => nil
-        }
-      end
-    {% end %}
-
-    {% for verb in %w(post patch delete) %}
-      # {{ verb.id.capitalize }} a resource
-      #
-      # ```
-      # Halite.{{ verb.id }}("http://httpbin.org/anything", form: {
       #   first_name: "foo",
       #   last_name:  "bar"
       # })
