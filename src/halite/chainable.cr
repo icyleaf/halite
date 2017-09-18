@@ -183,7 +183,7 @@ module Halite
     # })
     # ```
     def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil}) : Halite::Response
-      branch(options).request verb, uri
+      branch(options).request(verb, uri)
     end
 
     # :nodoc:
@@ -191,7 +191,7 @@ module Halite
 
     # :nodoc:
     private def branch(options : Hash(String, _) | NamedTuple | Options) : Halite::Client
-      Halite::Client.new options
+      Halite::Client.new(options)
     end
   end
 end
