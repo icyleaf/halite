@@ -33,7 +33,10 @@ module Halite
 
     # @return `String` with the path, query and fragment combined
     def full_path
-      "#{@uri.full_path}##{@uri.fragment}"
+      String.build do |str|
+        str << @uri.full_path
+        str << "#" << @uri.fragment if @uri.fragment
+      end
     end
 
     # @return `URI` with all componentes but query being normalized.
