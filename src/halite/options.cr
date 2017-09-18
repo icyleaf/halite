@@ -125,7 +125,7 @@ module Halite
         "cookies"         => @cookies.to_h,
         "params"          => @params ? @params.not_nil!.to_h : nil,
         "form"            => @form ? @form.not_nil!.to_h : nil,
-        "json"            => @form ? @json.not_nil!.to_h : nil,
+        "json"            => @json ? @json.not_nil!.to_h : nil,
         "connect_timeout" => @timeout.connect,
         "read_timeout"    => @timeout.read,
       }
@@ -133,7 +133,7 @@ module Halite
 
     private def parse_headers(options : (Hash(Type, _) | NamedTuple)) : HTTP::Headers
       case (headers = options["headers"]?)
-      when Hash
+      when Hash, NamedTuple
         HTTP::Headers.escape(headers)
       when HTTP::Headers
         headers
