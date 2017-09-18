@@ -182,7 +182,7 @@ module Halite
     #   "json" => nil
     # })
     # ```
-    private def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil}) : Halite::Response
+    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil}) : Halite::Response
       branch(options).request verb, uri
     end
 
