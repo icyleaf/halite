@@ -4,7 +4,7 @@
 [![Dependency Status](https://shards.rocks/badge/github/icyleaf/halite/status.svg)](https://shards.rocks/github/icyleaf/halite)
 [![devDependency Status](https://shards.rocks/badge/github/icyleaf/halite/dev_status.svg)](https://shards.rocks/github/icyleaf/halite)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/icyleaf/halite/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/LICENSE)
 
 Yet another simple HTTP and REST client with a chainable API, built-in sessions and timeouts written by [Crystal](https://crystal-lang.org/).
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem
