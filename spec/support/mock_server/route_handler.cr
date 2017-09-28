@@ -46,7 +46,7 @@ class MockServer < HTTP::Server
     get "/" do |context|
       context.response.status_code = 200
 
-      case context.request.headers["Accept"]
+      case context.request.headers["Accept"]?
       when "application/json"
         context.response.content_type = "application/json"
         context.response.print "{\"json\": true}"
@@ -105,7 +105,14 @@ class MockServer < HTTP::Server
 
     get "/redirect-302" do |context|
       context.response.status_code = 302
-      context.response.headers["Location"] = "http://#{context.request.host_with_port}/"
+      location =
+      if context.request.query_params["relative_path"]?
+        "/"
+      else
+        "http://#{context.request.host_with_port}/"
+      end
+
+      context.response.headers["Location"] = location
       context
     end
 
@@ -139,7 +146,14 @@ class MockServer < HTTP::Server
       context
     end
 
-    private def self.parse_body(body : (IO | String)?)
+    # HEAD
+    head "/" do |context|
+      context.response.status_code = 200
+      context.response.content_type = "text/html"
+      context
+    end
+
+    private def self.parse_body(body : (IO | String)?) : String
       case body
       when IO
         body.gets_to_end
@@ -150,7 +164,7 @@ class MockServer < HTTP::Server
       end
     end
 
-    private def self.parse_form(body : (IO | String)?)
+    private def self.parse_form(body : (IO | String)?) : HTTP::Params
       HTTP::Params.parse(parse_body(body))
     end
   end

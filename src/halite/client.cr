@@ -121,7 +121,7 @@ module Halite
     # Create the request body object to send
     private def make_request_body(options : Halite::Options) : Halite::Request::Data
       if (form = options.form) && !form.empty?
-        return FormData.create form
+        return FormData.create(form)
       elsif (hash = options.json) && !hash.empty?
         body = JSON.build do |builder|
           hash.to_json(builder)

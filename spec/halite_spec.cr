@@ -33,12 +33,12 @@ describe Halite do
   #     end
   #   end
 
-  #   context "with headers" do
-  #     it "is easy" do
-  #       response = Halite.accept("application/json").get server.endpoint
-  #       response.to_s.should match(/json/)
-  #     end
-  #   end
+    context "with headers" do
+      it "is easy" do
+        response = Halite.accept("application/json").get server.endpoint
+        response.to_s.should match(/json/)
+      end
+    end
 
   #   # context "loading binary data" do
   #   #   it "is encoded as bytes" do
@@ -87,10 +87,18 @@ describe Halite do
         response.to_s.should match(/<!doctype html>/)
       end
 
-      # it "should easy for 302" do
-      #   response = Halite.follow.get("#{server.endpoint}/redirect-302")
-      #   response.to_s.should match(/<!doctype html>/)
-      # end
+      it "should easy for 302" do
+        response = Halite.follow.get("#{server.endpoint}/redirect-302")
+        response.to_s.should match(/<!doctype html>/)
+      end
+    end
+  end
+
+  context ".head" do
+    it "should easy to request" do
+      response = Halite.head server.endpoint
+      response.status_code.should eq(200)
+      response.content_type.should match(/html/)
     end
   end
 end

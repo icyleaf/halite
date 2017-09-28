@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Add `accept` method
 
+### Changed
+
+- Always instance a new Options with each request in chainable methods.
+
 ### Fixed
 
 - Fix always overwrite request headers with default values
