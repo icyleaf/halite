@@ -43,6 +43,16 @@ module Halite
       headers({"Authorization" => value})
     end
 
+    # Accept the given MIME type
+    #
+    # ```
+    # Halite.accept("application/json")
+    #       .get("http://httpbin.org/get")
+    # ```
+    def accept(value : String) : Halite::Client
+      headers({"Accept" => value})
+    end
+
     # Make a request with the given headers
     #
     # ```
