@@ -17,7 +17,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Always overwrite request headers with default values
+- Fix always overwrite request headers with default values
+- Fix `follow`(redirect uri) with full uri and relative path
 
 ## 0.1.2 (09/18/2017)
 

@@ -45,9 +45,16 @@ module Halite
     end
 
     private def join_uri(source : URI, uri : String) : URI
-      source.dup.tap do |u|
-        u.path = uri
+      new_uri = URI.parse(uri)
+
+      # return a new uri with source and relative path
+      unless new_uri.scheme && new_uri.host
+        new_uri = source.dup.tap do |u|
+          u.path = uri
+        end
       end
+
+      new_uri
     end
 
     # Request data of body

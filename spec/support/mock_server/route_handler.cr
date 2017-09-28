@@ -42,6 +42,7 @@ class MockServer < HTTP::Server
       end
     {% end %}
 
+    # GET
     get "/" do |context|
       context.response.status_code = 200
 
@@ -65,14 +66,6 @@ class MockServer < HTTP::Server
       context
     end
 
-    post "/sleep" do |context|
-      sleep 2
-
-      context.response.status_code = 200
-      context.response.print "hello"
-      context
-    end
-
     get "/params" do |context|
       next not_found(context) unless context.request.query == "foo=bar"
 
@@ -87,6 +80,78 @@ class MockServer < HTTP::Server
       context.response.status_code = 200
       context.response.print "More Params!"
       context
+    end
+
+    get "/bytes" do |context|
+      bytes = [80, 75, 3, 4, 20, 0, 0, 0, 8, 0, 123, 104, 169, 70, 99, 243, 243]
+      context.response.content_type = "application/octet-stream"
+      context.response.print bytes.map { |b| b.unsafe_chr }.join
+
+      context
+    end
+
+    get "/redirect-301" do |context|
+      context.response.status_code = 301
+      location =
+        if context.request.query_params["relative_path"]?
+          "/"
+        else
+          "http://#{context.request.host_with_port}/"
+        end
+
+      context.response.headers["Location"] = location
+      context
+    end
+
+    get "/redirect-302" do |context|
+      context.response.status_code = 302
+      context.response.headers["Location"] = "http://#{context.request.host_with_port}/"
+      context
+    end
+
+    # POST
+    post "/echo-body" do |context|
+      body = parse_body(context.request.body)
+      context.response.status_code = 200
+      context.response.content_length = body.bytesize
+      context.response.print body
+      context
+    end
+
+    post "/form" do |context|
+      form = parse_form(context.request.body)
+      if form["example"] == "testing-form"
+        context.response.status_code = 200
+        context.response.print "passed :)"
+      else
+        context.response.status_code = 400
+        context.response.print "invalid! >:E"
+      end
+
+      context
+    end
+
+    post "/sleep" do |context|
+      sleep 2
+
+      context.response.status_code = 200
+      context.response.print "hello"
+      context
+    end
+
+    private def self.parse_body(body : (IO | String)?)
+      case body
+      when IO
+        body.gets_to_end
+      when String
+        body
+      else
+        ""
+      end
+    end
+
+    private def self.parse_form(body : (IO | String)?)
+      HTTP::Params.parse(parse_body(body))
     end
   end
 end
