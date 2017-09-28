@@ -127,10 +127,10 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def timeout(connect : (Int32 | Float64 | Time::Span)?, read : (Int32 | Float64 | Time::Span)?) : Halite::Client
-      default_options.timeout.connect = connect.to_f if connect
-      default_options.timeout.read = read.to_f if read
-
-      branch default_options
+      branch(default_options.tap do |options|
+        options.timeout.connect = connect.to_f if connect
+        options.timeout.read = read.to_f if read
+      end)
     end
 
     # Returns `Options` self with automatically following redirects.

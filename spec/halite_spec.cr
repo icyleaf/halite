@@ -11,31 +11,31 @@ end
 sleep 1
 
 describe Halite do
-  # describe ".get" do
-  #   context "loading a simple uri" do
-  #     it "should easy to request" do
-  #       response = Halite.get server.endpoint
-  #       response.to_s.should match(/<!doctype html>/)
-  #     end
-  #   end
+  describe ".get" do
+    context "loading a simple uri" do
+      it "should easy to request" do
+        response = Halite.get(server.endpoint)
+        response.to_s.should match(/<!doctype html>/)
+      end
+    end
 
-  #   context "with query string parameters" do
-  #     it "should easy to request" do
-  #       response = Halite.get "#{server.endpoint}/params", params: {foo: "bar"}
-  #       response.to_s.should eq("Params!")
-  #     end
-  #   end
+    context "with query string parameters" do
+      it "should easy to request" do
+        response = Halite.get("#{server.endpoint}/params", params: {foo: "bar"})
+        response.to_s.should eq("Params!")
+      end
+    end
 
-  #   context "with query string parameters in the URI and opts hash" do
-  #     it "includes both" do
-  #       response = Halite.get "#{server.endpoint}/multiple-params?foo=bar", params: {baz: "quux"}
-  #       response.to_s.should eq("More Params!")
-  #     end
-  #   end
+    context "with query string parameters in the URI and opts hash" do
+      it "includes both" do
+        response = Halite.get("#{server.endpoint}/multiple-params?foo=bar", params: {baz: "quux"})
+        response.to_s.should eq("More Params!")
+      end
+    end
 
     context "with headers" do
       it "is easy" do
-        response = Halite.accept("application/json").get server.endpoint
+        response = Halite.accept("application/json").get(server.endpoint)
         response.to_s.should match(/json/)
       end
     end
@@ -47,33 +47,33 @@ describe Halite do
   #   #   end
   #   # end
 
-  #   context "with a large request body" do
-  #     [16_000, 16_500, 17_000, 34_000, 68_000].each do |size|
-  #       [0, rand(0..100), rand(100..1000)].each do |fuzzer|
-  #         context "with a #{size} body and #{fuzzer} of fuzzing" do
-  #           it "returns a large body" do
-  #             characters = ("A".."Z").to_a
-  #             form = Hash(String, String).new.tap { |obj| (size + fuzzer).times { |i| obj[i.to_s] = characters[i % characters.size] } }
-  #             response = Halite.post "#{server.endpoint}/echo-body", form: form
-  #             response_body = HTTP::Params.escape(form)
+    context "with a large request body" do
+      [16_000, 16_500, 17_000, 34_000, 68_000].each do |size|
+        [0, rand(0..100), rand(100..1000)].each do |fuzzer|
+          context "with a #{size} body and #{fuzzer} of fuzzing" do
+            it "returns a large body" do
+              characters = ("A".."Z").to_a
+              form = Hash(String, String).new.tap { |obj| (size + fuzzer).times { |i| obj[i.to_s] = characters[i % characters.size] } }
+              response = Halite.post "#{server.endpoint}/echo-body", form: form
+              response_body = HTTP::Params.escape(form)
 
-  #             response.to_s.should eq(response_body)
-  #             response.content_length.should eq(response_body.bytesize)
-  #           end
-  #         end
-  #       end
-  #     end
-  #   end
-  # end
+              response.to_s.should eq(response_body)
+              response.content_length.should eq(response_body.bytesize)
+            end
+          end
+        end
+      end
+    end
+  end
 
-  # describe ".post" do
-  #   context "loading a simple form data" do
-  #     it "should easy to request" do
-  #       response = Halite.post "#{server.endpoint}/form", form: {example: "testing-form"}
-  #       response.to_s.should eq("passed :)")
-  #     end
-  #   end
-  # end
+  describe ".post" do
+    context "loading a simple form data" do
+      it "should easy to request" do
+        response = Halite.post("#{server.endpoint}/form", form: {example: "testing-form"})
+        response.to_s.should eq("passed :)")
+      end
+    end
+  end
 
   describe ".follow" do
     context "with redirects" do
@@ -94,11 +94,36 @@ describe Halite do
     end
   end
 
-  context ".head" do
+  describe ".head" do
     it "should easy to request" do
       response = Halite.head server.endpoint
       response.status_code.should eq(200)
       response.content_type.should match(/html/)
+    end
+  end
+
+  describe ".auth" do
+    it "sets Authorization header to the given value" do
+      client = Halite.auth("abc")
+      client.options.headers["Authorization"].should eq("abc")
+    end
+  end
+
+  describe ".basic_auth" do
+    it "sets Authorization header with proper BasicAuth value" do
+      client = Halite.basic_auth(user: "foo", pass: "bar")
+      client.options.headers["Authorization"].should match(%r{^Basic [A-Za-z0-9+/]+=*$})
+    end
+  end
+
+  describe ".timeout" do
+    context "without timeout type" do
+      it "sets given timeout options" do
+        client = Halite.timeout(connect: 12, read: 6)
+
+        client.options.timeout.read.should eq(6)
+        client.options.timeout.connect.should eq(12)
+      end
     end
   end
 end
