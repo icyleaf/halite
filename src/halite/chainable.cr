@@ -63,7 +63,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def headers(headers : Hash(String, _) | NamedTuple) : Halite::Client
-      branch DEFAULT_OPTIONS.with_headers(headers)
+      branch default_options.with_headers(headers)
     end
 
     # Make a request with the given headers
@@ -73,7 +73,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def headers(**kargs) : Halite::Client
-      branch DEFAULT_OPTIONS.with_headers(kargs)
+      branch default_options.with_headers(kargs)
     end
 
     # Make a request with the given cookies
@@ -86,7 +86,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def cookies(cookies : Hash(String, _) | NamedTuple) : Halite::Client
-      branch DEFAULT_OPTIONS.with_cookies(cookies)
+      branch default_options.with_cookies(cookies)
     end
 
     # Make a request with the given cookies
@@ -96,7 +96,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def cookies(**kargs) : Halite::Client
-      branch DEFAULT_OPTIONS.with_cookies(kargs)
+      branch default_options.with_cookies(kargs)
     end
 
     # Adds a timeout to the request.
@@ -127,10 +127,10 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def timeout(connect : (Int32 | Float64 | Time::Span)?, read : (Int32 | Float64 | Time::Span)?) : Halite::Client
-      DEFAULT_OPTIONS.timeout.connect = connect.to_f if connect
-      DEFAULT_OPTIONS.timeout.read = read.to_f if read
+      default_options.timeout.connect = connect.to_f if connect
+      default_options.timeout.read = read.to_f if read
 
-      branch DEFAULT_OPTIONS
+      branch default_options
     end
 
     # Returns `Options` self with automatically following redirects.
@@ -145,7 +145,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def follow(strict = Options::FOLLOW_STRICT) : Halite::Client
-      branch DEFAULT_OPTIONS.with_follow(strict: strict)
+      branch default_options.with_follow(strict: strict)
     end
 
     # Returns `Options` self with gived max hops of redirect times.
@@ -160,7 +160,7 @@ module Halite
     #       .get("http://httpbin.org/relative-redirect/4")
     # ```
     def follow(hops : Int32, strict = Options::FOLLOW_STRICT) : Halite::Client
-      branch DEFAULT_OPTIONS.with_follow(hops, strict)
+      branch default_options.with_follow(hops, strict)
     end
 
     # Make an HTTP request with the given verb
@@ -178,7 +178,9 @@ module Halite
     end
 
     # :nodoc:
-    DEFAULT_OPTIONS = Halite::Options.new
+    private def default_options
+      Halite::Options.new
+    end
 
     # :nodoc:
     private def branch(options : Hash(String, _) | NamedTuple | Options) : Halite::Client
