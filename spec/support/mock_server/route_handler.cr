@@ -116,6 +116,14 @@ class MockServer < HTTP::Server
       context
     end
 
+    get "/cookies" do |context|
+      body = context.request.cookies.map { |c| [c.name, c.value].join ": " }.join("\n")
+      context.response.headers["Set-Cookie"] = "foo=bar"
+      context.response.print body
+
+      context
+    end
+
     # POST
     post "/echo-body" do |context|
       body = parse_body(context.request.body)

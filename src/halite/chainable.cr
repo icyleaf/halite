@@ -99,6 +99,17 @@ module Halite
       branch default_options.with_cookies(kargs)
     end
 
+    # Make a request with the given cookies
+    #
+    # ```
+    # cookies = HTTP::Cookies.from_headers(headers)
+    # Halite.cookies(cookies)
+    #       .get("http://httpbin.org/get")
+    # ```
+    def cookies(cookies : HTTP::Cookies) : Halite::Client
+      branch default_options.with_cookies(cookies)
+    end
+
     # Adds a timeout to the request.
     #
     # How long to wait for the server to send data before giving up, as a int, float or time span.
@@ -178,8 +189,9 @@ module Halite
     end
 
     # :nodoc:
+    DEFAULT_OPTIONS = Halite::Options.new
     private def default_options
-      Halite::Options.new
+      DEFAULT_OPTIONS
     end
 
     # :nodoc:

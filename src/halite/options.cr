@@ -89,8 +89,8 @@ module Halite
 
     # Returns `Options` self with gived cookies combined.
     def with_cookies(cookies : HTTP::Cookies) : Halite::Options
-      cookies.each do |c|
-        with_cookies(c)
+      cookies.each do |cookie|
+        with_cookies(cookie)
       end
 
       self
@@ -98,8 +98,9 @@ module Halite
 
     # Returns `Options` self with gived cookies combined.
     def with_cookies(cookie : HTTP::Cookie) : Halite::Options
-      @headers.not_nil!.merge! cookie.to_set_cookie_header
-      @cookies.fill_from_headers @headers
+      cookie_header = HTTP::Headers{"Set-Cookie" => cookie.to_set_cookie_header}
+      @headers.not_nil!.merge!(cookie_header)
+      @cookies.fill_from_headers(@headers)
       self
     end
 

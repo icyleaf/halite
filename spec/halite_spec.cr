@@ -120,10 +120,28 @@ describe Halite do
     context "without timeout type" do
       it "sets given timeout options" do
         client = Halite.timeout(connect: 12, read: 6)
-
         client.options.timeout.read.should eq(6)
         client.options.timeout.connect.should eq(12)
       end
+    end
+  end
+
+  describe ".cookies" do
+    it "passes correct `Cookie` header" do
+      client = Halite.cookies(abc: "def").get("#{server.endpoint}/cookies")
+      client.to_s.should eq("abc: def")
+    end
+
+    it "properly works with cookie jars from response" do
+      res = Halite.get("#{server.endpoint}/cookies")
+      client = Halite.cookies(res.cookies).get("#{server.endpoint}/cookies")
+      client.to_s.should eq("foo: bar")
+    end
+
+    it "properly merges cookies" do
+      res     = Halite.get("#{server.endpoint}/cookies")
+      client  = Halite.cookies(foo: 123, bar: 321).cookies(res.cookies)
+      client.get("#{server.endpoint}/cookies").to_s.should eq("foo: bar\nbar: 321")
     end
   end
 end
