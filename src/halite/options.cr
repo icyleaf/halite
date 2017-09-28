@@ -23,7 +23,7 @@ module Halite
     property json : Hash(String, Type)?
 
     def initialize(options : (Hash(Type, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil})
-      @headers = parse_headers(options)
+      @headers = parse_headers(options).merge!(default_headers)
       @cookies = parse_cookies(@headers)
       @timeout = parse_timeout(options)
       @follow = 0 # No follow by default
@@ -58,13 +58,14 @@ module Halite
 
     # Returns `Options` self with gived headers combined.
     def with_headers(**headers) : Halite::Options
-      @headers.not_nil!.merge! parse_headers({"headers" => headers})
+      # headers = parse_headers({"headers" => headers}) || default_headers
+      @headers.not_nil!.merge!(parse_headers({"headers" => headers}))
       self
     end
 
     # Returns `Options` self with gived headers combined.
     def with_headers(headers : Hash(Type, _) | NamedTuple) : Halite::Options
-      @headers.not_nil!.merge! parse_headers({"headers" => headers})
+      @headers.not_nil!.merge!(parse_headers({"headers" => headers}))
       self
     end
 
@@ -138,7 +139,7 @@ module Halite
       when HTTP::Headers
         headers
       else
-        default_headers
+        HTTP::Headers.new
       end
     end
 
