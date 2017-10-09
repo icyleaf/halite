@@ -218,7 +218,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L2" target="_blank">halite/options.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L2" target="_blank">halite/options.cr</a>
     
     <br/>
   
@@ -279,6 +279,13 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#clear%21%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#clear!</strong> : Halite::Options</a>
+        
+          <div class="summary"><p>Reset options</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#cookies%3AHTTP%3A%3ACookies-instance-method" class="signature"><strong>#cookies</strong> : HTTP::Cookies</a>
         
       </li>
@@ -309,12 +316,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#form%3AHash%28String%2CType%29%3F-instance-method" class="signature"><strong>#form</strong> : Hash(String, Type)?</a>
+        <a href="#form%3AHash%28String%2CType%29-instance-method" class="signature"><strong>#form</strong> : Hash(String, Type)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#form%3D%28form%3AHash%28String%2CType%29%3F%29-instance-method" class="signature"><strong>#form=</strong>(form : Hash(String, Type)?)</a>
+        <a href="#form%3D%28form%3AHash%28String%2CType%29%29-instance-method" class="signature"><strong>#form=</strong>(form : Hash(String, Type))</a>
         
       </li>
     
@@ -329,12 +336,17 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#json%3AHash%28String%2CType%29%3F-instance-method" class="signature"><strong>#json</strong> : Hash(String, Type)?</a>
+        <a href="#json%3AHash%28String%2CType%29-instance-method" class="signature"><strong>#json</strong> : Hash(String, Type)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#json%3D%28json%3AHash%28String%2CType%29%3F%29-instance-method" class="signature"><strong>#json=</strong>(json : Hash(String, Type)?)</a>
+        <a href="#json%3D%28json%3AHash%28String%2CType%29%29-instance-method" class="signature"><strong>#json=</strong>(json : Hash(String, Type))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#merge%28options%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#merge</strong>(options : Halite::Options) : Halite::Options</a>
         
       </li>
     
@@ -346,12 +358,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#params%3AHash%28String%2CType%29%3F-instance-method" class="signature"><strong>#params</strong> : Hash(String, Type)?</a>
+        <a href="#params%3AHash%28String%2CType%29-instance-method" class="signature"><strong>#params</strong> : Hash(String, Type)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#params%3D%28params%3AHash%28String%2CType%29%3F%29-instance-method" class="signature"><strong>#params=</strong>(params : Hash(String, Type)?)</a>
+        <a href="#params%3D%28params%3AHash%28String%2CType%29%29-instance-method" class="signature"><strong>#params=</strong>(params : Hash(String, Type))</a>
         
       </li>
     
@@ -465,7 +477,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -476,6 +488,24 @@
 
 
   <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="clear&#33;:Halite::Options-instance-method">
+      <div class="signature">
+        
+        def <strong>clear!</strong> : <a href="../Halite/Options.html">Halite::Options</a>
+
+        <a class="method-permalink" href="#clear%21%3AHalite%3A%3AOptions-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Reset options</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L70" target="_blank">View source</a>]
+        
+      </div>
+    </div>
   
     <div class="entry-detail" id="cookies:HTTP::Cookies-instance-method">
       <div class="signature">
@@ -488,7 +518,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -504,7 +534,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -520,7 +550,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -536,7 +566,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -552,7 +582,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -568,39 +598,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="form:Hash&#40;String,Type&#41;?-instance-method">
+    <div class="entry-detail" id="form:Hash&#40;String,Type&#41;-instance-method">
       <div class="signature">
         
-        def <strong>form</strong> : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)?
+        def <strong>form</strong> : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)
 
-        <a class="method-permalink" href="#form%3AHash%28String%2CType%29%3F-instance-method">#</a>
+        <a class="method-permalink" href="#form%3AHash%28String%2CType%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="form&#61;&#40;form:Hash&#40;String,Type&#41;?&#41;-instance-method">
+    <div class="entry-detail" id="form&#61;&#40;form:Hash&#40;String,Type&#41;&#41;-instance-method">
       <div class="signature">
         
-        def <strong>form=</strong>(form : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)?)
+        def <strong>form=</strong>(form : Hash(String, <a href="../Halite/Options/Type.html">Type</a>))
 
-        <a class="method-permalink" href="#form%3D%28form%3AHash%28String%2CType%29%3F%29-instance-method">#</a>
+        <a class="method-permalink" href="#form%3D%28form%3AHash%28String%2CType%29%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -616,7 +646,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -632,39 +662,55 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="json:Hash&#40;String,Type&#41;?-instance-method">
+    <div class="entry-detail" id="json:Hash&#40;String,Type&#41;-instance-method">
       <div class="signature">
         
-        def <strong>json</strong> : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)?
+        def <strong>json</strong> : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)
 
-        <a class="method-permalink" href="#json%3AHash%28String%2CType%29%3F-instance-method">#</a>
+        <a class="method-permalink" href="#json%3AHash%28String%2CType%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="json&#61;&#40;json:Hash&#40;String,Type&#41;?&#41;-instance-method">
+    <div class="entry-detail" id="json&#61;&#40;json:Hash&#40;String,Type&#41;&#41;-instance-method">
       <div class="signature">
         
-        def <strong>json=</strong>(json : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)?)
+        def <strong>json=</strong>(json : Hash(String, <a href="../Halite/Options/Type.html">Type</a>))
 
-        <a class="method-permalink" href="#json%3D%28json%3AHash%28String%2CType%29%3F%29-instance-method">#</a>
+        <a class="method-permalink" href="#json%3D%28json%3AHash%28String%2CType%29%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="merge&#40;options:Halite::Options&#41;:Halite::Options-instance-method">
+      <div class="signature">
+        
+        def <strong>merge</strong>(options : <a href="../Halite/Options.html">Halite::Options</a>) : <a href="../Halite/Options.html">Halite::Options</a>
+
+        <a class="method-permalink" href="#merge%28options%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L59" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -682,39 +728,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L38" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="params:Hash&#40;String,Type&#41;?-instance-method">
+    <div class="entry-detail" id="params:Hash&#40;String,Type&#41;-instance-method">
       <div class="signature">
         
-        def <strong>params</strong> : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)?
+        def <strong>params</strong> : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)
 
-        <a class="method-permalink" href="#params%3AHash%28String%2CType%29%3F-instance-method">#</a>
+        <a class="method-permalink" href="#params%3AHash%28String%2CType%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="params&#61;&#40;params:Hash&#40;String,Type&#41;?&#41;-instance-method">
+    <div class="entry-detail" id="params&#61;&#40;params:Hash&#40;String,Type&#41;&#41;-instance-method">
       <div class="signature">
         
-        def <strong>params=</strong>(params : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)?)
+        def <strong>params=</strong>(params : Hash(String, <a href="../Halite/Options/Type.html">Type</a>))
 
-        <a class="method-permalink" href="#params%3D%28params%3AHash%28String%2CType%29%3F%29-instance-method">#</a>
+        <a class="method-permalink" href="#params%3D%28params%3AHash%28String%2CType%29%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -730,7 +776,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -746,7 +792,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -764,7 +810,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L123" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L145" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -782,7 +828,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L94" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -800,7 +846,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L91" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L112" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -818,7 +864,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L100" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L121" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -836,7 +882,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L82" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L103" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -861,7 +907,7 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L116" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L138" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -879,7 +925,7 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L67" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L88" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -897,7 +943,7 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a12a415b3f7b1e248d6dd3e981371fc95d1b9cfb/src/halite/options.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/387e1480981d91b21f9a3b769b0fab5dc59a31ae/src/halite/options.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
