@@ -1,17 +1,39 @@
 module Halite
   class Request
+
+    # Allowed methods
+    #
+    # See more: [https://github.com/crystal-lang/crystal/blob/master/src/http/client.cr#L329](https://github.com/crystal-lang/crystal/blob/master/src/http/client.cr#L329)
+    METHODS = ["GET", "PUT", "HEAD", "POST", "DELETE", "PATCH"]
+
+    # Allowed schemes
+    SCHEMES = ["http", "https"]
+
+    # The verb name of request
     getter verb : String
+
+    # The uri of request
     getter uri : URI
-    getter scheme : String?
+
+    # The scheme name of request
+    getter scheme : String
+
+    # The headers of request
     getter headers : HTTP::Headers
+
+    # The payload of request
     getter body : String
 
-    def initialize(verb : String, uri : String, @headers : HTTP::Headers, @body : String?)
+    def initialize(verb : String, uri : String, @headers : HTTP::Headers = HTTP::Headers.new, @body : String = "")
       @verb = verb.upcase
       @uri = normalize_uri(uri)
-      if scheme = @uri.scheme
-        @scheme = scheme
-      end
+
+      raise UnsupportedMethodError.new("Unknown method: #{@verb}") unless METHODS.includes?(@verb)
+      raise UnsupportedSchemeError.new("Missing scheme: #{@uri}") unless @uri.scheme
+
+      @scheme = @uri.scheme.not_nil!
+
+      raise UnsupportedSchemeError.new("Unknown scheme: #{@scheme}") unless SCHEMES.includes?(@scheme)
     end
 
     # Returns new Request with updated uri
