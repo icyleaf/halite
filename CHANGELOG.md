@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Todo
 
 - 100% pass specs
-- Fix always overwrite request headers with default values
+
+## [0.1.3] (10/09/2017)
 
 ### Added
 
@@ -23,9 +24,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 - Fix `follow`(redirect uri) with full uri and relative path
+- Fix always overwrite request headers with default values
+- Fix always shard same options in any new call (it only valid in chainable methods)
 
 ## 0.1.2 (09/18/2017)
 
 - First beta version
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/icyleaf/halite/compare/v0.1.2...v0.1.3
