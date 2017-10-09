@@ -90,6 +90,8 @@ module Halite
       response
     rescue ex : IO::Timeout
       raise TimeoutError.new(ex.message)
+    rescue ex : Socket::Error | Errno
+      raise ConnectionError.new(ex.message)
     end
 
     # Merges query params if needed

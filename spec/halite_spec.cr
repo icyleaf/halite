@@ -144,6 +144,30 @@ describe Halite do
       client.get("#{server.endpoint}/cookies").to_s.should eq("foo: bar\nbar: 321")
     end
   end
+
+  it "should throws a Halite::ConnectionError exception with not exist uri" do
+    expect_raises Halite::ConnectionError do
+      Halite.get("http://404-not_found.xyz/")
+    end
+  end
+
+  it "should throws a Halite::TimeoutError exception with long time not response" do
+    expect_raises Halite::TimeoutError do
+      Halite.get("http://404notfound.xyz")
+    end
+  end
+
+  it "should throws a Halite::ConnectionError exception with illegal port" do
+    expect_raises Halite::ConnectionError do
+      Halite.get("http://127.0.0.1:000")
+    end
+  end
+
+  it "should throws a Halite::RequestError exception with http request via ssl" do
+    expect_raises Halite::RequestError do
+      Halite.get("http://google.com", ssl: OpenSSL::SSL::Context::Client.new)
+    end
+  end
 end
 
 # Clean up

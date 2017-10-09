@@ -7,6 +7,8 @@ module Halite
 
   class TimeoutError < RequestError; end
 
+  class ConnectionError < RequestError; end
+
   class ResponseError < Error; end
 
   class TooManyRedirectsError < ResponseError; end
