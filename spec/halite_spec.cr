@@ -146,25 +146,25 @@ describe Halite do
   end
 
   it "should throws a Halite::ConnectionError exception with not exist uri" do
-    expect_raises Halite::ConnectionError do
+    expect_raises Halite::ConnectionError, "No address found for 404-not_found.xyz:80 over TCP" do
       Halite.get("http://404-not_found.xyz/")
     end
   end
 
-  it "should throws a Halite::TimeoutError exception with long time not response" do
-    expect_raises Halite::TimeoutError do
-      Halite.get("http://404notfound.xyz")
-    end
-  end
-
   it "should throws a Halite::ConnectionError exception with illegal port" do
-    expect_raises Halite::ConnectionError do
+    expect_raises Halite::ConnectionError, "connect: Can't assign requested address" do
       Halite.get("http://127.0.0.1:000")
     end
   end
 
+  it "should throws a Halite::TimeoutError exception with long time not response" do
+    expect_raises Halite::TimeoutError, "connect timed out" do
+      Halite.timeout(1).get("http://404notfound.xyz")
+    end
+  end
+
   it "should throws a Halite::RequestError exception with http request via ssl" do
-    expect_raises Halite::RequestError do
+    expect_raises Halite::RequestError, "SSL context given for HTTP URI = http://google.com" do
       Halite.get("http://google.com", ssl: OpenSSL::SSL::Context::Client.new)
     end
   end
