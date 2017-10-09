@@ -106,11 +106,11 @@ class MockServer < HTTP::Server
     get "/redirect-302" do |context|
       context.response.status_code = 302
       location =
-      if context.request.query_params["relative_path"]?
-        "/"
-      else
-        "http://#{context.request.host_with_port}/"
-      end
+        if context.request.query_params["relative_path"]?
+          "/"
+        else
+          "http://#{context.request.host_with_port}/"
+        end
 
       context.response.headers["Location"] = location
       context

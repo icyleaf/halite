@@ -40,12 +40,12 @@ describe Halite do
       end
     end
 
-  #   # context "loading binary data" do
-  #   #   it "is encoded as bytes" do
-  #   #     response = Halite.get "#{server.endpoint}/bytes"
-  #   #     # response.to_s.encoding.should eq(Encoding::BINARY)
-  #   #   end
-  #   # end
+    #   # context "loading binary data" do
+    #   #   it "is encoded as bytes" do
+    #   #     response = Halite.get "#{server.endpoint}/bytes"
+    #   #     # response.to_s.encoding.should eq(Encoding::BINARY)
+    #   #   end
+    #   # end
 
     context "with a large request body" do
       [16_000, 16_500, 17_000, 34_000, 68_000].each do |size|
@@ -139,8 +139,8 @@ describe Halite do
     end
 
     it "properly merges cookies" do
-      res     = Halite.get("#{server.endpoint}/cookies")
-      client  = Halite.cookies(foo: 123, bar: 321).cookies(res.cookies)
+      res = Halite.get("#{server.endpoint}/cookies")
+      client = Halite.cookies(foo: 123, bar: 321).cookies(res.cookies)
       client.get("#{server.endpoint}/cookies").to_s.should eq("foo: bar\nbar: 321")
     end
   end
