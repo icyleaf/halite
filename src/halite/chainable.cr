@@ -12,12 +12,12 @@ module Halite
       # })
       # ```
       def {{ verb.id }}(uri : String, headers : (Hash(String, _) | NamedTuple)? = nil, params : (Hash(String, _) | NamedTuple)? = nil, form : (Hash(String, _) | NamedTuple)? = nil, json : (Hash(String, _) | NamedTuple)? = nil) : Halite::Response
-        request {{ verb }}, uri, {
+        request({{ verb }}, uri, {
           "headers" => headers,
           "params" => params,
           "form" => form,
           "json" => json
-        }
+        })
       end
     {% end %}
 
@@ -30,7 +30,7 @@ module Halite
     #
     # See Also: [http://tools.ietf.org/html/rfc2617](http://tools.ietf.org/html/rfc2617)
     def basic_auth(user : String, pass : String) : Halite::Client
-      auth "Basic " + Base64.encode(user + ":" + pass).chomp
+      auth("Basic " + Base64.encode(user + ":" + pass).chomp)
     end
 
     # Make a request with the given Authorization header
@@ -63,7 +63,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def headers(headers : Hash(String, _) | NamedTuple) : Halite::Client
-      branch default_options.with_headers(headers)
+      branch(default_options.with_headers(headers))
     end
 
     # Make a request with the given headers
@@ -73,7 +73,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def headers(**kargs) : Halite::Client
-      branch default_options.with_headers(kargs)
+      branch(default_options.with_headers(kargs))
     end
 
     # Make a request with the given cookies
@@ -86,7 +86,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def cookies(cookies : Hash(String, _) | NamedTuple) : Halite::Client
-      branch default_options.with_cookies(cookies)
+      branch(default_options.with_cookies(cookies))
     end
 
     # Make a request with the given cookies
@@ -96,7 +96,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def cookies(**kargs) : Halite::Client
-      branch default_options.with_cookies(kargs)
+      branch(default_options.with_cookies(kargs))
     end
 
     # Make a request with the given cookies
@@ -107,7 +107,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def cookies(cookies : HTTP::Cookies) : Halite::Client
-      branch default_options.with_cookies(cookies)
+      branch(default_options.with_cookies(cookies))
     end
 
     # Adds a timeout to the request.
@@ -156,7 +156,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def follow(strict = Options::FOLLOW_STRICT) : Halite::Client
-      branch default_options.with_follow(strict: strict)
+      branch(default_options.with_follow(strict: strict))
     end
 
     # Returns `Options` self with gived max hops of redirect times.
@@ -171,7 +171,7 @@ module Halite
     #       .get("http://httpbin.org/relative-redirect/4")
     # ```
     def follow(hops : Int32, strict = Options::FOLLOW_STRICT) : Halite::Client
-      branch default_options.with_follow(hops, strict)
+      branch(default_options.with_follow(hops, strict))
     end
 
     # Make an HTTP request with the given verb
@@ -185,18 +185,25 @@ module Halite
     # })
     # ```
     def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil}) : Halite::Response
-      branch(options).request(verb, uri)
+      response = branch(options).request(verb, uri)
+      DEFAULT_OPTIONS.clear!
+      response
     end
 
     # :nodoc:
     DEFAULT_OPTIONS = Halite::Options.new
+
     private def default_options
-      DEFAULT_OPTIONS
+      {% if @type.superclass %}
+        DEFAULT_OPTIONS
+      {% else %}
+        DEFAULT_OPTIONS.clear!
+      {% end %}
     end
 
     # :nodoc:
     private def branch(options : Hash(String, _) | NamedTuple | Options) : Halite::Client
-      Halite::Client.new(options)
+      Halite::Client.new(DEFAULT_OPTIONS.merge(options))
     end
   end
 end

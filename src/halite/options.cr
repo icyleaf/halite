@@ -18,9 +18,9 @@ module Halite
     property follow : Int32
     property follow_strict : Bool
 
-    property params : Hash(String, Type)?
-    property form : Hash(String, Type)?
-    property json : Hash(String, Type)?
+    property params : Hash(String, Type)
+    property form : Hash(String, Type)
+    property json : Hash(String, Type)
 
     def initialize(options : (Hash(Type, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil})
       @headers = parse_headers(options).merge!(default_headers)
@@ -37,35 +37,56 @@ module Halite
     # Returns `Options` self with the headers, params, form and json of this hash and other combined.
     def merge(options : Hash(Type, _) | NamedTuple) : Halite::Options
       if headers = parse_headers(options)
-        @headers.not_nil!.merge!(headers)
+        @headers.merge!(headers)
         @cookies.fill_from_headers(@headers)
       end
 
       if params = parse_params(options)
-        @params.not_nil!.merge!(params)
+        @params.merge!(params)
       end
 
       if form = parse_form(options)
-        @form.not_nil!.merge!(form)
+        @form.merge!(form)
       end
 
       if json = parse_json(options)
-        @json.not_nil!.merge!(json)
+        @json.merge!(json)
       end
+
+      self
+    end
+
+    def merge(options : Halite::Options) : Halite::Options
+      @headers.merge!(options.headers) if options.headers
+      @cookies.fill_from_headers(@headers) if @headers
+      @params.merge!(options.params) if options.params
+      @form.merge!(options.form) if options.form
+      @json.merge!(options.json) if options.json
+
+      self
+    end
+
+    # Reset options
+    def clear! : Halite::Options
+      @headers = HTTP::Headers.new
+      @cookies = HTTP::Cookies.new
+
+      @params = {} of String => Type
+      @form = {} of String => Type
+      @json = {} of String => Type
 
       self
     end
 
     # Returns `Options` self with gived headers combined.
     def with_headers(**headers) : Halite::Options
-      # headers = parse_headers({"headers" => headers}) || default_headers
-      @headers.not_nil!.merge!(parse_headers({"headers" => headers}))
+      @headers.merge!(parse_headers({"headers" => headers}))
       self
     end
 
     # Returns `Options` self with gived headers combined.
     def with_headers(headers : Hash(Type, _) | NamedTuple) : Halite::Options
-      @headers.not_nil!.merge!(parse_headers({"headers" => headers}))
+      @headers.merge!(parse_headers({"headers" => headers}))
       self
     end
 
@@ -99,7 +120,7 @@ module Halite
     # Returns `Options` self with gived cookies combined.
     def with_cookies(cookie : HTTP::Cookie) : Halite::Options
       cookie_header = HTTP::Headers{"Set-Cookie" => cookie.to_set_cookie_header}
-      @headers.not_nil!.merge!(cookie_header)
+      @headers.merge!(cookie_header)
       @cookies.fill_from_headers(@headers)
       self
     end
@@ -125,9 +146,9 @@ module Halite
       {
         "headers"         => @headers.to_h,
         "cookies"         => @cookies.to_h,
-        "params"          => @params ? @params.not_nil!.to_h : nil,
-        "form"            => @form ? @form.not_nil!.to_h : nil,
-        "json"            => @json ? @json.not_nil!.to_h : nil,
+        "params"          => @params ? @params.to_h : nil,
+        "form"            => @form ? @form.to_h : nil,
+        "json"            => @json ? @json.to_h : nil,
         "connect_timeout" => @timeout.connect,
         "read_timeout"    => @timeout.read,
       }
