@@ -11,12 +11,13 @@ module Halite
       #   last_name:  "bar"
       # })
       # ```
-      def {{ verb.id }}(uri : String, headers : (Hash(String, _) | NamedTuple)? = nil, params : (Hash(String, _) | NamedTuple)? = nil, form : (Hash(String, _) | NamedTuple)? = nil, json : (Hash(String, _) | NamedTuple)? = nil) : Halite::Response
+      def {{ verb.id }}(uri : String, headers : (Hash(String, _) | NamedTuple)? = nil, params : (Hash(String, _) | NamedTuple)? = nil, form : (Hash(String, _) | NamedTuple)? = nil, json : (Hash(String, _) | NamedTuple)? = nil, ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
         request({{ verb }}, uri, {
           "headers" => headers,
           "params" => params,
           "form" => form,
-          "json" => json
+          "json" => json,
+          "ssl" => ssl
         })
       end
     {% end %}

@@ -24,6 +24,7 @@ Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
     - [Cookies](#cookies)
     - [Redirects](#redirects)
     - [Timeout](#timeout)
+  - [HTTPS](#https)
   - [Response Handling](#response-handling)
   - [Error Handling](#error-handling)
 - [Advanced Usage](#advanced-usage)
@@ -249,6 +250,20 @@ Halite.timeout(connect: 3.0, read: 2.minutes)
 # The timeout value will be applied to both the connect and the read timeouts.
 Halite.timeout(5)
       .get("http://httpbin.org/anything")
+```
+
+### HTTPS
+
+The Halite supports HTTPS via Crystal's built-in OpenSSL module. All you have to do in order to use HTTPS is pass in an https://-prefixed URL.
+
+To use client certificates, you can pass in a custom `OpenSSL::SSL::Context::Client` object containing the certificates you wish to use:
+
+```crystal
+ssl = OpenSSL::SSL::Context::Client.new
+ssl.ca_certificates = File.expand_path("~/client.crt")
+ssl.private_key = File.expand_path("~/client.key")
+
+Halite.get("https://httpbin.org/anything", ssl: ssl)
 ```
 
 ### Response Handling

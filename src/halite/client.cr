@@ -56,7 +56,7 @@ module Halite
     end
 
     # Make an HTTP request
-    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil}) : Halite::Response
+    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil, "ssl" => nil}) : Halite::Response
       options = @options.merge(options)
 
       uri = make_request_uri(uri, options)
@@ -75,7 +75,9 @@ module Halite
 
     # Perform a single (no follow) HTTP request
     private def perform(request, options) : Halite::Response
-      conn = HTTP::Client.new(request.domain)
+      raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.ssl
+
+      conn = HTTP::Client.new(request.domain, options.ssl)
       conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
       conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
 
