@@ -217,7 +217,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/92758a2" target="_blank">92758a2</a> (2017-10-11 00:51:57 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/82918d5" target="_blank">82918d5</a> (2017-10-11 01:02:13 +0800).</p>
 
 <p>&lt;hr /></p>
 
@@ -435,7 +435,7 @@ filename <span class="o">=</span> r.headers[<span class="s">&quot;Content-Dispos
 
 <h3>Error Handling</h3>
 
-<ul><li>For any status code, a <code><a href="Halite/Response.html">Halite::Response</a></code> will be returned</li><li>If request timeout, a <code><a href="Halite/TimeoutError.html">Halite::TimeoutError</a></code> will be raised.</li></ul>
+<ul><li>For any status code, a <code><a href="Halite/Response.html">Halite::Response</a></code> will be returned.</li><li>If request timeout, a <code><a href="Halite/TimeoutError.html">Halite::TimeoutError</a></code> will be raised.</li><li>If a request exceeds the configured number of maximum redirections, a <code><a href="Halite/TooManyRedirectsError.html">Halite::TooManyRedirectsError</a></code> will raised.</li><li>If request uri is http and configured ssl context, a <code><a href="Halite/RequestError.html">Halite::RequestError</a></code> will raised.</li><li>If request uri is invalid, a <code><a href="Halite/ConnectionError.html">Halite::ConnectionError</a></code>/<code><a href="Halite/UnsupportedMethodError.html">Halite::UnsupportedMethodError</a></code>/<code><a href="Halite/UnsupportedSchemeError.html">Halite::UnsupportedSchemeError</a></code> will raised.</li></ul>
 
 <h2>Advanced Usage</h2>
 
