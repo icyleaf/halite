@@ -217,11 +217,11 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/01d7fa2" target="_blank">01d7fa2</a> (2017-10-10 13:02:09 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/d7152e3" target="_blank">d7152e3</a> (2017-10-10 14:57:50 +0800).</p>
 
 <p>&lt;hr /></p>
 
-<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects" target="_blank">Redirects</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
+<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects" target="_blank">Redirects</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#binary-data" target="_blank">Binary data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
 
 <p>&lt;hr /></p>
 
@@ -420,6 +420,18 @@ ssl.private_key <span class="o">=</span> <span class="t">File</span>.expand_path
 <p>After an HTTP request, <code><a href="Halite/Response.html">Halite::Response</a></code> object have several useful methods. (Also see the <a href="https://icyleaf.github.io/halite/Halite/Response.html" target="_blank">API documentation</a>).</p>
 
 <ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io.</li><li><strong>#code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: The <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#version</strong>: The HTTP version.</li><li><strong>#to_a</strong>: A <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li></ul>
+
+<h4>Binary Data</h4>
+
+<p>Store binary data(<code>application/octet-stream</code>) to file, you can do this:</p>
+
+<pre><code class='language-crystal'>r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://example.com/foo/bar.zip&quot;</span>)
+filename <span class="o">=</span> r.headers[<span class="s">&quot;Content-Disposition&quot;</span>].split(<span class="s">&quot;filename&#61;&quot;</span>)[<span class="n">1</span>]
+<span class="t">File</span>.open(filename, <span class="s">&quot;w&quot;</span>) <span class="k">do</span> <span class="o">|</span>f<span class="o">|</span>
+  <span class="k">while</span> byte <span class="o">=</span> r.body.read_byte
+    f.write_byte byte
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
 
 <h3>Error Handling</h3>
 
