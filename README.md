@@ -298,8 +298,11 @@ end
 
 ### Error Handling
 
-- For any status code, a `Halite::Response` will be returned
+- For any status code, a `Halite::Response` will be returned.
 - If request timeout, a `Halite::TimeoutError` will be raised.
+- If a request exceeds the configured number of maximum redirections, a `Halite::TooManyRedirectsError` will raised.
+- If request uri is http and configured ssl context, a `Halite::RequestError` will raised.
+- If request uri is invalid, a `Halite::ConnectionError`/`Halite::UnsupportedMethodError`/`Halite::UnsupportedSchemeError` will raised.
 
 ## Advanced Usage
 
