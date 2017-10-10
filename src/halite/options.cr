@@ -166,7 +166,9 @@ module Halite
     end
 
     private def parse_headers(options : (Hash(Type, _) | NamedTuple)) : HTTP::Headers
-      case (headers = options["headers"]?)
+      return HTTP::Headers.new unless options["headers"]?
+
+      case headers = options["headers"]
       when Hash, NamedTuple
         HTTP::Headers.escape(headers)
       when HTTP::Headers

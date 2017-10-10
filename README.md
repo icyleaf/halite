@@ -26,6 +26,7 @@ Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
     - [Timeout](#timeout)
   - [HTTPS](#https)
   - [Response Handling](#response-handling)
+    - [Binary data](#binary-data)
   - [Error Handling](#error-handling)
 - [Advanced Usage](#advanced-usage)
   - [Sessions](#sessions)
@@ -280,6 +281,21 @@ After an HTTP request, `Halite::Response` object have several useful methods. (A
 - **#version**: The HTTP version.
 - **#to_a**: A `Hash` of status code, response headers and body as a string.
 - **#to_s**: Return response body as a string.
+
+#### Binary Data
+
+Store binary data(`application/octet-stream`) to file, you can do this:
+
+```crystal
+r = Halite.get("https://github.com/icyleaf/halite/archive/master.zip")
+filename = r.headers["Content-Disposition"].split("filename=")[1]
+File.open(filename, "w") do |f|
+  while byte = r.body.read_byte
+    f.write_byte byte
+  end
+end
+
+```
 
 ### Error Handling
 
