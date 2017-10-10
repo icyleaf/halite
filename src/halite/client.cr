@@ -139,7 +139,9 @@ module Halite
     private def merge_option_from_response(options : Halite::Options, response : Halite::Response) : Halite::Options
       return options unless response.headers
 
-      options.merge({"headers" => response.headers})
+      # Store cookies for sessions use
+      headers = response.headers.select { |key, _| %w(Cookie, Set-Cookie).includes?(key) }
+      options.merge({"headers" => headers})
     end
   end
 end

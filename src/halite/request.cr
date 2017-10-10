@@ -1,13 +1,12 @@
 module Halite
   class Request
-
     # Allowed methods
     #
     # See more: [https://github.com/crystal-lang/crystal/blob/master/src/http/client.cr#L329](https://github.com/crystal-lang/crystal/blob/master/src/http/client.cr#L329)
-    METHODS = ["GET", "PUT", "HEAD", "POST", "DELETE", "PATCH"]
+    METHODS = %w(GET PUT POST DELETE HEAD PATCH)
 
     # Allowed schemes
-    SCHEMES = ["http", "https"]
+    SCHEMES = %w(http https)
 
     # The verb name of request
     getter verb : String
@@ -38,7 +37,7 @@ module Halite
 
     # Returns new Request with updated uri
     def redirect(uri : String, verb = @verb)
-      headers = self.headers.dup
+      headers = @headers.dup
       headers.delete("Host")
 
       Request.new(verb, join_uri(domain, uri).to_s, headers, body)

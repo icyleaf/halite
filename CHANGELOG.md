@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - 100% pass specs
 
+### Add
+
+- History of redirections
+- Stream support
+- Better body of response with plain text, binary, json, xml or raw data. (reference [Response Content in requests](http://docs.python-requests.org/en/master/user/quickstart/#response-content))
+
+###
+
 ## [0.1.4] (10/10/2017)
 
 ### Added
