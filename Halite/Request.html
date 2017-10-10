@@ -165,6 +165,16 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/UnsupportedMethodError" data-name="halite::unsupportedmethoderror">
+      <a href="../Halite/UnsupportedMethodError.html">UnsupportedMethodError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/UnsupportedSchemeError" data-name="halite::unsupportedschemeerror">
+      <a href="../Halite/UnsupportedSchemeError.html">UnsupportedSchemeError</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -223,12 +233,39 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/3a4d50613ea9cd263f16e745b9d02c48eb2545ef/src/halite/request.cr#L2" target="_blank">halite/request.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/01d7fa211c41d7c6ef515cc13b09938565f11cbc/src/halite/request.cr#L2" target="_blank">halite/request.cr</a>
     
     <br/>
   
 
 
+
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="METHODS">
+        <strong>METHODS</strong> = <code>[<span class="s">&quot;GET&quot;</span>, <span class="s">&quot;PUT&quot;</span>, <span class="s">&quot;HEAD&quot;</span>, <span class="s">&quot;POST&quot;</span>, <span class="s">&quot;DELETE&quot;</span>, <span class="s">&quot;PATCH&quot;</span>]</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Allowed methods</p>
+
+<p>See more: <a href="https://github.com/crystal-lang/crystal/blob/master/src/http/client.cr#L329" target="_blank">https://github.com/crystal-lang/crystal/blob/master/src/http/client.cr#L329</a></p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="SCHEMES">
+        <strong>SCHEMES</strong> = <code>[<span class="s">&quot;http&quot;</span>, <span class="s">&quot;https&quot;</span>]</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Allowed schemes</p>
+      </dd>
+      
+    
+  </dl>
 
 
 
@@ -236,7 +273,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28verb%3AString%2Curi%3AString%2Cheaders%3AHTTP%3A%3AHeaders%2Cbody%3AString%3F%29-class-method" class="signature"><strong>.new</strong>(verb : String, uri : String, headers : HTTP::Headers, body : String?)</a>
+        <a href="#new%28verb%3AString%2Curi%3AString%2Cheaders%3AHTTP%3A%3AHeaders%3DHTTP%3A%3AHeaders.new%2Cbody%3AString%3D%26quot%3B%26quot%3B%29-class-method" class="signature"><strong>.new</strong>(verb : String, uri : String, headers : HTTP::Headers = <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.<span class="k">new</span>, body : String = <span class="s">&quot;&quot;</span>)</a>
         
       </li>
     
@@ -251,6 +288,8 @@
     
       <li class="entry-summary">
         <a href="#body%3AString-instance-method" class="signature"><strong>#body</strong> : String</a>
+        
+          <div class="summary"><p>The payload of request</p></div>
         
       </li>
     
@@ -271,6 +310,8 @@
       <li class="entry-summary">
         <a href="#headers%3AHTTP%3A%3AHeaders-instance-method" class="signature"><strong>#headers</strong> : HTTP::Headers</a>
         
+          <div class="summary"><p>The headers of request</p></div>
+        
       </li>
     
       <li class="entry-summary">
@@ -281,17 +322,23 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#scheme%3AString%3F-instance-method" class="signature"><strong>#scheme</strong> : String?</a>
+        <a href="#scheme%3AString-instance-method" class="signature"><strong>#scheme</strong> : String</a>
+        
+          <div class="summary"><p>The scheme name of request</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#uri%3AURI-instance-method" class="signature"><strong>#uri</strong> : URI</a>
         
+          <div class="summary"><p>The uri of request</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#verb%3AString-instance-method" class="signature"><strong>#verb</strong> : String</a>
+        
+          <div class="summary"><p>The verb name of request</p></div>
         
       </li>
     
@@ -328,18 +375,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new&#40;verb:String,uri:String,headers:HTTP::Headers,body:String?&#41;-class-method">
+    <div class="entry-detail" id="new&#40;verb:String,uri:String,headers:HTTP::Headers&#61;HTTP::Headers.new,body:String&#61;&amp;quot;&amp;quot;&#41;-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(verb : String, uri : String, headers : <a href="../HTTP/Headers.html">HTTP::Headers</a>, body : String?)
+        def self.<strong>new</strong>(verb : String, uri : String, headers : <a href="../HTTP/Headers.html">HTTP::Headers</a> = <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.<span class="k">new</span>, body : String = <span class="s">&quot;&quot;</span>)
 
-        <a class="method-permalink" href="#new%28verb%3AString%2Curi%3AString%2Cheaders%3AHTTP%3A%3AHeaders%2Cbody%3AString%3F%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28verb%3AString%2Curi%3AString%2Cheaders%3AHTTP%3A%3AHeaders%3DHTTP%3A%3AHeaders.new%2Cbody%3AString%3D%26quot%3B%26quot%3B%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3a4d50613ea9cd263f16e745b9d02c48eb2545ef/src/halite/request.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/01d7fa211c41d7c6ef515cc13b09938565f11cbc/src/halite/request.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -359,10 +406,12 @@
         <a class="method-permalink" href="#body%3AString-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>The payload of request</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3a4d50613ea9cd263f16e745b9d02c48eb2545ef/src/halite/request.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/01d7fa211c41d7c6ef515cc13b09938565f11cbc/src/halite/request.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -380,7 +429,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3a4d50613ea9cd263f16e745b9d02c48eb2545ef/src/halite/request.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/01d7fa211c41d7c6ef515cc13b09938565f11cbc/src/halite/request.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -398,7 +447,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3a4d50613ea9cd263f16e745b9d02c48eb2545ef/src/halite/request.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/01d7fa211c41d7c6ef515cc13b09938565f11cbc/src/halite/request.cr#L57" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -411,10 +460,12 @@
         <a class="method-permalink" href="#headers%3AHTTP%3A%3AHeaders-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>The headers of request</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3a4d50613ea9cd263f16e745b9d02c48eb2545ef/src/halite/request.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/01d7fa211c41d7c6ef515cc13b09938565f11cbc/src/halite/request.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -432,23 +483,25 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3a4d50613ea9cd263f16e745b9d02c48eb2545ef/src/halite/request.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/01d7fa211c41d7c6ef515cc13b09938565f11cbc/src/halite/request.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="scheme:String?-instance-method">
+    <div class="entry-detail" id="scheme:String-instance-method">
       <div class="signature">
         
-        def <strong>scheme</strong> : String?
+        def <strong>scheme</strong> : String
 
-        <a class="method-permalink" href="#scheme%3AString%3F-instance-method">#</a>
+        <a class="method-permalink" href="#scheme%3AString-instance-method">#</a>
       </div>
+      
+        <div class="doc"><p>The scheme name of request</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3a4d50613ea9cd263f16e745b9d02c48eb2545ef/src/halite/request.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/01d7fa211c41d7c6ef515cc13b09938565f11cbc/src/halite/request.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -461,10 +514,12 @@
         <a class="method-permalink" href="#uri%3AURI-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>The uri of request</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3a4d50613ea9cd263f16e745b9d02c48eb2545ef/src/halite/request.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/01d7fa211c41d7c6ef515cc13b09938565f11cbc/src/halite/request.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -477,10 +532,12 @@
         <a class="method-permalink" href="#verb%3AString-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>The verb name of request</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3a4d50613ea9cd263f16e745b9d02c48eb2545ef/src/halite/request.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/01d7fa211c41d7c6ef515cc13b09938565f11cbc/src/halite/request.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
