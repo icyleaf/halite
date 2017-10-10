@@ -287,14 +287,13 @@ After an HTTP request, `Halite::Response` object have several useful methods. (A
 Store binary data(`application/octet-stream`) to file, you can do this:
 
 ```crystal
-r = Halite.get("https://github.com/icyleaf/halite/archive/master.zip")
+r = Halite.get("http://example.com/foo/bar.zip")
 filename = r.headers["Content-Disposition"].split("filename=")[1]
 File.open(filename, "w") do |f|
   while byte = r.body.read_byte
     f.write_byte byte
   end
 end
-
 ```
 
 ### Error Handling
