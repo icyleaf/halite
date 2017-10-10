@@ -11,6 +11,12 @@ end
 sleep 1
 
 describe Halite do
+  it "returns a instance class" do
+    client = Halite::Client.new
+    client.should be_a(Halite::Client)
+    client.options.should be_a(Halite::Options)
+  end
+
   describe ".get" do
     context "loading a simple uri" do
       it "should easy to request" do

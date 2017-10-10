@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Spec"
+          name: "Specs"
           command: crystal spec
       - run:
           name: "Generate API documents"
