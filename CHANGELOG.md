@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - 100% pass specs
 
+## [0.1.4] (10/10/2017)
+
 ### Added
 
 - Add `TLS/SSL` support (based on [HTTP::Client.new(uri : URI, tls = nil)](https://crystal-lang.org/api/0.23.1/HTTP/Client.html#new%28uri%3AURI%2Ctls%3Dnil%29-class-method))
@@ -40,5 +42,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - First beta version
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/icyleaf/halite/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/icyleaf/halite/compare/v0.1.2...v0.1.3
