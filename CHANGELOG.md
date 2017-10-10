@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Add `TLS/SSL` support (based on [HTTP::Client.new(uri : URI, tls = nil)](https://crystal-lang.org/api/0.23.1/HTTP/Client.html#new%28uri%3AURI%2Ctls%3Dnil%29-class-method))
+- Add `UnsupportedMethodError/UnsupportedSchemeError` exceptions
+
+### Fixed
+
+- Compatibility with Crystal 0.24.0 (unreleased)
 
 ## [0.1.3] (10/09/2017)
 
