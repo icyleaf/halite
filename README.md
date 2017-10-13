@@ -326,7 +326,7 @@ All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/
 
 ## Help and Discussion
 
-You can browese the API documents:
+You can browse the API documents:
 
 https://icyleaf.github.io/halite/
 
