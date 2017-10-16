@@ -95,6 +95,8 @@ class MockServer < HTTP::Server
       location =
         if context.request.query_params["relative_path"]?
           "/"
+        elsif context.request.query_params["relative_path_without_slash"]?
+          "sleep"
         else
           "http://#{context.request.host_with_port}/"
         end

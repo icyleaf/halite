@@ -40,7 +40,7 @@ module Halite
       headers = @headers.dup
       headers.delete("Host")
 
-      Request.new(verb, join_uri(domain, uri).to_s, headers, body)
+      Request.new(verb, redirect_uri(domain, uri), headers, body)
     end
 
     # @return `URI` with the scheme, user, password, port and host combined
@@ -65,17 +65,18 @@ module Halite
       URI.parse(uri)
     end
 
-    private def join_uri(source : URI, uri : String) : URI
-      new_uri = URI.parse(uri)
+    private def redirect_uri(source : URI, uri : String) : String
+      return source.to_s if uri == '/'
 
+      new_uri = URI.parse(uri)
       # return a new uri with source and relative path
       unless new_uri.scheme && new_uri.host
         new_uri = source.dup.tap do |u|
-          u.path = uri
+          u.path = (uri[0] == '/') ? uri : "/#{uri}"
         end
       end
 
-      new_uri
+      new_uri.to_s
     end
 
     # Request data of body

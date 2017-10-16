@@ -93,6 +93,11 @@ describe Halite do
         response.to_s.should match(/<!doctype html>/)
       end
 
+      it "should easy for 301 with relative path which is not include slash" do
+        response = Halite.follow.get("#{server.endpoint}/redirect-301", params: {"relative_path_without_slash" => true})
+        response.to_s.should eq("hello")
+      end
+
       it "should easy for 302" do
         response = Halite.follow.get("#{server.endpoint}/redirect-302")
         response.to_s.should match(/<!doctype html>/)
