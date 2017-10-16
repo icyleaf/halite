@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Fix issue to first char of redirect uri is not slash(/).
+- Fix issue to first char of redirect uri is not slash(/). ([#11](https://github.com/icyleaf/halite/issues/11))
 
 ## [0.1.5] (10/11/2017)
 
