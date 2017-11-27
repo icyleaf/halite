@@ -32,5 +32,12 @@ module HTTP
     def self.escape(**data)
       escape(data)
     end
+
+    # Overwrite original `Hash#to_h`
+    def to_h
+      @hash.each_with_object({} of String => String | Array(String)) do |(key, values), obj|
+        obj[key.name] = values.size == 1 ? values[0].as(String) : values.as(Array(String))
+      end
+    end
   end
 end

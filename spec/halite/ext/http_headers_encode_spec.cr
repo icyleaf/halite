@@ -4,24 +4,24 @@ describe HTTP::Headers do
   describe "#escape" do
     it "should accepts Hash(String, _)" do
       HTTP::Headers.escape({
-        "foo" => "bar",
+        "foo"    => "bar",
         "number" => 1,
-        "bool" => false,
-        "array" => ["1", "2", "false"]
+        "bool"   => false,
+        "array"  => ["1", "2", "false"],
       }).size.should eq 4
     end
 
     it "should accepts NamedTuple" do
       HTTP::Headers.escape({
-        foo: "bar",
+        foo:    "bar",
         number: 1,
-        bool: false,
-        array: ["1", "2", "false"]
+        bool:   false,
+        array:  ["1", "2", "false"],
       }).size.should eq 4
     end
 
     it "should accepts tuples as params" do
-      HTTP::Headers.escape(foo:  "bar", name:  ["foo", "bar"]).size.should eq 2
+      HTTP::Headers.escape(foo: "bar", name: ["foo", "bar"]).size.should eq 2
     end
 
     it "should return as HTTP::Params" do

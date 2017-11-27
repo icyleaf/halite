@@ -1,10 +1,10 @@
 require "../spec_helper"
 
-URL = "http://example.com"
+URL         = "http://example.com"
 STATUS_CODE = 200
-HEADERS = {} of String => String
-BODY = "hello world"
-COOKIES = "foo=bar; domain=example.com"
+HEADERS     = {"Content-Type" => "text/plain"}
+BODY        = "hello world"
+COOKIES     = "foo=bar; domain=example.com"
 
 def response(url = URL, status_code = STATUS_CODE, headers = HEADERS, body = BODY)
   Halite::Response.new(
@@ -38,11 +38,17 @@ describe Halite::Response do
 
   describe "#cookies" do
     it "should HTTP::Cookies class" do
-      r = response(headers: { "Set-Cookie" => COOKIES })
+      r = response(headers: {"Set-Cookie" => COOKIES})
       r.cookies.class.should eq HTTP::Cookies
       r.cookies["foo"].class.should eq HTTP::Cookie
       r.cookies["foo"].value.should eq "bar"
       r.cookies["foo"].domain.should eq "example.com"
+    end
+  end
+
+  describe "#inspect" do
+    it "returns human-friendly response representation" do
+      response.inspect.should eq %q{#<Halite::Response HTTP/1.1 200 OK {"Content-Type" => "text/plain"}>}
     end
   end
 end

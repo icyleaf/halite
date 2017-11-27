@@ -45,6 +45,10 @@ module Halite
       @conn.body? ? @conn.body : @conn.body_io.to_s
     end
 
+    def inspect
+      "#<#{self.class} #{version} #{status_code} #{status_message} #{headers.to_h}>"
+    end
+
     def to_s(io)
       io << to_s
     end
