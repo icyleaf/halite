@@ -36,7 +36,7 @@ module Halite
     end
 
     # Return status_code, headers and body in a array
-    def to_a : Array(T)
+    def to_a
       [@conn.status_code, @conn.headers.to_h, to_s]
     end
 
