@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 def request
-  Halite::Request.new("get", "http://example.com/foo?bar=baz", HTTP::Headers{"Accept" => "text/html"})
+  Halite::Request.new("head", "http://example.com/foo?bar=baz")
 end
 
 def response(uri : URI, status_code = 200, headers = {} of String => String, body = "")
@@ -11,63 +11,205 @@ def response(uri : URI, status_code = 200, headers = {} of String => String, bod
   )
 end
 
-def redirector(request = request, response = response(request.uri))
-  Halite::Redirector.new(request, response)
+def redirector(request, response, strict = true, max_hops = 5)
+  Halite::Redirector.new(request, response, max_hops, strict)
 end
 
-def simple_response(uri : URI, status_code = Int32, body = "", headers = {} of String => String|Array(String))
+def simple_response(status_code = Int32, body = "", headers = {} of String => String|Array(String))
   Halite::Response.new(
-    uri,
+    URI.new("http://example.com"),
     HTTP::Client::Response.new(status_code: status_code, body: body, headers: HTTP::Headers.escape(headers))
   )
 end
 
 def redirect_response(status_code, location)
-  simple_response URI.new("http://example.com"), status_code, "", {"Location" => location}
+  simple_response status_code, "", {"Location" => location}
 end
 
 describe Halite::Redirector do
   describe "#strict" do
     it "should be true by default" do
-      redirector.strict.should eq true
+      redirector(request, response(request.uri)).strict.should eq true
     end
   end
 
   describe "#max_hops" do
     it "should be 5 by default" do
-      redirector.max_hops.should eq 5
+      redirector(request, response(request.uri)).max_hops.should eq 5
     end
   end
 
   describe "#perform" do
     it "fails with TooManyRedirectsError if max hops reached" do
-      req = Halite::Request.new "head", "http://example.com"
       res = -> (req : Halite::Request) { redirect_response(301, "#{req.uri}/1") }
       expect_raises Halite::TooManyRedirectsError do
-        redirector(req, res.call(req)).perform do |prev_req|
+        redirector(request, res.call(request)).perform do |prev_req|
           redirect_response(301, "#{prev_req.uri}/1")
         end
       end
     end
 
     it "fails with EndlessRedirectError if endless loop detected" do
-      req = Halite::Request.new "head", "http://example.com"
-      res = redirect_response(301, req.uri)
-
+      res = redirect_response 301, request.uri
       expect_raises Halite::EndlessRedirectError do
-        redirector(req, res).perform do |prev_req|
+        redirector(request, res).perform do |prev_req|
           res
         end
       end
     end
 
     it "fails with StateError if there were no Location header" do
-      req = Halite::Request.new "head", "http://example.com"
-      res = simple_response(req.uri, 301)
-
+      res = simple_response 301
       expect_raises Halite::StateError do
-        redirector(req, res).perform do |prev_req|
+        redirector(request, res).perform do |prev_req|
           res
+        end
+      end
+    end
+
+    it "returns first non-redirect response" do
+      hops = [
+        redirect_response(301, "http://example.com/1"),
+        redirect_response(301, "http://example.com/2"),
+        redirect_response(301, "http://example.com/3"),
+        simple_response(200, "foo"),
+        redirect_response(301, "http://example.com/4"),
+        simple_response(200, "bar")
+      ]
+
+      res = redirector(request, hops.shift).perform { hops.shift }
+      res.to_s.should eq "foo"
+    end
+
+    context "following 300/301/302 redirect" do
+      context "with strict mode" do
+        it "it follows with original verb if it's safe" do
+          req = Halite::Request.new "get", "http://example.com/foo?bar=baz"
+          res = redirect_response 300, "http://example.com/1"
+
+          redirector(req, res, true).perform do |prev_req|
+            prev_req.verb.should eq "GET"
+            simple_response 200
+          end
+        end
+
+        it "raises StateError if original request was PUT" do
+          req = Halite::Request.new "put", "http://example.com/foo?bar=baz"
+          res = redirect_response 300, "http://example.com/1"
+          expect_raises Halite::StateError do
+            redirector(req, res, true).perform { |req| simple_response 200 }
+          end
+        end
+
+        it "raises StateError if original request was POST" do
+          req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
+          res = redirect_response 301, "http://example.com/1"
+          expect_raises Halite::StateError do
+            redirector(req, res, true).perform { |req| simple_response 200 }
+          end
+        end
+
+        it "raises StateError if original request was DELETE" do
+          req = Halite::Request.new "delete", "http://example.com/foo?bar=baz"
+          res = redirect_response 302, "http://example.com/1"
+          expect_raises Halite::StateError do
+            redirector(req, res, true).perform { |req| simple_response 200 }
+          end
+        end
+      end
+
+      context "without strict mode" do
+        it "it follows with original verb if it's safe" do
+          req = Halite::Request.new "get", "http://example.com/foo?bar=baz"
+          res = redirect_response 300, "http://example.com/1"
+
+          redirector(req, res, false).perform do |prev_req|
+            prev_req.verb.should eq "GET"
+            simple_response 200
+          end
+        end
+
+        it "raises StateError if original request was PUT" do
+          req = Halite::Request.new "put", "http://example.com/foo?bar=baz"
+          res = redirect_response 300, "http://example.com/1"
+          redirector(req, res, false).perform do |prev_req|
+            prev_req.verb.should eq "GET"
+            simple_response 200
+          end
+        end
+
+        it "raises StateError if original request was POST" do
+          req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
+          res = redirect_response 301, "http://example.com/1"
+          redirector(req, res, false).perform do |prev_req|
+            prev_req.verb.should eq "GET"
+            simple_response 200
+          end
+        end
+
+        it "raises StateError if original request was DELETE" do
+          req = Halite::Request.new "delete", "http://example.com/foo?bar=baz"
+          res = redirect_response 302, "http://example.com/1"
+          redirector(req, res, false).perform do |prev_req|
+            prev_req.verb.should eq "GET"
+            simple_response 200
+          end
+        end
+      end
+    end
+
+    context "following 303 redirect" do
+      it "follows with HEAD if original request was HEAD" do
+        req = Halite::Request.new "head", "http://example.com/foo?bar=baz"
+        res = redirect_response 303, "http://example.com/1"
+
+        redirector(req, res).perform do |prev_req|
+          prev_req.verb.should eq "HEAD"
+          simple_response 200
+        end
+      end
+
+      it "follows with GET if original request was GET" do
+        req = Halite::Request.new "get", "http://example.com/foo?bar=baz"
+        res = redirect_response 303, "http://example.com/1"
+
+        redirector(req, res).perform do |prev_req|
+          prev_req.verb.should eq "GET"
+          simple_response 200
+        end
+      end
+
+      it "follows with GET if original request was neither GET nor HEAD" do
+        req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
+        res = redirect_response 303, "http://example.com/1"
+
+        redirector(req, res).perform do |prev_req|
+          prev_req.verb.should eq "GET"
+          simple_response 200
+        end
+      end
+    end
+
+    context "following 307 redirect" do
+      it "follows with original request's verb" do
+        req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
+        res = redirect_response 307, "http://example.com/1"
+
+        redirector(req, res).perform do |prev_req|
+          prev_req.verb.should eq "POST"
+          simple_response 200
+        end
+      end
+    end
+
+    context "following 308 redirect" do
+      it "follows with original request's verb" do
+        req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
+        res = redirect_response 308, "http://example.com/1"
+
+        redirector(req, res).perform do |prev_req|
+          prev_req.verb.should eq "POST"
+          simple_response 200
         end
       end
     end

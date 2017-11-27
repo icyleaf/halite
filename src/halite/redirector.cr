@@ -45,7 +45,7 @@ module Halite
       code = @response.status_code
 
       if UNSAFE_VERBS.includes?(verb) && STRICT_SENSITIVE_CODES.includes?(code)
-        raise StateError.new("Can not follow #{code} redirect") unless @strict
+        raise StateError.new("Can not follow #{code} redirect") if @strict
         verb = "GET"
       end
 
