@@ -14,8 +14,11 @@ module Halite
     # Verbs which will remain unchanged upon See Other response.
     SEE_OTHER_ALLOWED_VERBS = %w(GET HEAD)
 
+    getter strict : Bool
+    getter max_hops : Int32
+
     # Instance a new Redirector
-    def initialize(@request : Request, @response : Response, @max_hops : Int32, @strict = true)
+    def initialize(@request : Request, @response : Response, @max_hops = 5, @strict = true)
       @visited = [] of String
     end
 
@@ -36,7 +39,7 @@ module Halite
 
     # Redirect policy for follow
     private def redirect_to(uri : String?)
-      raise StateError.new("No fount `Location` in headers") unless uri
+      raise StateError.new("No found `Location` in headers") unless uri
 
       verb = @request.verb
       code = @response.status_code
