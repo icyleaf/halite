@@ -241,14 +241,14 @@ Halite.follow(strict: false)
 
 `Response#history` property list contains the `Response` objects that were created in order to complete the request. The list is orderd from the orderst to the most recent response.
 
-````crystal
+```crystal
 r = Halite.follow
           .get("http://httpbin.org/redirect/3")
 
 r.uri
 # => http://httpbin.org/get
 
-puts r.status_code
+r.status_code
 # => 200
 
 r.history
