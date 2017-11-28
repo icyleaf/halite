@@ -282,6 +282,7 @@ After an HTTP request, `Halite::Response` object have several useful methods. (A
 - **#cookies**: A `HTTP::Cookies` set by server.
 - **#headers**: The `HTTP::Headers` of the response.
 - **#version**: The HTTP version.
+- **#parse**: (return value depends on MIME type) parse the body using a parser defined for the #mime_type.
 - **#to_a**: A `Hash` of status code, response headers and body as a string.
 - **#to_s**: Return response body as a string.
 
