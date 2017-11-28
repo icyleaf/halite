@@ -28,4 +28,6 @@ module Halite
 
   # Notifies that following redirects got into an endless loop
   class EndlessRedirectError < TooManyRedirectsError; end
+
+  class UnRegisterAdapterError < ResponseError; end
 end

@@ -46,6 +46,36 @@ describe Halite::Response do
     end
   end
 
+  describe "#parse" do
+    context "with known content type" do
+      it "returns parsed body" do
+        r = response(headers: { "Content-Type" => "application/json;charset=utf-8"}, body: %q{{"foo":"bar"}})
+        r.parse.should eq({"foo" => "bar"})
+      end
+    end
+
+    context "with unknown content type" do
+      it "raises HTTP::Error" do
+        r = response(headers: { "Content-Type" => "application/html"})
+        expect_raises Halite::UnRegisterAdapterError do
+          r.parse
+        end
+      end
+    end
+
+    context "with explicitly given mime type" do
+      it "ignores mime_type of response" do
+        r = response(headers: { "Content-Type" => "application/html; charset=utf-8"}, body: %q{{"foo":"bar"}})
+        r.parse("application/json").should eq({"foo" => "bar"})
+      end
+
+      it "supports MIME type aliases" do
+        r = response(headers: { "Content-Type" => "application/html; charset=utf-8"}, body: %q{{"foo":"bar"}})
+        r.parse("json").should eq({"foo" => "bar"})
+      end
+    end
+  end
+
   describe "#inspect" do
     it "returns human-friendly response representation" do
       response.inspect.should eq %q{#<Halite::Response HTTP/1.1 200 OK {"Content-Type" => "text/plain"}>}

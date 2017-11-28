@@ -11,16 +11,39 @@ module Halite
     delegate success?, to: @conn
 
     delegate headers, to: @conn
-    delegate content_type, to: @conn
     delegate charset, to: @conn
 
     delegate body, to: @conn
     delegate body_io, to: @conn
 
+    # Content Length
     def content_length : Int64?
       if value = @conn.headers["Content-Length"]?
         value.to_i64
       end
+    end
+
+    # Content type, by default is "text/plain"
+    #
+    # Examples:
+    # - "text/plain"
+    # - "application/json; charset=utf-8"
+    def content_type : String
+      if content_type = @conn.content_type
+        return content_type
+      end
+
+      "text/plain"
+    end
+
+    # Mime Type, similar to `content_type`
+    #
+    # Examples:
+    # - "text/plain"
+    # - "application/json"
+    # - "text/html"
+    def mime_type
+      content_type.split(";")[0].downcase.strip
     end
 
     def cookies : HTTP::Cookies?
@@ -33,6 +56,14 @@ module Halite
       end
 
       cookies
+    end
+
+    # Parse response body with corresponding MIME type adapter.
+    def parse(name : String? = nil)
+      name ||= mime_type
+      raise Halite::UnRegisterAdapterError.new("Unregister Mime Type Adapter: #{name}") unless MimeTypes[name]?
+
+      MimeTypes[name].decode to_s
     end
 
     # Return status_code, headers and body in a array
