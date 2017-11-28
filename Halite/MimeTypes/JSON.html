@@ -5,7 +5,7 @@
   <meta id="repository-name" content="github.com/icyleaf/halite">
   <link href="../../css/style.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="../../js/doc.js"></script>
-  <title>Halite::Options::Timeout - github.com/icyleaf/halite</title>
+  <title>Halite::MimeTypes::JSON - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -55,7 +55,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/MimeTypes" data-name="halite::mimetypes">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/MimeTypes" data-name="halite::mimetypes">
       <a href="../../Halite/MimeTypes.html">MimeTypes</a>
       
         <ul>
@@ -65,7 +65,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeTypes/JSON" data-name="halite::mimetypes::json">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/MimeTypes/JSON" data-name="halite::mimetypes::json">
       <a href="../../Halite/MimeTypes/JSON.html">JSON</a>
       
     </li>
@@ -75,12 +75,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Options" data-name="halite::options">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Options" data-name="halite::options">
       <a href="../../Halite/Options.html">Options</a>
       
         <ul>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Options/Timeout" data-name="halite::options::timeout">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Timeout" data-name="halite::options::timeout">
       <a href="../../Halite/Options/Timeout.html">Timeout</a>
       
     </li>
@@ -192,19 +192,15 @@
 <div id="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> Halite::Options::Timeout
+  <span class="kind">class</span> Halite::MimeTypes::JSON
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Options/Timeout.html">Halite::Options::Timeout</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/MimeTypes/JSON.html">Halite::MimeTypes::JSON</a></li><li class="superclass"><a href="../../Halite/MimeTypes/Adapter.html">Halite::MimeTypes::Adapter</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
-
-  <h2>Overview</h2>
-
-  <p>Timeout struct</p>
 
 
 
@@ -222,7 +218,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/dff7f38f239fad58f7b50b187746088da5d8dcbf/src/halite/options.cr#L244" target="_blank">halite/options.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/dff7f38f239fad58f7b50b187746088da5d8dcbf/src/halite/mime_types/json.cr#L4" target="_blank">halite/mime_types/json.cr</a>
     
     <br/>
   
@@ -230,21 +226,6 @@
 
 
 
-
-  <h2>Constructors</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new%28connect%3AFloat64%3F%3Dnil%2Cread%3AFloat64%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(connect : Float64? = <span class="n">nil</span>, read : Float64? = <span class="n">nil</span>)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#new%28connect%3ATime%3A%3ASpan%3F%3Dnil%2Cread%3ATime%3A%3ASpan%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(connect : Time::Span? = <span class="n">nil</span>, read : Time::Span? = <span class="n">nil</span>)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -254,22 +235,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#connect%3AFloat64%3F-instance-method" class="signature"><strong>#connect</strong> : Float64?</a>
+        <a href="#decode%28str%29-instance-method" class="signature"><strong>#decode</strong>(str)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#connect%3D%28connect%29-instance-method" class="signature"><strong>#connect=</strong>(connect)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#read%3AFloat64%3F-instance-method" class="signature"><strong>#read</strong> : Float64?</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#read%3D%28read%29-instance-method" class="signature"><strong>#read=</strong>(read)</a>
+        <a href="#encode%28obj%29-instance-method" class="signature"><strong>#encode</strong>(obj)</a>
         
       </li>
     
@@ -282,6 +253,20 @@
 <div class="methods-inherited">
   
     
+
+  <h3>Instance methods inherited from class <code><a href="../../Halite/MimeTypes/Adapter.html">Halite::MimeTypes::Adapter</a></code></h3>
+  
+  
+    <a href="../../Halite/MimeTypes/Adapter.html#decode%28string%29-instance-method" class="tooltip">
+      <span>decode(string)</span>
+    decode</a>, 
+    
+  
+    <a href="../../Halite/MimeTypes/Adapter.html#encode%28obj%29-instance-method" class="tooltip">
+      <span>encode(obj)</span>
+    encode</a>
+    
+  
 
 
     
@@ -314,107 +299,40 @@
 </div>
 
 
-  <h2>Constructor Detail</h2>
-  
-    <div class="entry-detail" id="new&#40;connect:Float64?&#61;nil,read:Float64?&#61;nil&#41;-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(connect : Float64? = <span class="n">nil</span>, read : Float64? = <span class="n">nil</span>)
-
-        <a class="method-permalink" href="#new%28connect%3AFloat64%3F%3Dnil%2Cread%3AFloat64%3F%3Dnil%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/dff7f38f239fad58f7b50b187746088da5d8dcbf/src/halite/options.cr#L247" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="new&#40;connect:Time::Span?&#61;nil,read:Time::Span?&#61;nil&#41;-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(connect : Time::Span? = <span class="n">nil</span>, read : Time::Span? = <span class="n">nil</span>)
-
-        <a class="method-permalink" href="#new%28connect%3ATime%3A%3ASpan%3F%3Dnil%2Cread%3ATime%3A%3ASpan%3F%3Dnil%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/dff7f38f239fad58f7b50b187746088da5d8dcbf/src/halite/options.cr#L250" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-
 
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="connect:Float64?-instance-method">
+    <div class="entry-detail" id="decode&#40;str&#41;-instance-method">
       <div class="signature">
         
-        def <strong>connect</strong> : Float64?
+        def <strong>decode</strong>(str)
 
-        <a class="method-permalink" href="#connect%3AFloat64%3F-instance-method">#</a>
+        <a class="method-permalink" href="#decode%28str%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/dff7f38f239fad58f7b50b187746088da5d8dcbf/src/halite/options.cr#L245" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/dff7f38f239fad58f7b50b187746088da5d8dcbf/src/halite/mime_types/json.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="connect&#61;&#40;connect&#41;-instance-method">
+    <div class="entry-detail" id="encode&#40;obj&#41;-instance-method">
       <div class="signature">
         
-        def <strong>connect=</strong>(connect)
+        def <strong>encode</strong>(obj)
 
-        <a class="method-permalink" href="#connect%3D%28connect%29-instance-method">#</a>
+        <a class="method-permalink" href="#encode%28obj%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/dff7f38f239fad58f7b50b187746088da5d8dcbf/src/halite/options.cr#L245" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="read:Float64?-instance-method">
-      <div class="signature">
-        
-        def <strong>read</strong> : Float64?
-
-        <a class="method-permalink" href="#read%3AFloat64%3F-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/dff7f38f239fad58f7b50b187746088da5d8dcbf/src/halite/options.cr#L245" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="read&#61;&#40;read&#41;-instance-method">
-      <div class="signature">
-        
-        def <strong>read=</strong>(read)
-
-        <a class="method-permalink" href="#read%3D%28read%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/dff7f38f239fad58f7b50b187746088da5d8dcbf/src/halite/options.cr#L245" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/dff7f38f239fad58f7b50b187746088da5d8dcbf/src/halite/mime_types/json.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>

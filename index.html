@@ -55,6 +55,26 @@
       
     </li>
   
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/MimeTypes" data-name="halite::mimetypes">
+      <a href="Halite/MimeTypes.html">MimeTypes</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeTypes/Adapter" data-name="halite::mimetypes::adapter">
+      <a href="Halite/MimeTypes/Adapter.html">Adapter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeTypes/JSON" data-name="halite::mimetypes::json">
+      <a href="Halite/MimeTypes/JSON.html">JSON</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
   <li class="parent " data-id="github.com/icyleaf/halite/Halite/Options" data-name="halite::options">
       <a href="Halite/Options.html">Options</a>
       
@@ -125,6 +145,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/UnRegisterAdapterError" data-name="halite::unregisteradaptererror">
+      <a href="Halite/UnRegisterAdapterError.html">UnRegisterAdapterError</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/UnsupportedMethodError" data-name="halite::unsupportedmethoderror">
       <a href="Halite/UnsupportedMethodError.html">UnsupportedMethodError</a>
       
@@ -180,11 +205,11 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/87259a1" target="_blank">87259a1</a> (2017-11-28 11:11:34 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/dff7f38" target="_blank">dff7f38</a> (2017-11-28 17:30:56 +0800).</p>
 
 <p>&lt;hr /></p>
 
-<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects" target="_blank">Redirects</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#binary-data" target="_blank">Binary data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
+<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#binary-data" target="_blank">Binary data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
 
 <p>&lt;hr /></p>
 
@@ -323,7 +348,7 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 pp r.cookies
 <span class="c"># &#61;&gt; #&lt;HTTP::Cookies:0x10dbed980 &#64;cookies&#61;&#123;&quot;session_cookie&quot; &#61;&gt;#&lt;HTTP::Cookie:0x10ec20f00 &#64;domain&#61;nil, &#64;expires&#61;nil, &#64;extension&#61;nil, &#64;http_only&#61;false, &#64;name&#61;&quot;session_cookie&quot;, &#64;path&#61;&quot;/&quot;, &#64;secure&#61;false, &#64;value&#61;&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;&gt;&#125;&gt;</span></code></pre>
 
-<h4>Redirects</h4>
+<h4>Redirects and History</h4>
 
 <h5>Automatically following redirects</h5>
 
@@ -348,6 +373,27 @@ that redirect:</p>
 
 <pre><code class='language-crystal'><span class="t">Halite</span>.follow(strict: <span class="n">false</span>)
       .post(<span class="s">&quot;http://httpbin.org/relative-redirect/5&quot;</span>)</code></pre>
+
+<h5>History</h5>
+
+<p><code>Response#history</code> property list contains the <code>Response</code> objects that were created in order to complete the request. The list is orderd from the orderst to the most recent response.</p>
+
+<pre><code class='language-crystal'>r <span class="o">=</span> <span class="t">Halite</span>.follow
+          .get(<span class="s">&quot;http://httpbin.org/redirect/3&quot;</span>)
+
+r.uri
+<span class="c"># &#61;&gt; http://httpbin.org/get</span>
+
+r.status_code
+<span class="c"># &#61;&gt; 200</span>
+
+r.history
+<span class="c"># &#61;&gt; &#91;</span>
+<span class="c">#      #&lt;Halite::Response HTTP/1.1 302 FOUND &#123;&quot;Location&quot; &#61;&gt; &quot;/relative-redirect/2&quot; ...&gt;,</span>
+<span class="c">#      #&lt;Halite::Response HTTP/1.1 302 FOUND &#123;&quot;Location&quot; &#61;&gt; &quot;/relative-redirect/1&quot; ...&gt;,</span>
+<span class="c">#      #&lt;Halite::Response HTTP/1.1 302 FOUND &#123;&quot;Location&quot; &#61;&gt; &quot;/get&quot; ...&gt;,</span>
+<span class="c">#      #&lt;Halite::Response HTTP/1.1 200 OK    &#123;&quot;Content-Type&quot; &#61;&gt; &quot;application/json&quot; ...&gt;</span>
+<span class="c">#    &#93;</span></code></pre>
 
 <h4>Timeout</h4>
 
@@ -382,7 +428,7 @@ ssl.private_key <span class="o">=</span> <span class="t">File</span>.expand_path
 
 <p>After an HTTP request, <code><a href="Halite/Response.html">Halite::Response</a></code> object have several useful methods. (Also see the <a href="https://icyleaf.github.io/halite/Halite/Response.html" target="_blank">API documentation</a>).</p>
 
-<ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io.</li><li><strong>#code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: The <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#version</strong>: The HTTP version.</li><li><strong>#to_a</strong>: A <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li></ul>
+<ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io.</li><li><strong>#code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: The <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#version</strong>: The HTTP version.</li><li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the #mime_type.</li><li><strong>#to_a</strong>: A <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li></ul>
 
 <h4>Binary Data</h4>
 
