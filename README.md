@@ -25,7 +25,7 @@ Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
     - [Headers](#headers)
     - [Auth](#auth)
     - [Cookies](#cookies)
-    - [Redirects](#redirects)
+    - [Redirects and History](#redirects-and-history)
     - [Timeout](#timeout)
   - [HTTPS](#https)
   - [Response Handling](#response-handling)
@@ -205,7 +205,7 @@ pp r.cookies
 # => #<HTTP::Cookies:0x10dbed980 @cookies={"session_cookie" =>#<HTTP::Cookie:0x10ec20f00 @domain=nil, @expires=nil, @extension=nil, @http_only=false, @name="session_cookie", @path="/", @secure=false, @value="6abaef100b77808ceb7fe26a3bcff1d0">}>
 ```
 
-#### Redirects
+#### Redirects and History
 
 ##### Automatically following redirects
 
@@ -235,6 +235,29 @@ that redirect:
 ```crystal
 Halite.follow(strict: false)
       .post("http://httpbin.org/relative-redirect/5")
+```
+
+##### History
+
+`Response#history` property list contains the `Response` objects that were created in order to complete the request. The list is orderd from the orderst to the most recent response.
+
+````crystal
+r = Halite.follow
+          .get("http://httpbin.org/redirect/3")
+
+r.uri
+# => http://httpbin.org/get
+
+puts r.status_code
+# => 200
+
+r.history
+# => [
+#      #<Halite::Response HTTP/1.1 302 FOUND {"Location" => "/relative-redirect/2" ...>,
+#      #<Halite::Response HTTP/1.1 302 FOUND {"Location" => "/relative-redirect/1" ...>,
+#      #<Halite::Response HTTP/1.1 302 FOUND {"Location" => "/get" ...>,
+#      #<Halite::Response HTTP/1.1 200 OK    {"Content-Type" => "application/json" ...>
+#    ]
 ```
 
 #### Timeout
