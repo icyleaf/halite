@@ -102,6 +102,13 @@ describe Halite do
         response = Halite.follow.get("#{server.endpoint}/redirect-302")
         response.to_s.should match(/<!doctype html>/)
       end
+
+      it "should store full history" do
+        times = 5
+        response = Halite.follow.get("#{server.endpoint}/multi-redirect?n=#{times}")
+        response.history.class.should eq Array(Halite::Response)
+        response.history.size.should eq(times + 1)
+      end
     end
   end
 

@@ -118,6 +118,31 @@ class MockServer < HTTP::Server
       context
     end
 
+    get "/multi-redirect" do |context|
+      context.response.status_code = 302
+      if n = context.request.query_params["n"]?
+        n = n.to_i
+        next_r = if (r = context.request.query_params["r"]?)
+          r.to_i + 1
+        else
+          1
+        end
+
+        if next_r <= n
+          location = "/multi-redirect?n=#{n}&r=#{next_r}"
+          context.response.headers["Location"] = location
+        else
+          context.response.status_code = 200
+          context.response.print "Finished #{n} redirect"
+        end
+      else
+        context.response.status_code = 200
+        context.response.print "Please Set ?n={n} to multi-redirect"
+      end
+
+      context
+    end
+
     get "/cookies" do |context|
       body = context.request.cookies.map { |c| [c.name, c.value].join ": " }.join("\n")
       context.response.headers["Set-Cookie"] = "foo=bar"

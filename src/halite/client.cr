@@ -40,6 +40,7 @@ module Halite
     # client = Halite::Client.new(options)
     # ```
     def initialize(@options : Halite::Options = Options.new)
+      @history = [] of Response
     end
 
     # Instance a new client
@@ -53,6 +54,7 @@ module Halite
     # ```
     def initialize(options : (Hash(String, _) | NamedTuple) = {} of String => String)
       @options = Options.new(options)
+      @history = [] of Response
     end
 
     # Make an HTTP request
@@ -80,9 +82,11 @@ module Halite
       conn = HTTP::Client.new(request.domain, options.ssl)
       conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
       conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
-
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
-      response = Response.new(request.uri, conn_response)
+      response = Response.new(request.uri, conn_response, @history)
+
+      # Append history of response
+      @history << response
 
       # Merge headers and cookies from response
       @options = merge_option_from_response(options, response)

@@ -1,8 +1,9 @@
 module Halite
   class Response
     getter uri
+    getter history : Array(Response)
 
-    def initialize(@uri : URI, @conn : HTTP::Client::Response)
+    def initialize(@uri : URI, @conn : HTTP::Client::Response, @history = [] of Response)
     end
 
     delegate version, to: @conn
