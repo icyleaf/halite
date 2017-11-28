@@ -24,14 +24,14 @@ describe Halite::Request do
   end
 
   it "provides a #scheme getter" do
-    request.scheme.should eq("http")
+    request.scheme.should eq "http"
   end
 
   it "provides a #verb getter" do
-    request.verb.should eq("GET")
+    request.verb.should eq "GET"
   end
 
   it "sets given headers" do
-    request.headers["Accept"].should eq("text/html")
+    request.headers["Accept"].should eq "text/html"
   end
 end

@@ -29,5 +29,6 @@ module Halite
   # Notifies that following redirects got into an endless loop
   class EndlessRedirectError < TooManyRedirectsError; end
 
+  # The MIME type(adapter) given was not understood
   class UnRegisterAdapterError < ResponseError; end
 end

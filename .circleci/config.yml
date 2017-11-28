@@ -16,6 +16,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Crystal Version"
+          command: crystal version
+      - run:
           name: "Specs"
           command: crystal spec
       - run:

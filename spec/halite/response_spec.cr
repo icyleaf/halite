@@ -54,8 +54,26 @@ describe Halite::Response do
       end
     end
 
+    context "with empty content type or" do
+      it "raises Halite::UnRegisterAdapterError" do
+        r = response(headers: { "Content-Type" => ""})
+        expect_raises Halite::Error do
+          r.parse
+        end
+      end
+    end
+
+    context "without content type or" do
+      it "raises Halite::UnRegisterAdapterError" do
+        r = response(headers: {"Etag" => "123123123"})
+        expect_raises Halite::Error do
+          r.parse
+        end
+      end
+    end
+
     context "with unknown content type" do
-      it "raises HTTP::Error" do
+      it "raises Halite::UnRegisterAdapterError" do
         r = response(headers: { "Content-Type" => "application/html"})
         expect_raises Halite::UnRegisterAdapterError do
           r.parse
