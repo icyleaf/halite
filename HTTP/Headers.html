@@ -50,46 +50,6 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext" data-name="halite::ext">
-      <a href="../Halite/Ext.html">Ext</a>
-      
-        <ul>
-  
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPHeaders" data-name="halite::ext::httpheaders">
-      <a href="../Halite/Ext/HTTPHeaders.html">HTTPHeaders</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPHeaders/Escape" data-name="halite::ext::httpheaders::escape">
-      <a href="../Halite/Ext/HTTPHeaders/Escape.html">Escape</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPParams" data-name="halite::ext::httpparams">
-      <a href="../Halite/Ext/HTTPParams.html">HTTPParams</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPParams/Escape" data-name="halite::ext::httpparams::escape">
-      <a href="../Halite/Ext/HTTPParams/Escape.html">Escape</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
       <a href="../Halite/FormData.html">FormData</a>
       
@@ -237,13 +197,6 @@
 
 
 
-  <h2>Extended Modules</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../Halite/Ext/HTTPHeaders/Escape.html">Halite::Ext::HTTPHeaders::Escape</a></li>
-  
-  </ul>
-
 
 
 
@@ -254,7 +207,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/1b72adf3a4ed002663d84619dd32c2eff46a8892/src/halite/ext/http_headers_encode.cr#L31" target="_blank">halite/ext/http_headers_encode.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/f19cca7ae50fbaf052a69cfd9e53bc0f24ab844e/src/halite/ext/http_headers_escape.cr#L2" target="_blank">halite/ext/http_headers_escape.cr</a>
     
     <br/>
   
@@ -265,7 +218,38 @@
 
 
 
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#escape%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method" class="signature"><strong>.escape</strong>(data : Hash(String, _) | NamedTuple) : HTTP::Headers</a>
+        
+          <div class="summary"><p>Returns the given key value pairs as HTTP Headers</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#escape-class-method" class="signature"><strong>.escape</strong></a>
+        
+          <div class="summary"><p>Same as <code><a href="../HTTP/Headers.html#escape-class-method">#escape</a></code></p></div>
+        
+      </li>
+    
+  </ul>
 
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#to_h-instance-method" class="signature"><strong>#to_h</strong></a>
+        
+          <div class="summary"><p>Overwrite original <code>Hash#to_h</code></p></div>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -318,7 +302,79 @@
 
 
 
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="escape&#40;data:Hash&#40;String,_&#41;|NamedTuple&#41;:HTTP::Headers-class-method">
+      <div class="signature">
+        
+        def self.<strong>escape</strong>(data : Hash(String, _) | NamedTuple) : <a href="../HTTP/Headers.html">HTTP::Headers</a>
 
+        <a class="method-permalink" href="#escape%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the given key value pairs as HTTP Headers</p>
+
+<p>Every parameter added is directly written to an IO, where keys are properly escaped.</p>
+
+<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.escape({
+  content_type: <span class="s">&quot;application/json&quot;</span>,
+})
+<span class="c"># &#61;&gt; &quot;HTTP::Headers&#123;&quot;Content-Type&quot; &#61;&gt; &quot;application/json&quot;&#125;&quot;</span>
+
+<span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.escape({
+  <span class="s">&quot;conTENT-type&quot;</span>: <span class="s">&quot;application/json&quot;</span>,
+})
+<span class="c"># &#61;&gt; &quot;HTTP::Headers&#123;&quot;Content-Type&quot; &#61;&gt; &quot;application/json&quot;&#125;&quot;</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/f19cca7ae50fbaf052a69cfd9e53bc0f24ab844e/src/halite/ext/http_headers_escape.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="escape-class-method">
+      <div class="signature">
+        
+        def self.<strong>escape</strong>
+
+        <a class="method-permalink" href="#escape-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Same as <code><a href="../HTTP/Headers.html#escape-class-method">#escape</a></code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/f19cca7ae50fbaf052a69cfd9e53bc0f24ab844e/src/halite/ext/http_headers_escape.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="to_h-instance-method">
+      <div class="signature">
+        
+        def <strong>to_h</strong>
+
+        <a class="method-permalink" href="#to_h-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Overwrite original <code>Hash#to_h</code></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/f19cca7ae50fbaf052a69cfd9e53bc0f24ab844e/src/halite/ext/http_headers_escape.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

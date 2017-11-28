@@ -50,46 +50,6 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext" data-name="halite::ext">
-      <a href="../Halite/Ext.html">Ext</a>
-      
-        <ul>
-  
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPHeaders" data-name="halite::ext::httpheaders">
-      <a href="../Halite/Ext/HTTPHeaders.html">HTTPHeaders</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPHeaders/Escape" data-name="halite::ext::httpheaders::escape">
-      <a href="../Halite/Ext/HTTPHeaders/Escape.html">Escape</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPParams" data-name="halite::ext::httpparams">
-      <a href="../Halite/Ext/HTTPParams.html">HTTPParams</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Ext/HTTPParams/Escape" data-name="halite::ext::httpparams::escape">
-      <a href="../Halite/Ext/HTTPParams/Escape.html">Escape</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
       <a href="../Halite/FormData.html">FormData</a>
       
@@ -233,7 +193,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/1b72adf3a4ed002663d84619dd32c2eff46a8892/src/halite/redirector.cr#L2" target="_blank">halite/redirector.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/f19cca7ae50fbaf052a69cfd9e53bc0f24ab844e/src/halite/redirector.cr#L2" target="_blank">halite/redirector.cr</a>
     
     <br/>
   
@@ -291,7 +251,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28request%3ARequest%2Cresponse%3AResponse%2Cmax_hops%3AInt32%2Cstrict%3Dtrue%29-class-method" class="signature"><strong>.new</strong>(request : Request, response : Response, max_hops : Int32, strict = <span class="n">true</span>)</a>
+        <a href="#new%28request%3ARequest%2Cresponse%3AResponse%2Cmax_hops%3D5%2Cstrict%3Dtrue%29-class-method" class="signature"><strong>.new</strong>(request : Request, response : Response, max_hops = <span class="n">5</span>, strict = <span class="n">true</span>)</a>
         
           <div class="summary"><p>Instance a new Redirector</p></div>
         
@@ -314,9 +274,19 @@ upon {STRICT_SENSITIVE_CODES}</p>
       </li>
     
       <li class="entry-summary">
+        <a href="#max_hops%3AInt32-instance-method" class="signature"><strong>#max_hops</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#perform%28%26block%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#perform</strong>(&block) : Halite::Response</a>
         
           <div class="summary"><p>Follows redirects until non-redirect response found</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#strict%3ABool-instance-method" class="signature"><strong>#strict</strong> : Bool</a>
         
       </li>
     
@@ -353,12 +323,12 @@ upon {STRICT_SENSITIVE_CODES}</p>
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new&#40;request:Request,response:Response,max_hops:Int32,strict&#61;true&#41;-class-method">
+    <div class="entry-detail" id="new&#40;request:Request,response:Response,max_hops&#61;5,strict&#61;true&#41;-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(request : <a href="../Halite/Request.html">Request</a>, response : <a href="../Halite/Response.html">Response</a>, max_hops : Int32, strict = <span class="n">true</span>)
+        def self.<strong>new</strong>(request : <a href="../Halite/Request.html">Request</a>, response : <a href="../Halite/Response.html">Response</a>, max_hops = <span class="n">5</span>, strict = <span class="n">true</span>)
 
-        <a class="method-permalink" href="#new%28request%3ARequest%2Cresponse%3AResponse%2Cmax_hops%3AInt32%2Cstrict%3Dtrue%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28request%3ARequest%2Cresponse%3AResponse%2Cmax_hops%3D5%2Cstrict%3Dtrue%29-class-method">#</a>
       </div>
       
         <div class="doc"><p>Instance a new Redirector</p></div>
@@ -366,7 +336,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/1b72adf3a4ed002663d84619dd32c2eff46a8892/src/halite/redirector.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f19cca7ae50fbaf052a69cfd9e53bc0f24ab844e/src/halite/redirector.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -391,7 +361,23 @@ upon {STRICT_SENSITIVE_CODES}</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/1b72adf3a4ed002663d84619dd32c2eff46a8892/src/halite/redirector.cr#L59" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f19cca7ae50fbaf052a69cfd9e53bc0f24ab844e/src/halite/redirector.cr#L62" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max_hops:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>max_hops</strong> : Int32
+
+        <a class="method-permalink" href="#max_hops%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/f19cca7ae50fbaf052a69cfd9e53bc0f24ab844e/src/halite/redirector.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -409,7 +395,23 @@ upon {STRICT_SENSITIVE_CODES}</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/1b72adf3a4ed002663d84619dd32c2eff46a8892/src/halite/redirector.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f19cca7ae50fbaf052a69cfd9e53bc0f24ab844e/src/halite/redirector.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="strict:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>strict</strong> : Bool
+
+        <a class="method-permalink" href="#strict%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/f19cca7ae50fbaf052a69cfd9e53bc0f24ab844e/src/halite/redirector.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
