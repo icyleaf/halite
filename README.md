@@ -1,4 +1,6 @@
-# ![logo](halite-logo-small.png) Halite
+![halite-logo](halite-logo.png)
+
+# Halite
 
 [![Tag](https://img.shields.io/github/tag/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/CHANGELOG.md)
 [![Dependency Status](https://shards.rocks/badge/github/icyleaf/halite/status.svg)](https://shards.rocks/github/icyleaf/halite)
