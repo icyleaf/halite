@@ -11,15 +11,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - 100% pass specs
 
-### Add
+## [0.2.0] (11/28/2017)
 
-- History of redirections.
-- Stream support.
-- Better body parser of response with plain text, json, xml or raw data. ([#9](https://github.com/icyleaf/halite/issues/9))
+### Changed
+
+- `HTTP::Headers#to_h` return string with each key if it contains one in array. ([commit#e057c47c](https://github.com/icyleaf/halite/commit/e057c47c4b587b27b2bae6871a1968299ce348f5))
+
+### Added
+
+- Add `Response#mime_type` method.
+- Add `Response#history` method to support full history of redirections. ([#8](https://github.com/icyleaf/halite/issues/8))
+- Add `Response#parse` method that it better body parser of response with json and write custom adapter for MIME type. ([#9](https://github.com/icyleaf/halite/issues/9))
 
 ### Fixed
 
 - Fix issue to first char of redirect uri is not slash(/). ([#11](https://github.com/icyleaf/halite/issues/11))
+- Fix raise unsafe verbs in strict mode.
 
 ## [0.1.5] (10/11/2017)
 
@@ -57,6 +64,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.1.5...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/icyleaf/halite/compare/v0.1.5...v0.2.0
 [0.1.5]: https://github.com/icyleaf/halite/compare/v0.1.3...v0.1.5
 [0.1.3]: https://github.com/icyleaf/halite/compare/v0.1.2...v0.1.3
