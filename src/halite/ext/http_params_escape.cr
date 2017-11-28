@@ -11,9 +11,9 @@ module HTTP
     #   "company" => {
     #     "name" => "Keeling Inc",
     #   },
-    #   "avatar" => File.open("shard.yml"),
+    #   "avatar" => File.open("avatar_big.png"),
     # })
-    # # => "name=Lizeth+Gusikowski&skill=ruby&skill=crystal&company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&avatar=avatar.png"
+    # # => "name=Lizeth+Gusikowski&skill=ruby&skill=crystal&company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&avatar=avatar_big.png"
     # ```
     def self.escape(data : (Hash(String, _) | NamedTuple)) : String
       ::HTTP::Params.build do |form|
@@ -44,9 +44,9 @@ module HTTP
     #   "company" => {
     #     "name" => "Keeling Inc",
     #   },
-    #   "avatar" => File.open("shard.yml"),
+    #   "avatar" => File.open("avatar_big.png"),
     # })
-    # # => "name=Lizeth+Gusikowski&skill=ruby&skill=crystal&company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&avatar=avatar.png"
+    # # => "name=Lizeth+Gusikowski&skill=ruby&skill=crystal&company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&avatar=avatar_big.png"
     # ```
     def self.escape(data : (Hash(String, Halite::Options::Type) | NamedTuple)) : String
       ::HTTP::Params.build do |form|
