@@ -5,16 +5,20 @@ module Halite
   #
   # ## Init with splats options
   # ```
-  # Options.new(headers: {
-  #   user_agent: "foobar"
-  # })
+  # Options.new(
+  #   headers: {
+  #     user_agent: "foobar"
+  #   },
+  #   connect_timeout: 30,
+  #   read_timeout: 30,
+  # }
   # ```
   #
   # ## Init with Hash options
   # ```
   # Options.new({
   #   "headers" => {
-  #     user_agent: "foobar"
+  #     "User-Agent" => "foobar"
   #   },
   #   "connect_timeout" => 3,
   #   "read_timeout" => 1.minutes,
@@ -27,7 +31,7 @@ module Halite
   #   headers: {
   #     user_agent: "foobar"
   #   },
-  #   connect_timeout: 3,
+  #   connect_timeout: 4.5,
   #   read_timeout: 1.minutes,
   # })
   # ```
@@ -110,6 +114,7 @@ module Halite
       self
     end
 
+    # alias `merge` above
     def merge(options : Halite::Options) : Halite::Options
       @headers.merge!(options.headers) if options.headers
       @cookies.fill_from_headers(@headers) if @headers

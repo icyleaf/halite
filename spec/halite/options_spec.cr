@@ -35,7 +35,7 @@ describe Halite::Options do
       subject.timeout.connect.should eq(60)
     end
 
-    it "should initial with splat arguments" do
+    it "should initial with tuples arguments" do
       subject = Halite::Options.new(
         headers: {
          "private_token" => "token",
