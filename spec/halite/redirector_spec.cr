@@ -15,7 +15,7 @@ def redirector(request, response, strict = true, max_hops = 5)
   Halite::Redirector.new(request, response, max_hops, strict)
 end
 
-def simple_response(status_code = Int32, body = "", headers = {} of String => String|Array(String))
+def simple_response(status_code = Int32, body = "", headers = {} of String => String | Array(String))
   Halite::Response.new(
     URI.new("http://example.com"),
     HTTP::Client::Response.new(status_code: status_code, body: body, headers: HTTP::Headers.escape(headers))
@@ -41,7 +41,7 @@ describe Halite::Redirector do
 
   describe "#perform" do
     it "fails with TooManyRedirectsError if max hops reached" do
-      res = -> (req : Halite::Request) { redirect_response(301, "#{req.uri}/1") }
+      res = ->(req : Halite::Request) { redirect_response(301, "#{req.uri}/1") }
       expect_raises Halite::TooManyRedirectsError do
         redirector(request, res.call(request)).perform do |prev_req|
           redirect_response(301, "#{prev_req.uri}/1")
@@ -74,7 +74,7 @@ describe Halite::Redirector do
         redirect_response(301, "http://example.com/3"),
         simple_response(200, "foo"),
         redirect_response(301, "http://example.com/4"),
-        simple_response(200, "bar")
+        simple_response(200, "bar"),
       ]
 
       res = redirector(request, hops.shift).perform { hops.shift }

@@ -123,10 +123,10 @@ class MockServer < HTTP::Server
       if n = context.request.query_params["n"]?
         n = n.to_i
         next_r = if (r = context.request.query_params["r"]?)
-          r.to_i + 1
-        else
-          1
-        end
+                   r.to_i + 1
+                 else
+                   1
+                 end
 
         if next_r <= n
           location = "/multi-redirect?n=#{n}&r=#{next_r}"

@@ -4,13 +4,13 @@ describe HTTP::Params do
   describe "#escape" do
     it "should escape hash to url-encoded query" do
       HTTP::Params.escape({
-        "name"    => "Lizeth Gusikowski"
+        "name" => "Lizeth Gusikowski",
       }).should eq "name=Lizeth+Gusikowski"
     end
 
     it "should escape array in key to url-encoded query" do
       HTTP::Params.escape({
-        "skill"   => ["ruby", "crystal"],
+        "skill" => ["ruby", "crystal"],
       }).should eq "skill=ruby&skill=crystal"
     end
 
@@ -24,7 +24,7 @@ describe HTTP::Params do
 
     it "should extract file name to uri-encoded query" do
       HTTP::Params.escape({
-        "avatar" => File.open("halite-logo-small.png")
+        "avatar" => File.open("halite-logo-small.png"),
       }).should eq "avatar=halite-logo-small.png"
     end
   end
