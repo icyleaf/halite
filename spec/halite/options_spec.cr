@@ -155,11 +155,11 @@ describe Halite::Options do
           "private_token" => "token",
         },
         cookies: {
-          "name" => "foo"
+          "name" => "foo",
         },
-        params: { "name" => "foo" },
-        form: { "name" => "foo" },
-        json: { "name" => "foo" },
+        params: {"name" => "foo"},
+        form: {"name" => "foo"},
+        json: {"name" => "foo"},
         connect_timeout: 1,
         read_timeout: 3,
         follow: 4,

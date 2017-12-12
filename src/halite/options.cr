@@ -22,7 +22,7 @@ module Halite
   # ```
   # o = Options.new(connect_timeout: 30, read_timeout: 30)
   # o.timeout.connect # => 30.0
-  # o.timeout.read # => 30.0
+  # o.timeout.read    # => 30.0
   # ```
   #
   # ### Set/Get follow
@@ -31,7 +31,7 @@ module Halite
   #
   # ```
   # o = Options.new(follow: 3, follow_strict: false)
-  # o.follow.hops # => 3
+  # o.follow.hops   # => 3
   # o.follow.strict # => false
   # ```
   class Options

@@ -11,6 +11,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - 100% pass specs
 
+### Added
+
+- Accept tuples options in `Options.new`.
+- Accept `follow`/`follow_strict` in `Options.new`.
+- Set `Options.default_headers` to be public method.
+
+### Fixed
+
+- Fix cant not set connect/read timeout in `Options.new`.
+- Fix cant not overwrite default in `Options.new`.
+- Fix `Options.clear!` was not clear everything and restore default headers.
+
 ## [0.2.0] (11/28/2017)
 
 ### Changed
