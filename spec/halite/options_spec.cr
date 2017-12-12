@@ -40,15 +40,15 @@ describe Halite::Options do
         headers: {
          "private_token" => "token",
         },
-        connect_timeout: 4,
-        read_timeout: 3.seconds
+        follow: 4,
+        follow_strict: false
       )
 
       subject.should be_a(Halite::Options)
       subject.headers.should be_a(HTTP::Headers)
       subject.headers["Private-Token"].should eq("token")
-      subject.timeout.connect.should eq(4)
-      subject.timeout.read.should eq(3)
+      subject.follow.hops.should eq(4)
+      subject.follow.strict.should eq(false)
     end
 
     it "should overwrite default headers" do

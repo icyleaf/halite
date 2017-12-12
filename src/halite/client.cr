@@ -78,9 +78,9 @@ module Halite
       request = Request.new(verb, uri, headers, body.body)
       response = perform(request, options)
 
-      return response if options.follow.zero?
+      return response if options.follow.hops.zero?
 
-      Redirector.new(request, response, options.follow, options.follow_strict).perform do |req|
+      Redirector.new(request, response, options.follow.hops, options.follow.strict).perform do |req|
         perform(req, options)
       end
     end

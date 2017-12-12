@@ -139,10 +139,7 @@ module Halite
     #       .get("http://httpbin.org/get")
     # ```
     def timeout(connect : (Int32 | Float64 | Time::Span)?, read : (Int32 | Float64 | Time::Span)?) : Halite::Client
-      branch(default_options.tap do |options|
-        options.timeout.connect = connect.to_f if connect
-        options.timeout.read = read.to_f if read
-      end)
+      branch(default_options.with_timeout(connect, read))
     end
 
     # Returns `Options` self with automatically following redirects.
@@ -156,7 +153,7 @@ module Halite
     # Halite.follow(strict: false)
     #       .get("http://httpbin.org/get")
     # ```
-    def follow(strict = Options::FOLLOW_STRICT) : Halite::Client
+    def follow(strict = Options::Follow::STRICT) : Halite::Client
       branch(default_options.with_follow(strict: strict))
     end
 
@@ -171,7 +168,7 @@ module Halite
     # Halite.follow(4, strict: false)
     #       .get("http://httpbin.org/relative-redirect/4")
     # ```
-    def follow(hops : Int32, strict = Options::FOLLOW_STRICT) : Halite::Client
+    def follow(hops : Int32, strict = Options::Follow::STRICT) : Halite::Client
       branch(default_options.with_follow(hops, strict))
     end
 

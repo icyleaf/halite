@@ -3,47 +3,40 @@ require "openssl"
 module Halite
   # Options class
   #
-  # ## Init with splats options
+  # ### Init with splats options
+  #
   # ```
-  # Options.new(
+  # o = Options.new(
   #   headers: {
   #     user_agent: "foobar"
   #   },
-  #   connect_timeout: 30,
-  #   read_timeout: 30,
   # }
+  # o.headers.class # => HTTP::Headers
+  # o.cookies.class # => HTTP::Cookies
   # ```
   #
-  # ## Init with Hash options
+  # ### Set/Get timeout
+  #
+  # Set it with `connect_timeout`/`read_timeout` keys, but get it call `Timeout` class.
+  #
   # ```
-  # Options.new({
-  #   "headers" => {
-  #     "User-Agent" => "foobar"
-  #   },
-  #   "connect_timeout" => 3,
-  #   "read_timeout" => 1.minutes,
-  # })
+  # o = Options.new(connect_timeout: 30, read_timeout: 30)
+  # o.timeout.connect # => 30.0
+  # o.timeout.read # => 30.0
   # ```
   #
-  # ## Init with NamedTuple options
+  # ### Set/Get follow
+  #
+  # Set it with `follow`/`follow_strict` keys, but get it call `Follow` class.
+  #
   # ```
-  # Options.new({
-  #   headers: {
-  #     user_agent: "foobar"
-  #   },
-  #   connect_timeout: 4.5,
-  #   read_timeout: 1.minutes,
-  # })
+  # o = Options.new(follow: 3, follow_strict: false)
+  # o.follow.hops # => 3
+  # o.follow.strict # => false
   # ```
   class Options
     # Request user-agent by default
     USER_AGENT = "Halite/#{Halite::VERSION}"
-
-    # A maximum of 5 subsequent redirects
-    FOLLOW_MAX_HOPS = 5
-
-    # Redirector hops policy
-    FOLLOW_STRICT = true
 
     # Types of options in a Hash
     alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(Type, Type)
@@ -51,8 +44,7 @@ module Halite
     property headers : HTTP::Headers
     property cookies : HTTP::Cookies
     property timeout : Timeout
-    property follow : Int32
-    property follow_strict : Bool
+    property follow : Follow
 
     property params : Hash(String, Type)
     property form : Hash(String, Type)
@@ -60,17 +52,22 @@ module Halite
 
     property ssl : OpenSSL::SSL::Context::Client?
 
-    def self.new(headers = nil, params = nil, form = nil, json = nil,
-                 connect_timeout : (Int32|Float64|Time::Span)? = nil,
-                 read_timeout : (Int32|Float64|Time::Span)? = nil,
+    def self.new(headers = nil, cookies = nil, params = nil, form = nil, json = nil,
+                 connect_timeout : (Int32 | Float64 | Time::Span)? = nil,
+                 read_timeout : (Int32 | Float64 | Time::Span)? = nil,
+                 follow : Int32? = nil,
+                 follow_strict : Bool? = nil,
                  ssl : OpenSSL::SSL::Context::Client? = nil)
       Options.new({
-        "headers" => headers,
-        "form" => form,
-        "json" => json,
-        "read_timeout" => read_timeout,
+        "headers"         => headers,
+        "cookies"         => cookies,
+        "form"            => form,
+        "json"            => json,
+        "read_timeout"    => read_timeout,
         "connect_timeout" => connect_timeout,
-        "ssl" => ssl
+        "follow"          => follow,
+        "follow_strict"   => follow_strict,
+        "ssl"             => ssl,
       })
     end
 
@@ -78,8 +75,7 @@ module Halite
       @headers = default_headers.merge!(parse_headers(options))
       @cookies = parse_cookies(@headers)
       @timeout = parse_timeout(options)
-      @follow = 0 # No follow by default
-      @follow_strict = FOLLOW_STRICT
+      @follow = parse_follow(options)
 
       @params = parse_params(options)
       @form = parse_form(options)
@@ -195,9 +191,16 @@ module Halite
     # # Set subsequent redirects
     # options.with_follow(3)
     # ```
-    def with_follow(follow : Int32 = FOLLOW_MAX_HOPS, strict : Bool = FOLLOW_STRICT) : Halite::Options
-      @follow = follow
-      @follow_strict = strict
+    def with_follow(follow = Follow::MAX_HOPS, strict = Follow::STRICT) : Halite::Options
+      @follow.hops = follow
+      @follow.strict = strict
+      self
+    end
+
+    # Returns `Options` self with gived connect, read timeout.
+    def with_timeout(connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil) : Halite::Options
+      @timeout.connect = connect.to_f if connect
+      @timeout.read = read.to_f if read
       self
     end
 
@@ -211,6 +214,8 @@ module Halite
         "json"            => @json ? @json.to_h : nil,
         "connect_timeout" => @timeout.connect,
         "read_timeout"    => @timeout.read,
+        "follow"          => @follow.hops,
+        "follow_strict"   => @follow.strict,
       }
     end
 
@@ -260,6 +265,12 @@ module Halite
       Timeout.new(timeout_value("connect_timeout", options), timeout_value("read_timeout", options))
     end
 
+    private def parse_follow(options : Hash(Type, _) | NamedTuple) : Follow
+      hops = options["follow"]?.as(Int32?)
+      strict = options["follow_strict"]?.as(Bool?)
+      Follow.new(hops, strict)
+    end
+
     private def parse_ssl(options : Hash(Type, _) | NamedTuple) : OpenSSL::SSL::Context::Client?
       options["ssl"]?.as(OpenSSL::SSL::Context::Client?)
     end
@@ -296,6 +307,29 @@ module Halite
       def initialize(connect : Time::Span? = nil, read : Time::Span? = nil)
         @connect = connect.seconds
         @read = read.seconds
+      end
+    end
+
+    struct Follow
+      # No follow by default
+      DEFAULT_HOPS = 0
+
+      # A maximum of 5 subsequent redirects
+      MAX_HOPS = 5
+
+      # Redirector hops policy
+      STRICT = true
+
+      property hops : Int32
+      property strict : Bool
+
+      def initialize(hops : Int32? = nil, strict : Bool? = nil)
+        @hops = hops || DEFAULT_HOPS
+        @strict = strict.nil? ? STRICT : strict
+      end
+
+      def strict?
+        @strict == true
       end
     end
   end
