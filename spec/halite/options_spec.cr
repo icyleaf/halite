@@ -147,4 +147,37 @@ describe Halite::Options do
       options.follow.strict.should eq(false)
     end
   end
+
+  describe "#clear!" do
+    it "should clear setted options" do
+      options = Halite::Options.new(
+        headers: {
+          "private_token" => "token",
+        },
+        cookies: {
+          "name" => "foo"
+        },
+        params: { "name" => "foo" },
+        form: { "name" => "foo" },
+        json: { "name" => "foo" },
+        connect_timeout: 1,
+        read_timeout: 3,
+        follow: 4,
+        follow_strict: false
+      )
+      options.clear!
+
+      options.headers.should eq(options.default_headers)
+      options.cookies.empty?.should eq(true)
+      options.params.empty?.should eq(true)
+      options.form.empty?.should eq(true)
+      options.json.empty?.should eq(true)
+
+      options.timeout.connect.nil?.should eq(true)
+      options.timeout.read.nil?.should eq(true)
+
+      options.follow.hops.should eq(Halite::Options::Follow::DEFAULT_HOPS)
+      options.follow.strict.should eq(Halite::Options::Follow::STRICT)
+    end
+  end
 end

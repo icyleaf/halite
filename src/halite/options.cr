@@ -76,12 +76,11 @@ module Halite
       @cookies = parse_cookies(@headers)
       @timeout = parse_timeout(options)
       @follow = parse_follow(options)
+      @ssl = parse_ssl(options)
 
       @params = parse_params(options)
       @form = parse_form(options)
       @json = parse_json(options)
-
-      @ssl = parse_ssl(options)
     end
 
     # Returns `Options` self with the headers, params, form and json of this hash and other combined.
@@ -114,18 +113,22 @@ module Halite
     def merge(options : Halite::Options) : Halite::Options
       @headers.merge!(options.headers) if options.headers
       @cookies.fill_from_headers(@headers) if @headers
+      @ssl = options.ssl if options.ssl
+
       @params.merge!(options.params) if options.params
       @form.merge!(options.form) if options.form
       @json.merge!(options.json) if options.json
-      @ssl = options.ssl if options.ssl
 
       self
     end
 
     # Reset options
     def clear! : Halite::Options
-      @headers = HTTP::Headers.new
+      @headers = default_headers
       @cookies = HTTP::Cookies.new
+      @timeout = Timeout.new
+      @follow = Follow.new
+      @ssl = nil
 
       @params = {} of String => Type
       @form = {} of String => Type
@@ -202,6 +205,17 @@ module Halite
       @timeout.connect = connect.to_f if connect
       @timeout.read = read.to_f if read
       self
+    end
+
+    # Return default headers
+    #
+    # Auto accept gzip deflate encoding by [HTTP::Client](https://crystal-lang.org/api/0.23.1/HTTP/Client.html)
+    def default_headers : HTTP::Headers
+      HTTP::Headers{
+        "User-Agent" => USER_AGENT,
+        "Accept"     => "*/*",
+        "Connection" => "keep-alive",
+      }
     end
 
     # Returns this collection as a plain Hash.
@@ -284,17 +298,6 @@ module Halite
           timeout
         end
       end
-    end
-
-    # Return default headers
-    #
-    # Auto accept gzip deflate encoding by [HTTP::Client](https://crystal-lang.org/api/0.23.1/HTTP/Client.html)
-    private def default_headers : HTTP::Headers
-      HTTP::Headers{
-        "User-Agent" => USER_AGENT,
-        "Accept"     => "*/*",
-        "Connection" => "keep-alive",
-      }
     end
 
     # Timeout struct
