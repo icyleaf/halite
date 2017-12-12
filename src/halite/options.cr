@@ -158,7 +158,7 @@ module Halite
     # Returns `Options` self with gived cookies combined.
     def with_cookies(**cookies) : Halite::Options
       cookies.each do |key, value|
-        @cookies[key.to_s] = values.to_s
+        @cookies[key.to_s] = value.to_s
       end
 
       self

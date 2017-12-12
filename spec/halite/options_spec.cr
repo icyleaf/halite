@@ -3,63 +3,148 @@ require "../spec_helper"
 describe Halite::Options do
   describe "#initialize" do
     it "should initial with nothing" do
-      subject = Halite::Options.new
-      subject.should be_a(Halite::Options)
+      options = Halite::Options.new
+      options.should be_a(Halite::Options)
     end
 
     it "should initial with Hash arguments" do
-      subject = Halite::Options.new({
+      options = Halite::Options.new({
         "headers" => {
           "private_token" => "token",
         },
-        "connect_timeout" => 3.2
+        "connect_timeout" => 3.2,
       })
 
-      subject.should be_a(Halite::Options)
-      subject.headers.should be_a(HTTP::Headers)
-      subject.headers["Private-Token"].should eq("token")
-      subject.timeout.connect.should eq(3.2)
+      options.should be_a(Halite::Options)
+      options.headers.should be_a(HTTP::Headers)
+      options.headers["Private-Token"].should eq("token")
+      options.timeout.connect.should eq(3.2)
     end
 
     it "should initial with NamedTuple arguments" do
-      subject = Halite::Options.new({
+      options = Halite::Options.new({
         headers: {
           private_token: "token",
         },
-        connect_timeout: 1.minutes
+        connect_timeout: 1.minutes,
       })
 
-      subject.should be_a(Halite::Options)
-      subject.headers.should be_a(HTTP::Headers)
-      subject.headers["Private-Token"].should eq("token")
-      subject.timeout.connect.should eq(60)
+      options.should be_a(Halite::Options)
+      options.headers.should be_a(HTTP::Headers)
+      options.headers["Private-Token"].should eq("token")
+      options.timeout.connect.should eq(60)
     end
 
     it "should initial with tuples arguments" do
-      subject = Halite::Options.new(
+      options = Halite::Options.new(
         headers: {
-         "private_token" => "token",
+          "private_token" => "token",
         },
         follow: 4,
         follow_strict: false
       )
 
-      subject.should be_a(Halite::Options)
-      subject.headers.should be_a(HTTP::Headers)
-      subject.headers["Private-Token"].should eq("token")
-      subject.follow.hops.should eq(4)
-      subject.follow.strict.should eq(false)
+      options.should be_a(Halite::Options)
+      options.headers.should be_a(HTTP::Headers)
+      options.headers["Private-Token"].should eq("token")
+      options.follow.hops.should eq(4)
+      options.follow.strict.should eq(false)
     end
 
     it "should overwrite default headers" do
-      subject = Halite::Options.new(
+      options = Halite::Options.new(
         headers: {
-         user_agent: "spec",
+          user_agent: "spec",
         },
       )
 
-      subject.should be_a(Halite::Options)
-      subject.headers["User-Agent"].should eq("spec")
+      options.should be_a(Halite::Options)
+      options.headers["User-Agent"].should eq("spec")
+    end
+  end
+
+  describe "#with_headers" do
+    it "should overwrite tupled headers" do
+      options = Halite::Options.new(headers: {
+        private_token: "token",
+      })
+      options = options.with_headers(private_token: "new", accept: "application/json")
+
+      options.headers["Private-Token"].should eq("new")
+      options.headers["Accept"].should eq("application/json")
+    end
+
+    it "should overwrite NamedTuped headers" do
+      options = Halite::Options.new({
+        headers: {
+          private_token: "token",
+        },
+      })
+      options = options.with_headers(private_token: "new", accept: "application/json")
+
+      options.headers["Private-Token"].should eq("new")
+      options.headers["Accept"].should eq("application/json")
+    end
+
+    it "should overwrite Hash headers" do
+      options = Halite::Options.new({
+        "headers" => {
+          private_token: "token",
+        },
+      })
+      options = options.with_headers(private_token: "new", accept: "application/json")
+
+      options.headers["Private-Token"].should eq("new")
+      options.headers["Accept"].should eq("application/json")
+    end
+  end
+
+  describe "#with_cookies" do
+    it "should overwrite tupled cookies" do
+      options = Halite::Options.new(cookies: {
+        "name" => "foo",
+      })
+      options = options.with_cookies(name: "bar")
+
+      options.cookies["name"].value.should eq("bar")
+    end
+
+    it "should overwrite NamedTuple cookies" do
+      options = Halite::Options.new(cookies: {
+        "name" => "foo",
+      })
+      options = options.with_cookies({name: "bar"})
+
+      options.cookies["name"].value.should eq("bar")
+    end
+
+    it "should overwrite Hash cookies" do
+      options = Halite::Options.new(cookies: {
+        "name" => "foo",
+      })
+      options = options.with_cookies({"name" => "bar"})
+
+      options.cookies["name"].value.should eq("bar")
+    end
+  end
+
+  describe "#with_timeout" do
+    it "should overwrite timeout" do
+      options = Halite::Options.new(connect_timeout: 1, read_timeout: 3)
+      options = options.with_timeout(read: 4.minutes, connect: 1.2)
+
+      options.timeout.connect.should eq(1.2)
+      options.timeout.read.should eq(4.minutes.to_f)
+    end
+  end
+
+  describe "#with_follow" do
+    it "should overwrite follow" do
+      options = Halite::Options.new(follow: 1, follow_strict: true)
+      options = options.with_follow(follow: 5, strict: false)
+
+      options.follow.hops.should eq(5)
+      options.follow.strict.should eq(false)
     end
   end
 end
