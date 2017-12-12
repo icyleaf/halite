@@ -208,18 +208,15 @@ module Halite
     end
 
     private def parse_timeout(options : Hash(Type, _) | NamedTuple) : Timeout
-      Timeout.new.tap do |timeout|
-        timeout.connect = timeout_value("connect_timeout", options)
-        timeout.read = timeout_value("read_timeout", options)
-      end
+      Timeout.new(timeout_value(:connect_timeout, options), timeout_value(:read_timeout, options))
     end
 
     private def parse_ssl(options : Hash(Type, _) | NamedTuple) : OpenSSL::SSL::Context::Client?
       options["ssl"]?.as(OpenSSL::SSL::Context::Client?)
     end
 
-    private def timeout_value(key, options : Hash(Type, _) | NamedTuple)
-      if timeout = options[key]?
+    private def timeout_value(key, options : Hash(Type, _) | NamedTuple) : Float64?
+      if timeout = (options[key]? || options[key.to_s]?)
         case timeout
         when Int32, Time::Span
           timeout.to_f
