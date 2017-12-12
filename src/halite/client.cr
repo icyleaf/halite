@@ -31,6 +31,30 @@ module Halite
     # Instance a new client
     #
     # ```
+    # Halite::Client.new({
+    #   "headers" => {
+    #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
+    #   },
+    # })
+    # ```
+    def self.new(options : (Hash(String, _) | NamedTuple) = {} of String => String)
+      Client.new(Options.new(options))
+    end
+
+    # Instance a new client
+    #
+    # ```
+    # Halite::Client.new(headers: {
+    #   "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
+    # })
+    # ```
+    def self.new(**options)
+      Client.new(Options.new(options))
+    end
+
+    # Instance a new client
+    #
+    # ```
     # options = Halite::Options.new({
     #   "headers" => {
     #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
@@ -40,20 +64,6 @@ module Halite
     # client = Halite::Client.new(options)
     # ```
     def initialize(@options : Halite::Options = Options.new)
-      @history = [] of Response
-    end
-
-    # Instance a new client
-    #
-    # ```
-    # Halite::Client.new({
-    #   "headers" => {
-    #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
-    #   },
-    # })
-    # ```
-    def initialize(options : (Hash(String, _) | NamedTuple) = {} of String => String)
-      @options = Options.new(options)
       @history = [] of Response
     end
 

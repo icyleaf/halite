@@ -1,6 +1,36 @@
 require "openssl"
 
 module Halite
+  # Options class
+  #
+  # ## Init with splats options
+  # ```
+  # Options.new(headers: {
+  #   user_agent: "foobar"
+  # })
+  # ```
+  #
+  # ## Init with Hash options
+  # ```
+  # Options.new({
+  #   "headers" => {
+  #     user_agent: "foobar"
+  #   },
+  #   "connect_timeout" => 3,
+  #   "read_timeout" => 1.minutes,
+  # })
+  # ```
+  #
+  # ## Init with NamedTuple options
+  # ```
+  # Options.new({
+  #   headers: {
+  #     user_agent: "foobar"
+  #   },
+  #   connect_timeout: 3,
+  #   read_timeout: 1.minutes,
+  # })
+  # ```
   class Options
     # Request user-agent by default
     USER_AGENT = "Halite/#{Halite::VERSION}"
@@ -26,8 +56,22 @@ module Halite
 
     property ssl : OpenSSL::SSL::Context::Client?
 
+    def self.new(headers = nil, params = nil, form = nil, json = nil,
+                 connect_timeout : (Int32|Float64|Time::Span)? = nil,
+                 read_timeout : (Int32|Float64|Time::Span)? = nil,
+                 ssl : OpenSSL::SSL::Context::Client? = nil)
+      Options.new({
+        "headers" => headers,
+        "form" => form,
+        "json" => json,
+        "read_timeout" => read_timeout,
+        "connect_timeout" => connect_timeout,
+        "ssl" => ssl
+      })
+    end
+
     def initialize(options : (Hash(Type, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil, "ssl" => nil})
-      @headers = parse_headers(options).merge!(default_headers)
+      @headers = default_headers.merge!(parse_headers(options))
       @cookies = parse_cookies(@headers)
       @timeout = parse_timeout(options)
       @follow = 0 # No follow by default
@@ -208,15 +252,15 @@ module Halite
     end
 
     private def parse_timeout(options : Hash(Type, _) | NamedTuple) : Timeout
-      Timeout.new(timeout_value(:connect_timeout, options), timeout_value(:read_timeout, options))
+      Timeout.new(timeout_value("connect_timeout", options), timeout_value("read_timeout", options))
     end
 
     private def parse_ssl(options : Hash(Type, _) | NamedTuple) : OpenSSL::SSL::Context::Client?
       options["ssl"]?.as(OpenSSL::SSL::Context::Client?)
     end
 
-    private def timeout_value(key, options : Hash(Type, _) | NamedTuple) : Float64?
-      if timeout = (options[key]? || options[key.to_s]?)
+    private def timeout_value(key : String, options : Hash(Type, _) | NamedTuple) : Float64?
+      if timeout = options[key]?
         case timeout
         when Int32, Time::Span
           timeout.to_f
