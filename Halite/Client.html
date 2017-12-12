@@ -80,6 +80,11 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Follow" data-name="halite::options::follow">
+      <a href="../Halite/Options/Follow.html">Follow</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Timeout" data-name="halite::options::timeout">
       <a href="../Halite/Options/Timeout.html">Timeout</a>
       
@@ -243,7 +248,7 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/client.cr#L26" target="_blank">halite/client.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/client.cr#L26" target="_blank">halite/client.cr</a>
     
     <br/>
   
@@ -257,13 +262,6 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
     
       <li class="entry-summary">
         <a href="#new%28options%3AHalite%3A%3AOptions%3DOptions.new%29-class-method" class="signature"><strong>.new</strong>(options : Halite::Options = <span class="t">Options</span>.<span class="k">new</span>)</a>
-        
-          <div class="summary"><p>Instance a new client</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#new%28options%3AHash%28String%2C_%29%7CNamedTuple%3D%7B%7DofString%3D%3EString%29-class-method" class="signature"><strong>.new</strong>(options : Hash(String, _) | NamedTuple = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">String</span>)</a>
         
           <div class="summary"><p>Instance a new client</p></div>
         
@@ -333,8 +331,8 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
     delete</a>, 
     
   
-    <a href="../Halite/Chainable.html#follow%28strict%3DOptions%3A%3AFOLLOW_STRICT%29%3AHalite%3A%3AClient-instance-method" class="tooltip">
-      <span>follow(strict = <span class="t">Options</span><span class="t">::</span><span class="t">FOLLOW_STRICT</span>) : Halite::Client<br/>follow(hops : Int32, strict = <span class="t">Options</span><span class="t">::</span><span class="t">FOLLOW_STRICT</span>) : Halite::Client</span>
+    <a href="../Halite/Chainable.html#follow%28strict%3DOptions%3A%3AFollow%3A%3ASTRICT%29%3AHalite%3A%3AClient-instance-method" class="tooltip">
+      <span>follow(strict = <span class="t">Options</span><span class="t">::</span><span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : Halite::Client<br/>follow(hops : Int32, strict = <span class="t">Options</span><span class="t">::</span><span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : Halite::Client</span>
     follow</a>, 
     
   
@@ -433,31 +431,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/client.cr#L42" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="new&#40;options:Hash&#40;String,_&#41;|NamedTuple&#61;&#123;&#125;ofString&#61;&gt;String&#41;-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(options : Hash(String, _) | NamedTuple = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">String</span>)
-
-        <a class="method-permalink" href="#new%28options%3AHash%28String%2C_%29%7CNamedTuple%3D%7B%7DofString%3D%3EString%29-class-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Instance a new client</p>
-
-<pre><code><span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>({
-  <span class="s">&quot;headers&quot;</span> => {
-    <span class="s">&quot;private-token&quot;</span> => <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee4&quot;</span>,
-  },
-})</code></pre></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/client.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/client.cr#L66" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -480,7 +454,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/client.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/client.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -496,7 +470,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/client.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/client.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -514,7 +488,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/client.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/client.cr#L71" target="_blank">View source</a>]
         
       </div>
     </div>

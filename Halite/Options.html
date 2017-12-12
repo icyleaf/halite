@@ -80,6 +80,11 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Follow" data-name="halite::options::follow">
+      <a href="../Halite/Options/Follow.html">Follow</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Timeout" data-name="halite::options::timeout">
       <a href="../Halite/Options/Timeout.html">Timeout</a>
       
@@ -202,6 +207,36 @@
 
 
 
+  <h2>Overview</h2>
+
+  <p>Options class</p>
+
+<h3>Init with splats options</h3>
+
+<pre><code>o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(
+  headers: {
+    user_agent: <span class="s">&quot;foobar&quot;</span>
+  },
+}
+o.headers.<span class="k">class</span> <span class="c"># &#61;&gt; HTTP::Headers</span>
+o.cookies.<span class="k">class</span> <span class="c"># &#61;&gt; HTTP::Cookies</span></code></pre>
+
+<h3>Set/Get timeout</h3>
+
+<p>Set it with <code>connect_timeout</code>/<code>read_timeout</code> keys, but get it call <code><a href="../Halite/Options/Timeout.html">Timeout</a></code> class.</p>
+
+<pre><code>o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(connect_timeout: <span class="n">30</span>, read_timeout: <span class="n">30</span>)
+o.timeout.connect <span class="c"># &#61;&gt; 30.0</span>
+o.timeout.read    <span class="c"># &#61;&gt; 30.0</span></code></pre>
+
+<h3>Set/Get follow</h3>
+
+<p>Set it with <code><a href="../Halite/Options.html#follow%3AFollow-instance-method">#follow</a></code>/<code>follow_strict</code> keys, but get it call <code><a href="../Halite/Options/Follow.html">Follow</a></code> class.</p>
+
+<pre><code>o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(follow: <span class="n">3</span>, follow_strict: <span class="n">false</span>)
+o.follow.hops   <span class="c"># &#61;&gt; 3</span>
+o.follow.strict <span class="c"># &#61;&gt; false</span></code></pre>
+
 
 
 
@@ -218,7 +253,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L4" target="_blank">halite/options.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L37" target="_blank">halite/options.cr</a>
     
     <br/>
   
@@ -229,24 +264,6 @@
     <h2>Constant Summary</h2>
   
   <dl>
-    
-      <dt class="entry-const" id="FOLLOW_MAX_HOPS">
-        <strong>FOLLOW_MAX_HOPS</strong> = <code><span class="n">5</span></code>
-      </dt>
-      
-      <dd class="entry-const-doc">
-        <p>A maximum of 5 subsequent redirects</p>
-      </dd>
-      
-    
-      <dt class="entry-const" id="FOLLOW_STRICT">
-        <strong>FOLLOW_STRICT</strong> = <code><span class="n">true</span></code>
-      </dt>
-      
-      <dd class="entry-const-doc">
-        <p>Redirector hops policy</p>
-      </dd>
-      
     
       <dt class="entry-const" id="USER_AGENT">
         <strong>USER_AGENT</strong> = <code><span class="s">&quot;Halite/</span><span class="i">#{</span></span><span class="t">Halite</span><span class="t">::</span><span class="t">VERSION</span><span class="s"><span class="i">}</span>&quot;</span></code>
@@ -266,6 +283,11 @@
     
       <li class="entry-summary">
         <a href="#new%28options%3AHash%28Type%2C_%29%7CNamedTuple%3D%7B%26quot%3Bheaders%26quot%3B%3D%3Enil%2C%26quot%3Bparams%26quot%3B%3D%3Enil%2C%26quot%3Bform%26quot%3B%3D%3Enil%2C%26quot%3Bjson%26quot%3B%3D%3Enil%2C%26quot%3Bssl%26quot%3B%3D%3Enil%7D%29-class-method" class="signature"><strong>.new</strong>(options : Hash(Type, _) | NamedTuple = {<span class="s">&quot;headers&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;params&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;form&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;json&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;ssl&quot;</span> => <span class="n">nil</span>})</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28headers%3Dnil%2Ccookies%3Dnil%2Cparams%3Dnil%2Cform%3Dnil%2Cjson%3Dnil%2Cconnect_timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread_timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cfollow%3AInt32%3F%3Dnil%2Cfollow_strict%3ABool%3F%3Dnil%2Cssl%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(headers = <span class="n">nil</span>, cookies = <span class="n">nil</span>, params = <span class="n">nil</span>, form = <span class="n">nil</span>, json = <span class="n">nil</span>, connect_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, follow : Int32? = <span class="n">nil</span>, follow_strict : Bool? = <span class="n">nil</span>, ssl : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -296,22 +318,19 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#follow%3AInt32-instance-method" class="signature"><strong>#follow</strong> : Int32</a>
+        <a href="#default_headers%3AHTTP%3A%3AHeaders-instance-method" class="signature"><strong>#default_headers</strong> : HTTP::Headers</a>
+        
+          <div class="summary"><p>Return default headers</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#follow%3D%28follow%3AInt32%29-instance-method" class="signature"><strong>#follow=</strong>(follow : Int32)</a>
+        <a href="#follow%3AFollow-instance-method" class="signature"><strong>#follow</strong> : Follow</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#follow_strict%3ABool-instance-method" class="signature"><strong>#follow_strict</strong> : Bool</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#follow_strict%3D%28follow_strict%3ABool%29-instance-method" class="signature"><strong>#follow_strict=</strong>(follow_strict : Bool)</a>
+        <a href="#follow%3D%28follow%3AFollow%29-instance-method" class="signature"><strong>#follow=</strong>(follow : Follow)</a>
         
       </li>
     
@@ -346,14 +365,16 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#merge%28options%3AHash%28Type%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#merge</strong>(options : Hash(Type, _) | NamedTuple) : Halite::Options</a>
+        <a href="#merge%28options%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#merge</strong>(options : Halite::Options) : Halite::Options</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with the headers, params, form and json of this hash and other combined.</p></div>
+          <div class="summary"><p>alias <code><a href="../Halite/Options.html#merge%28options%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method">#merge</a></code> above</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#merge%28options%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#merge</strong>(options : Halite::Options) : Halite::Options</a>
+        <a href="#merge%28options%3AHash%28Type%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#merge</strong>(options : Hash(Type, _) | NamedTuple) : Halite::Options</a>
+        
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with the headers, params, form and json of this hash and other combined.</p></div>
         
       </li>
     
@@ -423,7 +444,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#with_follow%28follow%3AInt32%3DFOLLOW_MAX_HOPS%2Cstrict%3ABool%3DFOLLOW_STRICT%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_follow</strong>(follow : Int32 = <span class="t">FOLLOW_MAX_HOPS</span>, strict : Bool = <span class="t">FOLLOW_STRICT</span>) : Halite::Options</a>
+        <a href="#with_follow%28follow%3DFollow%3A%3AMAX_HOPS%2Cstrict%3DFollow%3A%3ASTRICT%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_follow</strong>(follow = <span class="t">Follow</span><span class="t">::</span><span class="t">MAX_HOPS</span>, strict = <span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with gived max hops of redirect times.</p></div>
         
@@ -440,6 +461,13 @@
         <a href="#with_headers%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_headers</strong> : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with gived headers combined.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_timeout</strong>(connect : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read : Int32 | Float64 | Time::Span? = <span class="n">nil</span>) : Halite::Options</a>
+        
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with gived connect, read timeout.</p></div>
         
       </li>
     
@@ -487,7 +515,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L74" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;headers&#61;nil,cookies&#61;nil,params&#61;nil,form&#61;nil,json&#61;nil,connect_timeout:Int32|Float64|Time::Span?&#61;nil,read_timeout:Int32|Float64|Time::Span?&#61;nil,follow:Int32?&#61;nil,follow_strict:Bool?&#61;nil,ssl:OpenSSL::SSL::Context::Client?&#61;nil&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(headers = <span class="n">nil</span>, cookies = <span class="n">nil</span>, params = <span class="n">nil</span>, form = <span class="n">nil</span>, json = <span class="n">nil</span>, connect_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, follow : Int32? = <span class="n">nil</span>, follow_strict : Bool? = <span class="n">nil</span>, ssl : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28headers%3Dnil%2Ccookies%3Dnil%2Cparams%3Dnil%2Cform%3Dnil%2Cjson%3Dnil%2Cconnect_timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread_timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cfollow%3AInt32%3F%3Dnil%2Cfollow_strict%3ABool%3F%3Dnil%2Cssl%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -512,7 +556,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L81" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L126" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -528,7 +572,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -544,71 +588,59 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="follow:Int32-instance-method">
+    <div class="entry-detail" id="default_headers:HTTP::Headers-instance-method">
       <div class="signature">
         
-        def <strong>follow</strong> : Int32
+        def <strong>default_headers</strong> : <a href="../HTTP/Headers.html">HTTP::Headers</a>
 
-        <a class="method-permalink" href="#follow%3AInt32-instance-method">#</a>
+        <a class="method-permalink" href="#default_headers%3AHTTP%3A%3AHeaders-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Return default headers</p>
+
+<p>Auto accept gzip deflate encoding by <a href="https://crystal-lang.org/api/0.23.1/HTTP/Client.html" target="_blank">HTTP::Client</a></p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L213" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="follow:Follow-instance-method">
+      <div class="signature">
+        
+        def <strong>follow</strong> : <a href="../Halite/Options/Follow.html">Follow</a>
+
+        <a class="method-permalink" href="#follow%3AFollow-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L47" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="follow&#61;&#40;follow:Int32&#41;-instance-method">
+    <div class="entry-detail" id="follow&#61;&#40;follow:Follow&#41;-instance-method">
       <div class="signature">
         
-        def <strong>follow=</strong>(follow : Int32)
+        def <strong>follow=</strong>(follow : <a href="../Halite/Options/Follow.html">Follow</a>)
 
-        <a class="method-permalink" href="#follow%3D%28follow%3AInt32%29-instance-method">#</a>
+        <a class="method-permalink" href="#follow%3D%28follow%3AFollow%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L20" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="follow_strict:Bool-instance-method">
-      <div class="signature">
-        
-        def <strong>follow_strict</strong> : Bool
-
-        <a class="method-permalink" href="#follow_strict%3ABool-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L21" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="follow_strict&#61;&#40;follow_strict:Bool&#41;-instance-method">
-      <div class="signature">
-        
-        def <strong>follow_strict=</strong>(follow_strict : Bool)
-
-        <a class="method-permalink" href="#follow_strict%3D%28follow_strict%3ABool%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L47" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -624,7 +656,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L50" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -640,7 +672,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L50" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -656,7 +688,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -672,7 +704,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -688,7 +720,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -704,7 +736,25 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="merge&#40;options:Halite::Options&#41;:Halite::Options-instance-method">
+      <div class="signature">
+        
+        def <strong>merge</strong>(options : <a href="../Halite/Options.html">Halite::Options</a>) : <a href="../Halite/Options.html">Halite::Options</a>
+
+        <a class="method-permalink" href="#merge%28options%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>alias <code><a href="../Halite/Options.html#merge%28options%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method">#merge</a></code> above</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L113" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -722,23 +772,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L44" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="merge&#40;options:Halite::Options&#41;:Halite::Options-instance-method">
-      <div class="signature">
-        
-        def <strong>merge</strong>(options : <a href="../Halite/Options.html">Halite::Options</a>) : <a href="../Halite/Options.html">Halite::Options</a>
-
-        <a class="method-permalink" href="#merge%28options%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L69" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L87" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -754,7 +788,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -770,7 +804,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -786,7 +820,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -802,7 +836,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -818,7 +852,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L46" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -834,7 +868,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L46" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -852,7 +886,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L156" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L222" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -870,7 +904,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L105" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L153" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -888,7 +922,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L123" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L171" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -906,7 +940,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L132" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L180" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -924,17 +958,17 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L114" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L162" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="with_follow&#40;follow:Int32&#61;FOLLOW_MAX_HOPS,strict:Bool&#61;FOLLOW_STRICT&#41;:Halite::Options-instance-method">
+    <div class="entry-detail" id="with_follow&#40;follow&#61;Follow::MAX_HOPS,strict&#61;Follow::STRICT&#41;:Halite::Options-instance-method">
       <div class="signature">
         
-        def <strong>with_follow</strong>(follow : Int32 = <span class="t">FOLLOW_MAX_HOPS</span>, strict : Bool = <span class="t">FOLLOW_STRICT</span>) : <a href="../Halite/Options.html">Halite::Options</a>
+        def <strong>with_follow</strong>(follow = <span class="t">Follow</span><span class="t">::</span><span class="t">MAX_HOPS</span>, strict = <span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_follow%28follow%3AInt32%3DFOLLOW_MAX_HOPS%2Cstrict%3ABool%3DFOLLOW_STRICT%29%3AHalite%3A%3AOptions-instance-method">#</a>
+        <a class="method-permalink" href="#with_follow%28follow%3DFollow%3A%3AMAX_HOPS%2Cstrict%3DFollow%3A%3ASTRICT%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with gived max hops of redirect times.</p>
@@ -949,7 +983,7 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L149" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L197" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -967,7 +1001,7 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L99" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L147" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -985,7 +1019,25 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a9551e790e5f95f6da649d76fececeb37dba0bdf/src/halite/options.cr#L93" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L141" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_timeout&#40;connect:Int32|Float64|Time::Span?&#61;nil,read:Int32|Float64|Time::Span?&#61;nil&#41;:Halite::Options-instance-method">
+      <div class="signature">
+        
+        def <strong>with_timeout</strong>(connect : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read : Int32 | Float64 | Time::Span? = <span class="n">nil</span>) : <a href="../Halite/Options.html">Halite::Options</a>
+
+        <a class="method-permalink" href="#with_timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%29%3AHalite%3A%3AOptions-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with gived connect, read timeout.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/90466e45e309995a18dd5275fb3d812b8af72b90/src/halite/options.cr#L204" target="_blank">View source</a>]
         
       </div>
     </div>
