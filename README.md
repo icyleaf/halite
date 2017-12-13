@@ -33,6 +33,7 @@ Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
   - [Error Handling](#error-handling)
 - [Advanced Usage](#advanced-usage)
   - [Sessions](#sessions)
+  - [Logging](#logging)
 - [Help and Discussion](#help-and-discussion)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
@@ -350,6 +351,55 @@ puts r.body
 ```
 
 All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/Chainable.html) in the other examples list in [requests.Session](http://docs.python-requests.org/en/master/user/advanced/#session-objects).
+
+### Logging
+
+By default, the Halite does not enable logging on each request. You can enable per operation timeouts by configuring them through the chaining API.
+
+#### Log request only
+
+It only log request by default.
+
+```
+Halite.logger
+      .get("http://httpbin.org/get", params: {name: "foobar"})
+
+# => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
+```
+
+#### Log both request and response
+
+```
+Halite.logger(response: true)
+      .get("http://httpbin.org/get", params: {name: "foobar"})
+
+# => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
+# => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name=foobar | application/json | [json data]
+```
+
+#### Log use the custom logger
+
+Creating the custom logger by integration `Halite::Logger` abstract class.
+here has two methods must be implement: `Halite::Logger.request` and `Halite::Logger.response`.
+
+```
+class MyLogger < Halite::Logger
+  def request(request)
+    @logger.info ">> | %s | %s %s" % [request.verb, request.uri, request.body]
+  end
+
+  def response(response)
+    @logger.info "<< | %s | %s %s" % [response.status_code, response.uri, response.mime_type]
+  end
+end
+
+Halite.logger(MyLogger.new, response: true)
+      .get("http://httpbin.org/get", params: {name: "foobar"})
+
+# => halite | 2017-12-13 16:40:13 >> | GET | http://httpbin.org/get?name=foobar
+# => halite | 2017-12-13 16:40:15 << | 200 | http://httpbin.org/get?name=foobar application/json
+```
+
 
 ## Help and Discussion
 

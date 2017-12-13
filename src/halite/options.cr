@@ -43,21 +43,26 @@ module Halite
 
     property headers : HTTP::Headers
     property cookies : HTTP::Cookies
-    property timeout : Timeout
-    property follow : Follow
+    property timeout : Options::Timeout
+    property follow : Options::Follow
+    property ssl : OpenSSL::SSL::Context::Client?
 
     property params : Hash(String, Type)
     property form : Hash(String, Type)
     property json : Hash(String, Type)
 
-    property ssl : OpenSSL::SSL::Context::Client?
+    property logger : Halite::Logger
+    property logging : Bool
 
     def self.new(headers = nil, cookies = nil, params = nil, form = nil, json = nil,
                  connect_timeout : (Int32 | Float64 | Time::Span)? = nil,
                  read_timeout : (Int32 | Float64 | Time::Span)? = nil,
                  follow : Int32? = nil,
                  follow_strict : Bool? = nil,
-                 ssl : OpenSSL::SSL::Context::Client? = nil)
+                 ssl : OpenSSL::SSL::Context::Client? = nil,
+                 logger = nil,
+                 logging = nil)
+
       Options.new({
         "headers"         => headers,
         "cookies"         => cookies,
@@ -68,6 +73,8 @@ module Halite
         "follow"          => follow,
         "follow_strict"   => follow_strict,
         "ssl"             => ssl,
+        "logger"          => logger,
+        "logging"         => logging
       })
     end
 
@@ -81,6 +88,12 @@ module Halite
       @params = parse_params(options)
       @form = parse_form(options)
       @json = parse_json(options)
+
+      # @logger = options.fetch("logger", CommonLogger.new).as(CommonLogger)
+      # @logging = options["logging"]? ? options["logging"].as(Bool) : false
+
+      @logger = CommonLogger.new
+      @logging = false
     end
 
     # Returns `Options` self with the headers, params, form and json of this hash and other combined.
@@ -207,6 +220,62 @@ module Halite
       self
     end
 
+    def with_logger(filename : String, response = false)
+      with_logger(Halite::CommonLogger.new(filename), response)
+    end
+
+    def with_logger(logger : Halite::Logger = CommonLogger.new, response = false)
+      @logger = logger
+      @logger.level = response ? ::Logger::DEBUG : ::Logger::INFO
+      @logging = true
+
+      self
+    end
+
+    def headers=(headers : (Hash(Type, _) | NamedTuple))
+      @headers = parse_headers({"headers" => headers})
+    end
+
+    # Alias `Timeout.connect`
+    def connect_timeout
+      @timeout.connect
+    end
+
+    # Alias `Timeout.connect=`
+    def connect_timeout=(timeout : Int32 | Float64 | Time::Span)
+      @timeout.connect = timeout
+    end
+
+    # Alias `Timeout.read`
+    def read_timeout
+      @timeout.read
+    end
+
+    # Alias `Timeout.read=`
+    def read_timeout=(timeout : Int32 | Float64 | Time::Span)
+      @timeout.read = timeout
+    end
+
+    # Alias `Follow.hops=`
+    def follow=(hops : Int32)
+      @follow.hops = hops
+    end
+
+    # Alias `Follow.strict`
+    def follow_strict
+      @follow.strict
+    end
+
+    # Alias `Follow.strict=`
+    def follow_strict=(strict : Bool)
+      @follow.strict = strict
+    end
+
+    # Return if enable logging
+    def logging?
+      @logging == true
+    end
+
     # Return default headers
     #
     # Auto accept gzip deflate encoding by [HTTP::Client](https://crystal-lang.org/api/0.23.1/HTTP/Client.html)
@@ -302,7 +371,7 @@ module Halite
 
     # Timeout struct
     struct Timeout
-      property connect, read
+      getter connect, read
 
       def initialize(@connect : Float64? = nil, @read : Float64? = nil)
       end
@@ -310,6 +379,14 @@ module Halite
       def initialize(connect : Time::Span? = nil, read : Time::Span? = nil)
         @connect = connect.seconds
         @read = read.seconds
+      end
+
+      def connect=(timeout : Int32 | Float64 | Time::Span)
+        @connect = timeout.to_f
+      end
+
+      def read=(timeout : Int32 | Float64 | Time::Span)
+        @read = timeout.to_f
       end
     end
 

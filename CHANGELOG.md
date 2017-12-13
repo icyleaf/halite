@@ -7,15 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-### Todo
-
-- 100% pass specs
-
 ### Added
 
+- Set `Options.default_headers` to be public method.
 - Accept tuples options in `Options.new`.
 - Accept `follow`/`follow_strict` in `Options.new`.
-- Set `Options.default_headers` to be public method.
+- Accept options block in `Options.new`.
+- Add logger during request and response (see [usage](README.md#logging)).
+- Alias method `Options.read_timeout` to `Options::Timeout.read`.
+- Alias method `Options.read_timeout=` to `Options::Timeout.read=`.
+- Alias method `Options.connect_timeout` to `Options::Timeout.connect`.
+- Alias method `Options.connect_timeout` to `Options::Timeout.connect=`.
+- Alias method `Options.follow=` to `Options::Timeout.follow.hops=`.
+- Alias method `Options.follow_strict` to `Options::Timeout.follow.strict`.
+- Alias method `Options.follow_strict=` to `Options::Timeout.follow.strict=`.
 
 ### Fixed
 
