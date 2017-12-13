@@ -174,25 +174,23 @@ module Halite
 
     # Returns `Options` self with gived the logger which it integration from `Halite::Logger`.
     #
-    # #### Log request only
-    #
-    # It only log request by default.
+    # #### Simple logging
     #
     # ```
     # Halite.logger
     #       .get("http://httpbin.org/get", params: {name: "foobar"})
-    #
+
     # # => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
+    # # => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name=foobar | application/json | { ... }
     # ```
     #
-    # #### Log both request and response
+    # #### Logging request only
     #
     # ```
-    # Halite.logger(response: true)
+    # Halite.logger(response: false)
     #       .get("http://httpbin.org/get", params: {name: "foobar"})
     #
     # # => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
-    # # => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name=foobar | application/json | [json data]
     # ```
     #
     # #### Log use the custom logger
@@ -211,13 +209,13 @@ module Halite
     #   end
     # end
     #
-    # Halite.logger(MyLogger.new, response: true)
+    # Halite.logger(MyLogger.new)
     #       .get("http://httpbin.org/get", params: {name: "foobar"})
     #
     # # => halite | 2017-12-13 16:40:13 >> | GET | http://httpbin.org/get?name=foobar
     # # => halite | 2017-12-13 16:40:15 << | 200 | http://httpbin.org/get?name=foobar application/json
     # ```
-    def logger(logger = Halite::CommonLogger.new, response = false)
+    def logger(logger = Halite::CommonLogger.new, response = true)
       branch(default_options.with_logger(logger, response))
     end
 
@@ -230,7 +228,7 @@ module Halite
     #       .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     # Check the log file content: **/tmp/halite.log**
-    def logger(filename : String, response = false)
+    def logger(filename : String, response = true)
       branch(default_options.with_logger(filename, response))
     end
 

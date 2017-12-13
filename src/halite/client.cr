@@ -170,8 +170,7 @@ module Halite
       return options unless response.headers
 
       # Store cookies for sessions use
-      headers = response.headers.select { |key, _| %w(Cookie, Set-Cookie).includes?(key) }
-      options.merge({"headers" => headers})
+      options.with_cookies(HTTP::Cookies.from_headers(response.headers))
     end
   end
 end

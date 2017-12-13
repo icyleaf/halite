@@ -126,6 +126,7 @@ module Halite
     def merge(options : Halite::Options) : Halite::Options
       @headers.merge!(options.headers) if options.headers
       @cookies.fill_from_headers(@headers) if @headers
+
       @ssl = options.ssl if options.ssl
 
       @params.merge!(options.params) if options.params
