@@ -220,7 +220,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/9086e9e" target="_blank">9086e9e</a> (2017-12-13 16:54:17 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/0b07312" target="_blank">0b07312</a> (2017-12-13 16:58:03 +0800).</p>
 
 <p>&lt;hr /></p>
 
@@ -487,14 +487,14 @@ puts r.body
 
 <p>It only log request by default.</p>
 
-<pre><code><span class="t">Halite</span>.logger
+<pre><code class='language-crystal'><span class="t">Halite</span>.logger
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># &#61;&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name&#61;foobar</span></code></pre>
 
 <h4>Log both request and response</h4>
 
-<pre><code><span class="t">Halite</span>.logger(response: <span class="n">true</span>)
+<pre><code class='language-crystal'><span class="t">Halite</span>.logger(response: <span class="n">true</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># &#61;&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name&#61;foobar</span>
@@ -505,7 +505,7 @@ puts r.body
 <p>Creating the custom logger by integration <code><a href="Halite/Logger.html">Halite::Logger</a></code> abstract class.
 here has two methods must be implement: <code>Halite::Logger.request</code> and <code>Halite::Logger.response</code>.</p>
 
-<pre><code><span class="k">class</span> <span class="t">MyLogger</span> <span class="o"><</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span>
+<pre><code class='language-crystal'><span class="k">class</span> <span class="t">MyLogger</span> <span class="o"><</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span>
   <span class="k">def</span> <span class="m">request</span>(request)
     @logger.info <span class="s">&quot;&gt;&gt; | &#37;s | &#37;s &#37;s&quot;</span> <span class="o">%</span> [request.verb, request.uri, request.body]
   <span class="k">end</span>
