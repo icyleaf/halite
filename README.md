@@ -360,7 +360,7 @@ By default, the Halite does not enable logging on each request. You can enable p
 
 It only log request by default.
 
-```
+```crystal
 Halite.logger
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
@@ -369,7 +369,7 @@ Halite.logger
 
 #### Log both request and response
 
-```
+```crystal
 Halite.logger(response: true)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
@@ -382,7 +382,7 @@ Halite.logger(response: true)
 Creating the custom logger by integration `Halite::Logger` abstract class.
 here has two methods must be implement: `Halite::Logger.request` and `Halite::Logger.response`.
 
-```
+```crystal
 class MyLogger < Halite::Logger
   def request(request)
     @logger.info ">> | %s | %s %s" % [request.verb, request.uri, request.body]
@@ -399,7 +399,6 @@ Halite.logger(MyLogger.new, response: true)
 # => halite | 2017-12-13 16:40:13 >> | GET | http://httpbin.org/get?name=foobar
 # => halite | 2017-12-13 16:40:15 << | 200 | http://httpbin.org/get?name=foobar application/json
 ```
-
 
 ## Help and Discussion
 
