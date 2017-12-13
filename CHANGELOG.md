@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+> TOOD
+
+## [0.3.0] (12/13/2017)
+
 ### Added
 
 - Set `Options.default_headers` to be public method.
@@ -81,7 +85,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/icyleaf/halite/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/icyleaf/halite/compare/v0.1.5...v0.2.0
 [0.1.5]: https://github.com/icyleaf/halite/compare/v0.1.3...v0.1.5
 [0.1.3]: https://github.com/icyleaf/halite/compare/v0.1.2...v0.1.3
