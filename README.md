@@ -377,8 +377,6 @@ If you want logging request behavior only, throught pass `response` argument to 
 
 #### Simple logging
 
-It only log request by default.
-
 ```crystal
 Halite.logger
       .get("http://httpbin.org/get", params: {name: "foobar"})
