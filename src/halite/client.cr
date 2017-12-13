@@ -37,18 +37,7 @@ module Halite
     #   },
     # })
     # ```
-    def self.new(options : (Hash(String, _) | NamedTuple) = {} of String => String)
-      Client.new(Options.new(options))
-    end
-
-    # Instance a new client
-    #
-    # ```
-    # Halite::Client.new(headers: {
-    #   "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
-    # })
-    # ```
-    def self.new(**options)
+    def self.new(options : (Hash(Options::Type, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil, "ssl" => nil})
       Client.new(Options.new(options))
     end
 
@@ -63,7 +52,7 @@ module Halite
     #
     # client = Halite::Client.new(options)
     # ```
-    def initialize(@options : Halite::Options = Options.new)
+    def initialize(@options = Options.new)
       @history = [] of Response
     end
 
