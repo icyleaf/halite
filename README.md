@@ -354,7 +354,11 @@ All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/
 
 ### Logging
 
-By default, the Halite does not enable logging on each request. You can enable per operation timeouts by configuring them through the chaining API.
+By default, the Halite does not enable logging on each request. You can enable per operation logging by configuring them through the chaining API.
+
+It only logging the request behavior, if you want logging response behavior, set `response` argument to `true` in `logger` chaining method.
+
+And it not output the full body with binary type MIME types, please review it [here](https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79).
 
 #### Log request only
 
@@ -374,7 +378,13 @@ Halite.logger(response: true)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
-# => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name=foobar | application/json | [json data]
+# => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name=foobar | application/json | { ... }
+
+Halite.logger(response: true)
+      .get("http://httpbin.org/image/png")
+
+# => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/image/png
+# => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/image/png | image//png | [binary file]
 ```
 
 #### Log use the custom logger
