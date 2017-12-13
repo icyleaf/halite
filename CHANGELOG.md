@@ -7,15 +7,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-### Todo
+> TOOD
 
-- 100% pass specs
+## [0.3.0] (12/13/2017)
 
 ### Added
 
+- Set `Options.default_headers` to be public method.
 - Accept tuples options in `Options.new`.
 - Accept `follow`/`follow_strict` in `Options.new`.
-- Set `Options.default_headers` to be public method.
+- Accept options block in `Options.new`.
+- Add logger during request and response (see [usage](README.md#logging)).
+- Alias method `Options.read_timeout` to `Options::Timeout.read`.
+- Alias method `Options.read_timeout=` to `Options::Timeout.read=`.
+- Alias method `Options.connect_timeout` to `Options::Timeout.connect`.
+- Alias method `Options.connect_timeout` to `Options::Timeout.connect=`.
+- Alias method `Options.follow=` to `Options::Timeout.follow.hops=`.
+- Alias method `Options.follow_strict` to `Options::Timeout.follow.strict`.
+- Alias method `Options.follow_strict=` to `Options::Timeout.follow.strict=`.
 
 ### Fixed
 
@@ -76,7 +85,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/icyleaf/halite/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/icyleaf/halite/compare/v0.1.5...v0.2.0
 [0.1.5]: https://github.com/icyleaf/halite/compare/v0.1.3...v0.1.5
 [0.1.3]: https://github.com/icyleaf/halite/compare/v0.1.2...v0.1.3

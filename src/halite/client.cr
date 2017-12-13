@@ -10,6 +10,8 @@ module Halite
   #
   # Support all `Chainable` methods.
   #
+  # ### Simple setup
+  #
   # ```
   # options = Optionns.new({
   #   "headers" = {
@@ -22,6 +24,18 @@ module Halite
   #       .get("http://httpbin.org/get", params: {
   #         name: "icyleaf"
   #       })
+  # ```
+  #
+  # ### Setup with block
+  #
+  # ```
+  # client = Halite::Client.new |options|
+  #   options.headers = {
+  #     private_token: "bdf39d82661358f80b31b67e6f89fee4"
+  #   }
+  #   options.timeout.connect = 3.minutes
+  #   options.logging = true
+  # end
   # ```
   class Client
     include Chainable
@@ -39,6 +53,14 @@ module Halite
     # ```
     def self.new(options : (Hash(Options::Type, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil, "ssl" => nil})
       Client.new(Options.new(options))
+    end
+
+    # Instance a new client with block
+    def self.new(&block)
+      options = Options.new
+      yield options
+
+      Client.new(options)
     end
 
     # Instance a new client
@@ -61,10 +83,10 @@ module Halite
       options = @options.merge(options)
 
       uri = make_request_uri(uri, options)
-      body = make_request_body(options)
-      headers = make_request_headers(options, body.headers)
+      body_data = make_request_body(options)
+      headers = make_request_headers(options, body_data.headers)
 
-      request = Request.new(verb, uri, headers, body.body)
+      request = Request.new(verb, uri, headers, body_data.body)
       response = perform(request, options)
 
       return response if options.follow.hops.zero?
@@ -78,11 +100,15 @@ module Halite
     private def perform(request, options) : Halite::Response
       raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.ssl
 
+      options.logger.request(request) if options.logging
+
       conn = HTTP::Client.new(request.domain, options.ssl)
       conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
       conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
       response = Response.new(request.uri, conn_response, @history)
+
+      options.logger.response(response) if options.logging
 
       # Append history of response
       @history << response
@@ -128,15 +154,16 @@ module Halite
     # Create the request body object to send
     private def make_request_body(options : Halite::Options) : Halite::Request::Data
       if (form = options.form) && !form.empty?
-        return FormData.create(form)
+        FormData.create(form)
       elsif (hash = options.json) && !hash.empty?
         body = JSON.build do |builder|
           hash.to_json(builder)
         end
-        return Halite::Request::Data.new(body, {"Content-Type" => "application/json"})
-      end
 
-      Halite::Request::Data.new("", {} of String => String)
+        Halite::Request::Data.new(body, {"Content-Type" => "application/json"})
+      else
+        Halite::Request::Data.new("", {} of String => String)
+      end
     end
 
     private def merge_option_from_response(options : Halite::Options, response : Halite::Response) : Halite::Options

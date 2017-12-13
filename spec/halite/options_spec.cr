@@ -180,4 +180,81 @@ describe Halite::Options do
       options.follow.strict.should eq(Halite::Options::Follow::STRICT)
     end
   end
+
+  describe "alias methods" do
+    context "read_timeout alias to timeout.read" do
+      it "getter" do
+        options = Halite::Options.new(read_timeout: 34)
+        options.read_timeout.should eq(34)
+        options.timeout.read.should eq(34)
+      end
+
+      it "setter" do
+        options = Halite::Options.new
+
+        options.timeout.read = 12
+        options.read_timeout.should eq(12)
+        options.timeout.read.should eq(12)
+
+        options.read_timeout = 21
+        options.read_timeout.should eq(21)
+        options.timeout.read.should eq(21)
+      end
+    end
+
+    context "connect_timeout alias to timeout.connect" do
+      it "getter" do
+        options = Halite::Options.new(connect_timeout: 34)
+        options.timeout.connect.should eq(34)
+        options.connect_timeout.should eq(34)
+      end
+
+      it "setter" do
+        options = Halite::Options.new
+
+        options.timeout.connect = 12
+        options.connect_timeout.should eq(12)
+        options.timeout.connect.should eq(12)
+
+        options.connect_timeout = 21
+        options.connect_timeout.should eq(21)
+        options.timeout.connect.should eq(21)
+      end
+    end
+
+    context "only setter for follow alias to follow.hops" do
+      it "setter" do
+        options = Halite::Options.new
+
+        options.follow = 2
+        options.follow.hops.should eq(2)
+      end
+
+      it "getter" do
+        options = Halite::Options.new(follow: 3)
+
+        # Can not return integer with follow
+        options.follow.hops.should eq(3)
+      end
+    end
+
+    context "follow_strict alias to follow.strict" do
+      it "setter" do
+        options = Halite::Options.new
+
+        options.follow_strict = false
+        options.follow.strict.should eq(false)
+
+        options.follow.strict = true
+        options.follow.strict.should eq(true)
+      end
+
+      it "getter" do
+        options = Halite::Options.new(follow_strict: false)
+
+        options.follow_strict.should eq(false)
+        options.follow.strict.should eq(false)
+      end
+    end
+  end
 end
