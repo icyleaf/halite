@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TOOD
 
-## [0.3.0] (12/13/2017)
+## [0.3.1] (12/13/2017)
 
 ### Added
 
@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
+- Fix store **Set-Cookies** in response and set **Cookies** in request in better way.
 - Fix cant not set connect/read timeout in `Options.new`.
 - Fix cant not overwrite default in `Options.new`.
 - Fix `Options.clear!` was not clear everything and restore default headers.
@@ -85,8 +86,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.3.0...HEAD
-[0.3.0]: https://github.com/icyleaf/halite/compare/v0.2.0...v0.3.0
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/icyleaf/halite/compare/v0.2.0...v0.3.1
 [0.2.0]: https://github.com/icyleaf/halite/compare/v0.1.5...v0.2.0
 [0.1.5]: https://github.com/icyleaf/halite/compare/v0.1.3...v0.1.5
 [0.1.3]: https://github.com/icyleaf/halite/compare/v0.1.2...v0.1.3
