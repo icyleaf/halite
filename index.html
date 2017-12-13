@@ -220,7 +220,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/d60a0bc" target="_blank">d60a0bc</a> (2017-12-13 17:53:46 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/edb0ece" target="_blank">edb0ece</a> (2017-12-13 17:55:32 +0800).</p>
 
 <p>&lt;hr /></p>
 
@@ -503,8 +503,6 @@ r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/c
 <p>If you want logging request behavior only, throught pass <code>response</code> argument to <code>false</code>. And it not output the full body with binary type MIME types, please review it <a href="https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79" target="_blank">here</a>.</p>
 
 <h4>Simple logging</h4>
-
-<p>It only log request by default.</p>
 
 <pre><code class='language-crystal'><span class="t">Halite</span>.logger
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
