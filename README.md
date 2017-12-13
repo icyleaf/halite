@@ -342,25 +342,40 @@ Let's persist some cookies across requests:
 
 ```crystal
 client = Halite::Client.new
+# Or
+client = Halite::Client.new do |options|
+  options.headers = {
+    user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36",
+  }
+
+  # Enable logging
+  options.logging = true
+
+  # Set read timeout to one minute
+  options.read_timeout = 1.minutes
+end
 
 client.get("http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0")
 r = client.get("http://httpbin.org/cookies")
-
-puts r.body
-# => "{\n  \"cookies\": {\n    \"private_token\": \"6abaef100b77808ceb7fe26a3bcff1d0\"\n  }\n}\n"
+# => halite | 2017-12-13 17:40:53 | GET    | http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0
+# => halite | 2017-12-13 17:40:53 | 302    | http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0 | text/html | <html> ...
+# => halite | 2017-12-13 17:40:53 | GET    | http://httpbin.org/cookies
+# => halite | 2017-12-13 17:40:55 | 200    | http://httpbin.org/cookies | application/json | {
+# =>   "cookies": {
+# =>     "private_token": "6abaef100b77808ceb7fe26a3bcff1d0"
+# =>   }
+# => }
 ```
 
 All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/Chainable.html) in the other examples list in [requests.Session](http://docs.python-requests.org/en/master/user/advanced/#session-objects).
 
 ### Logging
 
-By default, the Halite does not enable logging on each request. You can enable per operation logging by configuring them through the chaining API.
+the Halite does not enable logging on each request and response too. You can enable per operation logging by configuring them through the chaining API.
 
-It only logging the request behavior, if you want logging response behavior, set `response` argument to `true` in `logger` chaining method.
+If you want logging request behavior only, throught pass `response` argument to `false`. And it not output the full body with binary type MIME types, please review it [here](https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79).
 
-And it not output the full body with binary type MIME types, please review it [here](https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79).
-
-#### Log request only
+#### Simple logging
 
 It only log request by default.
 
@@ -369,25 +384,25 @@ Halite.logger
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
-```
-
-#### Log both request and response
-
-```crystal
-Halite.logger(response: true)
-      .get("http://httpbin.org/get", params: {name: "foobar"})
-
-# => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
 # => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name=foobar | application/json | { ... }
 
-Halite.logger(response: true)
+Halite.logger
       .get("http://httpbin.org/image/png")
 
 # => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/image/png
 # => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/image/png | image//png | [binary file]
 ```
 
-#### Log use the custom logger
+#### Logging request only
+
+```crystal
+Halite.logger(response: false)
+      .get("http://httpbin.org/get", params: {name: "foobar"})
+
+# => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
+```
+
+#### Use the custom logger
 
 Creating the custom logger by integration `Halite::Logger` abstract class.
 here has two methods must be implement: `Halite::Logger.request` and `Halite::Logger.response`.
@@ -403,7 +418,7 @@ class MyLogger < Halite::Logger
   end
 end
 
-Halite.logger(MyLogger.new, response: true)
+Halite.logger(MyLogger.new)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # => halite | 2017-12-13 16:40:13 >> | GET | http://httpbin.org/get?name=foobar
