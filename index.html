@@ -220,7 +220,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/3eda65c" target="_blank">3eda65c</a> (2017-12-13 17:09:41 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/749fc3f" target="_blank">749fc3f</a> (2017-12-13 17:50:18 +0800).</p>
 
 <p>&lt;hr /></p>
 
@@ -470,47 +470,62 @@ filename <span class="o">=</span> r.headers[<span class="s">&quot;Content-Dispos
 <p>Let's persist some cookies across requests:</p>
 
 <pre><code class='language-crystal'>client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
+<span class="c"># Or</span>
+client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span> <span class="k">do</span> <span class="o">|</span>options<span class="o">|</span>
+  options.headers <span class="o">=</span> {
+    user_agent: <span class="s">&quot;Mozilla/5.0 &#40;Macintosh; Intel Mac OS X 10_12_6&#41; AppleWebKit/537.36 &#40;KHTML, like Gecko&#41; Chrome/62.0.3202.94 Safari/537.36&quot;</span>,
+  }
+
+  <span class="c"># Enable logging</span>
+  options.logging <span class="o">=</span> <span class="n">true</span>
+
+  <span class="c"># Set read timeout to one minute</span>
+  options.read_timeout <span class="o">=</span> <span class="n">1</span>.minutes
+<span class="k">end</span>
 
 client.get(<span class="s">&quot;http://httpbin.org/cookies/set?private_token&#61;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
 r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
-
-puts r.body
-<span class="c"># &#61;&gt; &quot;&#123;\n  \&quot;cookies\&quot;: &#123;\n    \&quot;private_token\&quot;: \&quot;6abaef100b77808ceb7fe26a3bcff1d0\&quot;\n  &#125;\n&#125;\n&quot;</span></code></pre>
+<span class="c"># &#61;&gt; halite | 2017-12-13 17:40:53 | GET    | http://httpbin.org/cookies/set?private_token&#61;6abaef100b77808ceb7fe26a3bcff1d0</span>
+<span class="c"># &#61;&gt; halite | 2017-12-13 17:40:53 | 302    | http://httpbin.org/cookies/set?private_token&#61;6abaef100b77808ceb7fe26a3bcff1d0 | text/html | &lt;html&gt; ...</span>
+<span class="c"># &#61;&gt; halite | 2017-12-13 17:40:53 | GET    | http://httpbin.org/cookies</span>
+<span class="c"># &#61;&gt; halite | 2017-12-13 17:40:55 | 200    | http://httpbin.org/cookies | application/json | &#123;</span>
+<span class="c"># &#61;&gt;   &quot;cookies&quot;: &#123;</span>
+<span class="c"># &#61;&gt;     &quot;private_token&quot;: &quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>
+<span class="c"># &#61;&gt;   &#125;</span>
+<span class="c"># &#61;&gt; &#125;</span></code></pre>
 
 <p>All it support with <a href="https://icyleaf.github.io/halite/Halite/Chainable.html" target="_blank">chainable methods</a> in the other examples list in <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session</a>.</p>
 
 <h3>Logging</h3>
 
-<p>By default, the Halite does not enable logging on each request. You can enable per operation logging by configuring them through the chaining API.</p>
+<p>the Halite does not enable logging on each request and response too. You can enable per operation logging by configuring them through the chaining API.</p>
 
-<p>It only logging the request behavior, if you want logging response behavior, set <code>response</code> argument to <code>true</code> in <code>logger</code> chaining method.</p>
+<p>If you want logging request behavior only, throught pass <code>response</code> argument to <code>false</code>. And it not output the full body with binary type MIME types, please review it <a href="https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79" target="_blank">here</a>.</p>
 
-<p>And it not output the full body with binary type MIME types, please review it <a href="https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79" target="_blank">here</a>.</p>
-
-<h4>Log request only</h4>
+<h4>Simple logging</h4>
 
 <p>It only log request by default.</p>
 
 <pre><code class='language-crystal'><span class="t">Halite</span>.logger
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
-<span class="c"># &#61;&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name&#61;foobar</span></code></pre>
-
-<h4>Log both request and response</h4>
-
-<pre><code class='language-crystal'><span class="t">Halite</span>.logger(response: <span class="n">true</span>)
-      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
-
 <span class="c"># &#61;&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name&#61;foobar</span>
 <span class="c"># &#61;&gt; halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name&#61;foobar | application/json | &#123; ... &#125;</span>
 
-<span class="t">Halite</span>.logger(response: <span class="n">true</span>)
+<span class="t">Halite</span>.logger
       .get(<span class="s">&quot;http://httpbin.org/image/png&quot;</span>)
 
 <span class="c"># &#61;&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/image/png</span>
 <span class="c"># &#61;&gt; halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/image/png | image//png | &#91;binary file&#93;</span></code></pre>
 
-<h4>Log use the custom logger</h4>
+<h4>Logging request only</h4>
+
+<pre><code class='language-crystal'><span class="t">Halite</span>.logger(response: <span class="n">false</span>)
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
+
+<span class="c"># &#61;&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name&#61;foobar</span></code></pre>
+
+<h4>Use the custom logger</h4>
 
 <p>Creating the custom logger by integration <code><a href="Halite/Logger.html">Halite::Logger</a></code> abstract class.
 here has two methods must be implement: <code>Halite::Logger.request</code> and <code>Halite::Logger.response</code>.</p>
@@ -525,7 +540,7 @@ here has two methods must be implement: <code>Halite::Logger.request</code> and 
   <span class="k">end</span>
 <span class="k">end</span>
 
-<span class="t">Halite</span>.logger(<span class="t">MyLogger</span>.<span class="k">new</span>, response: <span class="n">true</span>)
+<span class="t">Halite</span>.logger(<span class="t">MyLogger</span>.<span class="k">new</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># &#61;&gt; halite | 2017-12-13 16:40:13 &gt;&gt; | GET | http://httpbin.org/get?name&#61;foobar</span>
