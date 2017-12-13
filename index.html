@@ -220,7 +220,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/0b07312" target="_blank">0b07312</a> (2017-12-13 16:58:03 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/3eda65c" target="_blank">3eda65c</a> (2017-12-13 17:09:41 +0800).</p>
 
 <p>&lt;hr /></p>
 
@@ -481,7 +481,11 @@ puts r.body
 
 <h3>Logging</h3>
 
-<p>By default, the Halite does not enable logging on each request. You can enable per operation timeouts by configuring them through the chaining API.</p>
+<p>By default, the Halite does not enable logging on each request. You can enable per operation logging by configuring them through the chaining API.</p>
+
+<p>It only logging the request behavior, if you want logging response behavior, set <code>response</code> argument to <code>true</code> in <code>logger</code> chaining method.</p>
+
+<p>And it not output the full body with binary type MIME types, please review it <a href="https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79" target="_blank">here</a>.</p>
 
 <h4>Log request only</h4>
 
@@ -498,7 +502,13 @@ puts r.body
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># &#61;&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name&#61;foobar</span>
-<span class="c"># &#61;&gt; halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name&#61;foobar | application/json | &#91;json data&#93;</span></code></pre>
+<span class="c"># &#61;&gt; halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name&#61;foobar | application/json | &#123; ... &#125;</span>
+
+<span class="t">Halite</span>.logger(response: <span class="n">true</span>)
+      .get(<span class="s">&quot;http://httpbin.org/image/png&quot;</span>)
+
+<span class="c"># &#61;&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/image/png</span>
+<span class="c"># &#61;&gt; halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/image/png | image//png | &#91;binary file&#93;</span></code></pre>
 
 <h4>Log use the custom logger</h4>
 
