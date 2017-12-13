@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Fix store **Set-Cookies** in response and set **Cookies** in request in better way.
 - Fix cant not set connect/read timeout in `Options.new`.
-- Fix cant not overwrite default in `Options.new`.
+- Fix cant not overwrite default headers in `Options.new`.
 - Fix `Options.clear!` was not clear everything and restore default headers.
 
 ## [0.2.0] (11/28/2017)
