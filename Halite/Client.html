@@ -35,6 +35,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/CommonLogger" data-name="halite::commonlogger">
+      <a href="../Halite/CommonLogger.html">CommonLogger</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/ConnectionError" data-name="halite::connectionerror">
       <a href="../Halite/ConnectionError.html">ConnectionError</a>
       
@@ -52,6 +57,11 @@
   
   <li class=" " data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
       <a href="../Halite/FormData.html">FormData</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
+      <a href="../Halite/Logger.html">Logger</a>
       
     </li>
   
@@ -213,6 +223,8 @@
 
 <p>Support all <code><a href="../Halite/Chainable.html">Chainable</a></code> methods.</p>
 
+<h3>Simple setup</h3>
+
 <pre><code>options <span class="o">=</span> <span class="t">Optionns</span>.<span class="k">new</span>({
   <span class="s">&quot;headers&quot;</span> <span class="o">=</span> {
     <span class="s">&quot;private-token&quot;</span> => <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee4&quot;</span>
@@ -224,6 +236,16 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {
         name: <span class="s">&quot;icyleaf&quot;</span>
       })</code></pre>
+
+<h3>Setup with block</h3>
+
+<pre><code>client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span> <span class="o">|</span>options<span class="o">|</span>
+  options.headers <span class="o">=</span> {
+    private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee4&quot;</span>
+  }
+  options.timeout.connect <span class="o">=</span> <span class="n">3</span>.minutes
+  options.logging <span class="o">=</span> <span class="n">true</span>
+<span class="k">end</span></code></pre>
 
 
 
@@ -248,7 +270,7 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/c4ef38fa4a9e9ef3a8d5089171734b796be8088b/src/halite/client.cr#L26" target="_blank">halite/client.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/client.cr#L40" target="_blank">halite/client.cr</a>
     
     <br/>
   
@@ -264,6 +286,13 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
         <a href="#new%28options%3AHash%28Options%3A%3AType%2C_%29%7CNamedTuple%3D%7B%26quot%3Bheaders%26quot%3B%3D%3Enil%2C%26quot%3Bparams%26quot%3B%3D%3Enil%2C%26quot%3Bform%26quot%3B%3D%3Enil%2C%26quot%3Bjson%26quot%3B%3D%3Enil%2C%26quot%3Bssl%26quot%3B%3D%3Enil%7D%29-class-method" class="signature"><strong>.new</strong>(options : Hash(Options::Type, _) | NamedTuple = {<span class="s">&quot;headers&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;params&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;form&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;json&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;ssl&quot;</span> => <span class="n">nil</span>})</a>
         
           <div class="summary"><p>Instance a new client</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28%26block%29-class-method" class="signature"><strong>.new</strong>(&block)</a>
+        
+          <div class="summary"><p>Instance a new client with block</p></div>
         
       </li>
     
@@ -358,6 +387,11 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
     headers</a>, 
     
   
+    <a href="../Halite/Chainable.html#logger%28filename%3AString%2Cresponse%3Dfalse%29-instance-method" class="tooltip">
+      <span>logger(filename : String, response = <span class="n">false</span>)<br/>logger(logger = <span class="t">Halite</span><span class="t">::</span><span class="t">CommonLogger</span>.<span class="k">new</span>, response = <span class="n">false</span>)</span>
+    logger</a>, 
+    
+  
     <a href="../Halite/Chainable.html#patch%28uri%3AString%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cssl%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="tooltip">
       <span>patch(uri : String, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, ssl : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>) : Halite::Response</span>
     patch</a>, 
@@ -436,7 +470,25 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c4ef38fa4a9e9ef3a8d5089171734b796be8088b/src/halite/client.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/client.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;&amp;block&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(&block)
+
+        <a class="method-permalink" href="#new%28%26block%29-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Instance a new client with block</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/client.cr#L59" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -462,7 +514,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c4ef38fa4a9e9ef3a8d5089171734b796be8088b/src/halite/client.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/client.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -485,7 +537,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c4ef38fa4a9e9ef3a8d5089171734b796be8088b/src/halite/client.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/client.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -501,7 +553,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c4ef38fa4a9e9ef3a8d5089171734b796be8088b/src/halite/client.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/client.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -519,7 +571,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c4ef38fa4a9e9ef3a8d5089171734b796be8088b/src/halite/client.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/client.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>

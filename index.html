@@ -35,6 +35,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/CommonLogger" data-name="halite::commonlogger">
+      <a href="Halite/CommonLogger.html">CommonLogger</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/ConnectionError" data-name="halite::connectionerror">
       <a href="Halite/ConnectionError.html">ConnectionError</a>
       
@@ -52,6 +57,11 @@
   
   <li class=" " data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
       <a href="Halite/FormData.html">FormData</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
+      <a href="Halite/Logger.html">Logger</a>
       
     </li>
   
@@ -210,11 +220,11 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/c4ef38f" target="_blank">c4ef38f</a> (2017-12-13 10:56:11 +0800).</p>
+<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/9086e9e" target="_blank">9086e9e</a> (2017-12-13 16:54:17 +0800).</p>
 
 <p>&lt;hr /></p>
 
-<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#binary-data" target="_blank">Binary data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
+<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#binary-data" target="_blank">Binary data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#logging" target="_blank">Logging</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
 
 <p>&lt;hr /></p>
 
@@ -468,6 +478,48 @@ puts r.body
 <span class="c"># &#61;&gt; &quot;&#123;\n  \&quot;cookies\&quot;: &#123;\n    \&quot;private_token\&quot;: \&quot;6abaef100b77808ceb7fe26a3bcff1d0\&quot;\n  &#125;\n&#125;\n&quot;</span></code></pre>
 
 <p>All it support with <a href="https://icyleaf.github.io/halite/Halite/Chainable.html" target="_blank">chainable methods</a> in the other examples list in <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session</a>.</p>
+
+<h3>Logging</h3>
+
+<p>By default, the Halite does not enable logging on each request. You can enable per operation timeouts by configuring them through the chaining API.</p>
+
+<h4>Log request only</h4>
+
+<p>It only log request by default.</p>
+
+<pre><code><span class="t">Halite</span>.logger
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
+
+<span class="c"># &#61;&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name&#61;foobar</span></code></pre>
+
+<h4>Log both request and response</h4>
+
+<pre><code><span class="t">Halite</span>.logger(response: <span class="n">true</span>)
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
+
+<span class="c"># &#61;&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name&#61;foobar</span>
+<span class="c"># &#61;&gt; halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name&#61;foobar | application/json | &#91;json data&#93;</span></code></pre>
+
+<h4>Log use the custom logger</h4>
+
+<p>Creating the custom logger by integration <code><a href="Halite/Logger.html">Halite::Logger</a></code> abstract class.
+here has two methods must be implement: <code>Halite::Logger.request</code> and <code>Halite::Logger.response</code>.</p>
+
+<pre><code><span class="k">class</span> <span class="t">MyLogger</span> <span class="o"><</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span>
+  <span class="k">def</span> <span class="m">request</span>(request)
+    @logger.info <span class="s">&quot;&gt;&gt; | &#37;s | &#37;s &#37;s&quot;</span> <span class="o">%</span> [request.verb, request.uri, request.body]
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="m">response</span>(response)
+    @logger.info <span class="s">&quot;&lt;&lt; | &#37;s | &#37;s &#37;s&quot;</span> <span class="o">%</span> [response.status_code, response.uri, response.mime_type]
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="t">Halite</span>.logger(<span class="t">MyLogger</span>.<span class="k">new</span>, response: <span class="n">true</span>)
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
+
+<span class="c"># &#61;&gt; halite | 2017-12-13 16:40:13 &gt;&gt; | GET | http://httpbin.org/get?name&#61;foobar</span>
+<span class="c"># &#61;&gt; halite | 2017-12-13 16:40:15 &lt;&lt; | 200 | http://httpbin.org/get?name&#61;foobar application/json</span></code></pre>
 
 <h2>Help and Discussion</h2>
 

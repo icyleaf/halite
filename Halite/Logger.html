@@ -5,7 +5,7 @@
   <meta id="repository-name" content="github.com/icyleaf/halite">
   <link href="../css/style.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="../js/doc.js"></script>
-  <title>HTTP::Headers - github.com/icyleaf/halite</title>
+  <title>Halite::Logger - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 
   <ul>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite" data-name="halite">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite" data-name="halite">
       <a href="../Halite.html">Halite</a>
       
         <ul>
@@ -60,7 +60,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
       <a href="../Halite/Logger.html">Logger</a>
       
     </li>
@@ -180,12 +180,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/HTTP" data-name="http">
+  <li class="parent " data-id="github.com/icyleaf/halite/HTTP" data-name="http">
       <a href="../HTTP.html">HTTP</a>
       
         <ul>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/HTTP/Headers" data-name="http::headers">
+  <li class=" " data-id="github.com/icyleaf/halite/HTTP/Headers" data-name="http::headers">
       <a href="../HTTP/Headers.html">Headers</a>
       
     </li>
@@ -207,37 +207,30 @@
 <div id="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> HTTP::Headers
+  <span class="kind">abstract class</span> Halite::Logger
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HTTP/Headers.html">HTTP::Headers</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
-
-
-
-
-  <h2>Overview</h2>
-
-  <p>A <code>Hash</code>-like object that holds HTTP headers.</p>
-
-<p>Two headers are considered the same if their downcase representation is the same
-(in which <code>_</code> is the downcase version of <code>-</code>).</p>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/Logger.html">Halite::Logger</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
 
-  <h2>Included Modules</h2>
+
+
+
+
+
+
+
+  <h2>Direct Known Subclasses</h2>
   <ul class="other-types-list">
   
-    <li class="other-type">Enumerable({String, Array(String)})</li>
+    <li class="other-type"><a href="../Halite/CommonLogger.html">Halite::CommonLogger</a></li>
   
   </ul>
-
-
-
-
 
 
 
@@ -247,7 +240,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/ext/http_headers_escape.cr#L2" target="_blank">halite/ext/http_headers_escape.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/logger.cr#L5" target="_blank">halite/logger.cr</a>
     
     <br/>
   
@@ -256,26 +249,22 @@
 
 
 
-
-
-  <h2>Class Method Summary</h2>
+  <h2>Constructors</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#escape%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method" class="signature"><strong>.escape</strong>(data : Hash(String, _) | NamedTuple) : HTTP::Headers</a>
-        
-          <div class="summary"><p>Returns the given key value pairs as HTTP Headers</p></div>
+        <a href="#new%28filename%3AString%29-class-method" class="signature"><strong>.new</strong>(filename : String)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#escape-class-method" class="signature"><strong>.escape</strong></a>
-        
-          <div class="summary"><p>Same as <code><a href="../HTTP/Headers.html#escape-class-method">#escape</a></code></p></div>
+        <a href="#new%28io%3AIO%3DSTDOUT%29-class-method" class="signature"><strong>.new</strong>(io : IO = <span class="t">STDOUT</span>)</a>
         
       </li>
     
   </ul>
+
+
 
 
 
@@ -283,15 +272,33 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#to_h-instance-method" class="signature"><strong>#to_h</strong></a>
+        <a href="#default_formatter-instance-method" class="signature"><strong>#default_formatter</strong></a>
         
-          <div class="summary"><p>Overwrite original <code>Hash#to_h</code></p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#request%28request%3AHalite%3A%3ARequest%29%3AString-instance-method" class="signature"><strong>#request</strong>(request : Halite::Request) : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#response%28response%3AHalite%3A%3AResponse%29%3AString-instance-method" class="signature"><strong>#response</strong>(response : Halite::Response) : String</a>
         
       </li>
     
   </ul>
 
 
+
+  <h2>Macro Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#method_missing%28call%29-macro" class="signature"><strong>method_missing</strong>(call)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -317,106 +324,119 @@
 
 
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
-
-
-  <h2>Class Method Detail</h2>
+  <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="escape&#40;data:Hash&#40;String,_&#41;|NamedTuple&#41;:HTTP::Headers-class-method">
+    <div class="entry-detail" id="new&#40;filename:String&#41;-class-method">
       <div class="signature">
         
-        def self.<strong>escape</strong>(data : Hash(String, _) | NamedTuple) : <a href="../HTTP/Headers.html">HTTP::Headers</a>
+        def self.<strong>new</strong>(filename : String)
 
-        <a class="method-permalink" href="#escape%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method">#</a>
+        <a class="method-permalink" href="#new%28filename%3AString%29-class-method">#</a>
       </div>
-      
-        <div class="doc"><p>Returns the given key value pairs as HTTP Headers</p>
-
-<p>Every parameter added is directly written to an IO, where keys are properly escaped.</p>
-
-<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.escape({
-  content_type: <span class="s">&quot;application/json&quot;</span>,
-})
-<span class="c"># &#61;&gt; &quot;HTTP::Headers&#123;&quot;Content-Type&quot; &#61;&gt; &quot;application/json&quot;&#125;&quot;</span>
-
-<span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.escape({
-  <span class="s">&quot;conTENT-type&quot;</span>: <span class="s">&quot;application/json&quot;</span>,
-})
-<span class="c"># &#61;&gt; &quot;HTTP::Headers&#123;&quot;Content-Type&quot; &#61;&gt; &quot;application/json&quot;&#125;&quot;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/ext/http_headers_escape.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/logger.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="escape-class-method">
+    <div class="entry-detail" id="new&#40;io:IO&#61;STDOUT&#41;-class-method">
       <div class="signature">
         
-        def self.<strong>escape</strong>
+        def self.<strong>new</strong>(io : IO = <span class="t">STDOUT</span>)
 
-        <a class="method-permalink" href="#escape-class-method">#</a>
+        <a class="method-permalink" href="#new%28io%3AIO%3DSTDOUT%29-class-method">#</a>
       </div>
-      
-        <div class="doc"><p>Same as <code><a href="../HTTP/Headers.html#escape-class-method">#escape</a></code></p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/ext/http_headers_escape.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/logger.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
   
+
+
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="to_h-instance-method">
+    <div class="entry-detail" id="default_formatter-instance-method">
       <div class="signature">
         
-        def <strong>to_h</strong>
+        def <strong>default_formatter</strong>
 
-        <a class="method-permalink" href="#to_h-instance-method">#</a>
+        <a class="method-permalink" href="#default_formatter-instance-method">#</a>
       </div>
-      
-        <div class="doc"><p>Overwrite original <code>Hash#to_h</code></p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/ext/http_headers_escape.cr#L37" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/logger.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="request&#40;request:Halite::Request&#41;:String-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>request</strong>(request : <a href="../Halite/Request.html">Halite::Request</a>) : String
+
+        <a class="method-permalink" href="#request%28request%3AHalite%3A%3ARequest%29%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/logger.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="response&#40;response:Halite::Response&#41;:String-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>response</strong>(response : <a href="../Halite/Response.html">Halite::Response</a>) : String
+
+        <a class="method-permalink" href="#response%28response%3AHalite%3A%3AResponse%29%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/logger.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+
+  <h2>Macro Detail</h2>
+  
+    <div class="entry-detail" id="method_missing&#40;call&#41;-macro">
+      <div class="signature">
+        
+        macro <strong>method_missing</strong>(call)
+
+        <a class="method-permalink" href="#method_missing%28call%29-macro">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/9086e9e29de11c591fc6066b1d9a277b562c102c/src/halite/logger.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 </div>
