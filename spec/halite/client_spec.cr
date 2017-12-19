@@ -1,4 +1,5 @@
 require "../spec_helper"
+require "../support/mock_server"
 
 describe Halite::Client do
   describe "#initialize" do
@@ -46,6 +47,34 @@ describe Halite::Client do
       client.options.headers["Private-Token"].should eq("token")
       client.options.timeout.connect.should eq(40)
       client.options.timeout.read.should eq(120)
+    end
+  end
+
+  describe "#sessions" do
+    it "should store and send cookies" do
+      # Start mock server
+      server = MockServer.new
+      spawn do
+        server.listen
+      end
+
+      # Wait server a moment
+      sleep 1
+
+      client = Halite::Client.new
+
+      # get Set-Cookies from server
+      r = client.get "#{server.endpoint}/cookies"
+      r.headers["Set-Cookie"].should eq("foo=bar")
+
+      r.cookies.size.should eq(1)
+      r.cookies["foo"].value.should eq("bar")
+
+      # request with stored cookies
+      r = client.get "#{server.endpoint}/get-cookies"
+      r.headers.has_key?("Set-Cookie").should be_false
+      r.cookies.size.zero?.should be_true
+      JSON.parse(r.body)["foo"].should eq("bar")
     end
   end
 end

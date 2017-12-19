@@ -151,6 +151,23 @@ class MockServer < HTTP::Server
       context
     end
 
+    get "/get-cookies" do |context|
+      body = JSON.build do |json|
+          json.object do
+            context.request.cookies.each do |cookie|
+              json.field cookie.name do
+                cookie.value.to_json(json)
+              end
+            end
+          end
+      end
+
+      context.response.content_type = "application/json"
+      context.response.print body
+
+      context
+    end
+
     # POST
     post "/echo-body" do |context|
       body = parse_body(context.request.body)
