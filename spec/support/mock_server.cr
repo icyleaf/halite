@@ -7,8 +7,25 @@ class MockServer < HTTP::Server
   BIND_ADDRESS = "127.0.0.1"
   BIND_PORT    = 18624
 
-  def initialize(**args)
+  getter running : Bool
+
+  @@INSTANCE = MockServer.new
+  def self.instance
+    @@INSTANCE
+  end
+
+  def initialize
     super(BIND_ADDRESS, BIND_PORT, HANDLERS)
+    @running = false
+  end
+
+  def listen
+    @running = true
+    super
+  end
+
+  def running?
+    @running == true
   end
 
   def endpoint

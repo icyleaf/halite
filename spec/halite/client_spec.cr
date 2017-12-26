@@ -53,9 +53,9 @@ describe Halite::Client do
   describe "#sessions" do
     it "should store and send cookies" do
       # Start mock server
-      server = MockServer.new
+      server = MockServer.instance
       spawn do
-        server.listen
+        server.listen unless server.running?
       end
 
       # Wait server a moment

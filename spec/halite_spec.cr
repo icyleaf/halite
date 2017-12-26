@@ -2,9 +2,9 @@ require "./spec_helper"
 require "./support/mock_server"
 
 # Start mock server
-server = MockServer.new
+server = MockServer.instance
 spawn do
-  server.listen
+  server.listen unless server.running?
 end
 
 # Wait server a moment
