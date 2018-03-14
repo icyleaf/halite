@@ -9,7 +9,7 @@
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
 [![License](https://img.shields.io/github/license/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/LICENSE)
 
-Yet another simple HTTP and REST client with a chainable API, built-in sessions and timeouts written by [Crystal](https://crystal-lang.org/).
+Crystal HTTP Requests with a chainable REST API, built-in sessions and loggers written by [Crystal](https://crystal-lang.org/).
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem
 and Python's [requests](https://github.com/requests/requests).
 
