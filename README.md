@@ -4,8 +4,6 @@
 
 ![Language](https://img.shields.io/badge/language-crystal-black.svg)
 [![Tag](https://img.shields.io/github/tag/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/CHANGELOG.md)
-[![Dependency Status](https://shards.rocks/badge/github/icyleaf/halite/status.svg)](https://shards.rocks/github/icyleaf/halite)
-[![devDependency Status](https://shards.rocks/badge/github/icyleaf/halite/dev_status.svg)](https://shards.rocks/github/icyleaf/halite)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
 [![License](https://img.shields.io/github/license/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/LICENSE)
 
