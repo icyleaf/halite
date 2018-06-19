@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: crystallang/crystal
     environment:
-      DOCS_PATH: "doc"
+      DOCS_PATH: "docs"
       GIT_USER: "icyleaf"
       GIT_EMAIL: "icyleaf.cn@gmail.com"
       GIT_REPO: "git@github.com:icyleaf/halite.git"
