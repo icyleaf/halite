@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TOOD
 
-## [0.3.1] (12/13/2017)
+## [0.3.2] (2018-06-19)
+
+### Fixed
+
+Compatibility with Crystal 0.25
+
+## [0.3.1] (2017-12-13)
 
 ### Added
 
@@ -33,7 +39,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix cant not overwrite default headers in `Options.new`.
 - Fix `Options.clear!` was not clear everything and restore default headers.
 
-## [0.2.0] (11/28/2017)
+## [0.2.0] (2017-11-28)
 
 ### Changed
 
@@ -50,7 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix issue to first char of redirect uri is not slash(/). ([#11](https://github.com/icyleaf/halite/issues/11))
 - Fix raise unsafe verbs in strict mode.
 
-## [0.1.5] (10/11/2017)
+## [0.1.5] (2017-10-11)
 
 ### Added
 
@@ -66,7 +72,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Timeout with redirection. ([#7](https://github.com/icyleaf/halite/issues/7))
 - Compatibility with Crystal 0.24.0 (unreleased)
 
-## [0.1.3] (10/09/2017)
+## [0.1.3] (2017-10-09)
 
 ### Added
 
@@ -82,11 +88,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix always overwrite request headers with default values.
 - Fix always shard same options in any new call. (it only valid in chainable methods)
 
-## 0.1.2 (09/18/2017)
+## 0.1.2 (2017-09-18)
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/icyleaf/halite/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/icyleaf/halite/compare/v0.2.0...v0.3.1
 [0.2.0]: https://github.com/icyleaf/halite/compare/v0.1.5...v0.2.0
 [0.1.5]: https://github.com/icyleaf/halite/compare/v0.1.3...v0.1.5
