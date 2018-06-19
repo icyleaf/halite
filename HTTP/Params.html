@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.25.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <link href="../css/style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="../js/doc.js"></script>
   <title>HTTP::Params - github.com/icyleaf/halite</title>
 </head>
 <body>
 
-<div id="types-list">
-  <div id="search-box">
-    <input type="search" id="search-input" placeholder="Search...">
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
   </div>
 
-  <ul>
-    <li><a href="../index.html">README</a></li>
-  </ul>
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
 
-  <ul>
+  <div class="types-list">
+    <ul>
   
   <li class="parent " data-id="github.com/icyleaf/halite/Halite" data-name="halite">
       <a href="../Halite.html">Halite</a>
@@ -202,9 +218,11 @@
   
 </ul>
 
+  </div>
 </div>
 
-<div id="main-content">
+
+<div class="main-content">
 <h1 class="type-name">
 
   <span class="kind">struct</span> HTTP::Params
@@ -244,7 +262,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/ext/http_params_escape.cr#L2" target="_blank">halite/ext/http_params_escape.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/ext/http_params_escape.cr#L2" target="_blank">halite/ext/http_params_escape.cr</a>
     
     <br/>
   
@@ -329,7 +347,7 @@
 
   <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="escape&#40;data:Hash&#40;String,_&#41;|NamedTuple&#41;:String-class-method">
+    <div class="entry-detail" id="escape(data:Hash(String,_)|NamedTuple):String-class-method">
       <div class="signature">
         
         def self.<strong>escape</strong>(data : Hash(String, _) | NamedTuple) : String
@@ -349,17 +367,17 @@
   },
   <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar_big.png&quot;</span>),
 })
-<span class="c"># &#61;&gt; &quot;name&#61;Lizeth&#43;Gusikowski&amp;skill&#61;ruby&amp;skill&#61;crystal&amp;company&#61;&#37;7B&#37;22name&#37;22&#43;&#37;3D&#37;3E&#43;&#37;22Keeling&#43;Inc&#37;22&#37;7D&amp;avatar&#61;avatar_big.png&quot;</span></code></pre></div>
+<span class="c"># =&gt; &quot;name=Lizeth+Gusikowski&amp;skill=ruby&amp;skill=crystal&amp;company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&amp;avatar=avatar_big.png&quot;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/ext/http_params_escape.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/ext/http_params_escape.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="escape&#40;data:Hash&#40;String,Halite::Options::Type&#41;|NamedTuple&#41;:String-class-method">
+    <div class="entry-detail" id="escape(data:Hash(String,Halite::Options::Type)|NamedTuple):String-class-method">
       <div class="signature">
         
         def self.<strong>escape</strong>(data : Hash(String, <a href="../Halite/Options/Type.html">Halite::Options::Type</a>) | NamedTuple) : String
@@ -379,12 +397,12 @@
   },
   <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar_big.png&quot;</span>),
 })
-<span class="c"># &#61;&gt; &quot;name&#61;Lizeth&#43;Gusikowski&amp;skill&#61;ruby&amp;skill&#61;crystal&amp;company&#61;&#37;7B&#37;22name&#37;22&#43;&#37;3D&#37;3E&#43;&#37;22Keeling&#43;Inc&#37;22&#37;7D&amp;avatar&#61;avatar_big.png&quot;</span></code></pre></div>
+<span class="c"># =&gt; &quot;name=Lizeth+Gusikowski&amp;skill=ruby&amp;skill=crystal&amp;company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&amp;avatar=avatar_big.png&quot;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/ext/http_params_escape.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/ext/http_params_escape.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>

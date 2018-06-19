@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.25.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <link href="../css/style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="../js/doc.js"></script>
   <title>Halite::Response - github.com/icyleaf/halite</title>
 </head>
 <body>
 
-<div id="types-list">
-  <div id="search-box">
-    <input type="search" id="search-input" placeholder="Search...">
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
   </div>
 
-  <ul>
-    <li><a href="../index.html">README</a></li>
-  </ul>
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
 
-  <ul>
+  <div class="types-list">
+    <ul>
   
   <li class="parent open current" data-id="github.com/icyleaf/halite/Halite" data-name="halite">
       <a href="../Halite.html">Halite</a>
@@ -202,9 +218,11 @@
   
 </ul>
 
+  </div>
 </div>
 
-<div id="main-content">
+
+<div class="main-content">
 <h1 class="type-name">
 
   <span class="kind">class</span> Halite::Response
@@ -233,7 +251,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L2" target="_blank">halite/response.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L2" target="_blank">halite/response.cr</a>
     
     <br/>
   
@@ -442,7 +460,7 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new&#40;uri:URI,conn:HTTP::Client::Response,history&#61;&#91;&#93;ofResponse&#41;-class-method">
+    <div class="entry-detail" id="new(uri:URI,conn:HTTP::Client::Response,history=[]ofResponse)-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(uri : URI, conn : HTTP::Client::Response, history = <span class="o">[]</span> <span class="k">of</span> <span class="t">Response</span>)
@@ -453,7 +471,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -465,7 +483,7 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="body&#40;*args,**options,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="body(*args,**options,&amp;block)-instance-method">
       <div class="signature">
         
         def <strong>body</strong>(*args, **options, &block)
@@ -476,12 +494,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="body&#40;*args,**options&#41;-instance-method">
+    <div class="entry-detail" id="body(*args,**options)-instance-method">
       <div class="signature">
         
         def <strong>body</strong>(*args, **options)
@@ -492,12 +510,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="body_io&#40;*args,**options,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="body_io(*args,**options,&amp;block)-instance-method">
       <div class="signature">
         
         def <strong>body_io</strong>(*args, **options, &block)
@@ -508,12 +526,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="body_io&#40;*args,**options&#41;-instance-method">
+    <div class="entry-detail" id="body_io(*args,**options)-instance-method">
       <div class="signature">
         
         def <strong>body_io</strong>(*args, **options)
@@ -524,12 +542,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="charset&#40;*args,**options&#41;-instance-method">
+    <div class="entry-detail" id="charset(*args,**options)-instance-method">
       <div class="signature">
         
         def <strong>charset</strong>(*args, **options)
@@ -540,12 +558,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="charset&#40;*args,**options,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="charset(*args,**options,&amp;block)-instance-method">
       <div class="signature">
         
         def <strong>charset</strong>(*args, **options, &block)
@@ -556,7 +574,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -574,12 +592,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="content_type&#40;*args,**options&#41;-instance-method">
+    <div class="entry-detail" id="content_type(*args,**options)-instance-method">
       <div class="signature">
         
         def <strong>content_type</strong>(*args, **options)
@@ -590,12 +608,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="content_type&#40;*args,**options,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="content_type(*args,**options,&amp;block)-instance-method">
       <div class="signature">
         
         def <strong>content_type</strong>(*args, **options, &block)
@@ -606,7 +624,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -622,12 +640,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="headers&#40;*args,**options&#41;-instance-method">
+    <div class="entry-detail" id="headers(*args,**options)-instance-method">
       <div class="signature">
         
         def <strong>headers</strong>(*args, **options)
@@ -638,12 +656,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="headers&#40;*args,**options,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="headers(*args,**options,&amp;block)-instance-method">
       <div class="signature">
         
         def <strong>headers</strong>(*args, **options, &block)
@@ -654,12 +672,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="history:Array&#40;Response&#41;-instance-method">
+    <div class="entry-detail" id="history:Array(Response)-instance-method">
       <div class="signature">
         
         def <strong>history</strong> : Array(<a href="../Halite/Response.html">Response</a>)
@@ -670,7 +688,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L4" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -686,7 +704,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -708,12 +726,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="parse&#40;name:String?&#61;nil&#41;-instance-method">
+    <div class="entry-detail" id="parse(name:String?=nil)-instance-method">
       <div class="signature">
         
         def <strong>parse</strong>(name : String? = <span class="n">nil</span>)
@@ -726,12 +744,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="status_code&#40;*args,**options,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="status_code(*args,**options,&amp;block)-instance-method">
       <div class="signature">
         
         def <strong>status_code</strong>(*args, **options, &block)
@@ -742,12 +760,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="status_code&#40;*args,**options&#41;-instance-method">
+    <div class="entry-detail" id="status_code(*args,**options)-instance-method">
       <div class="signature">
         
         def <strong>status_code</strong>(*args, **options)
@@ -758,12 +776,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="status_message&#40;*args,**options,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="status_message(*args,**options,&amp;block)-instance-method">
       <div class="signature">
         
         def <strong>status_message</strong>(*args, **options, &block)
@@ -774,12 +792,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="status_message&#40;*args,**options&#41;-instance-method">
+    <div class="entry-detail" id="status_message(*args,**options)-instance-method">
       <div class="signature">
         
         def <strong>status_message</strong>(*args, **options)
@@ -790,12 +808,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="success?&#40;*args,**options,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="success?(*args,**options,&amp;block)-instance-method">
       <div class="signature">
         
         def <strong>success?</strong>(*args, **options, &block)
@@ -806,12 +824,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="success?&#40;*args,**options&#41;-instance-method">
+    <div class="entry-detail" id="success?(*args,**options)-instance-method">
       <div class="signature">
         
         def <strong>success?</strong>(*args, **options)
@@ -822,7 +840,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -840,12 +858,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L63" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="to_s&#40;io&#41;-instance-method">
+    <div class="entry-detail" id="to_s(io)-instance-method">
       <div class="signature">
         
         def <strong>to_s</strong>(io)
@@ -856,7 +874,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L76" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L76" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -874,7 +892,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L68" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -890,12 +908,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="version&#40;*args,**options,&amp;block&#41;-instance-method">
+    <div class="entry-detail" id="version(*args,**options,&amp;block)-instance-method">
       <div class="signature">
         
         def <strong>version</strong>(*args, **options, &block)
@@ -906,12 +924,12 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="version&#40;*args,**options&#41;-instance-method">
+    <div class="entry-detail" id="version(*args,**options)-instance-method">
       <div class="signature">
         
         def <strong>version</strong>(*args, **options)
@@ -922,7 +940,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/response.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/response.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>

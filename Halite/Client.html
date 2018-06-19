@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.25.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <link href="../css/style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="../js/doc.js"></script>
   <title>Halite::Client - github.com/icyleaf/halite</title>
 </head>
 <body>
 
-<div id="types-list">
-  <div id="search-box">
-    <input type="search" id="search-input" placeholder="Search...">
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
   </div>
 
-  <ul>
-    <li><a href="../index.html">README</a></li>
-  </ul>
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
 
-  <ul>
+  <div class="types-list">
+    <ul>
   
   <li class="parent open current" data-id="github.com/icyleaf/halite/Halite" data-name="halite">
       <a href="../Halite.html">Halite</a>
@@ -202,9 +218,11 @@
   
 </ul>
 
+  </div>
 </div>
 
-<div id="main-content">
+
+<div class="main-content">
 <h1 class="type-name">
 
   <span class="kind">class</span> Halite::Client
@@ -270,7 +288,7 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/client.cr#L40" target="_blank">halite/client.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/client.cr#L40" target="_blank">halite/client.cr</a>
     
     <br/>
   
@@ -451,7 +469,7 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new&#40;options:Hash&#40;Options::Type,_&#41;|NamedTuple&#61;&#123;&amp;quot;headers&amp;quot;&#61;&gt;nil,&amp;quot;params&amp;quot;&#61;&gt;nil,&amp;quot;form&amp;quot;&#61;&gt;nil,&amp;quot;json&amp;quot;&#61;&gt;nil,&amp;quot;ssl&amp;quot;&#61;&gt;nil&#125;&#41;-class-method">
+    <div class="entry-detail" id="new(options:Hash(Options::Type,_)|NamedTuple={&amp;quot;headers&amp;quot;=&gt;nil,&amp;quot;params&amp;quot;=&gt;nil,&amp;quot;form&amp;quot;=&gt;nil,&amp;quot;json&amp;quot;=&gt;nil,&amp;quot;ssl&amp;quot;=&gt;nil})-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(options : Hash(<a href="../Halite/Options/Type.html">Options::Type</a>, _) | NamedTuple = {<span class="s">&quot;headers&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;params&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;form&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;json&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;ssl&quot;</span> => <span class="n">nil</span>})
@@ -470,12 +488,12 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/client.cr#L54" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/client.cr#L54" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new&#40;&amp;block&#41;-class-method">
+    <div class="entry-detail" id="new(&amp;block)-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(&block)
@@ -488,12 +506,12 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/client.cr#L59" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/client.cr#L59" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new&#40;options&#61;Options.new&#41;-class-method">
+    <div class="entry-detail" id="new(options=Options.new)-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(options = <span class="t">Options</span>.<span class="k">new</span>)
@@ -514,7 +532,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/client.cr#L77" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/client.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -537,12 +555,12 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/client.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/client.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="options&#61;&#40;options&#41;-instance-method">
+    <div class="entry-detail" id="options=(options)-instance-method">
       <div class="signature">
         
         def <strong>options=</strong>(options)
@@ -553,12 +571,12 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/client.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/client.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="request&#40;verb:String,uri:String,options:Hash&#40;String,_&#41;|NamedTuple&#61;&#123;&amp;quot;headers&amp;quot;&#61;&gt;nil,&amp;quot;params&amp;quot;&#61;&gt;nil,&amp;quot;form&amp;quot;&#61;&gt;nil,&amp;quot;json&amp;quot;&#61;&gt;nil,&amp;quot;ssl&amp;quot;&#61;&gt;nil&#125;&#41;:Halite::Response-instance-method">
+    <div class="entry-detail" id="request(verb:String,uri:String,options:Hash(String,_)|NamedTuple={&amp;quot;headers&amp;quot;=&gt;nil,&amp;quot;params&amp;quot;=&gt;nil,&amp;quot;form&amp;quot;=&gt;nil,&amp;quot;json&amp;quot;=&gt;nil,&amp;quot;ssl&amp;quot;=&gt;nil}):Halite::Response-instance-method">
       <div class="signature">
         
         def <strong>request</strong>(verb : String, uri : String, options : Hash(String, _) | NamedTuple = {<span class="s">&quot;headers&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;params&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;form&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;json&quot;</span> => <span class="n">nil</span>, <span class="s">&quot;ssl&quot;</span> => <span class="n">nil</span>}) : <a href="../Halite/Response.html">Halite::Response</a>
@@ -571,7 +589,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/client.cr#L82" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/client.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>

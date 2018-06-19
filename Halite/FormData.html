@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.25.0">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <link href="../css/style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="../js/doc.js"></script>
   <title>Halite::FormData - github.com/icyleaf/halite</title>
 </head>
 <body>
 
-<div id="types-list">
-  <div id="search-box">
-    <input type="search" id="search-input" placeholder="Search...">
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
   </div>
 
-  <ul>
-    <li><a href="../index.html">README</a></li>
-  </ul>
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
 
-  <ul>
+  <div class="types-list">
+    <ul>
   
   <li class="parent open current" data-id="github.com/icyleaf/halite/Halite" data-name="halite">
       <a href="../Halite.html">Halite</a>
@@ -202,9 +218,11 @@
   
 </ul>
 
+  </div>
 </div>
 
-<div id="main-content">
+
+<div class="main-content">
 <h1 class="type-name">
 
   <span class="kind">module</span> Halite::FormData
@@ -225,11 +243,11 @@
 <pre><code>form <span class="o">=</span> <span class="t">FormData</span>.create({
   <span class="s">&quot;name&quot;</span>   => <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
   <span class="s">&quot;skill&quot;</span>  => [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
-  <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar.png&quot;</span>), <span class="c"># &#61;&gt; &quot;image binary data&quot;</span>
+  <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar.png&quot;</span>), <span class="c"># =&gt; &quot;image binary data&quot;</span>
 })
 
-form.body    <span class="c"># &#61;&gt; &quot;----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;name\&quot;\r\n\r\nLizeth Gusikowski\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;skill\&quot;\r\n\r\nruby\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;skill\&quot;\r\n\r\ncrystal\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name&#61;\&quot;avatar\&quot;; filename&#61;\&quot;avatar.png\&quot;\r\n\r\nimage binary data\n\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN--&quot;</span>
-form.headers <span class="c"># &#61;&gt; HTTP::Headers&#123;&quot;Content-Type&quot; &#61;&gt; &quot;multipart/form-data; boundary&#61;\&quot;--------------------------SS0a9QKeM_6fcj2CE5D4d0LQ\&quot;&quot;&#125;</span></code></pre>
+form.body    <span class="c"># =&gt; &quot;----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\&quot;name\&quot;\r\n\r\nLizeth Gusikowski\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\&quot;skill\&quot;\r\n\r\nruby\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\&quot;skill\&quot;\r\n\r\ncrystal\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\&quot;avatar\&quot;; filename=\&quot;avatar.png\&quot;\r\n\r\nimage binary data\n\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN--&quot;</span>
+form.headers <span class="c"># =&gt; HTTP::Headers{&quot;Content-Type&quot; =&gt; &quot;multipart/form-data; boundary=\&quot;--------------------------SS0a9QKeM_6fcj2CE5D4d0LQ\&quot;&quot;}</span></code></pre>
 
 
 
@@ -247,7 +265,7 @@ form.headers <span class="c"># &#61;&gt; HTTP::Headers&#123;&quot;Content-Type&q
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/form_data.cr#L20" target="_blank">halite/form_data.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/form_data.cr#L20" target="_blank">halite/form_data.cr</a>
     
     <br/>
   
@@ -285,7 +303,7 @@ form.headers <span class="c"># &#61;&gt; HTTP::Headers&#123;&quot;Content-Type&q
 
   <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="create&#40;data:Hash&#40;String,Options::Type&#41;&#61;&#123;&#125;ofString&#61;&gt;Options::Type&#41;:Halite::Request::Data-class-method">
+    <div class="entry-detail" id="create(data:Hash(String,Options::Type)={}ofString=&gt;Options::Type):Halite::Request::Data-class-method">
       <div class="signature">
         
         def self.<strong>create</strong>(data : Hash(String, <a href="../Halite/Options/Type.html">Options::Type</a>) = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Options</span><span class="t">::</span><span class="t">Type</span>) : <a href="../Halite/Request/Data.html">Halite::Request::Data</a>
@@ -298,7 +316,7 @@ form.headers <span class="c"># &#61;&gt; HTTP::Headers&#123;&quot;Content-Type&q
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/779176e28140a61d25421427f22e13eb857375c2/src/halite/form_data.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d20f0242ee3ce337648490a15ba3c318d5885f06/src/halite/form_data.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
