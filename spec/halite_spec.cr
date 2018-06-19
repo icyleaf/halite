@@ -177,7 +177,7 @@ describe Halite do
 
   it "should throws a Halite::TimeoutError exception with long time not response" do
     expect_raises Halite::TimeoutError do
-      Halite.timeout(1).get("http://404notfound.xyz")
+      Halite.timeout(1.milliseconds).get("http://404notfound.xyz")
     end
   end
 

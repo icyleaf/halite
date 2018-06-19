@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-def request
+private def request
   Halite::Request.new("get", "http://example.com/foo?bar=baz", HTTP::Headers{"Accept" => "text/html"})
 end
 

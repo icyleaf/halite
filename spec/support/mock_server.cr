@@ -2,7 +2,7 @@ require "http/server"
 require "./mock_server/route_handler"
 
 class MockServer < HTTP::Server
-  HANDLERS = [MockServer::RouteHandler.new]
+  HANDLERS = MockServer::RouteHandler.new
 
   BIND_ADDRESS = "127.0.0.1"
   BIND_PORT    = 18624
@@ -15,12 +15,13 @@ class MockServer < HTTP::Server
   end
 
   def initialize
-    super(BIND_ADDRESS, BIND_PORT, HANDLERS)
+    super(HANDLERS)
     @running = false
   end
 
   def listen
     @running = true
+    bind_tcp(BIND_ADDRESS, BIND_PORT)
     super
   end
 
@@ -29,7 +30,7 @@ class MockServer < HTTP::Server
   end
 
   def endpoint
-    "#{scheme}://#{host}:#{port}"
+    "#{scheme}://#{BIND_ADDRESS}:#{BIND_PORT}"
   end
 
   def host

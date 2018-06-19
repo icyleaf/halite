@@ -6,7 +6,7 @@ HEADERS     = {"Content-Type" => "text/plain"}
 BODY        = "hello world"
 COOKIES     = "foo=bar; domain=example.com"
 
-def response(url = URL, status_code = STATUS_CODE, headers = HEADERS, body = BODY)
+private def response(url = URL, status_code = STATUS_CODE, headers = HEADERS, body = BODY)
   Halite::Response.new(
     URI.parse(url),
     HTTP::Client::Response.new(status_code: status_code, body: body, headers: HTTP::Headers.escape(headers))

@@ -1,9 +1,9 @@
 name: halite
-version: 0.3.1
+version: 0.3.2
 
 authors:
   - icyleaf <icyleaf.cn@gmail.com>
 
-crystal: 0.24.1
+crystal: 0.25.0
 
 license: MIT
