@@ -158,10 +158,10 @@ Here are two way to passing headers data:
 Halite.headers(private_token: "T0k3n").get("http://httpbin.org/get")
 
 # Also support Hash or NamedTuple
-Halte.headers({ "private_token" => "T0k3n" }).get("http://httpbin.org/get")
+Halite.headers({ "private_token" => "T0k3n" }).get("http://httpbin.org/get")
 
 # Or
-Halte.headers({ private_token: "T0k3n" }).get("http://httpbin.org/get")
+Halite.headers({ private_token: "T0k3n" }).get("http://httpbin.org/get")
 ```
 
 ##### 2. Use the `headers` argument in availabled request method:
