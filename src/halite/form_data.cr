@@ -29,7 +29,12 @@ module Halite
             builder.file(k, v.as(IO), HTTP::FormData::FileMetadata.new(filename: File.basename(v.path)))
           when Array
             v.each do |e|
-              builder.field(k, e.to_s)
+              case e
+              when File
+                builder.file(k, e.as(IO), HTTP::FormData::FileMetadata.new(filename: File.basename(e.path)))
+              else
+                builder.field(k, e.to_s)
+              end
             end
           else
             builder.field(k, v.to_s)
@@ -49,7 +54,14 @@ module Halite
     # Tells whenever data contains multipart data or not.
     private def self.multipart?(data : Hash(String, Options::Type)) : Bool
       data.any? do |_, v|
-        next true if v.is_a?(File)
+        case v
+        when File
+          next true
+        when Array
+          v.any? do |vv|
+            next true if vv.is_a?(File)
+          end
+        end
       end
     end
   end

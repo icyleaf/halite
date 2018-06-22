@@ -87,27 +87,60 @@ describe Halite do
         response = Halite.post("#{server.endpoint}/upload", form: {file: File.open("./src/halite.cr")})
         body = response.parse.as_h
         params = body["params"].as_h
-        files = body["files"].as_a
+        files = body["files"].as_h
 
-        params.empty?.should be_truthy
+        params.size.should eq 0
 
         files.size.should eq 1
-        files.first.as_h["name"].should eq "file"
-        files.first.as_h["filename"].should eq "halite.cr"
+        files["file"]?.should be_a JSON::Any
+        files["file"].as_h["filename"].should eq "halite.cr"
       end
 
       it "should easy upload file with other form data" do
-        response = Halite.post("#{server.endpoint}/upload", form: {avatar: File.open("halite-logo-small.png"), "name": "foobar"})
+        response = Halite.post("#{server.endpoint}/upload", form: {file: File.open("./src/halite.cr"), "name": "foobar"})
         body = response.parse.as_h
         params = body["params"].as_h
-        files = body["files"].as_a
+        files = body["files"].as_h
 
         params.size.should eq 1
         params["name"].should eq "foobar"
 
         files.size.should eq 1
-        files.first.as_h["name"].should eq "avatar"
-        files.first.as_h["filename"].should eq "halite-logo-small.png"
+        files["file"]?.should be_a JSON::Any
+        files["file"].as_h["filename"].should eq "halite.cr"
+      end
+
+      it "should easy upload multiple files" do
+        response = Halite.post("#{server.endpoint}/upload", form: {avatar: [File.open("halite-logo.png"), File.open("halite-logo-small.png")]})
+        body = response.parse.as_h
+        params = body["params"].as_h
+        files = body["files"].as_h
+
+        params.size.should eq 0
+        files.size.should eq 1
+        files["avatar"]?.should be_a JSON::Any
+        files["avatar"].as_a.size.should eq 2
+        files["avatar"].as_a[0].as_h["filename"].should eq "halite-logo.png"
+        files["avatar"].as_a[1].as_h["filename"].should eq "halite-logo-small.png"
+      end
+
+      it "should easy upload multiple files with other form data" do
+        response = Halite.post("#{server.endpoint}/upload", form: {
+          avatar: [File.open("halite-logo.png"), File.open("halite-logo-small.png")],
+          name: "foobar"
+        })
+        body = response.parse.as_h
+        params = body["params"].as_h
+        files = body["files"].as_h
+
+        params.size.should eq 1
+        params["name"].should eq "foobar"
+
+        files.size.should eq 1
+        files["avatar"]?.should be_a JSON::Any
+        files["avatar"].as_a.size.should eq 2
+        files["avatar"].as_a[0].as_h["filename"].should eq "halite-logo.png"
+        files["avatar"].as_a[1].as_h["filename"].should eq "halite-logo-small.png"
       end
     end
   end

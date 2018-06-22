@@ -141,6 +141,18 @@ Halite.post("http://httpbin.org/post", form: {
 })
 ```
 
+Want multiple files upload, of cause:
+
+```crystal
+Halite.post("http://httpbin.org/post", form: {
+  "photos" => [
+    File.open("/Users/icyleaf/photo1.png"),
+    File.open("/Users/icyleaf/photo2.png")
+  ],
+  "album_name" => "samples"
+})
+```
+
 #### JSON data
 
 Use the `json` argument to pass data serialized as body encoded:

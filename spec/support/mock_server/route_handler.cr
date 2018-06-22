@@ -202,7 +202,6 @@ class MockServer < HTTP::Server
     post "/upload" do |context|
       if multipart?(context.request.headers)
         upload = parse_upload_form(context.request)
-
         context.response.status_code = 200
         context.response.content_type = "application/json"
 
@@ -217,11 +216,24 @@ class MockServer < HTTP::Server
             end
 
             json.field "files" do
-              json.array do
+              json.object do
                 upload.files.each do |k, v|
-                  json.object do
-                    json.field "name", v.name
-                    json.field "filename", v.filename
+                  json.field k do
+                    if v.is_a?(Array)
+                      json.array do
+                        v.as(Array).each do |vv|
+                          json.object do
+                            json.field "filename", vv.filename
+                            json.field "body", "[binary file]"
+                          end
+                        end
+                      end
+                    else
+                      json.object do
+                        json.field "filename", v.filename
+                        json.field "body", "[binary file]"
+                      end
+                    end
                   end
                 end
               end
@@ -311,14 +323,19 @@ class MockServer < HTTP::Server
 
     private def self.parse_upload_form(request : HTTP::Request) : UploadParams
       params = HTTP::Params.parse("")
-      files = {} of String => HTTP::FormData::Part
+      files = {} of String => HTTP::FormData::Part | Array(HTTP::FormData::Part)
 
       HTTP::FormData.parse(request) do |part|
         next unless part
 
         name = part.name
-        if filename = part.filename
-          files[name] = part
+        if part.filename
+          if files.has_key?(name) && files[name].is_a?(HTTP::FormData::Part)
+            file = files.delete(name).as(HTTP::FormData::Part)
+            files[name] = [file, part]
+          else
+            files[name] = part
+          end
         else
           params.add name, part.body.gets_to_end
         end
@@ -327,6 +344,6 @@ class MockServer < HTTP::Server
       UploadParams.new(params, files)
     end
 
-    record UploadParams, params : HTTP::Params, files : Hash(String, HTTP::FormData::Part)
+    record UploadParams, params : HTTP::Params, files : Hash(String, HTTP::FormData::Part | Array(HTTP::FormData::Part))
   end
 end
