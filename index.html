@@ -236,7 +236,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/a052853" target="_blank">a052853</a> (2018-06-22 15:39:53 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/ca3a0b7" target="_blank">ca3a0b7</a> (2018-06-22 19:04:04 +0800).</p>
 
 <p>&lt;hr /></p>
 
@@ -530,8 +530,6 @@ r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/c
 
 <p>the Halite does not enable logging on each request and response too. You can enable per operation logging by configuring them through the chaining API.</p>
 
-<p>If you want logging request behavior only, throught pass <code>response</code> argument to <code>false</code>. And it not output the full body with binary type MIME types, please review it <a href="https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79" target="_blank">here</a>.</p>
-
 <h4>Simple logging</h4>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.logger
@@ -544,14 +542,21 @@ r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/c
       .get(<span class="s">&quot;http://httpbin.org/image/png&quot;</span>)
 
 <span class="c"># =&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/image/png</span>
-<span class="c"># =&gt; halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/image/png | image//png | [binary file]</span></code></pre>
+<span class="c"># =&gt; halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/image/png | image/png | [binary file]</span></code></pre>
 
 <h4>Logging request only</h4>
+
+<p>If you want logging request behavior only, throught pass <code>response</code> argument to <code>false</code>. And it not output the full body with binary type MIME types, please review it <a href="https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79" target="_blank">here</a>.</p>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.logger(response: <span class="n">false</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># =&gt; halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar</span></code></pre>
+
+<h4>Write to a log file</h4>
+
+<pre><code class="language-crystal"><span class="t">Halite</span>.logger(filename: <span class="s">&quot;halite.log&quot;</span>, response: <span class="n">false</span>)
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <h4>Use the custom logger</h4>
 
