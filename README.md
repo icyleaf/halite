@@ -2,7 +2,7 @@
 
 # Halite
 
-![Language](https://img.shields.io/badge/language-crystal-black.svg)
+![Language](https://img.shields.io/badge/language-crystal-776791.svg)
 [![Tag](https://img.shields.io/github/tag/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/CHANGELOG.md)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
 [![License](https://img.shields.io/github/license/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/LICENSE)
