@@ -59,6 +59,13 @@ module Halite
       MimeTypes[name].decode to_s
     end
 
+    # Return raw of response
+    def to_raw
+      io = IO::Memory.new
+      @conn.to_io(io)
+      io
+    end
+
     # Return status_code, headers and body in a array
     def to_a
       [@conn.status_code, @conn.headers.to_h, to_s]
