@@ -1,10 +1,15 @@
 require "logger"
-require "colorize"
+require "file_utils"
 
 module Halite
   abstract class Logger
-    def self.new(filename : String)
-      new(File.open(filename, "w"))
+    def self.new(filename : String, mode = "a")
+      file_path = File.dirname(filename)
+      if file_path != "." && !Dir.exists?(file_path)
+        FileUtils.mkdir_p(file_path)
+      end
+
+      new(File.open(filename, mode))
     end
 
     forward_missing_to @logger

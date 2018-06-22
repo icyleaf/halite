@@ -220,8 +220,8 @@ module Halite
       self
     end
 
-    def with_logger(filename : String, response = false)
-      with_logger(Halite::CommonLogger.new(filename), response)
+    def with_logger(filename : String, mode = "a", response = false)
+      with_logger(Halite::CommonLogger.new(filename, mode), response)
     end
 
     def with_logger(logger : Halite::Logger = CommonLogger.new, response = false)

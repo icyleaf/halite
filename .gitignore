@@ -2,6 +2,7 @@ doc/
 docs/
 lib/
 bin/
+logs/
 .shards/
 
 # Local test file

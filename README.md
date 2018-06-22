@@ -388,8 +388,6 @@ All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/
 
 the Halite does not enable logging on each request and response too. You can enable per operation logging by configuring them through the chaining API.
 
-If you want logging request behavior only, throught pass `response` argument to `false`. And it not output the full body with binary type MIME types, please review it [here](https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79).
-
 #### Simple logging
 
 ```crystal
@@ -403,16 +401,25 @@ Halite.logger
       .get("http://httpbin.org/image/png")
 
 # => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/image/png
-# => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/image/png | image//png | [binary file]
+# => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/image/png | image/png | [binary file]
 ```
 
 #### Logging request only
+
+If you want logging request behavior only, throught pass `response` argument to `false`. And it not output the full body with binary type MIME types, please review it [here](https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79).
 
 ```crystal
 Halite.logger(response: false)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
+```
+
+#### Write to a log file
+
+```crystal
+Halite.logger(filename: "halite.log", response: false)
+      .get("http://httpbin.org/get", params: {name: "foobar"})
 ```
 
 #### Use the custom logger

@@ -1,3 +1,5 @@
+require "colorize"
+
 module Halite
   class CommonLogger < Logger
     def request(request)

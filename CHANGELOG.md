@@ -11,10 +11,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Support `OPTIONS` method (crystal 0.25.0+)
 - Support multiple files upload. [#14](https://github.com/icyleaf/halite/issues/14) (thanks @[BenDietze](https://github.com/BenDietze))
+- Add write log to a file document.
+
+### Changed
+
+- Change write log file use append mode by default, it could be change by param.
 
 ### Fixed
 
 - Stripped the filename in a `multipart/form-data` body. [#16](https://github.com/icyleaf/halite/issues/16) (thanks @[BenDietze](https://github.com/BenDietze))
+- Create missing directories when use path to write log to a file.
 
 ## [0.3.2] (2018-06-19)
 

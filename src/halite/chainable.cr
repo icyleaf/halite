@@ -221,15 +221,23 @@ module Halite
 
     # Returns `Options` self with gived the filename of logger path.
     #
-    # #### create a http request and log it to file.
+    # #### create a http request and log to file.
     #
     # ```
     # Halite.logger("/tmp/halite.log")
     #       .get("http://httpbin.org/get", params: {name: "foobar"})
+    #
+    # ```
+    #
+    # #### Always create new log file and disable response log
+    #
+    # ```
+    # Halite.logger("/tmp/halite.log", mode: "w", response: false)
+    #       .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     # Check the log file content: **/tmp/halite.log**
-    def logger(filename : String, response = true)
-      branch(default_options.with_logger(filename, response))
+    def logger(filename : String, mode = "a", response = true)
+      branch(default_options.with_logger(filename, mode, response))
     end
 
     # Make an HTTP request with the given verb
