@@ -1,4 +1,4 @@
-![halite-logo](halite-logo.png)
+![halite-logo](halite-logo-small.png)
 
 # Halite
 
@@ -11,7 +11,7 @@ Crystal HTTP Requests with a chainable REST API, built-in sessions and loggers w
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem
 and Python's [requests](https://github.com/requests/requests).
 
-Build in crystal version >= `v0.23.1`, Docs Generated in latest commit.
+Build in crystal version >= `v0.25.0`, Docs Generated in latest commit.
 
 <hr />
 
@@ -90,10 +90,11 @@ Many other HTTP methods are avaiabled as well:
 
 - `get`
 - `head`
-- `patch`
 - `post`
 - `put`
 - `delete`
+- `patch`
+- `options`
 
 ```crystal
 Halite.get("http://httpbin.org/get", params: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
@@ -104,9 +105,11 @@ Halite.post("http://httpbin.org/post", form: { "firstname" => "Olen", "lastname"
 
 Halite.put("http://httpbin.org/put", json: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
 
+Haltie.delete("http://httpbin.org/delete", params: { "user_id" => 234234 })
+
 Halite.patch("http://httpbin.org/anything", json: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
 
-Haltie.delete("http://httpbin.org/delete", params: { "user_id" => 234234 })
+Haltie.options("http://httpbin.org/anything", params: json: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
 ```
 
 ### Passing Parameters
