@@ -143,6 +143,8 @@ Halite.post("http://httpbin.org/post", form: {
 
 Want multiple files upload, of cause:
 
+> NOTE: apply for `master` branch, not release yet.
+
 ```crystal
 Halite.post("http://httpbin.org/post", form: {
   "photos" => [
