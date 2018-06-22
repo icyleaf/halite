@@ -26,7 +26,7 @@ module Halite
         data.each do |k, v|
           case v
           when File
-            builder.file(k, v.as(IO), HTTP::FormData::FileMetadata.new(filename: v.path))
+            builder.file(k, v.as(IO), HTTP::FormData::FileMetadata.new(filename: File.basename(v.path)))
           when Array
             v.each do |e|
               builder.field(k, e.to_s)

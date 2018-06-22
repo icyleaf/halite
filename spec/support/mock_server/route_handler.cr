@@ -37,7 +37,7 @@ class MockServer < HTTP::Server
     end
 
     {% for verb in [:get, :post, :put, :delete, :head] %}
-      def self.{{ verb.id }}(route : String, &block : HTTP::Server::Context -> HTTP::Server::Context) #HTTP::Server::Context))
+      def self.{{ verb.id }}(route : String, &block : HTTP::Server::Context -> HTTP::Server::Context)
         ROUTES["{{ verb.id }}:#{route}"] = block
       end
     {% end %}
@@ -153,13 +153,13 @@ class MockServer < HTTP::Server
 
     get "/get-cookies" do |context|
       body = JSON.build do |json|
-          json.object do
-            context.request.cookies.each do |cookie|
-              json.field cookie.name do
-                cookie.value.to_json(json)
-              end
+        json.object do
+          context.request.cookies.each do |cookie|
+            json.field cookie.name do
+              cookie.value.to_json(json)
             end
           end
+        end
       end
 
       context.response.content_type = "application/json"
@@ -179,12 +179,53 @@ class MockServer < HTTP::Server
 
     post "/form" do |context|
       form = parse_form(context.request.body)
-      if form["example"] == "testing-form"
+      if form.empty?
+        context.response.status_code = 400
+        context.response.print "invalid form data! >:E"
+      else
         context.response.status_code = 200
-        context.response.print "passed :)"
+        form.each do |k, v|
+          context.response.print "#{k}: #{v}\n"
+        end
+      end
+
+      context
+    end
+
+    post "/upload" do |context|
+      if multipart?(context.request.headers)
+        upload = parse_upload_form(context.request)
+
+        context.response.status_code = 200
+        context.response.content_type = "application/json"
+
+        body = JSON.build do |json|
+          json.object do
+            json.field "params" do
+              json.object do
+                upload.params.each do |k, v|
+                  json.field k, v
+                end
+              end
+            end
+
+            json.field "files" do
+              json.array do
+                upload.files.each do |k, v|
+                  json.object do
+                    json.field "name", v.name
+                    json.field "filename", v.filename
+                  end
+                end
+              end
+            end
+          end
+        end
+
+        context.response.print body
       else
         context.response.status_code = 400
-        context.response.print "invalid! >:E"
+        context.response.print "invalid form data! >:E"
       end
 
       context
@@ -216,8 +257,36 @@ class MockServer < HTTP::Server
       end
     end
 
+    private def self.multipart?(headers : HTTP::Headers)
+      if content_type = headers["content_type"]?
+        return content_type.includes?("multipart/form-data") ? true : false
+      end
+
+      false
+    end
+
     private def self.parse_form(body : (IO | String)?) : HTTP::Params
       HTTP::Params.parse(parse_body(body))
     end
+
+    private def self.parse_upload_form(request : HTTP::Request) : UploadParams
+      params = HTTP::Params.parse("")
+      files = {} of String => HTTP::FormData::Part
+
+      HTTP::FormData.parse(request) do |part|
+        next unless part
+
+        name = part.name
+        if filename = part.filename
+          files[name] = part
+        else
+          params.add name, part.body.gets_to_end
+        end
+      end
+
+      UploadParams.new(params, files)
+    end
+
+    record UploadParams, params : HTTP::Params, files : Hash(String, HTTP::FormData::Part)
   end
 end

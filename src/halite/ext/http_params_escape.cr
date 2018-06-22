@@ -65,5 +65,7 @@ module HTTP
         end
       end
     end
+
+    delegate empty?, to: raw_params
   end
 end

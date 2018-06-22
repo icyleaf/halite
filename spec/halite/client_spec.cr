@@ -11,8 +11,8 @@ describe Halite::Client do
     it "should initial with Hash client" do
       client = Halite::Client.new({
         "headers" => {
-          user_agent: "Spec"
-        }
+          user_agent: "Spec",
+        },
       })
 
       client.should be_a(Halite::Client)

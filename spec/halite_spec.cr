@@ -76,7 +76,36 @@ describe Halite do
     context "loading a simple form data" do
       it "should easy to request" do
         response = Halite.post("#{server.endpoint}/form", form: {example: "testing-form"})
-        response.to_s.should eq("passed :)")
+        response.to_s.should contain("example: testing-form")
+      end
+    end
+
+    context "uploading file" do
+      it "should easy upload only file" do
+        response = Halite.post("#{server.endpoint}/upload", form: {file: File.open("./src/halite.cr")})
+        body = response.parse.as_h
+        params = body["params"].as_h
+        files = body["files"].as_a
+
+        params.empty?.should be_truthy
+
+        files.size.should eq 1
+        files.first.as_h["name"].should eq "file"
+        files.first.as_h["filename"].should eq "halite.cr"
+      end
+
+      it "should easy upload file with other form data" do
+        response = Halite.post("#{server.endpoint}/upload", form: {avatar: File.open("halite-logo-small.png"), "name": "foobar"})
+        body = response.parse.as_h
+        params = body["params"].as_h
+        files = body["files"].as_a
+
+        params.size.should eq 1
+        params["name"].should eq "foobar"
+
+        files.size.should eq 1
+        files.first.as_h["name"].should eq "avatar"
+        files.first.as_h["filename"].should eq "halite-logo-small.png"
       end
     end
   end

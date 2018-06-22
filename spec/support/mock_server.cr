@@ -10,6 +10,7 @@ class MockServer < HTTP::Server
   getter running : Bool
 
   @@INSTANCE = MockServer.new
+
   def self.instance
     @@INSTANCE
   end
