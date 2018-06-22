@@ -223,7 +223,7 @@
 
 
 <div class="main-content">
-<p><img src="halite-logo.png" alt="halite-logo"/></p>
+<p><img src="halite-logo-small.png" alt="halite-logo"/></p>
 
 <h1>Halite</h1>
 
@@ -236,7 +236,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.23.1</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/4d3ef30" target="_blank">4d3ef30</a> (2018-06-22 11:33:36 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, Docs Generated in <a href="https://github.com/icyleaf/gitlab.cr/commit/30de694" target="_blank">30de694</a> (2018-06-22 14:22:39 +0800).</p>
 
 <p>&lt;hr /></p>
 
@@ -288,7 +288,7 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 
 <p>Many other HTTP methods are avaiabled as well:</p>
 
-<ul><li><code>get</code></li><li><code>head</code></li><li><code>patch</code></li><li><code>post</code></li><li><code>put</code></li><li><code>delete</code></li></ul>
+<ul><li><code>get</code></li><li><code>head</code></li><li><code>post</code></li><li><code>put</code></li><li><code>delete</code></li><li><code>patch</code></li><li><code>options</code></li></ul>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })
 
@@ -298,9 +298,11 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 
 <span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/put&quot;</span>, json: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })
 
+<span class="t">Haltie</span>.delete(<span class="s">&quot;http://httpbin.org/delete&quot;</span>, params: { <span class="s">&quot;user_id&quot;</span> => <span class="n">234234</span> })
+
 <span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })
 
-<span class="t">Haltie</span>.delete(<span class="s">&quot;http://httpbin.org/delete&quot;</span>, params: { <span class="s">&quot;user_id&quot;</span> => <span class="n">234234</span> })</code></pre>
+<span class="t">Haltie</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, params: json: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
 
 <h3>Passing Parameters</h3>
 
@@ -323,6 +325,16 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 <pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {
   <span class="s">&quot;username&quot;</span> => <span class="s">&quot;Quincy&quot;</span>,
   <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/quincy_avatar.png&quot;</span>)
+})</code></pre>
+
+<p>Want multiple files upload, of cause:</p>
+
+<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {
+  <span class="s">&quot;photos&quot;</span> => [
+    <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/photo1.png&quot;</span>),
+    <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/photo2.png&quot;</span>)
+  ],
+  <span class="s">&quot;album_name&quot;</span> => <span class="s">&quot;samples&quot;</span>
 })</code></pre>
 
 <h4>JSON data</h4>
