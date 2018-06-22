@@ -2,7 +2,7 @@ require "base64"
 
 module Halite
   module Chainable
-    {% for verb in %w(get put head post patch delete) %}
+    {% for verb in %w(get put head post patch delete options) %}
       # {{ verb.id.capitalize }} a resource
       #
       # ```

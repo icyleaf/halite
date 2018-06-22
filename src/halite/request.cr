@@ -2,8 +2,8 @@ module Halite
   class Request
     # Allowed methods
     #
-    # See more: [https://github.com/crystal-lang/crystal/blob/master/src/http/client.cr#L329](https://github.com/crystal-lang/crystal/blob/master/src/http/client.cr#L329)
-    METHODS = %w(GET PUT POST DELETE HEAD PATCH)
+    # See more: [https://github.com/crystal-lang/crystal/blob/863f301cfe9e9757a6bf1a494ab7bf49bfc07a06/src/http/client.cr#L329](https://github.com/crystal-lang/crystal/blob/863f301cfe9e9757a6bf1a494ab7bf49bfc07a06/src/http/client.cr#L329)
+    METHODS = %w(GET PUT POST DELETE HEAD PATCH OPTIONS)
 
     # Allowed schemes
     SCHEMES = %w(http https)

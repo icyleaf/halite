@@ -36,7 +36,7 @@ class MockServer < HTTP::Server
       context
     end
 
-    {% for verb in [:get, :post, :put, :delete, :head] %}
+    {% for verb in [:get, :post, :put, :delete, :head, :patch, :options] %}
       def self.{{ verb.id }}(route : String, &block : HTTP::Server::Context -> HTTP::Server::Context)
         ROUTES["{{ verb.id }}:#{route}"] = block
       end
@@ -169,6 +169,13 @@ class MockServer < HTTP::Server
     end
 
     # POST
+    post "/" do |context|
+      context.response.status_code = 200
+      context.response.content_type = "text/html"
+      context.response.print "<!doctype html><body>Mock Server is running.</body></html>"
+      context
+    end
+
     post "/echo-body" do |context|
       body = parse_body(context.request.body)
       context.response.status_code = 200
@@ -239,10 +246,43 @@ class MockServer < HTTP::Server
       context
     end
 
+    # PUT
+    put "/" do |context|
+      context.response.status_code = 200
+      context.response.content_type = "text/html"
+      context.response.print "<!doctype html><body>Mock Server is running.</body></html>"
+      context
+    end
+
+    # DELETE
+    delete "/" do |context|
+      context.response.status_code = 200
+      context.response.content_type = "text/html"
+      context.response.print "<!doctype html><body>Mock Server is running.</body></html>"
+      context
+    end
+
     # HEAD
     head "/" do |context|
       context.response.status_code = 200
       context.response.content_type = "text/html"
+      context.response.print "<!doctype html><body>Mock Server is running.</body></html>"
+      context
+    end
+
+    # PATCH
+    patch "/" do |context|
+      context.response.status_code = 200
+      context.response.content_type = "text/html"
+      context.response.print "<!doctype html><body>Mock Server is running.</body></html>"
+      context
+    end
+
+    # OPTIONS
+    options "/" do |context|
+      context.response.status_code = 200
+      context.response.content_type = "text/html"
+      context.response.print "<!doctype html><body>Mock Server is running.</body></html>"
       context
     end
 

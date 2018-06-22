@@ -11,10 +11,12 @@ end
 sleep 1
 
 describe Halite do
-  it "returns a instance class" do
-    client = Halite::Client.new
-    client.should be_a(Halite::Client)
-    client.options.should be_a(Halite::Options)
+  describe ".new" do
+    it "returns a instance class" do
+      client = Halite::Client.new
+      client.should be_a(Halite::Client)
+      client.options.should be_a(Halite::Options)
+    end
   end
 
   describe ".get" do
@@ -141,11 +143,70 @@ describe Halite do
     end
   end
 
+  describe ".put" do
+    it "should easy to request" do
+      response = Halite.put server.endpoint
+      response.status_code.should eq(200)
+      response.content_type.should match(/html/)
+    end
+  end
+
+  describe ".delete" do
+    it "should easy to request" do
+      response = Halite.delete server.endpoint
+      response.status_code.should eq(200)
+      response.content_type.should match(/html/)
+    end
+  end
+
+  describe ".patch" do
+    it "should easy to request" do
+      response = Halite.patch server.endpoint
+      response.status_code.should eq(200)
+      response.content_type.should match(/html/)
+    end
+  end
+
   describe ".head" do
     it "should easy to request" do
       response = Halite.head server.endpoint
       response.status_code.should eq(200)
       response.content_type.should match(/html/)
+    end
+  end
+
+  describe ".options" do
+    it "should easy to request" do
+      response = Halite.options server.endpoint
+      response.status_code.should eq(200)
+      response.content_type.should match(/html/)
+    end
+  end
+
+  describe ".request" do
+    %w[get post put delete head patch options].each do |verb|
+      it "should easy to #{verb} request" do
+        response = Halite.request(verb, server.endpoint)
+        response.status_code.should eq(200)
+      end
+    end
+
+    it "throws an exception with non-support method" do
+      expect_raises Halite::UnsupportedMethodError do
+        Halite.request("abc", server.endpoint)
+      end
+    end
+
+    it "throws an exception with non-support scheme" do
+      expect_raises Halite::UnsupportedSchemeError do
+        Halite.request("get", "ws://example.com/abc")
+      end
+    end
+
+    it "throws an exception without scheme" do
+      expect_raises Halite::UnsupportedSchemeError do
+        Halite.request("get", "example.com/abc")
+      end
     end
   end
 

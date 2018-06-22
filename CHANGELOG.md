@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-> TOOD
+### Added
+
+- [ ] Support `OPTIONS` method (crystal 0.25.0+)
+- [ ] Support multiple file upload. [#14](https://github.com/icyleaf/halite/issues/14) (thanks @[BenDietze](https://github.com/BenDietze))
+
+### Fixed
+
+- Stripped the filename in a `multipart/form-data` body. [#16](https://github.com/icyleaf/halite/issues/16) (thanks @[BenDietze](https://github.com/BenDietze))
 
 ## [0.3.2] (2018-06-19)
 
