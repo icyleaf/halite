@@ -62,7 +62,6 @@ module Halite
                  ssl : OpenSSL::SSL::Context::Client? = nil,
                  logger = nil,
                  logging = nil)
-
       Options.new({
         "headers"         => headers,
         "cookies"         => cookies,
@@ -74,7 +73,7 @@ module Halite
         "follow_strict"   => follow_strict,
         "ssl"             => ssl,
         "logger"          => logger,
-        "logging"         => logging
+        "logging"         => logging,
       })
     end
 

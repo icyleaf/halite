@@ -20,10 +20,10 @@ module Halite
 
         unless response.body.empty?
           body = if binary_type?(mime_type)
-            "[binary file]"
-          else
-            response.body
-          end
+                   "[binary file]"
+                 else
+                   response.body
+                 end
 
           io << " | " << body
         end
@@ -34,36 +34,36 @@ module Halite
 
     protected def colorful_method(method, is_request = true)
       fore, back = case method.upcase
-      when "GET"
-        [:white, :blue]
-      when "POST"
-        [:white, :cyan]
-      when "PUT"
-        [:white, :yellow]
-      when "DELETE"
-        [:white, :red]
-      when "PATCH"
-        [:white, :green]
-      when "HEAD"
-        [:white, :magenta]
-      else
-        [:dark_gray, :white]
-      end
+                   when "GET"
+                     [:white, :blue]
+                   when "POST"
+                     [:white, :cyan]
+                   when "PUT"
+                     [:white, :yellow]
+                   when "DELETE"
+                     [:white, :red]
+                   when "PATCH"
+                     [:white, :green]
+                   when "HEAD"
+                     [:white, :magenta]
+                   else
+                     [:dark_gray, :white]
+                   end
 
       colorful((" %-7s" % method), fore, back)
     end
 
     protected def colorful_status_code(status_code : Int32)
       fore, back = case status_code
-      when 300..399
-        [:dark_gray, :white]
-      when 400..499
-        [:white, :yellow]
-      when 500..999
-        [:white, :red]
-      else
-        [:white, :green]
-      end
+                   when 300..399
+                     [:dark_gray, :white]
+                   when 400..499
+                     [:white, :yellow]
+                   when 500..999
+                     [:white, :red]
+                   else
+                     [:white, :green]
+                   end
 
       colorful((" %-7s" % status_code), fore, back)
     end
