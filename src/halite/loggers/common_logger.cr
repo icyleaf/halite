@@ -6,9 +6,10 @@ module Halite
       message = String.build do |io|
         io << "|" << colorful_method(request.verb)
         io << "| " << request.uri
-        io << " | " << request.body unless request.body.empty?
-      end.to_s
+        io << "\n" << request.body unless request.body.empty?
+      end
 
+      Fiber.current.logger_context["category"] = "request"
       @logger.info message
     end
 
@@ -27,10 +28,11 @@ module Halite
                    response.body
                  end
 
-          io << " | " << body
+          io << "\n" << body unless request.body.empty?
         end
-      end.to_s
+      end
 
+      Fiber.current.logger_context["category"] = "response"
       @logger.debug message
     end
 

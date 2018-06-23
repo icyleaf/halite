@@ -16,21 +16,33 @@ module Halite
 
     def initialize(@io : IO = STDOUT)
       @logger = ::Logger.new(@io)
-      @logger.level = ::Logger::DEBUG
       @logger.progname = "halite"
+      @logger.level = ::Logger::DEBUG
       @logger.formatter = default_formatter
     end
 
-    abstract def request(request : Halite::Request) : String
-    abstract def response(response : Halite::Response) : String
+    abstract def request(request : Halite::Request)
+    abstract def response(response : Halite::Response)
 
+    # return Halite logger formatter
     def default_formatter
       ::Logger::Formatter.new do |severity, datetime, progname, message, io|
-        io << progname
-        io << " | " << datetime.to_s("%F %T")
-        io << " " << message
+        if category = Fiber.current.logger_context["category"]?
+          io << category << " | "
+        end
+
+        io << datetime.to_s << " " << message
       end
     end
+  end
+end
+
+class Fiber
+  property logger_context : Hash(String, String)?
+
+  def logger_context
+    @logger_context ||= {} of String => String
+    @logger_context.not_nil!
   end
 end
 
