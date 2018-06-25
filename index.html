@@ -236,7 +236,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, Docs Generated in <a href="https://github.com/icyleaf/halite.cr/commit/8b3b255" target="_blank">8b3b255</a> (2018-06-25 15:04:54 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, Docs Generated in <a href="https://github.com/icyleaf/halite.cr/commit/f707ad7" target="_blank">f707ad7</a> (2018-06-25 15:11:02 +0800).</p>
 
 <h2>Index</h2>
 
@@ -325,17 +325,27 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
   <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/quincy_avatar.png&quot;</span>)
 })</code></pre>
 
-<p>Want multiple files upload, of cause:</p>
-
-<blockquote>NOTE: apply for <code>master</code> branch, not release yet.</blockquote>
+<p>It is possible to upload multiple files:</p>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {
-  <span class="s">&quot;photos&quot;</span> => [
+  photos: [
+    <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/photo1.png&quot;</span>),
+    <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/photo2.png&quot;</span>)
+  ],
+  album_name: <span class="s">&quot;samples&quot;</span>
+})</code></pre>
+
+<p>Or pass the name with <code>[]</code>:</p>
+
+<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {
+  <span class="s">&quot;photos[]&quot;</span> => [
     <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/photo1.png&quot;</span>),
     <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/photo2.png&quot;</span>)
   ],
   <span class="s">&quot;album_name&quot;</span> => <span class="s">&quot;samples&quot;</span>
 })</code></pre>
+
+<p>Multiple files aslo can be uploaded using both ways above, it depend on web server.</p>
 
 <h4>JSON data</h4>
 
