@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Change write log file use append mode by default, it could be change by param.
+- Change logger formatter to easy identify category(request/response).
 
 ### Fixed
 
