@@ -34,4 +34,16 @@ describe Halite::Request do
   it "sets given headers" do
     request.headers["Accept"].should eq "text/html"
   end
+
+  describe "#domain" do
+    it "return `URI` with the scheme, user, password, port and host combined" do
+      request.domain.to_s.should eq "http://example.com"
+    end
+
+    context "when subdomain and path are the same" do
+      it "return `URI` with the scheme, user, password, port and host combined" do
+        Halite::Request.new("get", "https://login.example.com/login").domain.to_s.should eq "https://login.example.com"
+      end
+    end
+  end
 end
