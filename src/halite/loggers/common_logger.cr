@@ -19,16 +19,7 @@ module Halite
         io << "| response |" << colorful_status_code(response.status_code)
         io << "| " << response.uri
         io << " | " << content_type
-
-        unless response.body.empty?
-          body = if binary_type?(content_type)
-                   "[binary file]"
-                 else
-                   response.body
-                 end
-
-          io << "\n" << body unless body.empty?
-        end
+        io << "\n" << response.body unless response.body.empty? || binary_type?(content_type)
       end
 
       @logger.debug message

@@ -371,7 +371,7 @@ Let's persist some cookies across requests:
 
 ```crystal
 client = Halite::Client.new
-# Or
+# Or configure it
 client = Halite::Client.new do |options|
   options.headers = {
     user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36",
@@ -385,15 +385,16 @@ client = Halite::Client.new do |options|
 end
 
 client.get("http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0")
-r = client.get("http://httpbin.org/cookies")
-# => halite | 2017-12-13 17:40:53 | GET    | http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0
-# => halite | 2017-12-13 17:40:53 | 302    | http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0 | text/html | <html> ...
-# => halite | 2017-12-13 17:40:53 | GET    | http://httpbin.org/cookies
-# => halite | 2017-12-13 17:40:55 | 200    | http://httpbin.org/cookies | application/json | {
-# =>   "cookies": {
-# =>     "private_token": "6abaef100b77808ceb7fe26a3bcff1d0"
-# =>   }
-# => }
+client.get("http://httpbin.org/cookies")
+# => 2018-06-25 18:41:05 +08:00 | request | GET    | http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0
+# => 2018-06-25 18:41:06 +08:00 | response | 302    | http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0 | text/html
+# => <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+# => <title>Redirecting...</title>
+# => <h1>Redirecting...</h1>
+# => <p>You should be redirected automatically to target URL: <a href="/cookies">/cookies</a>.  If not click the link.
+# => 2018-06-25 18:41:06 +08:00 | request | GET    | http://httpbin.org/cookies
+# => 2018-06-25 18:41:07 +08:00 | response | 200    | http://httpbin.org/cookies | application/json
+# => {"cookies":{"private_token":"6abaef100b77808ceb7fe26a3bcff1d0"}}
 ```
 
 All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/Chainable.html) in the other examples list in [requests.Session](http://docs.python-requests.org/en/master/user/advanced/#session-objects).
@@ -408,14 +409,15 @@ the Halite does not enable logging on each request and response too. You can ena
 Halite.logger
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
-# => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
-# => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name=foobar | application/json | { ... }
+# => 2018-06-25 18:33:14 +08:00 | request | GET    | http://httpbin.org/get?name=foobar
+# => 2018-06-25 18:33:15 +08:00 | response | 200    | http://httpbin.org/get?name=foobar | application/json
+# => {"args":{"name":"foobar"},"headers":{"Accept":"*/*","Accept-Encoding":"gzip, deflate","Connection":"close","Host":"httpbin.org","User-Agent":"Halite/0.3.2"},"origin":"60.206.194.34","url":"http://httpbin.org/get?name=foobar"}
 
 Halite.logger
       .get("http://httpbin.org/image/png")
 
-# => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/image/png
-# => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/image/png | image/png | [binary file]
+# => 2018-06-25 18:34:15 +08:00 | request | GET    | http://httpbin.org/image/png
+# => 2018-06-25 18:34:15 +08:00 | response | 200    | http://httpbin.org/image/png | image/png
 ```
 
 #### Logging request only
@@ -424,15 +426,19 @@ If you want logging request behavior only, throught pass `response` argument to 
 
 ```crystal
 Halite.logger(response: false)
-      .get("http://httpbin.org/get", params: {name: "foobar"})
+      .post("http://httpbin.org/get", form: {image: File.open("halite-logo.png")})
 
-# => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
+# => 2018-06-25 18:39:15 +08:00 | request | POST   | http://httpbin.org/get
+# => ---------------------------gUEmO7X80NT4_qIb-kgh4v2z
+# => Content-Disposition: form-data; name="image"; filename="halite-logo.png"
+# => [image data]
+# => ----------------------------gUEmO7X80NT4_qIb-kgh4v2z--
 ```
 
 #### Write to a log file
 
 ```crystal
-Halite.logger(filename: "halite.log", response: false)
+Halite.logger(filename: "logs/halite.log", response: false)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 ```
 
@@ -444,19 +450,19 @@ here has two methods must be implement: `Halite::Logger.request` and `Halite::Lo
 ```crystal
 class MyLogger < Halite::Logger
   def request(request)
-    @logger.info ">> | %s | %s %s" % [request.verb, request.uri, request.body]
+    @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
   end
 
   def response(response)
-    @logger.info "<< | %s | %s %s" % [response.status_code, response.uri, response.content_type]
+    @logger.info "| << | %s | %s %s" % [response.status_code, response.uri, response.content_type]
   end
 end
 
 Halite.logger(MyLogger.new)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
-# => halite | 2017-12-13 16:40:13 >> | GET | http://httpbin.org/get?name=foobar
-# => halite | 2017-12-13 16:40:15 << | 200 | http://httpbin.org/get?name=foobar application/json
+# => 2017-12-13 16:40:13 +08:00 | >> | GET | http://httpbin.org/get?name=foobar
+# => 2017-12-13 16:40:15 +08:00 | << | 200 | http://httpbin.org/get?name=foobar application/json
 ```
 
 ## Help and Discussion
