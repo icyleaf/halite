@@ -8,7 +8,7 @@ jobs:
       GIT_USER: "icyleaf"
       GIT_EMAIL: "icyleaf.cn@gmail.com"
       GIT_REPO: "git@github.com:icyleaf/halite.git"
-      GH_REF: "github.com/icyleaf/gitlab.cr"
+      GH_REF: "github.com/icyleaf/halite.cr"
     branches:
       ignore:
         - gh-pages
