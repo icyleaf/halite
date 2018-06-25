@@ -4,12 +4,11 @@ module Halite
   class CommonLogger < Logger
     def request(request)
       message = String.build do |io|
-        io << "|" << colorful_method(request.verb)
+        io << "| request |" << colorful_method(request.verb)
         io << "| " << request.uri
         io << "\n" << request.body unless request.body.empty?
       end
 
-      Fiber.current.logger_context["category"] = "request"
       @logger.info message
     end
 
@@ -17,7 +16,7 @@ module Halite
       message = String.build do |io|
         mime_type = response.mime_type.nil? ? "Unkown MIME" : response.mime_type.not_nil!
 
-        io << "|" << colorful_status_code(response.status_code)
+        io << "| response |" << colorful_status_code(response.status_code)
         io << "| " << response.uri
         io << " | " << mime_type
 
@@ -28,11 +27,10 @@ module Halite
                    response.body
                  end
 
-          io << "\n" << body unless request.body.empty?
+          io << "\n" << body unless body.empty?
         end
       end
 
-      Fiber.current.logger_context["category"] = "response"
       @logger.debug message
     end
 

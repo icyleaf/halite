@@ -12,14 +12,11 @@ module Halite
       new(File.open(filename, mode))
     end
 
-    forward_missing_to @logger
-
     def initialize(@io : IO = STDOUT)
-      @logger = ::Logger.new(@io)
-      @logger.progname = "halite"
-      @logger.level = ::Logger::DEBUG
-      @logger.formatter = default_formatter
+      @logger = ::Logger.new(@io, ::Logger::DEBUG, default_formatter, "halite")
     end
+
+    forward_missing_to @logger
 
     abstract def request(request : Halite::Request)
     abstract def response(response : Halite::Response)
@@ -27,23 +24,9 @@ module Halite
     # return Halite logger formatter
     def default_formatter
       ::Logger::Formatter.new do |severity, datetime, progname, message, io|
-        if category = Fiber.current.logger_context["category"]?
-          io << category << " | "
-        end
-
         io << datetime.to_s << " " << message
       end
     end
-  end
-end
-
-# :nodoc:
-class Fiber
-  property logger_context : Hash(String, String)?
-
-  def logger_context
-    @logger_context ||= {} of String => String
-    @logger_context.not_nil!
   end
 end
 
