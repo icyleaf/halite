@@ -13,12 +13,16 @@ and Python's [requests](https://github.com/requests/requests).
 
 Build in crystal version >= `v0.25.0`, Docs Generated in latest commit.
 
-<hr />
+## Index
 
 - [Installation](#installation)
 - [Usage](#usage)
   - [Making Requests](#making-requests)
   - [Passing Parameters](#passing-parameters)
+    - [Query String](#query-string-parameters)
+    - [Form data](#form-data)
+    - [File uploads](#file-uploads-via-form-data)
+    - [JSON data](#json-data)
   - [Passing advanced options](#passing-advanced-options)
     - [Headers](#headers)
     - [Auth](#auth)
@@ -35,8 +39,6 @@ Build in crystal version >= `v0.25.0`, Docs Generated in latest commit.
 - [Help and Discussion](#help-and-discussion)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
-
-<hr />
 
 ## Installation
 

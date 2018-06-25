@@ -37,6 +37,7 @@ module Halite
   end
 end
 
+# :nodoc:
 class Fiber
   property logger_context : Hash(String, String)?
 
