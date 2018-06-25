@@ -143,19 +143,31 @@ Halite.post("http://httpbin.org/post", form: {
 })
 ```
 
-Want multiple files upload, of cause:
-
-> NOTE: apply for `master` branch, not release yet.
+It is possible to upload multiple files:
 
 ```crystal
 Halite.post("http://httpbin.org/post", form: {
-  "photos" => [
+  photos: [
+    File.open("/Users/icyleaf/photo1.png"),
+    File.open("/Users/icyleaf/photo2.png")
+  ],
+  album_name: "samples"
+})
+```
+
+Or pass the name with `[]`:
+
+```crystal
+Halite.post("http://httpbin.org/post", form: {
+  "photos[]" => [
     File.open("/Users/icyleaf/photo1.png"),
     File.open("/Users/icyleaf/photo2.png")
   ],
   "album_name" => "samples"
 })
 ```
+
+Multiple files aslo can be uploaded using both ways above, it depend on web server.
 
 #### JSON data
 
