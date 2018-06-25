@@ -1,0 +1,23 @@
+name: benchmarks
+version: 0.1.0
+
+authors:
+  - icyleaf <icyleaf.cn@gmail.com>
+
+targets:
+  run_benchmark:
+    main: src/main.cr
+
+dependencies:
+  cossack:
+    github: crystal-community/cossack
+    version: ~> 0.1
+  crest:
+    github: mamantoha/crest
+    version: ~> 0.10.2
+  halite:
+    path: ../
+
+crystal: 0.25.0
+
+license: MIT

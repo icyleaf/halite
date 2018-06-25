@@ -1,3 +1,4 @@
+doc/
 docs/
 lib/
 bin/
@@ -6,6 +7,9 @@ logs/
 
 # Local test file
 main.cr
+
+# Temporay ignore
+benchmarks
 
 # Libraries don't need dependency lock
 # Dependencies will be locked in application that uses them
