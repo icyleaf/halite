@@ -25,18 +25,6 @@ module Halite
       end
     end
 
-    # Mime Type, similar to `content_type`
-    #
-    # Examples:
-    # - "text/plain"
-    # - "application/json"
-    # - "text/html"
-    def mime_type
-      return nil if content_type.to_s.empty?
-
-      content_type.not_nil!.split(";")[0].downcase.strip
-    end
-
     def cookies : HTTP::Cookies?
       cookies = @conn.cookies ? @conn.cookies : HTTP::Cookies.from_headers(@conn.headers)
 
@@ -51,9 +39,9 @@ module Halite
 
     # Parse response body with corresponding MIME type adapter.
     def parse(name : String? = nil)
-      name ||= mime_type
+      name ||= content_type
 
-      raise Halite::Error.new("No match MIME type") unless name
+      raise Halite::Error.new("No match MIME type: #{name}") unless name
       raise Halite::UnRegisterAdapterError.new("unregister MIME type adapter: #{name}") unless MimeTypes[name]?
 
       MimeTypes[name].decode to_s

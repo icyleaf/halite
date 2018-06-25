@@ -2,7 +2,7 @@ require "../spec_helper"
 
 URL         = "http://example.com"
 STATUS_CODE = 200
-HEADERS     = {"Content-Type" => "text/plain"}
+HEADERS     = {"Content-Type" => "text/plain; charset=utf-8"}
 BODY        = "hello world"
 COOKIES     = "foo=bar; domain=example.com"
 
@@ -10,6 +10,13 @@ private def response(url = URL, status_code = STATUS_CODE, headers = HEADERS, bo
   Halite::Response.new(
     URI.parse(url),
     HTTP::Client::Response.new(status_code: status_code, body: body, headers: HTTP::Headers.escape(headers))
+  )
+end
+
+private def empty_response
+  Halite::Response.new(
+    URI.parse(URL),
+    HTTP::Client::Response.new(status_code: 404, body: "", headers: HTTP::Headers.new)
   )
 end
 
@@ -46,6 +53,16 @@ describe Halite::Response do
     end
   end
 
+  describe "#content_type" do
+    it "should return nil with empty headers" do
+      empty_response.content_type.should be_nil
+    end
+
+    it "should return with string with contains headers" do
+      response.content_type.should eq "text/plain"
+    end
+  end
+
   describe "#parse" do
     context "with known content type" do
       it "returns parsed body" do
@@ -54,7 +71,7 @@ describe Halite::Response do
       end
     end
 
-    context "with empty content type or" do
+    context "with empty content type" do
       it "raises Halite::UnRegisterAdapterError" do
         r = response(headers: {"Content-Type" => ""})
         expect_raises Halite::Error do
@@ -63,7 +80,7 @@ describe Halite::Response do
       end
     end
 
-    context "without content type or" do
+    context "without content type" do
       it "raises Halite::UnRegisterAdapterError" do
         r = response(headers: {"Etag" => "123123123"})
         expect_raises Halite::Error do
@@ -96,7 +113,7 @@ describe Halite::Response do
 
   describe "#inspect" do
     it "returns human-friendly response representation" do
-      response.inspect.should eq %q{#<Halite::Response HTTP/1.1 200 OK {"Content-Type" => "text/plain"}>}
+      response.inspect.should eq %q{#<Halite::Response HTTP/1.1 200 OK {"Content-Type" => "text/plain; charset=utf-8"}>}
     end
   end
 end

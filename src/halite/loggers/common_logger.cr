@@ -14,14 +14,14 @@ module Halite
 
     def response(response)
       message = String.build do |io|
-        mime_type = response.mime_type.nil? ? "Unkown MIME" : response.mime_type.not_nil!
+        content_type = response.content_type.nil? ? "Unkown MIME" : response.content_type.not_nil!
 
         io << "| response |" << colorful_status_code(response.status_code)
         io << "| " << response.uri
-        io << " | " << mime_type
+        io << " | " << content_type
 
         unless response.body.empty?
-          body = if binary_type?(mime_type)
+          body = if binary_type?(content_type)
                    "[binary file]"
                  else
                    response.body
@@ -75,19 +75,19 @@ module Halite
       message.colorize.fore(fore).back(back)
     end
 
-    # return if is binary types with MIME type
+    # return `true` if is binary types with MIME type
     #
-    # MIME types list: https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
-    private def binary_type?(mime_type)
+    # MIME types list: https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
+    private def binary_type?(content_type)
       binary_types = %w(image audio video)
       application_types = %w(pdf octet-stream ogg 3gpp ebook archive rar zip tar 7z word powerpoint excel flash font)
 
       binary_types.each do |name|
-        return true if mime_type.starts_with?(name)
+        return true if content_type.starts_with?(name)
       end
 
       application_types.each do |name|
-        return true if mime_type.starts_with?("application") && mime_type.includes?(name)
+        return true if content_type.starts_with?("application") && content_type.includes?(name)
       end
 
       false
