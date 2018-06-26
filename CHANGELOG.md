@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 - Stripped the filename in a `multipart/form-data` body. [#16](https://github.com/icyleaf/halite/issues/16) (thanks @[BenDietze](https://github.com/BenDietze))
+- Fix `#domain` in `Halite::Request` with subdomian. [#17](https://github.com/icyleaf/halite/pull/17) (thanks @[007lva](https://github.com/007lva))
 - Create missing directories when use path to write log to a file.
 
 ## [0.3.2] (2018-06-19)
