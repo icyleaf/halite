@@ -89,6 +89,28 @@ describe Halite::Response do
     end
   end
 
+  describe "#raise_for_status" do
+    it "should returns nil when status_code not range in (400..599)" do
+      response.raise_for_status.should be_nil
+    end
+
+    (400..499).each do |code|
+      it "throws an Halite::ClientError if status_code is #{code}" do
+        expect_raises Halite::ClientError do
+          response(status_code: code).raise_for_status
+        end
+      end
+    end
+
+    (500..599).each do |code|
+      it "throws an Halite::ServerError if status_code is #{code}" do
+        expect_raises Halite::ServerError do
+          response(status_code: code).raise_for_status
+        end
+      end
+    end
+  end
+
   describe "#parse" do
     context "with known content type" do
       it "returns parsed body" do

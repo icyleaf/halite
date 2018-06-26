@@ -127,7 +127,7 @@ describe Halite do
       it "should easy upload multiple files with other form data" do
         response = Halite.post("#{server.endpoint}/upload", form: {
           avatar: [File.open("halite-logo.png"), File.open("halite-logo-small.png")],
-          name: "foobar"
+          name:   "foobar",
         })
         body = response.parse.as_h
         params = body["params"].as_h

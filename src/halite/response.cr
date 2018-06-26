@@ -43,6 +43,30 @@ module Halite
       parse_links_from_headers
     end
 
+    # Raise `Halite::ClientError`/`Halite::ServerError` if one occurred.
+    #
+    # - `4XX` raise an `Halite::ClientError` exception
+    # - `5XX` raise an `Halite::ServerError` exception
+    # - return `nil` with other status code
+    #
+    # ```
+    # Halite.get("https://httpbin.org/status/404").raise_for_status
+    # # => Unhandled exception: 404 not found error with url: https://httpbin.org/status/404  (Halite::ClientError)
+    #
+    # Halite.get("https://httpbin.org/status/500", params: {"foo" => "bar"}).raise_for_status
+    # # => Unhandled exception: 500 internal server error error with url: https://httpbin.org/status/500?foo=bar  (Halite::ServerError)
+    #
+    # Halite.get("https://httpbin.org/status/301").raise_for_status
+    # # => nil
+    # ```
+    def raise_for_status
+      if status_code >= 400 && status_code < 500
+        raise Halite::ClientError.new(status_code: status_code, uri: uri)
+      elsif status_code >= 500 && status_code < 600
+        raise Halite::ServerError.new(status_code: status_code, uri: uri)
+      end
+    end
+
     # Parse response body with corresponding MIME type adapter.
     def parse(name : String? = nil)
       name ||= content_type

@@ -9,11 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Add `#links` to `Halite::Response` to fetch link headers.
+- Add [#links](https://github.com/icyleaf/halite/#link-headers) to `Halite::Response` to fetch link headers.
+- Add [#raise_for_status](https://github.com/icyleaf/halite/#raise-for-status-code) to `Halite::Response`.
 - Support multiple files upload. [#14](https://github.com/icyleaf/halite/issues/14) (thanks @[BenDietze](https://github.com/BenDietze))
-- Add `#to_raw` to `Halite::Response` to dump the response. [#15](https://github.com/icyleaf/halite/issues/15) (thanks @[BenDietze](https://github.com/BenDietze))
+- Add `#to_raw` to `Halite::Response` to dump a raw of response. [#15](https://github.com/icyleaf/halite/issues/15) (thanks @[BenDietze](https://github.com/BenDietze))
 - Support `OPTIONS` method (crystal 0.25.0+)
-- Add write log to a file document.
+- Append write log to a file section to README.
 
 ### Changed
 

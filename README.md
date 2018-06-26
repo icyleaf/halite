@@ -33,9 +33,11 @@ Build in crystal version >= `v0.25.0`, documents generated in latest commit.
   - [Response Handling](#response-handling)
     - [Binary data](#binary-data)
   - [Error Handling](#error-handling)
+    - [Raise for status code](#raise-for-status-code)
 - [Advanced Usage](#advanced-usage)
   - [Sessions](#sessions)
   - [Logging](#logging)
+  - [Link Headers](#link-headers)
 - [Help and Discussion](#help-and-discussion)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
@@ -336,7 +338,8 @@ After an HTTP request, `Halite::Response` object have several useful methods. (A
 - **#headers**: A `HTTP::Headers` of the response.
 - **#links**: A list of `Halite::HeaderLink` set from headers.
 - **#parse**: (return value depends on MIME type) parse the body using a parser defined for the `#content_type`.
-- **#to_a**: Return A `Hash` of status code, response headers and body as a string.
+- **#to_a**: Return a `Hash` of status code, response headers and body as a string.
+- **#to_raw**: Return a raw of response as a string.
 - **#to_s**: Return response body as a string.
 - **#version**: The HTTP version.
 
@@ -361,6 +364,34 @@ end
 - If a request exceeds the configured number of maximum redirections, a `Halite::TooManyRedirectsError` will raised.
 - If request uri is http and configured ssl context, a `Halite::RequestError` will raised.
 - If request uri is invalid, a `Halite::ConnectionError`/`Halite::UnsupportedMethodError`/`Halite::UnsupportedSchemeError` will raised.
+
+#### Raise for status code
+
+If we made a bad request(a 4xx client error or a 5xx server error response), we can raise with `Halite::Response.raise_for_status`.
+
+But, since our `status_code` was not `4xx` or `5xx`, it returns `nil` when we call it:
+
+```crystal
+urls = [
+  "https://httpbin.org/status/404",
+  "https://httpbin.org/status/500?foo=bar",
+  "https://httpbin.org/status/200",
+]
+
+urls.each do |url|
+  r = Halite.get url
+  begin
+    r.raise_for_status
+    p r.body
+  rescue ex : Halite::ClientError | Halite::ServerError
+    p "#{ex.message} (#{ex.class})"
+  end
+end
+
+# => "404 not found error with url: https://httpbin.org/status/404  (Halite::ClientError)"
+# => "500 internal server error error with url: https://httpbin.org/status/500?foo=bar  (Halite::ServerError)"
+# => ""
+```
 
 ## Advanced Usage
 
