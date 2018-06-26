@@ -179,7 +179,7 @@ module Halite
     # ```
     # Halite.logger
     #       .get("http://httpbin.org/get", params: {name: "foobar"})
-
+    #
     # # => halite | 2017-12-13 16:41:32 | GET    | http://httpbin.org/get?name=foobar
     # # => halite | 2017-12-13 16:42:03 | 200    | http://httpbin.org/get?name=foobar | application/json | { ... }
     # ```
