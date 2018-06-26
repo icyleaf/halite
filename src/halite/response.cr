@@ -25,6 +25,7 @@ module Halite
       end
     end
 
+    # Return a `HTTP::Cookies` of parsed cookie headers or else nil.
     def cookies : HTTP::Cookies?
       cookies = @conn.cookies ? @conn.cookies : HTTP::Cookies.from_headers(@conn.headers)
 
@@ -35,6 +36,11 @@ module Halite
       end
 
       cookies
+    end
+
+    # Return a list of parsed link headers proxies or else nil.
+    def links : Hash(String, HeaderLink)?
+      parse_links_from_headers
     end
 
     # Parse response body with corresponding MIME type adapter.
@@ -70,6 +76,12 @@ module Halite
 
     def to_s(io)
       io << to_s
+    end
+
+    private def parse_links_from_headers : Hash(String, Halite::HeaderLink)?
+      if raw = headers["Link"]?
+        HeaderLinkParser.parse(raw, uri)
+      end
     end
   end
 end

@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Support `OPTIONS` method (crystal 0.25.0+)
+- Add `#links` to `Halite::Response` to fetch link headers.
 - Support multiple files upload. [#14](https://github.com/icyleaf/halite/issues/14) (thanks @[BenDietze](https://github.com/BenDietze))
-- Add `to_raw` in Halite::Response to dump the response. [#15](https://github.com/icyleaf/halite/issues/15) (thanks @[BenDietze](https://github.com/BenDietze))
+- Add `#to_raw` to `Halite::Response` to dump the response. [#15](https://github.com/icyleaf/halite/issues/15) (thanks @[BenDietze](https://github.com/BenDietze))
+- Support `OPTIONS` method (crystal 0.25.0+)
 - Add write log to a file document.
 
 ### Changed

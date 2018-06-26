@@ -63,6 +63,32 @@ describe Halite::Response do
     end
   end
 
+  describe "#links" do
+    # NOTE: more specs in `header_link_spec.cr`.
+    it "should returns nil without Link Header" do
+      response.links.should eq nil
+    end
+
+    it "should return a list of links" do
+      r = response(headers: {"Link" => %Q{<https://api.github.com/user/repos?page=3&per_page=100>; rel="next"; title="Next Page", </>; rel="http://example.net/foo"}})
+      r.links.should be_a Hash(String, Halite::HeaderLink)
+      if links = r.links
+        links.has_key?("next").should be_true
+        links["next"].rel.should eq "next"
+        links["next"].target.should eq "https://api.github.com/user/repos?page=3&per_page=100"
+        links["next"].params.size.should eq 1
+        links["next"].params["title"].should eq "Next Page"
+        links["next"].to_s.should eq "https://api.github.com/user/repos?page=3&per_page=100"
+
+        links.has_key?("/").should be_false
+        links["http://example.net/foo"].rel.should eq "http://example.net/foo"
+        links["http://example.net/foo"].target.should eq "http://example.net/foo"
+        links["http://example.net/foo"].params.size.should eq 0
+        links["http://example.net/foo"].to_s.should eq "http://example.net/foo"
+      end
+    end
+  end
+
   describe "#parse" do
     context "with known content type" do
       it "returns parsed body" do

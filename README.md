@@ -333,11 +333,12 @@ After an HTTP request, `Halite::Response` object have several useful methods. (A
 - **#content_type**: The content type of the response.
 - **#content_length**: The content length of the response.
 - **#cookies**: A `HTTP::Cookies` set by server.
-- **#headers**: The `HTTP::Headers` of the response.
-- **#version**: The HTTP version.
-- **#parse**: (return value depends on MIME type) parse the body using a parser defined for the #content_type.
-- **#to_a**: A `Hash` of status code, response headers and body as a string.
+- **#headers**: A `HTTP::Headers` of the response.
+- **#links**: A list of `Halite::HeaderLink` set from headers.
+- **#parse**: (return value depends on MIME type) parse the body using a parser defined for the `#content_type`.
+- **#to_a**: Return A `Hash` of status code, response headers and body as a string.
 - **#to_s**: Return response body as a string.
+- **#version**: The HTTP version.
 
 #### Binary Data
 
@@ -463,6 +464,32 @@ Halite.logger(MyLogger.new)
 
 # => 2017-12-13 16:40:13 +08:00 | >> | GET | http://httpbin.org/get?name=foobar
 # => 2017-12-13 16:40:15 +08:00 | << | 200 | http://httpbin.org/get?name=foobar application/json
+```
+
+### Link Headers
+
+Many HTTP APIs feature [Link headers](https://tools.ietf.org/html/rfc5988). Github uses
+these for [pagination](https://developer.github.com/v3/#pagination) in their API, for example:
+
+```crystal
+r = Halite.get "https://api.github.com/users/icyleaf/repos?page=1&per_page=2"
+r.links
+# => {"next" =>
+# =>   Halite::HeaderLink(
+# =>    @params={},
+# =>    @rel="next",
+# =>    @target="https://api.github.com/user/17814/repos?page=2&per_page=2"),
+# =>  "last" =>
+# =>   Halite::HeaderLink(
+# =>    @params={},
+# =>    @rel="last",
+# =>    @target="https://api.github.com/user/17814/repos?page=41&per_page=2")}
+
+r.links["next]
+# => "https://api.github.com/user/17814/repos?page=2&per_page=2"
+
+r.links["next].params
+# => {}
 ```
 
 ## Help and Discussion
