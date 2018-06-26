@@ -1,8 +1,8 @@
-![halite-logo](halite-logo-small.png)
+![halite-logo](https://github.com/icyleaf/halite/raw/master/halite-logo-small.png)
 
 # Halite
 
-![Language](https://img.shields.io/badge/language-crystal-776791.svg)
+[![Language](https://img.shields.io/badge/language-crystal-776791.svg)](https://github.com/crystal-lang/crystal)
 [![Tag](https://img.shields.io/github/tag/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/CHANGELOG.md)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
 [![License](https://img.shields.io/github/license/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/LICENSE)
@@ -11,7 +11,7 @@ Crystal HTTP Requests with a chainable REST API, built-in sessions and loggers w
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem
 and Python's [requests](https://github.com/requests/requests).
 
-Build in crystal version >= `v0.25.0`, Docs Generated in latest commit.
+Build in crystal version >= `v0.25.0`, documents generated in latest commit.
 
 ## Index
 
