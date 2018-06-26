@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::Error - github.com/icyleaf/halite</title>
+  <title>Halite::HeaderLinkParser - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -66,7 +66,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Error" data-name="halite::error">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Error" data-name="halite::error">
       <a href="../Halite/Error.html">Error</a>
       
     </li>
@@ -81,7 +81,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/HeaderLinkParser" data-name="halite::headerlinkparser">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/HeaderLinkParser" data-name="halite::headerlinkparser">
       <a href="../Halite/HeaderLinkParser.html">HeaderLinkParser</a>
       
     </li>
@@ -235,19 +235,21 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Halite::Error
+  <span class="kind">class</span> Halite::HeaderLinkParser
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/Error.html">Halite::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/HeaderLinkParser.html">Halite::HeaderLinkParser</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
   <h2>Overview</h2>
 
-  <p>Generic error</p>
+  <p>Header Link Parser</p>
+
+<p>Source: https://tools.ietf.org/html/rfc5988</p>
 
 
 
@@ -256,17 +258,6 @@
 
 
 
-
-  <h2>Direct Known Subclasses</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../Halite/ConnectionError.html">Halite::ConnectionError</a></li>
-  
-    <li class="other-type"><a href="../Halite/RequestError.html">Halite::RequestError</a></li>
-  
-    <li class="other-type"><a href="../Halite/ResponseError.html">Halite::ResponseError</a></li>
-  
-  </ul>
 
 
 
@@ -276,7 +267,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/fe081219d0bd7d9043352409965341c075ce8ed8/src/halite/error.cr#L3" target="_blank">halite/error.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/fe081219d0bd7d9043352409965341c075ce8ed8/src/halite/header_link.cr#L17" target="_blank">halite/header_link.cr</a>
     
     <br/>
   
@@ -287,7 +278,27 @@
 
 
 
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#parse%28raw%3AString%2Curi%3AURI%3F%3Dnil%29-class-method" class="signature"><strong>.parse</strong>(raw : String, uri : URI? = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+  </ul>
 
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#parse%28raw%3AString%2Curi%3AURI%3F%3Dnil%29%3AHash%28String%2CHalite%3A%3AHeaderLink%29-instance-method" class="signature"><strong>#parse</strong>(raw : String, uri : URI? = <span class="n">nil</span>) : Hash(String, Halite::HeaderLink)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -315,22 +326,50 @@
 
 
   
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
 
 
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="parse(raw:String,uri:URI?=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>parse</strong>(raw : String, uri : URI? = <span class="n">nil</span>)
 
+        <a class="method-permalink" href="#parse%28raw%3AString%2Curi%3AURI%3F%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/fe081219d0bd7d9043352409965341c075ce8ed8/src/halite/header_link.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="parse(raw:String,uri:URI?=nil):Hash(String,Halite::HeaderLink)-instance-method">
+      <div class="signature">
+        
+        def <strong>parse</strong>(raw : String, uri : URI? = <span class="n">nil</span>) : Hash(String, <a href="../Halite/HeaderLink.html">Halite::HeaderLink</a>)
+
+        <a class="method-permalink" href="#parse%28raw%3AString%2Curi%3AURI%3F%3Dnil%29%3AHash%28String%2CHalite%3A%3AHeaderLink%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/fe081219d0bd7d9043352409965341c075ce8ed8/src/halite/header_link.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

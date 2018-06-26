@@ -76,6 +76,16 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/HeaderLink" data-name="halite::headerlink">
+      <a href="Halite/HeaderLink.html">HeaderLink</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/HeaderLinkParser" data-name="halite::headerlinkparser">
+      <a href="Halite/HeaderLinkParser.html">HeaderLinkParser</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
       <a href="Halite/Logger.html">Logger</a>
       
@@ -236,7 +246,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/819f002" target="_blank">master#819f002</a> (2018-06-26 11:03:31 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/fe08121" target="_blank">master#fe08121</a> (2018-06-26 17:40:20 +0800).</p>
 
 <h2>Index</h2>
 
@@ -481,7 +491,7 @@ ssl.private_key <span class="o">=</span> <span class="t">File</span>.expand_path
 
 <p>After an HTTP request, <code><a href="Halite/Response.html">Halite::Response</a></code> object have several useful methods. (Also see the <a href="https://icyleaf.github.io/halite/Halite/Response.html" target="_blank">API documentation</a>).</p>
 
-<ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io.</li><li><strong>#code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: The <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#version</strong>: The HTTP version.</li><li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the #content_type.</li><li><strong>#to_a</strong>: A <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li></ul>
+<ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io.</li><li><strong>#code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: A <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#links</strong>: A list of <code><a href="Halite/HeaderLink.html">Halite::HeaderLink</a></code> set from headers.</li><li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the <code>#content_type</code>.</li><li><strong>#to_a</strong>: Return A <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li><li><strong>#version</strong>: The HTTP version.</li></ul>
 
 <h4>Binary Data</h4>
 
@@ -592,6 +602,30 @@ here has two methods must be implement: <code>Halite::Logger.request</code> and 
 
 <span class="c"># =&gt; 2017-12-13 16:40:13 +08:00 | &gt;&gt; | GET | http://httpbin.org/get?name=foobar</span>
 <span class="c"># =&gt; 2017-12-13 16:40:15 +08:00 | &lt;&lt; | 200 | http://httpbin.org/get?name=foobar application/json</span></code></pre>
+
+<h3>Link Headers</h3>
+
+<p>Many HTTP APIs feature <a href="https://tools.ietf.org/html/rfc5988" target="_blank">Link headers</a>. Github uses
+these for <a href="https://developer.github.com/v3/#pagination" target="_blank">pagination</a> in their API, for example:</p>
+
+<pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get <span class="s">&quot;https://api.github.com/users/icyleaf/repos?page=1&amp;per_page=2&quot;</span>
+r.links
+<span class="c"># =&gt; {&quot;next&quot; =&gt;</span>
+<span class="c"># =&gt;   Halite::HeaderLink(</span>
+<span class="c"># =&gt;    @params={},</span>
+<span class="c"># =&gt;    @rel=&quot;next&quot;,</span>
+<span class="c"># =&gt;    @target=&quot;https://api.github.com/user/17814/repos?page=2&amp;per_page=2&quot;),</span>
+<span class="c"># =&gt;  &quot;last&quot; =&gt;</span>
+<span class="c"># =&gt;   Halite::HeaderLink(</span>
+<span class="c"># =&gt;    @params={},</span>
+<span class="c"># =&gt;    @rel=&quot;last&quot;,</span>
+<span class="c"># =&gt;    @target=&quot;https://api.github.com/user/17814/repos?page=41&amp;per_page=2&quot;)}</span>
+
+r.links[<span class="s">&quot;next]
+# =&gt; &quot;</span>https<span class="n">:/</span><span class="s">/api.github.com/</span>user<span class="s">/17814/</span>repos?page<span class="o">=</span><span class="n">2</span><span class="o">&amp;</span>per_page<span class="o">=</span><span class="n">2</span><span class="s">&quot;
+
+r.links[&quot;</span><span class="k">next</span>].params
+<span class="c"># =&gt; {}</span></code></pre>
 
 <h2>Help and Discussion</h2>
 
