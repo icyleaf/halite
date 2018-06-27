@@ -516,10 +516,10 @@ r.links
 # =>    @rel="last",
 # =>    @target="https://api.github.com/user/17814/repos?page=41&per_page=2")}
 
-r.links["next]
+r.links["next"]
 # => "https://api.github.com/user/17814/repos?page=2&per_page=2"
 
-r.links["next].params
+r.links["next"].params
 # => {}
 ```
 

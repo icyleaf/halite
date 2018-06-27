@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+> TODO
+
+## [0.4.0] (2018-06-27)
+
 ### Added
 
 - Add [#links](https://github.com/icyleaf/halite/#link-headers) to `Halite::Response` to fetch link headers.
@@ -111,7 +115,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/icyleaf/halite/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/icyleaf/halite/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/icyleaf/halite/compare/v0.2.0...v0.3.1
 [0.2.0]: https://github.com/icyleaf/halite/compare/v0.1.5...v0.2.0
