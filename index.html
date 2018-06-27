@@ -261,7 +261,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/a020cf1" target="_blank">master#a020cf1</a> (2018-06-27 11:45:17 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/50d5003" target="_blank">master#50d5003</a> (2018-06-27 11:51:11 +0800).</p>
 
 <h2>Index</h2>
 
@@ -662,10 +662,10 @@ r.links
 <span class="c"># =&gt;    @rel=&quot;last&quot;,</span>
 <span class="c"># =&gt;    @target=&quot;https://api.github.com/user/17814/repos?page=41&amp;per_page=2&quot;)}</span>
 
-r.links[<span class="s">&quot;next]
-# =&gt; &quot;</span>https<span class="n">:/</span><span class="s">/api.github.com/</span>user<span class="s">/17814/</span>repos?page<span class="o">=</span><span class="n">2</span><span class="o">&amp;</span>per_page<span class="o">=</span><span class="n">2</span><span class="s">&quot;
+r.links[<span class="s">&quot;next&quot;</span>]
+<span class="c"># =&gt; &quot;https://api.github.com/user/17814/repos?page=2&amp;per_page=2&quot;</span>
 
-r.links[&quot;</span><span class="k">next</span>].params
+r.links[<span class="s">&quot;next&quot;</span>].params
 <span class="c"># =&gt; {}</span></code></pre>
 
 <h2>Help and Discussion</h2>
