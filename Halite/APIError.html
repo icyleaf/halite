@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::UnsupportedSchemeError - github.com/icyleaf/halite</title>
+  <title>Halite::APIError - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -41,7 +41,7 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/APIError" data-name="halite::apierror">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/APIError" data-name="halite::apierror">
       <a href="../Halite/APIError.html">APIError</a>
       
     </li>
@@ -211,7 +211,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/UnsupportedSchemeError" data-name="halite::unsupportedschemeerror">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/UnsupportedSchemeError" data-name="halite::unsupportedschemeerror">
       <a href="../Halite/UnsupportedSchemeError.html">UnsupportedSchemeError</a>
       
     </li>
@@ -250,19 +250,19 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Halite::UnsupportedSchemeError
+  <span class="kind">class</span> Halite::APIError
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/UnsupportedSchemeError.html">Halite::UnsupportedSchemeError</a></li><li class="superclass"><a href="../Halite/RequestError.html">Halite::RequestError</a></li><li class="superclass"><a href="../Halite/Error.html">Halite::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/APIError.html">Halite::APIError</a></li><li class="superclass"><a href="../Halite/ResponseError.html">Halite::ResponseError</a></li><li class="superclass"><a href="../Halite/Error.html">Halite::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
   <h2>Overview</h2>
 
-  <p>The scheme given was not understood</p>
+  <p>Generic API error</p>
 
 
 
@@ -271,6 +271,15 @@
 
 
 
+
+  <h2>Direct Known Subclasses</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type"><a href="../Halite/ClientError.html">Halite::ClientError</a></li>
+  
+    <li class="other-type"><a href="../Halite/ServerError.html">Halite::ServerError</a></li>
+  
+  </ul>
 
 
 
@@ -280,7 +289,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/6c19523d462511fa3503d63a1ceab4d35e65561a/src/halite/error.cr#L18" target="_blank">halite/error.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/6c19523d462511fa3503d63a1ceab4d35e65561a/src/halite/error.cr#L36" target="_blank">halite/error.cr</a>
     
     <br/>
   
@@ -289,9 +298,39 @@
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28message%3AString%3F%3Dnil%2Cstatus_code%3AInt32%3F%3Dnil%2Curi%3AURI%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(message : String? = <span class="n">nil</span>, status_code : Int32? = <span class="n">nil</span>, uri : URI? = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#status_code%3AInt32%3F-instance-method" class="signature"><strong>#status_code</strong> : Int32?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#status_message-instance-method" class="signature"><strong>#status_message</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#uri%3AURI%3F-instance-method" class="signature"><strong>#uri</strong> : URI?</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -352,9 +391,79 @@
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(message:String?=nil,status_code:Int32?=nil,uri:URI?=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(message : String? = <span class="n">nil</span>, status_code : Int32? = <span class="n">nil</span>, uri : URI? = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new%28message%3AString%3F%3Dnil%2Cstatus_code%3AInt32%3F%3Dnil%2Curi%3AURI%3F%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/6c19523d462511fa3503d63a1ceab4d35e65561a/src/halite/error.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="status_code:Int32?-instance-method">
+      <div class="signature">
+        
+        def <strong>status_code</strong> : Int32?
+
+        <a class="method-permalink" href="#status_code%3AInt32%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/6c19523d462511fa3503d63a1ceab4d35e65561a/src/halite/error.cr#L38" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="status_message-instance-method">
+      <div class="signature">
+        
+        def <strong>status_message</strong>
+
+        <a class="method-permalink" href="#status_message-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/6c19523d462511fa3503d63a1ceab4d35e65561a/src/halite/error.cr#L39" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="uri:URI?-instance-method">
+      <div class="signature">
+        
+        def <strong>uri</strong> : URI?
+
+        <a class="method-permalink" href="#uri%3AURI%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/6c19523d462511fa3503d63a1ceab4d35e65561a/src/halite/error.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

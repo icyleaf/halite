@@ -41,6 +41,11 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/APIError" data-name="halite::apierror">
+      <a href="Halite/APIError.html">APIError</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Chainable" data-name="halite::chainable">
       <a href="Halite/Chainable.html">Chainable</a>
       
@@ -48,6 +53,11 @@
   
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Client" data-name="halite::client">
       <a href="Halite/Client.html">Client</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/ClientError" data-name="halite::clienterror">
+      <a href="Halite/ClientError.html">ClientError</a>
       
     </li>
   
@@ -171,6 +181,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/ServerError" data-name="halite::servererror">
+      <a href="Halite/ServerError.html">ServerError</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/StateError" data-name="halite::stateerror">
       <a href="Halite/StateError.html">StateError</a>
       
@@ -246,11 +261,11 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/fe08121" target="_blank">master#fe08121</a> (2018-06-26 17:40:20 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/6c19523" target="_blank">master#6c19523</a> (2018-06-27 11:39:00 +0800).</p>
 
 <h2>Index</h2>
 
-<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query String</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#binary-data" target="_blank">Binary data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#logging" target="_blank">Logging</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
+<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query String</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#binary-data" target="_blank">Binary data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
 
 <h2>Installation</h2>
 
@@ -491,7 +506,7 @@ ssl.private_key <span class="o">=</span> <span class="t">File</span>.expand_path
 
 <p>After an HTTP request, <code><a href="Halite/Response.html">Halite::Response</a></code> object have several useful methods. (Also see the <a href="https://icyleaf.github.io/halite/Halite/Response.html" target="_blank">API documentation</a>).</p>
 
-<ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io.</li><li><strong>#code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: A <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#links</strong>: A list of <code><a href="Halite/HeaderLink.html">Halite::HeaderLink</a></code> set from headers.</li><li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the <code>#content_type</code>.</li><li><strong>#to_a</strong>: Return A <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li><li><strong>#version</strong>: The HTTP version.</li></ul>
+<ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io.</li><li><strong>#code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: A <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#links</strong>: A list of <code><a href="Halite/HeaderLink.html">Halite::HeaderLink</a></code> set from headers.</li><li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the <code>#content_type</code>.</li><li><strong>#to_a</strong>: Return a <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_raw</strong>: Return a raw of response as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li><li><strong>#version</strong>: The HTTP version.</li></ul>
 
 <h4>Binary Data</h4>
 
@@ -508,6 +523,30 @@ filename <span class="o">=</span> r.headers[<span class="s">&quot;Content-Dispos
 <h3>Error Handling</h3>
 
 <ul><li>For any status code, a <code><a href="Halite/Response.html">Halite::Response</a></code> will be returned.</li><li>If request timeout, a <code><a href="Halite/TimeoutError.html">Halite::TimeoutError</a></code> will be raised.</li><li>If a request exceeds the configured number of maximum redirections, a <code><a href="Halite/TooManyRedirectsError.html">Halite::TooManyRedirectsError</a></code> will raised.</li><li>If request uri is http and configured ssl context, a <code><a href="Halite/RequestError.html">Halite::RequestError</a></code> will raised.</li><li>If request uri is invalid, a <code><a href="Halite/ConnectionError.html">Halite::ConnectionError</a></code>/<code><a href="Halite/UnsupportedMethodError.html">Halite::UnsupportedMethodError</a></code>/<code><a href="Halite/UnsupportedSchemeError.html">Halite::UnsupportedSchemeError</a></code> will raised.</li></ul>
+
+<p>If we made a bad request(a 4xx client error or a 5xx server error response), we can raise with <code>Halite::Response.raise_for_status</code>.</p>
+
+<p>But, since our <code>status_code</code> was not <code>4xx</code> or <code>5xx</code>, it returns <code>nil</code> when we call it:</p>
+
+<pre><code class="language-crystal">urls <span class="o">=</span> [
+  <span class="s">&quot;https://httpbin.org/status/404&quot;</span>,
+  <span class="s">&quot;https://httpbin.org/status/500?foo=bar&quot;</span>,
+  <span class="s">&quot;https://httpbin.org/status/200&quot;</span>,
+]
+
+urls.each <span class="k">do</span> <span class="o">|</span>url<span class="o">|</span>
+  r <span class="o">=</span> <span class="t">Halite</span>.get url
+  <span class="k">begin</span>
+    r.raise_for_status
+    p r.body
+  <span class="k">rescue</span> ex : <span class="t">Halite</span><span class="t">::</span><span class="t">ClientError</span> <span class="o">|</span> <span class="t">Halite</span><span class="t">::</span><span class="t">ServerError</span>
+    p <span class="s">&quot;</span><span class="i">#{</span>ex.message<span class="i">}</span><span class="s"> (</span><span class="i">#{</span>ex.<span class="k">class</span><span class="i">}</span><span class="s">)&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c"># =&gt; &quot;404 not found error with url: https://httpbin.org/status/404  (Halite::ClientError)&quot;</span>
+<span class="c"># =&gt; &quot;500 internal server error error with url: https://httpbin.org/status/500?foo=bar  (Halite::ServerError)&quot;</span>
+<span class="c"># =&gt; &quot;&quot;</span></code></pre>
 
 <h2>Advanced Usage</h2>
 
