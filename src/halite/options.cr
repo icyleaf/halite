@@ -51,7 +51,7 @@ module Halite
     property form : Hash(String, Type)
     property json : Hash(String, Type)
 
-    property logger : Halite::Logger
+    property logger : Halite::Logger::Adapter
     property logging : Bool
 
     def self.new(headers = nil, cookies = nil, params = nil, form = nil, json = nil,
@@ -88,10 +88,7 @@ module Halite
       @form = parse_form(options)
       @json = parse_json(options)
 
-      # @logger = options.fetch("logger", CommonLogger.new).as(CommonLogger)
-      # @logging = options["logging"]? ? options["logging"].as(Bool) : false
-
-      @logger = CommonLogger.new
+      @logger = Logger::Common.new
       @logging = false
     end
 
@@ -220,11 +217,23 @@ module Halite
       self
     end
 
-    def with_logger(filename : String, mode = "a", response = false)
-      with_logger(Halite::CommonLogger.new(filename, mode), response)
+    def with_logger(adapter = "common", filename : String? = nil, mode : String? = nil, response : Bool = true)
+      adapters = Halite::Logger.availables
+      raise "Not avaiable adapter: #{adapter}, avaiables in #{adapters.join(", ")}" unless adapters.includes?(adapter)
+
+      io = if filename && mode
+             File.open(filename.not_nil!, mode.not_nil!)
+           else
+             STDOUT
+           end
+
+      logger = Halite::Logger[adapter]
+      logger.writer = ::Logger.new(io, logger.level, logger.formatter, logger.progname)
+
+      with_logger(logger: logger, response: response)
     end
 
-    def with_logger(logger : Halite::Logger = CommonLogger.new, response = false)
+    def with_logger(logger : Halite::Logger::Adapter = Halite::Logger::Common.new, response : Bool = true)
       @logger = logger
       @logger.level = response ? ::Logger::DEBUG : ::Logger::INFO
       @logging = true

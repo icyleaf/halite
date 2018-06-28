@@ -1,15 +1,15 @@
 require "colorize"
 
-module Halite
-  class CommonLogger < Logger
+module Halite::Logger
+  class Common < Adapter
     def request(request)
       message = String.build do |io|
-        io << "| request |" << colorful_method(request.verb)
+        io << "| request  |" << colorful_method(request.verb)
         io << "| " << request.uri
         io << "\n" << request.body unless request.body.empty?
       end
 
-      @logger.info message
+      @writer.info message
     end
 
     def response(response)
@@ -22,7 +22,7 @@ module Halite
         io << "\n" << response.body unless response.body.empty? || binary_type?(content_type)
       end
 
-      @logger.debug message
+      @writer.debug message
     end
 
     protected def colorful_method(method, is_request = true)
@@ -85,3 +85,5 @@ module Halite
     end
   end
 end
+
+Halite::Logger.register_adapter "common", Halite::Logger::Common.new

@@ -1,4 +1,15 @@
 require "../spec_helper"
+require "tempfile"
+
+private class SimpleLogger < Halite::Logger::Adapter
+  def request(request)
+    @writer.info "request"
+  end
+
+  def response(response)
+    @writer.info "response"
+  end
+end
 
 describe Halite::Options do
   describe "#initialize" do
@@ -145,6 +156,29 @@ describe Halite::Options do
 
       options.follow.hops.should eq(5)
       options.follow.strict.should eq(false)
+    end
+  end
+
+  describe "#with_logger" do
+    it "should overwrite logger with instance class" do
+      options = Halite::Options.new.with_logger(logger: SimpleLogger.new)
+      options.logger.should be_a SimpleLogger
+    end
+
+    it "should overwrite logger with adapter name" do
+      Halite::Logger.register_adapter "simple", SimpleLogger.new
+
+      options = Halite::Options.new.with_logger(adapter: "simple")
+      options.logger.should be_a SimpleLogger
+    end
+
+    it "should became a file logger" do
+      Halite::Logger.register_adapter "simple", SimpleLogger.new
+
+      tempfile = Tempfile.new("halite_logger")
+
+      options = Halite::Options.new.with_logger(adapter: "simple", filename: tempfile.path, mode: "w")
+      options.logger.should be_a SimpleLogger
     end
   end
 

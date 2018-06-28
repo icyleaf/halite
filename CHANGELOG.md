@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-> TODO
+### Changed
+
+- New logger system, see [#19](https://github.com/icyleaf/halite/pull/19).
 
 ## [0.4.0] (2018-06-27)
 

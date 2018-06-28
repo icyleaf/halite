@@ -20,11 +20,6 @@ module Halite
       @@adapters[normalize name]?
     end
 
-    def self.clear
-      @@adapters.clear
-      @@aliases.clear
-    end
-
     private def self.normalize(name : String)
       @@aliases.fetch name, name
     end

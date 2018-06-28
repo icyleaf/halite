@@ -15,13 +15,15 @@ Build in crystal version >= `v0.25.0`, documents generated in latest commit.
 
 ## Index
 
+<!-- TOC -->
+
 - [Installation](#installation)
 - [Usage](#usage)
   - [Making Requests](#making-requests)
   - [Passing Parameters](#passing-parameters)
-    - [Query String](#query-string-parameters)
+    - [Query string parameters](#query-string-parameters)
     - [Form data](#form-data)
-    - [File uploads](#file-uploads-via-form-data)
+    - [File uploads (via form data)](#file-uploads-via-form-data)
     - [JSON data](#json-data)
   - [Passing advanced options](#passing-advanced-options)
     - [Headers](#headers)
@@ -31,16 +33,25 @@ Build in crystal version >= `v0.25.0`, documents generated in latest commit.
     - [Timeout](#timeout)
   - [HTTPS](#https)
   - [Response Handling](#response-handling)
-    - [Binary data](#binary-data)
+    - [Response Content](#response-content)
+    - [Parsing Data](#parsing-data)
+    - [Binary Data](#binary-data)
   - [Error Handling](#error-handling)
     - [Raise for status code](#raise-for-status-code)
 - [Advanced Usage](#advanced-usage)
   - [Sessions](#sessions)
   - [Logging](#logging)
+    - [Simple logging](#simple-logging)
+    - [JSON-formatted logging](#json-formatted-logging)
+    - [Logging request only](#logging-request-only)
+    - [Write to a log file](#write-to-a-log-file)
+    - [Use the custom logger](#use-the-custom-logger)
   - [Link Headers](#link-headers)
 - [Help and Discussion](#help-and-discussion)
 - [Contributing](#contributing)
 - [Contributors](#contributors)
+
+<!-- /TOC -->
 
 ## Installation
 
@@ -212,7 +223,7 @@ Use the `#basic_auth` method to perform [HTTP Basic Authentication](http://tools
 ```crystal
 Halite.basic_auth(user: "user", password: "p@ss").get("http://httpbin.org/get")
 
-# You can pass a raw authorization header using the auth method:
+# We can pass a raw authorization header using the auth method:
 Halite.auth("Bearer dXNlcjpwQHNz").get("http://httpbin.org/get")
 ```
 
@@ -261,7 +272,7 @@ Halite.follow(2)
 ##### Disabling unsafe redirects
 
 It only redirects with `GET`, `HEAD` request and returns a `300`, `301`, `302` by default, otherwise it will raise a `Halite::StateError`.
-You can diasble it to set `:strict` to `false` if you want any method(verb) requests, in which case the `GET` method(verb) will be used for
+We can diasble it to set `:strict` to `false` if we want any method(verb) requests, in which case the `GET` method(verb) will be used for
 that redirect:
 
 ```crystal
@@ -271,7 +282,8 @@ Halite.follow(strict: false)
 
 ##### History
 
-`Response#history` property list contains the `Response` objects that were created in order to complete the request. The list is orderd from the orderst to the most recent response.
+`Response#history` property list contains the `Response` objects that were created in order to complete the request.
+The list is orderd from the orderst to the most recent response.
 
 ```crystal
 r = Halite.follow
@@ -294,11 +306,13 @@ r.history
 
 #### Timeout
 
-By default, the Halite does not enforce timeout on a request. You can enable per operation timeouts by configuring them through the chaining API.
+By default, the Halite does not enforce timeout on a request.
+We can enable per operation timeouts by configuring them through the chaining API.
 
-The `connect` timeout is the number of seconds Halite will wait for your client to establish a connection to a remote server call on the socket.
+The `connect` timeout is the number of seconds Halite will wait for our client to establish a connection to a remote server call on the socket.
 
-Once your client has connected to the server and sent the HTTP request, the `read` timeout is the number of seconds the client will wait for the server to send a response.
+Once our client has connected to the server and sent the HTTP request,
+the `read` timeout is the number of seconds the client will wait for the server to send a response.
 
 ```crystal
 # Separate set connect and read timeout
@@ -342,6 +356,60 @@ After an HTTP request, `Halite::Response` object have several useful methods. (A
 - **#to_raw**: Return a raw of response as a string.
 - **#to_s**: Return response body as a string.
 - **#version**: The HTTP version.
+
+#### Response Content
+
+We can read the content of the server's response by call `#body`:
+
+```crystal
+r = Halite.get("http://httpbin.org/user-agent")
+r.body
+# => {"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36"}
+```
+
+The `gzip` and `deflate` transfer-encodings are automatically decoded for you.
+And requests will automatically decode content from the server. Most unicode charsets are seamlessly decoded.
+
+#### JSON Content
+
+There’s also a built-in a JSON adapter, in case you’re dealing with JSON data:
+
+```crystal
+r = Halite.get("http://httpbin.org/user-agent")
+r.parse("json")
+r.parse # simplily by default
+# => {
+# =>   "user-agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36"
+# => }
+```
+
+#### Parsing Content
+
+`Halite::Response` has a MIME type adapter system that you can use a decoder to parse the content,
+we can inherit `Halite::Logger::Adapter` make our adapter:
+
+```crystal
+# Define a MIME type adapter
+class YAMLAdapter < Halite::Logger::Adapter
+  def decode(string)
+    YAML.parse(string)
+  end
+
+  def encode(obj)
+    obj.to_yaml
+  end
+end
+
+# Register to Halite to invoke
+Halite::MimeTypes.register_adapter "application/x-yaml", YAMLAdapter.new
+Halite::MimeTypes.register_alias "application/x-yaml", "yaml"
+Halite::MimeTypes.register_alias "application/x-yaml", "yml"
+
+# Test it!
+r = Halite.get "https://raw.githubusercontent.com/icyleaf/halite/master/shard.yml"
+r.parse("yaml") # or "yml"
+# => {"name" => "halite", "version" => "0.4.0", "authors" => ["icyleaf <icyleaf.cn@gmail.com>"], "crystal" => "0.25.0", "license" => "MIT"}
+```
 
 #### Binary Data
 
@@ -433,7 +501,8 @@ All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/
 
 ### Logging
 
-the Halite does not enable logging on each request and response too. You can enable per operation logging by configuring them through the chaining API.
+the Halite does not enable logging on each request and response too.
+We can enable per operation logging by configuring them through the chaining API.
 
 #### Simple logging
 
@@ -454,7 +523,8 @@ Halite.logger
 
 #### Logging request only
 
-If you want logging request behavior only, throught pass `response` argument to `false`. And it not output the full body with binary type MIME types, please review it [here](https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79).
+If you want logging request behavior only, throught pass `response` argument to `false`.
+And it not output the full body with binary type MIME types, please review it [here](https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79).
 
 ```crystal
 Halite.logger(response: false)
@@ -467,10 +537,24 @@ Halite.logger(response: false)
 # => ----------------------------gUEmO7X80NT4_qIb-kgh4v2z--
 ```
 
+#### JSON-formatted logging
+
+It has JSON formatted for developer friendly logger.
+
+```
+Halite.logger(adapter: "json")
+      .get("http://httpbin.org/get", params: {name: "foobar"})
+```
+
 #### Write to a log file
 
 ```crystal
+# Write plain text to a log file
 Halite.logger(filename: "logs/halite.log", response: false)
+      .get("http://httpbin.org/get", params: {name: "foobar"})
+
+# Write json data to a log file
+Halite.logger(adapter: "json", filename: "logs/halite.log", response: false)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 ```
 
@@ -480,7 +564,7 @@ Creating the custom logger by integration `Halite::Logger` abstract class.
 here has two methods must be implement: `Halite::Logger.request` and `Halite::Logger.response`.
 
 ```crystal
-class MyLogger < Halite::Logger
+class CustomLogger < Halite::Logger::Adapter
   def request(request)
     @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
   end
@@ -490,7 +574,14 @@ class MyLogger < Halite::Logger
   end
 end
 
-Halite.logger(MyLogger.new)
+# Add to adapter list (optional)
+Halite::Logger.register_adapter "custom", CustomLogger.new
+
+Halite.logger(logger: CustomLogger.new)
+      .get("http://httpbin.org/get", params: {name: "foobar"})
+
+# We can also call it use adapter name if we added it.
+Halite.logger(adapter: "custom")
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # => 2017-12-13 16:40:13 +08:00 | >> | GET | http://httpbin.org/get?name=foobar
