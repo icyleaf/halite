@@ -291,7 +291,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/44889b8" target="_blank">master#44889b8</a> (2018-06-28 15:13:13 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/0f844da" target="_blank">master#0f844da</a> (2018-06-28 15:32:06 +0800).</p>
 
 <h2>Index</h2>
 
@@ -740,7 +740,7 @@ here has two methods must be implement: <code>Halite::Logger.request</code> and 
 <span class="c"># Add to adapter list (optional)</span>
 <span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span>.register_adapter <span class="s">&quot;custom&quot;</span>, <span class="t">CustomLogger</span>.<span class="k">new</span>
 
-<span class="t">Halite</span>.logger(logger: <span class="t">MyLogger</span>.<span class="k">new</span>)
+<span class="t">Halite</span>.logger(logger: <span class="t">CustomLogger</span>.<span class="k">new</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># We can also call it use adapter name if we added it.</span>
