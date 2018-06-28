@@ -218,7 +218,7 @@ module Halite
     end
 
     def with_logger(adapter = "common", filename : String? = nil, mode : String? = nil, response : Bool = true)
-      adapters = Halite::Logger.adapter_names
+      adapters = Halite::Logger.availables
       raise "Not avaiable adapter: #{adapter}, avaiables in #{adapters.join(", ")}" unless adapters.includes?(adapter)
 
       io = if filename && mode

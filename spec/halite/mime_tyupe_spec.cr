@@ -22,10 +22,13 @@ describe Halite::MimeTypes do
 
     Halite::MimeTypes["yaml"].should be_a YAMLAdapter
     Halite::MimeTypes["yml"].should be_a YAMLAdapter
+  end
 
-    Halite::MimeTypes.clear
-    Halite::MimeTypes["yaml"]?.should be_nil
-    Halite::MimeTypes["yml"]?.should be_nil
-    Halite::MimeTypes["json"]?.should be_nil
+  it "should overwrite exists adapter" do
+    Halite::MimeTypes.register_adapter "application/json", YAMLAdapter.new
+    Halite::MimeTypes.register_alias "application/json", "json"
+
+    Halite::MimeTypes["json"].should be_a YAMLAdapter
+    Halite::MimeTypes["json"].should_not be_a Halite::MimeTypes::JSON
   end
 end

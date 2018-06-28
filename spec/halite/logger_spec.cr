@@ -17,9 +17,13 @@ describe Halite::Logger do
     Halite::Logger.register_adapter "simple", SimpleLogger.new
     Halite::Logger["simple"].should be_a SimpleLogger
 
-    Halite::Logger.adapter_names.should eq ["common", "json", "simple"]
+    Halite::Logger.availables.should eq ["common", "json", "simple"]
+  end
 
-    Halite::Logger.clear
-    Halite::Logger.adapter_names.size.should eq 0
+  it "should overwrite exists adapter" do
+    Halite::Logger.register_adapter "common", SimpleLogger.new
+
+    Halite::Logger["common"].should be_a SimpleLogger
+    Halite::Logger["common"].should_not be_a Halite::Logger::Common
   end
 end

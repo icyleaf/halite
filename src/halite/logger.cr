@@ -17,12 +17,8 @@ module Halite
       @@adapters[name]?
     end
 
-    def self.adapter_names
+    def self.availables
       @@adapters.keys
-    end
-
-    def self.clear
-      @@adapters.clear
     end
 
     abstract class Adapter
