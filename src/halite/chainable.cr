@@ -195,49 +195,62 @@ module Halite
     #
     # #### Log use the custom logger
     #
-    # Creating the custom logger by integration `Halite::Logger` abstract class.
-    # here has two methods must be implement: `Halite::Logger.request` and `Halite::Logger.response`.
+    # Creating the custom logger by integration `Halite::Logger::Adapter` abstract class.
+    # here has two methods must be implement: `Halite::Logger::Adapter.request` and `Halite::Logger::Adapter.response`.
     #
     # ```
-    # class MyLogger < Halite::Logger
+    # class CustomLogger < Halite::Logger::Adapter
     #   def request(request)
-    #     @logger.info ">> | %s | %s %s" % [request.verb, request.uri, request.body]
+    #     @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
     #   end
     #
     #   def response(response)
-    #     @logger.info "<< | %s | %s %s" % [response.status_code, response.uri, response.mime_type]
+    #     @logger.info "| << | %s | %s %s" % [response.status_code, response.uri, response.content_type]
     #   end
     # end
     #
-    # Halite.logger(MyLogger.new)
+    # Halite::Logger.register_adapter "custom", CustomLogger.new
+    #
+    # Halite.logger(logger: CustomLogger.new)
+    #       .get("http://httpbin.org/get", params: {name: "foobar"})
+    #
+    # # Also register name support
+    # Halite.logger(adapter: "custom")
     #       .get("http://httpbin.org/get", params: {name: "foobar"})
     #
     # # => halite | 2017-12-13 16:40:13 >> | GET | http://httpbin.org/get?name=foobar
     # # => halite | 2017-12-13 16:40:15 << | 200 | http://httpbin.org/get?name=foobar application/json
     # ```
-    def logger(logger = Halite::CommonLogger.new, response = true)
+    def logger(logger = Halite::Logger::Common.new, response = true)
       branch(default_options.with_logger(logger, response))
     end
 
     # Returns `Options` self with gived the filename of logger path.
     #
-    # #### create a http request and log to file.
+    # #### JSON-formatted logging
     #
     # ```
-    # Halite.logger("/tmp/halite.log")
-    #       .get("http://httpbin.org/get", params: {name: "foobar"})
-    #
-    # ```
-    #
-    # #### Always create new log file and disable response log
-    #
-    # ```
-    # Halite.logger("/tmp/halite.log", mode: "w", response: false)
+    # Halite.logger(adapter: "json")
     #       .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
+    #
+    # #### create a http request and log to file
+    #
+    # ```
+    # Halite.logger(filename: "/tmp/halite.log")
+    #       .get("http://httpbin.org/get", params: {name: "foobar"})
+    # ```
+    #
+    # #### Always create new log file and store data to JSON formatted
+    #
+    # ```
+    # Halite.logger(adapter: "json", filename: "/tmp/halite.log", mode: "w")
+    #       .get("http://httpbin.org/get", params: {name: "foobar"})
+    # ```
+    #
     # Check the log file content: **/tmp/halite.log**
-    def logger(filename : String, mode = "a", response = true)
-      branch(default_options.with_logger(filename, mode, response))
+    def logger(adapter = "common", filename : String? = nil, mode : String? = nil, response = true)
+      branch(default_options.with_logger(adapter, filename, mode, response))
     end
 
     # Make an HTTP request with the given verb

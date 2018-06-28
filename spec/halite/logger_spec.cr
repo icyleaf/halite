@@ -1,0 +1,25 @@
+require "../spec_helper"
+
+private class SimpleLogger < Halite::Logger::Adapter
+  def request(request)
+    @writer.info "request"
+  end
+
+  def response(response)
+    @writer.info "response"
+  end
+end
+
+describe Halite::Logger do
+  it "should register an adapter" do
+    Halite::Logger["simple"]?.should be_nil
+
+    Halite::Logger.register_adapter "simple", SimpleLogger.new
+    Halite::Logger["simple"].should be_a SimpleLogger
+
+    Halite::Logger.adapter_names.should eq ["common", "json", "simple"]
+
+    Halite::Logger.clear
+    Halite::Logger.adapter_names.size.should eq 0
+  end
+end
