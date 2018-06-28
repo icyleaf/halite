@@ -61,11 +61,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/CommonLogger" data-name="halite::commonlogger">
-      <a href="../Halite/CommonLogger.html">CommonLogger</a>
-      
-    </li>
-  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/ConnectionError" data-name="halite::connectionerror">
       <a href="../Halite/ConnectionError.html">ConnectionError</a>
       
@@ -96,8 +91,43 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
       <a href="../Halite/Logger.html">Logger</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/Adapter" data-name="halite::logger::adapter">
+      <a href="../Halite/Logger/Adapter.html">Adapter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/Common" data-name="halite::logger::common">
+      <a href="../Halite/Logger/Common.html">Common</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Logger/JSON" data-name="halite::logger::json">
+      <a href="../Halite/Logger/JSON.html">JSON</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/JSON/Request" data-name="halite::logger::json::request">
+      <a href="../Halite/Logger/JSON/Request.html">Request</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/JSON/Response" data-name="halite::logger::json::response">
+      <a href="../Halite/Logger/JSON/Response.html">Response</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -250,12 +280,11 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">abstract class</span> Halite::Logger
+  <span class="kind">module</span> Halite::Logger
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/Logger.html">Halite::Logger</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -266,14 +295,6 @@
 
 
 
-
-
-  <h2>Direct Known Subclasses</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../Halite/CommonLogger.html">Halite::CommonLogger</a></li>
-  
-  </ul>
 
 
 
@@ -283,7 +304,17 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/logger.cr#L5" target="_blank">halite/logger.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/logger.cr#L5" target="_blank">halite/logger.cr</a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/loggers/common.cr#L3" target="_blank">halite/loggers/common.cr</a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/loggers/json.cr#L3" target="_blank">halite/loggers/json.cr</a>
     
     <br/>
   
@@ -292,16 +323,33 @@
 
 
 
-  <h2>Constructors</h2>
+
+
+  <h2>Class Method Summary</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28filename%3AString%2Cmode%3D%26quot%3Ba%26quot%3B%29-class-method" class="signature"><strong>.new</strong>(filename : String, mode = <span class="s">&quot;a&quot;</span>)</a>
+        <a href="#%5B%5D%28name%3AString%29-class-method" class="signature"><strong>.[]</strong>(name : String)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28io%3AIO%3DSTDOUT%29-class-method" class="signature"><strong>.new</strong>(io : IO = <span class="t">STDOUT</span>)</a>
+        <a href="#%5B%5D%3F%28name%3AString%29-class-method" class="signature"><strong>.[]?</strong>(name : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#adapter_names-class-method" class="signature"><strong>.adapter_names</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#clear-class-method" class="signature"><strong>.clear</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#register_adapter%28name%3AString%2Cadapter%3AHalite%3A%3ALogger%3A%3AAdapter%29-class-method" class="signature"><strong>.register_adapter</strong>(name : String, adapter : Halite::Logger::Adapter)</a>
         
       </li>
     
@@ -310,155 +358,94 @@
 
 
 
-
-  <h2>Instance Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#default_formatter-instance-method" class="signature"><strong>#default_formatter</strong></a>
-        
-          <div class="summary"><p>return Halite logger formatter</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#request%28request%3AHalite%3A%3ARequest%29-instance-method" class="signature"><strong>#request</strong>(request : Halite::Request)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#response%28response%3AHalite%3A%3AResponse%29-instance-method" class="signature"><strong>#response</strong>(response : Halite::Response)</a>
-        
-      </li>
-    
-  </ul>
-
-
-
-  <h2>Macro Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#method_missing%28call%29-macro" class="signature"><strong>method_missing</strong>(call)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
 <div class="methods-inherited">
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
-  <h2>Constructor Detail</h2>
+
+
+  <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="new(filename:String,mode=&amp;quot;a&amp;quot;)-class-method">
+    <div class="entry-detail" id="[](name:String)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(filename : String, mode = <span class="s">&quot;a&quot;</span>)
+        def self.<strong>[]</strong>(name : String)
 
-        <a class="method-permalink" href="#new%28filename%3AString%2Cmode%3D%26quot%3Ba%26quot%3B%29-class-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%28name%3AString%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/logger.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/logger.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(io:IO=STDOUT)-class-method">
+    <div class="entry-detail" id="[]?(name:String)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(io : IO = <span class="t">STDOUT</span>)
+        def self.<strong>[]?</strong>(name : String)
 
-        <a class="method-permalink" href="#new%28io%3AIO%3DSTDOUT%29-class-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%3F%28name%3AString%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/logger.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/logger.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
   
-
-
-
-
-
-  <h2>Instance Method Detail</h2>
-  
-    <div class="entry-detail" id="default_formatter-instance-method">
+    <div class="entry-detail" id="adapter_names-class-method">
       <div class="signature">
         
-        def <strong>default_formatter</strong>
+        def self.<strong>adapter_names</strong>
 
-        <a class="method-permalink" href="#default_formatter-instance-method">#</a>
+        <a class="method-permalink" href="#adapter_names-class-method">#</a>
       </div>
-      
-        <div class="doc"><p>return Halite logger formatter</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/logger.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/logger.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="request(request:Halite::Request)-instance-method">
+    <div class="entry-detail" id="clear-class-method">
       <div class="signature">
-        abstract 
-        def <strong>request</strong>(request : <a href="../Halite/Request.html">Halite::Request</a>)
+        
+        def self.<strong>clear</strong>
 
-        <a class="method-permalink" href="#request%28request%3AHalite%3A%3ARequest%29-instance-method">#</a>
+        <a class="method-permalink" href="#clear-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/logger.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/logger.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="response(response:Halite::Response)-instance-method">
+    <div class="entry-detail" id="register_adapter(name:String,adapter:Halite::Logger::Adapter)-class-method">
       <div class="signature">
-        abstract 
-        def <strong>response</strong>(response : <a href="../Halite/Response.html">Halite::Response</a>)
+        
+        def self.<strong>register_adapter</strong>(name : String, adapter : <a href="../Halite/Logger/Adapter.html">Halite::Logger::Adapter</a>)
 
-        <a class="method-permalink" href="#response%28response%3AHalite%3A%3AResponse%29-instance-method">#</a>
+        <a class="method-permalink" href="#register_adapter%28name%3AString%2Cadapter%3AHalite%3A%3ALogger%3A%3AAdapter%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/logger.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/logger.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -466,24 +453,7 @@
 
 
 
-  <h2>Macro Detail</h2>
-  
-    <div class="entry-detail" id="method_missing(call)-macro">
-      <div class="signature">
-        
-        macro <strong>method_missing</strong>(call)
 
-        <a class="method-permalink" href="#method_missing%28call%29-macro">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/logger.cr#L19" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 </div>

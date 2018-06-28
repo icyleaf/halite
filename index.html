@@ -61,11 +61,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/CommonLogger" data-name="halite::commonlogger">
-      <a href="Halite/CommonLogger.html">CommonLogger</a>
-      
-    </li>
-  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/ConnectionError" data-name="halite::connectionerror">
       <a href="Halite/ConnectionError.html">ConnectionError</a>
       
@@ -96,8 +91,43 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
       <a href="Halite/Logger.html">Logger</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/Adapter" data-name="halite::logger::adapter">
+      <a href="Halite/Logger/Adapter.html">Adapter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/Common" data-name="halite::logger::common">
+      <a href="Halite/Logger/Common.html">Common</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Logger/JSON" data-name="halite::logger::json">
+      <a href="Halite/Logger/JSON.html">JSON</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/JSON/Request" data-name="halite::logger::json::request">
+      <a href="Halite/Logger/JSON/Request.html">Request</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/JSON/Response" data-name="halite::logger::json::response">
+      <a href="Halite/Logger/JSON/Response.html">Response</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -261,11 +291,15 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/c3fec8d" target="_blank">master#c3fec8d</a> (2018-06-27 11:56:07 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/44889b8" target="_blank">master#44889b8</a> (2018-06-28 15:13:13 +0800).</p>
 
 <h2>Index</h2>
 
-<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query String</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#binary-data" target="_blank">Binary data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
+<p>&lt;!-- TOC --></p>
+
+<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#parsing-data" target="_blank">Parsing Data</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#simple-logging" target="_blank">Simple logging</a></li><li><a href="#json-formatted-logging" target="_blank">JSON-formatted logging</a></li><li><a href="#logging-request-only" target="_blank">Logging request only</a></li><li><a href="#write-to-a-log-file" target="_blank">Write to a log file</a></li><li><a href="#use-the-custom-logger" target="_blank">Use the custom logger</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#contributors" target="_blank">Contributors</a></li></ul>
+
+<p>&lt;!-- /TOC --></p>
 
 <h2>Installation</h2>
 
@@ -406,7 +440,7 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.basic_auth(user: <span class="s">&quot;user&quot;</span>, password: <span class="s">&quot;p@ss&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 
-<span class="c"># You can pass a raw authorization header using the auth method:</span>
+<span class="c"># We can pass a raw authorization header using the auth method:</span>
 <span class="t">Halite</span>.auth(<span class="s">&quot;Bearer dXNlcjpwQHNz&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
 
 <h4>Cookies</h4>
@@ -446,7 +480,7 @@ pp r.cookies
 <h5>Disabling unsafe redirects</h5>
 
 <p>It only redirects with <code>GET</code>, <code>HEAD</code> request and returns a <code>300</code>, <code>301</code>, <code>302</code> by default, otherwise it will raise a <code><a href="Halite/StateError.html">Halite::StateError</a></code>.
-You can diasble it to set <code>:strict</code> to <code>false</code> if you want any method(verb) requests, in which case the <code>GET</code> method(verb) will be used for
+We can diasble it to set <code>:strict</code> to <code>false</code> if we want any method(verb) requests, in which case the <code>GET</code> method(verb) will be used for
 that redirect:</p>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.follow(strict: <span class="n">false</span>)
@@ -454,7 +488,8 @@ that redirect:</p>
 
 <h5>History</h5>
 
-<p><code>Response#history</code> property list contains the <code>Response</code> objects that were created in order to complete the request. The list is orderd from the orderst to the most recent response.</p>
+<p><code>Response#history</code> property list contains the <code>Response</code> objects that were created in order to complete the request.
+The list is orderd from the orderst to the most recent response.</p>
 
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.follow
           .get(<span class="s">&quot;http://httpbin.org/redirect/3&quot;</span>)
@@ -475,11 +510,13 @@ r.history
 
 <h4>Timeout</h4>
 
-<p>By default, the Halite does not enforce timeout on a request. You can enable per operation timeouts by configuring them through the chaining API.</p>
+<p>By default, the Halite does not enforce timeout on a request.
+We can enable per operation timeouts by configuring them through the chaining API.</p>
 
-<p>The <code>connect</code> timeout is the number of seconds Halite will wait for your client to establish a connection to a remote server call on the socket.</p>
+<p>The <code>connect</code> timeout is the number of seconds Halite will wait for our client to establish a connection to a remote server call on the socket.</p>
 
-<p>Once your client has connected to the server and sent the HTTP request, the <code>read</code> timeout is the number of seconds the client will wait for the server to send a response.</p>
+<p>Once our client has connected to the server and sent the HTTP request,
+the <code>read</code> timeout is the number of seconds the client will wait for the server to send a response.</p>
 
 <pre><code class="language-crystal"><span class="c"># Separate set connect and read timeout</span>
 <span class="t">Halite</span>.timeout(connect: <span class="n">3.0</span>, read: <span class="n">2</span>.minutes)
@@ -507,6 +544,54 @@ ssl.private_key <span class="o">=</span> <span class="t">File</span>.expand_path
 <p>After an HTTP request, <code><a href="Halite/Response.html">Halite::Response</a></code> object have several useful methods. (Also see the <a href="https://icyleaf.github.io/halite/Halite/Response.html" target="_blank">API documentation</a>).</p>
 
 <ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io.</li><li><strong>#code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: A <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#links</strong>: A list of <code><a href="Halite/HeaderLink.html">Halite::HeaderLink</a></code> set from headers.</li><li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the <code>#content_type</code>.</li><li><strong>#to_a</strong>: Return a <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_raw</strong>: Return a raw of response as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li><li><strong>#version</strong>: The HTTP version.</li></ul>
+
+<h4>Response Content</h4>
+
+<p>We can read the content of the server's response by call <code>#body</code>:</p>
+
+<pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/user-agent&quot;</span>)
+r.body
+<span class="c"># =&gt; {&quot;user-agent&quot;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36&quot;}</span></code></pre>
+
+<p>The <code>gzip</code> and <code>deflate</code> transfer-encodings are automatically decoded for you.
+And requests will automatically decode content from the server. Most unicode charsets are seamlessly decoded.</p>
+
+<h4>JSON Content</h4>
+
+<p>There’s also a built-in a JSON adapter, in case you’re dealing with JSON data:</p>
+
+<pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/user-agent&quot;</span>)
+r.parse(<span class="s">&quot;json&quot;</span>)
+r.parse <span class="c"># simplily by default</span>
+<span class="c"># =&gt; {</span>
+<span class="c"># =&gt;   &quot;user-agent&quot; =&gt; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36&quot;</span>
+<span class="c"># =&gt; }</span></code></pre>
+
+<h4>Parsing Content</h4>
+
+<p><code><a href="Halite/Response.html">Halite::Response</a></code> has a MIME type adapter system that you can use a decoder to parse the content,
+we can inherit <code><a href="Halite/Logger/Adapter.html">Halite::Logger::Adapter</a></code> make our adapter:</p>
+
+<pre><code class="language-crystal"><span class="c"># Define a MIME type adapter</span>
+<span class="k">class</span> <span class="t">YAMLAdapter</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span><span class="t">::</span><span class="t">Adapter</span>
+  <span class="k">def</span> <span class="m">decode</span>(string)
+    <span class="t">YAML</span>.parse(string)
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="m">encode</span>(obj)
+    obj.to_yaml
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c"># Register to Halite to invoke</span>
+<span class="t">Halite</span><span class="t">::</span><span class="t">MimeTypes</span>.register_adapter <span class="s">&quot;application/x-yaml&quot;</span>, <span class="t">YAMLAdapter</span>.<span class="k">new</span>
+<span class="t">Halite</span><span class="t">::</span><span class="t">MimeTypes</span>.register_alias <span class="s">&quot;application/x-yaml&quot;</span>, <span class="s">&quot;yaml&quot;</span>
+<span class="t">Halite</span><span class="t">::</span><span class="t">MimeTypes</span>.register_alias <span class="s">&quot;application/x-yaml&quot;</span>, <span class="s">&quot;yml&quot;</span>
+
+<span class="c"># Test it!</span>
+r <span class="o">=</span> <span class="t">Halite</span>.get <span class="s">&quot;https://raw.githubusercontent.com/icyleaf/halite/master/shard.yml&quot;</span>
+r.parse(<span class="s">&quot;yaml&quot;</span>) <span class="c"># or &quot;yml&quot;</span>
+<span class="c"># =&gt; {&quot;name&quot; =&gt; &quot;halite&quot;, &quot;version&quot; =&gt; &quot;0.4.0&quot;, &quot;authors&quot; =&gt; [&quot;icyleaf &lt;icyleaf.cn@gmail.com&gt;&quot;], &quot;crystal&quot; =&gt; &quot;0.25.0&quot;, &quot;license&quot; =&gt; &quot;MIT&quot;}</span></code></pre>
 
 <h4>Binary Data</h4>
 
@@ -588,7 +673,8 @@ client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 
 <h3>Logging</h3>
 
-<p>the Halite does not enable logging on each request and response too. You can enable per operation logging by configuring them through the chaining API.</p>
+<p>the Halite does not enable logging on each request and response too.
+We can enable per operation logging by configuring them through the chaining API.</p>
 
 <h4>Simple logging</h4>
 
@@ -607,7 +693,8 @@ client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 
 <h4>Logging request only</h4>
 
-<p>If you want logging request behavior only, throught pass <code>response</code> argument to <code>false</code>. And it not output the full body with binary type MIME types, please review it <a href="https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79" target="_blank">here</a>.</p>
+<p>If you want logging request behavior only, throught pass <code>response</code> argument to <code>false</code>.
+And it not output the full body with binary type MIME types, please review it <a href="https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79" target="_blank">here</a>.</p>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.logger(response: <span class="n">false</span>)
       .post(<span class="s">&quot;http://httpbin.org/get&quot;</span>, form: {image: <span class="t">File</span>.open(<span class="s">&quot;halite-logo.png&quot;</span>)})
@@ -618,9 +705,21 @@ client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 <span class="c"># =&gt; [image data]</span>
 <span class="c"># =&gt; ----------------------------gUEmO7X80NT4_qIb-kgh4v2z--</span></code></pre>
 
+<h4>JSON-formatted logging</h4>
+
+<p>It has JSON formatted for developer friendly logger.</p>
+
+<pre><code><span class="t">Halite</span>.logger(adapter: <span class="s">&quot;json&quot;</span>)
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
+
 <h4>Write to a log file</h4>
 
-<pre><code class="language-crystal"><span class="t">Halite</span>.logger(filename: <span class="s">&quot;logs/halite.log&quot;</span>, response: <span class="n">false</span>)
+<pre><code class="language-crystal"><span class="c"># Write plain text to a log file</span>
+<span class="t">Halite</span>.logger(filename: <span class="s">&quot;logs/halite.log&quot;</span>, response: <span class="n">false</span>)
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
+
+<span class="c"># Write json data to a log file</span>
+<span class="t">Halite</span>.logger(adapter: <span class="s">&quot;json&quot;</span>, filename: <span class="s">&quot;logs/halite.log&quot;</span>, response: <span class="n">false</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <h4>Use the custom logger</h4>
@@ -628,7 +727,7 @@ client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 <p>Creating the custom logger by integration <code><a href="Halite/Logger.html">Halite::Logger</a></code> abstract class.
 here has two methods must be implement: <code>Halite::Logger.request</code> and <code>Halite::Logger.response</code>.</p>
 
-<pre><code class="language-crystal"><span class="k">class</span> <span class="t">MyLogger</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span>
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">CustomLogger</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span><span class="t">::</span><span class="t">Adapter</span>
   <span class="k">def</span> <span class="m">request</span>(request)
     @logger.info <span class="s">&quot;| &gt;&gt; | %s | %s %s&quot;</span> <span class="o">%</span> [request.verb, request.uri, request.body]
   <span class="k">end</span>
@@ -638,7 +737,14 @@ here has two methods must be implement: <code>Halite::Logger.request</code> and 
   <span class="k">end</span>
 <span class="k">end</span>
 
-<span class="t">Halite</span>.logger(<span class="t">MyLogger</span>.<span class="k">new</span>)
+<span class="c"># Add to adapter list (optional)</span>
+<span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span>.register_adapter <span class="s">&quot;custom&quot;</span>, <span class="t">CustomLogger</span>.<span class="k">new</span>
+
+<span class="t">Halite</span>.logger(logger: <span class="t">MyLogger</span>.<span class="k">new</span>)
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
+
+<span class="c"># We can also call it use adapter name if we added it.</span>
+<span class="t">Halite</span>.logger(adapter: <span class="s">&quot;custom&quot;</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># =&gt; 2017-12-13 16:40:13 +08:00 | &gt;&gt; | GET | http://httpbin.org/get?name=foobar</span>

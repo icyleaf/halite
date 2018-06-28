@@ -61,11 +61,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/CommonLogger" data-name="halite::commonlogger">
-      <a href="../Halite/CommonLogger.html">CommonLogger</a>
-      
-    </li>
-  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/ConnectionError" data-name="halite::connectionerror">
       <a href="../Halite/ConnectionError.html">ConnectionError</a>
       
@@ -96,8 +91,43 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Logger" data-name="halite::logger">
       <a href="../Halite/Logger.html">Logger</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/Adapter" data-name="halite::logger::adapter">
+      <a href="../Halite/Logger/Adapter.html">Adapter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/Common" data-name="halite::logger::common">
+      <a href="../Halite/Logger/Common.html">Common</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Logger/JSON" data-name="halite::logger::json">
+      <a href="../Halite/Logger/JSON.html">JSON</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/JSON/Request" data-name="halite::logger::json::request">
+      <a href="../Halite/Logger/JSON/Request.html">Request</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logger/JSON/Response" data-name="halite::logger::json::response">
+      <a href="../Halite/Logger/JSON/Response.html">Response</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -313,7 +343,7 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/client.cr#L40" target="_blank">halite/client.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/client.cr#L40" target="_blank">halite/client.cr</a>
     
     <br/>
   
@@ -430,8 +460,8 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
     headers</a>, 
     
   
-    <a href="../Halite/Chainable.html#logger%28filename%3AString%2Cmode%3D%26quot%3Ba%26quot%3B%2Cresponse%3Dtrue%29-instance-method" class="tooltip">
-      <span>logger(filename : String, mode = <span class="s">&quot;a&quot;</span>, response = <span class="n">true</span>)<br/>logger(logger = <span class="t">Halite</span><span class="t">::</span><span class="t">CommonLogger</span>.<span class="k">new</span>, response = <span class="n">true</span>)</span>
+    <a href="../Halite/Chainable.html#logger%28adapter%3D%26quot%3Bcommon%26quot%3B%2Cfilename%3AString%3F%3Dnil%2Cmode%3AString%3F%3Dnil%2Cresponse%3Dtrue%29-instance-method" class="tooltip">
+      <span>logger(adapter = <span class="s">&quot;common&quot;</span>, filename : String? = <span class="n">nil</span>, mode : String? = <span class="n">nil</span>, response = <span class="n">true</span>)<br/>logger(logger = <span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span><span class="t">::</span><span class="t">Common</span>.<span class="k">new</span>, response = <span class="n">true</span>)</span>
     logger</a>, 
     
   
@@ -518,7 +548,7 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/client.cr#L54" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/client.cr#L54" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -536,7 +566,7 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/client.cr#L59" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/client.cr#L59" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -562,7 +592,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/client.cr#L77" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/client.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -585,7 +615,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/client.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/client.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -601,7 +631,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/client.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/client.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -619,7 +649,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c3fec8d170607a9e5e0ae25caac63f548c7bce63/src/halite/client.cr#L82" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/44889b8e95321ce275274dc15b3a5fe611e23a58/src/halite/client.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
