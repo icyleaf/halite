@@ -25,5 +25,8 @@ describe Halite::Logger do
 
     Halite::Logger["common"].should be_a SimpleLogger
     Halite::Logger["common"].should_not be_a Halite::Logger::Common
+
+    # Restore back for other specs
+    Halite::Logger.register_adapter "common", Halite::Logger::Common.new
   end
 end

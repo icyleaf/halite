@@ -30,5 +30,9 @@ describe Halite::MimeTypes do
 
     Halite::MimeTypes["json"].should be_a YAMLAdapter
     Halite::MimeTypes["json"].should_not be_a Halite::MimeTypes::JSON
+
+    # Restore back for other specs
+    Halite::MimeTypes.register_adapter "application/json", Halite::MimeTypes::JSON.new
+    Halite::MimeTypes.register_alias "application/json", "json"
   end
 end
