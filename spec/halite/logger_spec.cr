@@ -12,8 +12,6 @@ end
 
 describe Halite::Logger do
   it "should register an adapter" do
-    Halite::Logger["simple"]?.should be_nil
-
     Halite::Logger.register_adapter "simple", SimpleLogger.new
     Halite::Logger["simple"].should be_a SimpleLogger
 
