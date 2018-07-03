@@ -17,6 +17,7 @@ Build in crystal version >= `v0.25.0`, documents generated in latest commit.
 
 <!-- TOC -->
 
+- [Index](#index)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Making Requests](#making-requests)
@@ -25,6 +26,7 @@ Build in crystal version >= `v0.25.0`, documents generated in latest commit.
     - [Form data](#form-data)
     - [File uploads (via form data)](#file-uploads-via-form-data)
     - [JSON data](#json-data)
+    - [Raw String](#raw-string)
   - [Passing advanced options](#passing-advanced-options)
     - [Headers](#headers)
     - [Auth](#auth)
@@ -189,6 +191,14 @@ Use the `json` argument to pass data serialized as body encoded:
 
 ```crystal
 Halite.post("http://httpbin.org/post", json: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
+```
+
+#### Raw String
+
+Use the `raw` argument to pass raw string as body:
+
+```crystal
+Halite.post("http://httpbin.org/post", raw: "name=Peter+Lee&address=%23123+Happy+Ave&Language=C%2B%2B")
 ```
 
 ### Passing advanced options
