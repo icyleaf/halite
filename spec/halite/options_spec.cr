@@ -11,11 +11,52 @@ private class SimpleLogger < Halite::Logger::Adapter
   end
 end
 
+private def test_options
+  Halite::Options.new(
+    headers: {
+      user_agent: "spec",
+    },
+    params: {"title" => "h1"},
+    form: {"title" => "h2"},
+    json: {"title" => "h3"},
+    raw: "title=h4",
+    connect_timeout: 1,
+    read_timeout: 3.2,
+    ssl: OpenSSL::SSL::Context::Client.new,
+    follow: 2,
+    follow_strict: false
+  )
+end
+
 describe Halite::Options do
   describe "#initialize" do
     it "should initial with nothing" do
       options = Halite::Options.new
       options.should be_a(Halite::Options)
+      options.headers.should eq(HTTP::Headers{"User-Agent" => "Halite/#{Halite::VERSION}", "Accept" => "*/*", "Connection" => "keep-alive"})
+
+      options.cookies.should be_a(HTTP::Cookies)
+      options.cookies.size.should eq(0)
+
+      options.timeout.should be_a(Halite::Options::Timeout)
+      options.timeout.connect.should be_nil
+      options.timeout.read.should be_nil
+      options.connect_timeout.should be_nil
+      options.read_timeout.should be_nil
+
+      options.follow.should be_a(Halite::Options::Follow)
+      options.follow.hops.should eq(Halite::Options::Follow::DEFAULT_HOPS)
+      options.follow.strict.should eq(Halite::Options::Follow::STRICT)
+      options.follow_strict.should eq(Halite::Options::Follow::STRICT)
+
+      options.ssl.should be_nil
+      options.params.should eq({} of String => Halite::Options::Type)
+      options.form.should eq({} of String => Halite::Options::Type)
+      options.json.should eq({} of String => Halite::Options::Type)
+      options.raw.should be_nil
+
+      options.logger.should be_a(Halite::Logger::Common)
+      options.logging?.should be_false
     end
 
     it "should initial with Hash arguments" do
@@ -72,6 +113,113 @@ describe Halite::Options do
       options.should be_a(Halite::Options)
       options.headers["User-Agent"].should eq("spec")
     end
+  end
+
+  describe "#merge" do
+    it "should works with Hash or NamedTuple" do
+      options = test_options.merge({
+        headers: {
+          user_agent: "spec",
+        },
+        params:          {"title" => "1"},
+        form:            {"title" => "2"},
+        json:            {"title" => "3"},
+        raw:             "title=4",
+        connect_timeout: 2,
+        read_timeout:    1,
+        follow:          1,
+        follow_strict:   true,
+      })
+
+      options.headers.should eq(HTTP::Headers{"User-Agent" => "spec", "Accept" => "*/*", "Connection" => "keep-alive"})
+
+      options.cookies.should be_a(HTTP::Cookies)
+      options.cookies.size.should eq(0)
+
+      options.timeout.should be_a(Halite::Options::Timeout)
+      options.timeout.connect.should eq(2)
+      options.timeout.read.should eq(1)
+      options.connect_timeout.should eq(2)
+      options.read_timeout.should eq(1)
+
+      options.follow.should be_a(Halite::Options::Follow)
+      options.follow.hops.should eq(1)
+      options.follow.strict.should be_true
+      options.follow_strict.should be_true
+
+      options.params.should eq({"title" => "1"})
+      options.form.should eq({"title" => "2"})
+      options.json.should eq({"title" => "3"})
+      options.raw.should_not be_nil
+      options.raw.not_nil!.should eq("title=4")
+    end
+
+    it "should works with Halite::Options" do
+      options = test_options.merge(Halite::Options.new(
+        headers: {
+          user_agent: "spec",
+        },
+        params: {"title" => "1"},
+        form: {"title" => "2"},
+        json: {"title" => "3"},
+        raw: "title=4",
+        connect_timeout: 2,
+        read_timeout: 1,
+        follow: 1,
+        follow_strict: true
+      ))
+
+      options.headers.should eq(HTTP::Headers{"User-Agent" => "spec", "Accept" => "*/*", "Connection" => "keep-alive"})
+
+      options.cookies.should be_a(HTTP::Cookies)
+      options.cookies.size.should eq(0)
+
+      options.timeout.should be_a(Halite::Options::Timeout)
+      options.timeout.connect.should eq(2)
+      options.timeout.read.should eq(1)
+      options.connect_timeout.should eq(2)
+      options.read_timeout.should eq(1)
+
+      options.follow.should be_a(Halite::Options::Follow)
+      options.follow.hops.should eq(1)
+      options.follow.strict.should be_true
+      options.follow_strict.should be_true
+
+      options.params.should eq({"title" => "1"})
+      options.form.should eq({"title" => "2"})
+      options.json.should eq({"title" => "3"})
+      options.raw.should_not be_nil
+      options.raw.not_nil!.should eq("title=4")
+    end
+  end
+
+  describe "#clear!" do
+    options = test_options
+    options.clear!
+    options.headers.should eq(HTTP::Headers{"User-Agent" => "Halite/#{Halite::VERSION}", "Accept" => "*/*", "Connection" => "keep-alive"})
+
+    options.cookies.should be_a(HTTP::Cookies)
+    options.cookies.size.should eq(0)
+
+    options.timeout.should be_a(Halite::Options::Timeout)
+    options.timeout.connect.should be_nil
+    options.timeout.read.should be_nil
+    options.connect_timeout.should be_nil
+    options.read_timeout.should be_nil
+
+    options.follow.should be_a(Halite::Options::Follow)
+    options.follow.hops.should eq(Halite::Options::Follow::DEFAULT_HOPS)
+    options.follow.strict.should eq(Halite::Options::Follow::STRICT)
+    options.follow_strict.should eq(Halite::Options::Follow::STRICT)
+
+    options.ssl.should be_nil
+    options.params.should eq({} of String => Halite::Options::Type)
+    options.form.should eq({} of String => Halite::Options::Type)
+    options.json.should eq({} of String => Halite::Options::Type)
+    options.raw.should be_nil
+
+    options.logger.should be_a(Halite::Logger::Common)
+    options.logging?.should be_false
   end
 
   describe "#with_headers" do
