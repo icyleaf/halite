@@ -7,13 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+> TODO
+
+## [0.5.0] (2018-07-03)
+
 ### Added
 
 - Add request [#raw](https://github.com/icyleaf/halite/#raw-string) string support. [#20](https://github.com/icyleaf/halite/issues/20) (thanks @[wirrareka](https://github.com/wirrareka))
 
 ### Changed
 
-- New logger system, see [#19](https://github.com/icyleaf/halite/pull/19).
+- New logger system and json logger support, see [#19](https://github.com/icyleaf/halite/pull/19).
+- Change verb request behavior:
+  - `get`, `head` only accepts `#params` argument.
+  - `post`, `put`, `delete`, `patch`, `options` accepts `#params`, `#form`, `#json` and `#raw` arguments.
 
 ## [0.4.0] (2018-06-27)
 
@@ -121,7 +128,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/icyleaf/halite/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/icyleaf/halite/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/icyleaf/halite/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/icyleaf/halite/compare/v0.2.0...v0.3.1
