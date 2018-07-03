@@ -291,7 +291,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/b841fcd" target="_blank">master#b841fcd</a> (2018-07-03 14:36:56 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/d1be947" target="_blank">master#d1be947</a> (2018-07-03 16:15:59 +0800).</p>
 
 <h2>Index</h2>
 
@@ -414,9 +414,17 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 
 <h4>Raw String</h4>
 
-<p>Use the <code>raw</code> argument to pass raw string as body:</p>
+<p>Use the <code>raw</code> argument to pass raw string as body and set the <code>Content-Type</code> manually:</p>
 
-<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;language=C%2B%2B&quot;</span>)
+
+<span class="c"># Set content-type manually</span>
+<span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>,
+  headers: {
+    <span class="s">&quot;content-type&quot;</span> => <span class="s">&quot;application/json&quot;</span>
+  },
+  raw: <span class="s">%Q{{&quot;name&quot;:&quot;Peter Lee&quot;,&quot;address&quot;:&quot;23123 Happy Ave&quot;,&quot;language&quot;:&quot;C++&quot;}}</span>
+)</code></pre>
 
 <h3>Passing advanced options</h3>
 

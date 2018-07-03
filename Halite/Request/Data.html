@@ -310,7 +310,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/b841fcdb509668251cc746c123e43f8f916c6c0f/src/halite/request.cr#L79" target="_blank">halite/request.cr</a>
+      <a href="https://github.com/icyleaf/halite/blob/d1be947bc50378855cbdfab704ce0bf546f8ea33/src/halite/request.cr#L79" target="_blank">halite/request.cr</a>
     
     <br/>
   
@@ -323,12 +323,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28body%3AString%2Cheaders%3AHash%28String%2C_%29%29-class-method" class="signature"><strong>.new</strong>(body : String, headers : Hash(String, _))</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#new%28body%3AString%2Cheaders%3AHTTP%3A%3AHeaders%29-class-method" class="signature"><strong>.new</strong>(body : String, headers : HTTP::Headers)</a>
+        <a href="#new%28body%3AString%2Ccontent_type%3AString%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(body : String, content_type : String? = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -347,7 +342,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#headers%3AHTTP%3A%3AHeaders-instance-method" class="signature"><strong>#headers</strong> : HTTP::Headers</a>
+        <a href="#content_type%3AString%3F-instance-method" class="signature"><strong>#content_type</strong> : String?</a>
         
       </li>
     
@@ -394,34 +389,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(body:String,headers:Hash(String,_))-class-method">
+    <div class="entry-detail" id="new(body:String,content_type:String?=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(body : String, headers : Hash(String, _))
+        def self.<strong>new</strong>(body : String, content_type : String? = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28body%3AString%2Cheaders%3AHash%28String%2C_%29%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28body%3AString%2Ccontent_type%3AString%3F%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/b841fcdb509668251cc746c123e43f8f916c6c0f/src/halite/request.cr#L83" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="new(body:String,headers:HTTP::Headers)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(body : String, headers : <a href="../../HTTP/Headers.html">HTTP::Headers</a>)
-
-        <a class="method-permalink" href="#new%28body%3AString%2Cheaders%3AHTTP%3A%3AHeaders%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/b841fcdb509668251cc746c123e43f8f916c6c0f/src/halite/request.cr#L87" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d1be947bc50378855cbdfab704ce0bf546f8ea33/src/halite/request.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -444,23 +423,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/b841fcdb509668251cc746c123e43f8f916c6c0f/src/halite/request.cr#L80" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d1be947bc50378855cbdfab704ce0bf546f8ea33/src/halite/request.cr#L80" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="headers:HTTP::Headers-instance-method">
+    <div class="entry-detail" id="content_type:String?-instance-method">
       <div class="signature">
         
-        def <strong>headers</strong> : <a href="../../HTTP/Headers.html">HTTP::Headers</a>
+        def <strong>content_type</strong> : String?
 
-        <a class="method-permalink" href="#headers%3AHTTP%3A%3AHeaders-instance-method">#</a>
+        <a class="method-permalink" href="#content_type%3AString%3F-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/b841fcdb509668251cc746c123e43f8f916c6c0f/src/halite/request.cr#L81" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/d1be947bc50378855cbdfab704ce0bf546f8ea33/src/halite/request.cr#L80" target="_blank">View source</a>]
         
       </div>
     </div>
