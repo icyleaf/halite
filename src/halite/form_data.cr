@@ -42,12 +42,10 @@ module Halite
         end
         builder.finish
 
-        Halite::Request::Data.new(io.to_s, headers: {"Content-Type" => builder.content_type})
+        Halite::Request::Data.new(io.to_s, builder.content_type)
       else
-        content_type = "application/x-www-form-urlencoded"
         body = HTTP::Params.escape(data)
-
-        Halite::Request::Data.new(body, headers: {"Content-Type" => content_type})
+        Halite::Request::Data.new(body, "application/x-www-form-urlencoded")
       end
     end
 

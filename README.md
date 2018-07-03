@@ -195,10 +195,19 @@ Halite.post("http://httpbin.org/post", json: { "firstname" => "Olen", "lastname"
 
 #### Raw String
 
-Use the `raw` argument to pass raw string as body:
+Use the `raw` argument to pass raw string as body and set the `Content-Type` manually:
 
 ```crystal
-Halite.post("http://httpbin.org/post", raw: "name=Peter+Lee&address=%23123+Happy+Ave&Language=C%2B%2B")
+# Set content-type to "text/plain" by default
+Halite.post("http://httpbin.org/post", raw: "name=Peter+Lee&address=%23123+Happy+Ave&language=C%2B%2B")
+
+# Set content-type manually
+Halite.post("http://httpbin.org/post",
+  headers: {
+    "content-type" => "application/json"
+  },
+  raw: %Q{{"name":"Peter Lee","address":"23123 Happy Ave","language":"C++"}}
+)
 ```
 
 ### Passing advanced options

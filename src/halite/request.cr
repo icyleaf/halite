@@ -77,14 +77,9 @@ module Halite
 
     # Request data of body
     struct Data
-      getter body : String
-      getter headers : HTTP::Headers
+      getter body,content_type
 
-      def self.new(body : String, headers : Hash(String, _))
-        new(body, HTTP::Headers.escape(headers))
-      end
-
-      def initialize(@body : String, @headers : HTTP::Headers)
+      def initialize(@body : String, @content_type : String? = nil)
       end
     end
   end

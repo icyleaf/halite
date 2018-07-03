@@ -83,7 +83,7 @@ module Halite
 
       uri = make_request_uri(uri, opts)
       body_data = make_request_body(opts)
-      headers = make_request_headers(opts, body_data.headers)
+      headers = make_request_headers(opts, body_data.content_type)
 
       request = Request.new(verb, uri, headers, body_data.body)
       response = perform(request, opts)
@@ -135,18 +135,13 @@ module Halite
     end
 
     # Merges request headers
-    private def make_request_headers(options : Halite::Options, content_type : String) : HTTP::Headers
+    private def make_request_headers(options : Halite::Options, content_type : String?) : HTTP::Headers
       headers = options.headers
-      if !content_type.empty?
-        headers.add("Content-Type", content_type)
+      if  (value = content_type) && !value.empty?
+        headers.add("Content-Type", value)
       end
 
-      headers
-    end
-
-    # Merges request headers
-    private def make_request_headers(options : Halite::Options, headers : HTTP::Headers?) : HTTP::Headers
-      headers = headers ? options.headers.merge!(headers) : options.headers
+      # Cookie shards
       options.cookies.add_request_headers(headers)
     end
 
@@ -159,11 +154,11 @@ module Halite
           hash.to_json(builder)
         end
 
-        Halite::Request::Data.new(body, {"Content-Type" => "application/json"})
+        Halite::Request::Data.new(body, "application/json")
       elsif (raw = options.raw) && !raw.empty?
-        Halite::Request::Data.new(raw, {} of String => String)
+        Halite::Request::Data.new(raw, "text/plain")
       else
-        Halite::Request::Data.new("", {} of String => String)
+        Halite::Request::Data.new("")
       end
     end
 
