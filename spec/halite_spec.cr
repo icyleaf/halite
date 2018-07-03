@@ -76,8 +76,13 @@ describe Halite do
 
   describe ".post" do
     context "loading a simple form data" do
-      it "should easy to request" do
+      it "should easy to request with form data" do
         response = Halite.post("#{server.endpoint}/form", form: {example: "testing-form"})
+        response.to_s.should contain("example: testing-form")
+      end
+
+      it "should easy to request with raw string" do
+        response = Halite.post("#{server.endpoint}/form", raw: "example=testing-form")
         response.to_s.should contain("example: testing-form")
       end
     end

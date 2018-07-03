@@ -51,7 +51,7 @@ module Halite
     #   },
     # })
     # ```
-    def self.new(options : (Hash(Options::Type, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil, "ssl" => nil})
+    def self.new(options : (Hash(Options::Type, _) | NamedTuple))
       Client.new(Options.new(options))
     end
 
@@ -59,7 +59,6 @@ module Halite
     def self.new(&block)
       options = Options.new
       yield options
-
       Client.new(options)
     end
 
@@ -79,20 +78,20 @@ module Halite
     end
 
     # Make an HTTP request
-    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple) = {"headers" => nil, "params" => nil, "form" => nil, "json" => nil, "ssl" => nil}) : Halite::Response
-      options = @options.merge(options)
+    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple)? = nil) : Halite::Response
+      opts = options ? @options.merge(options.not_nil!) : @options
 
-      uri = make_request_uri(uri, options)
-      body_data = make_request_body(options)
-      headers = make_request_headers(options, body_data.headers)
+      uri = make_request_uri(uri, opts)
+      body_data = make_request_body(opts)
+      headers = make_request_headers(opts, body_data.headers)
 
       request = Request.new(verb, uri, headers, body_data.body)
-      response = perform(request, options)
+      response = perform(request, opts)
 
-      return response if options.follow.hops.zero?
+      return response if opts.follow.hops.zero?
 
-      Redirector.new(request, response, options.follow.hops, options.follow.strict).perform do |req|
-        perform(req, options)
+      Redirector.new(request, response, opts.follow.hops, opts.follow.strict).perform do |req|
+        perform(req, opts)
       end
     end
 
@@ -161,6 +160,8 @@ module Halite
         end
 
         Halite::Request::Data.new(body, {"Content-Type" => "application/json"})
+      elsif (raw = options.raw) && !raw.empty?
+        Halite::Request::Data.new(raw, {} of String => String)
       else
         Halite::Request::Data.new("", {} of String => String)
       end
