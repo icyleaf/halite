@@ -5,7 +5,6 @@
 [![Language](https://img.shields.io/badge/language-crystal-776791.svg)](https://github.com/crystal-lang/crystal)
 [![Tag](https://img.shields.io/github/tag/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/CHANGELOG.md)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
-[![License](https://img.shields.io/github/license/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/LICENSE)
 
 Crystal HTTP Requests with a chainable REST API, built-in sessions and loggers written by [Crystal](https://crystal-lang.org/).
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem
@@ -51,8 +50,9 @@ Build in crystal version >= `v0.25.0`, documents generated in latest commit.
     - [Use the custom logger](#use-the-custom-logger)
   - [Link Headers](#link-headers)
 - [Help and Discussion](#help-and-discussion)
-- [Contributing](#contributing)
-- [Contributors](#contributors)
+- [Donate](#donate)
+- [How to Contribute](#how-to-contribute)
+- [License](#license)
 
 <!-- /TOC -->
 
@@ -644,18 +644,32 @@ You can browse the all chainable methods:
 
 https://icyleaf.github.io/halite/Halite/Chainable.html
 
+You can browse the Changelog:
+
+https://github.com/icyleaf/halite/blob/master/CHANGELOG.md
+
 If you have found a bug, please create a issue here:
 
 https://github.com/icyleaf/halite/issues/new
 
-## Contributing
+## Donate
 
-1. Fork it ( https://github.com/icyleaf/halite/fork )
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create a new Pull Request
+Halite is a open source, collaboratively funded project. If you run a business and are using Halite in a revenue-generating product,
+it would make business sense to sponsor Halite development. Individual users are also welcome to make a one time donation
+if Halite has helped you in your work or personal projects.
 
-## Contributors
+You can donate via [Paypal](https://www.paypal.me/icyleaf/5).
 
-- [icyleaf](https://github.com/icyleaf) - creator, maintainer
+## How to Contribute
+
+Your contributions are always welcome! Please submit a pull request or create an issue to add a new question, bug or feature to the list.
+
+Here is a throughput graph of the repository for the last few weeks:
+
+[![Throughput Graph](https://graphs.waffle.io/icyleaf/halite/throughput.svg)](https://github.com/icyleaf/halite/issues/)
+
+All [Contributors](https://github.com/icyleaf/halite/graphs/contributors) are on the wall.
+
+## License
+
+[MIT License](https://github.com/icyleaf/halite/blob/master/LICENSE) © icyleaf
