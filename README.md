@@ -670,6 +670,13 @@ Here is a throughput graph of the repository for the last few weeks:
 
 All [Contributors](https://github.com/icyleaf/halite/graphs/contributors) are on the wall.
 
+## You may also like
+
+- [totem](https://github.com/icyleaf/totem) - Load and parse a configuration file or string in JSON, YAML, dotenv formats.
+- [poncho](https://github.com/icyleaf/poncho) - A .env parser/loader improved for performance.
+- [popcorn](https://github.com/icyleaf/popcorn) - Easy and Safe casting from one type to another.
+- [fast-crystal](https://github.com/icyleaf/fast-crystal) - 💨 Writing Fast Crystal 😍 -- Collect Common Crystal idioms.
+
 ## License
 
 [MIT License](https://github.com/icyleaf/halite/blob/master/LICENSE) © icyleaf
