@@ -673,6 +673,7 @@ All [Contributors](https://github.com/icyleaf/halite/graphs/contributors) are on
 ## You may also like
 
 - [totem](https://github.com/icyleaf/totem) - Load and parse a configuration file or string in JSON, YAML, dotenv formats.
+- [markd](https://github.com/icyleaf/markd) - Yet another markdown parser built for speed, Compliant to CommonMark specification.
 - [poncho](https://github.com/icyleaf/poncho) - A .env parser/loader improved for performance.
 - [popcorn](https://github.com/icyleaf/popcorn) - Easy and Safe casting from one type to another.
 - [fast-crystal](https://github.com/icyleaf/fast-crystal) - 💨 Writing Fast Crystal 😍 -- Collect Common Crystal idioms.
