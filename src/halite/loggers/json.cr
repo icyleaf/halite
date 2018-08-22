@@ -17,7 +17,7 @@ module Halite::Logger
     end
 
     def default_formatter
-      ::Logger::Formatter.new do |severity, datetime, progname, message, io|
+      ::Logger::Formatter.new do |_, _, _, message, io|
         io << message
       end
     end

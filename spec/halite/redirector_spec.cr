@@ -52,7 +52,7 @@ describe Halite::Redirector do
     it "fails with EndlessRedirectError if endless loop detected" do
       res = redirect_response 301, request.uri
       expect_raises Halite::EndlessRedirectError do
-        redirector(request, res).perform do |prev_req|
+        redirector(request, res).perform do |_|
           res
         end
       end
@@ -61,7 +61,7 @@ describe Halite::Redirector do
     it "fails with StateError if there were no Location header" do
       res = simple_response 301
       expect_raises Halite::StateError do
-        redirector(request, res).perform do |prev_req|
+        redirector(request, res).perform do |_|
           res
         end
       end
@@ -97,7 +97,7 @@ describe Halite::Redirector do
           req = Halite::Request.new "put", "http://example.com/foo?bar=baz"
           res = redirect_response 300, "http://example.com/1"
           expect_raises Halite::StateError do
-            redirector(req, res, true).perform { |req| simple_response 200 }
+            redirector(req, res, true).perform { |_| simple_response 200 }
           end
         end
 
@@ -105,7 +105,7 @@ describe Halite::Redirector do
           req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
           res = redirect_response 301, "http://example.com/1"
           expect_raises Halite::StateError do
-            redirector(req, res, true).perform { |req| simple_response 200 }
+            redirector(req, res, true).perform { |_| simple_response 200 }
           end
         end
 
@@ -113,7 +113,7 @@ describe Halite::Redirector do
           req = Halite::Request.new "delete", "http://example.com/foo?bar=baz"
           res = redirect_response 302, "http://example.com/1"
           expect_raises Halite::StateError do
-            redirector(req, res, true).perform { |req| simple_response 200 }
+            redirector(req, res, true).perform { |_| simple_response 200 }
           end
         end
       end

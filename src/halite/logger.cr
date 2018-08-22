@@ -43,7 +43,7 @@ module Halite
       abstract def response(response : Halite::Response)
 
       def default_formatter
-        ::Logger::Formatter.new do |severity, datetime, progname, message, io|
+        ::Logger::Formatter.new do |_, datetime, _, message, io|
           io << datetime.to_s << " " << message
         end
       end
