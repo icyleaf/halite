@@ -66,9 +66,9 @@ module HTTP
       end
     end
 
-    # Return `true` if params is empty.
-    #
-    # TODO: remove if crystal merge and dump new version wih [PL#6241](https://github.com/crystal-lang/crystal/pull/6241/).
-    delegate empty?, to: raw_params
+    {% if Crystal::VERSION < "0.26.0" %}
+      # Return `true` if params is empty.
+      delegate empty?, to: raw_params
+    {% end %}
   end
 end
