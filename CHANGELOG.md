@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+### Tested
+
+- Compatibility with Crystal 0.26
+
 ## [0.5.0] (2018-07-03)
 
 ### Added
