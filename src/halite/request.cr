@@ -52,7 +52,9 @@ module Halite
     def full_path
       String.build do |str|
         str << @uri.full_path
-        str << "#" << @uri.fragment if @uri.fragment
+        if @uri.fragment
+          str << "#" << @uri.fragment
+        end
       end
     end
 

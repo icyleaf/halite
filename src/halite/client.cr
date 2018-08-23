@@ -96,7 +96,7 @@ module Halite
     end
 
     # Perform a single (no follow) HTTP request
-    private def perform(request, options) : Halite::Response
+    private def perform(request : Halite::Request, options : Halite::Options) : Halite::Response
       raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.ssl
 
       options.logger.request(request) if options.logging
