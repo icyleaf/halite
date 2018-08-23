@@ -74,7 +74,7 @@ describe Halite::Client do
       r = client.get "#{server.endpoint}/get-cookies"
       r.headers.has_key?("Set-Cookie").should be_false
       r.cookies.size.zero?.should be_true
-      JSON.parse(r.body)["foo"].should eq("bar")
+      r.parse("json").as_h["foo"].should eq("bar")
     end
   end
 end

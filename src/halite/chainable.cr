@@ -22,25 +22,24 @@ module Halite
       #   last_name:  "bar"
       # })
       # ```
-      def {{ verb.id }}(uri : String, headers : (Hash(String, _) | NamedTuple)? = nil, params : (Hash(String, _) | NamedTuple)? = nil, form : (Hash(String, _) | NamedTuple)? = nil, json : (Hash(String, _) | NamedTuple)? = nil, ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
+      #
+      # ### Request with raw string
+      #
+      # ```
+      # Halite.{{ verb.id }}("http://httpbin.org/anything", raw: "name=Peter+Lee&address=%23123+Happy+Ave&Language=C%2B%2B")
+      # ```
+      def {{ verb.id }}(uri : String,
+                        headers : (Hash(String, _) | NamedTuple)? = nil,
+                        params : (Hash(String, _) | NamedTuple)? = nil,
+                        form : (Hash(String, _) | NamedTuple)? = nil,
+                        json : (Hash(String, _) | NamedTuple)? = nil,
+                        raw : String? = nil,
+                        ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
         request({{ verb }}, uri, {
           "headers" => headers,
           "params" => params,
           "form" => form,
           "json" => json,
-          "ssl" => ssl
-        })
-      end
-
-      # {{ verb.id.capitalize }} a resource with raw string
-      #
-      # ```
-      # Halite.{{ verb.id }}("http://httpbin.org/anything", raw: "name=Peter+Lee&address=%23123+Happy+Ave&Language=C%2B%2B")
-      # ```
-      def {{ verb.id }}(uri : String, headers : (Hash(String, _) | NamedTuple)? = nil, params : (Hash(String, _) | NamedTuple)? = nil, raw : String? = nil, ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
-        request({{ verb }}, uri, {
-          "headers" => headers,
-          "params" => params,
           "raw" => raw,
           "ssl" => ssl
         })
@@ -56,10 +55,15 @@ module Halite
       #   last_name:  "bar"
       # })
       # ```
-      def {{ verb.id }}(uri : String, headers : (Hash(String, _) | NamedTuple)? = nil, params : (Hash(String, _) | NamedTuple)? = nil, ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
+      def {{ verb.id }}(uri : String,
+                        headers : (Hash(String, _) | NamedTuple)? = nil,
+                        params : (Hash(String, _) | NamedTuple)? = nil,
+                        raw : String? = nil,
+                        ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
         request({{ verb }}, uri, {
           "headers" => headers,
           "params" => params,
+          "raw" => raw,
           "ssl" => ssl
         })
       end
