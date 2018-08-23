@@ -316,9 +316,8 @@ module Halite
     end
 
     private def parse_headers(options : (Hash(String, _) | NamedTuple)?) : HTTP::Headers
-      return HTTP::Headers.new unless options
+      return HTTP::Headers.new unless opts = options
 
-      opts = options.not_nil!
       case headers = opts["headers"]?
       when Hash, NamedTuple
         HTTP::Headers.escape(headers)
@@ -336,9 +335,8 @@ module Halite
     {% for attr in %w(params form json) %}
       private def parse_{{ attr.id }}(options : (Hash(String, _) | NamedTuple)?) : Hash(String, Halite::Options::Type)
         new_{{ attr.id }} = {} of String => Type
-        return new_{{ attr.id }} unless options
+        return new_{{ attr.id }} unless opts = options
 
-        opts = options.not_nil!
         if (data = opts[{{ attr.id.stringify }}]?) && data.responds_to?(:each)
           data.each do |k, v|
             new_{{ attr.id }}[k.to_s] =
@@ -378,9 +376,8 @@ module Halite
     {% end %}
 
     private def parse_raw(options : (Hash(String, _) | NamedTuple)?) : String?
-      return unless options
+      return unless opts = options
 
-      opts = options.not_nil!
       opts["raw"]?.as(String?)
     end
 
@@ -389,25 +386,22 @@ module Halite
     end
 
     private def parse_follow(options : (Hash(String, _) | NamedTuple)?) : Follow
-      return Follow.new unless options
+      return Follow.new unless opts = options
 
-      opts = options.not_nil!
       hops = opts["follow"]?.as(Int32?)
       strict = opts["follow_strict"]?.as(Bool?)
       Follow.new(hops, strict)
     end
 
     private def parse_ssl(options : (Hash(String, _) | NamedTuple)?) : OpenSSL::SSL::Context::Client?
-      return unless options
+      return unless opts = options
 
-      opts = options.not_nil!
       opts["ssl"]?.as(OpenSSL::SSL::Context::Client?)
     end
 
     private def timeout_value(key : String, options : (Hash(String, _) | NamedTuple)?) : Float64?
-      return unless options
+      return unless opts = options
 
-      opts = options.not_nil!
       if timeout = opts[key]?
         case timeout
         when Int32, Time::Span

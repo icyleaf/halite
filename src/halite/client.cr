@@ -137,7 +137,7 @@ module Halite
     # Merges request headers
     private def make_request_headers(options : Halite::Options, content_type : String?) : HTTP::Headers
       headers = options.headers
-      if  (value = content_type) && !value.empty?
+      if (value = content_type) && !value.empty?
         headers.add("Content-Type", value)
       end
 

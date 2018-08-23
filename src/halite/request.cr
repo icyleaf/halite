@@ -77,7 +77,7 @@ module Halite
 
     # Request data of body
     struct Data
-      getter body,content_type
+      getter body, content_type
 
       def initialize(@body : String, @content_type : String? = nil)
       end
