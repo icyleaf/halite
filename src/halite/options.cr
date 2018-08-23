@@ -266,7 +266,7 @@ module Halite
 
     # alias `merge` above
     def merge(options : Halite::Options) : Halite::Options
-      @headers.merge!(options.headers) if options.headers
+      @headers.merge!(options.headers) if options.headers != default_headers
       @cookies.fill_from_headers(@headers) if @headers
 
       if options.timeout.connect || options.timeout.read
