@@ -309,19 +309,9 @@ module Halite
     #   "form" => { "username" => "bar" },
     # })
     # ```
-    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple)) : Halite::Response
-      response = branch(options).request(verb, uri)
-      DEFAULT_OPTIONS.clear!
-      response
-    end
-
-    # Make an HTTP request with the given verb
-    #
-    # ```
-    # Halite.request("get", "http://httpbin.org/get")
-    # ```
-    def request(verb : String, uri : String) : Halite::Response
-      response = branch.request(verb, uri)
+    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple | Options)? = nil) : Halite::Response
+      client = options ? branch(options) : branch
+      response = client.request(verb, uri)
       DEFAULT_OPTIONS.clear!
       response
     end
@@ -334,12 +324,10 @@ module Halite
       {% end %}
     end
 
-    # :nodoc:
     private def branch(options : Hash(String, _) | NamedTuple | Options) : Halite::Client
       Halite::Client.new(DEFAULT_OPTIONS.merge(options))
     end
 
-    # :nodoc:
     private def branch : Halite::Client
       Halite::Client.new(DEFAULT_OPTIONS)
     end
