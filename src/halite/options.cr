@@ -52,8 +52,8 @@ module Halite
     property json : Hash(String, Type)
     property raw : String?
 
-    property logger : Halite::Logger::Adapter
-    property logging : Bool
+    getter logging : Bool
+    setter logger : Halite::Logger::Adapter?
 
     def self.new(headers = nil, cookies = nil, params = nil, form = nil, json = nil, raw = nil,
                  connect_timeout : (Int32 | Float64 | Time::Span)? = nil,
@@ -88,66 +88,8 @@ module Halite
       @json = parse_json(options)
       @raw = parse_raw(options)
 
-      @logger = Logger::Common.new
       @logging = false
-    end
-
-    # Returns `Options` self with the headers, params, form and json of this hash and other combined.
-    def merge(options : Hash(String, _) | NamedTuple) : Halite::Options
-      {% for attr in %w(headers params form json raw ssl) %}
-        merge_{{ attr.id }}(options)
-      {% end %}
-
-      @cookies.fill_from_headers(@headers)
-
-      if (timeout = parse_timeout(options)) && (timeout.connect || timeout.read)
-        @timeout = timeout
-      end
-
-      if (follow = parse_follow(options)) && follow.updated?
-        @follow = follow
-      end
-
-      self
-    end
-
-    # alias `merge` above
-    def merge(options : Halite::Options) : Halite::Options
-      @headers.merge!(options.headers) if options.headers
-      @cookies.fill_from_headers(@headers) if @headers
-
-      if options.timeout.connect || options.timeout.read
-        @timeout = options.timeout
-      end
-
-      if options.follow.updated?
-        @follow = options.follow
-      end
-
-      @ssl = options.ssl if options.ssl
-
-      @params.merge!(options.params) if options.params
-      @form.merge!(options.form) if options.form
-      @json.merge!(options.json) if options.json
-      @raw = options.raw if options.raw
-
-      self
-    end
-
-    # Reset options
-    def clear! : Halite::Options
-      @headers = default_headers
-      @cookies = HTTP::Cookies.new
-      @timeout = Timeout.new
-      @follow = Follow.new
-      @ssl = nil
-
-      @params = {} of String => Type
-      @form = {} of String => Type
-      @json = {} of String => Type
-      @raw = nil
-
-      self
+      @logger = nil
     end
 
     # Returns `Options` self with gived headers combined.
@@ -220,6 +162,7 @@ module Halite
       self
     end
 
+    # Returns `Logger` self with gived adapter, filename, mode and response.
     def with_logger(adapter = "common", filename : String? = nil, mode : String? = nil, response : Bool = true)
       adapters = Halite::Logger.availables
       raise "Not avaiable adapter: #{adapter}, avaiables in #{adapters.join(", ")}" unless adapters.includes?(adapter)
@@ -236,10 +179,11 @@ module Halite
       with_logger(logger: logger, response: response)
     end
 
+    # Returns `Logger` self with gived logger and response.
     def with_logger(logger : Halite::Logger::Adapter = Halite::Logger::Common.new, response : Bool = true)
-      @logger = logger
-      @logger.level = response ? ::Logger::DEBUG : ::Logger::INFO
       @logging = true
+      @logger = logger
+      logger.level = response ? ::Logger::DEBUG : ::Logger::INFO
 
       self
     end
@@ -283,9 +227,80 @@ module Halite
       @follow.strict = strict
     end
 
+    # Use logger to dump somthing
+    def logger
+      raise Error.new("Logging is disable now, set logging = true and try again") unless @logging
+      @logger.not_nil!
+    end
+
+    # Set logging status
+    def logging=(logging : Bool)
+      @logging = logging
+      @logger = Logger::Common.new unless @logger
+    end
+
     # Return if enable logging
     def logging?
       @logging == true
+    end
+
+
+    # Returns `Options` self with the headers, params, form and json of this hash and other combined.
+    def merge(options : Hash(String, _) | NamedTuple) : Halite::Options
+      {% for attr in %w(headers params form json raw ssl) %}
+        merge_{{ attr.id }}(options)
+      {% end %}
+
+      @cookies.fill_from_headers(@headers)
+
+      if (timeout = parse_timeout(options)) && (timeout.connect || timeout.read)
+        @timeout = timeout
+      end
+
+      if (follow = parse_follow(options)) && follow.updated?
+        @follow = follow
+      end
+
+      self
+    end
+
+    # alias `merge` above
+    def merge(options : Halite::Options) : Halite::Options
+      @headers.merge!(options.headers) if options.headers
+      @cookies.fill_from_headers(@headers) if @headers
+
+      if options.timeout.connect || options.timeout.read
+        @timeout = options.timeout
+      end
+
+      if options.follow.updated?
+        @follow = options.follow
+      end
+
+      @ssl = options.ssl if options.ssl
+
+      @params.merge!(options.params) if options.params
+      @form.merge!(options.form) if options.form
+      @json.merge!(options.json) if options.json
+      @raw = options.raw if options.raw
+
+      self
+    end
+
+    # Reset options
+    def clear! : Halite::Options
+      @headers = default_headers
+      @cookies = HTTP::Cookies.new
+      @timeout = Timeout.new
+      @follow = Follow.new
+      @ssl = nil
+
+      @params = {} of String => Type
+      @form = {} of String => Type
+      @json = {} of String => Type
+      @raw = nil
+
+      self
     end
 
     # Return default headers

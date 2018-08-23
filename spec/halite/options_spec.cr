@@ -55,8 +55,10 @@ describe Halite::Options do
       options.json.should eq({} of String => Halite::Options::Type)
       options.raw.should be_nil
 
-      options.logger.should be_a(Halite::Logger::Common)
       options.logging?.should be_false
+      expect_raises Halite::Error, "Logging is disable now, set logging = true and try again" do
+        options.logger
+      end
     end
 
     it "should initial with Hash arguments" do
@@ -218,8 +220,10 @@ describe Halite::Options do
     options.json.should eq({} of String => Halite::Options::Type)
     options.raw.should be_nil
 
-    options.logger.should be_a(Halite::Logger::Common)
     options.logging?.should be_false
+    expect_raises Halite::Error, "Logging is disable now, set logging = true and try again" do
+      options.logger
+    end
   end
 
   describe "#with_headers" do
