@@ -1,19 +1,7 @@
 module Halite
-  # HeaderLink Struct
-  struct HeaderLink
-    getter rel, target, params
-
-    def initialize(@rel : String, @target : String, @params : Hash(String, String))
-    end
-
-    def to_s(io)
-      io << target
-    end
-  end
-
-  # Header Link Parser
+  # Header link parser
   #
-  # Source: https://tools.ietf.org/html/rfc5988
+  # ref: [https://tools.ietf.org/html/rfc5988](https://tools.ietf.org/html/rfc5988)
   class HeaderLinkParser
     def self.parse(raw : String, uri : URI? = nil)
       new.parse(raw, uri)
@@ -60,6 +48,18 @@ module Halite
       end
 
       HeaderLink.new(rel, target, params)
+    end
+  end
+
+  # :nodoc:
+  struct HeaderLink
+    getter rel, target, params
+
+    def initialize(@rel : String, @target : String, @params : Hash(String, String))
+    end
+
+    def to_s(io)
+      io << target
     end
   end
 end

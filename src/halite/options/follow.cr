@@ -28,5 +28,6 @@ module Halite
     end
   end
 
+  # :nodoc:
   alias Follow = Options::Follow
 end

@@ -33,5 +33,6 @@ module Halite
     end
   end
 
+  # :nodoc:
   alias Timeout = Options::Timeout
 end
