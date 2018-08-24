@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## [0.6.0] (2018-08-24)
+
+> Improve performance with :love:
+
+### Changed
+
+- Set `logger` to nil when instance a `Halite::Options`, it throws a `Halite::Error` exception if enable `logging`.
+- Change `Halite::Options` accepts argument inside. no ffect for users. [#27](https://github.com/icyleaf/halite/pull/27)
+- Wrap all exception class into a module, better for reading document.
+
+### Fixed
+
+- Fix always return `#` with `#full_path` if fragment not exists in `Halite::Request`.
+- Fix always overwrite with default headers with `#merge` in `Halite::Options`
+
 ### Tested
 
 - Compatibility with Crystal 0.26
@@ -132,7 +147,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/icyleaf/halite/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/icyleaf/halite/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/icyleaf/halite/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/icyleaf/halite/compare/v0.3.1...v0.3.2
