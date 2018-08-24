@@ -45,6 +45,7 @@ module Benchmark
       def report
         fastest = @results.min_by { |_, value| value }
 
+        puts "Tach times: #{@times}"
         printf "%30s %20s\n", "Tach", "Total"
         @results.each do |label, result|
           mark = label == fastest.first ? " (fastest)" : ""

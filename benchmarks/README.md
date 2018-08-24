@@ -2,15 +2,25 @@
 
 Benchmarks performed inspired from excon's benchmarking tool.
 
+## Enviroments
+
+- MacBook Pro (Retina, 15-inch, Mid 2015), 2.2 GHz Intel Core i7, 16 GB 1600 MHz DDR3.
+- Crystal 0.26.0 (llvm 6.0.1)
+- Clients
+  - cossack v0.1.4
+  - create v0.14.0
+  - halite v0.6.0
+
 ## Result
 
 ```
+Tach times: 1000
                           Tach                Total
-                       cossack              4.325ms
-                         crest             4.3342ms
-                        halite             6.2203ms
-           halite (persistent)             4.4749ms
-          built-in http client             3.9897ms (fastest)
+                       cossack             6.9514ms (fastest)
+                         crest             9.0551ms
+                        halite             7.8958ms
+           halite (persistent)             8.0661ms
+          built-in http client             7.8528ms
 ```
 
 ## Test yourself
