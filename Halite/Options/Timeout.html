@@ -76,6 +76,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Follow" data-name="halite::follow">
+      <a href="../../Halite/Follow.html">Follow</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
       <a href="../../Halite/FormData.html">FormData</a>
       
@@ -221,6 +226,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Timeout" data-name="halite::timeout">
+      <a href="../../Halite/Timeout.html">Timeout</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/TimeoutError" data-name="halite::timeouterror">
       <a href="../../Halite/TimeoutError.html">TimeoutError</a>
       
@@ -310,8 +320,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/81e84216a14564ee67deba0b54325c2fd558afe2/src/halite/options.cr#L416" target="_blank">
-        halite/options.cr
+      <a href="https://github.com/icyleaf/halite/blob/f91681bc30da9f429d2837a762adfc14d9d84b53/src/halite/options/timeout.cr#L4" target="_blank">
+        halite/options/timeout.cr
       </a>
     
     <br/>
@@ -325,12 +335,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28connect%3AFloat64%3F%3Dnil%2Cread%3AFloat64%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(connect : Float64? = <span class="n">nil</span>, read : Float64? = <span class="n">nil</span>)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#new%28connect%3ATime%3A%3ASpan%3F%3Dnil%2Cread%3ATime%3A%3ASpan%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(connect : Time::Span? = <span class="n">nil</span>, read : Time::Span? = <span class="n">nil</span>)</a>
+        <a href="#new%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(connect : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read : Int32 | Float64 | Time::Span? = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -349,7 +354,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#connect%3D%28timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method" class="signature"><strong>#connect=</strong>(timeout : Int32 | Float64 | Time::Span)</a>
+        <a href="#connect%3D%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method" class="signature"><strong>#connect=</strong>(connect : Int32 | Float64 | Time::Span?)</a>
         
       </li>
     
@@ -359,7 +364,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#read%3D%28timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method" class="signature"><strong>#read=</strong>(timeout : Int32 | Float64 | Time::Span)</a>
+        <a href="#read%3D%28read%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method" class="signature"><strong>#read=</strong>(read : Int32 | Float64 | Time::Span?)</a>
         
       </li>
     
@@ -406,34 +411,18 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(connect:Float64?=nil,read:Float64?=nil)-class-method">
+    <div class="entry-detail" id="new(connect:Int32|Float64|Time::Span?=nil,read:Int32|Float64|Time::Span?=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(connect : Float64? = <span class="n">nil</span>, read : Float64? = <span class="n">nil</span>)
+        def self.<strong>new</strong>(connect : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read : Int32 | Float64 | Time::Span? = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28connect%3AFloat64%3F%3Dnil%2Cread%3AFloat64%3F%3Dnil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/81e84216a14564ee67deba0b54325c2fd558afe2/src/halite/options.cr#L419" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="new(connect:Time::Span?=nil,read:Time::Span?=nil)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(connect : Time::Span? = <span class="n">nil</span>, read : Time::Span? = <span class="n">nil</span>)
-
-        <a class="method-permalink" href="#new%28connect%3ATime%3A%3ASpan%3F%3Dnil%2Cread%3ATime%3A%3ASpan%3F%3Dnil%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/81e84216a14564ee67deba0b54325c2fd558afe2/src/halite/options.cr#L422" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f91681bc30da9f429d2837a762adfc14d9d84b53/src/halite/options/timeout.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -456,23 +445,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/81e84216a14564ee67deba0b54325c2fd558afe2/src/halite/options.cr#L417" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f91681bc30da9f429d2837a762adfc14d9d84b53/src/halite/options/timeout.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="connect=(timeout:Int32|Float64|Time::Span)-instance-method">
+    <div class="entry-detail" id="connect=(connect:Int32|Float64|Time::Span?)-instance-method">
       <div class="signature">
         
-        def <strong>connect=</strong>(timeout : Int32 | Float64 | Time::Span)
+        def <strong>connect=</strong>(connect : Int32 | Float64 | Time::Span?)
 
-        <a class="method-permalink" href="#connect%3D%28timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method">#</a>
+        <a class="method-permalink" href="#connect%3D%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/81e84216a14564ee67deba0b54325c2fd558afe2/src/halite/options.cr#L427" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f91681bc30da9f429d2837a762adfc14d9d84b53/src/halite/options/timeout.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -488,23 +477,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/81e84216a14564ee67deba0b54325c2fd558afe2/src/halite/options.cr#L417" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f91681bc30da9f429d2837a762adfc14d9d84b53/src/halite/options/timeout.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="read=(timeout:Int32|Float64|Time::Span)-instance-method">
+    <div class="entry-detail" id="read=(read:Int32|Float64|Time::Span?)-instance-method">
       <div class="signature">
         
-        def <strong>read=</strong>(timeout : Int32 | Float64 | Time::Span)
+        def <strong>read=</strong>(read : Int32 | Float64 | Time::Span?)
 
-        <a class="method-permalink" href="#read%3D%28timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method">#</a>
+        <a class="method-permalink" href="#read%3D%28read%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/81e84216a14564ee67deba0b54325c2fd558afe2/src/halite/options.cr#L431" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f91681bc30da9f429d2837a762adfc14d9d84b53/src/halite/options/timeout.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
