@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::MimeTypes::JSON - github.com/icyleaf/halite</title>
+  <title>Halite::Exception::TooManyRedirectsError - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -51,7 +51,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
       <a href="../../Halite/Exception.html">Exception</a>
       
         <ul>
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/TooManyRedirectsError" data-name="halite::exception::toomanyredirectserror">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Exception/TooManyRedirectsError" data-name="halite::exception::toomanyredirectserror">
       <a href="../../Halite/Exception/TooManyRedirectsError.html">TooManyRedirectsError</a>
       
     </li>
@@ -181,7 +181,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/MimeTypes" data-name="halite::mimetypes">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/MimeTypes" data-name="halite::mimetypes">
       <a href="../../Halite/MimeTypes.html">MimeTypes</a>
       
         <ul>
@@ -191,7 +191,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/MimeTypes/JSON" data-name="halite::mimetypes::json">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeTypes/JSON" data-name="halite::mimetypes::json">
       <a href="../../Halite/MimeTypes/JSON.html">JSON</a>
       
     </li>
@@ -285,12 +285,19 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Halite::MimeTypes::JSON
+  <span class="kind">class</span> Halite::Exception::TooManyRedirectsError
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/MimeTypes/JSON.html">Halite::MimeTypes::JSON</a></li><li class="superclass"><a href="../../Halite/MimeTypes/Adapter.html">Halite::MimeTypes::Adapter</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Exception/TooManyRedirectsError.html">Halite::Exception::TooManyRedirectsError</a></li><li class="superclass"><a href="../../Halite/Exception/ResponseError.html">Halite::Exception::ResponseError</a></li><li class="superclass"><a href="../../Halite/Exception/Error.html">Halite::Exception::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>Notifies that we reached max allowed redirect hops</p>
 
 
 
@@ -300,8 +307,12 @@
 
 
 
-
-
+  <h2>Direct Known Subclasses</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type"><a href="../../Halite/Exception/EndlessRedirectError.html">Halite::Exception::EndlessRedirectError</a></li>
+  
+  </ul>
 
 
 
@@ -311,8 +322,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/3f191e009d23c786cf3e51e01c5f429c561e6ad5/src/halite/mime_types/json.cr#L4" target="_blank">
-        halite/mime_types/json.cr
+      <a href="https://github.com/icyleaf/halite/blob/3f191e009d23c786cf3e51e01c5f429c561e6ad5/src/halite/error.cr#L29" target="_blank">
+        halite/error.cr
       </a>
     
     <br/>
@@ -326,21 +337,6 @@
 
 
 
-  <h2>Instance Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#decode%28str%29-instance-method" class="signature"><strong>#decode</strong>(str)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#encode%28obj%29-instance-method" class="signature"><strong>#encode</strong>(obj)</a>
-        
-      </li>
-    
-  </ul>
-
 
 
 
@@ -349,19 +345,25 @@
   
     
 
-  <h3>Instance methods inherited from class <code><a href="../../Halite/MimeTypes/Adapter.html">Halite::MimeTypes::Adapter</a></code></h3>
-  
-  
-    <a href="../../Halite/MimeTypes/Adapter.html#decode%28string%29-instance-method" class="tooltip">
-      <span>decode(string)</span>
-    decode</a>, 
+
     
-  
-    <a href="../../Halite/MimeTypes/Adapter.html#encode%28obj%29-instance-method" class="tooltip">
-      <span>encode(obj)</span>
-    encode</a>
+
+
     
+
+
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
 
 
     
@@ -397,41 +399,6 @@
 
 
 
-
-  <h2>Instance Method Detail</h2>
-  
-    <div class="entry-detail" id="decode(str)-instance-method">
-      <div class="signature">
-        
-        def <strong>decode</strong>(str)
-
-        <a class="method-permalink" href="#decode%28str%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/3f191e009d23c786cf3e51e01c5f429c561e6ad5/src/halite/mime_types/json.cr#L9" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="encode(obj)-instance-method">
-      <div class="signature">
-        
-        def <strong>encode</strong>(obj)
-
-        <a class="method-permalink" href="#encode%28obj%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/3f191e009d23c786cf3e51e01c5f429c561e6ad5/src/halite/mime_types/json.cr#L5" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
