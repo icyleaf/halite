@@ -22,28 +22,20 @@ module Halite
       #   last_name:  "bar"
       # })
       # ```
-      def {{ verb.id }}(uri : String, headers : (Hash(String, _) | NamedTuple)? = nil, params : (Hash(String, _) | NamedTuple)? = nil, form : (Hash(String, _) | NamedTuple)? = nil, json : (Hash(String, _) | NamedTuple)? = nil, ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
-        request({{ verb }}, uri, {
-          "headers" => headers,
-          "params" => params,
-          "form" => form,
-          "json" => json,
-          "ssl" => ssl
-        })
-      end
-
-      # {{ verb.id.capitalize }} a resource with raw string
+      #
+      # ### Request with raw string
       #
       # ```
       # Halite.{{ verb.id }}("http://httpbin.org/anything", raw: "name=Peter+Lee&address=%23123+Happy+Ave&Language=C%2B%2B")
       # ```
-      def {{ verb.id }}(uri : String, headers : (Hash(String, _) | NamedTuple)? = nil, params : (Hash(String, _) | NamedTuple)? = nil, raw : String? = nil, ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
-        request({{ verb }}, uri, {
-          "headers" => headers,
-          "params" => params,
-          "raw" => raw,
-          "ssl" => ssl
-        })
+      def {{ verb.id }}(uri : String, *,
+                        headers : (Hash(String, _) | NamedTuple)? = nil,
+                        params : (Hash(String, _) | NamedTuple)? = nil,
+                        form : (Hash(String, _) | NamedTuple)? = nil,
+                        json : (Hash(String, _) | NamedTuple)? = nil,
+                        raw : String? = nil,
+                        ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
+        request({{ verb }}, uri, options_with(headers, params, form, json, raw, ssl))
       end
     {% end %}
 
@@ -56,12 +48,12 @@ module Halite
       #   last_name:  "bar"
       # })
       # ```
-      def {{ verb.id }}(uri : String, headers : (Hash(String, _) | NamedTuple)? = nil, params : (Hash(String, _) | NamedTuple)? = nil, ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
-        request({{ verb }}, uri, {
-          "headers" => headers,
-          "params" => params,
-          "ssl" => ssl
-        })
+      def {{ verb.id }}(uri : String, *,
+                        headers : (Hash(String, _) | NamedTuple)? = nil,
+                        params : (Hash(String, _) | NamedTuple)? = nil,
+                        raw : String? = nil,
+                        ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
+        request({{ verb }}, uri, options_with(headers, params, raw: raw, ssl: ssl))
       end
     {% end %}
 
@@ -196,7 +188,7 @@ module Halite
     # Halite.follow(strict: false)
     #   .get("http://httpbin.org/get")
     # ```
-    def follow(strict = Options::Follow::STRICT) : Halite::Client
+    def follow(strict = Follow::STRICT) : Halite::Client
       branch(default_options.with_follow(strict: strict))
     end
 
@@ -211,7 +203,7 @@ module Halite
     # Halite.follow(4, strict: false)
     #   .get("http://httpbin.org/relative-redirect/4")
     # ```
-    def follow(hops : Int32, strict = Options::Follow::STRICT) : Halite::Client
+    def follow(hops : Int32, strict = Follow::STRICT) : Halite::Client
       branch(default_options.with_follow(hops, strict))
     end
 
@@ -305,19 +297,9 @@ module Halite
     #   "form" => { "username" => "bar" },
     # })
     # ```
-    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple)) : Halite::Response
-      response = branch(options).request(verb, uri)
-      DEFAULT_OPTIONS.clear!
-      response
-    end
-
-    # Make an HTTP request with the given verb
-    #
-    # ```
-    # Halite.request("get", "http://httpbin.org/get")
-    # ```
-    def request(verb : String, uri : String) : Halite::Response
-      response = branch.request(verb, uri)
+    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple | Options)? = nil) : Halite::Response
+      client = options ? branch(options) : branch
+      response = client.request(verb, uri)
       DEFAULT_OPTIONS.clear!
       response
     end
@@ -330,14 +312,22 @@ module Halite
       {% end %}
     end
 
-    # :nodoc:
     private def branch(options : Hash(String, _) | NamedTuple | Options) : Halite::Client
       Halite::Client.new(DEFAULT_OPTIONS.merge(options))
     end
 
-    # :nodoc:
     private def branch : Halite::Client
       Halite::Client.new(DEFAULT_OPTIONS)
+    end
+
+    private def options_with(headers : (Hash(String, _) | NamedTuple)? = nil,
+                             params : (Hash(String, _) | NamedTuple)? = nil,
+                             form : (Hash(String, _) | NamedTuple)? = nil,
+                             json : (Hash(String, _) | NamedTuple)? = nil,
+                             raw : String? = nil,
+                             ssl : OpenSSL::SSL::Context::Client? = nil)
+      Halite::Options.new(headers: headers, params: params,
+        form: form, json: json, raw: raw, ssl: ssl)
     end
 
     # :nodoc:

@@ -1,5 +1,5 @@
 require "openssl"
-
+require "./options/*"
 module Halite
   # Options class
   #
@@ -9,7 +9,7 @@ module Halite
   # o = Options.new(
   #   headers: {
   #     user_agent: "foobar"
-  #   },
+  #   }
   # }
   # o.headers.class # => HTTP::Headers
   # o.cookies.class # => HTTP::Cookies
@@ -43,8 +43,8 @@ module Halite
 
     property headers : HTTP::Headers
     property cookies : HTTP::Cookies
-    property timeout : Options::Timeout
-    property follow : Options::Follow
+    property timeout : Timeout
+    property follow : Follow
     property ssl : OpenSSL::SSL::Context::Client?
 
     property params : Hash(String, Type)
@@ -52,127 +52,68 @@ module Halite
     property json : Hash(String, Type)
     property raw : String?
 
-    property logger : Halite::Logger::Adapter
-    property logging : Bool
+    getter logging : Bool
+    setter logger : Halite::Logger::Adapter?
 
-    def self.new(headers = nil, cookies = nil, params = nil, form = nil, json = nil, raw = nil,
+    def self.new(headers : (Hash(String, _) | NamedTuple)? = nil,
+                 cookies : (Hash(String, _) | NamedTuple)? = nil,
+                 params : (Hash(String, _) | NamedTuple)? = nil,
+                 form : (Hash(String, _) | NamedTuple)? = nil,
+                 json : (Hash(String, _) | NamedTuple)? = nil,
+                 raw : String? = nil,
                  connect_timeout : (Int32 | Float64 | Time::Span)? = nil,
                  read_timeout : (Int32 | Float64 | Time::Span)? = nil,
                  follow : Int32? = nil,
                  follow_strict : Bool? = nil,
-                 ssl : OpenSSL::SSL::Context::Client? = nil)
-      Options.new({
-        "headers"         => headers,
-        "cookies"         => cookies,
-        "params"          => params,
-        "form"            => form,
-        "json"            => json,
-        "raw"             => raw,
-        "read_timeout"    => read_timeout,
-        "connect_timeout" => connect_timeout,
-        "follow"          => follow,
-        "follow_strict"   => follow_strict,
-        "ssl"             => ssl,
-      })
+                 ssl : OpenSSL::SSL::Context::Client? = nil,
+                 logging = false,
+                 logger = nil)
+
+      timeout = Timeout.new(connect: connect_timeout, read: read_timeout)
+      follow = Follow.new(hops: follow, strict: follow_strict)
+      new(headers: headers, cookies: cookies, params: params, form: form,
+          json: json, raw: raw, timeout: timeout, follow: follow,
+          ssl: ssl, logging: logging, logger: logger)
     end
 
-    def initialize(options : (Hash(String, _) | NamedTuple)? = nil)
-      @headers = default_headers.merge!(parse_headers(options))
-      @cookies = parse_cookies(@headers)
-      @timeout = parse_timeout(options)
-      @follow = parse_follow(options)
-      @ssl = parse_ssl(options)
+    def initialize(*,
+                   headers : (Hash(String, _) | NamedTuple)? = nil,
+                   cookies : (Hash(String, _) | NamedTuple)? = nil,
+                   params : (Hash(String, _) | NamedTuple)? = nil,
+                   form : (Hash(String, _) | NamedTuple)? = nil,
+                   json : (Hash(String, _) | NamedTuple)? = nil,
+                   @raw : String? = nil,
+                   @timeout = Timeout.new,
+                   @follow = Follow.new,
+                   @ssl : OpenSSL::SSL::Context::Client? = nil,
+                   @logging = false,
+                   @logger = nil)
 
-      @params = parse_params(options)
-      @form = parse_form(options)
-      @json = parse_json(options)
-      @raw = parse_raw(options)
-
-      @logger = Logger::Common.new
-      @logging = false
+      @headers = default_headers.merge!(parse_headers(headers))
+      @cookies = parse_cookies(cookies)
+      @params = parse_params(params)
+      @form = parse_form(form)
+      @json = parse_json(json)
     end
 
-    # Returns `Options` self with the headers, params, form and json of this hash and other combined.
-    def merge(options : Hash(String, _) | NamedTuple) : Halite::Options
-      {% for attr in %w(headers params form json raw ssl) %}
-        merge_{{ attr.id }}(options)
-      {% end %}
-
-      @cookies.fill_from_headers(@headers)
-
-      if (timeout = parse_timeout(options)) && (timeout.connect || timeout.read)
-        @timeout = timeout
-      end
-
-      if (follow = parse_follow(options)) && follow.updated?
-        @follow = follow
-      end
-
-      self
-    end
-
-    # alias `merge` above
-    def merge(options : Halite::Options) : Halite::Options
-      @headers.merge!(options.headers) if options.headers
-      @cookies.fill_from_headers(@headers) if @headers
-
-      if options.timeout.connect || options.timeout.read
-        @timeout = options.timeout
-      end
-
-      if options.follow.updated?
-        @follow = options.follow
-      end
-
-      @ssl = options.ssl if options.ssl
-
-      @params.merge!(options.params) if options.params
-      @form.merge!(options.form) if options.form
-      @json.merge!(options.json) if options.json
-      @raw = options.raw if options.raw
-
-      self
-    end
-
-    # Reset options
-    def clear! : Halite::Options
-      @headers = default_headers
-      @cookies = HTTP::Cookies.new
-      @timeout = Timeout.new
-      @follow = Follow.new
-      @ssl = nil
-
-      @params = {} of String => Type
-      @form = {} of String => Type
-      @json = {} of String => Type
-      @raw = nil
-
-      self
-    end
-
-    # Returns `Options` self with gived headers combined.
-    def with_headers(**headers) : Halite::Options
-      @headers.merge!(parse_headers({"headers" => headers}))
-      self
+    # Alias `with_headers` method.
+    def with_headers(**with_headers) : Halite::Options
+      with_headers(with_headers)
     end
 
     # Returns `Options` self with gived headers combined.
     def with_headers(headers : Hash(String, _) | NamedTuple) : Halite::Options
-      @headers.merge!(parse_headers({"headers" => headers}))
+      @headers.merge!(parse_headers(headers))
       self
+    end
+
+    # Alias `with_cookies` method.
+    def with_cookies(**cookies) : Halite::Options
+      with_cookies(cookies)
     end
 
     # Returns `Options` self with gived cookies combined.
     def with_cookies(cookies : Hash(String, _) | NamedTuple) : Halite::Options
-      cookies.each do |key, value|
-        @cookies[key.to_s] = value.to_s
-      end
-
-      self
-    end
-
-    # Returns `Options` self with gived cookies combined.
-    def with_cookies(**cookies) : Halite::Options
       cookies.each do |key, value|
         @cookies[key.to_s] = value.to_s
       end
@@ -220,6 +161,7 @@ module Halite
       self
     end
 
+    # Returns `Logger` self with gived adapter, filename, mode and response.
     def with_logger(adapter = "common", filename : String? = nil, mode : String? = nil, response : Bool = true)
       adapters = Halite::Logger.availables
       raise "Not avaiable adapter: #{adapter}, avaiables in #{adapters.join(", ")}" unless adapters.includes?(adapter)
@@ -236,16 +178,17 @@ module Halite
       with_logger(logger: logger, response: response)
     end
 
+    # Returns `Logger` self with gived logger and response.
     def with_logger(logger : Halite::Logger::Adapter = Halite::Logger::Common.new, response : Bool = true)
-      @logger = logger
-      @logger.level = response ? ::Logger::DEBUG : ::Logger::INFO
       @logging = true
+      @logger = logger
+      logger.level = response ? ::Logger::DEBUG : ::Logger::INFO
 
       self
     end
 
     def headers=(headers : (Hash(String, _) | NamedTuple))
-      @headers = parse_headers({"headers" => headers})
+      @headers = parse_headers(headers)
     end
 
     # Alias `Timeout.connect`
@@ -283,9 +226,58 @@ module Halite
       @follow.strict = strict
     end
 
+    # Use logger to dump somthing
+    def logger
+      raise Error.new("Logging is disable now, set logging = true and try again") unless @logging
+      @logger.not_nil!
+    end
+
+    # Set logging status
+    def logging=(logging : Bool)
+      @logging = logging
+      @logger = Logger::Common.new unless @logger
+    end
+
     # Return if enable logging
     def logging?
       @logging == true
+    end
+
+    # alias `merge` above
+    def merge(options : Halite::Options) : Halite::Options
+      @headers.merge!(options.headers) if options.headers != default_headers
+      @cookies.fill_from_headers(@headers) if @headers
+
+      if options.timeout.connect || options.timeout.read
+        @timeout = options.timeout
+      end
+
+      if options.follow.updated?
+        @follow = options.follow
+      end
+
+      @params.merge!(options.params) if options.params
+      @form.merge!(options.form) if options.form
+      @json.merge!(options.json) if options.json
+      @raw = options.raw if options.raw
+      @ssl = options.ssl if options.ssl
+
+      self
+    end
+
+    # Reset options
+    def clear! : Halite::Options
+      @headers = default_headers
+      @cookies = HTTP::Cookies.new
+      @params = {} of String => Type
+      @form = {} of String => Type
+      @json = {} of String => Type
+      @raw = nil
+      @timeout = Timeout.new
+      @follow = Follow.new
+      @ssl = nil
+
+      self
     end
 
     # Return default headers
@@ -315,17 +307,30 @@ module Halite
       }
     end
 
-    private def parse_headers(options : (Hash(String, _) | NamedTuple)?) : HTTP::Headers
-      return HTTP::Headers.new unless opts = options
-
-      case headers = opts["headers"]?
+    private def parse_headers(raw : (Hash(String, _) | NamedTuple | HTTP::Headers)?) : HTTP::Headers
+      case raw
       when Hash, NamedTuple
-        HTTP::Headers.escape(headers)
+        HTTP::Headers.escape(raw)
       when HTTP::Headers
-        headers
+        raw.as(HTTP::Headers)
       else
         HTTP::Headers.new
       end
+    end
+
+    private def parse_cookies(raw : (Hash(String, _) | NamedTuple | HTTP::Cookies)?) : HTTP::Cookies
+      cookies = HTTP::Cookies.from_headers(@headers)
+      if objects = raw
+        objects.each do |key, value|
+          cookies[key] = case value
+                         when HTTP::Cookie
+                           value
+                         else
+                           value.to_s
+                         end
+        end
+      end
+      cookies
     end
 
     private def parse_cookies(headers : HTTP::Headers) : HTTP::Cookies
@@ -333,12 +338,12 @@ module Halite
     end
 
     {% for attr in %w(params form json) %}
-      private def parse_{{ attr.id }}(options : (Hash(String, _) | NamedTuple)?) : Hash(String, Halite::Options::Type)
+      private def parse_{{ attr.id }}(raw : (Hash(String, _) | NamedTuple)?) : Hash(String, Options::Type)
         new_{{ attr.id }} = {} of String => Type
-        return new_{{ attr.id }} unless opts = options
+        return new_{{ attr.id }} unless {{ attr.id }} = raw
 
-        if (data = opts[{{ attr.id.stringify }}]?) && data.responds_to?(:each)
-          data.each do |k, v|
+        if {{ attr.id }}.responds_to?(:each)
+          {{ attr.id }}.each do |k, v|
             new_{{ attr.id }}[k.to_s] =
               case v
               when Array
@@ -358,123 +363,5 @@ module Halite
         new_{{ attr.id }}
       end
     {% end %}
-
-    {% for attr in %w(headers params form json raw timeout follow ssl) %}
-        private def merge_{{ attr.id }}(options : Hash(String, _) | NamedTuple)
-        {% if attr.id == "raw".id %}
-          @{{ attr.id }} = parse_{{ attr.id }}(options)
-        {% else %}
-          if {{ attr.id }} = parse_{{ attr.id }}(options)
-            {% if attr.id == "timeout".id || attr.id == "follow".id || attr.id == "ssl".id %}
-              @{{ attr.id }} = {{ attr.id }}
-            {% else %}
-              @{{ attr.id }}.merge!({{ attr.id }})
-            {% end %}
-          end
-        {% end %}
-      end
-    {% end %}
-
-    private def parse_raw(options : (Hash(String, _) | NamedTuple)?) : String?
-      return unless opts = options
-
-      opts["raw"]?.as(String?)
-    end
-
-    private def parse_timeout(options : (Hash(String, _) | NamedTuple)?) : Timeout
-      Timeout.new(timeout_value("connect_timeout", options), timeout_value("read_timeout", options))
-    end
-
-    private def parse_follow(options : (Hash(String, _) | NamedTuple)?) : Follow
-      return Follow.new unless opts = options
-
-      hops = opts["follow"]?.as(Int32?)
-      strict = opts["follow_strict"]?.as(Bool?)
-      Follow.new(hops, strict)
-    end
-
-    private def parse_ssl(options : (Hash(String, _) | NamedTuple)?) : OpenSSL::SSL::Context::Client?
-      return unless opts = options
-
-      opts["ssl"]?.as(OpenSSL::SSL::Context::Client?)
-    end
-
-    private def timeout_value(key : String, options : (Hash(String, _) | NamedTuple)?) : Float64?
-      return unless opts = options
-
-      if timeout = opts[key]?
-        case timeout
-        when Int32, Time::Span
-          timeout.to_f
-        when Float64
-          timeout
-        end
-      end
-    end
-
-    # Timeout struct
-    struct Timeout
-      getter connect, read
-
-      def initialize(@connect : Float64? = nil, @read : Float64? = nil)
-      end
-
-      def initialize(connect : Time::Span? = nil, read : Time::Span? = nil)
-        @connect = connect.seconds
-        @read = read.seconds
-      end
-
-      def connect=(timeout : Int32 | Float64 | Time::Span)
-        @connect = timeout.to_f
-      end
-
-      def read=(timeout : Int32 | Float64 | Time::Span)
-        @read = timeout.to_f
-      end
-    end
-
-    struct Follow
-      # No follow by default
-      DEFAULT_HOPS = 0
-
-      # A maximum of 5 subsequent redirects
-      MAX_HOPS = 5
-
-      # Redirector hops policy
-      STRICT = true
-
-      getter hops : Int32
-      getter strict : Bool
-
-      @default : Bool
-
-      def initialize(hops : Int32? = nil, strict : Bool? = nil)
-        @hops = hops || DEFAULT_HOPS
-        @strict = strict.nil? ? STRICT : strict
-        @default = !(hops && strict)
-      end
-
-      def hops=(hops : Int32)
-        @default = false
-        @hops = hops
-      end
-
-      def strict=(strict : Bool)
-        @default = false
-        @strict = strict
-      end
-
-      def strict?
-        @strict == true
-      end
-
-      def default?
-        @default
-      end
-
-      def updated?
-        !@default
-      end
-    end
   end
 end

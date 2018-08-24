@@ -13,13 +13,10 @@ module Halite
   # ### Simple setup
   #
   # ```
-  # options = Optionns.new({
-  #   "headers" = {
-  #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4"
-  #   }
+  # client = Halite::Client.new(headers: {
+  #   "private-token" => "bdf39d82661358f80b31b67e6f89fee4"
   # })
   #
-  # client = Halite::Client.new(options)
   # client.auth(private_token: "bdf39d82661358f80b31b67e6f89fee4").
   #       .get("http://httpbin.org/get", params: {
   #         name: "icyleaf"
@@ -45,14 +42,24 @@ module Halite
     # Instance a new client
     #
     # ```
-    # Halite::Client.new({
-    #   "headers" => {
-    #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
-    #   },
-    # })
+    # Halite::Client.new(headers: {"private-token" => "bdf39d82661358f80b31b67e6f89fee4"})
     # ```
-    def self.new(options : (Hash(Options::Type, _) | NamedTuple))
-      Client.new(Options.new(options))
+    def self.new(*,
+                 headers : (Hash(String, _) | NamedTuple)? = nil,
+                 cookies : (Hash(String, _) | NamedTuple)? = nil,
+                 params : (Hash(String, _) | NamedTuple)? = nil,
+                 form : (Hash(String, _) | NamedTuple)? = nil,
+                 json : (Hash(String, _) | NamedTuple)? = nil,
+                 raw : String? = nil,
+                 timeout = Timeout.new,
+                 follow = Follow.new,
+                 ssl : OpenSSL::SSL::Context::Client? = nil,
+                 logging = false,
+                 logger = nil)
+      Client.new(Options.new(headers: headers, cookies: cookies, params: params,
+        form: form, json: json, raw: raw, ssl: ssl,
+        timeout: timeout, follow: follow,
+        logging: logging, logger: logger))
     end
 
     # Instance a new client with block
@@ -65,10 +72,8 @@ module Halite
     # Instance a new client
     #
     # ```
-    # options = Halite::Options.new({
-    #   "headers" => {
-    #     "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
-    #   },
+    # options = Halite::Options.new(headers: {
+    #   "private-token" => "bdf39d82661358f80b31b67e6f89fee4"
     # })
     #
     # client = Halite::Client.new(options)
@@ -78,7 +83,7 @@ module Halite
     end
 
     # Make an HTTP request
-    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple)? = nil) : Halite::Response
+    def request(verb : String, uri : String, options : Options? = nil) : Halite::Response
       opts = options ? @options.merge(options.not_nil!) : @options
 
       uri = make_request_uri(uri, opts)
@@ -164,7 +169,6 @@ module Halite
 
     private def merge_option_from_response(options : Halite::Options, response : Halite::Response) : Halite::Options
       return options unless response.headers
-
       # Store cookies for sessions use
       options.with_cookies(HTTP::Cookies.from_headers(response.headers))
     end

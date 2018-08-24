@@ -8,29 +8,13 @@ describe Halite::Client do
       client.should be_a(Halite::Client)
     end
 
-    it "should initial with Hash client" do
-      client = Halite::Client.new({
-        "headers" => {
-          user_agent: "Spec",
-        },
+    it "should initial with options" do
+      client = Halite::Client.new(headers: {
+        user_agent: "Spec",
       })
 
       client.should be_a(Halite::Client)
       client.options.headers["User-Agent"].should eq("Spec")
-    end
-
-    it "should initial with NamedTuple client" do
-      client = Halite::Client.new({
-        headers: {
-          private_token: "token",
-        },
-        connect_timeout: 1.minutes,
-      })
-
-      client.should be_a(Halite::Client)
-      client.options.headers.should be_a(HTTP::Headers)
-      client.options.headers["Private-Token"].should eq("token")
-      client.options.timeout.connect.should eq(60)
     end
 
     it "should initial with block" do
@@ -74,7 +58,7 @@ describe Halite::Client do
       r = client.get "#{server.endpoint}/get-cookies"
       r.headers.has_key?("Set-Cookie").should be_false
       r.cookies.size.zero?.should be_true
-      JSON.parse(r.body)["foo"].should eq("bar")
+      r.parse("json").as_h["foo"].should eq("bar")
     end
   end
 end

@@ -22,9 +22,9 @@ private def test_options
     raw: "title=h4",
     connect_timeout: 1,
     read_timeout: 3.2,
-    ssl: OpenSSL::SSL::Context::Client.new,
     follow: 2,
-    follow_strict: false
+    follow_strict: false,
+    ssl: OpenSSL::SSL::Context::Client.new,
   )
 end
 
@@ -38,16 +38,16 @@ describe Halite::Options do
       options.cookies.should be_a(HTTP::Cookies)
       options.cookies.size.should eq(0)
 
-      options.timeout.should be_a(Halite::Options::Timeout)
+      options.timeout.should be_a(Halite::Timeout)
       options.timeout.connect.should be_nil
       options.timeout.read.should be_nil
       options.connect_timeout.should be_nil
       options.read_timeout.should be_nil
 
-      options.follow.should be_a(Halite::Options::Follow)
-      options.follow.hops.should eq(Halite::Options::Follow::DEFAULT_HOPS)
-      options.follow.strict.should eq(Halite::Options::Follow::STRICT)
-      options.follow_strict.should eq(Halite::Options::Follow::STRICT)
+      options.follow.should be_a(Halite::Follow)
+      options.follow.hops.should eq(Halite::Follow::DEFAULT_HOPS)
+      options.follow.strict.should eq(Halite::Follow::STRICT)
+      options.follow_strict.should eq(Halite::Follow::STRICT)
 
       options.ssl.should be_nil
       options.params.should eq({} of String => Halite::Options::Type)
@@ -55,17 +55,18 @@ describe Halite::Options do
       options.json.should eq({} of String => Halite::Options::Type)
       options.raw.should be_nil
 
-      options.logger.should be_a(Halite::Logger::Common)
       options.logging?.should be_false
+      expect_raises Halite::Error, "Logging is disable now, set logging = true and try again" do
+        options.logger
+      end
     end
 
-    it "should initial with Hash arguments" do
-      options = Halite::Options.new({
-        "headers" => {
+    it "should initial with original" do
+      options = Halite::Options.new(headers: {
           "private_token" => "token",
         },
-        "connect_timeout" => 3.2,
-      })
+        timeout: Halite::Timeout.new(connect: 3.2)
+      )
 
       options.should be_a(Halite::Options)
       options.headers.should be_a(HTTP::Headers)
@@ -73,34 +74,17 @@ describe Halite::Options do
       options.timeout.connect.should eq(3.2)
     end
 
-    it "should initial with NamedTuple arguments" do
-      options = Halite::Options.new({
-        headers: {
+    it "should initial with quick setup" do
+      options = Halite::Options.new(headers: {
           private_token: "token",
         },
-        connect_timeout: 1.minutes,
-      })
-
-      options.should be_a(Halite::Options)
-      options.headers.should be_a(HTTP::Headers)
-      options.headers["Private-Token"].should eq("token")
-      options.timeout.connect.should eq(60)
-    end
-
-    it "should initial with tuples arguments" do
-      options = Halite::Options.new(
-        headers: {
-          "private_token" => "token",
-        },
-        follow: 4,
-        follow_strict: false
+        connect_timeout: 1.minutes
       )
 
       options.should be_a(Halite::Options)
       options.headers.should be_a(HTTP::Headers)
       options.headers["Private-Token"].should eq("token")
-      options.follow.hops.should eq(4)
-      options.follow.strict.should eq(false)
+      options.timeout.connect.should eq(60)
     end
 
     it "should overwrite default headers" do
@@ -116,44 +100,6 @@ describe Halite::Options do
   end
 
   describe "#merge" do
-    it "should works with Hash or NamedTuple" do
-      options = test_options.merge({
-        headers: {
-          user_agent: "spec",
-        },
-        params:          {"title" => "1"},
-        form:            {"title" => "2"},
-        json:            {"title" => "3"},
-        raw:             "title=4",
-        connect_timeout: 2,
-        read_timeout:    1,
-        follow:          1,
-        follow_strict:   true,
-      })
-
-      options.headers.should eq(HTTP::Headers{"User-Agent" => "spec", "Accept" => "*/*", "Connection" => "keep-alive"})
-
-      options.cookies.should be_a(HTTP::Cookies)
-      options.cookies.size.should eq(0)
-
-      options.timeout.should be_a(Halite::Options::Timeout)
-      options.timeout.connect.should eq(2)
-      options.timeout.read.should eq(1)
-      options.connect_timeout.should eq(2)
-      options.read_timeout.should eq(1)
-
-      options.follow.should be_a(Halite::Options::Follow)
-      options.follow.hops.should eq(1)
-      options.follow.strict.should be_true
-      options.follow_strict.should be_true
-
-      options.params.should eq({"title" => "1"})
-      options.form.should eq({"title" => "2"})
-      options.json.should eq({"title" => "3"})
-      options.raw.should_not be_nil
-      options.raw.not_nil!.should eq("title=4")
-    end
-
     it "should works with Halite::Options" do
       options = test_options.merge(Halite::Options.new(
         headers: {
@@ -164,23 +110,17 @@ describe Halite::Options do
         json: {"title" => "3"},
         raw: "title=4",
         connect_timeout: 2,
-        read_timeout: 1,
-        follow: 1,
-        follow_strict: true
+        follow: 1
       ))
 
       options.headers.should eq(HTTP::Headers{"User-Agent" => "spec", "Accept" => "*/*", "Connection" => "keep-alive"})
-
-      options.cookies.should be_a(HTTP::Cookies)
       options.cookies.size.should eq(0)
 
-      options.timeout.should be_a(Halite::Options::Timeout)
       options.timeout.connect.should eq(2)
-      options.timeout.read.should eq(1)
+      options.timeout.read.should be_nil
       options.connect_timeout.should eq(2)
-      options.read_timeout.should eq(1)
+      options.read_timeout.should be_nil
 
-      options.follow.should be_a(Halite::Options::Follow)
       options.follow.hops.should eq(1)
       options.follow.strict.should be_true
       options.follow_strict.should be_true
@@ -201,16 +141,16 @@ describe Halite::Options do
     options.cookies.should be_a(HTTP::Cookies)
     options.cookies.size.should eq(0)
 
-    options.timeout.should be_a(Halite::Options::Timeout)
+    options.timeout.should be_a(Halite::Timeout)
     options.timeout.connect.should be_nil
     options.timeout.read.should be_nil
     options.connect_timeout.should be_nil
     options.read_timeout.should be_nil
 
-    options.follow.should be_a(Halite::Options::Follow)
-    options.follow.hops.should eq(Halite::Options::Follow::DEFAULT_HOPS)
-    options.follow.strict.should eq(Halite::Options::Follow::STRICT)
-    options.follow_strict.should eq(Halite::Options::Follow::STRICT)
+    options.follow.should be_a(Halite::Follow)
+    options.follow.hops.should eq(Halite::Follow::DEFAULT_HOPS)
+    options.follow.strict.should eq(Halite::Follow::STRICT)
+    options.follow_strict.should eq(Halite::Follow::STRICT)
 
     options.ssl.should be_nil
     options.params.should eq({} of String => Halite::Options::Type)
@@ -218,8 +158,10 @@ describe Halite::Options do
     options.json.should eq({} of String => Halite::Options::Type)
     options.raw.should be_nil
 
-    options.logger.should be_a(Halite::Logger::Common)
     options.logging?.should be_false
+    expect_raises Halite::Error, "Logging is disable now, set logging = true and try again" do
+      options.logger
+    end
   end
 
   describe "#with_headers" do
@@ -234,10 +176,8 @@ describe Halite::Options do
     end
 
     it "should overwrite NamedTuped headers" do
-      options = Halite::Options.new({
-        headers: {
-          private_token: "token",
-        },
+      options = Halite::Options.new(headers: {
+        private_token: "token",
       })
       options = options.with_headers(private_token: "new", accept: "application/json")
 
@@ -246,10 +186,8 @@ describe Halite::Options do
     end
 
     it "should overwrite Hash headers" do
-      options = Halite::Options.new({
-        "headers" => {
-          private_token: "token",
-        },
+      options = Halite::Options.new(headers: {
+        private_token: "token",
       })
       options = options.with_headers(private_token: "new", accept: "application/json")
 
@@ -289,7 +227,7 @@ describe Halite::Options do
 
   describe "#with_timeout" do
     it "should overwrite timeout" do
-      options = Halite::Options.new(connect_timeout: 1, read_timeout: 3)
+      options = Halite::Options.new(timeout: Halite::Timeout.new(connect: 1, read: 3))
       options = options.with_timeout(read: 4.minutes, connect: 1.2)
 
       options.timeout.connect.should eq(1.2)
@@ -299,7 +237,7 @@ describe Halite::Options do
 
   describe "#with_follow" do
     it "should overwrite follow" do
-      options = Halite::Options.new(follow: 1, follow_strict: true)
+      options = Halite::Options.new(follow: Halite::Follow.new(1, true))
       options = options.with_follow(follow: 5, strict: false)
 
       options.follow.hops.should eq(5)
@@ -342,10 +280,8 @@ describe Halite::Options do
         params: {"name" => "foo"},
         form: {"name" => "foo"},
         json: {"name" => "foo"},
-        connect_timeout: 1,
-        read_timeout: 3,
-        follow: 4,
-        follow_strict: false
+        timeout: Halite::Timeout.new(1, 3),
+        follow: Halite::Follow.new(4, false),
       )
       options.clear!
 
@@ -358,15 +294,15 @@ describe Halite::Options do
       options.timeout.connect.nil?.should eq(true)
       options.timeout.read.nil?.should eq(true)
 
-      options.follow.hops.should eq(Halite::Options::Follow::DEFAULT_HOPS)
-      options.follow.strict.should eq(Halite::Options::Follow::STRICT)
+      options.follow.hops.should eq(Halite::Follow::DEFAULT_HOPS)
+      options.follow.strict.should eq(Halite::Follow::STRICT)
     end
   end
 
   describe "alias methods" do
     context "read_timeout alias to timeout.read" do
       it "getter" do
-        options = Halite::Options.new(read_timeout: 34)
+        options = Halite::Options.new(timeout: Halite::Timeout.new(read: 34))
         options.read_timeout.should eq(34)
         options.timeout.read.should eq(34)
       end
@@ -386,7 +322,7 @@ describe Halite::Options do
 
     context "connect_timeout alias to timeout.connect" do
       it "getter" do
-        options = Halite::Options.new(connect_timeout: 34)
+        options = Halite::Options.new(timeout: Halite::Timeout.new(connect: 34))
         options.timeout.connect.should eq(34)
         options.connect_timeout.should eq(34)
       end
@@ -413,7 +349,7 @@ describe Halite::Options do
       end
 
       it "getter" do
-        options = Halite::Options.new(follow: 3)
+        options = Halite::Options.new(follow: Halite::Follow.new(3))
 
         # Can not return integer with follow
         options.follow.hops.should eq(3)
@@ -432,7 +368,7 @@ describe Halite::Options do
       end
 
       it "getter" do
-        options = Halite::Options.new(follow_strict: false)
+        options = Halite::Options.new(follow: Halite::Follow.new(strict: false))
 
         options.follow_strict.should eq(false)
         options.follow.strict.should eq(false)
