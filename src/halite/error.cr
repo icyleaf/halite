@@ -25,6 +25,9 @@ module Halite
     # Generic Timeout error
     class TimeoutError < RequestError; end
 
+    # The feature given was not understood
+    class UnRegisterFeatureError < RequestError; end
+
     # Notifies that we reached max allowed redirect hops
     class TooManyRedirectsError < ResponseError; end
 

@@ -52,6 +52,7 @@ module Halite
     property json : Hash(String, Type)
     property raw : String?
 
+    getter features : Hash(String, Features::Adapter)
     getter logging : Bool
     setter logger : Halite::Logger::Adapter?
 
@@ -94,6 +95,8 @@ module Halite
       @params = parse_params(params)
       @form = parse_form(form)
       @json = parse_json(json)
+
+      @features = {} of String => Features::Adapter
     end
 
     # Alias `with_headers` method.
@@ -161,10 +164,38 @@ module Halite
       self
     end
 
+    # Returns `Options` self with features
+    def with_features(features : Hash(String, Features::Adapter))
+      features.each do |name, feature|
+        with_features(name, feature)
+      end
+      self
+    end
+
+    # Returns `Options` self with features
+    def with_features(features : Hash(String, NamedTuple))
+      features.each do |name, opts|
+        with_features(name, **opts)
+      end
+      self
+    end
+
+    # Returns `Options` self with feature name and options
+    def with_features(feature_name : String, **opts)
+      with_feature(feature_name, opts)
+    end
+
+    # Returns `Options` self with feature name and feature or options
+    def with_features(feature_name : String, opts_or_feature : NamedTuple | Features::Adapter)
+      raise UnRegisterFeatureError.new("Not avaiable feature: #{feature_name}") unless feature_cls = Features.availables.includes?(feature_name)
+      @features[feature_name] = opts_or_feature.is_a?(Features::Adapter) ? opts_or_feature : feature_cls.new(**opts_or_feature)
+      self
+    end
+
     # Returns `Logger` self with gived adapter, filename, mode and response.
     def with_logger(adapter = "common", filename : String? = nil, mode : String? = nil, response : Bool = true)
       adapters = Halite::Logger.availables
-      raise "Not avaiable adapter: #{adapter}, avaiables in #{adapters.join(", ")}" unless adapters.includes?(adapter)
+      raise UnRegisterAdapterError.new("Not avaiable adapter: #{adapter}, avaiables in #{adapters.join(", ")}") unless adapters.includes?(adapter)
 
       io = if filename && mode
              File.open(filename.not_nil!, mode.not_nil!)
