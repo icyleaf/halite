@@ -315,7 +315,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/22bbfe8" target="_blank">#22bbfe8</a> (2018-08-28 18:09:48 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/8f92df5" target="_blank">#8f92df5</a> (2018-08-28 18:13:35 +0800).</p>
 
 <h2>Index</h2>
 
@@ -718,7 +718,7 @@ We can enable per operation logging by configuring them through the chaining API
 <p>By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to <code>STDOUT</code> on DEBUG level.
 You can configuring the following options:</p>
 
-<ul><li><code>logger</code>: Instance your <code><a href="Halite/Features/Logger/Abstract.html">Halite::Features::Logger::Abstract</a></code>, check <a href="#use-the-custom-logger" target="_blank">Use the custom logger</a>.</li><li><code>format</code>: Outputing format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>file</code>: Write to file with path, works with <code>format</code>.</li><li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code> (append content to bottom of file, create if file is not exist).</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
+<ul><li><code>logger</code>: Instance your <code><a href="Halite/Features/Logger/Abstract.html">Halite::Features::Logger::Abstract</a></code>, check <a href="#use-the-custom-logger" target="_blank">Use the custom logger</a>.</li><li><code>format</code>: Outputing format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>file</code>: Write to file with path, works with <code>format</code>.</li><li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code>. (append to bottom, create it if file is not exist)</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
 
 <blockquote><strong>NOTE</strong>: <code>format</code> (<code>file</code> and <code>filemode</code>) and <code>logger</code> are conflict, you can not use both.</blockquote>
 
