@@ -1,7 +1,8 @@
 require "json"
 
-module Halite::Logger
-  class JSON < Adapter
+module Halite::Features
+  # Logger feature: JSONLogger
+  class JSONLogger < Logger::Abstract
     @created_at : Time? = nil
     @request : Request? = nil
     @response : Response? = nil
@@ -32,7 +33,8 @@ module Halite::Logger
       }.to_pretty_json
     end
 
-    struct Request
+    # :nodoc:
+    private struct Request
       def initialize(@request : Halite::Request)
       end
 
@@ -47,7 +49,8 @@ module Halite::Logger
       end
     end
 
-    struct Response
+    # :nodoc:
+    private struct Response
       def initialize(@response : Halite::Response)
       end
 
@@ -61,7 +64,7 @@ module Halite::Logger
         }
       end
     end
+
+    Logger.register "json", self
   end
 end
-
-Halite::Logger.register_adapter "json", Halite::Logger::JSON.new

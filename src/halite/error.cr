@@ -13,6 +13,9 @@ module Halite
     # Generic Response error
     class ResponseError < Error; end
 
+    # Generic Feature error
+    class FeatureError < Error; end
+
     # The method given was not understood
     class UnsupportedMethodError < RequestError; end
 
@@ -26,7 +29,10 @@ module Halite
     class TimeoutError < RequestError; end
 
     # The feature given was not understood
-    class UnRegisterFeatureError < RequestError; end
+    class UnRegisterFeatureError < FeatureError; end
+
+    # The format given was not understood
+    class UnRegisterLoggerFormatError < FeatureError; end
 
     # Notifies that we reached max allowed redirect hops
     class TooManyRedirectsError < ResponseError; end
@@ -35,7 +41,7 @@ module Halite
     class EndlessRedirectError < TooManyRedirectsError; end
 
     # The MIME type(adapter) given was not understood
-    class UnRegisterAdapterError < ResponseError; end
+    class UnRegisterMimeTypeError < ResponseError; end
 
     # Generic API error
     class APIError < ResponseError

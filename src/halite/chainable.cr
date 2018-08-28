@@ -256,8 +256,8 @@ module Halite
     # # => halite | 2017-12-13 16:40:13 >> | GET | http://httpbin.org/get?name=foobar
     # # => halite | 2017-12-13 16:40:15 << | 200 | http://httpbin.org/get?name=foobar application/json
     # ```
-    def logger(logger = Halite::Logger::Common.new, response = true)
-      branch(default_options.with_logger(logger, response))
+    def logger(logger = Halite::Features::CommonLogger.new)
+      branch(default_options.with_logger(logger))
     end
 
     # Returns `Options` self with gived the filename of logger path.
@@ -265,7 +265,7 @@ module Halite
     # #### JSON-formatted logging
     #
     # ```
-    # Halite.logger(adapter: "json")
+    # Halite.logger(format: "json")
     #   .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     #
@@ -279,13 +279,24 @@ module Halite
     # #### Always create new log file and store data to JSON formatted
     #
     # ```
-    # Halite.logger(adapter: "json", filename: "/tmp/halite.log", mode: "w")
+    # Halite.logger(format: "json", filename: "/tmp/halite.log")
     #   .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     #
     # Check the log file content: **/tmp/halite.log**
-    def logger(adapter = "common", filename : String? = nil, mode : String? = nil, response = true)
-      branch(default_options.with_logger(adapter, filename, mode, response))
+    def logger(format = "common", filename : String? = nil, filemode : String? = nil,
+               skip_request_body = false, skip_response_body = false,
+               skip_benchmark = false, colorize = true)
+      opts = {
+        format: format,
+        filename: filename,
+        filemode: filemode,
+        skip_request_body: skip_request_body,
+        skip_response_body: skip_response_body,
+        skip_benchmark: skip_benchmark,
+        colorize: colorize
+      }
+      branch(default_options.with_logger(**opts))
     end
 
     # Make an HTTP request with the given verb

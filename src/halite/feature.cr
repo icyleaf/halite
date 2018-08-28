@@ -1,24 +1,24 @@
 module Halite
   module Features
-    @@adapters = {} of String => Features::Adapter.class
+    @@featurs = {} of String => Features::Feature.class
 
-    def self.register_feature(name : String, feature : Features::Adapter.class)
-      @@adapters[name] = feature
+    def self.register(name : String, feature : Features::Feature.class)
+      @@featurs[name] = feature
     end
 
     def self.[](name : String)
-      @@adapters[name]
+      @@featurs[name]
     end
 
     def self.[]?(name : String)
-      @@adapters[name]?
+      @@featurs[name]?
     end
 
     def self.availables
-      @@adapters.keys
+      @@featurs.keys
     end
 
-    abstract class Adapter
+    abstract class Feature
       def initialize(**options)
       end
 

@@ -72,7 +72,7 @@ module Halite
       name ||= content_type
 
       raise Halite::Error.new("No match MIME type: #{name}") unless name
-      raise Halite::UnRegisterAdapterError.new("unregister MIME type adapter: #{name}") unless MimeTypes[name]?
+      raise Halite::UnRegisterMimeTypeError.new("unregister MIME type adapter: #{name}") unless MimeTypes[name]?
 
       MimeTypes[name].decode to_s
     end

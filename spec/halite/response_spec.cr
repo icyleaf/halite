@@ -120,7 +120,7 @@ describe Halite::Response do
     end
 
     context "with empty content type" do
-      it "raises Halite::UnRegisterAdapterError" do
+      it "raises Halite::UnRegisterMimeTypeError" do
         r = response(headers: {"Content-Type" => ""})
         expect_raises Halite::Error do
           r.parse
@@ -129,7 +129,7 @@ describe Halite::Response do
     end
 
     context "without content type" do
-      it "raises Halite::UnRegisterAdapterError" do
+      it "raises Halite::UnRegisterMimeTypeError" do
         r = response(headers: {"Etag" => "123123123"})
         expect_raises Halite::Error do
           r.parse
@@ -138,9 +138,9 @@ describe Halite::Response do
     end
 
     context "with unknown content type" do
-      it "raises Halite::UnRegisterAdapterError" do
+      it "raises Halite::UnRegisterMimeTypeError" do
         r = response(headers: {"Content-Type" => "application/html"})
-        expect_raises Halite::UnRegisterAdapterError do
+        expect_raises Halite::UnRegisterMimeTypeError do
           r.parse
         end
       end

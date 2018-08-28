@@ -1,15 +1,15 @@
 require "../spec_helper"
 require "tempfile"
 
-private class SimpleLogger < Halite::Logger::Adapter
-  def request(request)
-    @writer.info "request"
-  end
+# private class SimpleLogger < Halite::Logger::Adapter
+#   def request(request)
+#     @writer.info "request"
+#   end
 
-  def response(response)
-    @writer.info "response"
-  end
-end
+#   def response(response)
+#     @writer.info "response"
+#   end
+# end
 
 private def test_options
   Halite::Options.new(
@@ -56,9 +56,6 @@ describe Halite::Options do
       options.raw.should be_nil
 
       options.logging?.should be_false
-      expect_raises Halite::Error, "Logging is disable now, set logging = true and try again" do
-        options.logger
-      end
     end
 
     it "should initial with original" do
@@ -159,9 +156,6 @@ describe Halite::Options do
     options.raw.should be_nil
 
     options.logging?.should be_false
-    expect_raises Halite::Error, "Logging is disable now, set logging = true and try again" do
-      options.logger
-    end
   end
 
   describe "#with_headers" do
@@ -245,28 +239,28 @@ describe Halite::Options do
     end
   end
 
-  describe "#with_logger" do
-    it "should overwrite logger with instance class" do
-      options = Halite::Options.new.with_logger(logger: SimpleLogger.new)
-      options.logger.should be_a SimpleLogger
-    end
+  # describe "#with_logger" do
+  #   it "should overwrite logger with instance class" do
+  #     options = Halite::Options.new.with_logger(logger: SimpleLogger.new)
+  #     options.logger.should be_a SimpleLogger
+  #   end
 
-    it "should overwrite logger with adapter name" do
-      Halite::Logger.register_adapter "simple", SimpleLogger.new
+  #   it "should overwrite logger with adapter name" do
+  #     Halite::Logger.register_adapter "simple", SimpleLogger.new
 
-      options = Halite::Options.new.with_logger(adapter: "simple")
-      options.logger.should be_a SimpleLogger
-    end
+  #     options = Halite::Options.new.with_logger(adapter: "simple")
+  #     options.logger.should be_a SimpleLogger
+  #   end
 
-    it "should became a file logger" do
-      Halite::Logger.register_adapter "simple", SimpleLogger.new
+  #   it "should became a file logger" do
+  #     Halite::Logger.register_adapter "simple", SimpleLogger.new
 
-      tempfile = Tempfile.new("halite_logger")
+  #     tempfile = Tempfile.new("halite_logger")
 
-      options = Halite::Options.new.with_logger(adapter: "simple", filename: tempfile.path, mode: "w")
-      options.logger.should be_a SimpleLogger
-    end
-  end
+  #     options = Halite::Options.new.with_logger(adapter: "simple", filename: tempfile.path, mode: "w")
+  #     options.logger.should be_a SimpleLogger
+  #   end
+  # end
 
   describe "#clear!" do
     it "should clear setted options" do
