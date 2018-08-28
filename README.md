@@ -406,11 +406,11 @@ r.parse # simplily by default
 #### Parsing Content
 
 `Halite::Response` has a MIME type adapter system that you can use a decoder to parse the content,
-we can inherit `Halite::Logger::Adapter` make our adapter:
+we can inherit `Halite::MimeTypes::Adapter` make our adapter:
 
 ```crystal
 # Define a MIME type adapter
-class YAMLAdapter < Halite::Logger::Adapter
+class YAMLAdapter < Halite::MimeTypes::Adapter
   def decode(string)
     YAML.parse(string)
   end
