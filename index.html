@@ -315,7 +315,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/05af985" target="_blank">master#05af985</a> (2018-08-28 14:45:31 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/484fd40" target="_blank">master#484fd40</a> (2018-08-28 15:26:29 +0800).</p>
 
 <h2>Index</h2>
 
@@ -718,9 +718,9 @@ We can enable per operation logging by configuring them through the chaining API
 <p>By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to <code>STDOUT</code> on DEBUG level.
 You can configuring the following options:</p>
 
-<ul><li><code>format</code>: Outputing format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>logger</code>: Instance your <code><a href="Halite/Features/Logger/Abstract.html">Halite::Features::Logger::Abstract</a></code>, check <a href="#use-the-custom-logger" target="_blank">Use the custom logger</a>.</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
+<ul><li><code>logger</code>: Instance your <code><a href="Halite/Features/Logger/Abstract.html">Halite::Features::Logger::Abstract</a></code>, check <a href="#use-the-custom-logger" target="_blank">Use the custom logger</a>.</li><li><code>format</code>: Outputing format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>file</code>: Write to file with path, works with <code>format</code>.</li><li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code> (append content to bottom of file, create if file is not exist).</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
 
-<blockquote><strong>NOTE</strong>: <code>format</code> and <code>logger</code> are conflict, you can not use it both.</blockquote>
+<blockquote><strong>NOTE</strong>: <code>format</code> (<code>file</code> and <code>filemode</code>) and <code>logger</code> are conflict, you can not use both.</blockquote>
 
 <p>Let's try with it:</p>
 
@@ -728,7 +728,7 @@ You can configuring the following options:</p>
 <span class="t">Halite</span>.logger
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
-<span class="c"># =&gt; 2018-06-25 18:33:14 +08:00 | request | GET    | http://httpbin.org/get?name=foobar</span>
+<span class="c"># =&gt; 2018-06-25 18:33:14 +08:00 | request  | GET    | http://httpbin.org/get?name=foobar</span>
 <span class="c"># =&gt; 2018-06-25 18:33:15 +08:00 | response | 200    | http://httpbin.org/get?name=foobar | 381.32ms | application/json</span>
 <span class="c"># =&gt; {&quot;args&quot;:{&quot;name&quot;:&quot;foobar&quot;},&quot;headers&quot;:{&quot;Accept&quot;:&quot;*/*&quot;,&quot;Accept-Encoding&quot;:&quot;gzip, deflate&quot;,&quot;Connection&quot;:&quot;close&quot;,&quot;Host&quot;:&quot;httpbin.org&quot;,&quot;User-Agent&quot;:&quot;Halite/0.3.2&quot;},&quot;origin&quot;:&quot;60.206.194.34&quot;,&quot;url&quot;:&quot;http://httpbin.org/get?name=foobar&quot;}</span>
 
@@ -736,7 +736,7 @@ You can configuring the following options:</p>
 <span class="t">Halite</span>.logger
       .get(<span class="s">&quot;http://httpbin.org/image/png&quot;</span>)
 
-<span class="c"># =&gt; 2018-06-25 18:34:15 +08:00 | request | GET    | http://httpbin.org/image/png</span>
+<span class="c"># =&gt; 2018-06-25 18:34:15 +08:00 | request  | GET    | http://httpbin.org/image/png</span>
 <span class="c"># =&gt; 2018-06-25 18:34:15 +08:00 | response | 200    | http://httpbin.org/image/png | image/png</span>
 
 <span class="c"># Logging with options</span>
@@ -756,17 +756,17 @@ You can configuring the following options:</p>
 <h4>Write to a log file</h4>
 
 <pre><code class="language-crystal"><span class="c"># Write plain text to a log file</span>
-<span class="t">Halite</span>.logger(filename: <span class="s">&quot;logs/halite.log&quot;</span>, skip_benchmark: <span class="n">true</span>, colorize: <span class="n">false</span>)
+<span class="t">Halite</span>.logger(file: <span class="s">&quot;logs/halite.log&quot;</span>, skip_benchmark: <span class="n">true</span>, colorize: <span class="n">false</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># Write json data to a log file</span>
-<span class="t">Halite</span>.logger(format: <span class="s">&quot;json&quot;</span>, filename: <span class="s">&quot;logs/halite.log&quot;</span>)
+<span class="t">Halite</span>.logger(format: <span class="s">&quot;json&quot;</span>, file: <span class="s">&quot;logs/halite.log&quot;</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <h4>Use the custom logger</h4>
 
 <p>Creating the custom logger by integration <code><a href="Halite/Features/Logger/Abstract.html">Halite::Features::Logger::Abstract</a></code> abstract class.
-here has two methods must be implement: <code>#request</code> and <code>#response</code>.</p>
+Here has two methods must be implement: <code>#request</code> and <code>#response</code>.</p>
 
 <pre><code class="language-crystal"><span class="k">class</span> <span class="t">CustomLogger</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Features</span><span class="t">::</span><span class="t">Logger</span><span class="t">::</span><span class="t">Abstract</span>
   <span class="k">def</span> <span class="m">request</span>(request)
