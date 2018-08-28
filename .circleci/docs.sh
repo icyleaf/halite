@@ -10,6 +10,10 @@ rm -rf $DOCS_PATH
 mkdir -p $DOCS_PATH
 
 # Generate master docs
+COMMIT_DATE=$(git log -1 --format=%ci)
+MASTER_COMMIT_HASH=$(git rev-parse --short HEAD)
+COMMIT_STATUS="[#${MASTER_COMMIT_HASH}](${GH_REF}/commit/${MASTER_COMMIT_HASH})"
+sed -i -e "s/latest commit/$(echo ${COMMIT_STATUS} | sed -e "s/\//\\\\\//g") (${COMMIT_DATE})/" README.md
 crystal docs --output="${DOCS_PATH}/master"
 
 # Generate version docs

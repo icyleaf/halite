@@ -24,18 +24,7 @@ jobs:
           command: crystal spec
       - run:
           name: "Generate API documents"
-          command: |
-            COMMIT_DATE=$(git log -1 --format=%ci)
-            MASTER_COMMIT_HASH=$(git rev-parse --short HEAD)
-            LATEST_TAG_NAME=$(git tag --merged master | sort | tail -n 1)
-            LATEST_TAG_HASH=$(git rev-parse --short ${LATEST_TAG_NAME})
-            if [ "$MASTER_COMMIT_HASH" -eq "#LATEST_TAG_HASH" ]; then
-              COMMIT_STATUS="[${LATEST_TAG_NAME}](${GH_REF}/commit/${LATEST_TAG_HASH})"
-            else
-              COMMIT_STATUS="[master#${MASTER_COMMIT_HASH}](${GH_REF}/commit/${MASTER_COMMIT_HASH})"
-            fi;
-            sed -i -e "s/latest commit/$(echo ${COMMIT_STATUS} | sed -e "s/\//\\\\\//g") (${COMMIT_DATE})/" README.md
-            crystal docs
+          command: ./docs.sh
       - deploy:
           name: "Upload to gh-page"
           command: |
