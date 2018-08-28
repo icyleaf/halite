@@ -365,7 +365,7 @@ After an HTTP request, `Halite::Response` object have several useful methods. (A
 
 - **#body**: The response body.
 - **#body_io**: The response body io.
-- **#code**: The HTTP status code.
+- **#status_code**: The HTTP status code.
 - **#content_type**: The content type of the response.
 - **#content_length**: The content length of the response.
 - **#cookies**: A `HTTP::Cookies` set by server.
