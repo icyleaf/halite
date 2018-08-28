@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::FormData - github.com/icyleaf/halite</title>
+  <title>Halite::RequestError - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -101,7 +101,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
       <a href="../Halite/FormData.html">FormData</a>
       
     </li>
@@ -146,7 +146,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/RequestError" data-name="halite::requesterror">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/RequestError" data-name="halite::requesterror">
       <a href="../Halite/RequestError.html">RequestError</a>
       
     </li>
@@ -210,29 +210,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Halite::FormData
+  <span class="kind">class</span> Halite::RequestError
 
 </h1>
 
 
-
-
-
-  <h2>Overview</h2>
-
-  <p>Utility-belt to build form data request bodies.</p>
-
-<p>Provides support for <code>application/x-www-form-urlencoded</code> and
-<code>multipart/form-data</code> types.</p>
-
-<pre><code>form <span class="o">=</span> <span class="t">FormData</span>.create({
-  <span class="s">&quot;name&quot;</span>   => <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
-  <span class="s">&quot;skill&quot;</span>  => [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
-  <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar.png&quot;</span>), <span class="c"># =&gt; &quot;image binary data&quot;</span>
-})
-
-form.body    <span class="c"># =&gt; &quot;----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\&quot;name\&quot;\r\n\r\nLizeth Gusikowski\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\&quot;skill\&quot;\r\n\r\nruby\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\&quot;skill\&quot;\r\n\r\ncrystal\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN\r\nContent-Disposition: form-data; name=\&quot;avatar\&quot;; filename=\&quot;avatar.png\&quot;\r\n\r\nimage binary data\n\r\n----------------------------_ytTht-0D5oif0cAGXSPjPSN--&quot;</span>
-form.headers <span class="c"># =&gt; HTTP::Headers{&quot;Content-Type&quot; =&gt; &quot;multipart/form-data; boundary=\&quot;--------------------------SS0a9QKeM_6fcj2CE5D4d0LQ\&quot;&quot;}</span></code></pre>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/RequestError.html">Halite::RequestError</a></li><li class="superclass"><a href="../Halite/Error.html">Halite::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -241,6 +224,18 @@ form.headers <span class="c"># =&gt; HTTP::Headers{&quot;Content-Type&quot; =&gt
 
 
 
+
+
+
+
+  <h2>Direct Known Subclasses</h2>
+  <ul class="other-types-list">
+  
+    <li class="other-type"><a href="../Halite/StateError.html">Halite::StateError</a></li>
+  
+    <li class="other-type"><a href="../Halite/TimeoutError.html">Halite::TimeoutError</a></li>
+  
+  </ul>
 
 
 
@@ -250,8 +245,8 @@ form.headers <span class="c"># =&gt; HTTP::Headers{&quot;Content-Type&quot; =&gt
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/81a961968888ac2993454304671af0d69d32891f/src/halite/form_data.cr#L20" target="_blank">
-        halite/form_data.cr
+      <a href="https://github.com/icyleaf/halite/blob/81a961968888ac2993454304671af0d69d32891f/src/halite/error.cr#L4" target="_blank">
+        halite/error.cr
       </a>
     
     <br/>
@@ -263,18 +258,6 @@ form.headers <span class="c"># =&gt; HTTP::Headers{&quot;Content-Type&quot; =&gt
 
 
 
-  <h2>Class Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#create%28data%3AHash%28String%2COptions%3A%3AType%29%3D%7B%7DofString%3D%3EOptions%3A%3AType%29%3AHalite%3A%3ARequest%3A%3AData-class-method" class="signature"><strong>.create</strong>(data : Hash(String, Options::Type) = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Options</span><span class="t">::</span><span class="t">Type</span>) : Halite::Request::Data</a>
-        
-          <div class="summary"><p>FormData factory.</p></div>
-        
-      </li>
-    
-  </ul>
-
 
 
 
@@ -283,31 +266,50 @@ form.headers <span class="c"># =&gt; HTTP::Headers{&quot;Content-Type&quot; =&gt
 
 <div class="methods-inherited">
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
 
-
-  <h2>Class Method Detail</h2>
-  
-    <div class="entry-detail" id="create(data:Hash(String,Options::Type)={}ofString=&gt;Options::Type):Halite::Request::Data-class-method">
-      <div class="signature">
-        
-        def self.<strong>create</strong>(data : Hash(String, <a href="../Halite/Options/Type.html">Options::Type</a>) = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Options</span><span class="t">::</span><span class="t">Type</span>) : <a href="../Halite/Request/Data.html">Halite::Request::Data</a>
-
-        <a class="method-permalink" href="#create%28data%3AHash%28String%2COptions%3A%3AType%29%3D%7B%7DofString%3D%3EOptions%3A%3AType%29%3AHalite%3A%3ARequest%3A%3AData-class-method">#</a>
-      </div>
-      
-        <div class="doc"><p>FormData factory. Automatically selects best type depending on given <code>data</code> Hash</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/81a961968888ac2993454304671af0d69d32891f/src/halite/form_data.cr#L22" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
