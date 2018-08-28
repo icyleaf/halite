@@ -22,8 +22,8 @@ module Halite
       def initialize(**options)
       end
 
-      abstract def request(request : Request)
-      abstract def response(response : Response)
+      abstract def request(request : Request) : Request
+      abstract def response(response : Response) : Response
     end
   end
 end
