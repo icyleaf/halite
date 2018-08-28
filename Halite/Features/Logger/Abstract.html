@@ -146,25 +146,15 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Feature" data-name="halite::feature">
+      <a href="../../../Halite/Feature.html">Feature</a>
+      
+    </li>
+  
   <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Features" data-name="halite::features">
       <a href="../../../Halite/Features.html">Features</a>
       
         <ul>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/CommonLogger" data-name="halite::features::commonlogger">
-      <a href="../../../Halite/Features/CommonLogger.html">CommonLogger</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/Feature" data-name="halite::features::feature">
-      <a href="../../../Halite/Features/Feature.html">Feature</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/JSONLogger" data-name="halite::features::jsonlogger">
-      <a href="../../../Halite/Features/JSONLogger.html">JSONLogger</a>
-      
-    </li>
   
   <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Features/Logger" data-name="halite::features::logger">
       <a href="../../../Halite/Features/Logger.html">Logger</a>
@@ -173,6 +163,16 @@
   
   <li class=" current" data-id="github.com/icyleaf/halite/Halite/Features/Logger/Abstract" data-name="halite::features::logger::abstract">
       <a href="../../../Halite/Features/Logger/Abstract.html">Abstract</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/Logger/Common" data-name="halite::features::logger::common">
+      <a href="../../../Halite/Features/Logger/Common.html">Common</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/Logger/JSON" data-name="halite::features::logger::json">
+      <a href="../../../Halite/Features/Logger/JSON.html">JSON</a>
       
     </li>
   
@@ -330,9 +330,9 @@
   <h2>Direct Known Subclasses</h2>
   <ul class="other-types-list">
   
-    <li class="other-type"><a href="../../../Halite/Features/CommonLogger.html">Halite::Features::CommonLogger</a></li>
+    <li class="other-type"><a href="../../../Halite/Features/Logger/Common.html">Halite::Features::Logger::Common</a></li>
   
-    <li class="other-type"><a href="../../../Halite/Features/JSONLogger.html">Halite::Features::JSONLogger</a></li>
+    <li class="other-type"><a href="../../../Halite/Features/Logger/JSON.html">Halite::Features::Logger::JSON</a></li>
   
   </ul>
 
@@ -344,7 +344,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/2915fee2643f26d4cb60b6022d14b128d73684a1/src/halite/features/logger.cr#L31" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L34" target="_blank">
         halite/features/logger.cr
       </a>
     
@@ -378,7 +378,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#colorize%3ABool-instance-method" class="signature"><strong>#colorize</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#default_formatter-instance-method" class="signature"><strong>#default_formatter</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#logger%3D%28logger%3A%3A%3ALogger%29-instance-method" class="signature"><strong>#logger=</strong>(logger : ::Logger)</a>
         
       </li>
     
@@ -393,7 +403,17 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#writer%3D%28writer%29-instance-method" class="signature"><strong>#writer=</strong>(writer)</a>
+        <a href="#skip_benchmark%3ABool-instance-method" class="signature"><strong>#skip_benchmark</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#skip_request_body%3ABool-instance-method" class="signature"><strong>#skip_request_body</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#skip_response_body%3ABool-instance-method" class="signature"><strong>#skip_response_body</strong> : Bool</a>
         
       </li>
     
@@ -451,7 +471,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/2915fee2643f26d4cb60b6022d14b128d73684a1/src/halite/features/logger.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -467,7 +487,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/2915fee2643f26d4cb60b6022d14b128d73684a1/src/halite/features/logger.cr#L49" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -478,6 +498,22 @@
 
 
   <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="colorize:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>colorize</strong> : Bool
+
+        <a class="method-permalink" href="#colorize%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
   
     <div class="entry-detail" id="default_formatter-instance-method">
       <div class="signature">
@@ -490,7 +526,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/2915fee2643f26d4cb60b6022d14b128d73684a1/src/halite/features/logger.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L67" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="logger=(logger:::Logger)-instance-method">
+      <div class="signature">
+        
+        def <strong>logger=</strong>(logger : ::Logger)
+
+        <a class="method-permalink" href="#logger%3D%28logger%3A%3A%3ALogger%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L50" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -506,7 +558,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/2915fee2643f26d4cb60b6022d14b128d73684a1/src/halite/features/logger.cr#L57" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L64" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -522,23 +574,55 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/2915fee2643f26d4cb60b6022d14b128d73684a1/src/halite/features/logger.cr#L58" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L65" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="writer=(writer)-instance-method">
+    <div class="entry-detail" id="skip_benchmark:Bool-instance-method">
       <div class="signature">
         
-        def <strong>writer=</strong>(writer)
+        def <strong>skip_benchmark</strong> : Bool
 
-        <a class="method-permalink" href="#writer%3D%28writer%29-instance-method">#</a>
+        <a class="method-permalink" href="#skip_benchmark%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/2915fee2643f26d4cb60b6022d14b128d73684a1/src/halite/features/logger.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="skip_request_body:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>skip_request_body</strong> : Bool
+
+        <a class="method-permalink" href="#skip_request_body%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="skip_response_body:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>skip_response_body</strong> : Bool
+
+        <a class="method-permalink" href="#skip_response_body%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L52" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -559,7 +643,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/2915fee2643f26d4cb60b6022d14b128d73684a1/src/halite/features/logger.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5f154232fce55e77f72b4d67a41d67feeb2286f5/src/halite/features/logger.cr#L62" target="_blank">View source</a>]
         
       </div>
     </div>
