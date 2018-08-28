@@ -529,7 +529,7 @@ You can configuring the following options:
 - `logger`: Instance your `Halite::Features::Logger::Abstract`, check [Use the custom logger](#use-the-custom-logger).
 - `format`: Outputing format, built-in `common` and `json`, you can write your own.
 - `file`: Write to file with path, works with `format`.
-- `filemode`: Write file mode, works with `format`, by default is `a` (append content to bottom of file, create if file is not exist).
+- `filemode`: Write file mode, works with `format`, by default is `a`. (append to bottom, create it if file is not exist)
 - `skip_request_body`: By default is `false`.
 - `skip_response_body`: By default is `false`.
 - `skip_benchmark`: Display elapsed time, by default is `false`.
