@@ -312,7 +312,7 @@ module Halite
 
     # Turn on given features and its options.
     #
-    # Available features to review all subclasses of `Halite::Features::Feature`.
+    # Available features to review all subclasses of `Halite::Feature`.
     #
     # #### Use json logger
     #
@@ -337,7 +337,7 @@ module Halite
 
     # Turn on given the name of features.
     #
-    # Available features to review all subclasses of `Halite::Features::Feature`.
+    # Available features to review all subclasses of `Halite::Feature`.
     #
     # ```
     # Halite.use("logger", "your-custom-feature-name")

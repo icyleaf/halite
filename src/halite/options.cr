@@ -52,7 +52,7 @@ module Halite
     property json : Hash(String, Type)
     property raw : String?
 
-    getter features : Hash(String, Features::Feature)
+    getter features : Hash(String, Feature)
     getter logging : Bool
 
     def self.new(headers : (Hash(String, _) | NamedTuple)? = nil,
@@ -85,7 +85,7 @@ module Halite
                    @timeout = Timeout.new,
                    @follow = Follow.new,
                    @ssl : OpenSSL::SSL::Context::Client? = nil,
-                   @features = {} of String => Features::Feature,
+                   @features = {} of String => Feature,
                    @logging = false)
 
       @headers = default_headers.merge!(parse_headers(headers))
@@ -173,9 +173,9 @@ module Halite
     end
 
     # Returns `Options` self with feature include name and feature or options
-    def with_features(feature_name : String, opts_or_feature : NamedTuple | Features::Feature)
+    def with_features(feature_name : String, opts_or_feature : NamedTuple | Feature)
       raise UnRegisterFeatureError.new("Not avaiable feature: #{feature_name}") unless feature_cls = Features[feature_name]?
-      @features[feature_name] = opts_or_feature.is_a?(Features::Feature) ? opts_or_feature : feature_cls.new(**opts_or_feature)
+      @features[feature_name] = opts_or_feature.is_a?(Feature) ? opts_or_feature : feature_cls.new(**opts_or_feature)
       self
     end
 
