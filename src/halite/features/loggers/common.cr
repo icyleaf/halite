@@ -101,7 +101,7 @@ module Halite::Features
       case Math.log10(elapsed)
       when 0..Float64::MAX
         digits = elapsed
-        suffix = "s "
+        suffix = "s"
       when -3..0
         digits = elapsed * 1000
         suffix = "ms"
