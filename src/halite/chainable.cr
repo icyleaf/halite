@@ -331,8 +331,8 @@ module Halite
     # # => 2018-08-28 14:58:26 +08:00 | request  | GET    | http://httpbin.org/get
     # # => 2018-08-28 14:58:27 +08:00 | response | 200    | http://httpbin.org/get | 615.8ms | application/json
     # ```
-    def use(features : String, **opts)
-      branch(default_options.with_features(features, **opts))
+    def use(feature : String, **opts)
+      branch(default_options.with_features(feature, **opts))
     end
 
     # Turn on given the name of features.

@@ -628,10 +628,11 @@ Let's implement simple middleware that prints each request:
 
 ```crystal
 class RequestMonister < Halite::Feature
-  def initialize(@label : String)
+  def initialize(@label : String? = nil)
   end
 
   def request(request) : Halite::Request
+    puts @label
     puts request.verb
     puts request.uri
     puts request.body
@@ -643,16 +644,23 @@ class RequestMonister < Halite::Feature
     response
   end
 
-  Halite::Features.register "request_monsiter", self
+  Halite::Features.register "request_monster", self
 end
 ```
 
 Then use it in Halite:
 
 ```crystal
-Halite.use("request_monsiter", label: "testing")
+Halite.use("request_monster", label: "testing")
       .post("http://httpbin.org/post", form: {name: "foo"})
 
+# Or configure to client
+client = Halite::Client.new do |opts|
+  opts.use("request_monster", label: "testing")
+end
+client.post("http://httpbin.org/post", form: {name: "foo"})
+
+# => testing
 # => POST
 # => http://httpbin.org/post
 # => name=foo

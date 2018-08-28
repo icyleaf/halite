@@ -192,6 +192,16 @@ module Halite
       self
     end
 
+    # Alias to `with_features`
+    def use(*features)
+      with_features(*features)
+    end
+
+    # Alias to `with_features`
+    def use(feature : String, **opts)
+      with_features(feature, **opts)
+    end
+
     def headers=(headers : (Hash(String, _) | NamedTuple))
       @headers = parse_headers(headers)
     end
