@@ -15,6 +15,7 @@ MASTER_COMMIT_HASH=$(git rev-parse --short HEAD)
 COMMIT_STATUS="[#${MASTER_COMMIT_HASH}](${GH_REF}/commit/${MASTER_COMMIT_HASH})"
 sed -i -e "s/latest commit/$(echo ${COMMIT_STATUS} | sed -e "s/\//\\\\\//g") (${COMMIT_DATE})/" README.md
 crystal docs --output="${DOCS_PATH}/master"
+git reset --hard
 
 # Generate version docs
 for TAG in $TAGS; do
