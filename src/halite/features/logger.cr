@@ -1,5 +1,6 @@
 require "logger"
 require "colorize"
+require "file_utils"
 
 module Halite::Features
 
@@ -30,15 +31,18 @@ module Halite::Features
     abstract class Abstract
       setter writer
 
-      def self.new(filename : String? = nil, filemode : String? = nil,
+      def self.new(file : String? = nil, filemode = "a",
                    skip_request_body = false, skip_response_body = false,
                    skip_benchmark = false, colorize = true)
 
-        io = if filename && filemode
-              File.open(filename.not_nil!, filemode.not_nil!)
-            else
-              STDOUT
-            end
+        io = STDOUT
+        if file
+          file = File.expand_path(file)
+          filepath = File.dirname(file)
+          FileUtils.mkdir_p(filepath) unless Dir.exists?(filepath)
+
+          io = File.open(file, filemode)
+        end
         new(skip_request_body, skip_response_body, skip_benchmark, colorize, io)
       end
 

@@ -160,20 +160,11 @@ module Halite
       self
     end
 
-    # Returns `Options` self with features
-    def with_features(features : Hash(String, Features::Adapter))
-      features.each do |name, feature|
-        with_features(name, feature)
+    # Returns `Options` self with the name of features.
+    def with_features(*features)
+      features.each do |feature|
+        with_features(feature, NamedTuple.new)
       end
-      self
-    end
-
-    # Returns `Options` self with features
-    def with_features(features : Hash(String, NamedTuple))
-      features.each do |name, opts|
-        with_features(name, **opts)
-      end
-      self
     end
 
     # Returns `Options` self with feature name and options
@@ -181,7 +172,7 @@ module Halite
       with_features(feature_name, opts)
     end
 
-    # Returns `Options` self with feature name and feature or options
+    # Returns `Options` self with feature include name and feature or options
     def with_features(feature_name : String, opts_or_feature : NamedTuple | Features::Feature)
       raise UnRegisterFeatureError.new("Not avaiable feature: #{feature_name}") unless feature_cls = Features[feature_name]?
       @features[feature_name] = opts_or_feature.is_a?(Features::Feature) ? opts_or_feature : feature_cls.new(**opts_or_feature)

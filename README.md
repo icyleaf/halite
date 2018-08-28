@@ -526,14 +526,16 @@ We can enable per operation logging by configuring them through the chaining API
 By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to `STDOUT` on DEBUG level.
 You can configuring the following options:
 
-- `format`: Outputing format, built-in `common` and `json`, you can write your own.
 - `logger`: Instance your `Halite::Features::Logger::Abstract`, check [Use the custom logger](#use-the-custom-logger).
+- `format`: Outputing format, built-in `common` and `json`, you can write your own.
+- `file`: Write to file with path, works with `format`.
+- `filemode`: Write file mode, works with `format`, by default is `a` (append content to bottom of file, create if file is not exist).
 - `skip_request_body`: By default is `false`.
 - `skip_response_body`: By default is `false`.
 - `skip_benchmark`: Display elapsed time, by default is `false`.
 - `colorize`: Enable colorize in terminal, only apply in `common` format, by default is `true`.
 
-> **NOTE**: `format` and `logger` are conflict, you can not use it both.
+> **NOTE**: `format` (`file` and `filemode`) and `logger` are conflict, you can not use both.
 
 Let's try with it:
 
@@ -542,7 +544,7 @@ Let's try with it:
 Halite.logger
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
-# => 2018-06-25 18:33:14 +08:00 | request | GET    | http://httpbin.org/get?name=foobar
+# => 2018-06-25 18:33:14 +08:00 | request  | GET    | http://httpbin.org/get?name=foobar
 # => 2018-06-25 18:33:15 +08:00 | response | 200    | http://httpbin.org/get?name=foobar | 381.32ms | application/json
 # => {"args":{"name":"foobar"},"headers":{"Accept":"*/*","Accept-Encoding":"gzip, deflate","Connection":"close","Host":"httpbin.org","User-Agent":"Halite/0.3.2"},"origin":"60.206.194.34","url":"http://httpbin.org/get?name=foobar"}
 
@@ -550,7 +552,7 @@ Halite.logger
 Halite.logger
       .get("http://httpbin.org/image/png")
 
-# => 2018-06-25 18:34:15 +08:00 | request | GET    | http://httpbin.org/image/png
+# => 2018-06-25 18:34:15 +08:00 | request  | GET    | http://httpbin.org/image/png
 # => 2018-06-25 18:34:15 +08:00 | response | 200    | http://httpbin.org/image/png | image/png
 
 # Logging with options
@@ -574,18 +576,18 @@ Halite.logger(format: "json")
 
 ```crystal
 # Write plain text to a log file
-Halite.logger(filename: "logs/halite.log", skip_benchmark: true, colorize: false)
+Halite.logger(file: "logs/halite.log", skip_benchmark: true, colorize: false)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # Write json data to a log file
-Halite.logger(format: "json", filename: "logs/halite.log")
+Halite.logger(format: "json", file: "logs/halite.log")
       .get("http://httpbin.org/get", params: {name: "foobar"})
 ```
 
 #### Use the custom logger
 
 Creating the custom logger by integration `Halite::Features::Logger::Abstract` abstract class.
-here has two methods must be implement: `#request` and `#response`.
+Here has two methods must be implement: `#request` and `#response`.
 
 ```crystal
 class CustomLogger < Halite::Features::Logger::Abstract
