@@ -31,9 +31,12 @@ done
 
 echo "<html>
 <header>
-  <meta http-equiv=\"refresh\" content=\"3; url=\"${GH_URL}/${DEFAULT_VERSION}/index.html\" />
+  <meta http-equiv='Refresh' content='0; url='${GH_URL}/${DEFAULT_VERSION}/' />
+  <script language='javascript' type='text/javascript'>
+    window.location.href='${GH_URL}/${DEFAULT_VERSION}/';
+  </script>
 </header>
 <body>
-<p><a href=\"${GH_URL}/${DEFAULT_VERSION}/index.html\">Redirect to ${DEFAULT_VERSION}</a></p>
+<p><a href='${GH_URL}/${DEFAULT_VERSION}/'>Redirect to ${DEFAULT_VERSION}</a></p>
 </body>
 </html>" > "${DOCS_PATH}/index.html"
