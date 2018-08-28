@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>HTTP::Params - github.com/icyleaf/halite</title>
+  <title>Halite::Features - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -36,7 +36,7 @@
   <div class="types-list">
     <ul>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite" data-name="halite">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite" data-name="halite">
       <a href="../Halite.html">Halite</a>
       
         <ul>
@@ -151,7 +151,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Features" data-name="halite::features">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Features" data-name="halite::features">
       <a href="../Halite/Features.html">Features</a>
       
         <ul>
@@ -276,7 +276,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/HTTP" data-name="http">
+  <li class="parent " data-id="github.com/icyleaf/halite/HTTP" data-name="http">
       <a href="../HTTP.html">HTTP</a>
       
         <ul>
@@ -286,7 +286,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/HTTP/Params" data-name="http::params">
+  <li class=" " data-id="github.com/icyleaf/halite/HTTP/Params" data-name="http::params">
       <a href="../HTTP/Params.html">Params</a>
       
     </li>
@@ -305,30 +305,17 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> HTTP::Params
+  <span class="kind">module</span> Halite::Features
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HTTP/Params.html">HTTP::Params</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
-
-
-
-
-  <h2>Overview</h2>
-
-  <p>Represents a collection of http parameters and their respective values.</p>
 
 
 
 
 
-  <h2>Included Modules</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type">Enumerable({String, String})</li>
-  
-  </ul>
+
 
 
 
@@ -342,8 +329,15 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/22bbfe8be98c59dff493a9113fbf909c3f4ed3e4/src/halite/ext/http_params_escape.cr#L2" target="_blank">
-        halite/ext/http_params_escape.cr
+      <a href="https://github.com/icyleaf/halite/blob/22bbfe8be98c59dff493a9113fbf909c3f4ed3e4/src/halite/features.cr#L2" target="_blank">
+        halite/features.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/icyleaf/halite/blob/22bbfe8be98c59dff493a9113fbf909c3f4ed3e4/src/halite/features/logger.cr#L5" target="_blank">
+        halite/features/logger.cr
       </a>
     
     <br/>
@@ -359,16 +353,22 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#escape%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AString-class-method" class="signature"><strong>.escape</strong>(data : Hash(String, _) | NamedTuple) : String</a>
-        
-          <div class="summary"><p>Returns the given key value pairs as a url-encoded query.</p></div>
+        <a href="#%5B%5D%28name%3AString%29-class-method" class="signature"><strong>.[]</strong>(name : String)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#escape%28data%3AHash%28String%2CHalite%3A%3AOptions%3A%3AType%29%7CNamedTuple%29%3AString-class-method" class="signature"><strong>.escape</strong>(data : Hash(String, Halite::Options::Type) | NamedTuple) : String</a>
+        <a href="#%5B%5D%3F%28name%3AString%29-class-method" class="signature"><strong>.[]?</strong>(name : String)</a>
         
-          <div class="summary"><p>Returns the given key value pairs as a url-encoded query.</p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#availables-class-method" class="signature"><strong>.availables</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#register%28name%3AString%2Cfeature%3AFeature.class%29-class-method" class="signature"><strong>.register</strong>(name : String, feature : Feature.class)</a>
         
       </li>
     
@@ -382,46 +382,6 @@
 
 <div class="methods-inherited">
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
@@ -429,62 +389,66 @@
 
   <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="escape(data:Hash(String,_)|NamedTuple):String-class-method">
+    <div class="entry-detail" id="[](name:String)-class-method">
       <div class="signature">
         
-        def self.<strong>escape</strong>(data : Hash(String, _) | NamedTuple) : String
+        def self.<strong>[]</strong>(name : String)
 
-        <a class="method-permalink" href="#escape%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AString-class-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%28name%3AString%29-class-method">#</a>
       </div>
-      
-        <div class="doc"><p>Returns the given key value pairs as a url-encoded query.</p>
-
-<p>Every parameter added is directly written to an IO, where keys and values are properly escaped.</p>
-
-<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.escape({
-  <span class="s">&quot;name&quot;</span>    => <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
-  <span class="s">&quot;skill&quot;</span>   => [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
-  <span class="s">&quot;company&quot;</span> => {
-    <span class="s">&quot;name&quot;</span> => <span class="s">&quot;Keeling Inc&quot;</span>,
-  },
-  <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar_big.png&quot;</span>),
-})
-<span class="c"># =&gt; &quot;name=Lizeth+Gusikowski&amp;skill=ruby&amp;skill=crystal&amp;company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&amp;avatar=avatar_big.png&quot;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/22bbfe8be98c59dff493a9113fbf909c3f4ed3e4/src/halite/ext/http_params_escape.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/22bbfe8be98c59dff493a9113fbf909c3f4ed3e4/src/halite/features.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="escape(data:Hash(String,Halite::Options::Type)|NamedTuple):String-class-method">
+    <div class="entry-detail" id="[]?(name:String)-class-method">
       <div class="signature">
         
-        def self.<strong>escape</strong>(data : Hash(String, <a href="../Halite/Options/Type.html">Halite::Options::Type</a>) | NamedTuple) : String
+        def self.<strong>[]?</strong>(name : String)
 
-        <a class="method-permalink" href="#escape%28data%3AHash%28String%2CHalite%3A%3AOptions%3A%3AType%29%7CNamedTuple%29%3AString-class-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%3F%28name%3AString%29-class-method">#</a>
       </div>
-      
-        <div class="doc"><p>Returns the given key value pairs as a url-encoded query.</p>
-
-<p>Every parameter added is directly written to an IO, where keys and values are properly escaped.</p>
-
-<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.escape({
-  <span class="s">&quot;name&quot;</span>    => <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
-  <span class="s">&quot;skill&quot;</span>   => [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
-  <span class="s">&quot;company&quot;</span> => {
-    <span class="s">&quot;name&quot;</span> => <span class="s">&quot;Keeling Inc&quot;</span>,
-  },
-  <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar_big.png&quot;</span>),
-})
-<span class="c"># =&gt; &quot;name=Lizeth+Gusikowski&amp;skill=ruby&amp;skill=crystal&amp;company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&amp;avatar=avatar_big.png&quot;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/22bbfe8be98c59dff493a9113fbf909c3f4ed3e4/src/halite/ext/http_params_escape.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/22bbfe8be98c59dff493a9113fbf909c3f4ed3e4/src/halite/features.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="availables-class-method">
+      <div class="signature">
+        
+        def self.<strong>availables</strong>
+
+        <a class="method-permalink" href="#availables-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/22bbfe8be98c59dff493a9113fbf909c3f4ed3e4/src/halite/features.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="register(name:String,feature:Feature.class)-class-method">
+      <div class="signature">
+        
+        def self.<strong>register</strong>(name : String, feature : Feature.class)
+
+        <a class="method-permalink" href="#register%28name%3AString%2Cfeature%3AFeature.class%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/22bbfe8be98c59dff493a9113fbf909c3f4ed3e4/src/halite/features.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
