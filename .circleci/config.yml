@@ -24,7 +24,7 @@ jobs:
           command: crystal spec
       - run:
           name: "Generate API documents"
-          command: ./docs.sh
+          command: ./.circleci/generate_docs.sh
       - deploy:
           name: "Upload to gh-page"
           command: |
