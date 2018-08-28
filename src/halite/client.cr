@@ -54,12 +54,10 @@ module Halite
                  timeout = Timeout.new,
                  follow = Follow.new,
                  ssl : OpenSSL::SSL::Context::Client? = nil,
-                 logging = false,
-                 logger = nil)
+                 logging = false)
       Client.new(Options.new(headers: headers, cookies: cookies, params: params,
         form: form, json: json, raw: raw, ssl: ssl,
-        timeout: timeout, follow: follow,
-        logging: logging, logger: logger))
+        timeout: timeout, follow: follow, logging: logging))
     end
 
     # Instance a new client with block
@@ -73,7 +71,7 @@ module Halite
     #
     # ```
     # options = Halite::Options.new(headers: {
-    #   "private-token" => "bdf39d82661358f80b31b67e6f89fee4"
+    #   "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
     # })
     #
     # client = Halite::Client.new(options)
@@ -84,27 +82,32 @@ module Halite
 
     # Make an HTTP request
     def request(verb : String, uri : String, options : Options? = nil) : Halite::Response
-      opts = options ? @options.merge(options.not_nil!) : @options
+      options = options ? @options.merge(options.not_nil!) : @options
+      request = build_request(verb, uri, options)
+      response = perform(request, options)
+      return response if options.follow.hops.zero?
 
-      uri = make_request_uri(uri, opts)
-      body_data = make_request_body(opts)
-      headers = make_request_headers(opts, body_data.content_type)
-
-      request = Request.new(verb, uri, headers, body_data.body)
-      response = perform(request, opts)
-
-      return response if opts.follow.hops.zero?
-
-      Redirector.new(request, response, opts.follow.hops, opts.follow.strict).perform do |req|
-        perform(req, opts)
+      Redirector.new(request, response, options.follow.hops, options.follow.strict).perform do |req|
+        perform(req, options)
       end
+    end
+
+    private def build_request(verb : String, uri : String, options : Options) : Halite::Request
+      uri = make_request_uri(uri, options)
+      body_data = make_request_body(options)
+      headers = make_request_headers(options, body_data.content_type)
+      request = Request.new(verb, uri, headers, body_data.body)
+
+      options.features.reduce(request) do |req, (_, feature)|
+        feature.request(req)
+      end
+
+      request
     end
 
     # Perform a single (no follow) HTTP request
     private def perform(request : Halite::Request, options : Halite::Options) : Halite::Response
       raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.ssl
-
-      options.logger.request(request) if options.logging
 
       conn = HTTP::Client.new(request.domain, options.ssl)
       conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
@@ -112,7 +115,9 @@ module Halite
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
       response = Response.new(request.uri, conn_response, @history)
 
-      options.logger.response(response) if options.logging
+      options.features.reduce(response) do |res, (_, feature)|
+        feature.response(res)
+      end
 
       # Append history of response
       @history << response

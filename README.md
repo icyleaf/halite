@@ -43,8 +43,6 @@ Build in crystal version >= `v0.25.0`, documents generated in latest commit.
 - [Advanced Usage](#advanced-usage)
   - [Sessions](#sessions)
   - [Logging](#logging)
-    - [Simple logging](#simple-logging)
-    - [Logging request only](#logging-request-only)
     - [JSON-formatted logging](#json-formatted-logging)
     - [Write to a log file](#write-to-a-log-file)
     - [Use the custom logger](#use-the-custom-logger)
@@ -52,6 +50,7 @@ Build in crystal version >= `v0.25.0`, documents generated in latest commit.
 - [Help and Discussion](#help-and-discussion)
 - [Donate](#donate)
 - [How to Contribute](#how-to-contribute)
+- [You may also like](#you-may-also-like)
 - [License](#license)
 
 <!-- /TOC -->
@@ -521,40 +520,47 @@ All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/
 
 ### Logging
 
-the Halite does not enable logging on each request and response too.
+Halite does not enable logging on each request and response too.
 We can enable per operation logging by configuring them through the chaining API.
 
-#### Simple logging
+By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to `STDOUT` on DEBUG level.
+You can configuring the following options:
+
+- `logger`: Instance your `Halite::Features::Logger::Abstract`, check [Use the custom logger](#use-the-custom-logger).
+- `format`: Outputing format, built-in `common` and `json`, you can write your own.
+- `file`: Write to file with path, works with `format`.
+- `filemode`: Write file mode, works with `format`, by default is `a`. (append to bottom, create it if file is not exist)
+- `skip_request_body`: By default is `false`.
+- `skip_response_body`: By default is `false`.
+- `skip_benchmark`: Display elapsed time, by default is `false`.
+- `colorize`: Enable colorize in terminal, only apply in `common` format, by default is `true`.
+
+> **NOTE**: `format` (`file` and `filemode`) and `logger` are conflict, you can not use both.
+
+Let's try with it:
 
 ```crystal
+# Logging json request
 Halite.logger
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
-# => 2018-06-25 18:33:14 +08:00 | request | GET    | http://httpbin.org/get?name=foobar
-# => 2018-06-25 18:33:15 +08:00 | response | 200    | http://httpbin.org/get?name=foobar | application/json
+# => 2018-06-25 18:33:14 +08:00 | request  | GET    | http://httpbin.org/get?name=foobar
+# => 2018-06-25 18:33:15 +08:00 | response | 200    | http://httpbin.org/get?name=foobar | 381.32ms | application/json
 # => {"args":{"name":"foobar"},"headers":{"Accept":"*/*","Accept-Encoding":"gzip, deflate","Connection":"close","Host":"httpbin.org","User-Agent":"Halite/0.3.2"},"origin":"60.206.194.34","url":"http://httpbin.org/get?name=foobar"}
 
+# Logging image request
 Halite.logger
       .get("http://httpbin.org/image/png")
 
-# => 2018-06-25 18:34:15 +08:00 | request | GET    | http://httpbin.org/image/png
+# => 2018-06-25 18:34:15 +08:00 | request  | GET    | http://httpbin.org/image/png
 # => 2018-06-25 18:34:15 +08:00 | response | 200    | http://httpbin.org/image/png | image/png
-```
 
-#### Logging request only
-
-If you want logging request behavior only, throught pass `response` argument to `false`.
-And it not output the full body with binary type MIME types, please review it [here](https://github.com/icyleaf/halite/blob/master/src/halite/loggers/common_logger.cr#L79).
-
-```crystal
-Halite.logger(response: false)
+# Logging with options
+Halite.logger(skip_request_body: true, skip_response_body: true)
       .post("http://httpbin.org/get", form: {image: File.open("halite-logo.png")})
 
-# => 2018-06-25 18:39:15 +08:00 | request | POST   | http://httpbin.org/get
-# => ---------------------------gUEmO7X80NT4_qIb-kgh4v2z
-# => Content-Disposition: form-data; name="image"; filename="halite-logo.png"
-# => [image data]
-# => ----------------------------gUEmO7X80NT4_qIb-kgh4v2z--
+# => 2018-08-28 14:33:19 +08:00 | request  | POST   | http://httpbin.org/post
+# => 2018-08-28 14:33:21 +08:00 | response | 200    | http://httpbin.org/post | 1.61s | application/json
 ```
 
 #### JSON-formatted logging
@@ -562,7 +568,7 @@ Halite.logger(response: false)
 It has JSON formatted for developer friendly logger.
 
 ```
-Halite.logger(adapter: "json")
+Halite.logger(format: "json")
       .get("http://httpbin.org/get", params: {name: "foobar"})
 ```
 
@@ -570,21 +576,21 @@ Halite.logger(adapter: "json")
 
 ```crystal
 # Write plain text to a log file
-Halite.logger(filename: "logs/halite.log", response: false)
+Halite.logger(file: "logs/halite.log", skip_benchmark: true, colorize: false)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # Write json data to a log file
-Halite.logger(adapter: "json", filename: "logs/halite.log", response: false)
+Halite.logger(format: "json", file: "logs/halite.log")
       .get("http://httpbin.org/get", params: {name: "foobar"})
 ```
 
 #### Use the custom logger
 
-Creating the custom logger by integration `Halite::Logger` abstract class.
-here has two methods must be implement: `Halite::Logger.request` and `Halite::Logger.response`.
+Creating the custom logger by integration `Halite::Features::Logger::Abstract` abstract class.
+Here has two methods must be implement: `#request` and `#response`.
 
 ```crystal
-class CustomLogger < Halite::Logger::Adapter
+class CustomLogger < Halite::Features::Logger::Abstract
   def request(request)
     @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
   end
@@ -600,8 +606,8 @@ Halite::Logger.register_adapter "custom", CustomLogger.new
 Halite.logger(logger: CustomLogger.new)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
-# We can also call it use adapter name if we added it.
-Halite.logger(adapter: "custom")
+# We can also call it use format name if you added it.
+Halite.logger(format: "custom")
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # => 2017-12-13 16:40:13 +08:00 | >> | GET | http://httpbin.org/get?name=foobar

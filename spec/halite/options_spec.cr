@@ -1,14 +1,28 @@
 require "../spec_helper"
 require "tempfile"
 
-private class SimpleLogger < Halite::Logger::Adapter
+private class SimpleFeature < Halite::Feature
   def request(request)
-    @writer.info "request"
+    request
   end
 
   def response(response)
-    @writer.info "response"
+    response
   end
+
+  Halite::Features.register "simple", self
+end
+
+private class SimpleLogger < Halite::Features::Logger::Abstract
+  def request(request)
+    @logger.info "request"
+  end
+
+  def response(response)
+    @logger.info "response"
+  end
+
+  Halite::Features::Logger.register "simple", self
 end
 
 private def test_options
@@ -56,15 +70,12 @@ describe Halite::Options do
       options.raw.should be_nil
 
       options.logging?.should be_false
-      expect_raises Halite::Error, "Logging is disable now, set logging = true and try again" do
-        options.logger
-      end
     end
 
     it "should initial with original" do
       options = Halite::Options.new(headers: {
-          "private_token" => "token",
-        },
+        "private_token" => "token",
+      },
         timeout: Halite::Timeout.new(connect: 3.2)
       )
 
@@ -76,8 +87,8 @@ describe Halite::Options do
 
     it "should initial with quick setup" do
       options = Halite::Options.new(headers: {
-          private_token: "token",
-        },
+        private_token: "token",
+      },
         connect_timeout: 1.minutes
       )
 
@@ -159,9 +170,6 @@ describe Halite::Options do
     options.raw.should be_nil
 
     options.logging?.should be_false
-    expect_raises Halite::Error, "Logging is disable now, set logging = true and try again" do
-      options.logger
-    end
   end
 
   describe "#with_headers" do
@@ -248,23 +256,63 @@ describe Halite::Options do
   describe "#with_logger" do
     it "should overwrite logger with instance class" do
       options = Halite::Options.new.with_logger(logger: SimpleLogger.new)
-      options.logger.should be_a SimpleLogger
+      logger = options.features["logger"].as(Halite::Features::Logger)
+      logger.writer.should be_a(SimpleLogger)
     end
 
-    it "should overwrite logger with adapter name" do
-      Halite::Logger.register_adapter "simple", SimpleLogger.new
+    it "should overwrite logger with format name" do
+      Halite::Features::Logger.register "simple", SimpleLogger
 
-      options = Halite::Options.new.with_logger(adapter: "simple")
-      options.logger.should be_a SimpleLogger
+      options = Halite::Options.new.with_logger(format: "simple")
+      logger = options.features["logger"].as(Halite::Features::Logger)
+      logger.writer.should be_a(SimpleLogger)
     end
 
     it "should became a file logger" do
-      Halite::Logger.register_adapter "simple", SimpleLogger.new
+      Halite::Features::Logger.register "simple", SimpleLogger
 
       tempfile = Tempfile.new("halite_logger")
 
-      options = Halite::Options.new.with_logger(adapter: "simple", filename: tempfile.path, mode: "w")
-      options.logger.should be_a SimpleLogger
+      options = Halite::Options.new.with_logger(format: "simple", file: tempfile.path, filemode: "w")
+      logger = options.features["logger"].as(Halite::Features::Logger)
+      logger.writer.should be_a(SimpleLogger)
+    end
+
+    it "throws an exception with unregister logger format" do
+      expect_raises Halite::UnRegisterLoggerFormatError do
+        Halite::Options.new.with_logger(format: "fake")
+      end
+    end
+  end
+
+  describe "#with_features" do
+    it "should use a feature" do
+      options = Halite::Options.new.with_features("logger")
+      logger = options.features["logger"].as(Halite::Features::Logger)
+      logger.writer.should be_a(Halite::Features::Logger::Common)
+    end
+
+    it "should use a feature with options" do
+      options = Halite::Options.new.with_features("logger", logger: SimpleLogger.new)
+      logger = options.features["logger"].as(Halite::Features::Logger)
+      logger.writer.should be_a(SimpleLogger)
+    end
+
+    it "should use multiple features" do
+      Halite::Features.register "simple", SimpleFeature
+
+      options = Halite::Options.new.with_features("logger", "simple")
+      logger = options.features["logger"].as(Halite::Features::Logger)
+      logger.writer.should be_a(Halite::Features::Logger::Common)
+
+      simple = options.features["simple"].as(SimpleFeature)
+      simple.should be_a(SimpleFeature)
+    end
+
+    it "throws an exception with unregister feature" do
+      expect_raises Halite::UnRegisterFeatureError do
+        Halite::Options.new.with_features("fake")
+      end
     end
   end
 

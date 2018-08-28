@@ -291,27 +291,55 @@ describe Halite do
     end
   end
 
-  it "should throws a Halite::ConnectionError exception with not exist uri" do
-    expect_raises Halite::ConnectionError do
-      Halite.get("http://404-not_found.xyz/")
+  describe ".use" do
+    it "sets given feature name" do
+      client = Halite.use("logger")
+      client.options.features.has_key?("logger").should be_true
+      client.options.features["logger"].should be_a(Halite::Features::Logger)
+      logger = client.options.features["logger"].as(Halite::Features::Logger)
+      logger.writer.should be_a(Halite::Features::Logger::Common)
+      logger.writer.skip_request_body.should be_false
+      logger.writer.skip_response_body.should be_false
+      logger.writer.skip_benchmark.should be_false
+      logger.writer.colorize.should be_true
+    end
+
+    it "sets given feature name and options" do
+      client = Halite.use("logger", logger: Halite::Features::Logger::JSON.new(skip_request_body: true, colorize: false))
+      client.options.features.has_key?("logger").should be_true
+      client.options.features["logger"].should be_a(Halite::Features::Logger)
+      logger = client.options.features["logger"].as(Halite::Features::Logger)
+      logger.writer.should be_a(Halite::Features::Logger::JSON)
+      logger.writer.skip_request_body.should be_true
+      logger.writer.skip_response_body.should be_false
+      logger.writer.skip_benchmark.should be_false
+      logger.writer.colorize.should be_false
     end
   end
 
-  it "should throws a Halite::ConnectionError exception with illegal port" do
-    expect_raises Halite::ConnectionError do
-      Halite.get("http://127.0.0.1:000")
+  describe "raise" do
+    it "should throws a Halite::ConnectionError exception with not exist uri" do
+      expect_raises Halite::ConnectionError do
+        Halite.get("http://404-not_found.xyz/")
+      end
     end
-  end
 
-  it "should throws a Halite::TimeoutError exception with long time not response" do
-    expect_raises Halite::TimeoutError do
-      Halite.timeout(1.milliseconds).get("http://404notfound.xyz")
+    it "should throws a Halite::ConnectionError exception with illegal port" do
+      expect_raises Halite::ConnectionError do
+        Halite.get("http://127.0.0.1:000")
+      end
     end
-  end
 
-  it "should throws a Halite::RequestError exception with http request via ssl" do
-    expect_raises Halite::RequestError, "SSL context given for HTTP URI = http://google.com" do
-      Halite.get("http://google.com", ssl: OpenSSL::SSL::Context::Client.new)
+    it "should throws a Halite::TimeoutError exception with long time not response" do
+      expect_raises Halite::TimeoutError do
+        Halite.timeout(1.milliseconds).get("http://404notfound.xyz")
+      end
+    end
+
+    it "should throws a Halite::RequestError exception with http request via ssl" do
+      expect_raises Halite::RequestError, "SSL context given for HTTP URI = http://google.com" do
+        Halite.get("http://google.com", ssl: OpenSSL::SSL::Context::Client.new)
+      end
     end
   end
 end

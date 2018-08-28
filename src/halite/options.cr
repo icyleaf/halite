@@ -1,5 +1,6 @@
 require "openssl"
 require "./options/*"
+
 module Halite
   # Options class
   #
@@ -52,8 +53,8 @@ module Halite
     property json : Hash(String, Type)
     property raw : String?
 
+    getter features : Hash(String, Feature)
     getter logging : Bool
-    setter logger : Halite::Logger::Adapter?
 
     def self.new(headers : (Hash(String, _) | NamedTuple)? = nil,
                  cookies : (Hash(String, _) | NamedTuple)? = nil,
@@ -66,14 +67,12 @@ module Halite
                  follow : Int32? = nil,
                  follow_strict : Bool? = nil,
                  ssl : OpenSSL::SSL::Context::Client? = nil,
-                 logging = false,
-                 logger = nil)
-
+                 logging = false)
       timeout = Timeout.new(connect: connect_timeout, read: read_timeout)
       follow = Follow.new(hops: follow, strict: follow_strict)
       new(headers: headers, cookies: cookies, params: params, form: form,
-          json: json, raw: raw, timeout: timeout, follow: follow,
-          ssl: ssl, logging: logging, logger: logger)
+        json: json, raw: raw, timeout: timeout, follow: follow,
+        ssl: ssl, logging: logging)
     end
 
     def initialize(*,
@@ -86,9 +85,8 @@ module Halite
                    @timeout = Timeout.new,
                    @follow = Follow.new,
                    @ssl : OpenSSL::SSL::Context::Client? = nil,
-                   @logging = false,
-                   @logger = nil)
-
+                   @features = {} of String => Feature,
+                   @logging = false)
       @headers = default_headers.merge!(parse_headers(headers))
       @cookies = parse_cookies(cookies)
       @params = parse_params(params)
@@ -101,7 +99,7 @@ module Halite
       with_headers(with_headers)
     end
 
-    # Returns `Options` self with gived headers combined.
+    # Returns `Options` self with given headers combined.
     def with_headers(headers : Hash(String, _) | NamedTuple) : Halite::Options
       @headers.merge!(parse_headers(headers))
       self
@@ -112,7 +110,7 @@ module Halite
       with_cookies(cookies)
     end
 
-    # Returns `Options` self with gived cookies combined.
+    # Returns `Options` self with given cookies combined.
     def with_cookies(cookies : Hash(String, _) | NamedTuple) : Halite::Options
       cookies.each do |key, value|
         @cookies[key.to_s] = value.to_s
@@ -121,7 +119,7 @@ module Halite
       self
     end
 
-    # Returns `Options` self with gived cookies combined.
+    # Returns `Options` self with given cookies combined.
     def with_cookies(cookies : HTTP::Cookies) : Halite::Options
       cookies.each do |cookie|
         with_cookies(cookie)
@@ -130,7 +128,7 @@ module Halite
       self
     end
 
-    # Returns `Options` self with gived cookies combined.
+    # Returns `Options` self with given cookies combined.
     def with_cookies(cookie : HTTP::Cookie) : Halite::Options
       cookie_header = HTTP::Headers{"Set-Cookie" => cookie.to_set_cookie_header}
       @headers.merge!(cookie_header)
@@ -138,7 +136,7 @@ module Halite
       self
     end
 
-    # Returns `Options` self with gived max hops of redirect times.
+    # Returns `Options` self with given max hops of redirect times.
     #
     # ```
     # # Automatically following redirects
@@ -154,36 +152,43 @@ module Halite
       self
     end
 
-    # Returns `Options` self with gived connect, read timeout.
+    # Returns `Options` self with given connect, read timeout.
     def with_timeout(connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil) : Halite::Options
       @timeout.connect = connect.to_f if connect
       @timeout.read = read.to_f if read
       self
     end
 
-    # Returns `Logger` self with gived adapter, filename, mode and response.
-    def with_logger(adapter = "common", filename : String? = nil, mode : String? = nil, response : Bool = true)
-      adapters = Halite::Logger.availables
-      raise "Not avaiable adapter: #{adapter}, avaiables in #{adapters.join(", ")}" unless adapters.includes?(adapter)
-
-      io = if filename && mode
-             File.open(filename.not_nil!, mode.not_nil!)
-           else
-             STDOUT
-           end
-
-      logger = Halite::Logger[adapter]
-      logger.writer = ::Logger.new(io, logger.level, logger.formatter, logger.progname)
-
-      with_logger(logger: logger, response: response)
+    # Returns `Options` self with the name of features.
+    def with_features(*features)
+      features.each do |feature|
+        with_features(feature, NamedTuple.new)
+      end
+      self
     end
 
-    # Returns `Logger` self with gived logger and response.
-    def with_logger(logger : Halite::Logger::Adapter = Halite::Logger::Common.new, response : Bool = true)
-      @logging = true
-      @logger = logger
-      logger.level = response ? ::Logger::DEBUG : ::Logger::INFO
+    # Returns `Options` self with feature name and options
+    def with_features(feature_name : String, **opts)
+      with_features(feature_name, opts)
+    end
 
+    # Returns `Options` self with feature include name and feature or options
+    def with_features(feature_name : String, opts_or_feature : NamedTuple | Feature)
+      raise UnRegisterFeatureError.new("Not avaiable feature: #{feature_name}") unless feature_cls = Features[feature_name]?
+      @features[feature_name] = opts_or_feature.is_a?(Feature) ? opts_or_feature : feature_cls.new(**opts_or_feature)
+      self
+    end
+
+    # Returns `Logger` self with given format and the options of format.
+    def with_logger(format : String, **opts)
+      raise UnRegisterLoggerFormatError.new("Not avaiable logger format: #{format}") unless format_cls = Features::Logger[format]?
+      with_logger(format_cls.new(**opts))
+    end
+
+    # Returns `Logger` self with given logger, depend on `with_features`.
+    def with_logger(logger : Halite::Features::Logger::Abstract)
+      @logging = true
+      with_features("logger", logger: logger)
       self
     end
 
@@ -226,21 +231,22 @@ module Halite
       @follow.strict = strict
     end
 
-    # Use logger to dump somthing
-    def logger
-      raise Error.new("Logging is disable now, set logging = true and try again") unless @logging
-      @logger.not_nil!
-    end
-
-    # Set logging status
+    # Quick enable logger
+    #
+    # By defaults, use `Logger::Common` as logger output.
     def logging=(logging : Bool)
       @logging = logging
-      @logger = Logger::Common.new unless @logger
+
+      if logging
+        with_features("logger")
+      else
+        @features.delete("logger")
+      end
     end
 
     # Return if enable logging
     def logging?
-      @logging == true
+      @logging
     end
 
     # alias `merge` above
