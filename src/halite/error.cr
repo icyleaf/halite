@@ -1,6 +1,5 @@
 module Halite
   module Exception
-
     # Generic error
     class Error < ::Exception; end
 

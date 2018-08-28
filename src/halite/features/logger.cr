@@ -3,7 +3,6 @@ require "colorize"
 require "file_utils"
 
 module Halite::Features
-
   # Logger feature
   class Logger < Feature
     def self.new(format : String = "common", logger : Logger::Abstract? = nil, **opts)
@@ -14,27 +13,27 @@ module Halite::Features
       new(logger)
     end
 
-    def initialize(@logger : Logger::Abstract = CommonLogger.new)
+    getter writer : Logger::Abstract
+
+    def initialize(logger = Logger::Common.new)
+      @writer = logger
     end
 
     def request(request)
-      @logger.request(request)
+      @writer.request(request)
       request
     end
 
     def response(response)
-      @logger.response(response)
+      @writer.response(response)
       response
     end
 
     # Logger Abstract
     abstract class Abstract
-      setter writer
-
       def self.new(file : String? = nil, filemode = "a",
                    skip_request_body = false, skip_response_body = false,
                    skip_benchmark = false, colorize = true)
-
         io = STDOUT
         if file
           file = File.expand_path(file)
@@ -46,13 +45,19 @@ module Halite::Features
         new(skip_request_body, skip_response_body, skip_benchmark, colorize, io)
       end
 
+      setter logger : ::Logger
+      getter skip_request_body : Bool
+      getter skip_response_body : Bool
+      getter skip_benchmark : Bool
+      getter colorize : Bool
+
       def initialize(@skip_request_body = false, @skip_response_body = false,
                      @skip_benchmark = false, @colorize = true, @io : IO = STDOUT)
-        @writer = ::Logger.new(@io, ::Logger::DEBUG, default_formatter, "halite")
+        @logger = ::Logger.new(@io, ::Logger::DEBUG, default_formatter, "halite")
         Colorize.enabled = @colorize
       end
 
-      forward_missing_to @writer
+      forward_missing_to @logger
 
       abstract def request(request)
       abstract def response(response)

@@ -1,8 +1,8 @@
 require "file_utils"
 
-module Halite::Features
-  # Logger feature: CommonLogger
-  class CommonLogger < Logger::Abstract
+class Halite::Features::Logger
+  # Logger feature: Logger::Common
+  class Common < Abstract
     @request_time : Time?
 
     def request(request)
@@ -14,7 +14,7 @@ module Halite::Features
         end
       end
 
-      @writer.info message
+      @logger.info message
       @request_time = Time.now unless @skip_benchmark
     end
 
@@ -34,7 +34,7 @@ module Halite::Features
         end
       end
 
-      @writer.info message
+      @logger.info message
     end
 
     protected def colorful_method(method, is_request = true)

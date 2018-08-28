@@ -232,7 +232,7 @@ module Halite
     #
     # ```
     # Halite.logger(skip_request_body: true, skip_response_body: true)
-    # .post("http://httpbin.org/get", form: {image: File.open("halite-logo.png")})
+    #   .post("http://httpbin.org/get", form: {image: File.open("halite-logo.png")})
     #
     # # => 2018-08-28 14:33:19 +08:00 | request  | POST   | http://httpbin.org/post
     # # => 2018-08-28 14:33:21 +08:00 | response | 200    | http://httpbin.org/post | 1.61s | application/json
@@ -258,16 +258,16 @@ module Halite
     # Halite::Logger.register_adapter "custom", CustomLogger.new
     #
     # Halite.logger(logger: CustomLogger.new)
-    #       .get("http://httpbin.org/get", params: {name: "foobar"})
+    #   .get("http://httpbin.org/get", params: {name: "foobar"})
     #
     # # We can also call it use format name if you added it.
     # Halite.logger(format: "custom")
-    #       .get("http://httpbin.org/get", params: {name: "foobar"})
+    #   .get("http://httpbin.org/get", params: {name: "foobar"})
     #
     # # => 2017-12-13 16:40:13 +08:00 | >> | GET | http://httpbin.org/get?name=foobar
     # # => 2017-12-13 16:40:15 +08:00 | << | 200 | http://httpbin.org/get?name=foobar application/json
     # ```
-    def logger(logger = Halite::Features::CommonLogger.new)
+    def logger(logger = Halite::Features::Logger::Common.new)
       branch(default_options.with_logger(logger))
     end
 
@@ -299,13 +299,13 @@ module Halite
                skip_request_body = false, skip_response_body = false,
                skip_benchmark = false, colorize = true)
       opts = {
-        format: format,
-        file: file,
-        filemode: filemode,
-        skip_request_body: skip_request_body,
+        format:             format,
+        file:               file,
+        filemode:           filemode,
+        skip_request_body:  skip_request_body,
         skip_response_body: skip_response_body,
-        skip_benchmark: skip_benchmark,
-        colorize: colorize
+        skip_benchmark:     skip_benchmark,
+        colorize:           colorize,
       }
       branch(default_options.with_logger(**opts))
     end
@@ -318,7 +318,7 @@ module Halite
     #
     # ```
     # Halite.use("logger", format: "json")
-    #       .get("http://httpbin.org/get", params: {name: "foobar"})
+    #   .get("http://httpbin.org/get", params: {name: "foobar"})
     #
     # # => { ... }
     # ```
@@ -326,7 +326,7 @@ module Halite
     # #### Use common format logger and skip response body
     # ```
     # Halite.use("logger", format: "common", skip_response_body: true)
-    #       .get("http://httpbin.org/get", params: {name: "foobar"})
+    #   .get("http://httpbin.org/get", params: {name: "foobar"})
     #
     # # => 2018-08-28 14:58:26 +08:00 | request  | GET    | http://httpbin.org/get
     # # => 2018-08-28 14:58:27 +08:00 | response | 200    | http://httpbin.org/get | 615.8ms | application/json
@@ -341,7 +341,7 @@ module Halite
     #
     # ```
     # Halite.use("logger", "your-custom-feature-name")
-    #       .get("http://httpbin.org/get", params: {name: "foobar"})
+    #   .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     def use(*features)
       branch(default_options.with_features(*features))

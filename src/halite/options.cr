@@ -1,5 +1,6 @@
 require "openssl"
 require "./options/*"
+
 module Halite
   # Options class
   #
@@ -67,12 +68,11 @@ module Halite
                  follow_strict : Bool? = nil,
                  ssl : OpenSSL::SSL::Context::Client? = nil,
                  logging = false)
-
       timeout = Timeout.new(connect: connect_timeout, read: read_timeout)
       follow = Follow.new(hops: follow, strict: follow_strict)
       new(headers: headers, cookies: cookies, params: params, form: form,
-          json: json, raw: raw, timeout: timeout, follow: follow,
-          ssl: ssl, logging: logging)
+        json: json, raw: raw, timeout: timeout, follow: follow,
+        ssl: ssl, logging: logging)
     end
 
     def initialize(*,
@@ -87,7 +87,6 @@ module Halite
                    @ssl : OpenSSL::SSL::Context::Client? = nil,
                    @features = {} of String => Feature,
                    @logging = false)
-
       @headers = default_headers.merge!(parse_headers(headers))
       @cookies = parse_cookies(cookies)
       @params = parse_params(params)
@@ -165,6 +164,7 @@ module Halite
       features.each do |feature|
         with_features(feature, NamedTuple.new)
       end
+      self
     end
 
     # Returns `Options` self with feature name and options
@@ -233,7 +233,7 @@ module Halite
 
     # Quick enable logger
     #
-    # By defaults, use `CommonLogger` as logger output.
+    # By defaults, use `Logger::Common` as logger output.
     def logging=(logging : Bool)
       @logging = logging
 

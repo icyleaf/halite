@@ -71,7 +71,7 @@ module Halite
     #
     # ```
     # options = Halite::Options.new(headers: {
-    #   "private-token" => "bdf39d82661358f80b31b67e6f89fee4"
+    #   "private-token" => "bdf39d82661358f80b31b67e6f89fee4",
     # })
     #
     # client = Halite::Client.new(options)

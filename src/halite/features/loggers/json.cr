@@ -1,8 +1,8 @@
 require "json"
 
-module Halite::Features
-  # Logger feature: JSONLogger
-  class JSONLogger < Logger::Abstract
+class Halite::Features::Logger
+  # Logger feature: Logger::JSON
+  class JSON < Abstract
     @created_at : Time? = nil
     @request : Request? = nil
     @response : Response? = nil
@@ -14,7 +14,7 @@ module Halite::Features
 
     def response(response)
       @response = Response.new(response)
-      @writer.info raw
+      @logger.info raw
     end
 
     def default_formatter
