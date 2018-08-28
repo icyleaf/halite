@@ -295,7 +295,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/e8ca1c1" target="_blank">master#e8ca1c1</a> (2018-08-28 10:20:05 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/fb166d5" target="_blank">master#fb166d5</a> (2018-08-28 14:24:19 +0800).</p>
 
 <h2>Index</h2>
 
@@ -589,10 +589,10 @@ r.parse <span class="c"># simplily by default</span>
 <h4>Parsing Content</h4>
 
 <p><code><a href="Halite/Response.html">Halite::Response</a></code> has a MIME type adapter system that you can use a decoder to parse the content,
-we can inherit <code><a href="Halite/Logger/Adapter.html">Halite::Logger::Adapter</a></code> make our adapter:</p>
+we can inherit <code><a href="Halite/MimeTypes/Adapter.html">Halite::MimeTypes::Adapter</a></code> make our adapter:</p>
 
 <pre><code class="language-crystal"><span class="c"># Define a MIME type adapter</span>
-<span class="k">class</span> <span class="t">YAMLAdapter</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span><span class="t">::</span><span class="t">Adapter</span>
+<span class="k">class</span> <span class="t">YAMLAdapter</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">MimeTypes</span><span class="t">::</span><span class="t">Adapter</span>
   <span class="k">def</span> <span class="m">decode</span>(string)
     <span class="t">YAML</span>.parse(string)
   <span class="k">end</span>
