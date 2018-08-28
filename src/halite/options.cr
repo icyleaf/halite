@@ -100,7 +100,7 @@ module Halite
       with_headers(with_headers)
     end
 
-    # Returns `Options` self with gived headers combined.
+    # Returns `Options` self with given headers combined.
     def with_headers(headers : Hash(String, _) | NamedTuple) : Halite::Options
       @headers.merge!(parse_headers(headers))
       self
@@ -111,7 +111,7 @@ module Halite
       with_cookies(cookies)
     end
 
-    # Returns `Options` self with gived cookies combined.
+    # Returns `Options` self with given cookies combined.
     def with_cookies(cookies : Hash(String, _) | NamedTuple) : Halite::Options
       cookies.each do |key, value|
         @cookies[key.to_s] = value.to_s
@@ -120,7 +120,7 @@ module Halite
       self
     end
 
-    # Returns `Options` self with gived cookies combined.
+    # Returns `Options` self with given cookies combined.
     def with_cookies(cookies : HTTP::Cookies) : Halite::Options
       cookies.each do |cookie|
         with_cookies(cookie)
@@ -129,7 +129,7 @@ module Halite
       self
     end
 
-    # Returns `Options` self with gived cookies combined.
+    # Returns `Options` self with given cookies combined.
     def with_cookies(cookie : HTTP::Cookie) : Halite::Options
       cookie_header = HTTP::Headers{"Set-Cookie" => cookie.to_set_cookie_header}
       @headers.merge!(cookie_header)
@@ -137,7 +137,7 @@ module Halite
       self
     end
 
-    # Returns `Options` self with gived max hops of redirect times.
+    # Returns `Options` self with given max hops of redirect times.
     #
     # ```
     # # Automatically following redirects
@@ -153,7 +153,7 @@ module Halite
       self
     end
 
-    # Returns `Options` self with gived connect, read timeout.
+    # Returns `Options` self with given connect, read timeout.
     def with_timeout(connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil) : Halite::Options
       @timeout.connect = connect.to_f if connect
       @timeout.read = read.to_f if read
@@ -179,13 +179,13 @@ module Halite
       self
     end
 
-    # Returns `Logger` self with gived format and the options of format.
+    # Returns `Logger` self with given format and the options of format.
     def with_logger(format : String, **opts)
       raise UnRegisterLoggerFormatError.new("Not avaiable logger format: #{format}") unless format_cls = Features::Logger[format]?
       with_logger(format_cls.new(**opts))
     end
 
-    # Returns `Logger` self with gived logger, depend on `with_features`.
+    # Returns `Logger` self with given logger, depend on `with_features`.
     def with_logger(logger : Halite::Features::Logger::Abstract)
       @logging = true
       with_features("logger", logger: logger)

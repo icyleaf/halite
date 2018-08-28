@@ -192,7 +192,7 @@ module Halite
       branch(default_options.with_follow(strict: strict))
     end
 
-    # Returns `Options` self with gived max hops of redirect times.
+    # Returns `Options` self with given max hops of redirect times.
     #
     # ```
     # # Max hops 3 times
@@ -207,7 +207,7 @@ module Halite
       branch(default_options.with_follow(hops, strict))
     end
 
-    # Returns `Options` self with gived the logger which it integration from `Halite::Logger`.
+    # Returns `Options` self with given the logger which it integration from `Halite::Logger`.
     #
     # #### Simple logging
     #
@@ -271,7 +271,7 @@ module Halite
       branch(default_options.with_logger(logger))
     end
 
-    # Returns `Options` self with gived the file with the path.
+    # Returns `Options` self with given the file with the path.
     #
     # #### JSON-formatted logging
     #
@@ -335,12 +335,12 @@ module Halite
       branch(default_options.with_features(features, **opts))
     end
 
-    # Turn on given features.
+    # Turn on given the name of features.
     #
     # Available features to review all subclasses of `Halite::Features::Feature`.
     #
     # ```
-    # Halite.use("logger")
+    # Halite.use("logger", "your-custom-feature-name")
     #       .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     def use(*features)
