@@ -46,6 +46,7 @@ Build in crystal version >= `v0.25.0`, documents generated in latest commit.
     - [JSON-formatted logging](#json-formatted-logging)
     - [Write to a log file](#write-to-a-log-file)
     - [Use the custom logger](#use-the-custom-logger)
+  - [Middlewares](#middlewares)
   - [Link Headers](#link-headers)
 - [Help and Discussion](#help-and-discussion)
 - [Donate](#donate)
@@ -613,6 +614,51 @@ Halite.logger(format: "custom")
 # => 2017-12-13 16:40:13 +08:00 | >> | GET | http://httpbin.org/get?name=foobar
 # => 2017-12-13 16:40:15 +08:00 | << | 200 | http://httpbin.org/get?name=foobar application/json
 ```
+
+### Middlewares
+
+Halite now has middlewares (a.k.a features) support providing a simple way to plug in intermediate custom logic
+in your HTTP client and allowing you to monitor outgoing requests, and incoming responses.
+
+Avaiabled features:
+
+- logger (Cool, aha!)
+
+Let's implement simple middleware that prints each request:
+
+```crystal
+class RequestMonister < Halite::Feature
+  def initialize(@label : String)
+  end
+
+  def request(request) : Halite::Request
+    puts request.verb
+    puts request.uri
+    puts request.body
+
+    request
+  end
+
+  def response(response) : Halite::Response
+    response
+  end
+
+  Halite::Features.register "request_monsiter", self
+end
+```
+
+Then use it in Halite:
+
+```crystal
+Halite.use("request_monsiter", label: "testing")
+      .post("http://httpbin.org/post", form: {name: "foo"})
+
+# => POST
+# => http://httpbin.org/post
+# => name=foo
+```
+
+For more implementation details about the feature layer, see the [feature](https://github.com/icyleaf/halite/blob/master/src/halite/features.cr#L22) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features).
 
 ### Link Headers
 
