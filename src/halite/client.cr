@@ -82,25 +82,38 @@ module Halite
 
     # Make an HTTP request
     def request(verb : String, uri : String, options : Options? = nil) : Halite::Response
-      options = options ? @options.merge(options.not_nil!) : @options
-      request = build_request(verb, uri, options)
-      response = perform(request, options)
-      return response if options.follow.hops.zero?
+      opts = options ? @options.merge(options.not_nil!) : @options
+      request = build_request(verb, uri, opts)
+      response = perform(request, opts) do
+        perform(request, opts)
+      end
 
-      Redirector.new(request, response, options.follow.hops, options.follow.strict).perform do |req|
-        perform(req, options)
+      return response if opts.follow.hops.zero?
+
+      Redirector.new(request, response, opts.follow.hops, opts.follow.strict).perform do |req|
+        perform(req, opts)
       end
     end
 
-    private def build_request(verb : String, uri : String, options : Options) : Halite::Request
-      uri = make_request_uri(uri, options)
-      body_data = make_request_body(options)
-      headers = make_request_headers(options, body_data.content_type)
-      request = Request.new(verb, uri, headers, body_data.body)
-
-      options.features.reduce(request) do |req, (_, feature)|
-        feature.request(req)
+    # Find interceptor and return `Response` else perform HTTP request.
+    private def perform(request : Halite::Request, options : Halite::Options, &block : -> Response)
+      chain = Interceptor::Chain.new(request, nil, options, &block)
+      options.features.each do |_, feature|
+        current_chain = feature.intercept(chain)
+        if current_chain.result == Interceptor::Chain::Result::Next
+          chain = current_chain
+        elsif current_chain.result == Interceptor::Chain::Result::Return && (response = current_chain.response)
+          return response
+        end
       end
+
+      # Make sure return if has response with each interceptor
+      if response = chain.response
+        return response
+      end
+
+      # Perform original HTTP request if not found any response in interceptors
+      block.call
     end
 
     # Perform a single (no follow) HTTP request
@@ -111,7 +124,7 @@ module Halite
       conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
       conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
-      response = Response.new(request.uri, conn_response, @history)
+      response = Response.new(uri: request.uri, conn: conn_response, history: @history)
 
       response = options.features.reduce(response) do |res, (_, feature)|
         feature.response(res)
@@ -128,6 +141,18 @@ module Halite
       raise TimeoutError.new(ex.message)
     rescue ex : Socket::Error | Errno
       raise ConnectionError.new(ex.message)
+    end
+
+    # Prepare a HTTP request
+    private def build_request(verb : String, uri : String, options : Options) : Halite::Request
+      uri = make_request_uri(uri, options)
+      body_data = make_request_body(options)
+      headers = make_request_headers(options, body_data.content_type)
+      request = Request.new(verb, uri, headers, body_data.body)
+
+      options.features.reduce(request) do |req, (_, feature)|
+        feature.request(req)
+      end
     end
 
     # Merges query params if needed
