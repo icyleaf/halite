@@ -656,7 +656,7 @@ Halite.use("request_monster", label: "testing")
 
 # Or configure to client
 client = Halite::Client.new do |opts|
-  opts.use("request_monster", label: "testing")
+  opts.with_features("request_monster", label: "testing")
 end
 client.post("http://httpbin.org/post", form: {name: "foo"})
 
