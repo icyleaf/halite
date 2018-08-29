@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::Exception::UnRegisterFeatureError - github.com/icyleaf/halite</title>
+  <title>Halite::Interceptor::Chain - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -51,7 +51,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
       <a href="../../Halite/Exception.html">Exception</a>
       
         <ul>
@@ -116,7 +116,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Exception/UnRegisterFeatureError" data-name="halite::exception::unregisterfeatureerror">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnRegisterFeatureError" data-name="halite::exception::unregisterfeatureerror">
       <a href="../../Halite/Exception/UnRegisterFeatureError.html">UnRegisterFeatureError</a>
       
     </li>
@@ -201,12 +201,12 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Interceptor" data-name="halite::interceptor">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Interceptor" data-name="halite::interceptor">
       <a href="../../Halite/Interceptor.html">Interceptor</a>
       
         <ul>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Interceptor/Chain" data-name="halite::interceptor::chain">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Interceptor/Chain" data-name="halite::interceptor::chain">
       <a href="../../Halite/Interceptor/Chain.html">Chain</a>
       
         <ul>
@@ -330,19 +330,15 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Halite::Exception::UnRegisterFeatureError
+  <span class="kind">class</span> Halite::Interceptor::Chain
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Exception/UnRegisterFeatureError.html">Halite::Exception::UnRegisterFeatureError</a></li><li class="superclass"><a href="../../Halite/Exception/FeatureError.html">Halite::Exception::FeatureError</a></li><li class="superclass"><a href="../../Halite/Exception/Error.html">Halite::Exception::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Interceptor/Chain.html">Halite::Interceptor::Chain</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
-
-  <h2>Overview</h2>
-
-  <p>The feature given was not understood</p>
 
 
 
@@ -360,8 +356,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/5ce3d89ca6793a7f7e21b28c278ec38434c4576c/src/halite/error.cr#L31" target="_blank">
-        halite/error.cr
+      <a href="https://github.com/icyleaf/halite/blob/5ce3d89ca6793a7f7e21b28c278ec38434c4576c/src/halite/features.cr#L45" target="_blank">
+        halite/features.cr
       </a>
     
     <br/>
@@ -371,9 +367,59 @@
 
 
 
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28request%3ARequest%2Cresponse%3AResponse%3F%2Coptions%3AOptions%2C%26block%3A-%3EResponse%29-class-method" class="signature"><strong>.new</strong>(request : Request, response : Response?, options : Options, &block :  -> Response)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#next%28response%29-instance-method" class="signature"><strong>#next</strong>(response)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#perform-instance-method" class="signature"><strong>#perform</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#request%3AHalite%3A%3ARequest-instance-method" class="signature"><strong>#request</strong> : Halite::Request</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#request%3D%28request%29-instance-method" class="signature"><strong>#request=</strong>(request)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#response%3AHalite%3A%3AResponse%3F-instance-method" class="signature"><strong>#response</strong> : Halite::Response?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#result%3AHalite%3A%3AInterceptor%3A%3AChain%3A%3AResult-instance-method" class="signature"><strong>#result</strong> : Halite::Interceptor::Chain::Result</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#return%28response%29-instance-method" class="signature"><strong>#return</strong>(response)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -401,42 +447,146 @@
 
 
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(request:Request,response:Response?,options:Options,&amp;block:-&gt;Response)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(request : <a href="../../Halite/Request.html">Request</a>, response : <a href="../../Halite/Response.html">Response</a>?, options : <a href="../../Halite/Options.html">Options</a>, &block :  -> <a href="../../Halite/Response.html">Response</a>)
+
+        <a class="method-permalink" href="#new%28request%3ARequest%2Cresponse%3AResponse%3F%2Coptions%3AOptions%2C%26block%3A-%3EResponse%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ce3d89ca6793a7f7e21b28c278ec38434c4576c/src/halite/features.cr#L55" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="next(response)-instance-method">
+      <div class="signature">
+        
+        def <strong>next</strong>(response)
+
+        <a class="method-permalink" href="#next%28response%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ce3d89ca6793a7f7e21b28c278ec38434c4576c/src/halite/features.cr#L60" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="perform-instance-method">
+      <div class="signature">
+        
+        def <strong>perform</strong>
+
+        <a class="method-permalink" href="#perform-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ce3d89ca6793a7f7e21b28c278ec38434c4576c/src/halite/features.cr#L74" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="request:Halite::Request-instance-method">
+      <div class="signature">
+        
+        def <strong>request</strong> : <a href="../../Halite/Request.html">Halite::Request</a>
+
+        <a class="method-permalink" href="#request%3AHalite%3A%3ARequest-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ce3d89ca6793a7f7e21b28c278ec38434c4576c/src/halite/features.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="request=(request)-instance-method">
+      <div class="signature">
+        
+        def <strong>request=</strong>(request)
+
+        <a class="method-permalink" href="#request%3D%28request%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ce3d89ca6793a7f7e21b28c278ec38434c4576c/src/halite/features.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="response:Halite::Response?-instance-method">
+      <div class="signature">
+        
+        def <strong>response</strong> : <a href="../../Halite/Response.html">Halite::Response</a>?
+
+        <a class="method-permalink" href="#response%3AHalite%3A%3AResponse%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ce3d89ca6793a7f7e21b28c278ec38434c4576c/src/halite/features.cr#L52" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="result:Halite::Interceptor::Chain::Result-instance-method">
+      <div class="signature">
+        
+        def <strong>result</strong> : <a href="../../Halite/Interceptor/Chain/Result.html">Halite::Interceptor::Chain::Result</a>
+
+        <a class="method-permalink" href="#result%3AHalite%3A%3AInterceptor%3A%3AChain%3A%3AResult-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ce3d89ca6793a7f7e21b28c278ec38434c4576c/src/halite/features.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="return(response)-instance-method">
+      <div class="signature">
+        
+        def <strong>return</strong>(response)
+
+        <a class="method-permalink" href="#return%28response%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ce3d89ca6793a7f7e21b28c278ec38434c4576c/src/halite/features.cr#L67" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
