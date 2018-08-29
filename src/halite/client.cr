@@ -101,8 +101,6 @@ module Halite
       options.features.reduce(request) do |req, (_, feature)|
         feature.request(req)
       end
-
-      request
     end
 
     # Perform a single (no follow) HTTP request
@@ -115,7 +113,7 @@ module Halite
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
       response = Response.new(request.uri, conn_response, @history)
 
-      options.features.reduce(response) do |res, (_, feature)|
+      response = options.features.reduce(response) do |res, (_, feature)|
         feature.response(res)
       end
 
