@@ -2,6 +2,24 @@ require "base64"
 
 module Halite
   module Chainable
+    {% for verb in %w(get head) %}
+      # {{ verb.id.capitalize }} a resource
+      #
+      # ```
+      # Halite.{{ verb.id }}("http://httpbin.org/anything", params: {
+      #   first_name: "foo",
+      #   last_name:  "bar"
+      # })
+      # ```
+      def {{ verb.id }}(uri : String, *,
+                        headers : (Hash(String, _) | NamedTuple)? = nil,
+                        params : (Hash(String, _) | NamedTuple)? = nil,
+                        raw : String? = nil,
+                        ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
+        request({{ verb }}, uri, options_with(headers, params, raw: raw, ssl: ssl))
+      end
+    {% end %}
+
     {% for verb in %w(put post patch delete options) %}
       # {{ verb.id.capitalize }} a resource
       #
@@ -36,24 +54,6 @@ module Halite
                         raw : String? = nil,
                         ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
         request({{ verb }}, uri, options_with(headers, params, form, json, raw, ssl))
-      end
-    {% end %}
-
-    {% for verb in %w(get head) %}
-      # {{ verb.id.capitalize }} a resource
-      #
-      # ```
-      # Halite.{{ verb.id }}("http://httpbin.org/anything", params: {
-      #   first_name: "foo",
-      #   last_name:  "bar"
-      # })
-      # ```
-      def {{ verb.id }}(uri : String, *,
-                        headers : (Hash(String, _) | NamedTuple)? = nil,
-                        params : (Hash(String, _) | NamedTuple)? = nil,
-                        raw : String? = nil,
-                        ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
-        request({{ verb }}, uri, options_with(headers, params, raw: raw, ssl: ssl))
       end
     {% end %}
 
@@ -356,12 +356,36 @@ module Halite
     #   "form" => { "username" => "bar" },
     # })
     # ```
-    def request(verb : String, uri : String, options : (Hash(String, _) | NamedTuple | Options)? = nil) : Halite::Response
-      client = options ? branch(options) : branch
-      response = client.request(verb, uri)
-      DEFAULT_OPTIONS.clear!
-      response
+    def request(verb : String, uri : String, *,
+                headers : (Hash(String, _) | NamedTuple)? = nil,
+                params : (Hash(String, _) | NamedTuple)? = nil,
+                form : (Hash(String, _) | NamedTuple)? = nil,
+                json : (Hash(String, _) | NamedTuple)? = nil,
+                raw : String? = nil,
+                ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
+      branch(headers, params, form, json, raw, ssl).request(verb, uri)
     end
+
+    def request(verb : String, uri : String, options : Options? = nil) : Halite::Response
+      branch(options).request(verb, uri)
+    end
+
+    private def branch(headers : (Hash(String, _) | NamedTuple)? = nil,
+                       params : (Hash(String, _) | NamedTuple)? = nil,
+                       form : (Hash(String, _) | NamedTuple)? = nil,
+                       json : (Hash(String, _) | NamedTuple)? = nil,
+                       raw : String? = nil,
+                       ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Client
+      branch(options_with(headers, params, form, json, raw, ssl))
+    end
+
+    private def branch(options : Options? = nil) : Halite::Client
+      options ||= default_options
+      Halite::Client.new(options)
+    end
+
+    # :nodoc:
+    DEFAULT_OPTIONS = Halite::Options.new
 
     private def default_options
       {% if @type.superclass %}
@@ -371,25 +395,13 @@ module Halite
       {% end %}
     end
 
-    private def branch(options : Hash(String, _) | NamedTuple | Options) : Halite::Client
-      Halite::Client.new(DEFAULT_OPTIONS.merge(options))
-    end
-
-    private def branch : Halite::Client
-      Halite::Client.new(DEFAULT_OPTIONS)
-    end
-
     private def options_with(headers : (Hash(String, _) | NamedTuple)? = nil,
                              params : (Hash(String, _) | NamedTuple)? = nil,
                              form : (Hash(String, _) | NamedTuple)? = nil,
                              json : (Hash(String, _) | NamedTuple)? = nil,
                              raw : String? = nil,
                              ssl : OpenSSL::SSL::Context::Client? = nil)
-      Halite::Options.new(headers: headers, params: params,
-        form: form, json: json, raw: raw, ssl: ssl)
+      Halite::Options.new(headers: headers, params: params, form: form, json: json, raw: raw, ssl: ssl)
     end
-
-    # :nodoc:
-    DEFAULT_OPTIONS = Halite::Options.new
   end
 end
