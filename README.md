@@ -10,7 +10,7 @@ Crystal HTTP Requests with a chainable REST API, built-in sessions and loggers w
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem
 and Python's [requests](https://github.com/requests/requests).
 
-Build in crystal version >= `v0.25.0`, documents generated in latest commit.
+Build in crystal version >= `v0.25.0`, this document valid in latest commit.
 
 ## Index
 
