@@ -340,13 +340,13 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/27427b8" target="_blank">#27427b8</a> (2018-08-30 14:52:48 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, documents generated in <a href="https://github.com/icyleaf/halite/commit/c5c1b56" target="_blank">#c5c1b56</a> (2018-08-30 15:10:26 +0800).</p>
 
 <h2>Index</h2>
 
 <p>&lt;!-- TOC --></p>
 
-<ul><li><a href="#index" target="_blank">Index</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#json-formatted-logging" target="_blank">JSON-formatted logging</a></li><li><a href="#write-to-a-log-file" target="_blank">Write to a log file</a></li><li><a href="#use-the-custom-logger" target="_blank">Use the custom logger</a></li><li><a href="#middlewares" target="_blank">Middlewares</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#donate" target="_blank">Donate</a></li><li><a href="#how-to-contribute" target="_blank">How to Contribute</a></li><li><a href="#you-may-also-like" target="_blank">You may also like</a></li><li><a href="#license" target="_blank">License</a></li></ul>
+<ul><li><a href="#index" target="_blank">Index</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#json-formatted-logging" target="_blank">JSON-formatted logging</a></li><li><a href="#write-to-a-log-file" target="_blank">Write to a log file</a></li><li><a href="#use-the-custom-logger" target="_blank">Use the custom logger</a></li><li><a href="#middlewares" target="_blank">Middlewares</a></li><li><a href="#write-a-simple-feature" target="_blank">Write a simple feature</a></li><li><a href="#write-a-interceptor" target="_blank">Write a interceptor</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#donate" target="_blank">Donate</a></li><li><a href="#how-to-contribute" target="_blank">How to Contribute</a></li><li><a href="#you-may-also-like" target="_blank">You may also like</a></li><li><a href="#license" target="_blank">License</a></li></ul>
 
 <p>&lt;!-- /TOC --></p>
 
@@ -818,11 +818,13 @@ Here has two methods must be implement: <code>#request</code> and <code>#respons
 <h3>Middlewares</h3>
 
 <p>Halite now has middlewares (a.k.a features) support providing a simple way to plug in intermediate custom logic
-in your HTTP client and allowing you to monitor outgoing requests, and incoming responses.</p>
+in your HTTP client and allowing you to monitor outgoing requests, and incoming responses, even use interceptor.</p>
 
 <p>Avaiabled features:</p>
 
 <ul><li>logger (Cool, aha!)</li></ul>
+
+<h4>Write a simple feature</h4>
 
 <p>Let's implement simple middleware that prints each request:</p>
 
@@ -859,7 +861,43 @@ client.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {n
 <span class="c"># =&gt; http://httpbin.org/post</span>
 <span class="c"># =&gt; name=foo</span></code></pre>
 
-<p>For more implementation details about the feature layer, see the <a href="https://github.com/icyleaf/halite/blob/master/src/halite/features.cr#L22" target="_blank">feature</a> class and <a href="https://github.com/icyleaf/halite/tree/master/src/halite/features" target="_blank">examples</a>.</p>
+<h4>Write a interceptor</h4>
+
+<p>Halite features has a killer feature is the *<em>interceptor</em>, Use <code><a href="Halite/Interceptor/Chain.html">Halite::Interceptor::Chain</a></code> to process with two result:</p>
+
+<ul><li><code>next</code>: perform and run next interceptor</li><li><code>return</code>: perform and return</li></ul>
+
+<p>So, you can intercept and turn to the following registered features.</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">AlwaysNotFound</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Feature</span>
+  <span class="k">def</span> <span class="m">intercept</span>(chain)
+    response <span class="o">=</span> chain.perform
+    response <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Response</span>.<span class="k">new</span>(chain.request.uri, <span class="n">404</span>, response.body, response.headers)
+    chain.<span class="k">next</span>(response)
+  <span class="k">end</span>
+
+  <span class="t">Halite</span><span class="t">::</span><span class="t">Features</span>.register <span class="s">&quot;404&quot;</span>, <span class="k">self</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="t">PoweredBy</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Feature</span>
+  <span class="k">def</span> <span class="m">intercept</span>(chain)
+    <span class="k">if</span> response <span class="o">=</span> chain.response
+      response.headers[<span class="s">&quot;X-Powered-By&quot;</span>] <span class="o">=</span> <span class="s">&quot;Halite&quot;</span>
+      chain.<span class="k">return</span>(response)
+    <span class="k">else</span>
+      chain
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="t">Halite</span><span class="t">::</span><span class="t">Features</span>.register <span class="s">&quot;powered_by&quot;</span>, <span class="k">self</span>
+<span class="k">end</span>
+
+r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&quot;404&quot;</span>).use(<span class="s">&quot;powered_by&quot;</span>).get(<span class="s">&quot;http://httpbin.org/user-agent&quot;</span>)
+r.status_code               <span class="c"># =&gt; 404</span>
+r.headers[<span class="s">&quot;X-Powered-By&quot;</span>]   <span class="c"># =&gt; Halite</span>
+r.body                      <span class="c"># =&gt; {&quot;user-agent&quot;:&quot;Halite/0.6.0&quot;}</span></code></pre>
+
+<p>For more implementation details about the feature layer, see the <a href="https://github.com/icyleaf/halite/blob/master/src/halite/features.cr#L22" target="_blank">feature</a> class and <a href="https://github.com/icyleaf/halite/tree/master/src/halite/features" target="_blank">examples</a> and <a href="https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23" target="_blank">specs</a>.</p>
 
 <h3>Link Headers</h3>
 
