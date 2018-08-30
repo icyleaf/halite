@@ -404,6 +404,9 @@ module Halite
       Halite::Client.new(options)
     end
 
+    # :nodoc:
+    DEFAULT_OPTIONS = Halite::Options.new
+
     private def default_options
       {% if @type.superclass %}
         DEFAULT_OPTIONS
@@ -420,8 +423,5 @@ module Halite
                              ssl : OpenSSL::SSL::Context::Client? = nil)
       Halite::Options.new(headers: headers, params: params, form: form, json: json, raw: raw, ssl: ssl)
     end
-
-    # :nodoc:
-    DEFAULT_OPTIONS = Halite::Options.new
   end
 end
