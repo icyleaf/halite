@@ -61,10 +61,17 @@ module Halite
     end
 
     # Instance a new client with block
+    #
+    # ```crystal
+    # client = Halite::Client.new do
+    #   basic_auth "name", "foo"
+    #   logger true
+    # end
+    # ```
     def self.new(&block)
       options = Options.new
-      yield options
-      Client.new(options)
+      instance = Client.new(options)
+      with instance yield
     end
 
     # Instance a new client

@@ -16,7 +16,7 @@ module Halite
                         params : (Hash(String, _) | NamedTuple)? = nil,
                         raw : String? = nil,
                         ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
-        request({{ verb }}, uri, options_with(headers, params, raw: raw, ssl: ssl))
+        request({{ verb }}, uri, headers: headers, params: params, raw: raw, ssl: ssl)
       end
     {% end %}
 
@@ -53,7 +53,7 @@ module Halite
                         json : (Hash(String, _) | NamedTuple)? = nil,
                         raw : String? = nil,
                         ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
-        request({{ verb }}, uri, options_with(headers, params, form, json, raw, ssl))
+        request({{ verb }}, uri, headers: headers, params: params, form: form, json: json, raw: raw, ssl: ssl)
       end
     {% end %}
 
@@ -205,6 +205,26 @@ module Halite
     # ```
     def follow(hops : Int32, strict = Follow::STRICT) : Halite::Client
       branch(default_options.with_follow(hops, strict))
+    end
+
+    # Returns `Options` self with enable or disable logging.
+    #
+    # #### Enable logging
+    #
+    # Same as call `logger` method without any argument.
+    #
+    # ```
+    # Halite.logging.get("http://httpbin.org/get")
+    # ```
+    #
+    # #### Disable logging
+    #
+    # ```
+    # Halite.logging(false).get("http://httpbin.org/get")
+    # ```
+    def logging(enable = true)
+      default_options.logging = enable
+      branch(default_options)
     end
 
     # Returns `Options` self with given the logger which it integration from `Halite::Logger`.
@@ -363,29 +383,26 @@ module Halite
                 json : (Hash(String, _) | NamedTuple)? = nil,
                 raw : String? = nil,
                 ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
-      branch(headers, params, form, json, raw, ssl).request(verb, uri)
+      request(verb, uri, options_with(headers, params, form, json, raw, ssl))
     end
 
+    # Make an HTTP request with the given verb and options
+    #
+    # ```
+    # Halite.request("get", "http://httpbin.org/get", Halite::Options.new(
+    #   "headers" = { "user_agent" => "halite" },
+    #   "params" => { "nickname" => "foo" },
+    #   "form" => { "username" => "bar" },
+    # )
+    # ```
     def request(verb : String, uri : String, options : Options? = nil) : Halite::Response
       branch(options).request(verb, uri)
-    end
-
-    private def branch(headers : (Hash(String, _) | NamedTuple)? = nil,
-                       params : (Hash(String, _) | NamedTuple)? = nil,
-                       form : (Hash(String, _) | NamedTuple)? = nil,
-                       json : (Hash(String, _) | NamedTuple)? = nil,
-                       raw : String? = nil,
-                       ssl : OpenSSL::SSL::Context::Client? = nil) : Halite::Client
-      branch(options_with(headers, params, form, json, raw, ssl))
     end
 
     private def branch(options : Options? = nil) : Halite::Client
       options ||= default_options
       Halite::Client.new(options)
     end
-
-    # :nodoc:
-    DEFAULT_OPTIONS = Halite::Options.new
 
     private def default_options
       {% if @type.superclass %}
@@ -403,5 +420,8 @@ module Halite
                              ssl : OpenSSL::SSL::Context::Client? = nil)
       Halite::Options.new(headers: headers, params: params, form: form, json: json, raw: raw, ssl: ssl)
     end
+
+    # :nodoc:
+    DEFAULT_OPTIONS = Halite::Options.new
   end
 end

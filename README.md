@@ -492,16 +492,15 @@ Let's persist some cookies across requests:
 ```crystal
 client = Halite::Client.new
 # Or configure it
-client = Halite::Client.new do |options|
-  options.headers = {
-    user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36",
-  }
+client = Halite::Client.new do
+  # Set basic auth
+  basic_auth "name", "foo"
 
   # Enable logging
-  options.logging = true
+  logging true
 
   # Set read timeout to one minute
-  options.read_timeout = 1.minutes
+  timeout(read: 1.minutes)
 end
 
 client.get("http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0")
@@ -651,9 +650,10 @@ Halite.use("request_monster", label: "testing")
       .post("http://httpbin.org/post", form: {name: "foo"})
 
 # Or configure to client
-client = Halite::Client.new do |opts|
-  opts.with_features("request_monster", label: "testing")
+client = Halite::Client.new do
+  use "request_monster", label: "testing"
 end
+
 client.post("http://httpbin.org/post", form: {name: "foo"})
 
 # => testing

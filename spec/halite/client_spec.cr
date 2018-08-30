@@ -18,12 +18,9 @@ describe Halite::Client do
     end
 
     it "should initial with block" do
-      client = Halite::Client.new do |options|
-        options.headers = {
-          private_token: "token",
-        }
-        options.read_timeout = 2.minutes
-        options.timeout.connect = 40
+      client = Halite::Client.new do
+        headers({private_token: "token"})
+        timeout(read: 2.minutes, connect: 40)
       end
 
       client.should be_a(Halite::Client)
