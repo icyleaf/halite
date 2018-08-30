@@ -167,15 +167,21 @@ module Halite
       self
     end
 
-    # Returns `Options` self with feature name and options
+    # Returns `Options` self with feature name and options.
     def with_features(feature_name : String, **opts)
       with_features(feature_name, opts)
     end
 
-    # Returns `Options` self with feature include name and feature or options
-    def with_features(feature_name : String, opts_or_feature : NamedTuple | Feature)
-      raise UnRegisterFeatureError.new("Not avaiable feature: #{feature_name}") unless feature_cls = Features[feature_name]?
-      @features[feature_name] = opts_or_feature.is_a?(Feature) ? opts_or_feature : feature_cls.new(**opts_or_feature)
+    # Returns `Options` self with feature name and options.
+    def with_features(name : String, opts : NamedTuple)
+      raise UnRegisterFeatureError.new("Not avaiable feature: #{name}") unless klass = Features[name]?
+      @features[name] = klass.new(**opts)
+      self
+    end
+
+    # Returns `Options` self with feature name and feature.
+    def with_features(name : String, feature : Feature)
+      @features[name] = feature
       self
     end
 

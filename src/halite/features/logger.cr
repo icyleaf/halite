@@ -6,17 +6,19 @@ module Halite::Features
   # Logger feature
   class Logger < Feature
     def self.new(format : String = "common", logger : Logger::Abstract? = nil, **opts)
-      return new(logger) if logger
+      return new(logger: logger) if logger
       raise UnRegisterLoggerFormatError.new("Not avaiable logger format: #{format}") unless cls = Logger[format]?
 
       logger = cls.new(**opts)
-      new(logger)
+      new(logger: logger)
     end
+
+    DEFAULT_LOGGER = Logger::Common.new
 
     getter writer : Logger::Abstract
 
-    def initialize(logger = Logger::Common.new)
-      @writer = logger
+    def initialize(**options)
+      @writer = options.fetch(:logger, DEFAULT_LOGGER).as(Logger::Abstract)
     end
 
     def request(request)

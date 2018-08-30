@@ -2,8 +2,8 @@ module Halite
   module Features
     @@features = {} of String => Feature.class
 
-    def self.register(name : String, feature : Feature.class)
-      @@features[name] = feature
+    def self.register(name : String, klass : Feature.class)
+      @@features[name] = klass
     end
 
     def self.[](name : String)

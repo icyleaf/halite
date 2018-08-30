@@ -631,7 +631,9 @@ Let's implement simple middleware that prints each request:
 
 ```crystal
 class RequestMonister < Halite::Feature
-  def initialize(@label : String? = nil)
+  @label : String
+  def initialize(**options)
+    @label = options.fetch(:label, "")
   end
 
   def request(request) : Halite::Request
