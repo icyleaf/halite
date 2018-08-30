@@ -349,10 +349,11 @@
 
   <p>Cache feature use for caching HTTP response to local storage to speed up in developing stage.</p>
 
-<p>You can set cache path and expires time. By default cache path is
-"cache/" of root project and never expires.</p>
+<p>It has the following options:</p>
 
-<p>With cached response it always included some headers information:</p>
+<ul><li><code>path</code>: The path of cache, default is "cache/"</li><li><code>expires</code>: The expires time of cache, default is nerver expires.</li><li><code>debug</code>: The debug mode of cache, default is <code>true</code></li></ul>
+
+<p>With debug mode, cached response it always included some headers information:</p>
 
 <ul><li><code>X-Cached-Key</code>: Cache key with verb, uri and body</li><li><code>X-Cached-At</code>:  Cache created time</li><li><code>X-Cached-Expires-At</code>: Cache expired time</li><li><code>X-Cached-By</code>: Always return "Halite"</li></ul>
 
@@ -376,7 +377,7 @@ r.headers <span class="c"># =&gt; {..., &quot;X-Cached-At&quot; =&gt; &quot;2018
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/cf10f0870a968a78901fe3a321f60545b650708e/src/halite/features/cache.cr#L23" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/c91033f0b020591f4d0b212d7802606a9ae933ce/src/halite/features/cache.cr#L26" target="_blank">
         halite/features/cache.cr
       </a>
     
@@ -503,7 +504,7 @@ r.headers <span class="c"># =&gt; {..., &quot;X-Cached-At&quot; =&gt; &quot;2018
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/cf10f0870a968a78901fe3a321f60545b650708e/src/halite/features/cache.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/c91033f0b020591f4d0b212d7802606a9ae933ce/src/halite/features/cache.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -526,7 +527,7 @@ r.headers <span class="c"># =&gt; {..., &quot;X-Cached-At&quot; =&gt; &quot;2018
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/cf10f0870a968a78901fe3a321f60545b650708e/src/halite/features/cache.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/c91033f0b020591f4d0b212d7802606a9ae933ce/src/halite/features/cache.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
