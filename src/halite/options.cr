@@ -281,6 +281,7 @@ module Halite
       @raw = nil
       @timeout = Timeout.new
       @follow = Follow.new
+      @features = {} of String => Feature
       @ssl = nil
 
       self
