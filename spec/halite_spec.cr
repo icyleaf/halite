@@ -141,24 +141,41 @@ describe Halite do
   end
 
   describe ".follow" do
+    context "without redirects" do
+      it "should return empty history" do
+        response = Halite.get(SERVER.api("/"))
+        response.history.size.should eq(0)
+      end
+    end
+
     context "with redirects" do
+      it "should return one history with non-redirect url" do
+        response = Halite.follow.get(SERVER.api("/"))
+        response.history.size.should eq(1)
+        response.to_s.should match(/<!doctype html>/)
+      end
+
       it "should easy for 301 with full uri" do
         response = Halite.follow.get(SERVER.api("redirect-301"))
+        response.history.size.should eq(2)
         response.to_s.should match(/<!doctype html>/)
       end
 
       it "should easy for 301 with relative path" do
         response = Halite.follow.get(SERVER.api("redirect-301"), params: {"relative_path" => true})
+        response.history.size.should eq(2)
         response.to_s.should match(/<!doctype html>/)
       end
 
       it "should easy for 301 with relative path which is not include slash" do
         response = Halite.follow.get(SERVER.api("redirect-301"), params: {"relative_path_without_slash" => true})
+        response.history.size.should eq(2)
         response.to_s.should eq("hello")
       end
 
       it "should easy for 302" do
         response = Halite.follow.get(SERVER.api("redirect-302"))
+        response.history.size.should eq(2)
         response.to_s.should match(/<!doctype html>/)
       end
 
