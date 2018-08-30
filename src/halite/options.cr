@@ -259,9 +259,17 @@ module Halite
       @logging
     end
 
-    # alias `merge` above
+    # Merge with other `Options`
     def merge(options : Halite::Options) : Halite::Options
-      @headers.merge!(options.headers) if options.headers != default_headers
+      if options.headers != default_headers
+        # Remove default key to make sure it is not to overwrite new one.
+        default_headers.each do |key, value|
+          options.headers.delete(key) if options.headers[key] = default_headers[key]
+        end
+
+        @headers.merge!(options.headers)
+      end
+
       @cookies.fill_from_headers(@headers) if @headers
 
       if options.timeout.connect || options.timeout.read
