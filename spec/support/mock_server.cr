@@ -41,4 +41,8 @@ class MockServer < HTTP::Server
   def scheme
     "http"
   end
+
+  def api(path : String)
+    File.join(endpoint, path)
+  end
 end

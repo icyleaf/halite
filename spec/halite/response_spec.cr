@@ -1,10 +1,10 @@
 require "../spec_helper"
 
-URL         = "http://example.com"
-STATUS_CODE = 200
-HEADERS     = {"Content-Type" => "text/plain; charset=utf-8"}
-BODY        = "hello world"
-COOKIES     = "foo=bar; domain=example.com"
+private URL         = "http://example.com"
+private STATUS_CODE = 200
+private HEADERS     = {"Content-Type" => "text/plain; charset=utf-8"}
+private BODY        = "hello world"
+private COOKIES     = "foo=bar; domain=example.com"
 
 private def response(url = URL, status_code = STATUS_CODE, headers = HEADERS, body = BODY)
   Halite::Response.new(
