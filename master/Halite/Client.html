@@ -390,7 +390,7 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/client.cr#L37" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/client.cr#L37" target="_blank">
         halite/client.cr
       </a>
     
@@ -479,8 +479,8 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
     basic_auth</a>, 
     
   
-    <a href="../Halite/Chainable.html#cookies%3AHalite%3A%3AClient-instance-method" class="tooltip">
-      <span>cookies : Halite::Client<br/>cookies(cookies : HTTP::Cookies) : Halite::Client<br/>cookies(cookies : Hash(String, _) | NamedTuple) : Halite::Client</span>
+    <a href="../Halite/Chainable.html#cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AClient-instance-method" class="tooltip">
+      <span>cookies(cookies : Hash(String, _) | NamedTuple) : Halite::Client<br/>cookies : Halite::Client<br/>cookies(cookies : HTTP::Cookies) : Halite::Client</span>
     cookies</a>, 
     
   
@@ -534,13 +534,13 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
     put</a>, 
     
   
-    <a href="../Halite/Chainable.html#request%28verb%3AString%2Curi%3AString%2Coptions%3AHash%28String%2C_%29%7CNamedTuple%7COptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="tooltip">
-      <span>request(verb : String, uri : String, options : Hash(String, _) | NamedTuple | Options? = <span class="n">nil</span>) : Halite::Response</span>
+    <a href="../Halite/Chainable.html#request%28verb%3AString%2Curi%3AString%2Coptions%3AOptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="tooltip">
+      <span>request(verb : String, uri : String, options : Options? = <span class="n">nil</span>) : Halite::Response<br/>request(verb : String, uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, ssl : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>) : Halite::Response</span>
     request</a>, 
     
   
-    <a href="../Halite/Chainable.html#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method" class="tooltip">
-      <span>timeout(connect_and_read : Int32 | Float64 | Time::Span) : Halite::Client<br/>timeout(connect : Int32 | Float64 | Time::Span?, read : Int32 | Float64 | Time::Span?) : Halite::Client</span>
+    <a href="../Halite/Chainable.html#timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29%3AHalite%3A%3AClient-instance-method" class="tooltip">
+      <span>timeout(connect : Int32 | Float64 | Time::Span?, read : Int32 | Float64 | Time::Span?) : Halite::Client<br/>timeout(connect_and_read : Int32 | Float64 | Time::Span) : Halite::Client</span>
     timeout</a>, 
     
   
@@ -602,7 +602,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/client.cr#L79" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/client.cr#L79" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -622,7 +622,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/client.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/client.cr#L47" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -640,7 +640,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/client.cr#L64" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/client.cr#L64" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -663,7 +663,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/client.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/client.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -679,7 +679,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/client.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/client.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -697,7 +697,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/client.cr#L84" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/client.cr#L84" target="_blank">View source</a>]
         
       </div>
     </div>

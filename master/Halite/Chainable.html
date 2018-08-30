@@ -361,7 +361,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L4" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L4" target="_blank">
         halite/chainable.cr
       </a>
     
@@ -401,6 +401,13 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Client</a>
+        
+          <div class="summary"><p>Make a request with the given cookies</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#cookies%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong> : Halite::Client</a>
         
           <div class="summary"><p>Make a request with the given cookies</p></div>
@@ -409,13 +416,6 @@
     
       <li class="entry-summary">
         <a href="#cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong>(cookies : HTTP::Cookies) : Halite::Client</a>
-        
-          <div class="summary"><p>Make a request with the given cookies</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Client</a>
         
           <div class="summary"><p>Make a request with the given cookies</p></div>
         
@@ -506,21 +506,26 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#request%28verb%3AString%2Curi%3AString%2Coptions%3AHash%28String%2C_%29%7CNamedTuple%7COptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#request</strong>(verb : String, uri : String, options : Hash(String, _) | NamedTuple | Options? = <span class="n">nil</span>) : Halite::Response</a>
+        <a href="#request%28verb%3AString%2Curi%3AString%2Coptions%3AOptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#request</strong>(verb : String, uri : String, options : Options? = <span class="n">nil</span>) : Halite::Response</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#request%28verb%3AString%2Curi%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Cssl%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#request</strong>(verb : String, uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, ssl : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>) : Halite::Response</a>
         
           <div class="summary"><p>Make an HTTP request with the given verb</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span) : Halite::Client</a>
+        <a href="#timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#timeout</strong>(connect : Int32 | Float64 | Time::Span?, read : Int32 | Float64 | Time::Span?) : Halite::Client</a>
         
           <div class="summary"><p>Adds a timeout to the request.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#timeout</strong>(connect : Int32 | Float64 | Time::Span?, read : Int32 | Float64 | Time::Span?) : Halite::Client</a>
+        <a href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span) : Halite::Client</a>
         
           <div class="summary"><p>Adds a timeout to the request.</p></div>
         
@@ -573,7 +578,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L88" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L88" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -594,7 +599,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -617,50 +622,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L68" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="cookies:Halite::Client-instance-method">
-      <div class="signature">
-        
-        def <strong>cookies</strong> : <a href="../Halite/Client.html">Halite::Client</a>
-
-        <a class="method-permalink" href="#cookies%3AHalite%3A%3AClient-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Make a request with the given cookies</p>
-
-<pre><code><span class="t">Halite</span>.cookies(name: <span class="s">&quot;icyleaf&quot;</span>, <span class="s">&quot;gender&quot;</span>: <span class="s">&quot;male&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L134" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="cookies(cookies:HTTP::Cookies):Halite::Client-instance-method">
-      <div class="signature">
-        
-        def <strong>cookies</strong>(cookies : HTTP::Cookies) : <a href="../Halite/Client.html">Halite::Client</a>
-
-        <a class="method-permalink" href="#cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AClient-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Make a request with the given cookies</p>
-
-<pre><code>cookies <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Cookies</span>.from_headers(headers)
-<span class="t">Halite</span>.cookies(cookies)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L145" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -684,7 +646,50 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L124" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L124" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="cookies:Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>cookies</strong> : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#cookies%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Make a request with the given cookies</p>
+
+<pre><code><span class="t">Halite</span>.cookies(name: <span class="s">&quot;icyleaf&quot;</span>, <span class="s">&quot;gender&quot;</span>: <span class="s">&quot;male&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L134" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="cookies(cookies:HTTP::Cookies):Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>cookies</strong>(cookies : HTTP::Cookies) : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Make a request with the given cookies</p>
+
+<pre><code>cookies <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Cookies</span>.from_headers(headers)
+<span class="t">Halite</span>.cookies(cookies)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L145" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -720,7 +725,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -746,7 +751,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L191" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L191" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -772,7 +777,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L206" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L206" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -795,7 +800,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L42" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -818,7 +823,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L42" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -842,7 +847,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L101" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -863,7 +868,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L111" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L111" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -898,7 +903,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L298" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L298" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -934,7 +939,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -970,7 +975,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1006,7 +1011,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1042,17 +1047,33 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="request(verb:String,uri:String,options:Hash(String,_)|NamedTuple|Options?=nil):Halite::Response-instance-method">
+    <div class="entry-detail" id="request(verb:String,uri:String,options:Options?=nil):Halite::Response-instance-method">
       <div class="signature">
         
-        def <strong>request</strong>(verb : String, uri : String, options : Hash(String, _) | NamedTuple | <a href="../Halite/Options.html">Options</a>? = <span class="n">nil</span>) : <a href="../Halite/Response.html">Halite::Response</a>
+        def <strong>request</strong>(verb : String, uri : String, options : <a href="../Halite/Options.html">Options</a>? = <span class="n">nil</span>) : <a href="../Halite/Response.html">Halite::Response</a>
 
-        <a class="method-permalink" href="#request%28verb%3AString%2Curi%3AString%2Coptions%3AHash%28String%2C_%29%7CNamedTuple%7COptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method">#</a>
+        <a class="method-permalink" href="#request%28verb%3AString%2Curi%3AString%2Coptions%3AOptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L369" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="request(verb:String,uri:String,*,headers:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,ssl:OpenSSL::SSL::Context::Client?=nil):Halite::Response-instance-method">
+      <div class="signature">
+        
+        def <strong>request</strong>(verb : String, uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, ssl : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>) : <a href="../Halite/Response.html">Halite::Response</a>
+
+        <a class="method-permalink" href="#request%28verb%3AString%2Curi%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Cssl%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Make an HTTP request with the given verb</p>
@@ -1066,33 +1087,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L359" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="timeout(connect_and_read:Int32|Float64|Time::Span):Halite::Client-instance-method">
-      <div class="signature">
-        
-        def <strong>timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span) : <a href="../Halite/Client.html">Halite::Client</a>
-
-        <a class="method-permalink" href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Adds a timeout to the request.</p>
-
-<p>How long to wait for the server to send data before giving up, as a int, float or time span.
-The timeout value will be applied to both the connect and the read timeouts.</p>
-
-<pre><code><span class="t">Halite</span>.timeout(<span class="n">5.5</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
-<span class="c"># Or</span>
-<span class="t">Halite</span>.timeout(<span class="n">2</span>.minutes)
-  .post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {file: <span class="s">&quot;file.txt&quot;</span>})</code></pre></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L160" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L359" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1119,7 +1114,33 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L176" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L176" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="timeout(connect_and_read:Int32|Float64|Time::Span):Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span) : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Adds a timeout to the request.</p>
+
+<p>How long to wait for the server to send data before giving up, as a int, float or time span.
+The timeout value will be applied to both the connect and the read timeouts.</p>
+
+<pre><code><span class="t">Halite</span>.timeout(<span class="n">5.5</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+<span class="c"># Or</span>
+<span class="t">Halite</span>.timeout(<span class="n">2</span>.minutes)
+  .post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {file: <span class="s">&quot;file.txt&quot;</span>})</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L160" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1154,7 +1175,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L334" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L334" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1177,7 +1198,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/28c44e943dff236e1e7c5eb028c30a365f3c0008/src/halite/chainable.cr#L346" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/17bd8880817bd38b91edf678eaa98e50d4f2a53f/src/halite/chainable.cr#L346" target="_blank">View source</a>]
         
       </div>
     </div>
