@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::Exception::FeatureError - github.com/icyleaf/halite</title>
+  <title>Halite::Features::Cache - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -51,7 +51,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
       <a href="../../Halite/Exception.html">Exception</a>
       
         <ul>
@@ -81,7 +81,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Exception/FeatureError" data-name="halite::exception::featureerror">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/FeatureError" data-name="halite::exception::featureerror">
       <a href="../../Halite/Exception/FeatureError.html">FeatureError</a>
       
     </li>
@@ -151,12 +151,12 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Features" data-name="halite::features">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Features" data-name="halite::features">
       <a href="../../Halite/Features.html">Features</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/Cache" data-name="halite::features::cache">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Features/Cache" data-name="halite::features::cache">
       <a href="../../Halite/Features/Cache.html">Cache</a>
       
     </li>
@@ -335,19 +335,30 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Halite::Exception::FeatureError
+  <span class="kind">class</span> Halite::Features::Cache
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Exception/FeatureError.html">Halite::Exception::FeatureError</a></li><li class="superclass"><a href="../../Halite/Exception/Error.html">Halite::Exception::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Features/Cache.html">Halite::Features::Cache</a></li><li class="superclass"><a href="../../Halite/Feature.html">Halite::Feature</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
   <h2>Overview</h2>
 
-  <p>Generic Feature error</p>
+  <p>Cache feature use for caching HTTP response to local storage to speed up in developing stage.</p>
+
+<p>You can set cache path and expires time. By default cache path is
+"cache/" of root project and never expires.</p>
+
+<p>With cached response it always included some headers information:</p>
+
+<ul><li><code>X-Cached-Key</code>: Cache key with verb, uri and body</li><li><code>X-Cached-At</code>:  Cache created time</li><li><code>X-Cached-Expires-At</code>: Cache expired time</li><li><code>X-Cached-By</code>: Always return "Halite"</li></ul>
+
+<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span>         <span class="c"># request a HTTP</span>
+r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span>     <span class="c"># request from local storage</span>
+r.headers <span class="c"># =&gt; {..., &quot;X-Cached-At&quot; =&gt; &quot;2018-08-30 10:41:14 UTC&quot;, &quot;X-Cached-By&quot; =&gt; &quot;Halite&quot;, &quot;X-Cached-Expires-At&quot; =&gt; &quot;2018-08-30 10:41:19 UTC&quot;, &quot;X-Cached-Key&quot; =&gt; &quot;2bb155e6c8c47627da3d91834eb4249a&quot;}}</span></code></pre>
 
 
 
@@ -356,15 +367,6 @@
 
 
 
-
-  <h2>Direct Known Subclasses</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../../Halite/Exception/UnRegisterFeatureError.html">Halite::Exception::UnRegisterFeatureError</a></li>
-  
-    <li class="other-type"><a href="../../Halite/Exception/UnRegisterLoggerFormatError.html">Halite::Exception::UnRegisterLoggerFormatError</a></li>
-  
-  </ul>
 
 
 
@@ -374,8 +376,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/cf10f0870a968a78901fe3a321f60545b650708e/src/halite/error.cr#L16" target="_blank">
-        halite/error.cr
+      <a href="https://github.com/icyleaf/halite/blob/cf10f0870a968a78901fe3a321f60545b650708e/src/halite/features/cache.cr#L23" target="_blank">
+        halite/features/cache.cr
       </a>
     
     <br/>
@@ -383,11 +385,43 @@
 
 
 
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="DEFAULT_PATH">
+        <strong>DEFAULT_PATH</strong> = <code><span class="s">&quot;cache/&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+      </li>
+    
+  </ul>
 
 
 
 
 
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#intercept%28chain%29-instance-method" class="signature"><strong>#intercept</strong>(chain)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -397,18 +431,36 @@
   
     
 
-
-    
-
-
-    
-
-
+  <h3>Instance methods inherited from class <code><a href="../../Halite/Feature.html">Halite::Feature</a></code></h3>
   
+  
+    <a href="../../Halite/Feature.html#intercept%28chain%3AInterceptor%3A%3AChain%29%3AInterceptor%3A%3AChain-instance-method" class="tooltip">
+      <span>intercept(chain : Interceptor::Chain) : Interceptor::Chain</span>
+    intercept</a>, 
     
+  
+    <a href="../../Halite/Feature.html#request%28request%3ARequest%29%3ARequest-instance-method" class="tooltip">
+      <span>request(request : Request) : Request</span>
+    request</a>, 
+    
+  
+    <a href="../../Halite/Feature.html#response%28response%3AResponse%29%3AResponse-instance-method" class="tooltip">
+      <span>response(response : Response) : Response</span>
+    response</a>
+    
+  
 
 
     
+
+  <h3>Constructor methods inherited from class <code><a href="../../Halite/Feature.html">Halite::Feature</a></code></h3>
+  
+  
+    <a href="../../Halite/Feature.html#new-class-method" class="tooltip">
+      <span>new</span>
+    new</a>
+    
+  
 
 
     
@@ -438,9 +490,47 @@
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/cf10f0870a968a78901fe3a321f60545b650708e/src/halite/features/cache.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="intercept(chain)-instance-method">
+      <div class="signature">
+        
+        def <strong>intercept</strong>(chain)
+
+        <a class="method-permalink" href="#intercept%28chain%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/cf10f0870a968a78901fe3a321f60545b650708e/src/halite/features/cache.cr#L34" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
