@@ -640,10 +640,6 @@ class RequestMonister < Halite::Feature
     request
   end
 
-  def response(response) : Halite::Response
-    response
-  end
-
   Halite::Features.register "request_monster", self
 end
 ```
