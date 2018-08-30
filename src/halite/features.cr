@@ -45,8 +45,8 @@ module Halite
     #
     # Chain has two result:
     #
-    # - next
-    # - return
+    # next: perform and run next interceptor
+    # return: perform and return
     class Chain
       enum Result
         Next

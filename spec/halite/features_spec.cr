@@ -13,3 +13,12 @@ describe Halite::Features do
     end
   end
 end
+
+describe Halite::Feature do
+  it "should a empty feature" do
+    feature = NullFeature.new
+    feature.responds_to?(:request).should be_true
+    feature.responds_to?(:response).should be_true
+    feature.responds_to?(:intercept).should be_true
+  end
+end
