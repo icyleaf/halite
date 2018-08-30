@@ -137,8 +137,8 @@ module Halite
         feature.response(res)
       end
 
-      # Append history of response
-      @history << response
+      # Append history of response if enable follow
+      @history << response unless options.follow.hops.zero?
 
       # Merge headers and cookies from response
       @options = merge_option_from_response(options, response)
