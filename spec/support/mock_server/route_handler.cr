@@ -2,7 +2,8 @@ class MockServer < HTTP::Server
   class RouteHandler
     include HTTP::Handler
 
-    ROUTES = {} of String => (HTTP::Server::Context -> HTTP::Server::Context)
+    METHODS = [:get, :post, :put, :delete, :head, :patch, :options]
+    ROUTES  = {} of String => (HTTP::Server::Context -> HTTP::Server::Context)
 
     def call(context : HTTP::Server::Context)
       process_route(context)
@@ -36,11 +37,32 @@ class MockServer < HTTP::Server
       context
     end
 
-    {% for verb in [:get, :post, :put, :delete, :head, :patch, :options] %}
+    {% for verb in METHODS %}
       def self.{{ verb.id }}(route : String, &block : HTTP::Server::Context -> HTTP::Server::Context)
         ROUTES["{{ verb.id }}:#{route}"] = block
       end
     {% end %}
+
+    def self.any(route : String, &block : HTTP::Server::Context -> HTTP::Server::Context)
+      METHODS.each do |method|
+        ROUTES["#{method}:#{route}"] = block
+      end
+    end
+
+    # Any
+    any "/anything" do |context|
+      body = {
+        "verb"    => context.request.method,
+        "url"     => context.request.resource,
+        "query"   => context.request.query,
+        "headers" => context.request.headers.to_h,
+      }
+
+      context.response.status_code = 200
+      context.response.content_type = "application/json"
+      context.response.print body.to_json
+      context
+    end
 
     # GET
     get "/" do |context|

@@ -47,6 +47,8 @@ Build in crystal version >= `v0.25.0`, documents generated in latest commit.
     - [Write to a log file](#write-to-a-log-file)
     - [Use the custom logger](#use-the-custom-logger)
   - [Middlewares](#middlewares)
+    - [Write a simple feature](#write-a-simple-feature)
+    - [Write a interceptor](#write-a-interceptor)
   - [Link Headers](#link-headers)
 - [Help and Discussion](#help-and-discussion)
 - [Donate](#donate)
@@ -492,16 +494,15 @@ Let's persist some cookies across requests:
 ```crystal
 client = Halite::Client.new
 # Or configure it
-client = Halite::Client.new do |options|
-  options.headers = {
-    user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36",
-  }
+client = Halite::Client.new do
+  # Set basic auth
+  basic_auth "name", "foo"
 
   # Enable logging
-  options.logging = true
+  logging true
 
   # Set read timeout to one minute
-  options.read_timeout = 1.minutes
+  timeout(read: 1.minutes)
 end
 
 client.get("http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0")
@@ -618,11 +619,13 @@ Halite.logger(format: "custom")
 ### Middlewares
 
 Halite now has middlewares (a.k.a features) support providing a simple way to plug in intermediate custom logic
-in your HTTP client and allowing you to monitor outgoing requests, and incoming responses.
+in your HTTP client and allowing you to monitor outgoing requests, and incoming responses, even use interceptor.
 
 Avaiabled features:
 
 - logger (Cool, aha!)
+
+#### Write a simple feature
 
 Let's implement simple middleware that prints each request:
 
@@ -651,9 +654,10 @@ Halite.use("request_monster", label: "testing")
       .post("http://httpbin.org/post", form: {name: "foo"})
 
 # Or configure to client
-client = Halite::Client.new do |opts|
-  opts.use("request_monster", label: "testing")
+client = Halite::Client.new do
+  use "request_monster", label: "testing"
 end
+
 client.post("http://httpbin.org/post", form: {name: "foo"})
 
 # => testing
@@ -662,7 +666,46 @@ client.post("http://httpbin.org/post", form: {name: "foo"})
 # => name=foo
 ```
 
-For more implementation details about the feature layer, see the [feature](https://github.com/icyleaf/halite/blob/master/src/halite/features.cr#L22) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features).
+#### Write a interceptor
+
+Halite features has a killer feature is the **interceptor*, Use `Halite::Interceptor::Chain` to process with two result:
+
+- `next`: perform and run next interceptor
+- `return`: perform and return
+
+So, you can intercept and turn to the following registered features.
+
+```crystal
+class AlwaysNotFound < Halite::Feature
+  def intercept(chain)
+    response = chain.perform
+    response = Halite::Response.new(chain.request.uri, 404, response.body, response.headers)
+    chain.next(response)
+  end
+
+  Halite::Features.register "404", self
+end
+
+class PoweredBy < Halite::Feature
+  def intercept(chain)
+    if response = chain.response
+      response.headers["X-Powered-By"] = "Halite"
+      chain.return(response)
+    else
+      chain
+    end
+  end
+
+  Halite::Features.register "powered_by", self
+end
+
+r = Halite.use("404").use("powered_by").get("http://httpbin.org/user-agent")
+r.status_code               # => 404
+r.headers["X-Powered-By"]   # => Halite
+r.body                      # => {"user-agent":"Halite/0.6.0"}
+```
+
+For more implementation details about the feature layer, see the [feature](https://github.com/icyleaf/halite/blob/master/src/halite/features.cr#L22) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features) and [specs](https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23).
 
 ### Link Headers
 

@@ -1,6 +1,13 @@
 module Halite
   class Response
+    def self.new(uri : URI, status_code : Int32, body : String? = nil, headers = HTTP::Headers.new,
+                 status_message = nil, body_io : IO? = nil, version = "HTTP/1.1", history = [] of Response)
+      conn = HTTP::Client::Response.new(status_code, body, headers, status_message, version, body_io)
+      new(uri, conn, history)
+    end
+
     getter uri
+    getter conn
     getter history : Array(Response)
 
     def initialize(@uri : URI, @conn : HTTP::Client::Response, @history = [] of Response)
