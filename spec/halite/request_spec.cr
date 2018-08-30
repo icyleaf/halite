@@ -57,8 +57,26 @@ describe Halite::Request do
   end
 
   describe "#redirect" do
-    pending do
-      "todo"
+    it "should return a new request" do
+      request = Halite::Request.new("GET", "http://httpbin.com/redirect/3", headers: HTTP::Headers{"Host" => "httpbin.com"})
+      new_request = request.redirect("http://httpbin.com/redirect/2")
+      new_request.uri.to_s.should eq("http://httpbin.com/redirect/2")
+      new_request.headers.has_key?("Host").should be_false
+      new_request.verb.should eq("GET")
+      request.uri.to_s.should eq("http://httpbin.com/redirect/3")
+      request.verb.should eq("GET")
+      request.headers.has_key?("Host").should be_true
+    end
+
+    it "should return a new request without Host" do
+      request = Halite::Request.new("POST", "http://httpbin.com/redirect/3")
+      new_request = request.redirect("http://httpbin.com/redirect/2", "GET")
+      new_request.uri.to_s.should eq("http://httpbin.com/redirect/2")
+      new_request.verb.should eq("GET")
+      new_request.headers.has_key?("Host").should be_false
+      request.uri.to_s.should eq("http://httpbin.com/redirect/3")
+      request.verb.should eq("POST")
+      request.headers.has_key?("Host").should be_false
     end
   end
 

@@ -1,13 +1,6 @@
 require "../spec_helper"
 
 private class NullFeature < Halite::Feature
-  def request(request)
-    request
-  end
-
-  def response(response)
-    response
-  end
 end
 
 describe Halite::Features do
