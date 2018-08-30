@@ -1,21 +1,21 @@
 module Halite
   module Features
-    @@featurs = {} of String => Feature.class
+    @@features = {} of String => Feature.class
 
     def self.register(name : String, feature : Feature.class)
-      @@featurs[name] = feature
+      @@features[name] = feature
     end
 
     def self.[](name : String)
-      @@featurs[name]
+      @@features[name]
     end
 
     def self.[]?(name : String)
-      @@featurs[name]?
+      @@features[name]?
     end
 
     def self.availables
-      @@featurs.keys
+      @@features.keys
     end
   end
 
@@ -39,7 +39,14 @@ module Halite
     end
   end
 
+  # Interceptor for feature
   module Interceptor
+    # Interceptor chain
+    #
+    # Chain has two result:
+    #
+    # - next
+    # - return
     class Chain
       enum Result
         Next
