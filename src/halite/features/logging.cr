@@ -2,23 +2,15 @@ require "logger"
 require "colorize"
 require "file_utils"
 
-module Halite::Features
-  # Logger feature
-  class Logger < Feature
-    def self.new(format : String = "common", logger : Logger::Abstract? = nil, **opts)
-      return new(logger: logger) if logger
-      raise UnRegisterLoggerFormatError.new("Not avaiable logger format: #{format}") unless cls = Logger[format]?
+module Halite
+  # Logging feature
+  class Logging < Feature
+    DEFAULT_LOGGER = Logging::Common.new
 
-      logger = cls.new(**opts)
-      new(logger: logger)
-    end
-
-    DEFAULT_LOGGER = Logger::Common.new
-
-    getter writer : Logger::Abstract
+    getter writer : Logging::Abstract
 
     def initialize(**options)
-      @writer = options.fetch(:logger, DEFAULT_LOGGER).as(Logger::Abstract)
+      @writer = (logger = options[:logger]?) ? logger.as(Logging::Abstract) : DEFAULT_LOGGER
     end
 
     def request(request)
@@ -31,7 +23,7 @@ module Halite::Features
       response
     end
 
-    # Logger Abstract
+    # Logging format Abstract
     abstract class Abstract
       def self.new(file : String? = nil, filemode = "a",
                    skip_request_body = false, skip_response_body = false,
@@ -53,9 +45,11 @@ module Halite::Features
       getter skip_benchmark : Bool
       getter colorize : Bool
 
+      @request_time : Time?
+
       def initialize(@skip_request_body = false, @skip_response_body = false,
                      @skip_benchmark = false, @colorize = true, @io : IO = STDOUT)
-        @logger = ::Logger.new(@io, ::Logger::DEBUG, default_formatter, "halite")
+        @logger = Logger.new(@io, ::Logger::DEBUG, default_formatter, "halite")
         Colorize.enabled = @colorize
       end
 
@@ -64,15 +58,36 @@ module Halite::Features
       abstract def request(request)
       abstract def response(response)
 
-      def default_formatter
-        ::Logger::Formatter.new do |_, datetime, _, message, io|
+      protected def default_formatter
+        Logger::Formatter.new do |_, datetime, _, message, io|
           io << datetime.to_s << " " << message
         end
+      end
+
+      protected def human_time(elapsed : Time::Span)
+        elapsed = elapsed.to_f
+        case Math.log10(elapsed)
+        when 0..Float64::MAX
+          digits = elapsed
+          suffix = "s"
+        when -3..0
+          digits = elapsed * 1000
+          suffix = "ms"
+        when -6..-3
+          digits = elapsed * 1_000_000
+          suffix = "µs"
+        else
+          digits = elapsed * 1_000_000_000
+          suffix = "ns"
+        end
+
+        "#{digits.round(2).to_s}#{suffix}"
       end
     end
 
     @@formats = {} of String => Abstract.class
 
+    # Logging format register
     module Register
       def register(name : String, format : Abstract.class)
         @@formats[name] = format
@@ -93,8 +108,8 @@ module Halite::Features
 
     extend Register
 
-    Halite::Features.register "logger", self
+    Halite.register_feature "logging", self
   end
 end
 
-require "./loggers/*"
+require "./logging/*"

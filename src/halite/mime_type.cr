@@ -1,15 +1,14 @@
 module Halite
-  module MimeTypes
-    @@adapters = {} of String => Adapter
-
-    def self.register_adapter(name : String, adapter : Adapter)
-      @@adapters[name] = adapter
-    end
-
+  module MimeType
+    @@adapters = {} of String => MimeType::Adapter
     @@aliases = {} of String => String
 
-    def self.register_alias(name : String, shortcut : String)
-      @@aliases[shortcut] = name
+    def self.register(adapter : MimeType::Adapter, name : String, *shortcuts)
+      @@adapters[name] = adapter
+      shortcuts.each do |shortcut|
+        next unless shortcut.is_a?(String)
+        @@aliases[shortcut] = name
+      end unless shortcuts.empty?
     end
 
     def self.[](name : String)

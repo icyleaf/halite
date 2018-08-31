@@ -174,7 +174,7 @@ module Halite
 
     # Returns `Options` self with feature name and options.
     def with_features(name : String, opts : NamedTuple)
-      raise UnRegisterFeatureError.new("Not avaiable feature: #{name}") unless klass = Features[name]?
+      raise UnRegisterFeatureError.new("Not avaiable feature: #{name}") unless klass = Halite.feature?(name)
       @features[name] = klass.new(**opts)
       self
     end
@@ -187,14 +187,14 @@ module Halite
 
     # Returns `Logger` self with given format and the options of format.
     def with_logger(format : String, **opts)
-      raise UnRegisterLoggerFormatError.new("Not avaiable logger format: #{format}") unless format_cls = Features::Logger[format]?
+      raise UnRegisterLoggerFormatError.new("Not avaiable logging format: #{format}") unless format_cls = Logging[format]?
       with_logger(format_cls.new(**opts))
     end
 
     # Returns `Logger` self with given logger, depend on `with_features`.
-    def with_logger(logger : Halite::Features::Logger::Abstract)
+    def with_logger(logger : Halite::Logging::Abstract)
       @logging = true
-      with_features("logger", logger: logger)
+      with_features("logging", logger: logger)
       self
     end
 
@@ -239,15 +239,10 @@ module Halite
 
     # Quick enable logger
     #
-    # By defaults, use `Logger::Common` as logger output.
+    # By defaults, use `Logging::Common` as logger output.
     def logging=(logging : Bool)
       @logging = logging
-
-      if logging
-        with_features("logger")
-      else
-        @features.delete("logger")
-      end
+      logging ? with_features("logging") : @features.delete("logging")
     end
 
     # Return if enable logging
@@ -259,7 +254,7 @@ module Halite
     def merge(options : Halite::Options) : Halite::Options
       if options.headers != default_headers
         # Remove default key to make sure it is not to overwrite new one.
-        default_headers.each do |key, value|
+        default_headers.each do |key, _|
           options.headers.delete(key) if options.headers[key] = default_headers[key]
         end
 

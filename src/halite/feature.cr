@@ -1,24 +1,4 @@
 module Halite
-  module Features
-    @@features = {} of String => Feature.class
-
-    def self.register(name : String, klass : Feature.class)
-      @@features[name] = klass
-    end
-
-    def self.[](name : String)
-      @@features[name]
-    end
-
-    def self.[]?(name : String)
-      @@features[name]?
-    end
-
-    def self.availables
-      @@features.keys
-    end
-  end
-
   abstract class Feature
     def initialize(**options)
     end
@@ -34,14 +14,11 @@ module Halite
     end
 
     # Intercept and cooking request and response
-    def intercept(chain : Interceptor::Chain) : Interceptor::Chain
+    def intercept(chain : Chain) : Chain
       chain
     end
-  end
 
-  # Interceptor for feature
-  module Interceptor
-    # Interceptor chain
+    # Feature chain
     #
     # Chain has two result:
     #

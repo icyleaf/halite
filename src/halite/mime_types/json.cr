@@ -1,6 +1,6 @@
 require "json"
 
-module Halite::MimeTypes
+module Halite::MimeType
   class JSON < Adapter
     def encode(obj)
       obj.to_json
@@ -12,5 +12,4 @@ module Halite::MimeTypes
   end
 end
 
-Halite::MimeTypes.register_adapter "application/json", Halite::MimeTypes::JSON.new
-Halite::MimeTypes.register_alias "application/json", "json"
+Halite::MimeType.register Halite::MimeType::JSON.new, "application/json", "json"

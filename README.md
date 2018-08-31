@@ -6,11 +6,11 @@
 [![Tag](https://img.shields.io/github/tag/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/CHANGELOG.md)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
 
-Crystal HTTP Requests with a chainable REST API, built-in sessions and loggers written by [Crystal](https://crystal-lang.org/).
+HTTP Requests with a chainable REST API, built-in sessions and loggers written by [Crystal](https://crystal-lang.org/).
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem
 and Python's [requests](https://github.com/requests/requests).
 
-Build in crystal version >= `v0.25.0`, this document valid in latest commit.
+Build in crystal version >= `v0.25.0`, this document valid with latest commit.
 
 ## Index
 
@@ -41,6 +41,7 @@ Build in crystal version >= `v0.25.0`, this document valid in latest commit.
   - [Error Handling](#error-handling)
     - [Raise for status code](#raise-for-status-code)
 - [Advanced Usage](#advanced-usage)
+  - [Configuring](#configuring)
   - [Sessions](#sessions)
   - [Logging](#logging)
     - [JSON-formatted logging](#json-formatted-logging)
@@ -326,6 +327,17 @@ r.history
 #    ]
 ```
 
+**NOTE**: It contains the `Response` object if you use `history` and HTTP was not a `30x`, For example:
+
+```crystal
+r = Halite.get("http://httpbin.org/get")
+r.history.size # => 0
+
+r = Halite.follow
+          .get("http://httpbin.org/get")
+r.history.size # => 1
+```
+
 #### Timeout
 
 By default, the Halite does not enforce timeout on a request.
@@ -412,7 +424,7 @@ we can inherit `Halite::MimeTypes::Adapter` make our adapter:
 
 ```crystal
 # Define a MIME type adapter
-class YAMLAdapter < Halite::MimeTypes::Adapter
+class YAMLAdapter < Halite::MimeType::Adapter
   def decode(string)
     YAML.parse(string)
   end
@@ -423,9 +435,7 @@ class YAMLAdapter < Halite::MimeTypes::Adapter
 end
 
 # Register to Halite to invoke
-Halite::MimeTypes.register_adapter "application/x-yaml", YAMLAdapter.new
-Halite::MimeTypes.register_alias "application/x-yaml", "yaml"
-Halite::MimeTypes.register_alias "application/x-yaml", "yml"
+Halite::MimeType.register YAMLAdapter.new, "application/x-yaml", "yaml", "yml"
 
 # Test it!
 r = Halite.get "https://raw.githubusercontent.com/icyleaf/halite/master/shard.yml"
@@ -485,6 +495,31 @@ end
 
 ## Advanced Usage
 
+### Configuring
+
+Halite provides a traditional way to instance client, and you can configure any chainable methods with block:
+
+```crystal
+client = Halite::Client.new do
+  # Set basic auth
+  basic_auth "username", "password"
+
+  # Enable logging
+  logging true
+
+  # Set timeout
+  timeout 10.seconds
+
+  # Set user agent
+  headers user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"
+end
+
+# You also can configure in this way
+client.accept("application/json")
+
+r = client.get("http://httpbin.org/get")
+```
+
 ### Sessions
 
 As like [requests.Session()](http://docs.python-requests.org/en/master/user/advanced/#session-objects), Halite built-in session by default.
@@ -493,18 +528,6 @@ Let's persist some cookies across requests:
 
 ```crystal
 client = Halite::Client.new
-# Or configure it
-client = Halite::Client.new do
-  # Set basic auth
-  basic_auth "name", "foo"
-
-  # Enable logging
-  logging true
-
-  # Set read timeout to one minute
-  timeout(read: 1.minutes)
-end
-
 client.get("http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0")
 client.get("http://httpbin.org/cookies")
 # => 2018-06-25 18:41:05 +08:00 | request | GET    | http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0
@@ -528,7 +551,7 @@ We can enable per operation logging by configuring them through the chaining API
 By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to `STDOUT` on DEBUG level.
 You can configuring the following options:
 
-- `logger`: Instance your `Halite::Features::Logger::Abstract`, check [Use the custom logger](#use-the-custom-logger).
+- `logger`: Instance your `Halite::Logger::Abstract`, check [Use the custom logger](#use-the-custom-logger).
 - `format`: Outputing format, built-in `common` and `json`, you can write your own.
 - `file`: Write to file with path, works with `format`.
 - `filemode`: Write file mode, works with `format`, by default is `a`. (append to bottom, create it if file is not exist)
@@ -588,11 +611,11 @@ Halite.logger(format: "json", file: "logs/halite.log")
 
 #### Use the custom logger
 
-Creating the custom logger by integration `Halite::Features::Logger::Abstract` abstract class.
+Creating the custom logger by integration `Halite::Logger::Abstract` abstract class.
 Here has two methods must be implement: `#request` and `#response`.
 
 ```crystal
-class CustomLogger < Halite::Features::Logger::Abstract
+class CustomLogger < Halite::Logging::Abstract
   def request(request)
     @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
   end
@@ -603,7 +626,7 @@ class CustomLogger < Halite::Features::Logger::Abstract
 end
 
 # Add to adapter list (optional)
-Halite::Logger.register_adapter "custom", CustomLogger.new
+Halite::Logging.register "custom", CustomLogger.new
 
 Halite.logger(logger: CustomLogger.new)
       .get("http://httpbin.org/get", params: {name: "foobar"})
@@ -623,7 +646,7 @@ in your HTTP client and allowing you to monitor outgoing requests, and incoming 
 
 Avaiabled features:
 
-- logger (Cool, aha!)
+- logging (Yes, logging is based on feature, cool, aha!)
 
 #### Write a simple feature
 
@@ -645,7 +668,7 @@ class RequestMonister < Halite::Feature
     request
   end
 
-  Halite::Features.register "request_monster", self
+  Halite.register_feature "request_monster", self
 end
 ```
 
@@ -670,7 +693,7 @@ client.post("http://httpbin.org/post", form: {name: "foo"})
 
 #### Write a interceptor
 
-Halite features has a killer feature is the **interceptor*, Use `Halite::Interceptor::Chain` to process with two result:
+Halite features has a killer feature is the **interceptor*, Use `Halite::Feature::Chain` to process with two result:
 
 - `next`: perform and run next interceptor
 - `return`: perform and return
@@ -685,7 +708,7 @@ class AlwaysNotFound < Halite::Feature
     chain.next(response)
   end
 
-  Halite::Features.register "404", self
+  Halite.register_feature "404", self
 end
 
 class PoweredBy < Halite::Feature
@@ -698,7 +721,7 @@ class PoweredBy < Halite::Feature
     end
   end
 
-  Halite::Features.register "powered_by", self
+  Halite.register_feature "powered_by", self
 end
 
 r = Halite.use("404").use("powered_by").get("http://httpbin.org/user-agent")
