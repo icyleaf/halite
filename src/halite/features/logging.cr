@@ -45,6 +45,8 @@ module Halite
       getter skip_benchmark : Bool
       getter colorize : Bool
 
+      @request_time : Time?
+
       def initialize(@skip_request_body = false, @skip_response_body = false,
                      @skip_benchmark = false, @colorize = true, @io : IO = STDOUT)
         @logger = Logger.new(@io, ::Logger::DEBUG, default_formatter, "halite")
@@ -56,10 +58,30 @@ module Halite
       abstract def request(request)
       abstract def response(response)
 
-      def default_formatter
+      protected def default_formatter
         Logger::Formatter.new do |_, datetime, _, message, io|
           io << datetime.to_s << " " << message
         end
+      end
+
+      protected def human_time(elapsed : Time::Span)
+        elapsed = elapsed.to_f
+        case Math.log10(elapsed)
+        when 0..Float64::MAX
+          digits = elapsed
+          suffix = "s"
+        when -3..0
+          digits = elapsed * 1000
+          suffix = "ms"
+        when -6..-3
+          digits = elapsed * 1_000_000
+          suffix = "µs"
+        else
+          digits = elapsed * 1_000_000_000
+          suffix = "ns"
+        end
+
+        "#{digits.round(2).to_s}#{suffix}"
       end
     end
 
