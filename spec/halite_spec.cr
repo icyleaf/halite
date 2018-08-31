@@ -347,7 +347,7 @@ describe Halite do
       logger.writer.skip_benchmark.should be_false
       logger.writer.colorize.should be_true
 
-      response = client.get SERVER.endpoint
+      client.get SERVER.endpoint
       logs = File.read_lines(tempfile.path).join("\n")
       logs.should contain("request")
       logs.should contain("response")

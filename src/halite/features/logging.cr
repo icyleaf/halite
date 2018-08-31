@@ -23,7 +23,7 @@ module Halite
       response
     end
 
-    # Logger Abstract
+    # Logging format Abstract
     abstract class Abstract
       def self.new(file : String? = nil, filemode = "a",
                    skip_request_body = false, skip_response_body = false,
@@ -87,6 +87,7 @@ module Halite
 
     @@formats = {} of String => Abstract.class
 
+    # Logging format register
     module Register
       def register(name : String, format : Abstract.class)
         @@formats[name] = format
