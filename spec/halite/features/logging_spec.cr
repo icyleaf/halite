@@ -1,17 +1,5 @@
 require "../../spec_helper"
 
-private class SimpleLogger < Halite::Logging::Abstract
-  def request(request)
-    @logger.info "request"
-  end
-
-  def response(response)
-    @logger.info "response"
-  end
-
-  Halite::Logging.register "simple", self
-end
-
 describe Halite::Logging do
   it "should register an format" do
     Halite::Logging["simple"].should eq(SimpleLogger)
