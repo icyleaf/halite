@@ -311,11 +311,11 @@ describe Halite do
   describe ".use" do
     describe "built-in features" do
       it "sets given feature name" do
-        client = Halite.use("logger")
-        client.options.features.has_key?("logger").should be_true
-        client.options.features["logger"].should be_a(Halite::Logger)
-        logger = client.options.features["logger"].as(Halite::Logger)
-        logger.writer.should be_a(Halite::Logger::Common)
+        client = Halite.use("logging")
+        client.options.features.has_key?("logging").should be_true
+        client.options.features["logging"].should be_a(Halite::Logging)
+        logger = client.options.features["logging"].as(Halite::Logging)
+        logger.writer.should be_a(Halite::Logging::Common)
         logger.writer.skip_request_body.should be_false
         logger.writer.skip_response_body.should be_false
         logger.writer.skip_benchmark.should be_false
@@ -323,11 +323,11 @@ describe Halite do
       end
 
       it "sets given feature name and options" do
-        client = Halite.use("logger", logger: Halite::Logger::JSON.new(skip_request_body: true, colorize: false))
-        client.options.features.has_key?("logger").should be_true
-        client.options.features["logger"].should be_a(Halite::Logger)
-        logger = client.options.features["logger"].as(Halite::Logger)
-        logger.writer.should be_a(Halite::Logger::JSON)
+        client = Halite.use("logging", logger: Halite::Logging::JSON.new(skip_request_body: true, colorize: false))
+        client.options.features.has_key?("logging").should be_true
+        client.options.features["logging"].should be_a(Halite::Logging)
+        logger = client.options.features["logging"].as(Halite::Logging)
+        logger.writer.should be_a(Halite::Logging::JSON)
         logger.writer.skip_request_body.should be_true
         logger.writer.skip_response_body.should be_false
         logger.writer.skip_benchmark.should be_false

@@ -3,22 +3,22 @@ require "colorize"
 require "file_utils"
 
 module Halite
-  # Logger feature
-  class Logger < Feature
-    def self.new(format : String = "common", logger : Logger::Abstract? = nil, **opts)
+  # Logging feature
+  class Logging < Feature
+    def self.new(format : String = "common", logger : Logging::Abstract? = nil, **opts)
       return new(logger: logger) if logger
-      raise UnRegisterLoggerFormatError.new("Not avaiable logger format: #{format}") unless cls = Logger[format]?
+      raise UnRegisterLoggerFormatError.new("Not avaiable logging format: #{format}") unless cls = Logging[format]?
 
       logger = cls.new(**opts)
       new(logger: logger)
     end
 
-    DEFAULT_LOGGER = Logger::Common.new
+    DEFAULT_LOGGER = Logging::Common.new
 
-    getter writer : Logger::Abstract
+    getter writer : Logging::Abstract
 
     def initialize(**options)
-      @writer = options.fetch(:logger, DEFAULT_LOGGER).as(Logger::Abstract)
+      @writer = options.fetch(:logger, DEFAULT_LOGGER).as(Logging::Abstract)
     end
 
     def request(request)
@@ -93,8 +93,8 @@ module Halite
 
     extend Register
 
-    Halite.register_feature "logger", self
+    Halite.register_feature "logging", self
   end
 end
 
-require "./loggers/*"
+require "./logging/*"
