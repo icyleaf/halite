@@ -326,17 +326,17 @@
 <a href="https://github.com/icyleaf/halite/blob/master/CHANGELOG.md" target="_blank"><img src="https://img.shields.io/github/tag/icyleaf/halite.svg" alt="Tag"/></a>
 <a href="https://circleci.com/gh/icyleaf/halite" target="_blank"><img src="https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat" alt="Build Status"/></a></p>
 
-<p>Crystal HTTP Requests with a chainable REST API, built-in sessions and loggers written by <a href="https://crystal-lang.org/" target="_blank">Crystal</a>.
+<p>HTTP Requests with a chainable REST API, built-in sessions and loggers written by <a href="https://crystal-lang.org/" target="_blank">Crystal</a>.
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, this document valid in <a href="https://github.com/icyleaf/halite/commit/ae633c3" target="_blank">#ae633c3</a> (2018-08-31 17:16:06 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/3592850" target="_blank">#3592850</a> (2018-08-31 17:42:09 +0800).</p>
 
 <h2>Index</h2>
 
 <p>&lt;!-- TOC --></p>
 
-<ul><li><a href="#index" target="_blank">Index</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#json-formatted-logging" target="_blank">JSON-formatted logging</a></li><li><a href="#write-to-a-log-file" target="_blank">Write to a log file</a></li><li><a href="#use-the-custom-logger" target="_blank">Use the custom logger</a></li><li><a href="#middlewares" target="_blank">Middlewares</a></li><li><a href="#write-a-simple-feature" target="_blank">Write a simple feature</a></li><li><a href="#write-a-interceptor" target="_blank">Write a interceptor</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#donate" target="_blank">Donate</a></li><li><a href="#how-to-contribute" target="_blank">How to Contribute</a></li><li><a href="#you-may-also-like" target="_blank">You may also like</a></li><li><a href="#license" target="_blank">License</a></li></ul>
+<ul><li><a href="#index" target="_blank">Index</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#configuring" target="_blank">Configuring</a></li><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#json-formatted-logging" target="_blank">JSON-formatted logging</a></li><li><a href="#write-to-a-log-file" target="_blank">Write to a log file</a></li><li><a href="#use-the-custom-logger" target="_blank">Use the custom logger</a></li><li><a href="#middlewares" target="_blank">Middlewares</a></li><li><a href="#write-a-simple-feature" target="_blank">Write a simple feature</a></li><li><a href="#write-a-interceptor" target="_blank">Write a interceptor</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#donate" target="_blank">Donate</a></li><li><a href="#how-to-contribute" target="_blank">How to Contribute</a></li><li><a href="#you-may-also-like" target="_blank">You may also like</a></li><li><a href="#license" target="_blank">License</a></li></ul>
 
 <p>&lt;!-- /TOC --></p>
 
@@ -562,6 +562,15 @@ r.history
 <span class="c">#      #&lt;Halite::Response HTTP/1.1 200 OK    {&quot;Content-Type&quot; =&gt; &quot;application/json&quot; ...&gt;</span>
 <span class="c">#    ]</span></code></pre>
 
+<p><strong>NOTE</strong>: It contains the <code>Response</code> object if you use <code>history</code> and HTTP was not a <code>30x</code>, For example:</p>
+
+<pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+r.history.size <span class="c"># =&gt; 0</span>
+
+r <span class="o">=</span> <span class="t">Halite</span>.follow
+          .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+r.history.size <span class="c"># =&gt; 1</span></code></pre>
+
 <h4>Timeout</h4>
 
 <p>By default, the Halite does not enforce timeout on a request.
@@ -627,7 +636,7 @@ r.parse <span class="c"># simplily by default</span>
 we can inherit <code>Halite::MimeTypes::Adapter</code> make our adapter:</p>
 
 <pre><code class="language-crystal"><span class="c"># Define a MIME type adapter</span>
-<span class="k">class</span> <span class="t">YAMLAdapter</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">MimeTypes</span><span class="t">::</span><span class="t">Adapter</span>
+<span class="k">class</span> <span class="t">YAMLAdapter</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">MimeType</span><span class="t">::</span><span class="t">Adapter</span>
   <span class="k">def</span> <span class="m">decode</span>(string)
     <span class="t">YAML</span>.parse(string)
   <span class="k">end</span>
@@ -638,9 +647,7 @@ we can inherit <code>Halite::MimeTypes::Adapter</code> make our adapter:</p>
 <span class="k">end</span>
 
 <span class="c"># Register to Halite to invoke</span>
-<span class="t">Halite</span><span class="t">::</span><span class="t">MimeTypes</span>.register_adapter <span class="s">&quot;application/x-yaml&quot;</span>, <span class="t">YAMLAdapter</span>.<span class="k">new</span>
-<span class="t">Halite</span><span class="t">::</span><span class="t">MimeTypes</span>.register_alias <span class="s">&quot;application/x-yaml&quot;</span>, <span class="s">&quot;yaml&quot;</span>
-<span class="t">Halite</span><span class="t">::</span><span class="t">MimeTypes</span>.register_alias <span class="s">&quot;application/x-yaml&quot;</span>, <span class="s">&quot;yml&quot;</span>
+<span class="t">Halite</span><span class="t">::</span><span class="t">MimeType</span>.register <span class="t">YAMLAdapter</span>.<span class="k">new</span>, <span class="s">&quot;application/x-yaml&quot;</span>, <span class="s">&quot;yaml&quot;</span>, <span class="s">&quot;yml&quot;</span>
 
 <span class="c"># Test it!</span>
 r <span class="o">=</span> <span class="t">Halite</span>.get <span class="s">&quot;https://raw.githubusercontent.com/icyleaf/halite/master/shard.yml&quot;</span>
@@ -691,6 +698,29 @@ urls.each <span class="k">do</span> <span class="o">|</span>url<span class="o">|
 
 <h2>Advanced Usage</h2>
 
+<h3>Configuring</h3>
+
+<p>Halite provides a traditional way to instance client, and you can configure any chainable methods with block:</p>
+
+<pre><code class="language-crystal">client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span> <span class="k">do</span>
+  <span class="c"># Set basic auth</span>
+  basic_auth <span class="s">&quot;username&quot;</span>, <span class="s">&quot;password&quot;</span>
+
+  <span class="c"># Enable logging</span>
+  logging <span class="n">true</span>
+
+  <span class="c"># Set timeout</span>
+  timeout <span class="n">10</span>.seconds
+
+  <span class="c"># Set user agent</span>
+  headers user_agent: <span class="s">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36&quot;</span>
+<span class="k">end</span>
+
+<span class="c"># You also can configure in this way</span>
+client.accept(<span class="s">&quot;application/json&quot;</span>)
+
+r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
+
 <h3>Sessions</h3>
 
 <p>As like <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session()</a>, Halite built-in session by default.</p>
@@ -698,18 +728,6 @@ urls.each <span class="k">do</span> <span class="o">|</span>url<span class="o">|
 <p>Let's persist some cookies across requests:</p>
 
 <pre><code class="language-crystal">client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
-<span class="c"># Or configure it</span>
-client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span> <span class="k">do</span>
-  <span class="c"># Set basic auth</span>
-  basic_auth <span class="s">&quot;name&quot;</span>, <span class="s">&quot;foo&quot;</span>
-
-  <span class="c"># Enable logging</span>
-  logging <span class="n">true</span>
-
-  <span class="c"># Set read timeout to one minute</span>
-  timeout(read: <span class="n">1</span>.minutes)
-<span class="k">end</span>
-
 client.get(<span class="s">&quot;http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
 client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 <span class="c"># =&gt; 2018-06-25 18:41:05 +08:00 | request | GET    | http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0</span>
@@ -812,7 +830,7 @@ in your HTTP client and allowing you to monitor outgoing requests, and incoming 
 
 <p>Avaiabled features:</p>
 
-<ul><li>logging (Cool, aha!)</li></ul>
+<ul><li>logging (Yes, logging is based on feature, cool, aha!)</li></ul>
 
 <h4>Write a simple feature</h4>
 
