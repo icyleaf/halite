@@ -13,7 +13,7 @@ private class SimpleFeature < Halite::Feature
   Halite.register_feature "simple", self
 end
 
-private class SimpleLogger < Halite::Logger::Abstract
+private class SimpleLogger < Halite::Logging::Abstract
   def request(request)
     @logger.info "request"
   end
@@ -22,7 +22,7 @@ private class SimpleLogger < Halite::Logger::Abstract
     @logger.info "response"
   end
 
-  Halite::Logger.register "simple", self
+  Halite::Logging.register "simple", self
 end
 
 private def test_options
@@ -256,25 +256,25 @@ describe Halite::Options do
   describe "#with_logger" do
     it "should overwrite logger with instance class" do
       options = Halite::Options.new.with_logger(logger: SimpleLogger.new)
-      logger = options.features["logger"].as(Halite::Logger)
+      logger = options.features["logging"].as(Halite::Logging)
       logger.writer.should be_a(SimpleLogger)
     end
 
     it "should overwrite logger with format name" do
-      Halite::Logger.register "simple", SimpleLogger
+      Halite::Logging.register "simple", SimpleLogger
 
       options = Halite::Options.new.with_logger(format: "simple")
-      logger = options.features["logger"].as(Halite::Logger)
+      logger = options.features["logging"].as(Halite::Logging)
       logger.writer.should be_a(SimpleLogger)
     end
 
     it "should became a file logger" do
-      Halite::Logger.register "simple", SimpleLogger
+      Halite::Logging.register "simple", SimpleLogger
 
       tempfile = Tempfile.new("halite_logger")
 
       options = Halite::Options.new.with_logger(format: "simple", file: tempfile.path, filemode: "w")
-      logger = options.features["logger"].as(Halite::Logger)
+      logger = options.features["logging"].as(Halite::Logging)
       logger.writer.should be_a(SimpleLogger)
     end
 
@@ -287,23 +287,23 @@ describe Halite::Options do
 
   describe "#with_features" do
     it "should use a feature" do
-      options = Halite::Options.new.with_features("logger")
-      logger = options.features["logger"].as(Halite::Logger)
-      logger.writer.should be_a(Halite::Logger::Common)
+      options = Halite::Options.new.with_features("logging")
+      logger = options.features["logging"].as(Halite::Logging)
+      logger.writer.should be_a(Halite::Logging::Common)
     end
 
     it "should use a feature with options" do
-      options = Halite::Options.new.with_features("logger", logger: SimpleLogger.new)
-      logger = options.features["logger"].as(Halite::Logger)
+      options = Halite::Options.new.with_features("logging", logger: SimpleLogger.new)
+      logger = options.features["logging"].as(Halite::Logging)
       logger.writer.should be_a(SimpleLogger)
     end
 
     it "should use multiple features" do
       Halite.register_feature "simple", SimpleFeature
 
-      options = Halite::Options.new.with_features("logger", "simple")
-      logger = options.features["logger"].as(Halite::Logger)
-      logger.writer.should be_a(Halite::Logger::Common)
+      options = Halite::Options.new.with_features("logging", "simple")
+      logger = options.features["logging"].as(Halite::Logging)
+      logger.writer.should be_a(Halite::Logging::Common)
 
       simple = options.features["simple"].as(SimpleFeature)
       simple.should be_a(SimpleFeature)

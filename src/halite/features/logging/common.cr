@@ -1,7 +1,7 @@
 require "file_utils"
 
-class Halite::Logger
-  # Logger feature: Logger::Common
+class Halite::Logging
+  # Logger feature: Logging::Common
   class Common < Abstract
     @request_time : Time?
 
@@ -116,6 +116,6 @@ class Halite::Logger
       "#{digits.round(2).to_s}#{suffix}"
     end
 
-    Logger.register "common", self
+    Logging.register "common", self
   end
 end

@@ -227,7 +227,7 @@ module Halite
       branch(default_options)
     end
 
-    # Returns `Options` self with given the logger which it integration from `Halite::Logger`.
+    # Returns `Options` self with given the logger which it integration from `Halite::Logging`.
     #
     # #### Simple logging
     #
@@ -260,11 +260,11 @@ module Halite
     #
     # #### Use custom logger
     #
-    # Creating the custom logger by integration `Halite::Logger::Abstract` abstract class.
+    # Creating the custom logger by integration `Halite::Logging::Abstract` abstract class.
     # Here has two methods must be implement: `#request` and `#response`.
     #
     # ```
-    # class CustomLogger < Halite::Logger::Abstract
+    # class CustomLogger < Halite::Logging::Abstract
     #   def request(request)
     #     @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
     #   end
@@ -275,7 +275,7 @@ module Halite
     # end
     #
     # # Add to adapter list (optional)
-    # Halite::Logger.register_adapter "custom", CustomLogger.new
+    # Halite::Logging.register_adapter "custom", CustomLogger.new
     #
     # Halite.logger(logger: CustomLogger.new)
     #   .get("http://httpbin.org/get", params: {name: "foobar"})
@@ -287,7 +287,7 @@ module Halite
     # # => 2017-12-13 16:40:13 +08:00 | >> | GET | http://httpbin.org/get?name=foobar
     # # => 2017-12-13 16:40:15 +08:00 | << | 200 | http://httpbin.org/get?name=foobar application/json
     # ```
-    def logger(logger = Halite::Logger::Common.new)
+    def logger(logger = Halite::Logging::Common.new)
       branch(default_options.with_logger(logger))
     end
 
@@ -337,7 +337,7 @@ module Halite
     # #### Use json logger
     #
     # ```
-    # Halite.use("logger", format: "json")
+    # Halite.use("logging", format: "json")
     #   .get("http://httpbin.org/get", params: {name: "foobar"})
     #
     # # => { ... }
@@ -345,7 +345,7 @@ module Halite
     #
     # #### Use common format logger and skip response body
     # ```
-    # Halite.use("logger", format: "common", skip_response_body: true)
+    # Halite.use("logging", format: "common", skip_response_body: true)
     #   .get("http://httpbin.org/get", params: {name: "foobar"})
     #
     # # => 2018-08-28 14:58:26 +08:00 | request  | GET    | http://httpbin.org/get
@@ -360,7 +360,7 @@ module Halite
     # Available features to review all subclasses of `Halite::Feature`.
     #
     # ```
-    # Halite.use("logger", "your-custom-feature-name")
+    # Halite.use("logging", "your-custom-feature-name")
     #   .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     def use(*features)

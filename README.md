@@ -528,7 +528,7 @@ We can enable per operation logging by configuring them through the chaining API
 By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to `STDOUT` on DEBUG level.
 You can configuring the following options:
 
-- `logger`: Instance your `Halite::Features::Logger::Abstract`, check [Use the custom logger](#use-the-custom-logger).
+- `logger`: Instance your `Halite::Logger::Abstract`, check [Use the custom logger](#use-the-custom-logger).
 - `format`: Outputing format, built-in `common` and `json`, you can write your own.
 - `file`: Write to file with path, works with `format`.
 - `filemode`: Write file mode, works with `format`, by default is `a`. (append to bottom, create it if file is not exist)
@@ -588,11 +588,11 @@ Halite.logger(format: "json", file: "logs/halite.log")
 
 #### Use the custom logger
 
-Creating the custom logger by integration `Halite::Features::Logger::Abstract` abstract class.
+Creating the custom logger by integration `Halite::Logger::Abstract` abstract class.
 Here has two methods must be implement: `#request` and `#response`.
 
 ```crystal
-class CustomLogger < Halite::Features::Logger::Abstract
+class CustomLogger < Halite::Logging::Abstract
   def request(request)
     @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
   end
@@ -603,7 +603,7 @@ class CustomLogger < Halite::Features::Logger::Abstract
 end
 
 # Add to adapter list (optional)
-Halite::Logger.register_adapter "custom", CustomLogger.new
+Halite::Logging.register "custom", CustomLogger.new
 
 Halite.logger(logger: CustomLogger.new)
       .get("http://httpbin.org/get", params: {name: "foobar"})
@@ -623,7 +623,7 @@ in your HTTP client and allowing you to monitor outgoing requests, and incoming 
 
 Avaiabled features:
 
-- logger (Cool, aha!)
+- logging (Cool, aha!)
 
 #### Write a simple feature
 
@@ -645,7 +645,7 @@ class RequestMonister < Halite::Feature
     request
   end
 
-  Halite::Features.register "request_monster", self
+  Halite.register_feature "request_monster", self
 end
 ```
 
@@ -685,7 +685,7 @@ class AlwaysNotFound < Halite::Feature
     chain.next(response)
   end
 
-  Halite::Features.register "404", self
+  Halite.register_feature "404", self
 end
 
 class PoweredBy < Halite::Feature
@@ -698,7 +698,7 @@ class PoweredBy < Halite::Feature
     end
   end
 
-  Halite::Features.register "powered_by", self
+  Halite.register_feature "powered_by", self
 end
 
 r = Halite.use("404").use("powered_by").get("http://httpbin.org/user-agent")

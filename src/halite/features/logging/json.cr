@@ -1,6 +1,6 @@
 require "json"
 
-class Halite::Logger
+class Halite::Logging
   # Logger feature: Logger::JSON
   class JSON < Abstract
     @created_at : Time? = nil
@@ -65,6 +65,6 @@ class Halite::Logger
       end
     end
 
-    Logger.register "json", self
+    Logging.register "json", self
   end
 end
