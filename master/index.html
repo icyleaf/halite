@@ -146,43 +146,18 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Feature" data-name="halite::feature">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Feature" data-name="halite::feature">
       <a href="Halite/Feature.html">Feature</a>
       
-    </li>
+        <ul>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Features" data-name="halite::features">
-      <a href="Halite/Features.html">Features</a>
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Feature/Chain" data-name="halite::feature::chain">
+      <a href="Halite/Feature/Chain.html">Chain</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/Cache" data-name="halite::features::cache">
-      <a href="Halite/Features/Cache.html">Cache</a>
-      
-    </li>
-  
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Features/Logger" data-name="halite::features::logger">
-      <a href="Halite/Features/Logger.html">Logger</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/Logger/Abstract" data-name="halite::features::logger::abstract">
-      <a href="Halite/Features/Logger/Abstract.html">Abstract</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/Logger/Common" data-name="halite::features::logger::common">
-      <a href="Halite/Features/Logger/Common.html">Common</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/Logger/JSON" data-name="halite::features::logger::json">
-      <a href="Halite/Features/Logger/JSON.html">JSON</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Features/Logger/Register" data-name="halite::features::logger::register">
-      <a href="Halite/Features/Logger/Register.html">Register</a>
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Feature/Chain/Result" data-name="halite::feature::chain::result">
+      <a href="Halite/Feature/Chain/Result.html">Result</a>
       
     </li>
   
@@ -193,6 +168,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/FeatureRegister" data-name="halite::featureregister">
+      <a href="Halite/FeatureRegister.html">FeatureRegister</a>
       
     </li>
   
@@ -206,23 +186,28 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Interceptor" data-name="halite::interceptor">
-      <a href="Halite/Interceptor.html">Interceptor</a>
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Logging" data-name="halite::logging">
+      <a href="Halite/Logging.html">Logging</a>
       
         <ul>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Interceptor/Chain" data-name="halite::interceptor::chain">
-      <a href="Halite/Interceptor/Chain.html">Chain</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Interceptor/Chain/Result" data-name="halite::interceptor::chain::result">
-      <a href="Halite/Interceptor/Chain/Result.html">Result</a>
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logging/Abstract" data-name="halite::logging::abstract">
+      <a href="Halite/Logging/Abstract.html">Abstract</a>
       
     </li>
   
-</ul>
-
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logging/Common" data-name="halite::logging::common">
+      <a href="Halite/Logging/Common.html">Common</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logging/JSON" data-name="halite::logging::json">
+      <a href="Halite/Logging/JSON.html">JSON</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logging/Register" data-name="halite::logging::register">
+      <a href="Halite/Logging/Register.html">Register</a>
       
     </li>
   
@@ -345,7 +330,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, this document valid in <a href="https://github.com/icyleaf/halite/commit/2eee140" target="_blank">#2eee140</a> (2018-08-30 18:58:59 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, this document valid in <a href="https://github.com/icyleaf/halite/commit/1ec66b8" target="_blank">#1ec66b8</a> (2018-08-31 11:43:20 +0800).</p>
 
 <h2>Index</h2>
 
@@ -747,7 +732,7 @@ We can enable per operation logging by configuring them through the chaining API
 <p>By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to <code>STDOUT</code> on DEBUG level.
 You can configuring the following options:</p>
 
-<ul><li><code>logger</code>: Instance your <code><a href="Halite/Features/Logger/Abstract.html">Halite::Features::Logger::Abstract</a></code>, check <a href="#use-the-custom-logger" target="_blank">Use the custom logger</a>.</li><li><code>format</code>: Outputing format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>file</code>: Write to file with path, works with <code>format</code>.</li><li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code>. (append to bottom, create it if file is not exist)</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
+<ul><li><code>logger</code>: Instance your <code>Halite::Logger::Abstract</code>, check <a href="#use-the-custom-logger" target="_blank">Use the custom logger</a>.</li><li><code>format</code>: Outputing format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>file</code>: Write to file with path, works with <code>format</code>.</li><li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code>. (append to bottom, create it if file is not exist)</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
 
 <blockquote><strong>NOTE</strong>: <code>format</code> (<code>file</code> and <code>filemode</code>) and <code>logger</code> are conflict, you can not use both.</blockquote>
 
@@ -794,10 +779,10 @@ You can configuring the following options:</p>
 
 <h4>Use the custom logger</h4>
 
-<p>Creating the custom logger by integration <code><a href="Halite/Features/Logger/Abstract.html">Halite::Features::Logger::Abstract</a></code> abstract class.
+<p>Creating the custom logger by integration <code>Halite::Logger::Abstract</code> abstract class.
 Here has two methods must be implement: <code>#request</code> and <code>#response</code>.</p>
 
-<pre><code class="language-crystal"><span class="k">class</span> <span class="t">CustomLogger</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Features</span><span class="t">::</span><span class="t">Logger</span><span class="t">::</span><span class="t">Abstract</span>
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">CustomLogger</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Abstract</span>
   <span class="k">def</span> <span class="m">request</span>(request)
     @logger.info <span class="s">&quot;| &gt;&gt; | %s | %s %s&quot;</span> <span class="o">%</span> [request.verb, request.uri, request.body]
   <span class="k">end</span>
@@ -808,7 +793,7 @@ Here has two methods must be implement: <code>#request</code> and <code>#respons
 <span class="k">end</span>
 
 <span class="c"># Add to adapter list (optional)</span>
-<span class="t">Halite</span><span class="t">::</span><span class="t">Logger</span>.register_adapter <span class="s">&quot;custom&quot;</span>, <span class="t">CustomLogger</span>.<span class="k">new</span>
+<span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span>.register <span class="s">&quot;custom&quot;</span>, <span class="t">CustomLogger</span>.<span class="k">new</span>
 
 <span class="t">Halite</span>.logger(logger: <span class="t">CustomLogger</span>.<span class="k">new</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
@@ -827,7 +812,7 @@ in your HTTP client and allowing you to monitor outgoing requests, and incoming 
 
 <p>Avaiabled features:</p>
 
-<ul><li>logger (Cool, aha!)</li></ul>
+<ul><li>logging (Cool, aha!)</li></ul>
 
 <h4>Write a simple feature</h4>
 
@@ -848,7 +833,7 @@ in your HTTP client and allowing you to monitor outgoing requests, and incoming 
     request
   <span class="k">end</span>
 
-  <span class="t">Halite</span><span class="t">::</span><span class="t">Features</span>.register <span class="s">&quot;request_monster&quot;</span>, <span class="k">self</span>
+  <span class="t">Halite</span>.register_feature <span class="s">&quot;request_monster&quot;</span>, <span class="k">self</span>
 <span class="k">end</span></code></pre>
 
 <p>Then use it in Halite:</p>
@@ -870,7 +855,7 @@ client.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {n
 
 <h4>Write a interceptor</h4>
 
-<p>Halite features has a killer feature is the *<em>interceptor</em>, Use <code><a href="Halite/Interceptor/Chain.html">Halite::Interceptor::Chain</a></code> to process with two result:</p>
+<p>Halite features has a killer feature is the *<em>interceptor</em>, Use <code><a href="Halite/Feature/Chain.html">Halite::Feature::Chain</a></code> to process with two result:</p>
 
 <ul><li><code>next</code>: perform and run next interceptor</li><li><code>return</code>: perform and return</li></ul>
 
@@ -883,7 +868,7 @@ client.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {n
     chain.<span class="k">next</span>(response)
   <span class="k">end</span>
 
-  <span class="t">Halite</span><span class="t">::</span><span class="t">Features</span>.register <span class="s">&quot;404&quot;</span>, <span class="k">self</span>
+  <span class="t">Halite</span>.register_feature <span class="s">&quot;404&quot;</span>, <span class="k">self</span>
 <span class="k">end</span>
 
 <span class="k">class</span> <span class="t">PoweredBy</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Feature</span>
@@ -896,7 +881,7 @@ client.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {n
     <span class="k">end</span>
   <span class="k">end</span>
 
-  <span class="t">Halite</span><span class="t">::</span><span class="t">Features</span>.register <span class="s">&quot;powered_by&quot;</span>, <span class="k">self</span>
+  <span class="t">Halite</span>.register_feature <span class="s">&quot;powered_by&quot;</span>, <span class="k">self</span>
 <span class="k">end</span>
 
 r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&quot;404&quot;</span>).use(<span class="s">&quot;powered_by&quot;</span>).get(<span class="s">&quot;http://httpbin.org/user-agent&quot;</span>)
