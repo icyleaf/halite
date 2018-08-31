@@ -343,27 +343,29 @@
 
 <span class="c"># Or</span>
 <span class="t">Halite</span>.logger(format: <span class="s">&quot;json&quot;</span>, skip_request_body: <span class="n">true</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
 
-<span class="c"># =&gt; {</span>
-<span class="c"># =&gt;   &quot;created_at&quot;: &quot;2018-08-31T16:53:57+08:00:00&quot;,</span>
-<span class="c"># =&gt;   &quot;entry&quot;: {</span>
-<span class="c"># =&gt;     &quot;request&quot;: {</span>
-<span class="c"># =&gt;       &quot;body&quot;: &quot;&quot;,</span>
-<span class="c"># =&gt;       &quot;headers&quot;: { ... },</span>
-<span class="c"># =&gt;       &quot;method&quot;: &quot;GET&quot;,</span>
-<span class="c"># =&gt;       &quot;url&quot;: &quot;http://httpbin.org/anything&quot;,</span>
-<span class="c"># =&gt;       &quot;timestamp&quot;: &quot;2018-08-31T16:53:59+08:00:00&quot;</span>
-<span class="c"># =&gt;     },</span>
-<span class="c"># =&gt;     &quot;response&quot;: {</span>
-<span class="c"># =&gt;       &quot;body&quot;: false,</span>
-<span class="c"># =&gt;       &quot;header&quot;: { ... },</span>
-<span class="c"># =&gt;       &quot;status_code&quot;: 200,</span>
-<span class="c"># =&gt;       &quot;http_version&quot;: &quot;HTTP/1.1&quot;,</span>
-<span class="c"># =&gt;       &quot;timestamp&quot;: &quot;2018-08-31T16:53:59+08:00:00&quot;</span>
-<span class="c"># =&gt;     }</span>
-<span class="c"># =&gt;   }</span>
-<span class="c"># =&gt; }</span></code></pre>
+<p>Log will look like:</p>
+
+<pre><code>{
+  <span class="s">&quot;created_at&quot;</span>: <span class="s">&quot;2018-08-31T16:53:57+08:00:00&quot;</span>,
+  <span class="s">&quot;entry&quot;</span>: {
+    <span class="s">&quot;request&quot;</span>: {
+      <span class="s">&quot;body&quot;</span>: <span class="s">&quot;&quot;</span>,
+      <span class="s">&quot;headers&quot;</span>: { ... },
+      <span class="s">&quot;method&quot;</span>: <span class="s">&quot;GET&quot;</span>,
+      <span class="s">&quot;url&quot;</span>: <span class="s">&quot;http://httpbin.org/anything&quot;</span>,
+      <span class="s">&quot;timestamp&quot;</span>: <span class="s">&quot;2018-08-31T16:53:59+08:00:00&quot;</span>
+    },
+    <span class="s">&quot;response&quot;</span>: {
+      <span class="s">&quot;body&quot;</span>: <span class="n">false</span>,
+      <span class="s">&quot;header&quot;</span>: { ... },
+      <span class="s">&quot;status_code&quot;</span>: <span class="n">200</span>,
+      <span class="s">&quot;http_version&quot;</span>: <span class="s">&quot;HTTP/1.1&quot;</span>,
+      <span class="s">&quot;timestamp&quot;</span>: <span class="s">&quot;2018-08-31T16:53:59+08:00:00&quot;</span>
+    }
+  }
+}</code></pre>
 
 
 
@@ -381,7 +383,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/3592850265c41c4d76214a6ee88ef1b7657be7e9/src/halite/features/logging/json.cr#L38" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/511f94cb69a4b960f5e63e20b94ee7890004d7f4/src/halite/features/logging/json.cr#L42" target="_blank">
         halite/features/logging/json.cr
       </a>
     
@@ -520,7 +522,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3592850265c41c4d76214a6ee88ef1b7657be7e9/src/halite/features/logging/json.cr#L52" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/511f94cb69a4b960f5e63e20b94ee7890004d7f4/src/halite/features/logging/json.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -536,7 +538,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3592850265c41c4d76214a6ee88ef1b7657be7e9/src/halite/features/logging/json.cr#L42" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/511f94cb69a4b960f5e63e20b94ee7890004d7f4/src/halite/features/logging/json.cr#L46" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -552,7 +554,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/3592850265c41c4d76214a6ee88ef1b7657be7e9/src/halite/features/logging/json.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/511f94cb69a4b960f5e63e20b94ee7890004d7f4/src/halite/features/logging/json.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
