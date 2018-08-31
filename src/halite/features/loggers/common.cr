@@ -1,6 +1,6 @@
 require "file_utils"
 
-class Halite::Features::Logger
+class Halite::Logger
   # Logger feature: Logger::Common
   class Common < Abstract
     @request_time : Time?

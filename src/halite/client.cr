@@ -104,12 +104,12 @@ module Halite
 
     # Find interceptor and return `Response` else perform HTTP request.
     private def perform(request : Halite::Request, options : Halite::Options, &block : -> Response)
-      chain = Interceptor::Chain.new(request, nil, options, &block)
+      chain = Feature::Chain.new(request, nil, options, &block)
       options.features.each do |_, feature|
         current_chain = feature.intercept(chain)
-        if current_chain.result == Interceptor::Chain::Result::Next
+        if current_chain.result == Feature::Chain::Result::Next
           chain = current_chain
-        elsif current_chain.result == Interceptor::Chain::Result::Return && (response = current_chain.response)
+        elsif current_chain.result == Feature::Chain::Result::Return && (response = current_chain.response)
           return response
         end
       end

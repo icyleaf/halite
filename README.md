@@ -670,7 +670,7 @@ client.post("http://httpbin.org/post", form: {name: "foo"})
 
 #### Write a interceptor
 
-Halite features has a killer feature is the **interceptor*, Use `Halite::Interceptor::Chain` to process with two result:
+Halite features has a killer feature is the **interceptor*, Use `Halite::Feature::Chain` to process with two result:
 
 - `next`: perform and run next interceptor
 - `return`: perform and return

@@ -16,7 +16,7 @@ module TestFeatures
       response
     end
 
-    Halite::Features.register "append_headers", self
+    Halite.register_feature "append_headers", self
   end
 end
 
@@ -27,7 +27,7 @@ module TestInterceptors
       chain.return(response)
     end
 
-    Halite::Features.register "mock", self
+    Halite.register_feature "mock", self
   end
 
   class AlwaysNotFound < Halite::Feature
@@ -37,7 +37,7 @@ module TestInterceptors
       chain.next(response)
     end
 
-    Halite::Features.register "404", self
+    Halite.register_feature "404", self
   end
 
   class PoweredBy < Halite::Feature
@@ -50,7 +50,7 @@ module TestInterceptors
       end
     end
 
-    Halite::Features.register "powered_by", self
+    Halite.register_feature "powered_by", self
   end
 end
 

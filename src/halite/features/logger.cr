@@ -2,7 +2,7 @@ require "logger"
 require "colorize"
 require "file_utils"
 
-module Halite::Features
+module Halite
   # Logger feature
   class Logger < Feature
     def self.new(format : String = "common", logger : Logger::Abstract? = nil, **opts)
@@ -93,7 +93,7 @@ module Halite::Features
 
     extend Register
 
-    Halite::Features.register "logger", self
+    Halite.register_feature "logger", self
   end
 end
 
