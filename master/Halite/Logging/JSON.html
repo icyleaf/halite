@@ -332,7 +332,38 @@
 
   <h2>Overview</h2>
 
-  <p>Logger feature: Logger::JSON</p>
+  <p>JSON logger format</p>
+
+<p>Instance variables to check <code><a href="../../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code>.</p>
+
+<p>In JSON format, if you set skip some key, it will return <code>false</code>.</p>
+
+<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, logger: <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">JSON</span>.<span class="k">new</span>(skip_request_body: <span class="n">true</span>))
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+
+<span class="c"># Or</span>
+<span class="t">Halite</span>.logger(format: <span class="s">&quot;json&quot;</span>, skip_request_body: <span class="n">true</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+
+<span class="c"># =&gt; {</span>
+<span class="c"># =&gt;   &quot;created_at&quot;: &quot;2018-08-31T16:53:57+08:00:00&quot;,</span>
+<span class="c"># =&gt;   &quot;entry&quot;: {</span>
+<span class="c"># =&gt;     &quot;request&quot;: {</span>
+<span class="c"># =&gt;       &quot;body&quot;: &quot;&quot;,</span>
+<span class="c"># =&gt;       &quot;headers&quot;: { ... },</span>
+<span class="c"># =&gt;       &quot;method&quot;: &quot;GET&quot;,</span>
+<span class="c"># =&gt;       &quot;url&quot;: &quot;http://httpbin.org/anything&quot;,</span>
+<span class="c"># =&gt;       &quot;timestamp&quot;: &quot;2018-08-31T16:53:59+08:00:00&quot;</span>
+<span class="c"># =&gt;     },</span>
+<span class="c"># =&gt;     &quot;response&quot;: {</span>
+<span class="c"># =&gt;       &quot;body&quot;: false,</span>
+<span class="c"># =&gt;       &quot;header&quot;: { ... },</span>
+<span class="c"># =&gt;       &quot;status_code&quot;: 200,</span>
+<span class="c"># =&gt;       &quot;http_version&quot;: &quot;HTTP/1.1&quot;,</span>
+<span class="c"># =&gt;       &quot;timestamp&quot;: &quot;2018-08-31T16:53:59+08:00:00&quot;</span>
+<span class="c"># =&gt;     }</span>
+<span class="c"># =&gt;   }</span>
+<span class="c"># =&gt; }</span></code></pre>
 
 
 
@@ -350,7 +381,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/9e35d630475171a214a289973c8bd20911726179/src/halite/features/logging/json.cr#L5" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/ae633c30aaeb0468f6265928c65b29566700b8a7/src/halite/features/logging/json.cr#L38" target="_blank">
         halite/features/logging/json.cr
       </a>
     
@@ -399,11 +430,6 @@
     <a href="../../Halite/Logging/Abstract.html#colorize%3ABool-instance-method" class="tooltip">
       <span>colorize : Bool</span>
     colorize</a>, 
-    
-  
-    <a href="../../Halite/Logging/Abstract.html#default_formatter-instance-method" class="tooltip">
-      <span>default_formatter</span>
-    default_formatter</a>, 
     
   
     <a href="../../Halite/Logging/Abstract.html#logger%3D%28logger%3ALogger%29-instance-method" class="tooltip">
@@ -494,7 +520,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/9e35d630475171a214a289973c8bd20911726179/src/halite/features/logging/json.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/ae633c30aaeb0468f6265928c65b29566700b8a7/src/halite/features/logging/json.cr#L52" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -510,7 +536,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/9e35d630475171a214a289973c8bd20911726179/src/halite/features/logging/json.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/ae633c30aaeb0468f6265928c65b29566700b8a7/src/halite/features/logging/json.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -526,7 +552,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/9e35d630475171a214a289973c8bd20911726179/src/halite/features/logging/json.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/ae633c30aaeb0468f6265928c65b29566700b8a7/src/halite/features/logging/json.cr#L47" target="_blank">View source</a>]
         
       </div>
     </div>

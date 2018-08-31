@@ -332,7 +332,19 @@
 
   <h2>Overview</h2>
 
-  <p>Logger feature: Logging::Common</p>
+  <p>Common logger format</p>
+
+<p>Instance variables to check <code><a href="../../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code></p>
+
+<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, logger: <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Common</span>.<span class="k">new</span>(skip_request_body: <span class="n">true</span>))
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+
+<span class="c"># Or</span>
+<span class="t">Halite</span>.logger(format: <span class="s">&quot;common&quot;</span>, skip_request_body: <span class="n">true</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+
+<span class="c"># =&gt; 2018-08-31 16:56:12 +08:00 | request  | GET    | http://httpbin.org/get</span>
+<span class="c"># =&gt; 2018-08-31 16:56:13 +08:00 | response | 200    | http://httpbin.org/get | 1.08s | application/json</span></code></pre>
 
 
 
@@ -350,7 +362,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/9e35d630475171a214a289973c8bd20911726179/src/halite/features/logging/common.cr#L5" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/ae633c30aaeb0468f6265928c65b29566700b8a7/src/halite/features/logging/common.cr#L17" target="_blank">
         halite/features/logging/common.cr
       </a>
     
@@ -394,11 +406,6 @@
     <a href="../../Halite/Logging/Abstract.html#colorize%3ABool-instance-method" class="tooltip">
       <span>colorize : Bool</span>
     colorize</a>, 
-    
-  
-    <a href="../../Halite/Logging/Abstract.html#default_formatter-instance-method" class="tooltip">
-      <span>default_formatter</span>
-    default_formatter</a>, 
     
   
     <a href="../../Halite/Logging/Abstract.html#logger%3D%28logger%3ALogger%29-instance-method" class="tooltip">
@@ -489,7 +496,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/9e35d630475171a214a289973c8bd20911726179/src/halite/features/logging/common.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/ae633c30aaeb0468f6265928c65b29566700b8a7/src/halite/features/logging/common.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -505,7 +512,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/9e35d630475171a214a289973c8bd20911726179/src/halite/features/logging/common.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/ae633c30aaeb0468f6265928c65b29566700b8a7/src/halite/features/logging/common.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
