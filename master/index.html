@@ -216,18 +216,18 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/MimeTypes" data-name="halite::mimetypes">
-      <a href="Halite/MimeTypes.html">MimeTypes</a>
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/MimeType" data-name="halite::mimetype">
+      <a href="Halite/MimeType.html">MimeType</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeTypes/Adapter" data-name="halite::mimetypes::adapter">
-      <a href="Halite/MimeTypes/Adapter.html">Adapter</a>
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeType/Adapter" data-name="halite::mimetype::adapter">
+      <a href="Halite/MimeType/Adapter.html">Adapter</a>
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeTypes/JSON" data-name="halite::mimetypes::json">
-      <a href="Halite/MimeTypes/JSON.html">JSON</a>
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeType/JSON" data-name="halite::mimetype::json">
+      <a href="Halite/MimeType/JSON.html">JSON</a>
       
     </li>
   
@@ -330,7 +330,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, this document valid in <a href="https://github.com/icyleaf/halite/commit/1ec66b8" target="_blank">#1ec66b8</a> (2018-08-31 11:43:20 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, this document valid in <a href="https://github.com/icyleaf/halite/commit/918e07e" target="_blank">#918e07e</a> (2018-08-31 12:05:25 +0800).</p>
 
 <h2>Index</h2>
 
@@ -624,7 +624,7 @@ r.parse <span class="c"># simplily by default</span>
 <h4>Parsing Content</h4>
 
 <p><code><a href="Halite/Response.html">Halite::Response</a></code> has a MIME type adapter system that you can use a decoder to parse the content,
-we can inherit <code><a href="Halite/MimeTypes/Adapter.html">Halite::MimeTypes::Adapter</a></code> make our adapter:</p>
+we can inherit <code>Halite::MimeTypes::Adapter</code> make our adapter:</p>
 
 <pre><code class="language-crystal"><span class="c"># Define a MIME type adapter</span>
 <span class="k">class</span> <span class="t">YAMLAdapter</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">MimeTypes</span><span class="t">::</span><span class="t">Adapter</span>

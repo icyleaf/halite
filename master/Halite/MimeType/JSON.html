@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::MimeTypes::Adapter - github.com/icyleaf/halite</title>
+  <title>Halite::MimeType::JSON - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -216,18 +216,18 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/MimeTypes" data-name="halite::mimetypes">
-      <a href="../../Halite/MimeTypes.html">MimeTypes</a>
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/MimeType" data-name="halite::mimetype">
+      <a href="../../Halite/MimeType.html">MimeType</a>
       
         <ul>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/MimeTypes/Adapter" data-name="halite::mimetypes::adapter">
-      <a href="../../Halite/MimeTypes/Adapter.html">Adapter</a>
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeType/Adapter" data-name="halite::mimetype::adapter">
+      <a href="../../Halite/MimeType/Adapter.html">Adapter</a>
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeTypes/JSON" data-name="halite::mimetypes::json">
-      <a href="../../Halite/MimeTypes/JSON.html">JSON</a>
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/MimeType/JSON" data-name="halite::mimetype::json">
+      <a href="../../Halite/MimeType/JSON.html">JSON</a>
       
     </li>
   
@@ -320,12 +320,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">abstract class</span> Halite::MimeTypes::Adapter
+  <span class="kind">class</span> Halite::MimeType::JSON
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/MimeTypes/Adapter.html">Halite::MimeTypes::Adapter</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/MimeType/JSON.html">Halite::MimeType::JSON</a></li><li class="superclass"><a href="../../Halite/MimeType/Adapter.html">Halite::MimeType::Adapter</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -337,13 +337,6 @@
 
 
 
-
-  <h2>Direct Known Subclasses</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../../Halite/MimeTypes/JSON.html">Halite::MimeTypes::JSON</a></li>
-  
-  </ul>
 
 
 
@@ -353,8 +346,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/1ec66b8f7d7a8fb9730db2911abde9735829717c/src/halite/mime_type.cr#L27" target="_blank">
-        halite/mime_type.cr
+      <a href="https://github.com/icyleaf/halite/blob/918e07e7dd2db598d0497dd62d0f8399c1a83f97/src/halite/mime_types/json.cr#L4" target="_blank">
+        halite/mime_types/json.cr
       </a>
     
     <br/>
@@ -372,7 +365,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#decode%28string%29-instance-method" class="signature"><strong>#decode</strong>(string)</a>
+        <a href="#decode%28str%29-instance-method" class="signature"><strong>#decode</strong>(str)</a>
         
       </li>
     
@@ -388,6 +381,30 @@
 
 
 <div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../../Halite/MimeType/Adapter.html">Halite::MimeType::Adapter</a></code></h3>
+  
+  
+    <a href="../../Halite/MimeType/Adapter.html#decode%28string%29-instance-method" class="tooltip">
+      <span>decode(string)</span>
+    decode</a>, 
+    
+  
+    <a href="../../Halite/MimeType/Adapter.html#encode%28obj%29-instance-method" class="tooltip">
+      <span>encode(obj)</span>
+    encode</a>
+    
+  
+
+
+    
+
+
+    
+
+
   
     
 
@@ -418,25 +435,25 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="decode(string)-instance-method">
+    <div class="entry-detail" id="decode(str)-instance-method">
       <div class="signature">
-        abstract 
-        def <strong>decode</strong>(string)
+        
+        def <strong>decode</strong>(str)
 
-        <a class="method-permalink" href="#decode%28string%29-instance-method">#</a>
+        <a class="method-permalink" href="#decode%28str%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/1ec66b8f7d7a8fb9730db2911abde9735829717c/src/halite/mime_type.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/918e07e7dd2db598d0497dd62d0f8399c1a83f97/src/halite/mime_types/json.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
   
     <div class="entry-detail" id="encode(obj)-instance-method">
       <div class="signature">
-        abstract 
+        
         def <strong>encode</strong>(obj)
 
         <a class="method-permalink" href="#encode%28obj%29-instance-method">#</a>
@@ -445,7 +462,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/1ec66b8f7d7a8fb9730db2911abde9735829717c/src/halite/mime_type.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/918e07e7dd2db598d0497dd62d0f8399c1a83f97/src/halite/mime_types/json.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
