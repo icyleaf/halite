@@ -14,26 +14,30 @@ class Halite::Logging
   # # Or
   # Halite.logger(format: "json", skip_request_body: true)
   #   .get("http://httpbin.org/get")
+  # ```
   #
-  # # => {
-  # # =>   "created_at": "2018-08-31T16:53:57+08:00:00",
-  # # =>   "entry": {
-  # # =>     "request": {
-  # # =>       "body": "",
-  # # =>       "headers": { ... },
-  # # =>       "method": "GET",
-  # # =>       "url": "http://httpbin.org/anything",
-  # # =>       "timestamp": "2018-08-31T16:53:59+08:00:00"
-  # # =>     },
-  # # =>     "response": {
-  # # =>       "body": false,
-  # # =>       "header": { ... },
-  # # =>       "status_code": 200,
-  # # =>       "http_version": "HTTP/1.1",
-  # # =>       "timestamp": "2018-08-31T16:53:59+08:00:00"
-  # # =>     }
-  # # =>   }
-  # # => }
+  # Log will look like:
+  #
+  # ```
+  # {
+  #   "created_at": "2018-08-31T16:53:57+08:00:00",
+  #   "entry": {
+  #     "request": {
+  #       "body": "",
+  #       "headers": { ... },
+  #       "method": "GET",
+  #       "url": "http://httpbin.org/anything",
+  #       "timestamp": "2018-08-31T16:53:59+08:00:00"
+  #     },
+  #     "response": {
+  #       "body": false,
+  #       "header": { ... },
+  #       "status_code": 200,
+  #       "http_version": "HTTP/1.1",
+  #       "timestamp": "2018-08-31T16:53:59+08:00:00"
+  #     }
+  #   }
+  # }
   # ```
   class JSON < Abstract
     @request : Request? = nil
