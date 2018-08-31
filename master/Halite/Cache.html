@@ -341,7 +341,7 @@
 
 <p>It has the following options:</p>
 
-<ul><li><code>path</code>: The path of cache, default is "cache/"</li><li><code>expires</code>: The expires time of cache, default is nerver expires.</li><li><code>debug</code>: The debug mode of cache, default is <code>true</code></li></ul>
+<ul><li><code><a href="../Halite/Cache.html#path%3AString-instance-method">#path</a></code>: The path of cache, default is "cache/"</li><li><code><a href="../Halite/Cache.html#expires%3ATime%3A%3ASpan%3F-instance-method">#expires</a></code>: The expires time of cache, default is nerver expires.</li><li><code><a href="../Halite/Cache.html#debug%3ABool-instance-method">#debug</a></code>: The debug mode of cache, default is <code>true</code></li></ul>
 
 <p>With debug mode, cached response it always included some headers information:</p>
 
@@ -367,7 +367,7 @@ r.headers                                                 <span class="c"># =&gt
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/7e17d02ac1a98be15293d68acf06dc14556cd6ab/src/halite/features/cache.cr#L26" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/990b3bd3558b26872a23e222331bb27ffaad0eb0/src/halite/features/cache.cr#L26" target="_blank">
         halite/features/cache.cr
       </a>
     
@@ -410,7 +410,22 @@ r.headers                                                 <span class="c"># =&gt
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#debug%3ABool-instance-method" class="signature"><strong>#debug</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#expires%3ATime%3A%3ASpan%3F-instance-method" class="signature"><strong>#expires</strong> : Time::Span?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#intercept%28chain%29-instance-method" class="signature"><strong>#intercept</strong>(chain)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#path%3AString-instance-method" class="signature"><strong>#path</strong> : String</a>
         
       </li>
     
@@ -502,7 +517,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7e17d02ac1a98be15293d68acf06dc14556cd6ab/src/halite/features/cache.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/990b3bd3558b26872a23e222331bb27ffaad0eb0/src/halite/features/cache.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -513,6 +528,38 @@ r.headers                                                 <span class="c"># =&gt
 
 
   <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="debug:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>debug</strong> : Bool
+
+        <a class="method-permalink" href="#debug%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/990b3bd3558b26872a23e222331bb27ffaad0eb0/src/halite/features/cache.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="expires:Time::Span?-instance-method">
+      <div class="signature">
+        
+        def <strong>expires</strong> : Time::Span?
+
+        <a class="method-permalink" href="#expires%3ATime%3A%3ASpan%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/990b3bd3558b26872a23e222331bb27ffaad0eb0/src/halite/features/cache.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
   
     <div class="entry-detail" id="intercept(chain)-instance-method">
       <div class="signature">
@@ -525,7 +572,23 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7e17d02ac1a98be15293d68acf06dc14556cd6ab/src/halite/features/cache.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/990b3bd3558b26872a23e222331bb27ffaad0eb0/src/halite/features/cache.cr#L55" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="path:String-instance-method">
+      <div class="signature">
+        
+        def <strong>path</strong> : String
+
+        <a class="method-permalink" href="#path%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/990b3bd3558b26872a23e222331bb27ffaad0eb0/src/halite/features/cache.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
