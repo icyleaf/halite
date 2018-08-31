@@ -30,6 +30,13 @@ module Halite
     @expires : Time::Span?
     @debug : Bool
 
+    # return a new Cache instance
+    #
+    # Accepts argument:
+    #
+    # - **debug**: `Bool`
+    # - **path**: `String`
+    # - **expires**: `(Int32 | Time::Span)?`
     def initialize(**options)
       @debug = options.fetch(:debug, true).as(Bool)
       @path = options.fetch(:path, DEFAULT_PATH).as(String)

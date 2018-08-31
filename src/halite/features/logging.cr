@@ -9,6 +9,11 @@ module Halite
 
     getter writer : Logging::Abstract
 
+    # return a new Cache instance
+    #
+    # Accepts argument:
+    #
+    # - **logger**: `Logging::Abstract`
     def initialize(**options)
       @writer = (logger = options[:logger]?) ? logger.as(Logging::Abstract) : DEFAULT_LOGGER
     end
