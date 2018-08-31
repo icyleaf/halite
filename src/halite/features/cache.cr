@@ -26,9 +26,9 @@ module Halite
   class Cache < Feature
     DEFAULT_PATH = "cache/"
 
-    @path : String
-    @expires : Time::Span?
-    @debug : Bool
+    getter path : String
+    getter expires : Time::Span?
+    getter debug : Bool
 
     # return a new Cache instance
     #
@@ -45,6 +45,8 @@ module Halite
                    expires.as(Time::Span)
                  when Int32
                    Time::Span.new(seconds: expires.as(Int32), nanoseconds: 0)
+                 when Nil
+                  nil
                  else
                    raise "Only accept Int32 and Time::Span type."
                  end
@@ -119,7 +121,6 @@ module Halite
     private def write_cache(request, response)
       key = generate_cache_key(request)
       path = File.join(@path, key)
-
       FileUtils.mkdir_p(path) unless Dir.exists?(path)
 
       write_metadata(path, response)
