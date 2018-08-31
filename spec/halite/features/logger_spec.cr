@@ -1,6 +1,6 @@
 require "../../spec_helper"
 
-private class SimpleLogger < Halite::Features::Logger::Abstract
+private class SimpleLogger < Halite::Logger::Abstract
   def request(request)
     @logger.info "request"
   end
@@ -9,18 +9,18 @@ private class SimpleLogger < Halite::Features::Logger::Abstract
     @logger.info "response"
   end
 
-  Halite::Features::Logger.register "simple", self
+  Halite::Logger.register "simple", self
 end
 
-describe Halite::Features::Logger do
+describe Halite::Logger do
   it "should register an format" do
-    Halite::Features::Logger["simple"].should eq(SimpleLogger)
-    Halite::Features::Logger.availables.should eq ["common", "json", "simple"]
+    Halite::Logger["simple"].should eq(SimpleLogger)
+    Halite::Logger.availables.should eq ["common", "json", "simple"]
   end
 
   it "should use common as default logger" do
-    logger = Halite::Features::Logger.new
-    logger.writer.should be_a(Halite::Features::Logger::Common)
+    logger = Halite::Logger.new
+    logger.writer.should be_a(Halite::Logger::Common)
     logger.writer.skip_request_body.should be_false
     logger.writer.skip_response_body.should be_false
     logger.writer.skip_benchmark.should be_false
@@ -28,7 +28,7 @@ describe Halite::Features::Logger do
   end
 
   it "should use custom logger" do
-    logger = Halite::Features::Logger.new(logger: SimpleLogger.new)
+    logger = Halite::Logger.new(logger: SimpleLogger.new)
     logger.writer.should be_a(SimpleLogger)
     logger.writer.skip_request_body.should be_false
     logger.writer.skip_response_body.should be_false

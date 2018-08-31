@@ -260,11 +260,11 @@ module Halite
     #
     # #### Use custom logger
     #
-    # Creating the custom logger by integration `Halite::Features::Logger::Abstract` abstract class.
+    # Creating the custom logger by integration `Halite::Logger::Abstract` abstract class.
     # Here has two methods must be implement: `#request` and `#response`.
     #
     # ```
-    # class CustomLogger < Halite::Features::Logger::Abstract
+    # class CustomLogger < Halite::Logger::Abstract
     #   def request(request)
     #     @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
     #   end
@@ -287,7 +287,7 @@ module Halite
     # # => 2017-12-13 16:40:13 +08:00 | >> | GET | http://httpbin.org/get?name=foobar
     # # => 2017-12-13 16:40:15 +08:00 | << | 200 | http://httpbin.org/get?name=foobar application/json
     # ```
-    def logger(logger = Halite::Features::Logger::Common.new)
+    def logger(logger = Halite::Logger::Common.new)
       branch(default_options.with_logger(logger))
     end
 
