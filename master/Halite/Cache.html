@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::MimeType - github.com/icyleaf/halite</title>
+  <title>Halite::Cache - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -41,7 +41,7 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Cache" data-name="halite::cache">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Cache" data-name="halite::cache">
       <a href="../Halite/Cache.html">Cache</a>
       
     </li>
@@ -221,7 +221,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/MimeType" data-name="halite::mimetype">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/MimeType" data-name="halite::mimetype">
       <a href="../Halite/MimeType.html">MimeType</a>
       
         <ul>
@@ -325,13 +325,31 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Halite::MimeType
+  <span class="kind">class</span> Halite::Cache
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/Cache.html">Halite::Cache</a></li><li class="superclass"><a href="../Halite/Feature.html">Halite::Feature</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
+
+
+  <h2>Overview</h2>
+
+  <p>Cache feature use for caching HTTP response to local storage to speed up in developing stage.</p>
+
+<p>It has the following options:</p>
+
+<ul><li><code>path</code>: The path of cache, default is "cache/"</li><li><code>expires</code>: The expires time of cache, default is nerver expires.</li><li><code>debug</code>: The debug mode of cache, default is <code>true</code></li></ul>
+
+<p>With debug mode, cached response it always included some headers information:</p>
+
+<ul><li><code>X-Cached-Key</code>: Cache key with verb, uri and body</li><li><code>X-Cached-At</code>:  Cache created time</li><li><code>X-Cached-Expires-At</code>: Cache expired time</li><li><code>X-Cached-By</code>: Always return "Halite"</li></ul>
+
+<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span>         <span class="c"># request a HTTP</span>
+r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span>     <span class="c"># request from local storage</span>
+r.headers <span class="c"># =&gt; {..., &quot;X-Cached-At&quot; =&gt; &quot;2018-08-30 10:41:14 UTC&quot;, &quot;X-Cached-By&quot; =&gt; &quot;Halite&quot;, &quot;X-Cached-Expires-At&quot; =&gt; &quot;2018-08-30 10:41:19 UTC&quot;, &quot;X-Cached-Key&quot; =&gt; &quot;2bb155e6c8c47627da3d91834eb4249a&quot;}}</span></code></pre>
 
 
 
@@ -349,15 +367,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/423c4db4016c292615bef9aabe0581fe8029c040/src/halite/mime_type.cr#L2" target="_blank">
-        halite/mime_type.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/icyleaf/halite/blob/423c4db4016c292615bef9aabe0581fe8029c040/src/halite/mime_types/json.cr#L3" target="_blank">
-        halite/mime_types/json.cr
+      <a href="https://github.com/icyleaf/halite/blob/423c4db4016c292615bef9aabe0581fe8029c040/src/halite/features/cache.cr#L26" target="_blank">
+        halite/features/cache.cr
       </a>
     
     <br/>
@@ -365,25 +376,25 @@
 
 
 
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="DEFAULT_PATH">
+        <strong>DEFAULT_PATH</strong> = <code><span class="s">&quot;/tmp/cache/&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
 
 
 
-
-  <h2>Class Method Summary</h2>
+  <h2>Constructors</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#%5B%5D%28name%3AString%29-class-method" class="signature"><strong>.[]</strong>(name : String)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#%5B%5D%3F%28name%3AString%29-class-method" class="signature"><strong>.[]?</strong>(name : String)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#register%28adapter%3AMimeType%3A%3AAdapter%2Cname%3AString%2C%2Ashortcuts%29-class-method" class="signature"><strong>.register</strong>(adapter : MimeType::Adapter, name : String, *shortcuts)</a>
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
         
       </li>
     
@@ -393,67 +404,124 @@
 
 
 
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#intercept%28chain%29-instance-method" class="signature"><strong>#intercept</strong>(chain)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
 
 
 <div class="methods-inherited">
   
+    
+
+  <h3>Instance methods inherited from class <code><a href="../Halite/Feature.html">Halite::Feature</a></code></h3>
+  
+  
+    <a href="../Halite/Feature.html#intercept%28chain%3AChain%29%3AChain-instance-method" class="tooltip">
+      <span>intercept(chain : Chain) : Chain</span>
+    intercept</a>, 
+    
+  
+    <a href="../Halite/Feature.html#request%28request%3ARequest%29%3ARequest-instance-method" class="tooltip">
+      <span>request(request : Request) : Request</span>
+    request</a>, 
+    
+  
+    <a href="../Halite/Feature.html#response%28response%3AResponse%29%3AResponse-instance-method" class="tooltip">
+      <span>response(response : Response) : Response</span>
+    response</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from class <code><a href="../Halite/Feature.html">Halite::Feature</a></code></h3>
+  
+  
+    <a href="../Halite/Feature.html#new-class-method" class="tooltip">
+      <span>new</span>
+    new</a>
+    
+  
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
-
-
-  <h2>Class Method Detail</h2>
+  <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="[](name:String)-class-method">
+    <div class="entry-detail" id="new-class-method">
       <div class="signature">
         
-        def self.<strong>[]</strong>(name : String)
+        def self.<strong>new</strong>
 
-        <a class="method-permalink" href="#%5B%5D%28name%3AString%29-class-method">#</a>
+        <a class="method-permalink" href="#new-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/423c4db4016c292615bef9aabe0581fe8029c040/src/halite/mime_type.cr#L14" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="[]?(name:String)-class-method">
-      <div class="signature">
-        
-        def self.<strong>[]?</strong>(name : String)
-
-        <a class="method-permalink" href="#%5B%5D%3F%28name%3AString%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/423c4db4016c292615bef9aabe0581fe8029c040/src/halite/mime_type.cr#L18" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="register(adapter:MimeType::Adapter,name:String,*shortcuts)-class-method">
-      <div class="signature">
-        
-        def self.<strong>register</strong>(adapter : <a href="../Halite/MimeType/Adapter.html">MimeType::Adapter</a>, name : String, *shortcuts)
-
-        <a class="method-permalink" href="#register%28adapter%3AMimeType%3A%3AAdapter%2Cname%3AString%2C%2Ashortcuts%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/423c4db4016c292615bef9aabe0581fe8029c040/src/halite/mime_type.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/423c4db4016c292615bef9aabe0581fe8029c040/src/halite/features/cache.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="intercept(chain)-instance-method">
+      <div class="signature">
+        
+        def <strong>intercept</strong>(chain)
+
+        <a class="method-permalink" href="#intercept%28chain%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/423c4db4016c292615bef9aabe0581fe8029c040/src/halite/features/cache.cr#L39" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
