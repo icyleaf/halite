@@ -1,7 +1,7 @@
 require "../../spec_helper"
 
 describe Halite::Logging do
-  it "should register an format" do
+  it "should register a format" do
     Halite::Logging["simple"].should eq(SimpleLogger)
     Halite::Logging.availables.should eq ["common", "json", "simple"]
   end

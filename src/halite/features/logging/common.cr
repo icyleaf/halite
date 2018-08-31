@@ -1,10 +1,20 @@
-require "file_utils"
-
 class Halite::Logging
-  # Logger feature: Logging::Common
+  # Common logger format
+  #
+  # Instance variables to check `Halite::Logging::Abstract`
+  #
+  # ```
+  # Halite.use("logging", logger: Halite::Logging::Common.new(skip_request_body: true))
+  #   .get("http://httpbin.org/get")
+  #
+  # # Or
+  # Halite.logger(format: "common", skip_request_body: true)
+  #   .get("http://httpbin.org/get")
+  #
+  # # => 2018-08-31 16:56:12 +08:00 | request  | GET    | http://httpbin.org/get
+  # # => 2018-08-31 16:56:13 +08:00 | response | 200    | http://httpbin.org/get | 1.08s | application/json
+  # ```
   class Common < Abstract
-    @request_time : Time?
-
     def request(request)
       message = String.build do |io|
         io << "| request  |" << colorful_method(request.verb)
@@ -94,26 +104,6 @@ class Halite::Logging
       end
 
       false
-    end
-
-    private def human_time(elapsed : Time::Span)
-      elapsed = elapsed.to_f
-      case Math.log10(elapsed)
-      when 0..Float64::MAX
-        digits = elapsed
-        suffix = "s"
-      when -3..0
-        digits = elapsed * 1000
-        suffix = "ms"
-      when -6..-3
-        digits = elapsed * 1_000_000
-        suffix = "µs"
-      else
-        digits = elapsed * 1_000_000_000
-        suffix = "ns"
-      end
-
-      "#{digits.round(2).to_s}#{suffix}"
     end
 
     Logging.register "common", self
