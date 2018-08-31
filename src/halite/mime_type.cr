@@ -22,6 +22,7 @@ module Halite
     private def self.normalize(name : String)
       @@aliases.fetch name, name
     end
+
     abstract class Adapter
       abstract def encode(obj)
       abstract def decode(string)

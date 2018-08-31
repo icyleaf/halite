@@ -1,4 +1,5 @@
 require "./spec_helper"
+require "tempfile"
 
 describe Halite do
   describe ".new" do
@@ -308,6 +309,64 @@ describe Halite do
     end
   end
 
+  describe ".logger" do
+    it "should use logging" do
+      client = Halite.logger
+      client.options.features.has_key?("logging").should be_true
+      client.options.features["logging"].should be_a(Halite::Logging)
+      logger = client.options.features["logging"].as(Halite::Logging)
+      logger.writer.should be_a(Halite::Logging::Common)
+      logger.writer.skip_request_body.should be_false
+      logger.writer.skip_response_body.should be_false
+      logger.writer.skip_benchmark.should be_false
+      logger.writer.colorize.should be_true
+    end
+
+    it "sets logging with format" do
+      client = Halite.logger(format: "json", skip_response_body: true)
+      client.options.features.has_key?("logging").should be_true
+      client.options.features["logging"].should be_a(Halite::Logging)
+      logger = client.options.features["logging"].as(Halite::Logging)
+      logger.writer.should be_a(Halite::Logging::JSON)
+      logger.writer.skip_request_body.should be_false
+      logger.writer.skip_response_body.should be_true
+      logger.writer.skip_benchmark.should be_false
+      logger.writer.colorize.should be_true
+    end
+
+    it "sets logging into file" do
+      tempfile = Tempfile.new("halite-spec-logging")
+
+      client = Halite.logger(file: tempfile.path, skip_response_body: true)
+      client.options.features.has_key?("logging").should be_true
+      client.options.features["logging"].should be_a(Halite::Logging)
+      logger = client.options.features["logging"].as(Halite::Logging)
+      logger.writer.should be_a(Halite::Logging::Common)
+      logger.writer.skip_request_body.should be_false
+      logger.writer.skip_response_body.should be_true
+      logger.writer.skip_benchmark.should be_false
+      logger.writer.colorize.should be_true
+
+      response = client.get SERVER.endpoint
+      logs = File.read_lines(tempfile.path).join("\n")
+      logs.should contain("request")
+      logs.should contain("response")
+      logs.should_not contain("<!doctype html><body>Mock Server is running.</body></html>")
+    end
+
+    it "sets logging with custom logger" do
+      client = Halite.logger(logger: SimpleLogger.new(skip_benchmark: true))
+      client.options.features.has_key?("logging").should be_true
+      client.options.features["logging"].should be_a(Halite::Logging)
+      logger = client.options.features["logging"].as(Halite::Logging)
+      logger.writer.should be_a(SimpleLogger)
+      logger.writer.skip_request_body.should be_false
+      logger.writer.skip_response_body.should be_false
+      logger.writer.skip_benchmark.should be_true
+      logger.writer.colorize.should be_true
+    end
+  end
+
   describe ".use" do
     describe "built-in features" do
       it "sets given feature name" do
@@ -322,7 +381,7 @@ describe Halite do
         logger.writer.colorize.should be_true
       end
 
-      it "sets given feature name and options" do
+      it "sets logging with logger" do
         client = Halite.use("logging", logger: Halite::Logging::JSON.new(skip_request_body: true, colorize: false))
         client.options.features.has_key?("logging").should be_true
         client.options.features["logging"].should be_a(Halite::Logging)

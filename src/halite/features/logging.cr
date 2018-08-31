@@ -5,20 +5,12 @@ require "file_utils"
 module Halite
   # Logging feature
   class Logging < Feature
-    def self.new(format : String = "common", logger : Logging::Abstract? = nil, **opts)
-      return new(logger: logger) if logger
-      raise UnRegisterLoggerFormatError.new("Not avaiable logging format: #{format}") unless cls = Logging[format]?
-
-      logger = cls.new(**opts)
-      new(logger: logger)
-    end
-
     DEFAULT_LOGGER = Logging::Common.new
 
     getter writer : Logging::Abstract
 
     def initialize(**options)
-      @writer = options.fetch(:logger, DEFAULT_LOGGER).as(Logging::Abstract)
+      @writer = (logger = options[:logger]?) ? logger.as(Logging::Abstract) : DEFAULT_LOGGER
     end
 
     def request(request)
@@ -55,7 +47,7 @@ module Halite
 
       def initialize(@skip_request_body = false, @skip_response_body = false,
                      @skip_benchmark = false, @colorize = true, @io : IO = STDOUT)
-        @logger = ::Logger.new(@io, ::Logger::DEBUG, default_formatter, "halite")
+        @logger = Logger.new(@io, ::Logger::DEBUG, default_formatter, "halite")
         Colorize.enabled = @colorize
       end
 
@@ -65,7 +57,7 @@ module Halite
       abstract def response(response)
 
       def default_formatter
-        ::Logger::Formatter.new do |_, datetime, _, message, io|
+        Logger::Formatter.new do |_, datetime, _, message, io|
           io << datetime.to_s << " " << message
         end
       end

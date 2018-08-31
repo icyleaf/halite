@@ -287,7 +287,7 @@ module Halite
     # # => 2017-12-13 16:40:13 +08:00 | >> | GET | http://httpbin.org/get?name=foobar
     # # => 2017-12-13 16:40:15 +08:00 | << | 200 | http://httpbin.org/get?name=foobar application/json
     # ```
-    def logger(logger = Halite::Logging::Common.new)
+    def logger(logger : Halite::Logging::Abstract = Halite::Logging::Common.new)
       branch(default_options.with_logger(logger))
     end
 
@@ -319,7 +319,6 @@ module Halite
                skip_request_body = false, skip_response_body = false,
                skip_benchmark = false, colorize = true)
       opts = {
-        format:             format,
         file:               file,
         filemode:           filemode,
         skip_request_body:  skip_request_body,
@@ -327,7 +326,7 @@ module Halite
         skip_benchmark:     skip_benchmark,
         colorize:           colorize,
       }
-      branch(default_options.with_logger(**opts))
+      branch(default_options.with_logger(format, **opts))
     end
 
     # Turn on given features and its options.
