@@ -2,7 +2,7 @@ require "json"
 require "digest"
 require "file_utils"
 
-module Halite::Features
+module Halite
   # Cache feature use for caching HTTP response to local storage to speed up in developing stage.
   #
   # It has the following options:
@@ -44,7 +44,7 @@ module Halite::Features
       chain.return(response)
     end
 
-    private def cache(chain : Interceptor::Chain, &block : -> Response)
+    private def cache(chain, &block : -> Response)
       if response = find_cache(chain.request)
         return response
       end
@@ -104,6 +104,6 @@ module Halite::Features
       end
     end
 
-    Halite::Features.register "cache", self
+    Halite.register_feature "cache", self
   end
 end
