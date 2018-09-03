@@ -341,11 +341,11 @@
 
 <p>It has the following options:</p>
 
-<ul><li><code><a href="../Halite/Cache.html#path%3AString-instance-method">#path</a></code>: The path of cache, default is "cache/"</li><li><code><a href="../Halite/Cache.html#expires%3ATime%3A%3ASpan%3F-instance-method">#expires</a></code>: The expires time of cache, default is nerver expires.</li><li><code><a href="../Halite/Cache.html#debug%3ABool-instance-method">#debug</a></code>: The debug mode of cache, default is <code>true</code></li></ul>
+<ul><li><code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code>: Load cache from file. it conflict with <code><a href="../Halite/Cache.html#path%3AString-instance-method">#path</a></code> and <code>expries</code>.</li><li><code><a href="../Halite/Cache.html#path%3AString-instance-method">#path</a></code>: The path of cache, default is "cache/"</li><li><code><a href="../Halite/Cache.html#expires%3ATime%3A%3ASpan%3F-instance-method">#expires</a></code>: The expires time of cache, default is nerver expires.</li><li><code><a href="../Halite/Cache.html#debug%3ABool-instance-method">#debug</a></code>: The debug mode of cache, default is <code>true</code></li></ul>
 
 <p>With debug mode, cached response it always included some headers information:</p>
 
-<ul><li><code>X-Cached-Key</code>: Cache key with verb, uri and body</li><li><code>X-Cached-At</code>:  Cache created time</li><li><code>X-Cached-Expires-At</code>: Cache expired time</li><li><code>X-Cached-By</code>: Always return "Halite"</li></ul>
+<ul><li><code>X-Cached-From</code>: Cache source (cache or file)</li><li><code>X-Cached-Key</code>: Cache key with verb, uri and body (return with cache, not <code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code> passed)</li><li><code>X-Cached-At</code>:  Cache created time</li><li><code>X-Cached-Expires-At</code>: Cache expired time (return with cache, not <code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code> passed)</li><li><code>X-Cached-By</code>: Always return "Halite"</li></ul>
 
 <pre><code><span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span>     <span class="c"># request a HTTP</span>
 r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span> <span class="c"># request from local storage</span>
@@ -367,7 +367,7 @@ r.headers                                                 <span class="c"># =&gt
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/c1a45556052cfba299c8318bfd17380827523043/src/halite/features/cache.cr#L26" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/f220ba4d9c500c64556aea1809bbccc0d341aa5e/src/halite/features/cache.cr#L28" target="_blank">
         halite/features/cache.cr
       </a>
     
@@ -416,6 +416,11 @@ r.headers                                                 <span class="c"># =&gt
     
       <li class="entry-summary">
         <a href="#expires%3ATime%3A%3ASpan%3F-instance-method" class="signature"><strong>#expires</strong> : Time::Span?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#file%3AString%3F-instance-method" class="signature"><strong>#file</strong> : String?</a>
         
       </li>
     
@@ -517,7 +522,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c1a45556052cfba299c8318bfd17380827523043/src/halite/features/cache.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f220ba4d9c500c64556aea1809bbccc0d341aa5e/src/halite/features/cache.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -540,7 +545,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c1a45556052cfba299c8318bfd17380827523043/src/halite/features/cache.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f220ba4d9c500c64556aea1809bbccc0d341aa5e/src/halite/features/cache.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -556,7 +561,23 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c1a45556052cfba299c8318bfd17380827523043/src/halite/features/cache.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f220ba4d9c500c64556aea1809bbccc0d341aa5e/src/halite/features/cache.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="file:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>file</strong> : String?
+
+        <a class="method-permalink" href="#file%3AString%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/f220ba4d9c500c64556aea1809bbccc0d341aa5e/src/halite/features/cache.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -572,7 +593,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c1a45556052cfba299c8318bfd17380827523043/src/halite/features/cache.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f220ba4d9c500c64556aea1809bbccc0d341aa5e/src/halite/features/cache.cr#L65" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -588,7 +609,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/c1a45556052cfba299c8318bfd17380827523043/src/halite/features/cache.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f220ba4d9c500c64556aea1809bbccc0d341aa5e/src/halite/features/cache.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
