@@ -9,9 +9,32 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## [0.7.0] (2018-09-03)
+
+> Features support :tada:
+
+### Changed
+
+- Change instance `Halite::Client` with block behavior. [#33](https://github.com/icyleaf/halite/issues/33)
+- Renamed argument name `adapter` to `format` in `#logger` chainable method.
+- Move logger into features.
+
+### Added
+
+- Add features (aka middleware) support, you can create monitor or interceptor. [#29](https://github.com/icyleaf/halite/issues/29)
+- Add cache feature. [#24](https://github.com/icyleaf/halite/issues/24)
+- Add `#logging` in chainable method.
+
+### Fixed
+
+- Add misisng `#request` method with headers, params, form, json, raw, ssl arguments.
+- Fix do not overwrite default headers with exists one by using `Halite::Options.merge`.
+- Fix append response to history only with redirect uri. (thanks @[j8r](https://github.com/j8r))
+- Typo and correct words in README. (thanks @[megatux](https://github.com/megatux))
+
 ## [0.6.0] (2018-08-24)
 
-> Improve performance with :love:
+> Improve performance with :see_no_evil:
 
 ### Changed
 
@@ -30,10 +53,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.5.0] (2018-07-03)
 
-### Added
-
-- Add request [#raw](https://github.com/icyleaf/halite/#raw-string) string support. [#20](https://github.com/icyleaf/halite/issues/20) (thanks @[wirrareka](https://github.com/wirrareka))
-
 ### Changed
 
 - New logger system and json logger support, see [#19](https://github.com/icyleaf/halite/pull/19).
@@ -41,7 +60,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - `get`, `head` only accepts `#params` argument.
   - `post`, `put`, `delete`, `patch`, `options` accepts `#params`, `#form`, `#json` and `#raw` arguments.
 
+### Added
+
+- Add request [#raw](https://github.com/icyleaf/halite/#raw-string) string support. [#20](https://github.com/icyleaf/halite/issues/20) (thanks @[wirrareka](https://github.com/wirrareka))
+
 ## [0.4.0] (2018-06-27)
+
+### Changed
+
+- Remove `#mime_type` duplicate with `#content_type` in `Halite::Response`.
+- Change write log file use append mode by default, it could be change by param.
+- Change logger formatter to easy identify category(request/response).
 
 ### Added
 
@@ -51,12 +80,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `#to_raw` to `Halite::Response` to dump a raw of response. [#15](https://github.com/icyleaf/halite/issues/15) (thanks @[BenDietze](https://github.com/BenDietze))
 - Support `OPTIONS` method (crystal 0.25.0+)
 - Append write log to a file section to README.
-
-### Changed
-
-- Remove `#mime_type` duplicate with `#content_type` in `Halite::Response`.
-- Change write log file use append mode by default, it could be change by param.
-- Change logger formatter to easy identify category(request/response).
 
 ### Fixed
 
@@ -113,14 +136,14 @@ Compatibility with Crystal 0.25
 
 ## [0.1.5] (2017-10-11)
 
+### Changed
+
+- Only store cookies in Sessions shards. ([#7](https://github.com/icyleaf/halite/issues/7))
+
 ### Added
 
 - Add `TLS/SSL` support (based on [HTTP::Client.new(uri : URI, tls = nil)](https://crystal-lang.org/api/0.23.1/HTTP/Client.html#new%28uri%3AURI%2Ctls%3Dnil%29-class-method)).
 - Add `UnsupportedMethodError/UnsupportedSchemeError` exceptions.
-
-### Changed
-
-- Only store cookies in Sessions shards. ([#7](https://github.com/icyleaf/halite/issues/7))
 
 ### Fixed
 
@@ -129,13 +152,13 @@ Compatibility with Crystal 0.25
 
 ## [0.1.3] (2017-10-09)
 
-### Added
-
-- Add `accept` method.
-
 ### Changed
 
 - Always instance a new Options with each request in chainable methods.
+
+### Added
+
+- Add `accept` method.
 
 ### Fixed
 
