@@ -4,6 +4,8 @@
 
 [![Language](https://img.shields.io/badge/language-crystal-776791.svg)](https://github.com/crystal-lang/crystal)
 [![Tag](https://img.shields.io/github/tag/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/CHANGELOG.md)
+[![Source](https://img.shields.io/badge/source-github-brightgreen.svg)](https://github.com/icyleaf/halite/)
+[![Document](https://img.shields.io/badge/document-api-brightgreen.svg)](https://icyleaf.github.io/halite/)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
 
 HTTP Requests with a chainable REST API, built-in sessions and loggers written by [Crystal](https://crystal-lang.org/).
@@ -647,6 +649,7 @@ in your HTTP client and allowing you to monitor outgoing requests, and incoming 
 Avaiabled features:
 
 - logging (Yes, logging is based on feature, cool, aha!)
+- cache (local storage, speed up in development)
 
 #### Write a simple feature
 
@@ -730,7 +733,7 @@ r.headers["X-Powered-By"]   # => Halite
 r.body                      # => {"user-agent":"Halite/0.6.0"}
 ```
 
-For more implementation details about the feature layer, see the [feature](https://github.com/icyleaf/halite/blob/master/src/halite/features.cr#L22) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features) and [specs](https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23).
+For more implementation details about the feature layer, see the [feature](https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features) and [specs](https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23).
 
 ### Link Headers
 
