@@ -8,7 +8,7 @@ module Halite
   # It has the following options:
   #
   # - `file`: Load cache from file. it conflict with `path` and `expries`.
-  # - `path`: The path of cache, default is "cache/"
+  # - `path`: The path of cache, default is "/tmp/halite/cache/"
   # - `expires`: The expires time of cache, default is nerver expires.
   # - `debug`: The debug mode of cache, default is `true`
   #
@@ -25,7 +25,7 @@ module Halite
   # r.headers                                                 # => {..., "X-Cached-At" => "2018-08-30 10:41:14 UTC", "X-Cached-By" => "Halite", "X-Cached-Expires-At" => "2018-08-30 10:41:19 UTC", "X-Cached-Key" => "2bb155e6c8c47627da3d91834eb4249a"}}
   # ```
   class Cache < Feature
-    DEFAULT_PATH = "cache/"
+    DEFAULT_PATH = "/tmp/halite/cache/"
 
     getter file : String?
     getter path : String
