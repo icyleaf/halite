@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::Exception - github.com/icyleaf/halite</title>
+  <title>Halite::Cache - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -41,7 +41,7 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Cache" data-name="halite::cache">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Cache" data-name="halite::cache">
       <a href="../Halite/Cache.html">Cache</a>
       
     </li>
@@ -56,7 +56,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
       <a href="../Halite/Exception.html">Exception</a>
       
         <ul>
@@ -325,13 +325,31 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Halite::Exception
+  <span class="kind">class</span> Halite::Cache
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/Cache.html">Halite::Cache</a></li><li class="superclass"><a href="../Halite/Feature.html">Halite::Feature</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
+
+
+  <h2>Overview</h2>
+
+  <p>Cache feature use for caching HTTP response to local storage to speed up in developing stage.</p>
+
+<p>It has the following options:</p>
+
+<ul><li><code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code>: Load cache from file. it conflict with <code><a href="../Halite/Cache.html#path%3AString-instance-method">#path</a></code> and <code>expries</code>.</li><li><code><a href="../Halite/Cache.html#path%3AString-instance-method">#path</a></code>: The path of cache, default is "cache/"</li><li><code><a href="../Halite/Cache.html#expires%3ATime%3A%3ASpan%3F-instance-method">#expires</a></code>: The expires time of cache, default is nerver expires.</li><li><code><a href="../Halite/Cache.html#debug%3ABool-instance-method">#debug</a></code>: The debug mode of cache, default is <code>true</code></li></ul>
+
+<p>With debug mode, cached response it always included some headers information:</p>
+
+<ul><li><code>X-Cached-From</code>: Cache source (cache or file)</li><li><code>X-Cached-Key</code>: Cache key with verb, uri and body (return with cache, not <code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code> passed)</li><li><code>X-Cached-At</code>:  Cache created time</li><li><code>X-Cached-Expires-At</code>: Cache expired time (return with cache, not <code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code> passed)</li></ul>
+
+<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span>     <span class="c"># request a HTTP</span>
+r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span> <span class="c"># request from local storage</span>
+r.headers                                                 <span class="c"># =&gt; {..., &quot;X-Cached-At&quot; =&gt; &quot;2018-08-30 10:41:14 UTC&quot;, &quot;X-Cached-By&quot; =&gt; &quot;Halite&quot;, &quot;X-Cached-Expires-At&quot; =&gt; &quot;2018-08-30 10:41:19 UTC&quot;, &quot;X-Cached-Key&quot; =&gt; &quot;2bb155e6c8c47627da3d91834eb4249a&quot;}}</span></code></pre>
 
 
 
@@ -349,8 +367,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/35563f29e5a9b1ba98767c91f924e96011a1e73c/src/halite/error.cr#L2" target="_blank">
-        halite/error.cr
+      <a href="https://github.com/icyleaf/halite/blob/35563f29e5a9b1ba98767c91f924e96011a1e73c/src/halite/features/cache.cr#L27" target="_blank">
+        halite/features/cache.cr
       </a>
     
     <br/>
@@ -358,11 +376,65 @@
 
 
 
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="DEFAULT_PATH">
+        <strong>DEFAULT_PATH</strong> = <code><span class="s">&quot;cache/&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+          <div class="summary"><p>return a new Cache instance</p></div>
+        
+      </li>
+    
+  </ul>
 
 
 
 
 
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#debug%3ABool-instance-method" class="signature"><strong>#debug</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#expires%3ATime%3A%3ASpan%3F-instance-method" class="signature"><strong>#expires</strong> : Time::Span?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#file%3AString%3F-instance-method" class="signature"><strong>#file</strong> : String?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#intercept%28chain%29-instance-method" class="signature"><strong>#intercept</strong>(chain)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#path%3AString-instance-method" class="signature"><strong>#path</strong> : String</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -370,12 +442,178 @@
 
 <div class="methods-inherited">
   
+    
+
+  <h3>Instance methods inherited from class <code><a href="../Halite/Feature.html">Halite::Feature</a></code></h3>
+  
+  
+    <a href="../Halite/Feature.html#intercept%28chain%3AChain%29%3AChain-instance-method" class="tooltip">
+      <span>intercept(chain : Chain) : Chain</span>
+    intercept</a>, 
+    
+  
+    <a href="../Halite/Feature.html#request%28request%3ARequest%29%3ARequest-instance-method" class="tooltip">
+      <span>request(request : Request) : Request</span>
+    request</a>, 
+    
+  
+    <a href="../Halite/Feature.html#response%28response%3AResponse%29%3AResponse-instance-method" class="tooltip">
+      <span>response(response : Response) : Response</span>
+    response</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from class <code><a href="../Halite/Feature.html">Halite::Feature</a></code></h3>
+  
+  
+    <a href="../Halite/Feature.html#new-class-method" class="tooltip">
+      <span>new</span>
+    new</a>
+    
+  
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>return a new Cache instance</p>
+
+<p>Accepts argument:</p>
+
+<ul><li><strong>debug</strong>: <code>Bool</code></li><li><strong>path</strong>: <code>String</code></li><li><strong>expires</strong>: <code>(Int32 | Time::Span)?</code></li></ul></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/35563f29e5a9b1ba98767c91f924e96011a1e73c/src/halite/features/cache.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="debug:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>debug</strong> : Bool
+
+        <a class="method-permalink" href="#debug%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/35563f29e5a9b1ba98767c91f924e96011a1e73c/src/halite/features/cache.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="expires:Time::Span?-instance-method">
+      <div class="signature">
+        
+        def <strong>expires</strong> : Time::Span?
+
+        <a class="method-permalink" href="#expires%3ATime%3A%3ASpan%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/35563f29e5a9b1ba98767c91f924e96011a1e73c/src/halite/features/cache.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="file:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>file</strong> : String?
+
+        <a class="method-permalink" href="#file%3AString%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/35563f29e5a9b1ba98767c91f924e96011a1e73c/src/halite/features/cache.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="intercept(chain)-instance-method">
+      <div class="signature">
+        
+        def <strong>intercept</strong>(chain)
+
+        <a class="method-permalink" href="#intercept%28chain%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/35563f29e5a9b1ba98767c91f924e96011a1e73c/src/halite/features/cache.cr#L64" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="path:String-instance-method">
+      <div class="signature">
+        
+        def <strong>path</strong> : String
+
+        <a class="method-permalink" href="#path%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/35563f29e5a9b1ba98767c91f924e96011a1e73c/src/halite/features/cache.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
