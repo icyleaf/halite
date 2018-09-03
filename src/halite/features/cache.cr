@@ -7,15 +7,17 @@ module Halite
   #
   # It has the following options:
   #
+  # - `file`: Load cache from file. it conflict with `path` and `expries`.
   # - `path`: The path of cache, default is "cache/"
   # - `expires`: The expires time of cache, default is nerver expires.
   # - `debug`: The debug mode of cache, default is `true`
   #
   # With debug mode, cached response it always included some headers information:
   #
-  # - `X-Cached-Key`: Cache key with verb, uri and body
+  # - `X-Cached-From`: Cache source (cache or file)
+  # - `X-Cached-Key`: Cache key with verb, uri and body (return with cache, not `file` passed)
   # - `X-Cached-At`:  Cache created time
-  # - `X-Cached-Expires-At`: Cache expired time
+  # - `X-Cached-Expires-At`: Cache expired time (return with cache, not `file` passed)
   # - `X-Cached-By`: Always return "Halite"
   #
   # ```
@@ -26,6 +28,7 @@ module Halite
   class Cache < Feature
     DEFAULT_PATH = "cache/"
 
+    getter file : String?
     getter path : String
     getter expires : Time::Span?
     getter debug : Bool
@@ -39,17 +42,24 @@ module Halite
     # - **expires**: `(Int32 | Time::Span)?`
     def initialize(**options)
       @debug = options.fetch(:debug, true).as(Bool)
-      @path = options.fetch(:path, DEFAULT_PATH).as(String)
-      @expires = case expires = options[:expires]?
-                 when Time::Span
-                   expires.as(Time::Span)
-                 when Int32
-                   Time::Span.new(seconds: expires.as(Int32), nanoseconds: 0)
-                 when Nil
-                  nil
-                 else
-                   raise "Only accept Int32 and Time::Span type."
-                 end
+      if file = options[:file]?
+        @file = file
+        @path = DEFAULT_PATH
+        @expires = nil
+      else
+        @file = nil
+        @path = options.fetch(:path, DEFAULT_PATH).as(String)
+        @expires = case expires = options[:expires]?
+                  when Time::Span
+                    expires.as(Time::Span)
+                  when Int32
+                    Time::Span.new(seconds: expires.as(Int32), nanoseconds: 0)
+                  when Nil
+                    nil
+                  else
+                    raise "Only accept Int32 and Time::Span type."
+                  end
+      end
     end
 
     def intercept(chain)
@@ -71,30 +81,58 @@ module Halite
     end
 
     private def find_cache(request : Request) : Response?
-      key = generate_cache_key(request)
-      path = File.join(@path, key)
-      file = File.join(path, "#{key}.cache")
+      if file = @file
+        build_response(request, file)
+      elsif response = build_response(request)
+        response
+      end
+    end
 
-      if File.exists?(file) && !cache_expired?(file)
-        status_code = 200
-        headers = HTTP::Headers.new
-        if metadata = find_metadata(path)
-          status_code = metadata["status_code"].as_i
-          metadata["headers"].as_h.each do |key, value|
-            headers[key] = value.as_s
+    private def find_file(file) : Response
+      raise Error.new("Not find cache file: #{file}") if File.file?(file)
+      build_response(file)
+    end
+
+    private def build_response(request : Request, file : String? = nil) : Response?
+      status_code = 200
+      headers = HTTP::Headers.new
+      cache_from = "file"
+
+      unless file
+        key = generate_cache_key(request)
+        path = File.join(@path, key)
+
+        return unless Dir.exists?(path)
+
+        cache_from = "cache"
+        cache_file = File.join(path, "#{key}.cache")
+        if File.file?(cache_file) && !cache_expired?(cache_file)
+          file = cache_file
+
+          if metadata = find_metadata(path)
+            status_code = metadata["status_code"].as_i
+            metadata["headers"].as_h.each do |key, value|
+              headers[key] = value.as_s
+            end
           end
 
           if @debug
             headers["X-Cached-Key"] = key
-            headers["X-Cached-At"] = cache_created_time(file).to_s
             headers["X-Cached-Expires-At"] = @expires ? (cache_created_time(file) + @expires.not_nil!).to_s : "None"
-            headers["X-Cached-By"] = "Halite"
           end
         end
-
-        body = File.read_lines(file).join("\n")
-        return Response.new(request.uri, status_code, body, headers)
       end
+
+      return unless file
+
+      if @debug
+        headers["X-Cached-From"] = cache_from
+        headers["X-Cached-At"] = cache_created_time(file).to_s
+        headers["X-Cached-By"] = "Halite"
+      end
+
+      body = File.read_lines(file).join("\n")
+      Response.new(request.uri, status_code, body, headers)
     end
 
     private def find_metadata(path)
