@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## [0.7.0] (2018-09-?)
+
+> Features support :tada:
+
 ### Changed
 
 - Change instance `Halite::Client` with block behavior. [#33](https://github.com/icyleaf/halite/issues/33)
@@ -17,7 +21,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Add features support (aka middleware), you can create monitor or interceptor. [#29](https://github.com/icyleaf/halite/issues/29)
+- Add features (aka middleware) support, you can create monitor or interceptor. [#29](https://github.com/icyleaf/halite/issues/29)
+- Add cache feature. [#24](https://github.com/icyleaf/halite/issues/24)
 - Add `#logging` in chainable method.
 
 ### Fixed
