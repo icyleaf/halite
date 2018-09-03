@@ -18,7 +18,6 @@ module Halite
   # - `X-Cached-Key`: Cache key with verb, uri and body (return with cache, not `file` passed)
   # - `X-Cached-At`:  Cache created time
   # - `X-Cached-Expires-At`: Cache expired time (return with cache, not `file` passed)
-  # - `X-Cached-By`: Always return "Halite"
   #
   # ```
   # Halite.use("cache").get "http://httpbin.org/anything"     # request a HTTP
@@ -99,6 +98,7 @@ module Halite
       cache_from = "file"
 
       unless file
+        # Cache in path
         key = generate_cache_key(request)
         path = File.join(@path, key)
 
@@ -128,7 +128,6 @@ module Halite
       if @debug
         headers["X-Cached-From"] = cache_from
         headers["X-Cached-At"] = cache_created_time(file).to_s
-        headers["X-Cached-By"] = "Halite"
       end
 
       body = File.read_lines(file).join("\n")
@@ -145,7 +144,7 @@ module Halite
     private def cache_expired?(file)
       return false unless expires = @expires
       file_modified_time = cache_created_time(file)
-      Time.now >= (file_modified_time + expires)
+      Time.utc_now >= (file_modified_time + expires)
     end
 
     private def cache_created_time(file)

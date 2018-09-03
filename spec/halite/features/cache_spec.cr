@@ -6,7 +6,9 @@ private struct CacheStruct
   end
 end
 
-private def cache_spec(cache, request, response, use_cache = false, clean = true, wait_time : (Int32 | Time::Span)? = nil)
+private def cache_spec(cache, request, response, use_cache = false, wait_time : (Int32 | Time::Span)? = nil)
+  FileUtils.rm_rf(cache.path)
+
   _chain = Halite::Feature::Chain.new(request, nil, Halite::Options.new) do
     response
   end
@@ -21,13 +23,7 @@ private def cache_spec(cache, request, response, use_cache = false, clean = true
     metadata_file = File.join(path, "metadata.json")
     body_file = File.join(path, "#{key}.cache")
 
-    if use_cache
-      unless Dir.exists?(path)
-        cache.intercept(_chain)
-      end
-    elsif Dir.exists?(path)
-      FileUtils.rm_rf cache.path
-    end
+    cache.intercept(_chain) if use_cache
 
     if seconds = wait_time
       sleep seconds
@@ -44,8 +40,7 @@ private def cache_spec(cache, request, response, use_cache = false, clean = true
 
     yield CacheStruct.new(body, chain, metadata)
 
-    # Clean up
-    FileUtils.rm_rf(cache.path) if clean
+    FileUtils.rm_rf(cache.path)
   end
 end
 
@@ -110,7 +105,6 @@ describe Halite::Cache do
 
         result.chain.response.should_not be_nil
         result.chain.response.not_nil!.headers["X-Cached-From"].should eq("cache")
-        result.chain.response.not_nil!.headers["X-Cached-By"].should eq("Halite")
         result.chain.response.not_nil!.headers["X-Cached-Key"].should_not eq("")
         result.chain.response.not_nil!.headers["X-Cached-At"].should_not eq("")
         result.chain.response.not_nil!.headers["X-Cached-Expires-At"].should eq("None")
@@ -136,10 +130,8 @@ describe Halite::Cache do
 
         result.chain.response.should_not be_nil
         result.chain.response.not_nil!.headers.has_key?("X-Cached-From").should be_false
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-By").should be_false
         result.chain.response.not_nil!.headers.has_key?("X-Cached-Key").should be_false
         result.chain.response.not_nil!.headers.has_key?("X-Cached-At").should be_false
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-Expires-At").should be_false
       end
     end
 
@@ -153,7 +145,7 @@ describe Halite::Cache do
       feature.expires.should eq(1.milliseconds)
       feature.debug.should be_true
 
-      cache_spec(feature, request, response, use_cache: true, wait_time: 2.milliseconds) do |result|
+      cache_spec(feature, request, response, use_cache: true, wait_time: 500.milliseconds) do |result|
         result.metadata.not_nil!["status_code"].should eq(200)
         result.metadata.not_nil!["headers"].as_h["Content-Type"].should eq("application/json")
         result.metadata.not_nil!["headers"].as_h["Content-Length"].should eq(response.body.size.to_s)
@@ -162,7 +154,6 @@ describe Halite::Cache do
 
         result.chain.response.should_not be_nil
         result.chain.response.not_nil!.headers.has_key?("X-Cached-From").should be_false
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-By").should be_false
         result.chain.response.not_nil!.headers.has_key?("X-Cached-Key").should be_false
         result.chain.response.not_nil!.headers.has_key?("X-Cached-At").should be_false
         result.chain.response.not_nil!.headers.has_key?("X-Cached-Expires-At").should be_false
@@ -187,7 +178,6 @@ describe Halite::Cache do
 
         result.chain.response.should_not be_nil
         result.chain.response.not_nil!.headers["X-Cached-From"].should eq("file")
-        result.chain.response.not_nil!.headers["X-Cached-By"].should eq("Halite")
         result.chain.response.not_nil!.headers.has_key?("X-Cached-Key").should be_false
         result.chain.response.not_nil!.headers["X-Cached-At"].should_not eq("")
         result.chain.response.not_nil!.headers.has_key?("X-Cached-Expires-At").should be_false
