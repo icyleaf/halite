@@ -119,22 +119,6 @@ Many other HTTP methods are avaiabled as well:
 - `patch`
 - `options`
 
-```crystal
-Halite.get("http://httpbin.org/get", params: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
-
-Halite.head("http://httpbin.org/anything", params: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
-
-Halite.post("http://httpbin.org/post", form: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
-
-Halite.put("http://httpbin.org/put", json: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
-
-Haltie.delete("http://httpbin.org/delete", params: { "user_id" => 234234 })
-
-Halite.patch("http://httpbin.org/anything", json: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
-
-Haltie.options("http://httpbin.org/anything", params: json: { "firstname" => "Olen", "lastname" => "Rosenbaum" })
-```
-
 ### Passing Parameters
 
 #### Query string parameters
