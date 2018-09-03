@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Add misisng `#request` method with headers, params, form, json, raw, ssl arguments.
 - Fix do not overwrite default headers with exists one by using `Halite::Options.merge`.
+- Fix append response to history only with redirect uri. (thanks @[j8r](https://github.com/j8r))
 - Typo and correct words in README. (thanks @[megatux](https://github.com/megatux))
 
 ## [0.6.0] (2018-08-24)
