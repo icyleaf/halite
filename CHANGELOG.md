@@ -33,7 +33,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.6.0] (2018-08-24)
 
-> Improve performance with :love:
+> Improve performance with :see_no_evil:
 
 ### Changed
 
