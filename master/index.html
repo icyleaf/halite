@@ -329,13 +329,15 @@
 
 <p><a href="https://github.com/crystal-lang/crystal" target="_blank"><img src="https://img.shields.io/badge/language-crystal-776791.svg" alt="Language"/></a>
 <a href="https://github.com/icyleaf/halite/blob/master/CHANGELOG.md" target="_blank"><img src="https://img.shields.io/github/tag/icyleaf/halite.svg" alt="Tag"/></a>
+<a href="https://github.com/icyleaf/halite/" target="_blank"><img src="https://img.shields.io/badge/source-github-brightgreen.svg" alt="Source"/></a>
+<a href="https://icyleaf.github.io/halite/" target="_blank"><img src="https://img.shields.io/badge/document-api-brightgreen.svg" alt="Document"/></a>
 <a href="https://circleci.com/gh/icyleaf/halite" target="_blank"><img src="https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat" alt="Build Status"/></a></p>
 
 <p>HTTP Requests with a chainable REST API, built-in sessions and loggers written by <a href="https://crystal-lang.org/" target="_blank">Crystal</a>.
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a> gem
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/b79735b" target="_blank">#b79735b</a> (2018-09-03 18:02:16 +0800).</p>
+<p>Build in crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/d76917d" target="_blank">#d76917d</a> (2018-09-03 18:24:19 +0800).</p>
 
 <h2>Index</h2>
 
@@ -835,7 +837,7 @@ in your HTTP client and allowing you to monitor outgoing requests, and incoming 
 
 <p>Avaiabled features:</p>
 
-<ul><li>logging (Yes, logging is based on feature, cool, aha!)</li></ul>
+<ul><li>logging (Yes, logging is based on feature, cool, aha!)</li><li>cache (local storage, speed up in development)</li></ul>
 
 <h4>Write a simple feature</h4>
 
@@ -912,7 +914,7 @@ r.status_code               <span class="c"># =&gt; 404</span>
 r.headers[<span class="s">&quot;X-Powered-By&quot;</span>]   <span class="c"># =&gt; Halite</span>
 r.body                      <span class="c"># =&gt; {&quot;user-agent&quot;:&quot;Halite/0.6.0&quot;}</span></code></pre>
 
-<p>For more implementation details about the feature layer, see the <a href="https://github.com/icyleaf/halite/blob/master/src/halite/features.cr#L22" target="_blank">feature</a> class and <a href="https://github.com/icyleaf/halite/tree/master/src/halite/features" target="_blank">examples</a> and <a href="https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23" target="_blank">specs</a>.</p>
+<p>For more implementation details about the feature layer, see the <a href="https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2" target="_blank">feature</a> class and <a href="https://github.com/icyleaf/halite/tree/master/src/halite/features" target="_blank">examples</a> and <a href="https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23" target="_blank">specs</a>.</p>
 
 <h3>Link Headers</h3>
 
