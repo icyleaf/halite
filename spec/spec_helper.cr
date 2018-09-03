@@ -66,6 +66,14 @@ class SimpleLogger < Halite::Logging::Abstract
   Halite::Logging.register "simple", self
 end
 
+def fixture_path(file)
+  File.join(File.dirname(__FILE__), "fixtures", file)
+end
+
+def load_fixture(file)
+  File.read_lines(fixture_path(file)).join("\n")
+end
+
 ####################
 # Start mock server
 ####################
