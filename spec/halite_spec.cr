@@ -1,4 +1,5 @@
 require "./spec_helper"
+require "tempfile"
 
 describe Halite do
   describe ".new" do
@@ -141,24 +142,41 @@ describe Halite do
   end
 
   describe ".follow" do
+    context "without redirects" do
+      it "should return empty history" do
+        response = Halite.get(SERVER.api("/"))
+        response.history.size.should eq(0)
+      end
+    end
+
     context "with redirects" do
+      it "should return one history with non-redirect url" do
+        response = Halite.follow.get(SERVER.api("/"))
+        response.history.size.should eq(1)
+        response.to_s.should match(/<!doctype html>/)
+      end
+
       it "should easy for 301 with full uri" do
         response = Halite.follow.get(SERVER.api("redirect-301"))
+        response.history.size.should eq(2)
         response.to_s.should match(/<!doctype html>/)
       end
 
       it "should easy for 301 with relative path" do
         response = Halite.follow.get(SERVER.api("redirect-301"), params: {"relative_path" => true})
+        response.history.size.should eq(2)
         response.to_s.should match(/<!doctype html>/)
       end
 
       it "should easy for 301 with relative path which is not include slash" do
         response = Halite.follow.get(SERVER.api("redirect-301"), params: {"relative_path_without_slash" => true})
+        response.history.size.should eq(2)
         response.to_s.should eq("hello")
       end
 
       it "should easy for 302" do
         response = Halite.follow.get(SERVER.api("redirect-302"))
+        response.history.size.should eq(2)
         response.to_s.should match(/<!doctype html>/)
       end
 
@@ -291,26 +309,84 @@ describe Halite do
     end
   end
 
+  describe ".logger" do
+    it "should use logging" do
+      client = Halite.logger
+      client.options.features.has_key?("logging").should be_true
+      client.options.features["logging"].should be_a(Halite::Logging)
+      logger = client.options.features["logging"].as(Halite::Logging)
+      logger.writer.should be_a(Halite::Logging::Common)
+      logger.writer.skip_request_body.should be_false
+      logger.writer.skip_response_body.should be_false
+      logger.writer.skip_benchmark.should be_false
+      logger.writer.colorize.should be_true
+    end
+
+    it "sets logging with format" do
+      client = Halite.logger(format: "json", skip_response_body: true)
+      client.options.features.has_key?("logging").should be_true
+      client.options.features["logging"].should be_a(Halite::Logging)
+      logger = client.options.features["logging"].as(Halite::Logging)
+      logger.writer.should be_a(Halite::Logging::JSON)
+      logger.writer.skip_request_body.should be_false
+      logger.writer.skip_response_body.should be_true
+      logger.writer.skip_benchmark.should be_false
+      logger.writer.colorize.should be_true
+    end
+
+    it "sets logging into file" do
+      tempfile = Tempfile.new("halite-spec-logging")
+
+      client = Halite.logger(file: tempfile.path, skip_response_body: true)
+      client.options.features.has_key?("logging").should be_true
+      client.options.features["logging"].should be_a(Halite::Logging)
+      logger = client.options.features["logging"].as(Halite::Logging)
+      logger.writer.should be_a(Halite::Logging::Common)
+      logger.writer.skip_request_body.should be_false
+      logger.writer.skip_response_body.should be_true
+      logger.writer.skip_benchmark.should be_false
+      logger.writer.colorize.should be_true
+
+      client.get SERVER.endpoint
+      logs = File.read_lines(tempfile.path).join("\n")
+      logs.should contain("request")
+      logs.should contain("response")
+      logs.should_not contain("<!doctype html><body>Mock Server is running.</body></html>")
+    end
+
+    it "sets logging with custom logger" do
+      client = Halite.logger(logger: SimpleLogger.new(skip_benchmark: true))
+      client.options.features.has_key?("logging").should be_true
+      client.options.features["logging"].should be_a(Halite::Logging)
+      logger = client.options.features["logging"].as(Halite::Logging)
+      logger.writer.should be_a(SimpleLogger)
+      logger.writer.skip_request_body.should be_false
+      logger.writer.skip_response_body.should be_false
+      logger.writer.skip_benchmark.should be_true
+      logger.writer.colorize.should be_true
+    end
+  end
+
   describe ".use" do
     describe "built-in features" do
       it "sets given feature name" do
-        client = Halite.use("logger")
-        client.options.features.has_key?("logger").should be_true
-        client.options.features["logger"].should be_a(Halite::Features::Logger)
-        logger = client.options.features["logger"].as(Halite::Features::Logger)
-        logger.writer.should be_a(Halite::Features::Logger::Common)
+        client = Halite.use("logging")
+        client.options.features.has_key?("logging").should be_true
+        client.options.features["logging"].should be_a(Halite::Logging)
+        logger = client.options.features["logging"].as(Halite::Logging)
+        logger.writer.should be_a(Halite::Logging::Common)
         logger.writer.skip_request_body.should be_false
         logger.writer.skip_response_body.should be_false
         logger.writer.skip_benchmark.should be_false
         logger.writer.colorize.should be_true
       end
 
-      it "sets given feature name and options" do
-        client = Halite.use("logger", logger: Halite::Features::Logger::JSON.new(skip_request_body: true, colorize: false))
-        client.options.features.has_key?("logger").should be_true
-        client.options.features["logger"].should be_a(Halite::Features::Logger)
-        logger = client.options.features["logger"].as(Halite::Features::Logger)
-        logger.writer.should be_a(Halite::Features::Logger::JSON)
+      it "sets logging with logger" do
+        client = Halite.use("logging", logger: Halite::Logging::JSON.new(skip_request_body: true, colorize: false))
+        client.options.features.has_key?("logging").should be_true
+        client.options.features["logging"].should be_a(Halite::Logging)
+        logger = client.options.features["logging"].as(Halite::Logging)
+        logger.writer.should be_a(Halite::Logging::JSON)
         logger.writer.skip_request_body.should be_true
         logger.writer.skip_response_body.should be_false
         logger.writer.skip_benchmark.should be_false
@@ -374,6 +450,15 @@ describe Halite do
       expect_raises Halite::RequestError, "SSL context given for HTTP URI = http://google.com" do
         Halite.get("http://google.com", ssl: OpenSSL::SSL::Context::Client.new)
       end
+    end
+  end
+
+  describe Halite::FeatureRegister do
+    it "should use a registered feature" do
+      Halite.feature?("null").should be_nil
+      Halite.register_feature "null", TestFeatures::Null
+      Halite.has_feature?("null").should be_true
+      Halite.feature("null").should eq(TestFeatures::Null)
     end
   end
 end
