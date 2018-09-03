@@ -393,20 +393,6 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 
 <ul><li><code>get</code></li><li><code>head</code></li><li><code>post</code></li><li><code>put</code></li><li><code>delete</code></li><li><code>patch</code></li><li><code>options</code></li></ul>
 
-<pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })
-
-<span class="t">Halite</span>.head(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, params: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })
-
-<span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })
-
-<span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/put&quot;</span>, json: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })
-
-<span class="t">Haltie</span>.delete(<span class="s">&quot;http://httpbin.org/delete&quot;</span>, params: { <span class="s">&quot;user_id&quot;</span> => <span class="n">234234</span> })
-
-<span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })
-
-<span class="t">Haltie</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, params: json: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
-
 <h3>Passing Parameters</h3>
 
 <h4>Query string parameters</h4>
