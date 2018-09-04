@@ -110,13 +110,13 @@ module Halite
         if current_chain.result == Feature::Chain::Result::Next
           chain = current_chain
         elsif current_chain.result == Feature::Chain::Result::Return && (response = current_chain.response)
-          return handle_response(response)
+          return handle_response(response, options)
         end
       end
 
       # Make sure return if has response with each interceptor
       if response = chain.response
-        return handle_response(response)
+        return handle_response(response, options)
       end
 
       # Perform original HTTP request if not found any response in interceptors
@@ -132,7 +132,7 @@ module Halite
       conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
       response = Response.new(uri: request.uri, conn: conn_response, history: @history)
-      handle_response(response)
+      handle_response(response, options)
     rescue ex : IO::Timeout
       raise TimeoutError.new(ex.message)
     rescue ex : Socket::Error | Errno
@@ -191,15 +191,8 @@ module Halite
       end
     end
 
-    # Merge options from response (mainly syncing cookies)
-    private def merge_options_from_response(options : Halite::Options, response : Halite::Response) : Halite::Options
-      return options unless response.headers
-      # Store cookies for sessions use
-      options.with_cookies(HTTP::Cookies.from_headers(response.headers))
-    end
-
     # Handles response by reduce the response of feature, add history and update options
-    private def handle_response(response)
+    private def handle_response(response, options)
       response = options.features.reduce(response) do |res, (name, feature)|
         feature.response(res)
       end
@@ -211,6 +204,13 @@ module Halite
       @options = merge_options_from_response(options, response)
 
       response
+    end
+
+    # Merge options from response (mainly syncing cookies)
+    private def merge_options_from_response(options : Halite::Options, response : Halite::Response) : Halite::Options
+      return options unless response.headers
+      # Store cookies for sessions use
+      options.with_cookies(HTTP::Cookies.from_headers(response.headers))
     end
   end
 end
