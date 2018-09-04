@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## [0.7.1] (2018-09-04)
+
+### Changed
+
+- Return empty hash for an empty named tuple.
+
+### Fixed
+
+- Fix send cookie during requesting in session mode.
+- Fix pass current options instead of instance variable.
+- Fix move named tuple extension to src path.
+
 ## [0.7.0] (2018-09-03)
 
 > Features support :tada:
@@ -170,7 +182,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.7.1...HEAD
+[0.7.1]: https://github.com/icyleaf/halite/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/icyleaf/halite/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/icyleaf/halite/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/icyleaf/halite/compare/v0.4.0...v0.5.0
