@@ -292,20 +292,20 @@ describe Halite do
 
   describe ".cookies" do
     it "passes correct `Cookie` header" do
-      client = Halite.cookies(abc: "def").get(SERVER.api("cookies"))
-      client.to_s.should eq("abc: def")
+      response = Halite.cookies(abc: "def").get(SERVER.api("cookies"))
+      response.to_s.should eq("abc: def")
     end
 
     it "properly works with cookie jars from response" do
-      res = Halite.get(SERVER.api("cookies"))
-      client = Halite.cookies(res.cookies).get(SERVER.api("cookies"))
-      client.to_s.should eq("foo: bar")
+      cookies = Halite.get(SERVER.api("cookies")).cookies
+      response = Halite.cookies(cookies).get(SERVER.api("cookies"))
+      response.to_s.should eq("foo: bar")
     end
 
     it "properly merges cookies" do
-      res = Halite.get(SERVER.api("cookies"))
-      client = Halite.cookies(foo: 123, bar: 321).cookies(res.cookies)
-      client.get(SERVER.api("cookies")).to_s.should eq("foo: bar\nbar: 321")
+      cookies = Halite.get(SERVER.api("cookies")).cookies
+      response = Halite.cookies(foo: 123, bar: 321).cookies(cookies).get(SERVER.api("cookies"))
+      response.to_s.should contain("foo: bar\nbar: 321")
     end
   end
 
