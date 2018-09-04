@@ -8,11 +8,11 @@
 [![Document](https://img.shields.io/badge/document-api-brightgreen.svg)](https://icyleaf.github.io/halite/)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
 
-HTTP Requests with a chainable REST API, built-in sessions and loggers written by [Crystal](https://crystal-lang.org/).
-Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client) gem
+HTTP Requests with a chainable REST API, built-in sessions and middlewares written by [Crystal](https://crystal-lang.org/).
+Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client)
 and Python's [requests](https://github.com/requests/requests).
 
-Build in crystal version >= `v0.25.0`, this document valid with latest commit.
+Build in Crystal version >= `v0.25.0`, this document valid with latest commit.
 
 ## Index
 
