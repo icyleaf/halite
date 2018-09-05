@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Fix send cookie during requesting in session mode.
+- Fix send cookie during requesting in session mode. (thanks @[megatux](https://github.com/megatux))
 - Fix pass current options instead of instance variable.
 - Fix move named tuple extension to src path.
 
