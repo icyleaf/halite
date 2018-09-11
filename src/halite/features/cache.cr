@@ -111,8 +111,8 @@ module Halite
 
           if metadata = find_metadata(path)
             status_code = metadata["status_code"].as_i
-            metadata["headers"].as_h.each do |key, value|
-              headers[key] = value.as_s
+            metadata["headers"].as_h.each do |name, value|
+              headers[name] = value.as_s
             end
           end
 

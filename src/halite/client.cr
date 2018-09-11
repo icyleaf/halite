@@ -193,7 +193,7 @@ module Halite
 
     # Handles response by reduce the response of feature, add history and update options
     private def handle_response(response, options)
-      response = options.features.reduce(response) do |res, (name, feature)|
+      response = options.features.reduce(response) do |res, (_, feature)|
         feature.response(res)
       end
 
