@@ -49,15 +49,15 @@ module Halite
         @file = nil
         @path = options.fetch(:path, DEFAULT_PATH).as(String)
         @expires = case expires = options[:expires]?
-                  when Time::Span
-                    expires.as(Time::Span)
-                  when Int32
-                    Time::Span.new(seconds: expires.as(Int32), nanoseconds: 0)
-                  when Nil
-                    nil
-                  else
-                    raise "Only accept Int32 and Time::Span type."
-                  end
+                   when Time::Span
+                     expires.as(Time::Span)
+                   when Int32
+                     Time::Span.new(seconds: expires.as(Int32), nanoseconds: 0)
+                   when Nil
+                     nil
+                   else
+                     raise "Only accept Int32 and Time::Span type."
+                   end
       end
     end
 

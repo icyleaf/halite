@@ -155,7 +155,7 @@ module Halite
     private def make_request_uri(uri : String, options : Halite::Options) : String
       uri = URI.parse uri
       if params = options.params
-        query = HTTP::Params.escape(params)
+        query = HTTP::Params.encode(params)
         uri.query = [uri.query, query].compact.join("&") unless query.empty?
       end
 

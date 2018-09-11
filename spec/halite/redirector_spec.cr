@@ -7,7 +7,7 @@ end
 def response(uri : URI, status_code = 200, headers = {} of String => String, body = "")
   Halite::Response.new(
     uri,
-    HTTP::Client::Response.new(status_code: status_code, body: body, headers: HTTP::Headers.escape(headers))
+    HTTP::Client::Response.new(status_code: status_code, body: body, headers: HTTP::Headers.encode(headers))
   )
 end
 
@@ -18,7 +18,7 @@ end
 def simple_response(status_code = Int32, body = "", headers = {} of String => String | Array(String))
   Halite::Response.new(
     URI.new("http://example.com"),
-    HTTP::Client::Response.new(status_code: status_code, body: body, headers: HTTP::Headers.escape(headers))
+    HTTP::Client::Response.new(status_code: status_code, body: body, headers: HTTP::Headers.encode(headers))
   )
 end
 

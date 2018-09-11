@@ -5,17 +5,17 @@ module HTTP
     # Every parameter added is directly written to an IO, where keys are properly escaped.
     #
     # ```
-    # HTTP::Headers.escape({
+    # HTTP::Headers.encode({
     #   content_type: "application/json",
     # })
     # # => "HTTP::Headers{"Content-Type" => "application/json"}"
     #
-    # HTTP::Headers.escape({
+    # HTTP::Headers.encode({
     #   "conTENT-type": "application/json",
     # })
     # # => "HTTP::Headers{"Content-Type" => "application/json"}"
     # ```
-    def self.escape(data : Hash(String, _) | NamedTuple) : HTTP::Headers
+    def self.encode(data : Hash(String, _) | NamedTuple) : HTTP::Headers
       ::HTTP::Headers.new.tap do |builder|
         data = data.is_a?(NamedTuple) ? data.to_h : data
         data.each do |key, value|
@@ -28,9 +28,9 @@ module HTTP
       end
     end
 
-    # Same as `#escape`
-    def self.escape(**data)
-      escape(data)
+    # Same as `#encode`
+    def self.encode(**data)
+      encode(data)
     end
 
     # Overwrite original `Hash#to_h`

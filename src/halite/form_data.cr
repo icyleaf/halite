@@ -44,7 +44,7 @@ module Halite
 
         Halite::Request::Data.new(io.to_s, builder.content_type)
       else
-        body = HTTP::Params.escape(data)
+        body = HTTP::Params.encode(data)
         Halite::Request::Data.new(body, "application/x-www-form-urlencoded")
       end
     end

@@ -1,9 +1,9 @@
 require "../../spec_helper"
 
 describe HTTP::Headers do
-  describe "#escape" do
+  describe "#encode" do
     it "should accepts Hash(String, _)" do
-      HTTP::Headers.escape({
+      HTTP::Headers.encode({
         "foo"    => "bar",
         "number" => 1,
         "bool"   => false,
@@ -12,7 +12,7 @@ describe HTTP::Headers do
     end
 
     it "should accepts NamedTuple" do
-      HTTP::Headers.escape({
+      HTTP::Headers.encode({
         foo:    "bar",
         number: 1,
         bool:   false,
@@ -21,16 +21,16 @@ describe HTTP::Headers do
     end
 
     it "should accepts tuples as params" do
-      HTTP::Headers.escape(foo: "bar", name: ["foo", "bar"]).size.should eq 2
+      HTTP::Headers.encode(foo: "bar", name: ["foo", "bar"]).size.should eq 2
     end
 
     it "should return as HTTP::Params" do
-      HTTP::Headers.escape({} of String => String).class.should eq HTTP::Headers
+      HTTP::Headers.encode({} of String => String).class.should eq HTTP::Headers
     end
   end
 
   it "accepts array to same key" do
-    h = HTTP::Headers.escape(cookie: ["a=b", "c=d", "e=f"])
+    h = HTTP::Headers.encode(cookie: ["a=b", "c=d", "e=f"])
     h["Cookie"].should eq "a=b,c=d,e=f"
   end
 end

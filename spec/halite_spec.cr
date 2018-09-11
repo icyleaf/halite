@@ -54,7 +54,7 @@ describe Halite do
               characters = ("A".."Z").to_a
               form = Hash(String, String).new.tap { |obj| (size + fuzzer).times { |i| obj[i.to_s] = characters[i % characters.size] } }
               response = Halite.post SERVER.api("echo-body"), form: form
-              response_body = HTTP::Params.escape(form)
+              response_body = HTTP::Params.encode(form)
 
               response.to_s.should eq(response_body)
               response.content_length.should eq(response_body.bytesize)

@@ -2,6 +2,7 @@ require "../../spec_helper"
 
 private struct CacheStruct
   getter metadata, body, chain
+
   def initialize(@body : String, @chain : Halite::Feature::Chain, @metadata : Hash(String, JSON::Any)? = nil)
   end
 end

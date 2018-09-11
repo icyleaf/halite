@@ -40,7 +40,7 @@ module Halite
     USER_AGENT = "Halite/#{Halite::VERSION}"
 
     # Types of options in a Hash
-    alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(Type, Type)
+    alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(String, Type)
 
     property headers : HTTP::Headers
     property cookies : HTTP::Cookies
@@ -326,7 +326,7 @@ module Halite
     private def parse_headers(raw : (Hash(String, _) | NamedTuple | HTTP::Headers)?) : HTTP::Headers
       case raw
       when Hash, NamedTuple
-        HTTP::Headers.escape(raw)
+        HTTP::Headers.encode(raw)
       when HTTP::Headers
         raw.as(HTTP::Headers)
       else
@@ -370,6 +370,12 @@ module Halite
                 v.each_with_object({} of String => Type) do |(ik, iv), obj|
                   obj[ik.to_s] = iv.as(Type)
                 end
+              when NamedTuple
+                hash = {} of String => Type
+                v.each do |nk, nv|
+                  hash[nk.to_s] = nv.as(Type)
+                end
+                hash
               else
                 v.as(Type)
               end
