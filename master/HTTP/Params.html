@@ -367,8 +367,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/4701eb0c8a90915befe2566b1e148a53afe0627b/src/halite/ext/http_params_escape.cr#L2" target="_blank">
-        halite/ext/http_params_escape.cr
+      <a href="https://github.com/icyleaf/halite/blob/63d45a853a12a9b86030a46c8a282d439013b16f/src/halite/ext/http_params_encode.cr#L2" target="_blank">
+        halite/ext/http_params_encode.cr
       </a>
     
     <br/>
@@ -384,14 +384,21 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#escape%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AString-class-method" class="signature"><strong>.escape</strong>(data : Hash(String, _) | NamedTuple) : String</a>
+        <a href="#encode%28named_tuple%3ANamedTuple%29%3AString-class-method" class="signature"><strong>.encode</strong>(named_tuple : NamedTuple) : String</a>
         
           <div class="summary"><p>Returns the given key value pairs as a url-encoded query.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#escape%28data%3AHash%28String%2CHalite%3A%3AOptions%3A%3AType%29%7CNamedTuple%29%3AString-class-method" class="signature"><strong>.escape</strong>(data : Hash(String, Halite::Options::Type) | NamedTuple) : String</a>
+        <a href="#encode%28hash%3AHash%29%3AString-class-method" class="signature"><strong>.encode</strong>(hash : Hash) : String</a>
+        
+          <div class="summary"><p>Returns the given key value pairs as a url-encoded query.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#encode%3AString-class-method" class="signature"><strong>.encode</strong> : String</a>
         
           <div class="summary"><p>Returns the given key value pairs as a url-encoded query.</p></div>
         
@@ -454,49 +461,49 @@
 
   <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="escape(data:Hash(String,_)|NamedTuple):String-class-method">
+    <div class="entry-detail" id="encode(named_tuple:NamedTuple):String-class-method">
       <div class="signature">
         
-        def self.<strong>escape</strong>(data : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>) : String
+        def self.<strong>encode</strong>(named_tuple : <a href="../NamedTuple.html">NamedTuple</a>) : String
 
-        <a class="method-permalink" href="#escape%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AString-class-method">#</a>
+        <a class="method-permalink" href="#encode%28named_tuple%3ANamedTuple%29%3AString-class-method">#</a>
       </div>
       
         <div class="doc"><p>Returns the given key value pairs as a url-encoded query.</p>
 
 <p>Every parameter added is directly written to an IO, where keys and values are properly escaped.</p>
 
-<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.escape({
-  <span class="s">&quot;name&quot;</span>    => <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
-  <span class="s">&quot;skill&quot;</span>   => [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
-  <span class="s">&quot;company&quot;</span> => {
-    <span class="s">&quot;name&quot;</span> => <span class="s">&quot;Keeling Inc&quot;</span>,
+<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.encode({
+  name: <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
+  skill: [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
+  company: {
+    name: <span class="s">&quot;Keeling Inc&quot;</span>,
   },
-  <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar_big.png&quot;</span>),
+  avatar: <span class="t">File</span>.open(<span class="s">&quot;avatar_big.png&quot;</span>
 })
 <span class="c"># =&gt; &quot;name=Lizeth+Gusikowski&amp;skill=ruby&amp;skill=crystal&amp;company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&amp;avatar=avatar_big.png&quot;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/4701eb0c8a90915befe2566b1e148a53afe0627b/src/halite/ext/http_params_escape.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/63d45a853a12a9b86030a46c8a282d439013b16f/src/halite/ext/http_params_encode.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="escape(data:Hash(String,Halite::Options::Type)|NamedTuple):String-class-method">
+    <div class="entry-detail" id="encode(hash:Hash):String-class-method">
       <div class="signature">
         
-        def self.<strong>escape</strong>(data : Hash(String, <a href="../Halite/Options/Type.html">Halite::Options::Type</a>) | <a href="../NamedTuple.html">NamedTuple</a>) : String
+        def self.<strong>encode</strong>(hash : Hash) : String
 
-        <a class="method-permalink" href="#escape%28data%3AHash%28String%2CHalite%3A%3AOptions%3A%3AType%29%7CNamedTuple%29%3AString-class-method">#</a>
+        <a class="method-permalink" href="#encode%28hash%3AHash%29%3AString-class-method">#</a>
       </div>
       
         <div class="doc"><p>Returns the given key value pairs as a url-encoded query.</p>
 
 <p>Every parameter added is directly written to an IO, where keys and values are properly escaped.</p>
 
-<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.escape({
+<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.encode({
   <span class="s">&quot;name&quot;</span>    => <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
   <span class="s">&quot;skill&quot;</span>   => [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
   <span class="s">&quot;company&quot;</span> => {
@@ -509,7 +516,37 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/4701eb0c8a90915befe2566b1e148a53afe0627b/src/halite/ext/http_params_escape.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/63d45a853a12a9b86030a46c8a282d439013b16f/src/halite/ext/http_params_encode.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="encode:String-class-method">
+      <div class="signature">
+        
+        def self.<strong>encode</strong> : String
+
+        <a class="method-permalink" href="#encode%3AString-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the given key value pairs as a url-encoded query.</p>
+
+<p>Every parameter added is directly written to an IO, where keys and values are properly escaped.</p>
+
+<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.encode(
+  name: <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
+  skill: [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
+  company: {
+    name: <span class="s">&quot;Keeling Inc&quot;</span>,
+  },
+  avatar: <span class="t">File</span>.open(<span class="s">&quot;avatar_big.png&quot;</span>
+)
+<span class="c"># =&gt; &quot;name=Lizeth+Gusikowski&amp;skill=ruby&amp;skill=crystal&amp;company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&amp;avatar=avatar_big.png&quot;</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/63d45a853a12a9b86030a46c8a282d439013b16f/src/halite/ext/http_params_encode.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>

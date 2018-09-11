@@ -370,8 +370,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/4701eb0c8a90915befe2566b1e148a53afe0627b/src/halite/ext/http_headers_escape.cr#L2" target="_blank">
-        halite/ext/http_headers_escape.cr
+      <a href="https://github.com/icyleaf/halite/blob/63d45a853a12a9b86030a46c8a282d439013b16f/src/halite/ext/http_headers_encode.cr#L2" target="_blank">
+        halite/ext/http_headers_encode.cr
       </a>
     
     <br/>
@@ -387,16 +387,16 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#escape%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method" class="signature"><strong>.escape</strong>(data : Hash(String, _) | NamedTuple) : HTTP::Headers</a>
+        <a href="#encode%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method" class="signature"><strong>.encode</strong>(data : Hash(String, _) | NamedTuple) : HTTP::Headers</a>
         
           <div class="summary"><p>Returns the given key value pairs as HTTP Headers</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#escape-class-method" class="signature"><strong>.escape</strong></a>
+        <a href="#encode-class-method" class="signature"><strong>.encode</strong></a>
         
-          <div class="summary"><p>Same as <code><a href="../HTTP/Headers.html#escape-class-method">#escape</a></code></p></div>
+          <div class="summary"><p>Same as <code><a href="../HTTP/Headers.html#encode-class-method">#encode</a></code></p></div>
         
       </li>
     
@@ -469,24 +469,24 @@
 
   <h2>Class Method Detail</h2>
   
-    <div class="entry-detail" id="escape(data:Hash(String,_)|NamedTuple):HTTP::Headers-class-method">
+    <div class="entry-detail" id="encode(data:Hash(String,_)|NamedTuple):HTTP::Headers-class-method">
       <div class="signature">
         
-        def self.<strong>escape</strong>(data : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>) : <a href="../HTTP/Headers.html">HTTP::Headers</a>
+        def self.<strong>encode</strong>(data : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>) : <a href="../HTTP/Headers.html">HTTP::Headers</a>
 
-        <a class="method-permalink" href="#escape%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method">#</a>
+        <a class="method-permalink" href="#encode%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method">#</a>
       </div>
       
         <div class="doc"><p>Returns the given key value pairs as HTTP Headers</p>
 
 <p>Every parameter added is directly written to an IO, where keys are properly escaped.</p>
 
-<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.escape({
+<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.encode({
   content_type: <span class="s">&quot;application/json&quot;</span>,
 })
 <span class="c"># =&gt; &quot;HTTP::Headers{&quot;Content-Type&quot; =&gt; &quot;application/json&quot;}&quot;</span>
 
-<span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.escape({
+<span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.encode({
   <span class="s">&quot;conTENT-type&quot;</span>: <span class="s">&quot;application/json&quot;</span>,
 })
 <span class="c"># =&gt; &quot;HTTP::Headers{&quot;Content-Type&quot; =&gt; &quot;application/json&quot;}&quot;</span></code></pre></div>
@@ -494,25 +494,25 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/4701eb0c8a90915befe2566b1e148a53afe0627b/src/halite/ext/http_headers_escape.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/63d45a853a12a9b86030a46c8a282d439013b16f/src/halite/ext/http_headers_encode.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="escape-class-method">
+    <div class="entry-detail" id="encode-class-method">
       <div class="signature">
         
-        def self.<strong>escape</strong>
+        def self.<strong>encode</strong>
 
-        <a class="method-permalink" href="#escape-class-method">#</a>
+        <a class="method-permalink" href="#encode-class-method">#</a>
       </div>
       
-        <div class="doc"><p>Same as <code><a href="../HTTP/Headers.html#escape-class-method">#escape</a></code></p></div>
+        <div class="doc"><p>Same as <code><a href="../HTTP/Headers.html#encode-class-method">#encode</a></code></p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/4701eb0c8a90915befe2566b1e148a53afe0627b/src/halite/ext/http_headers_escape.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/63d45a853a12a9b86030a46c8a282d439013b16f/src/halite/ext/http_headers_encode.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -535,7 +535,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/4701eb0c8a90915befe2566b1e148a53afe0627b/src/halite/ext/http_headers_escape.cr#L37" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/63d45a853a12a9b86030a46c8a282d439013b16f/src/halite/ext/http_headers_encode.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>
