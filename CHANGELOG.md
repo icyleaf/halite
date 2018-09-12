@@ -27,8 +27,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Change instance `Halite::Client` with block behavior. [#33](https://github.com/icyleaf/halite/issues/33)
-- Renamed argument name `adapter` to `format` in `#logger` chainable method.
+- [API Change] Change instance `Halite::Client` with block behavior. [#33](https://github.com/icyleaf/halite/issues/33)
+- [API Change] Renamed argument name `adapter` to `format` in `#logger` chainable method.
 - Move logger into features.
 
 ### Added
@@ -50,8 +50,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Set `logger` to nil when instance a `Halite::Options`, it throws a `Halite::Error` exception if enable `logging`.
-- Change `Halite::Options` accepts argument inside. no ffect for users. [#27](https://github.com/icyleaf/halite/pull/27)
+- [API Change] Set `logger` to nil when instance a `Halite::Options`, it throws a `Halite::Error` exception if enable `logging`.
+- Change `Halite::Options` accepts argument inside. no effect for users. [#27](https://github.com/icyleaf/halite/pull/27)
 - Wrap all exception class into a module, better for reading document.
 
 ### Fixed
@@ -68,7 +68,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - New logger system and json logger support, see [#19](https://github.com/icyleaf/halite/pull/19).
-- Change verb request behavior:
+- [API Change] Change verb request behavior:
   - `get`, `head` only accepts `#params` argument.
   - `post`, `put`, `delete`, `patch`, `options` accepts `#params`, `#form`, `#json` and `#raw` arguments.
 
@@ -80,7 +80,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Remove `#mime_type` duplicate with `#content_type` in `Halite::Response`.
+- [API Change] Remove `#mime_type` duplicate with `#content_type` in `Halite::Response`.
 - Change write log file use append mode by default, it could be change by param.
 - Change logger formatter to easy identify category(request/response).
 
