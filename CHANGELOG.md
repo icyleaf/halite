@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## [0.7.2] (2018-09-14)
+
+### Changed
+
+- [API Change] Renamed `#to_h` to `#to_flat_h` to avoid confict in `HTTP::Params` extension. [#39](https://github.com/icyleaf/halite/issues/39)
+
+### Fixed
+
+- Fix cast from NamedTuple(work: String) to Halite::Options::Type failed with params/json/form. [#38](https://github.com/icyleaf/halite/issues/38)
+
 ## [0.7.1] (2018-09-04)
 
 ### Changed
@@ -182,7 +192,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.7.1...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.7.2...HEAD
+[0.7.2]: https://github.com/icyleaf/halite/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/icyleaf/halite/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/icyleaf/halite/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/icyleaf/halite/compare/v0.5.0...v0.6.0
