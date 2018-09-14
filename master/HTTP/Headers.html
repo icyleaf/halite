@@ -370,7 +370,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/0ac0ed49a1ceb2696c3cd5fe2dfb287e553089f1/src/halite/ext/http_headers_encode.cr#L2" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/dfae94709a5321e6c7abb32c81246a68366f3a5f/src/halite/ext/http_headers_encode.cr#L2" target="_blank">
         halite/ext/http_headers_encode.cr
       </a>
     
@@ -408,9 +408,9 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#to_h-instance-method" class="signature"><strong>#to_h</strong></a>
+        <a href="#to_flat_h-instance-method" class="signature"><strong>#to_flat_h</strong></a>
         
-          <div class="summary"><p>Overwrite original <code>Hash#to_h</code></p></div>
+          <div class="summary"><p>Similar as <code>Hahs#to_h</code> but return <code>String</code> if it has one value of the key.</p></div>
         
       </li>
     
@@ -494,7 +494,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/0ac0ed49a1ceb2696c3cd5fe2dfb287e553089f1/src/halite/ext/http_headers_encode.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/dfae94709a5321e6c7abb32c81246a68366f3a5f/src/halite/ext/http_headers_encode.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -512,7 +512,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/0ac0ed49a1ceb2696c3cd5fe2dfb287e553089f1/src/halite/ext/http_headers_encode.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/dfae94709a5321e6c7abb32c81246a68366f3a5f/src/halite/ext/http_headers_encode.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -522,20 +522,24 @@
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="to_h-instance-method">
+    <div class="entry-detail" id="to_flat_h-instance-method">
       <div class="signature">
         
-        def <strong>to_h</strong>
+        def <strong>to_flat_h</strong>
 
-        <a class="method-permalink" href="#to_h-instance-method">#</a>
+        <a class="method-permalink" href="#to_flat_h-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Overwrite original <code>Hash#to_h</code></p></div>
+        <div class="doc"><p>Similar as <code>Hahs#to_h</code> but return <code>String</code> if it has one value of the key.</p>
+
+<pre><code>headers <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>{<span class="s">&quot;Accepts&quot;</span> => [<span class="s">&quot;application/json&quot;</span>, <span class="s">&quot;text/html&quot;</span>], <span class="s">&quot;Content-Type&quot;</span> => [<span class="s">&quot;text/html&quot;</span>]}
+headers[<span class="s">&quot;Accepts&quot;</span>]      <span class="c"># =&gt; [&quot;application/json&quot;, &quot;text/html&quot;]</span>
+headers[<span class="s">&quot;Content-Type&quot;</span>] <span class="c"># =&gt; &quot;text/html&quot;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/0ac0ed49a1ceb2696c3cd5fe2dfb287e553089f1/src/halite/ext/http_headers_encode.cr#L37" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/dfae94709a5321e6c7abb32c81246a68366f3a5f/src/halite/ext/http_headers_encode.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
