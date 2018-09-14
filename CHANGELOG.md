@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.7.2] (2018-09-14)
 
+> Minor bugfix :bug:
+
 ### Changed
 
 - [API Change] Renamed `#to_h` to `#to_flat_h` to avoid confict in `HTTP::Params` extension. [#39](https://github.com/icyleaf/halite/issues/39)
