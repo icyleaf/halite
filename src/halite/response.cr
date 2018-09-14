@@ -93,7 +93,7 @@ module Halite
 
     # Return status_code, headers and body in a array
     def to_a
-      [@conn.status_code, @conn.headers.to_h, to_s]
+      [@conn.status_code, @conn.headers, to_s]
     end
 
     # Return String eagerly consume the entire body as a string
@@ -102,7 +102,7 @@ module Halite
     end
 
     def inspect
-      "#<#{self.class} #{version} #{status_code} #{status_message} #{headers.to_h}>"
+      "#<#{self.class} #{version} #{status_code} #{status_message} #{headers.to_flat_h}>"
     end
 
     def to_s(io)

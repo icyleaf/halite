@@ -55,7 +55,7 @@ class MockServer < HTTP::Server
         "verb"    => context.request.method,
         "url"     => context.request.resource,
         "query"   => context.request.query,
-        "headers" => context.request.headers.to_h,
+        "headers" => context.request.headers.to_flat_h,
       }
 
       context.response.status_code = 200

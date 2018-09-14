@@ -168,7 +168,7 @@ module Halite
       File.open(File.join(path, "metadata.json"), "w") do |f|
         f.puts({
           "status_code" => response.status_code,
-          "headers"     => response.headers.to_h,
+          "headers"     => response.headers.to_flat_h,
         }.to_json)
       end
     end

@@ -33,8 +33,14 @@ module HTTP
       encode(data)
     end
 
-    # Overwrite original `Hash#to_h`
-    def to_h
+    # Similar as `Hahs#to_h` but return `String` if it has one value of the key.
+    #
+    # ```
+    # headers = HTTP::Headers{"Accepts" => ["application/json", "text/html"], "Content-Type" => ["text/html"]}
+    # headers["Accepts"]      # => ["application/json", "text/html"]
+    # headers["Content-Type"] # => "text/html"
+    # ```
+    def to_flat_h
       @hash.each_with_object({} of String => String | Array(String)) do |(key, values), obj|
         obj[key.name] = values.size == 1 ? values[0].as(String) : values.as(Array(String))
       end

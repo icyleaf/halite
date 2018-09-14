@@ -27,10 +27,16 @@ describe HTTP::Headers do
     it "should return as HTTP::Params" do
       HTTP::Headers.encode({} of String => String).class.should eq HTTP::Headers
     end
+
+    it "accepts array to same key" do
+      h = HTTP::Headers.encode(cookie: ["a=b", "c=d", "e=f"])
+      h["Cookie"].should eq "a=b,c=d,e=f"
+    end
   end
 
-  it "accepts array to same key" do
-    h = HTTP::Headers.encode(cookie: ["a=b", "c=d", "e=f"])
-    h["Cookie"].should eq "a=b,c=d,e=f"
+  describe "#to_flat_h" do
+    flat_h = HTTP::Headers{"Accepts" => ["application/json", "text/html"], "Content-Type" => ["text/html"]}.to_flat_h
+    flat_h["Accepts"].should eq(["application/json", "text/html"])
+    flat_h["Content-Type"].should eq("text/html")
   end
 end
