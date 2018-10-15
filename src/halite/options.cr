@@ -359,31 +359,60 @@ module Halite
         return new_{{ attr.id }} unless {{ attr.id }} = raw
 
         if {{ attr.id }}.responds_to?(:each)
-          {{ attr.id }}.each do |k, v|
-            new_{{ attr.id }}[k.to_s] =
-              case v
-              when Array
-                v.each_with_object([] of Type) do |e, obj|
-                  obj << e.as(Type)
-                end
-              when Hash
-                v.each_with_object({} of String => Type) do |(ik, iv), obj|
-                  obj[ik.to_s] = iv.as(Type)
-                end
-              when NamedTuple
-                hash = {} of String => Type
-                v.each do |nk, nv|
-                  hash[nk.to_s] = nv.as(Type)
-                end
-                hash
-              else
-                v.as(Type)
-              end
+          {{ attr.id }}.each do |key, value|
+            new_{{ attr.id }}[key.to_s] = case value
+                                          when Array
+                                            cast_hash(value.as(Array))
+                                          when Hash
+                                            cast_hash(value.as(Hash))
+                                          when NamedTuple
+                                            cast_hash(value.as(NamedTuple))
+                                          when Type
+                                            value
+                                          else
+                                            value.as(Type)
+                                          end
           end
         end
 
         new_{{ attr.id }}
       end
     {% end %}
+
+    private def cast_hash(raw : Array) : Options::Type
+      raw.each_with_object([] of Type) do |value, obj|
+        obj << case value
+        when Array
+          cast_hash(value.as(Array))
+        when Hash
+          cast_hash(value.as(Hash))
+        when NamedTuple
+          cast_hash(value.as(NamedTuple))
+        else
+          value.as(Type)
+        end
+      end.as(Type)
+    end
+
+    private def cast_hash(raw : Hash) : Options::Type
+      raw.each_with_object({} of String => Type) do |(key, value), obj|
+        if key.responds_to?(:to_s)
+          obj[key.to_s] = case value
+                          when Array
+                            cast_hash(value.as(Array))
+                          when Hash
+                            cast_hash(value.as(Hash))
+                          when NamedTuple
+                            cast_hash(value.as(NamedTuple))
+                          else
+                            value.as(Type)
+                          end
+        end
+      end.as(Type)
+    end
+
+    private def cast_hash(raw : NamedTuple) : Options::Type
+      cast_hash(raw.to_h)
+    end
   end
 end

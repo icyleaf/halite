@@ -76,6 +76,11 @@ describe Halite do
         response = Halite.post(SERVER.api("form"), raw: "example=testing-form")
         response.to_s.should contain("example: testing-form")
       end
+
+      it "should easy to request with json data" do
+        response = Halite.post(SERVER.api("form"), json: {"job" => { "title" => ["foo", "bar"], "info" => {gender: "male"}}})
+        response.to_s.should contain(%Q({"job":{"title":["foo","bar"],"info":{"gender":"male"}}}))
+      end
     end
 
     context "uploading file" do
