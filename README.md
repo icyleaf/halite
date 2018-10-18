@@ -470,12 +470,12 @@ urls.each do |url|
     r.raise_for_status
     p r.body
   rescue ex : Halite::ClientError | Halite::ServerError
-    p "#{ex.message} (#{ex.class})"
+    p "[#{ex.status_code}] #{ex.status_message} (#{ex.class})"
   end
 end
 
-# => "404 not found error with url: https://httpbin.org/status/404  (Halite::ClientError)"
-# => "500 internal server error error with url: https://httpbin.org/status/500?foo=bar  (Halite::ServerError)"
+# => "[404] not found error with url: https://httpbin.org/status/404  (Halite::ClientError)"
+# => "[500] internal server error error with url: https://httpbin.org/status/500?foo=bar  (Halite::ServerError)"
 # => ""
 ```
 
