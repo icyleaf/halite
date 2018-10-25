@@ -58,7 +58,7 @@ module Halite
       end
     end
 
-    # @return `URI` with all componentes but query being normalized.
+    # @return `URI` with all components but query being normalized.
     private def normalize_uri(uri : String) : URI
       URI.parse(uri)
     end

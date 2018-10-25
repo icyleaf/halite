@@ -7,9 +7,9 @@ module Halite
   #
   # It has the following options:
   #
-  # - `file`: Load cache from file. it conflict with `path` and `expries`.
+  # - `file`: Load cache from file. it conflict with `path` and `expires`.
   # - `path`: The path of cache, default is "/tmp/halite/cache/"
-  # - `expires`: The expires time of cache, default is nerver expires.
+  # - `expires`: The expires time of cache, default is never expires.
   # - `debug`: The debug mode of cache, default is `true`
   #
   # With debug mode, cached response it always included some headers information:

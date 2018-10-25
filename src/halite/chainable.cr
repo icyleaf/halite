@@ -333,7 +333,7 @@ module Halite
     #
     # Available features to review all subclasses of `Halite::Feature`.
     #
-    # #### Use json logger
+    # #### Use JSON logger
     #
     # ```
     # Halite.use("logging", format: "json")
