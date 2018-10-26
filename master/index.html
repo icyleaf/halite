@@ -338,11 +338,11 @@
 <a href="https://icyleaf.github.io/halite/" target="_blank"><img src="https://img.shields.io/badge/document-api-brightgreen.svg" alt="Document"/></a>
 <a href="https://circleci.com/gh/icyleaf/halite" target="_blank"><img src="https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat" alt="Build Status"/></a></p>
 
-<p>HTTP Requests with a chainable REST API, built-in sessions and middlewares written by <a href="https://crystal-lang.org/" target="_blank">Crystal</a>.
+<p>HTTP Requests with a chainable REST API, built-in sessions and middleware written by <a href="https://crystal-lang.org/" target="_blank">Crystal</a>.
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/bac824b" target="_blank">#bac824b</a> (2018-10-18 14:03:29 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/1f8d075" target="_blank">#1f8d075</a> (2018-10-26 09:51:16 +0800).</p>
 
 <h2>Index</h2>
 
@@ -394,7 +394,7 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 
 <p>See also all <a href="https://icyleaf.github.io/halite/Halite/Chainable.html" target="_blank">chainable methods</a>.</p>
 
-<p>Many other HTTP methods are avaiabled as well:</p>
+<p>Many other HTTP methods are available as well:</p>
 
 <ul><li><code>get</code></li><li><code>head</code></li><li><code>post</code></li><li><code>put</code></li><li><code>delete</code></li><li><code>patch</code></li><li><code>options</code></li></ul>
 
@@ -441,7 +441,7 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
   <span class="s">&quot;album_name&quot;</span> => <span class="s">&quot;samples&quot;</span>
 })</code></pre>
 
-<p>Multiple files aslo can be uploaded using both ways above, it depend on web server.</p>
+<p>Multiple files can also be uploaded using both ways above, it depend on web server.</p>
 
 <h4>JSON data</h4>
 
@@ -480,7 +480,7 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 <span class="c"># Or</span>
 <span class="t">Halite</span>.headers({ private_token: <span class="s">&quot;T0k3n&quot;</span> }).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
 
-<h5>2. Use the <code>headers</code> argument in availabled request method:</h5>
+<h5>2. Use the <code>headers</code> argument in the available request method:</h5>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/anything&quot;</span> , headers: { private_token: <span class="s">&quot;T0k3n&quot;</span> })
 
@@ -532,7 +532,7 @@ pp r.cookies
 <h5>Disabling unsafe redirects</h5>
 
 <p>It only redirects with <code>GET</code>, <code>HEAD</code> request and returns a <code>300</code>, <code>301</code>, <code>302</code> by default, otherwise it will raise a <code>Halite::StateError</code>.
-We can diasble it to set <code>:strict</code> to <code>false</code> if we want any method(verb) requests, in which case the <code>GET</code> method(verb) will be used for
+We can disable it to set <code>:strict</code> to <code>false</code> if we want any method(verb) requests, in which case the <code>GET</code> method(verb) will be used for
 that redirect:</p>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.follow(strict: <span class="n">false</span>)
@@ -541,7 +541,7 @@ that redirect:</p>
 <h5>History</h5>
 
 <p><code>Response#history</code> property list contains the <code>Response</code> objects that were created in order to complete the request.
-The list is orderd from the orderst to the most recent response.</p>
+The list is ordered from the oldest to most recent response.</p>
 
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.follow
           .get(<span class="s">&quot;http://httpbin.org/redirect/3&quot;</span>)
@@ -631,7 +631,7 @@ r.parse <span class="c"># simplily by default</span>
 <h4>Parsing Content</h4>
 
 <p><code><a href="Halite/Response.html">Halite::Response</a></code> has a MIME type adapter system that you can use a decoder to parse the content,
-we can inherit <code>Halite::MimeTypes::Adapter</code> make our adapter:</p>
+we can inherit <code>Halite::MimeTypes::Adapter</code> to make our adapter:</p>
 
 <pre><code class="language-crystal"><span class="c"># Define a MIME type adapter</span>
 <span class="k">class</span> <span class="t">YAMLAdapter</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">MimeType</span><span class="t">::</span><span class="t">Adapter</span>
@@ -748,7 +748,7 @@ We can enable per operation logging by configuring them through the chaining API
 <p>By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to <code>STDOUT</code> on DEBUG level.
 You can configuring the following options:</p>
 
-<ul><li><code>logger</code>: Instance your <code>Halite::Logger::Abstract</code>, check <a href="#use-the-custom-logger" target="_blank">Use the custom logger</a>.</li><li><code>format</code>: Outputing format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>file</code>: Write to file with path, works with <code>format</code>.</li><li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code>. (append to bottom, create it if file is not exist)</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
+<ul><li><code>logger</code>: Instance your <code>Halite::Logger::Abstract</code>, check <a href="#use-the-custom-logger" target="_blank">Use the custom logger</a>.</li><li><code>format</code>: Output format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>file</code>: Write to file with path, works with <code>format</code>.</li><li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code>. (append to bottom, create it if file is not exist)</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
 
 <blockquote><strong>NOTE</strong>: <code>format</code> (<code>file</code> and <code>filemode</code>) and <code>logger</code> are conflict, you can not use both.</blockquote>
 
@@ -778,7 +778,7 @@ You can configuring the following options:</p>
 
 <h4>JSON-formatted logging</h4>
 
-<p>It has JSON formatted for developer friendly logger.</p>
+<p>It has JSON formatted for developer friendly logging.</p>
 
 <pre><code><span class="t">Halite</span>.logger(format: <span class="s">&quot;json&quot;</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
@@ -821,12 +821,12 @@ Here has two methods must be implement: <code>#request</code> and <code>#respons
 <span class="c"># =&gt; 2017-12-13 16:40:13 +08:00 | &gt;&gt; | GET | http://httpbin.org/get?name=foobar</span>
 <span class="c"># =&gt; 2017-12-13 16:40:15 +08:00 | &lt;&lt; | 200 | http://httpbin.org/get?name=foobar application/json</span></code></pre>
 
-<h3>Middlewares</h3>
+<h3>Middleware</h3>
 
-<p>Halite now has middlewares (a.k.a features) support providing a simple way to plug in intermediate custom logic
-in your HTTP client and allowing you to monitor outgoing requests, and incoming responses, even use interceptor.</p>
+<p>Halite now has middleware (a.k.a features) support providing a simple way to plug in intermediate custom logic
+in your HTTP client, allowing you to monitor outgoing requests, incoming responses, and use it as an interceptor.</p>
 
-<p>Avaiabled features:</p>
+<p>Available features:</p>
 
 <ul><li>logging (Yes, logging is based on feature, cool, aha!)</li><li>cache (local storage, speed up in development)</li></ul>
 
@@ -871,7 +871,7 @@ client.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {n
 
 <h4>Write a interceptor</h4>
 
-<p>Halite features has a killer feature is the *<em>interceptor</em>, Use <code><a href="Halite/Feature/Chain.html">Halite::Feature::Chain</a></code> to process with two result:</p>
+<p>Halite's killer feature is the <strong>interceptor</strong>, Use <code><a href="Halite/Feature/Chain.html">Halite::Feature::Chain</a></code> to process with two result:</p>
 
 <ul><li><code>next</code>: perform and run next interceptor</li><li><code>return</code>: perform and return</li></ul>
 
@@ -905,11 +905,11 @@ r.status_code               <span class="c"># =&gt; 404</span>
 r.headers[<span class="s">&quot;X-Powered-By&quot;</span>]   <span class="c"># =&gt; Halite</span>
 r.body                      <span class="c"># =&gt; {&quot;user-agent&quot;:&quot;Halite/0.6.0&quot;}</span></code></pre>
 
-<p>For more implementation details about the feature layer, see the <a href="https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2" target="_blank">feature</a> class and <a href="https://github.com/icyleaf/halite/tree/master/src/halite/features" target="_blank">examples</a> and <a href="https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23" target="_blank">specs</a>.</p>
+<p>For more implementation details about the feature layer, see the <a href="https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2" target="_blank">Feature</a> class and <a href="https://github.com/icyleaf/halite/tree/master/src/halite/features" target="_blank">examples</a> and <a href="https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23" target="_blank">specs</a>.</p>
 
 <h3>Link Headers</h3>
 
-<p>Many HTTP APIs feature <a href="https://tools.ietf.org/html/rfc5988" target="_blank">Link headers</a>. Github uses
+<p>Many HTTP APIs feature <a href="https://tools.ietf.org/html/rfc5988" target="_blank">Link headers</a>. GitHub uses
 these for <a href="https://developer.github.com/v3/#pagination" target="_blank">pagination</a> in their API, for example:</p>
 
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get <span class="s">&quot;https://api.github.com/users/icyleaf/repos?page=1&amp;per_page=2&quot;</span>
