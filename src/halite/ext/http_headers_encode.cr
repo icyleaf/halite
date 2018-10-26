@@ -20,7 +20,7 @@ module HTTP
         data = data.is_a?(NamedTuple) ? data.to_h : data
         data.each do |key, value|
           key = key.to_s.gsub("_", "-").split("-").map { |v| v.capitalize }.join("-")
-          # skip invaild value of content length
+          # skip invalid value of content length
           next if key == "Content-Length" && !(value =~ /^\d+$/)
 
           builder.add key, value.is_a?(Array(String)) ? value : value.to_s

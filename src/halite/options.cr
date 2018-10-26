@@ -174,7 +174,7 @@ module Halite
 
     # Returns `Options` self with feature name and options.
     def with_features(name : String, opts : NamedTuple)
-      raise UnRegisterFeatureError.new("Not avaiable feature: #{name}") unless klass = Halite.feature?(name)
+      raise UnRegisterFeatureError.new("Not available feature: #{name}") unless klass = Halite.feature?(name)
       @features[name] = klass.new(**opts)
       self
     end
@@ -187,7 +187,7 @@ module Halite
 
     # Returns `Logger` self with given format and the options of format.
     def with_logger(format : String, **opts)
-      raise UnRegisterLoggerFormatError.new("Not avaiable logging format: #{format}") unless format_cls = Logging[format]?
+      raise UnRegisterLoggerFormatError.new("Not available logging format: #{format}") unless format_cls = Logging[format]?
       with_logger(format_cls.new(**opts))
     end
 

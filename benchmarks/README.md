@@ -2,7 +2,7 @@
 
 Benchmarks performed inspired from excon's benchmarking tool.
 
-## Enviroments
+## Environments
 
 - MacBook Pro (Retina, 15-inch, Mid 2015), 2.2 GHz Intel Core i7, 16 GB 1600 MHz DDR3.
 - Crystal 0.26.0 (llvm 6.0.1)

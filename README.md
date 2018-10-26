@@ -8,7 +8,7 @@
 [![Document](https://img.shields.io/badge/document-api-brightgreen.svg)](https://icyleaf.github.io/halite/)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
 
-HTTP Requests with a chainable REST API, built-in sessions and middlewares written by [Crystal](https://crystal-lang.org/).
+HTTP Requests with a chainable REST API, built-in sessions and middleware written by [Crystal](https://crystal-lang.org/).
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client)
 and Python's [requests](https://github.com/requests/requests).
 
@@ -109,7 +109,7 @@ Halite.header(private_token: "T0k3n")
 
 See also all [chainable methods](https://icyleaf.github.io/halite/Halite/Chainable.html).
 
-Many other HTTP methods are avaiabled as well:
+Many other HTTP methods are available as well:
 
 - `get`
 - `head`
@@ -172,7 +172,7 @@ Halite.post("http://httpbin.org/post", form: {
 })
 ```
 
-Multiple files aslo can be uploaded using both ways above, it depend on web server.
+Multiple files can also be uploaded using both ways above, it depend on web server.
 
 #### JSON data
 
@@ -217,7 +217,7 @@ Halite.headers({ "private_token" => "T0k3n" }).get("http://httpbin.org/get")
 Halite.headers({ private_token: "T0k3n" }).get("http://httpbin.org/get")
 ```
 
-##### 2. Use the `headers` argument in availabled request method:
+##### 2. Use the `headers` argument in the available request method:
 
 ```crystal
 Halite.get("http://httpbin.org/anything" , headers: { private_token: "T0k3n" })
@@ -281,7 +281,7 @@ Halite.follow(2)
 ##### Disabling unsafe redirects
 
 It only redirects with `GET`, `HEAD` request and returns a `300`, `301`, `302` by default, otherwise it will raise a `Halite::StateError`.
-We can diasble it to set `:strict` to `false` if we want any method(verb) requests, in which case the `GET` method(verb) will be used for
+We can disable it to set `:strict` to `false` if we want any method(verb) requests, in which case the `GET` method(verb) will be used for
 that redirect:
 
 ```crystal
@@ -292,7 +292,7 @@ Halite.follow(strict: false)
 ##### History
 
 `Response#history` property list contains the `Response` objects that were created in order to complete the request.
-The list is orderd from the orderst to the most recent response.
+The list is ordered from the oldest to most recent response.
 
 ```crystal
 r = Halite.follow
@@ -406,7 +406,7 @@ r.parse # simplily by default
 #### Parsing Content
 
 `Halite::Response` has a MIME type adapter system that you can use a decoder to parse the content,
-we can inherit `Halite::MimeTypes::Adapter` make our adapter:
+we can inherit `Halite::MimeTypes::Adapter` to make our adapter:
 
 ```crystal
 # Define a MIME type adapter
@@ -538,7 +538,7 @@ By default, Halite will logging all outgoing HTTP requests and their responses(w
 You can configuring the following options:
 
 - `logger`: Instance your `Halite::Logger::Abstract`, check [Use the custom logger](#use-the-custom-logger).
-- `format`: Outputing format, built-in `common` and `json`, you can write your own.
+- `format`: Output format, built-in `common` and `json`, you can write your own.
 - `file`: Write to file with path, works with `format`.
 - `filemode`: Write file mode, works with `format`, by default is `a`. (append to bottom, create it if file is not exist)
 - `skip_request_body`: By default is `false`.
@@ -576,7 +576,7 @@ Halite.logger(skip_request_body: true, skip_response_body: true)
 
 #### JSON-formatted logging
 
-It has JSON formatted for developer friendly logger.
+It has JSON formatted for developer friendly logging.
 
 ```
 Halite.logger(format: "json")
@@ -625,12 +625,12 @@ Halite.logger(format: "custom")
 # => 2017-12-13 16:40:15 +08:00 | << | 200 | http://httpbin.org/get?name=foobar application/json
 ```
 
-### Middlewares
+### Middleware
 
-Halite now has middlewares (a.k.a features) support providing a simple way to plug in intermediate custom logic
-in your HTTP client and allowing you to monitor outgoing requests, and incoming responses, even use interceptor.
+Halite now has middleware (a.k.a features) support providing a simple way to plug in intermediate custom logic
+in your HTTP client, allowing you to monitor outgoing requests, incoming responses, and use it as an interceptor.
 
-Avaiabled features:
+Available features:
 
 - logging (Yes, logging is based on feature, cool, aha!)
 - cache (local storage, speed up in development)
@@ -680,7 +680,7 @@ client.post("http://httpbin.org/post", form: {name: "foo"})
 
 #### Write a interceptor
 
-Halite features has a killer feature is the **interceptor*, Use `Halite::Feature::Chain` to process with two result:
+Halite's killer feature is the **interceptor**, Use `Halite::Feature::Chain` to process with two result:
 
 - `next`: perform and run next interceptor
 - `return`: perform and return
@@ -717,11 +717,11 @@ r.headers["X-Powered-By"]   # => Halite
 r.body                      # => {"user-agent":"Halite/0.6.0"}
 ```
 
-For more implementation details about the feature layer, see the [feature](https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features) and [specs](https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23).
+For more implementation details about the feature layer, see the [Feature](https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features) and [specs](https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23).
 
 ### Link Headers
 
-Many HTTP APIs feature [Link headers](https://tools.ietf.org/html/rfc5988). Github uses
+Many HTTP APIs feature [Link headers](https://tools.ietf.org/html/rfc5988). GitHub uses
 these for [pagination](https://developer.github.com/v3/#pagination) in their API, for example:
 
 ```crystal

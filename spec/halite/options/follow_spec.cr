@@ -1,14 +1,14 @@
 require "../../spec_helper"
 
 describe Halite::Follow do
-  describe "#initlize" do
-    it "shoulds works" do
+  describe "#initialize" do
+    it "should work" do
       follow = Halite::Follow.new(1, false)
       follow.hops.should eq(1)
       follow.strict.should be_false
     end
 
-    it "shoulds sets one argument" do
+    it "should set one argument" do
       follow = Halite::Follow.new(1)
       follow.hops.should eq(1)
       follow.strict.should be_true
@@ -20,7 +20,7 @@ describe Halite::Follow do
   end
 
   describe "setter" do
-    it "should works" do
+    it "should work" do
       follow = Halite::Follow.new
       follow.hops = 3
       follow.hops.should eq(3)

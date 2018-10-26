@@ -1,26 +1,26 @@
 require "../../spec_helper"
 
 describe Halite::Timeout do
-  describe "#initlize" do
-    it "shoulds sets with Int32" do
+  describe "#initialize" do
+    it "should set with Int32" do
       timeout = Halite::Timeout.new(1, 2)
       timeout.connect.should eq(1.0)
       timeout.read.should eq(2)
     end
 
-    it "shoulds sets with Float64" do
+    it "should set with Float64" do
       timeout = Halite::Timeout.new(1.2, 3.4)
       timeout.connect.should eq(1.2)
       timeout.read.should eq(3.4)
     end
 
-    it "shoulds sets with Time::Span" do
+    it "should set with Time::Span" do
       timeout = Halite::Timeout.new(1.seconds, 1.minutes)
       timeout.connect.should eq(1.0)
       timeout.read.should eq(60.0)
     end
 
-    it "shoulds sets different format" do
+    it "should set different format" do
       timeout = Halite::Timeout.new(1, 1.minutes)
       timeout.connect.should eq(1.0)
       timeout.read.should eq(60.0)
@@ -30,7 +30,7 @@ describe Halite::Timeout do
       timeout.read.should eq(1.0)
     end
 
-    it "shoulds sets one argument" do
+    it "should set one argument" do
       timeout = Halite::Timeout.new(1)
       timeout.connect.should eq(1.0)
       timeout.read.should be_nil
@@ -46,7 +46,7 @@ describe Halite::Timeout do
   end
 
   describe "setter" do
-    it "should sets with Int32" do
+    it "should set with Int32" do
       timeout = Halite::Timeout.new
       timeout.connect = 3
       timeout.connect.should eq(3.0)
@@ -55,7 +55,7 @@ describe Halite::Timeout do
       timeout.read.should eq(12.0)
     end
 
-    it "should sets with Float64" do
+    it "should set with Float64" do
       timeout = Halite::Timeout.new(1, 2)
       timeout.connect = 3.0
       timeout.connect.should eq(3.0)
@@ -64,7 +64,7 @@ describe Halite::Timeout do
       timeout.read.should eq(12.0)
     end
 
-    it "should sets with Time::Span" do
+    it "should set with Time::Span" do
       timeout = Halite::Timeout.new(1, 2)
       timeout.connect = 3.seconds
       timeout.connect.should eq(3.0)
