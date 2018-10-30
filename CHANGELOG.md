@@ -9,11 +9,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## [0.7.4] (2018-10-30)
+
+### Fixed
+
+- Fix typos in document and comments. [#43](https://github.com/icyleaf/halite/issues/43) (thanks @[GloverDonovan](https://github.com/GloverDonovan))
+
 ## [0.7.3] (2018-10-18)
 
 ### Fixed
 
-- Fix json payloads with sub hash/array/namedtupled. [#41](https://github.com/icyleaf/halite/issues/39) (thanks @[fusillicode](https://github.com/fusillicode))
+- Fix json payloads with sub hash/array/namedtupled. [#41](https://github.com/icyleaf/halite/issues/41) (thanks @[fusillicode](https://github.com/fusillicode))
 
 ## [0.7.2] (2018-09-14)
 
