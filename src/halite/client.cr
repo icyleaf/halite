@@ -71,7 +71,9 @@ module Halite
     def self.new(&block)
       options = Options.new
       instance = Client.new(options)
-      with instance yield
+      value = with instance yield
+      instance = value if value
+      instance
     end
 
     # Instance a new client
