@@ -38,7 +38,7 @@ private def test_options
     read_timeout: 3.2,
     follow: 2,
     follow_strict: false,
-    ssl: OpenSSL::SSL::Context::Client.new,
+    tls: OpenSSL::SSL::Context::Client.new,
   )
 end
 
@@ -63,7 +63,7 @@ describe Halite::Options do
       options.follow.strict.should eq(Halite::Follow::STRICT)
       options.follow_strict.should eq(Halite::Follow::STRICT)
 
-      options.ssl.should be_nil
+      options.tls.should be_nil
       options.params.should eq({} of String => Halite::Options::Type)
       options.form.should eq({} of String => Halite::Options::Type)
       options.json.should eq({} of String => Halite::Options::Type)
@@ -163,7 +163,7 @@ describe Halite::Options do
     options.follow.strict.should eq(Halite::Follow::STRICT)
     options.follow_strict.should eq(Halite::Follow::STRICT)
 
-    options.ssl.should be_nil
+    options.tls.should be_nil
     options.params.should eq({} of String => Halite::Options::Type)
     options.form.should eq({} of String => Halite::Options::Type)
     options.json.should eq({} of String => Halite::Options::Type)
