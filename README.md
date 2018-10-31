@@ -352,11 +352,11 @@ The Halite supports HTTPS via Crystal's built-in OpenSSL module. All you have to
 To use client certificates, you can pass in a custom `OpenSSL::SSL::Context::Client` object containing the certificates you wish to use:
 
 ```crystal
-ssl = OpenSSL::SSL::Context::Client.new
-ssl.ca_certificates = File.expand_path("~/client.crt")
-ssl.private_key = File.expand_path("~/client.key")
+tls = OpenSSL::SSL::Context::Client.new
+tls.ca_certificates = File.expand_path("~/client.crt")
+tls.private_key = File.expand_path("~/client.key")
 
-Halite.get("https://httpbin.org/anything", ssl: ssl)
+Halite.get("https://httpbin.org/anything", tls: tls)
 ```
 
 ### Response Handling
@@ -448,7 +448,7 @@ end
 - For any status code, a `Halite::Response` will be returned.
 - If request timeout, a `Halite::TimeoutError` will be raised.
 - If a request exceeds the configured number of maximum redirections, a `Halite::TooManyRedirectsError` will raised.
-- If request uri is http and configured ssl context, a `Halite::RequestError` will raised.
+- If request uri is http and configured tls context, a `Halite::RequestError` will raised.
 - If request uri is invalid, a `Halite::ConnectionError`/`Halite::UnsupportedMethodError`/`Halite::UnsupportedSchemeError` will raised.
 
 #### Raise for status code

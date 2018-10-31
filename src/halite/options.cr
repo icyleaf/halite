@@ -46,7 +46,7 @@ module Halite
     property cookies : HTTP::Cookies
     property timeout : Timeout
     property follow : Follow
-    property ssl : OpenSSL::SSL::Context::Client?
+    property tls : OpenSSL::SSL::Context::Client?
 
     property params : Hash(String, Type)
     property form : Hash(String, Type)
@@ -66,13 +66,13 @@ module Halite
                  read_timeout : (Int32 | Float64 | Time::Span)? = nil,
                  follow : Int32? = nil,
                  follow_strict : Bool? = nil,
-                 ssl : OpenSSL::SSL::Context::Client? = nil,
+                 tls : OpenSSL::SSL::Context::Client? = nil,
                  logging = false)
       timeout = Timeout.new(connect: connect_timeout, read: read_timeout)
       follow = Follow.new(hops: follow, strict: follow_strict)
       new(headers: headers, cookies: cookies, params: params, form: form,
         json: json, raw: raw, timeout: timeout, follow: follow,
-        ssl: ssl, logging: logging)
+        tls: tls, logging: logging)
     end
 
     def initialize(*,
@@ -84,7 +84,7 @@ module Halite
                    @raw : String? = nil,
                    @timeout = Timeout.new,
                    @follow = Follow.new,
-                   @ssl : OpenSSL::SSL::Context::Client? = nil,
+                   @tls : OpenSSL::SSL::Context::Client? = nil,
                    @features = {} of String => Feature,
                    @logging = false)
       @headers = default_headers.merge!(parse_headers(headers))
@@ -275,7 +275,7 @@ module Halite
       @form.merge!(options.form) if options.form
       @json.merge!(options.json) if options.json
       @raw = options.raw if options.raw
-      @ssl = options.ssl if options.ssl
+      @tls = options.tls if options.tls
 
       self
     end
@@ -291,7 +291,7 @@ module Halite
       @timeout = Timeout.new
       @follow = Follow.new
       @features = {} of String => Feature
-      @ssl = nil
+      @tls = nil
 
       self
     end

@@ -53,10 +53,10 @@ module Halite
                  raw : String? = nil,
                  timeout = Timeout.new,
                  follow = Follow.new,
-                 ssl : OpenSSL::SSL::Context::Client? = nil,
+                 tls : OpenSSL::SSL::Context::Client? = nil,
                  logging = false)
       Client.new(Options.new(headers: headers, cookies: cookies, params: params,
-        form: form, json: json, raw: raw, ssl: ssl,
+        form: form, json: json, raw: raw, tls: tls,
         timeout: timeout, follow: follow, logging: logging))
     end
 
@@ -127,9 +127,9 @@ module Halite
 
     # Perform a single (no follow) HTTP request
     private def perform(request : Halite::Request, options : Halite::Options) : Halite::Response
-      raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.ssl
+      raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.tls
 
-      conn = HTTP::Client.new(request.domain, options.ssl)
+      conn = HTTP::Client.new(request.domain, options.tls)
       conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
       conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)

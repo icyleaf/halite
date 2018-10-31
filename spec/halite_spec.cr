@@ -451,9 +451,9 @@ describe Halite do
       end
     end
 
-    it "should throws a Halite::RequestError exception with http request via ssl" do
+    it "should throws a Halite::RequestError exception with http request via tls" do
       expect_raises Halite::RequestError, "SSL context given for HTTP URI = http://google.com" do
-        Halite.get("http://google.com", ssl: OpenSSL::SSL::Context::Client.new)
+        Halite.get("http://google.com", tls: OpenSSL::SSL::Context::Client.new)
       end
     end
   end
