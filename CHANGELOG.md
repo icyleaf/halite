@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - [API Change] Rename argument name `ssl` to `tls` in `Halite::Client`/`Halite::Options`/`Halite::Chainable`.
 
-## Fixed
+### Fixed
 
 - Fix new a `Halite::Client` instance with empty block return `Nil`. [#44](https://github.com/icyleaf/halite/issues/44)
 
