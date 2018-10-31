@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## [0.7.5] (2018-10-31)
+
+### Changed
+
+- [API Change] Rename argument name `ssl` to `tls` in `Halite::Client`/`Halite::Options`/`Halite::Chainable`.
+
+## Fixed
+
+- Fix new a `Halite::Client` instance with empty block return `Nil`. [#44](https://github.com/icyleaf/halite/issues/44)
+
 ## [0.7.4] (2018-10-30)
 
 ### Fixed
@@ -206,7 +216,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.7.4...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.7.5...HEAD
+[0.7.5]: https://github.com/icyleaf/halite/compare/v0.7.4...v0.7.5
 [0.7.4]: https://github.com/icyleaf/halite/compare/v0.7.3...v0.7.4
 [0.7.3]: https://github.com/icyleaf/halite/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/icyleaf/halite/compare/v0.7.1...v0.7.2
