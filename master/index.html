@@ -342,7 +342,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/e947e3c" target="_blank">#e947e3c</a> (2018-10-31 17:24:37 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/40e2e59" target="_blank">#40e2e59</a> (2018-10-31 17:31:25 +0800).</p>
 
 <h2>Index</h2>
 
@@ -594,11 +594,11 @@ the <code>read</code> timeout is the number of seconds the client will wait for 
 
 <p>To use client certificates, you can pass in a custom <code>OpenSSL::SSL::Context::Client</code> object containing the certificates you wish to use:</p>
 
-<pre><code class="language-crystal">ssl <span class="o">=</span> <span class="t">OpenSSL</span><span class="t">::</span><span class="t">SSL</span><span class="t">::</span><span class="t">Context</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
-ssl.ca_certificates <span class="o">=</span> <span class="t">File</span>.expand_path(<span class="s">&quot;~/client.crt&quot;</span>)
-ssl.private_key <span class="o">=</span> <span class="t">File</span>.expand_path(<span class="s">&quot;~/client.key&quot;</span>)
+<pre><code class="language-crystal">tls <span class="o">=</span> <span class="t">OpenSSL</span><span class="t">::</span><span class="t">SSL</span><span class="t">::</span><span class="t">Context</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
+tls.ca_certificates <span class="o">=</span> <span class="t">File</span>.expand_path(<span class="s">&quot;~/client.crt&quot;</span>)
+tls.private_key <span class="o">=</span> <span class="t">File</span>.expand_path(<span class="s">&quot;~/client.key&quot;</span>)
 
-<span class="t">Halite</span>.get(<span class="s">&quot;https://httpbin.org/anything&quot;</span>, ssl: ssl)</code></pre>
+<span class="t">Halite</span>.get(<span class="s">&quot;https://httpbin.org/anything&quot;</span>, tls: tls)</code></pre>
 
 <h3>Response Handling</h3>
 
@@ -666,7 +666,7 @@ filename <span class="o">=</span> r.headers[<span class="s">&quot;Content-Dispos
 
 <h3>Error Handling</h3>
 
-<ul><li>For any status code, a <code><a href="Halite/Response.html">Halite::Response</a></code> will be returned.</li><li>If request timeout, a <code>Halite::TimeoutError</code> will be raised.</li><li>If a request exceeds the configured number of maximum redirections, a <code>Halite::TooManyRedirectsError</code> will raised.</li><li>If request uri is http and configured ssl context, a <code>Halite::RequestError</code> will raised.</li><li>If request uri is invalid, a <code>Halite::ConnectionError</code>/<code>Halite::UnsupportedMethodError</code>/<code>Halite::UnsupportedSchemeError</code> will raised.</li></ul>
+<ul><li>For any status code, a <code><a href="Halite/Response.html">Halite::Response</a></code> will be returned.</li><li>If request timeout, a <code>Halite::TimeoutError</code> will be raised.</li><li>If a request exceeds the configured number of maximum redirections, a <code>Halite::TooManyRedirectsError</code> will raised.</li><li>If request uri is http and configured tls context, a <code>Halite::RequestError</code> will raised.</li><li>If request uri is invalid, a <code>Halite::ConnectionError</code>/<code>Halite::UnsupportedMethodError</code>/<code>Halite::UnsupportedSchemeError</code> will raised.</li></ul>
 
 <h4>Raise for status code</h4>
 
