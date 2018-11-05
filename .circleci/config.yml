@@ -1,11 +1,4 @@
 version: 2
-workflows:
-  version: 2
-  test:
-    jobs:
-      - test_crystal_0_27
-      - test_crystal_0_26
-      - test_crystal_0_25
 jobs:
   test_crystal_0_27:
     docker:
@@ -17,9 +10,6 @@ jobs:
       GIT_REPO: "git@github.com:icyleaf/halite.git"
       GH_REF: "https://github.com/icyleaf/halite"
       GH_URL: "https://icyleaf.github.io/halite"
-    branches:
-      ignore:
-        - gh-pages
     working_directory: ~/halite
     steps:
       - checkout
@@ -48,9 +38,6 @@ jobs:
   test_crystal_0_26:
     docker:
       - image: "crystallang/crystal:0.26.1"
-    branches:
-      ignore:
-        - gh-pages
     working_directory: ~/halite
     steps:
       - checkout
@@ -63,9 +50,6 @@ jobs:
   test_crystal_0_25:
     docker:
       - image: "crystallang/crystal:0.25.0"
-    branches:
-      ignore:
-        - gh-pages
     working_directory: ~/halite
     steps:
       - checkout
@@ -75,3 +59,22 @@ jobs:
       - run:
           name: "Specs"
           command: crystal spec
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - test_crystal_0_25:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+      - test_crystal_0_26:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+      - test_crystal_0_27:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
