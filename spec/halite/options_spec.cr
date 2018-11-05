@@ -1,5 +1,4 @@
 require "../spec_helper"
-require "tempfile"
 
 private class SimpleFeature < Halite::Feature
   def request(request)
@@ -271,11 +270,11 @@ describe Halite::Options do
     it "should became a file logger" do
       Halite::Logging.register "simple", SimpleLogger
 
-      tempfile = Tempfile.new("halite_logger")
-
-      options = Halite::Options.new.with_logger(format: "simple", file: tempfile.path, filemode: "w")
-      logger = options.features["logging"].as(Halite::Logging)
-      logger.writer.should be_a(SimpleLogger)
+      with_tempfile("halite_logger") do |file|
+        options = Halite::Options.new.with_logger(format: "simple", file: file, filemode: "w")
+        logger = options.features["logging"].as(Halite::Logging)
+        logger.writer.should be_a(SimpleLogger)
+      end
     end
 
     it "throws an exception with unregister logger format" do
