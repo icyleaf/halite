@@ -1,6 +1,21 @@
 require "spec"
 require "./support/mock_server"
 require "../src/halite"
+{% if Crystal::VERSION < "0.27.0" %}
+  require "tempfile"
+{% end %}
+
+def with_tempfile(filename)
+  {% if Crystal::VERSION < "0.27.0" %}
+    tempfile = Tempfile.new("halite-spec-logging")
+    tempfile.close
+    yield tempfile.path
+    tempfile.delete
+  {% else %}
+    path = File.tempname("halite-spec-logging")
+    yield path
+  {% end %}
+end
 
 module TestFeatures
   class Null < Halite::Feature; end

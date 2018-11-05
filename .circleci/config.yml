@@ -1,8 +1,15 @@
 version: 2
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test_crystal_0_27
+      - test_crystal_0_26
+      - test_crystal_0_25
 jobs:
-  build:
+  test_crystal_0_27:
     docker:
-      - image: crystallang/crystal
+      - image: "crystallang/crystal:0.27.0"
     environment:
       DOCS_PATH: "docs"
       GIT_USER: "icyleaf"
@@ -38,3 +45,33 @@ jobs:
             git add -A .
             git commit --allow-empty -m "Updating documents"
             git push origin HEAD:gh-pages
+  test_crystal_0_26:
+    docker:
+      - image: "crystallang/crystal:0.26.1"
+    branches:
+      ignore:
+        - gh-pages
+    working_directory: ~/halite
+    steps:
+      - checkout
+      - run:
+          name: "Crystal Version"
+          command: crystal version
+      - run:
+          name: "Specs"
+          command: crystal spec
+  test_crystal_0_25:
+    docker:
+      - image: "crystallang/crystal:0.25.0"
+    branches:
+      ignore:
+        - gh-pages
+    working_directory: ~/halite
+    steps:
+      - checkout
+      - run:
+          name: "Crystal Version"
+          command: crystal version
+      - run:
+          name: "Specs"
+          command: crystal spec
