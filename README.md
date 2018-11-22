@@ -443,6 +443,8 @@ File.open(filename, "w") do |f|
 end
 ```
 
+> Use byte to byte will cost more memory and slow down the speed, here has no solution for now, the reason is Crystal only accept streaming by using block with [HTTP::Client](https://crystal-lang.org/api/0.27.0/HTTP/Client.html) (search keyword: **Streaming**).
+
 ### Error Handling
 
 - For any status code, a `Halite::Response` will be returned.
