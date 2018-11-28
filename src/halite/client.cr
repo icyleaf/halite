@@ -55,9 +55,20 @@ module Halite
                  follow = Follow.new,
                  tls : OpenSSL::SSL::Context::Client? = nil,
                  logging = false)
-      Client.new(Options.new(headers: headers, cookies: cookies, params: params,
-        form: form, json: json, raw: raw, tls: tls,
-        timeout: timeout, follow: follow, logging: logging))
+
+      options = Options.new(
+        headers: headers,
+        cookies: cookies,
+        params: params,
+        form: form,
+        json: json,
+        raw: raw,
+        tls: tls,
+        timeout: timeout,
+        follow: follow
+      )
+      options.logging = logging
+      new(options)
     end
 
     # Instance a new client with block
@@ -69,8 +80,7 @@ module Halite
     # end
     # ```
     def self.new(&block)
-      options = Options.new
-      instance = Client.new(options)
+      instance = new(Options.new)
       value = with instance yield
       instance = value if value
       instance

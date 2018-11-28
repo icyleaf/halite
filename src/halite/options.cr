@@ -39,6 +39,33 @@ module Halite
     # Request user-agent by default
     USER_AGENT = "Halite/#{Halite::VERSION}"
 
+
+    def self.new(headers : (Hash(String, _) | NamedTuple)? = nil,
+                 cookies : (Hash(String, _) | NamedTuple)? = nil,
+                 params : (Hash(String, _) | NamedTuple)? = nil,
+                 form : (Hash(String, _) | NamedTuple)? = nil,
+                 json : (Hash(String, _) | NamedTuple)? = nil,
+                 raw : String? = nil,
+                 connect_timeout : (Int32 | Float64 | Time::Span)? = nil,
+                 read_timeout : (Int32 | Float64 | Time::Span)? = nil,
+                 follow : Int32? = nil,
+                 follow_strict : Bool? = nil,
+                 tls : OpenSSL::SSL::Context::Client? = nil,
+                 features = {} of String => Feature)
+      new(
+        headers: headers,
+        cookies: cookies,
+        params: params,
+        form: form,
+        json: json,
+        raw: raw,
+        timeout: Timeout.new(connect: connect_timeout, read: read_timeout),
+        follow: Follow.new(hops: follow, strict: follow_strict),
+        tls: tls,
+        features: features
+      )
+    end
+
     # Types of options in a Hash
     alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(String, Type)
 
@@ -53,27 +80,8 @@ module Halite
     property json : Hash(String, Type)
     property raw : String?
 
-    getter features : Hash(String, Feature)
-    getter logging : Bool
-
-    def self.new(headers : (Hash(String, _) | NamedTuple)? = nil,
-                 cookies : (Hash(String, _) | NamedTuple)? = nil,
-                 params : (Hash(String, _) | NamedTuple)? = nil,
-                 form : (Hash(String, _) | NamedTuple)? = nil,
-                 json : (Hash(String, _) | NamedTuple)? = nil,
-                 raw : String? = nil,
-                 connect_timeout : (Int32 | Float64 | Time::Span)? = nil,
-                 read_timeout : (Int32 | Float64 | Time::Span)? = nil,
-                 follow : Int32? = nil,
-                 follow_strict : Bool? = nil,
-                 tls : OpenSSL::SSL::Context::Client? = nil,
-                 logging = false)
-      timeout = Timeout.new(connect: connect_timeout, read: read_timeout)
-      follow = Follow.new(hops: follow, strict: follow_strict)
-      new(headers: headers, cookies: cookies, params: params, form: form,
-        json: json, raw: raw, timeout: timeout, follow: follow,
-        tls: tls, logging: logging)
-    end
+    property features : Hash(String, Feature)
+    getter logging : Bool = false
 
     def initialize(*,
                    headers : (Hash(String, _) | NamedTuple)? = nil,
@@ -85,13 +93,25 @@ module Halite
                    @timeout = Timeout.new,
                    @follow = Follow.new,
                    @tls : OpenSSL::SSL::Context::Client? = nil,
-                   @features = {} of String => Feature,
-                   @logging = false)
+                   @features = {} of String => Feature)
       @headers = default_headers.merge!(parse_headers(headers))
       @cookies = parse_cookies(cookies)
       @params = parse_params(params)
       @form = parse_form(form)
       @json = parse_json(json)
+    end
+
+    def initialize(*,
+                   @headers : HTTP::Headers,
+                   @cookies : HTTP::Cookies,
+                   @params : Hash(String, Type),
+                   @form : Hash(String, Type),
+                   @json : Hash(String, Type),
+                   @raw : String? = nil,
+                   @timeout = Timeout.new,
+                   @follow = Follow.new,
+                   @tls : OpenSSL::SSL::Context::Client? = nil,
+                   @features = {} of String => Feature)
     end
 
     # Alias `with_headers` method.
@@ -241,41 +261,50 @@ module Halite
     #
     # By defaults, use `Logging::Common` as logger output.
     def logging=(logging : Bool)
+      if logging
+        with_features("logging") unless @features.has_key?("logging")
+      else
+        @features.delete("logging")
+      end
       @logging = logging
-      logging ? with_features("logging") : @features.delete("logging")
     end
 
-    # Return if enable logging
-    def logging?
-      @logging
+    # Merge with other `Options` and return new `Halite::Options`
+    def merge(other : Halite::Options) : Halite::Options
+      options = Halite::Options.new
+      options.merge!(dup)
+      options.merge!(other)
+      options
     end
 
-    # Merge with other `Options`
-    def merge(options : Halite::Options) : Halite::Options
-      if options.headers != default_headers
+    # Merge with other `Options` and return self
+    def merge!(other : Halite::Options) : Halite::Options
+      if other.headers != default_headers
         # Remove default key to make sure it is not to overwrite new one.
-        default_headers.each do |key, _|
-          options.headers.delete(key) if options.headers[key] == default_headers[key]
+        default_headers.each do |key, value|
+          other.headers.delete(key) if other.headers.get(key) == value
         end
 
-        @headers.merge!(options.headers)
+        @headers.merge!(other.headers)
       end
 
       @cookies.fill_from_headers(@headers) if @headers
 
-      if options.timeout.connect || options.timeout.read
-        @timeout = options.timeout
+      if other.timeout.connect || other.timeout.read
+        @timeout = other.timeout
       end
 
-      if options.follow.updated?
-        @follow = options.follow
+      if other.follow.updated?
+        @follow = other.follow
       end
 
-      @params.merge!(options.params) if options.params
-      @form.merge!(options.form) if options.form
-      @json.merge!(options.json) if options.json
-      @raw = options.raw if options.raw
-      @tls = options.tls if options.tls
+      @features.merge!(other.features) unless other.features.empty?
+      @params.merge!(other.params) if other.params
+      @form.merge!(other.form) if other.form
+      @json.merge!(other.json) if other.json
+      @raw = other.raw if other.raw
+      @tls = other.tls if other.tls
+      logging = other.logging
 
       self
     end
@@ -294,6 +323,23 @@ module Halite
       @tls = nil
 
       self
+    end
+
+    def dup
+      options = Halite::Options.new(
+        headers: @headers.dup,
+        cookies: @cookies,
+        params: @params,
+        form: @form,
+        json: @json,
+        raw: @raw,
+        timeout: @timeout,
+        follow: @follow,
+        features: @features.dup,
+        tls: @tls
+      )
+      options.logging = @logging
+      options
     end
 
     # Return default headers
