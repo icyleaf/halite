@@ -26,18 +26,15 @@ module Halite
   # ### Setup with block
   #
   # ```
-  # client = Halite::Client.new |options|
-  #   options.headers = {
-  #     private_token: "bdf39d82661358f80b31b67e6f89fee4"
-  #   }
-  #   options.timeout.connect = 3.minutes
-  #   options.logging = true
+  # client = Halite::Client.new do
+  #   basic_auth "name", "foo"
+  #   headers content_type: "application/jsong"
+  #   read_timeout 3.minutes
+  #   logger true
   # end
   # ```
   class Client
     include Chainable
-
-    property options
 
     # Instance a new client
     #
@@ -53,12 +50,21 @@ module Halite
                  raw : String? = nil,
                  timeout = Timeout.new,
                  follow = Follow.new,
-                 tls : OpenSSL::SSL::Context::Client? = nil,
-                 logging = false)
-      Client.new(Options.new(headers: headers, cookies: cookies, params: params,
-        form: form, json: json, raw: raw, tls: tls,
-        timeout: timeout, follow: follow, logging: logging))
+                 tls : OpenSSL::SSL::Context::Client? = nil)
+      new(Options.new(
+        headers: headers,
+        cookies: cookies,
+        params: params,
+        form: form,
+        json: json,
+        raw: raw,
+        tls: tls,
+        timeout: timeout,
+        follow: follow
+      ))
     end
+
+    property options
 
     # Instance a new client with block
     #
@@ -69,8 +75,7 @@ module Halite
     # end
     # ```
     def self.new(&block)
-      options = Options.new
-      instance = Client.new(options)
+      instance = new(Options.new)
       value = with instance yield
       instance = value if value
       instance
