@@ -1,5 +1,4 @@
 require "./spec_helper"
-require "tempfile"
 
 describe Halite do
   describe ".new" do
@@ -340,23 +339,23 @@ describe Halite do
     end
 
     it "sets logging into file" do
-      tempfile = Tempfile.new("halite-spec-logging")
+      with_tempfile("halite-spec-logging") do |file|
+        client = Halite.logger(file: file, skip_response_body: true)
+        client.options.features.has_key?("logging").should be_true
+        client.options.features["logging"].should be_a(Halite::Logging)
+        logger = client.options.features["logging"].as(Halite::Logging)
+        logger.writer.should be_a(Halite::Logging::Common)
+        logger.writer.skip_request_body.should be_false
+        logger.writer.skip_response_body.should be_true
+        logger.writer.skip_benchmark.should be_false
+        logger.writer.colorize.should be_true
 
-      client = Halite.logger(file: tempfile.path, skip_response_body: true)
-      client.options.features.has_key?("logging").should be_true
-      client.options.features["logging"].should be_a(Halite::Logging)
-      logger = client.options.features["logging"].as(Halite::Logging)
-      logger.writer.should be_a(Halite::Logging::Common)
-      logger.writer.skip_request_body.should be_false
-      logger.writer.skip_response_body.should be_true
-      logger.writer.skip_benchmark.should be_false
-      logger.writer.colorize.should be_true
-
-      client.get SERVER.endpoint
-      logs = File.read_lines(tempfile.path).join("\n")
-      logs.should contain("request")
-      logs.should contain("response")
-      logs.should_not contain("<!doctype html><body>Mock Server is running.</body></html>")
+        client.get SERVER.endpoint
+        logs = File.read_lines(file).join("\n")
+        logs.should contain("request")
+        logs.should contain("response")
+        logs.should_not contain("<!doctype html><body>Mock Server is running.</body></html>")
+      end
     end
 
     it "sets logging with custom logger" do
@@ -451,9 +450,9 @@ describe Halite do
       end
     end
 
-    it "should throws a Halite::RequestError exception with http request via ssl" do
+    it "should throws a Halite::RequestError exception with http request via tls" do
       expect_raises Halite::RequestError, "SSL context given for HTTP URI = http://google.com" do
-        Halite.get("http://google.com", ssl: OpenSSL::SSL::Context::Client.new)
+        Halite.get("http://google.com", tls: OpenSSL::SSL::Context::Client.new)
       end
     end
   end

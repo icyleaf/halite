@@ -19,7 +19,7 @@ describe Halite::Client do
 
     it "should initial with block" do
       client = Halite::Client.new do
-        headers({private_token: "token"})
+        headers(private_token: "token")
         timeout(read: 2.minutes, connect: 40)
       end
 
@@ -28,6 +28,11 @@ describe Halite::Client do
       client.options.headers["Private-Token"].should eq("token")
       client.options.timeout.connect.should eq(40)
       client.options.timeout.read.should eq(120)
+    end
+
+    it "should initial with empty block" do
+      client = Halite::Client.new {}
+      client.should be_a(Halite::Client)
     end
   end
 

@@ -1,5 +1,4 @@
 require "../spec_helper"
-require "tempfile"
 
 private class SimpleFeature < Halite::Feature
   def request(request)
@@ -38,7 +37,7 @@ private def test_options
     read_timeout: 3.2,
     follow: 2,
     follow_strict: false,
-    ssl: OpenSSL::SSL::Context::Client.new,
+    tls: OpenSSL::SSL::Context::Client.new,
   )
 end
 
@@ -63,7 +62,7 @@ describe Halite::Options do
       options.follow.strict.should eq(Halite::Follow::STRICT)
       options.follow_strict.should eq(Halite::Follow::STRICT)
 
-      options.ssl.should be_nil
+      options.tls.should be_nil
       options.params.should eq({} of String => Halite::Options::Type)
       options.form.should eq({} of String => Halite::Options::Type)
       options.json.should eq({} of String => Halite::Options::Type)
@@ -163,7 +162,7 @@ describe Halite::Options do
     options.follow.strict.should eq(Halite::Follow::STRICT)
     options.follow_strict.should eq(Halite::Follow::STRICT)
 
-    options.ssl.should be_nil
+    options.tls.should be_nil
     options.params.should eq({} of String => Halite::Options::Type)
     options.form.should eq({} of String => Halite::Options::Type)
     options.json.should eq({} of String => Halite::Options::Type)
@@ -271,11 +270,11 @@ describe Halite::Options do
     it "should became a file logger" do
       Halite::Logging.register "simple", SimpleLogger
 
-      tempfile = Tempfile.new("halite_logger")
-
-      options = Halite::Options.new.with_logger(format: "simple", file: tempfile.path, filemode: "w")
-      logger = options.features["logging"].as(Halite::Logging)
-      logger.writer.should be_a(SimpleLogger)
+      with_tempfile("halite_logger") do |file|
+        options = Halite::Options.new.with_logger(format: "simple", file: file, filemode: "w")
+        logger = options.features["logging"].as(Halite::Logging)
+        logger.writer.should be_a(SimpleLogger)
+      end
     end
 
     it "throws an exception with unregister logger format" do
