@@ -280,19 +280,19 @@ module Halite
 
     # Merge with other `Options` and return self
     def merge!(other : Halite::Options) : Halite::Options
-      if other.headers != default_headers
-        # Remove default key to make sure it is not to overwrite new one.
-        default_headers.each do |key, value|
-          other.headers.delete(key) if other.headers.get?(key) == value
-        end
+      # if other.headers != default_headers
+      #   # Remove default key to make sure it is not to overwrite new one.
+      #   default_headers.each do |key, value|
+      #     other.headers.delete(key) if other.headers.get?(key) == value
+      #   end
 
-        @headers.merge!(other.headers)
-      end
+      #   @headers.merge!(other.headers)
+      # end
+      @headers.merge!(other.headers) if other.headers != default_headers
 
-      # @cookies.fill_from_headers(@headers) if @headers
       other.cookies.each do |cookie|
         @cookies << cookie
-      end
+      end if other.cookies != @cookies
 
       if other.timeout.connect || other.timeout.read
         @timeout = other.timeout

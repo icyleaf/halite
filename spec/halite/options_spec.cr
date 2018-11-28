@@ -163,6 +163,24 @@ describe Halite::Options do
       options.features["logging"].should be_a(Halite::Logging)
       options.features["cache"].should be_a(Halite::Cache)
     end
+
+    it "should keep defaults headers if same as others" do
+      options = Halite::Options.new
+      new_options = options.merge(Halite::Options.new)
+      new_options.headers.should eq(options.default_headers)
+    end
+
+    it "should overwrite exists value of headers from other" do
+      options = Halite::Options.new(headers: {private_token: "foo"})
+      new_options = options.merge(Halite::Options.new(headers: {private_token: "bar"}))
+      new_options.headers.should eq(Halite::Options.new(headers: {private_token: "bar"}).headers)
+    end
+
+    it "should merge new headers from other" do
+      options = Halite::Options.new(headers: {private_token: "foo"})
+      new_options = options.merge(Halite::Options.new(headers: {content_type: "text/html"}))
+      new_options.headers.should eq(Halite::Options.new(headers: {private_token: "foo", content_type: "text/html"}).headers)
+    end
   end
 
   describe "#merge!" do

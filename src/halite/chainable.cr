@@ -407,11 +407,12 @@ module Halite
     DEFAULT_OPTIONS = Halite::Options.new
 
     private def default_options
-      {% if @type.superclass %}
+      options = {% if @type.superclass %}
         DEFAULT_OPTIONS
       {% else %}
         DEFAULT_OPTIONS.clear!
       {% end %}
+      options
     end
 
     private def options_with(headers : (Hash(String, _) | NamedTuple)? = nil,
@@ -420,7 +421,8 @@ module Halite
                              json : (Hash(String, _) | NamedTuple)? = nil,
                              raw : String? = nil,
                              tls : OpenSSL::SSL::Context::Client? = nil)
-      Halite::Options.new(headers: headers, params: params, form: form, json: json, raw: raw, tls: tls)
+      options = Halite::Options.new(headers: headers, params: params, form: form, json: json, raw: raw, tls: tls)
+      default_options.merge!(options)
     end
   end
 end
