@@ -342,7 +342,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/1ffb4cb" target="_blank">#1ffb4cb</a> (2018-11-22 17:16:33 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/234b4bb" target="_blank">#234b4bb</a> (2018-11-28 12:16:23 +0800).</p>
 
 <h2>Index</h2>
 
@@ -663,8 +663,6 @@ filename <span class="o">=</span> r.headers[<span class="s">&quot;Content-Dispos
     f.write_byte byte
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
-
-<blockquote>Use byte to byte will cost more memory and slow down the speed, here has no solution for now, the reason is Crystal only accept streaming by using block with <a href="https://crystal-lang.org/api/0.27.0/HTTP/Client.html" target="_blank">HTTP::Client</a> (search keyword: <strong>Streaming</strong>).</blockquote>
 
 <h3>Error Handling</h3>
 
