@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+> TODO
+
+## [0.8.0] (2018-11-28)
+
 > Compatibility with Crystal 0.27 and bugfix.
 
 ### Fixed
@@ -226,7 +230,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.7.5...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/icyleaf/halite/compare/v0.7.5...v0.8.0
 [0.7.5]: https://github.com/icyleaf/halite/compare/v0.7.4...v0.7.5
 [0.7.4]: https://github.com/icyleaf/halite/compare/v0.7.3...v0.7.4
 [0.7.3]: https://github.com/icyleaf/halite/compare/v0.7.2...v0.7.3
