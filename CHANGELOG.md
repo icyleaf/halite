@@ -13,10 +13,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > Compatibility with Crystal 0.27 and bugfix.
 
+### Changed
+
+- [API Change] Remove `logging` argument in `Halite::Options.new` and `Halite::Client.new`. [#51](https://github.com/icyleaf/halite/pull/51)
+- [API Change] Remove `logging?` method in `Halite::Options`, use `logging` method instead. [#51](https://github.com/icyleaf/halite/pull/51)
+
+### Added
+
+- Added `merge!` and `dup` methods in `Halite::Options`. [#51](https://github.com/icyleaf/halite/pull/51)
+
 ### Fixed
 
-- Fix duplice add "Content-Type" into header during request.
-- Fix non overwrite value of headers use `Halite::Options.merge` method.
+- Fix duplice add "Content-Type" into header during request. [#50](https://github.com/icyleaf/halite/pull/50)
+- Fix non overwrite value of headers use `Halite::Options.merge` method. [#50](https://github.com/icyleaf/halite/pull/50)
+- Fix always overwrite and return merged option in
 
 ### Tested
 
