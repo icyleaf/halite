@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-> TODO
+> Compatibility with Crystal 0.27 and bugfix.
+
+### Fixed
+
+- Fix duplice add "Content-Type" into header during request.
+- Fix non overwrite value of headers use `Halite::Options.merge` method.
+
+### Tested
+
+- Compatibility with Crystal 0.27
+- Added specs with Crystal 0.25, 0.26 and 0.27 in Circle CI.
 
 ## [0.7.5] (2018-10-31)
 
