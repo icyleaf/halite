@@ -207,17 +207,14 @@ module Halite
       # Append history of response if enable follow
       @history << response unless options.follow.hops.zero?
 
-      # Merge headers and cookies from response
-      @options = merge_options_from_response(options, response)
-
-      response
+      store_cookies_from_response(response)
     end
 
-    # Merge options from response (mainly syncing cookies)
-    private def merge_options_from_response(options : Halite::Options, response : Halite::Response) : Halite::Options
-      return options unless response.headers
-      # Store cookies for sessions use
-      options.with_cookies(HTTP::Cookies.from_headers(response.headers))
+    # Store cookies for sessions use from response
+    private def store_cookies_from_response(response : Halite::Response)
+      return response unless response.headers
+      @options.with_cookies(HTTP::Cookies.from_headers(response.headers))
+      response
     end
   end
 end
