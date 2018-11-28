@@ -283,7 +283,7 @@ module Halite
       if other.headers != default_headers
         # Remove default key to make sure it is not to overwrite new one.
         default_headers.each do |key, value|
-          other.headers.delete(key) if other.headers.get(key) == value
+          other.headers.delete(key) if other.headers.get?(key) == value
         end
 
         @headers.merge!(other.headers)
