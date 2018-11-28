@@ -39,7 +39,6 @@ module Halite
     # Request user-agent by default
     USER_AGENT = "Halite/#{Halite::VERSION}"
 
-
     def self.new(headers : (Hash(String, _) | NamedTuple)? = nil,
                  cookies : (Hash(String, _) | NamedTuple)? = nil,
                  params : (Hash(String, _) | NamedTuple)? = nil,
@@ -81,7 +80,6 @@ module Halite
     property raw : String?
 
     property features : Hash(String, Feature)
-    getter logging : Bool = false
 
     def initialize(*,
                    headers : (Hash(String, _) | NamedTuple)? = nil,
@@ -213,7 +211,6 @@ module Halite
 
     # Returns `Logger` self with given logger, depend on `with_features`.
     def with_logger(logger : Halite::Logging::Abstract)
-      @logging = true
       with_features("logging", logger: logger)
       self
     end
@@ -257,6 +254,11 @@ module Halite
       @follow.strict = strict
     end
 
+    # Get logging status
+    def logging : Bool
+      !@features.values.select { |v| v.is_a?(Halite::Logging) }.empty?
+    end
+
     # Quick enable logger
     #
     # By defaults, use `Logging::Common` as logger output.
@@ -266,7 +268,6 @@ module Halite
       else
         @features.delete("logging")
       end
-      @logging = logging
     end
 
     # Merge with other `Options` and return new `Halite::Options`
@@ -288,7 +289,10 @@ module Halite
         @headers.merge!(other.headers)
       end
 
-      @cookies.fill_from_headers(@headers) if @headers
+      # @cookies.fill_from_headers(@headers) if @headers
+      other.cookies.each do |cookie|
+        @cookies << cookie
+      end
 
       if other.timeout.connect || other.timeout.read
         @timeout = other.timeout
@@ -304,7 +308,6 @@ module Halite
       @json.merge!(other.json) if other.json
       @raw = other.raw if other.raw
       @tls = other.tls if other.tls
-      logging = other.logging
 
       self
     end
@@ -325,6 +328,8 @@ module Halite
       self
     end
 
+    # Produces a shallow copy of obj—the instance variables of obj are copied,
+    # but not the objects they reference. dup copies the tainted state of obj.
     def dup
       options = Halite::Options.new(
         headers: @headers.dup,
@@ -335,10 +340,9 @@ module Halite
         raw: @raw,
         timeout: @timeout,
         follow: @follow,
-        features: @features.dup,
+        features: @features,
         tls: @tls
       )
-      options.logging = @logging
       options
     end
 

@@ -70,8 +70,6 @@ describe Halite::Options do
       options.form.should eq({} of String => Halite::Options::Type)
       options.json.should eq({} of String => Halite::Options::Type)
       options.raw.should be_nil
-
-      options.logging.should be_false
     end
 
     it "should initial with original" do
@@ -131,7 +129,6 @@ describe Halite::Options do
           "cache" => Halite::Cache.new.as(Halite::Feature)
         }
       ))
-      options.logging = true
 
       old_options.headers.should eq(HTTP::Headers{"User-Agent" => "spec", "Accept" => "*/*", "Connection" => "keep-alive"})
       old_options.cookies.size.should eq(0)
@@ -144,7 +141,6 @@ describe Halite::Options do
       old_options.json.should eq({"title" => "h3"})
       old_options.raw.should_not be_nil
       old_options.raw.not_nil!.should eq("title=h4")
-      old_options.logging.should be_false
       old_options.features.size.should eq(1)
       old_options.features["logging"].should be_a(Halite::Logging)
       old_options.tls.not_nil!.should_not eq(new_tls)
@@ -162,7 +158,6 @@ describe Halite::Options do
       options.json.should eq({"title" => "3"})
       options.raw.should_not be_nil
       options.raw.not_nil!.should eq("title=4")
-      options.logging.should be_true
       options.tls.not_nil!.should eq(new_tls)
       options.features.size.should eq(2)
       options.features["logging"].should be_a(Halite::Logging)
@@ -189,7 +184,6 @@ describe Halite::Options do
           "cache" => Halite::Cache.new.as(Halite::Feature)
         }
       ))
-      options.logging = true
 
       old_options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec", "Accept" => "*/*", "Connection" => "keep-alive"})
       old_options.cookies.size.should eq(0)
@@ -204,7 +198,6 @@ describe Halite::Options do
       old_options.json.should eq({"title" => "3"})
       old_options.raw.should_not be_nil
       old_options.raw.not_nil!.should eq("title=4")
-      old_options.logging.should be_true
       old_options.tls.not_nil!.should eq(new_tls)
       options.features["logging"].should be_a(Halite::Logging)
       options.features["cache"].should be_a(Halite::Cache)
@@ -222,7 +215,6 @@ describe Halite::Options do
       options.json.should eq({"title" => "3"})
       options.raw.should_not be_nil
       options.raw.not_nil!.should eq("title=4")
-      options.logging.should be_true
       options.tls.not_nil!.should eq(new_tls)
       options.features["logging"].should be_a(Halite::Logging)
       options.features["cache"].should be_a(Halite::Cache)
@@ -255,7 +247,6 @@ describe Halite::Options do
     options.raw.should be_nil
 
     options.features.should eq({} of String => Halite::Feature)
-    options.logging.should be_false
   end
 
   describe "#dup" do
@@ -315,9 +306,9 @@ describe Halite::Options do
     options.features.size.should eq(1)
     options.features["logging"].should be_a(Halite::Logging)
 
-    new_options.logging = true
-    new_options.logging.should be_true
-    options.logging.should be_false
+    new_options.logging = false
+    new_options.logging.should be_false
+    options.logging.should be_true
   end
 
   describe "#with_headers" do
