@@ -255,7 +255,7 @@ module Halite
       if options.headers != default_headers
         # Remove default key to make sure it is not to overwrite new one.
         default_headers.each do |key, _|
-          options.headers.delete(key) if options.headers[key] = default_headers[key]
+          options.headers.delete(key) if options.headers[key] == default_headers[key]
         end
 
         @headers.merge!(options.headers)
