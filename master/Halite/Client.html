@@ -359,12 +359,11 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
 
 <h3>Setup with block</h3>
 
-<pre><code>client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span> <span class="o">|</span>options<span class="o">|</span>
-  options.headers <span class="o">=</span> {
-    private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee4&quot;</span>
-  }
-  options.timeout.connect <span class="o">=</span> <span class="n">3</span>.minutes
-  options.logging <span class="o">=</span> <span class="n">true</span>
+<pre><code>client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span> <span class="k">do</span>
+  basic_auth <span class="s">&quot;name&quot;</span>, <span class="s">&quot;foo&quot;</span>
+  headers content_type: <span class="s">&quot;application/jsong&quot;</span>
+  read_timeout <span class="n">3</span>.minutes
+  logger <span class="n">true</span>
 <span class="k">end</span></code></pre>
 
 
@@ -390,7 +389,7 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/599f8d0503d15a2fffe1d8e8b3dfac5e6b6bcc67/src/halite/client.cr#L37" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/f43427ffcef48bf8df3d6a474614d9fbc2182116/src/halite/client.cr#L36" target="_blank">
         halite/client.cr
       </a>
     
@@ -412,7 +411,7 @@ client.auth(private_token: <span class="s">&quot;bdf39d82661358f80b31b67e6f89fee
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Ccookies%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctimeout%3DTimeout.new%2Cfollow%3DFollow.new%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2Clogging%3Dfalse%29-class-method" class="signature"><strong>.new</strong>(*, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, logging = <span class="n">false</span>)</a>
+        <a href="#new%28%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Ccookies%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctimeout%3DTimeout.new%2Cfollow%3DFollow.new%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29-class-method" class="signature"><strong>.new</strong>(*, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>)</a>
         
           <div class="summary"><p>Instance a new client</p></div>
         
@@ -607,17 +606,17 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/599f8d0503d15a2fffe1d8e8b3dfac5e6b6bcc67/src/halite/client.cr#L88" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f43427ffcef48bf8df3d6a474614d9fbc2182116/src/halite/client.cr#L93" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(*,headers:Hash(String,_)|NamedTuple?=nil,cookies:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,logging=false)-class-method">
+    <div class="entry-detail" id="new(*,headers:Hash(String,_)|NamedTuple?=nil,cookies:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(*, headers : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>? = <span class="n">nil</span>, cookies : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>? = <span class="n">nil</span>, params : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>? = <span class="n">nil</span>, form : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>? = <span class="n">nil</span>, json : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, logging = <span class="n">false</span>)
+        def self.<strong>new</strong>(*, headers : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>? = <span class="n">nil</span>, cookies : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>? = <span class="n">nil</span>, params : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>? = <span class="n">nil</span>, form : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>? = <span class="n">nil</span>, json : Hash(String, _) | <a href="../NamedTuple.html">NamedTuple</a>? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#new%28%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Ccookies%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctimeout%3DTimeout.new%2Cfollow%3DFollow.new%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2Clogging%3Dfalse%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Ccookies%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctimeout%3DTimeout.new%2Cfollow%3DFollow.new%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29-class-method">#</a>
       </div>
       
         <div class="doc"><p>Instance a new client</p>
@@ -627,7 +626,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/599f8d0503d15a2fffe1d8e8b3dfac5e6b6bcc67/src/halite/client.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f43427ffcef48bf8df3d6a474614d9fbc2182116/src/halite/client.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -650,7 +649,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/599f8d0503d15a2fffe1d8e8b3dfac5e6b6bcc67/src/halite/client.cr#L71" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f43427ffcef48bf8df3d6a474614d9fbc2182116/src/halite/client.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -673,7 +672,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/599f8d0503d15a2fffe1d8e8b3dfac5e6b6bcc67/src/halite/client.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f43427ffcef48bf8df3d6a474614d9fbc2182116/src/halite/client.cr#L67" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -689,7 +688,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/599f8d0503d15a2fffe1d8e8b3dfac5e6b6bcc67/src/halite/client.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f43427ffcef48bf8df3d6a474614d9fbc2182116/src/halite/client.cr#L67" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -707,7 +706,7 @@ client <span class="o">=</span> <span class="t">Halite</span><span class="t">::<
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/599f8d0503d15a2fffe1d8e8b3dfac5e6b6bcc67/src/halite/client.cr#L93" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/f43427ffcef48bf8df3d6a474614d9fbc2182116/src/halite/client.cr#L98" target="_blank">View source</a>]
         
       </div>
     </div>
