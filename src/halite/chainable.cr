@@ -173,7 +173,7 @@ module Halite
     # Halite.timeout(3.04, 64)
     #   .get("http://httpbin.org/get")
     # ```
-    def timeout(*, connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil) : Halite::Client
+    def timeout(connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil) : Halite::Client
       branch(default_options.with_timeout(connect, read))
     end
 
