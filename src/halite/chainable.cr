@@ -173,7 +173,7 @@ module Halite
     # Halite.timeout(3.04, 64)
     #   .get("http://httpbin.org/get")
     # ```
-    def timeout(connect : (Int32 | Float64 | Time::Span)?, read : (Int32 | Float64 | Time::Span)?) : Halite::Client
+    def timeout(*, connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil) : Halite::Client
       branch(default_options.with_timeout(connect, read))
     end
 
@@ -408,12 +408,11 @@ module Halite
     private DEFAULT_OPTIONS = Halite::Options.new
 
     private def default_options
-      options = {% if @type.superclass %}
+      {% if @type.superclass %}
         DEFAULT_OPTIONS
       {% else %}
         DEFAULT_OPTIONS.clear!
       {% end %}
-      options
     end
 
     private def options_with(headers : (Hash(String, _) | NamedTuple)? = nil,
