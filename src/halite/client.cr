@@ -68,16 +68,21 @@ module Halite
 
     # Instance a new client with block
     #
-    # ```crystal
+    # ```
     # client = Halite::Client.new do
     #   basic_auth "name", "foo"
     #   logger true
     # end
     # ```
     def self.new(&block)
-      instance = new(Options.new)
+      instance = new
       value = with instance yield
-      instance = value if value
+      if value
+        value.options.merge!(value.oneshot_options)
+        value.oneshot_options.clear!
+        instance = value
+      end
+
       instance
     end
 
@@ -153,6 +158,9 @@ module Halite
       headers = make_request_headers(options, body_data.content_type)
       request = Request.new(verb, uri, headers, body_data.body)
 
+      # reset options during onshot request, see `default_options` method at the bottom of file.
+      default_options.clear!
+
       options.features.reduce(request) do |req, (_, feature)|
         feature.request(req)
       end
@@ -206,7 +214,6 @@ module Halite
 
       # Append history of response if enable follow
       @history << response unless options.follow.hops.zero?
-
       store_cookies_from_response(response)
     end
 
@@ -215,6 +222,28 @@ module Halite
       return response unless response.headers
       @options.with_cookies(HTTP::Cookies.from_headers(response.headers))
       response
+    end
+
+    # Use in instance/session mode, it will replace same method in `Halite::Chainable`.
+    private def branch(options : Options? = nil)
+      oneshot_options.merge!(options)
+      self
+    end
+
+    # :nodoc:
+    @oneshot_options : Halite::Options?
+
+    # :nodoc:
+    #
+    # Store options on each request, then it will reset after finish response.
+    #
+    # > It will called in this class method, so it mark be public but not recommend to users.
+    #
+    # It make sure never store any gived headers, cookies, query, form, raw and tls
+    # during each request in instance/session mode.
+    def oneshot_options
+      @oneshot_options ||= Halite::Options.new
+      @oneshot_options.not_nil!
     end
   end
 end
