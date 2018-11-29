@@ -405,8 +405,7 @@ module Halite
       Halite::Client.new(options)
     end
 
-    # :nodoc:
-    DEFAULT_OPTIONS = Halite::Options.new
+    private DEFAULT_OPTIONS = Halite::Options.new
 
     private def default_options
       options = {% if @type.superclass %}
