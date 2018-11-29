@@ -1,4 +1,5 @@
 module HTTP
+  # This is **extension**  apply in Halite.
   struct Params
     # Returns the given key value pairs as a url-encoded query.
     #

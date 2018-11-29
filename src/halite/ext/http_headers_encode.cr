@@ -1,4 +1,5 @@
 module HTTP
+  # This is **extension** apply in Halite.
   struct Headers
     # Returns the given key value pairs as HTTP Headers
     #
