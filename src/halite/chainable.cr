@@ -387,6 +387,8 @@ module Halite
 
     # Make an HTTP request with the given verb and options
     #
+    # > This method will be executed with oneshot request.
+    #
     # ```
     # Halite.request("get", "http://httpbin.org/get", Halite::Options.new(
     #   "headers" = { "user_agent" => "halite" },
