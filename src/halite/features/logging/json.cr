@@ -83,7 +83,7 @@ class Halite::Logging
       def to_h
         {
           "body"      => @skip_body ? false : @request.body,
-          "headers"   => @request.headers.to_h,
+          "headers"   => @request.headers.to_flat_h,
           "method"    => @request.verb,
           "url"       => @request.uri.to_s,
           "timestamp" => Time::Format::RFC_3339.format(Time.now, 0),
@@ -99,7 +99,7 @@ class Halite::Logging
       def to_h
         {
           "body"         => @skip_body ? false : @response.body,
-          "header"       => @response.headers.to_h,
+          "header"       => @response.headers.to_flat_h,
           "status_code"  => @response.status_code,
           "http_version" => @response.version,
           "timestamp"    => Time::Format::RFC_3339.format(Time.now, 0),
