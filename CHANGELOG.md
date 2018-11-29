@@ -21,18 +21,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Added `merge!` and `dup` methods in `Halite::Options`. [#51](https://github.com/icyleaf/halite/pull/51)
+- Allow `timeout` method passed single `read` or `connect` method.
+- Add `merge!` and `dup` methods in `Halite::Options`. [#51](https://github.com/icyleaf/halite/pull/51)
 
 ### Fixed
 
 - Fix duplice add "Content-Type" into header during request. [#50](https://github.com/icyleaf/halite/pull/50)
 - Fix non overwrite value of headers use `Halite::Options.merge` method. [#50](https://github.com/icyleaf/halite/pull/50)
-- Fix always overwrite and return merged option in
+- Fix always overwrite and return merged option in a instanced class(session mode).
 
 ### Tested
 
 - Compatibility with Crystal 0.27
-- Added specs with Crystal 0.25, 0.26 and 0.27 in Circle CI.
+- Add specs with Crystal 0.25, 0.26 and 0.27 in Circle CI.
 
 ## [0.7.5] (2018-10-31)
 
