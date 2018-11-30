@@ -337,7 +337,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/f9e1993" target="_blank">#f9e1993</a> (2018-11-30 14:52:57 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/7efce8d" target="_blank">#7efce8d</a> (2018-11-30 14:54:45 +0800).</p>
 
 <h2>Index</h2>
 
@@ -766,7 +766,7 @@ r.body # => {"cookies":{"username":"foobar"}}</p>
 <span class="t">By</span> default, <span class="t">Halite</span> will logging all outgoing <span class="t">HTTP</span> requests and their responses(without binary stream) to <span class="s">`STDOUT`</span> on <span class="t">DEBUG</span> level.
 <span class="t">You</span> can configuring the following options:
 
-<span class="o">-</span> <span class="s">`logging`</span>: <span class="t">Instance</span> your <span class="s">`Halite::Logger::Abstract`</span>, check [<span class="t">Use</span> the custom logging](<span class="c">#use-the-custom-logging).</span>
+<span class="o">-</span> <span class="s">`logging`</span>: <span class="t">Instance</span> your <span class="s">`Halite::Logging::Abstract`</span>, check [<span class="t">Use</span> the custom logging](<span class="c">#use-the-custom-logging).</span>
 <span class="o">-</span> <span class="s">`format`</span>: <span class="t">Output</span> format, built<span class="o">-</span><span class="k">in</span> <span class="s">`common`</span> and <span class="s">`json`</span>, you can write your own.
 <span class="o">-</span> <span class="s">`file`</span>: <span class="t">Write</span> to file <span class="k">with</span> path, works <span class="k">with</span> <span class="s">`format`</span>.
 <span class="o">-</span> <span class="s">`filemode`</span>: <span class="t">Write</span> file mode, works <span class="k">with</span> <span class="s">`format`</span>, by default is <span class="s">`a`</span>. (append to bottom, create it <span class="k">if</span> file is not exist)
@@ -840,11 +840,11 @@ r.body # => {"cookies":{"username":"foobar"}}</p>
 <pre><code>
 <span class="c">#### Use the custom logging</span>
 
-<span class="t">Creating</span> the custom logging by integration <span class="s">`Halite::Logger::Abstract`</span> <span class="k">abstract</span> <span class="k">class</span>.
+<span class="t">Creating</span> the custom logging by integration <span class="s">`Halite::Logging::Abstract`</span> <span class="k">abstract</span> <span class="k">class</span>.
 <span class="t">Here</span> has two methods must be implement: <span class="s">`#request`</span> and <span class="s">`#response`</span>.
 </code></pre>
 
-<p>class CustomLogger &lt; Halite::Logging::Abstract
+<p>class CustomLogging &lt; Halite::Logging::Abstract
   def request(request)</p>
 
 <pre><code>@logger.info <span class="s">&quot;| &gt;&gt; | %s | %s %s&quot;</span> <span class="o">%</span> [request.verb, request.uri, request.body]</code></pre>
@@ -860,9 +860,9 @@ end</p>
 
 <h1>Add to adapter list (optional)</h1>
 
-<p>Halite::Logging.register "custom", CustomLogger.new</p>
+<p>Halite::Logging.register "custom", CustomLogging.new</p>
 
-<p>Halite.logging(logging: CustomLogger.new)</p>
+<p>Halite.logging(logging: CustomLogging.new)</p>
 
 <pre><code>  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
