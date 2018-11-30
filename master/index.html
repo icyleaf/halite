@@ -337,7 +337,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/ad9a795" target="_blank">#ad9a795</a> (2018-11-30 10:19:42 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/7dd4913" target="_blank">#7dd4913</a> (2018-11-30 10:23:35 +0800).</p>
 
 <h2>Index</h2>
 
@@ -737,7 +737,7 @@ client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 
 <p>All it support with <a href="https://icyleaf.github.io/halite/Halite/Chainable.html" target="_blank">chainable methods</a> in the other examples list in <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session</a>.</p>
 
-<p>Note, however, that method-level parameters will not be persisted across requests, even if using a session. This example will only send the cookies or headers with the first request, but not the second:</p>
+<p>Note, however, that chainable methods will not be persisted across requests, even if using a session. This example will only send the cookies or headers with the first request, but not the second:</p>
 
 <pre><code class="language-crystal">client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
 r <span class="o">=</span> client.cookies(<span class="s">&quot;username&quot;</span>: <span class="s">&quot;foobar&quot;</span>).get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
