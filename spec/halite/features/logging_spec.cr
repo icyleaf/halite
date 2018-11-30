@@ -15,21 +15,21 @@ describe Halite::Logging do
     Halite::Logging["null"].should eq(NulleLogger)
   end
 
-  it "should use common as default logger" do
-    logger = Halite::Logging.new
-    logger.writer.should be_a(Halite::Logging::Common)
-    logger.writer.skip_request_body.should be_false
-    logger.writer.skip_response_body.should be_false
-    logger.writer.skip_benchmark.should be_false
-    logger.writer.colorize.should be_true
+  it "should use common as default logging" do
+    logging = Halite::Logging.new
+    logging.writer.should be_a(Halite::Logging::Common)
+    logging.writer.skip_request_body.should be_false
+    logging.writer.skip_response_body.should be_false
+    logging.writer.skip_benchmark.should be_false
+    logging.writer.colorize.should be_true
   end
 
-  it "should use custom logger" do
-    logger = Halite::Logging.new(logger: NulleLogger.new)
-    logger.writer.should be_a(NulleLogger)
-    logger.writer.skip_request_body.should be_false
-    logger.writer.skip_response_body.should be_false
-    logger.writer.skip_benchmark.should be_false
-    logger.writer.colorize.should be_true
+  it "should use custom logging" do
+    logging = Halite::Logging.new(logging: NulleLogger.new)
+    logging.writer.should be_a(NulleLogger)
+    logging.writer.skip_request_body.should be_false
+    logging.writer.skip_response_body.should be_false
+    logging.writer.skip_benchmark.should be_false
+    logging.writer.colorize.should be_true
   end
 end

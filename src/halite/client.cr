@@ -30,7 +30,7 @@ module Halite
   #   basic_auth "name", "foo"
   #   headers content_type: "application/jsong"
   #   read_timeout 3.minutes
-  #   logger true
+  #   logging true
   # end
   # ```
   class Client
@@ -71,7 +71,7 @@ module Halite
     # ```
     # client = Halite::Client.new do
     #   basic_auth "name", "foo"
-    #   logger true
+    #   logging true
     # end
     # ```
     def self.new(&block)

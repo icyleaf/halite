@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+- [API Change] Rename `logger` to `logging`, `with_logger` to `with_logging`. [#52](https://github.com/icyleaf/halite/pull/52)
 - [API Change] Remove `logging` argument in `Halite::Options.new` and `Halite::Client.new`. [#51](https://github.com/icyleaf/halite/pull/51)
 - [API Change] Remove `logging?` method in `Halite::Options`, use `logging` method instead. [#51](https://github.com/icyleaf/halite/pull/51)
 - Change `logging` behavior check if features is exists any class of superclasses is `Halite::Logging` instead of given a Bool type.

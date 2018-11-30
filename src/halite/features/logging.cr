@@ -13,9 +13,9 @@ module Halite
     #
     # Accepts argument:
     #
-    # - **logger**: `Logging::Abstract`
+    # - **logging**: `Logging::Abstract`
     def initialize(**options)
-      @writer = (logger = options[:logger]?) ? logger.as(Logging::Abstract) : DEFAULT_LOGGER
+      @writer = (logging = options[:logging]?) ? logging.as(Logging::Abstract) : DEFAULT_LOGGER
     end
 
     def request(request)

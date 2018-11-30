@@ -1,14 +1,14 @@
 class Halite::Logging
-  # Common logger format
+  # Common logging format
   #
   # Instance variables to check `Halite::Logging::Abstract`
   #
   # ```
-  # Halite.use("logging", logger: Halite::Logging::Common.new(skip_request_body: true))
+  # Halite.use("logging", logging: Halite::Logging::Common.new(skip_request_body: true))
   #   .get("http://httpbin.org/get")
   #
   # # Or
-  # Halite.logger(format: "common", skip_request_body: true)
+  # Halite.logging(format: "common", skip_request_body: true)
   #   .get("http://httpbin.org/get")
   #
   # # => 2018-08-31 16:56:12 +08:00 | request  | GET    | http://httpbin.org/get

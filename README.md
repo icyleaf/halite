@@ -48,7 +48,7 @@ Build in Crystal version >= `v0.25.0`, this document valid with latest commit.
   - [Logging](#logging)
     - [JSON-formatted logging](#json-formatted-logging)
     - [Write to a log file](#write-to-a-log-file)
-    - [Use the custom logger](#use-the-custom-logger)
+    - [Use the custom logging](#use-the-custom-logging)
   - [Middlewares](#middlewares)
     - [Write a simple feature](#write-a-simple-feature)
     - [Write a interceptor](#write-a-interceptor)
@@ -561,7 +561,7 @@ We can enable per operation logging by configuring them through the chaining API
 By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to `STDOUT` on DEBUG level.
 You can configuring the following options:
 
-- `logger`: Instance your `Halite::Logger::Abstract`, check [Use the custom logger](#use-the-custom-logger).
+- `logging`: Instance your `Halite::Logger::Abstract`, check [Use the custom logging](#use-the-custom-logging).
 - `format`: Output format, built-in `common` and `json`, you can write your own.
 - `file`: Write to file with path, works with `format`.
 - `filemode`: Write file mode, works with `format`, by default is `a`. (append to bottom, create it if file is not exist)
@@ -570,13 +570,13 @@ You can configuring the following options:
 - `skip_benchmark`: Display elapsed time, by default is `false`.
 - `colorize`: Enable colorize in terminal, only apply in `common` format, by default is `true`.
 
-> **NOTE**: `format` (`file` and `filemode`) and `logger` are conflict, you can not use both.
+> **NOTE**: `format` (`file` and `filemode`) and `logging` are conflict, you can not use both.
 
 Let's try with it:
 
 ```crystal
 # Logging json request
-Halite.logger
+Halite.logging
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # => 2018-06-25 18:33:14 +08:00 | request  | GET    | http://httpbin.org/get?name=foobar
@@ -584,14 +584,14 @@ Halite.logger
 # => {"args":{"name":"foobar"},"headers":{"Accept":"*/*","Accept-Encoding":"gzip, deflate","Connection":"close","Host":"httpbin.org","User-Agent":"Halite/0.3.2"},"origin":"60.206.194.34","url":"http://httpbin.org/get?name=foobar"}
 
 # Logging image request
-Halite.logger
+Halite.logging
       .get("http://httpbin.org/image/png")
 
 # => 2018-06-25 18:34:15 +08:00 | request  | GET    | http://httpbin.org/image/png
 # => 2018-06-25 18:34:15 +08:00 | response | 200    | http://httpbin.org/image/png | image/png
 
 # Logging with options
-Halite.logger(skip_request_body: true, skip_response_body: true)
+Halite.logging(skip_request_body: true, skip_response_body: true)
       .post("http://httpbin.org/get", form: {image: File.open("halite-logo.png")})
 
 # => 2018-08-28 14:33:19 +08:00 | request  | POST   | http://httpbin.org/post
@@ -603,7 +603,7 @@ Halite.logger(skip_request_body: true, skip_response_body: true)
 It has JSON formatted for developer friendly logging.
 
 ```
-Halite.logger(format: "json")
+Halite.logging(format: "json")
       .get("http://httpbin.org/get", params: {name: "foobar"})
 ```
 
@@ -611,17 +611,17 @@ Halite.logger(format: "json")
 
 ```crystal
 # Write plain text to a log file
-Halite.logger(file: "logs/halite.log", skip_benchmark: true, colorize: false)
+Halite.logging(file: "logs/halite.log", skip_benchmark: true, colorize: false)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # Write json data to a log file
-Halite.logger(format: "json", file: "logs/halite.log")
+Halite.logging(format: "json", file: "logs/halite.log")
       .get("http://httpbin.org/get", params: {name: "foobar"})
 ```
 
-#### Use the custom logger
+#### Use the custom logging
 
-Creating the custom logger by integration `Halite::Logger::Abstract` abstract class.
+Creating the custom logging by integration `Halite::Logger::Abstract` abstract class.
 Here has two methods must be implement: `#request` and `#response`.
 
 ```crystal
@@ -638,11 +638,11 @@ end
 # Add to adapter list (optional)
 Halite::Logging.register "custom", CustomLogger.new
 
-Halite.logger(logger: CustomLogger.new)
+Halite.logging(logging: CustomLogger.new)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # We can also call it use format name if you added it.
-Halite.logger(format: "custom")
+Halite.logging(format: "custom")
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # => 2017-12-13 16:40:13 +08:00 | >> | GET | http://httpbin.org/get?name=foobar

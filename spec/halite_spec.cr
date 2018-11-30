@@ -313,42 +313,42 @@ describe Halite do
     end
   end
 
-  describe ".logger" do
+  describe ".logging" do
     it "should use logging" do
-      client = Halite.logger
+      client = Halite.logging
       client.options.features.has_key?("logging").should be_true
       client.options.features["logging"].should be_a(Halite::Logging)
-      logger = client.options.features["logging"].as(Halite::Logging)
-      logger.writer.should be_a(Halite::Logging::Common)
-      logger.writer.skip_request_body.should be_false
-      logger.writer.skip_response_body.should be_false
-      logger.writer.skip_benchmark.should be_false
-      logger.writer.colorize.should be_true
+      logging = client.options.features["logging"].as(Halite::Logging)
+      logging.writer.should be_a(Halite::Logging::Common)
+      logging.writer.skip_request_body.should be_false
+      logging.writer.skip_response_body.should be_false
+      logging.writer.skip_benchmark.should be_false
+      logging.writer.colorize.should be_true
     end
 
     it "sets logging with format" do
-      client = Halite.logger(format: "json", skip_response_body: true)
+      client = Halite.logging(format: "json", skip_response_body: true)
       client.options.features.has_key?("logging").should be_true
       client.options.features["logging"].should be_a(Halite::Logging)
-      logger = client.options.features["logging"].as(Halite::Logging)
-      logger.writer.should be_a(Halite::Logging::JSON)
-      logger.writer.skip_request_body.should be_false
-      logger.writer.skip_response_body.should be_true
-      logger.writer.skip_benchmark.should be_false
-      logger.writer.colorize.should be_true
+      logging = client.options.features["logging"].as(Halite::Logging)
+      logging.writer.should be_a(Halite::Logging::JSON)
+      logging.writer.skip_request_body.should be_false
+      logging.writer.skip_response_body.should be_true
+      logging.writer.skip_benchmark.should be_false
+      logging.writer.colorize.should be_true
     end
 
     it "sets logging into file" do
       with_tempfile("halite-spec-logging") do |file|
-        client = Halite.logger(file: file, skip_response_body: true)
+        client = Halite.logging(file: file, skip_response_body: true)
         client.options.features.has_key?("logging").should be_true
         client.options.features["logging"].should be_a(Halite::Logging)
-        logger = client.options.features["logging"].as(Halite::Logging)
-        logger.writer.should be_a(Halite::Logging::Common)
-        logger.writer.skip_request_body.should be_false
-        logger.writer.skip_response_body.should be_true
-        logger.writer.skip_benchmark.should be_false
-        logger.writer.colorize.should be_true
+        logging = client.options.features["logging"].as(Halite::Logging)
+        logging.writer.should be_a(Halite::Logging::Common)
+        logging.writer.skip_request_body.should be_false
+        logging.writer.skip_response_body.should be_true
+        logging.writer.skip_benchmark.should be_false
+        logging.writer.colorize.should be_true
 
         client.get SERVER.endpoint
         logs = File.read_lines(file).join("\n")
@@ -358,16 +358,16 @@ describe Halite do
       end
     end
 
-    it "sets logging with custom logger" do
-      client = Halite.logger(logger: SimpleLogger.new(skip_benchmark: true))
+    it "sets logging with custom logging" do
+      client = Halite.logging(logging: SimpleLogger.new(skip_benchmark: true))
       client.options.features.has_key?("logging").should be_true
       client.options.features["logging"].should be_a(Halite::Logging)
-      logger = client.options.features["logging"].as(Halite::Logging)
-      logger.writer.should be_a(SimpleLogger)
-      logger.writer.skip_request_body.should be_false
-      logger.writer.skip_response_body.should be_false
-      logger.writer.skip_benchmark.should be_true
-      logger.writer.colorize.should be_true
+      logging = client.options.features["logging"].as(Halite::Logging)
+      logging.writer.should be_a(SimpleLogger)
+      logging.writer.skip_request_body.should be_false
+      logging.writer.skip_response_body.should be_false
+      logging.writer.skip_benchmark.should be_true
+      logging.writer.colorize.should be_true
     end
   end
 
@@ -377,24 +377,24 @@ describe Halite do
         client = Halite.use("logging")
         client.options.features.has_key?("logging").should be_true
         client.options.features["logging"].should be_a(Halite::Logging)
-        logger = client.options.features["logging"].as(Halite::Logging)
-        logger.writer.should be_a(Halite::Logging::Common)
-        logger.writer.skip_request_body.should be_false
-        logger.writer.skip_response_body.should be_false
-        logger.writer.skip_benchmark.should be_false
-        logger.writer.colorize.should be_true
+        logging = client.options.features["logging"].as(Halite::Logging)
+        logging.writer.should be_a(Halite::Logging::Common)
+        logging.writer.skip_request_body.should be_false
+        logging.writer.skip_response_body.should be_false
+        logging.writer.skip_benchmark.should be_false
+        logging.writer.colorize.should be_true
       end
 
-      it "sets logging with logger" do
-        client = Halite.use("logging", logger: Halite::Logging::JSON.new(skip_request_body: true, colorize: false))
+      it "sets logging with logging" do
+        client = Halite.use("logging", logging: Halite::Logging::JSON.new(skip_request_body: true, colorize: false))
         client.options.features.has_key?("logging").should be_true
         client.options.features["logging"].should be_a(Halite::Logging)
-        logger = client.options.features["logging"].as(Halite::Logging)
-        logger.writer.should be_a(Halite::Logging::JSON)
-        logger.writer.skip_request_body.should be_true
-        logger.writer.skip_response_body.should be_false
-        logger.writer.skip_benchmark.should be_false
-        logger.writer.colorize.should be_false
+        logging = client.options.features["logging"].as(Halite::Logging)
+        logging.writer.should be_a(Halite::Logging::JSON)
+        logging.writer.skip_request_body.should be_true
+        logging.writer.skip_response_body.should be_false
+        logging.writer.skip_benchmark.should be_false
+        logging.writer.colorize.should be_false
 
         # Restore
         Colorize.on_tty_only!
