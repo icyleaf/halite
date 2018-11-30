@@ -105,10 +105,10 @@ describe Halite::Cache do
         result.chain.result.should eq(Halite::Feature::Chain::Result::Return)
 
         result.chain.response.should_not be_nil
-        result.chain.response.not_nil!.headers["X-Cached-From"].should eq("cache")
-        result.chain.response.not_nil!.headers["X-Cached-Key"].should_not eq("")
-        result.chain.response.not_nil!.headers["X-Cached-At"].should_not eq("")
-        result.chain.response.not_nil!.headers["X-Cached-Expires-At"].should eq("None")
+        result.chain.response.not_nil!.headers["X-Halite-Cached-From"].should eq("cache")
+        result.chain.response.not_nil!.headers["X-Halite-Cached-Key"].should_not eq("")
+        result.chain.response.not_nil!.headers["X-Halite-Cached-At"].should_not eq("")
+        result.chain.response.not_nil!.headers["X-Halite-Cached-Expires-At"].should eq("None")
       end
     end
 
@@ -130,9 +130,9 @@ describe Halite::Cache do
         result.chain.result.should eq(Halite::Feature::Chain::Result::Return)
 
         result.chain.response.should_not be_nil
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-From").should be_false
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-Key").should be_false
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-At").should be_false
+        result.chain.response.not_nil!.headers.has_key?("X-Halite-Cached-From").should be_false
+        result.chain.response.not_nil!.headers.has_key?("X-Halite-Cached-Key").should be_false
+        result.chain.response.not_nil!.headers.has_key?("X-Halite-Cached-At").should be_false
       end
     end
 
@@ -154,10 +154,10 @@ describe Halite::Cache do
         result.chain.result.should eq(Halite::Feature::Chain::Result::Return)
 
         result.chain.response.should_not be_nil
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-From").should be_false
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-Key").should be_false
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-At").should be_false
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-Expires-At").should be_false
+        result.chain.response.not_nil!.headers.has_key?("X-Halite-Cached-From").should be_false
+        result.chain.response.not_nil!.headers.has_key?("X-Halite-Cached-Key").should be_false
+        result.chain.response.not_nil!.headers.has_key?("X-Halite-Cached-At").should be_false
+        result.chain.response.not_nil!.headers.has_key?("X-Halite-Cached-Expires-At").should be_false
       end
     end
 
@@ -178,10 +178,10 @@ describe Halite::Cache do
         result.chain.result.should eq(Halite::Feature::Chain::Result::Return)
 
         result.chain.response.should_not be_nil
-        result.chain.response.not_nil!.headers["X-Cached-From"].should eq("file")
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-Key").should be_false
-        result.chain.response.not_nil!.headers["X-Cached-At"].should_not eq("")
-        result.chain.response.not_nil!.headers.has_key?("X-Cached-Expires-At").should be_false
+        result.chain.response.not_nil!.headers["X-Halite-Cached-From"].should eq("file")
+        result.chain.response.not_nil!.headers.has_key?("X-Halite-Cached-Key").should be_false
+        result.chain.response.not_nil!.headers["X-Halite-Cached-At"].should_not eq("")
+        result.chain.response.not_nil!.headers.has_key?("X-Halite-Cached-Expires-At").should be_false
       end
     end
   end

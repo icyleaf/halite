@@ -561,7 +561,7 @@ We can enable per operation logging by configuring them through the chaining API
 By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to `STDOUT` on DEBUG level.
 You can configuring the following options:
 
-- `logging`: Instance your `Halite::Logger::Abstract`, check [Use the custom logging](#use-the-custom-logging).
+- `logging`: Instance your `Halite::Logging::Abstract`, check [Use the custom logging](#use-the-custom-logging).
 - `format`: Output format, built-in `common` and `json`, you can write your own.
 - `file`: Write to file with path, works with `format`.
 - `filemode`: Write file mode, works with `format`, by default is `a`. (append to bottom, create it if file is not exist)
@@ -621,11 +621,11 @@ Halite.logging(format: "json", file: "logs/halite.log")
 
 #### Use the custom logging
 
-Creating the custom logging by integration `Halite::Logger::Abstract` abstract class.
+Creating the custom logging by integration `Halite::Logging::Abstract` abstract class.
 Here has two methods must be implement: `#request` and `#response`.
 
 ```crystal
-class CustomLogger < Halite::Logging::Abstract
+class CustomLogging < Halite::Logging::Abstract
   def request(request)
     @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
   end
@@ -636,9 +636,9 @@ class CustomLogger < Halite::Logging::Abstract
 end
 
 # Add to adapter list (optional)
-Halite::Logging.register "custom", CustomLogger.new
+Halite::Logging.register "custom", CustomLogging.new
 
-Halite.logging(logging: CustomLogger.new)
+Halite.logging(logging: CustomLogging.new)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # We can also call it use format name if you added it.

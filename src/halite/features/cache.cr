@@ -14,15 +14,15 @@ module Halite
   #
   # With debug mode, cached response it always included some headers information:
   #
-  # - `X-Cached-From`: Cache source (cache or file)
-  # - `X-Cached-Key`: Cache key with verb, uri and body (return with cache, not `file` passed)
-  # - `X-Cached-At`:  Cache created time
-  # - `X-Cached-Expires-At`: Cache expired time (return with cache, not `file` passed)
+  # - `X-Halite-Cached-From`: Cache source (cache or file)
+  # - `X-Halite-Cached-Key`: Cache key with verb, uri and body (return with cache, not `file` passed)
+  # - `X-Halite-Cached-At`:  Cache created time
+  # - `X-Halite-Cached-Expires-At`: Cache expired time (return with cache, not `file` passed)
   #
   # ```
   # Halite.use("cache").get "http://httpbin.org/anything"     # request a HTTP
   # r = Halite.use("cache").get "http://httpbin.org/anything" # request from local storage
-  # r.headers                                                 # => {..., "X-Cached-At" => "2018-08-30 10:41:14 UTC", "X-Cached-By" => "Halite", "X-Cached-Expires-At" => "2018-08-30 10:41:19 UTC", "X-Cached-Key" => "2bb155e6c8c47627da3d91834eb4249a"}}
+  # r.headers                                                 # => {..., "X-Halite-Cached-At" => "2018-08-30 10:41:14 UTC", "X-Halite-Cached-By" => "Halite", "X-Halite-Cached-Expires-At" => "2018-08-30 10:41:19 UTC", "X-Halite-Cached-Key" => "2bb155e6c8c47627da3d91834eb4249a"}}
   # ```
   class Cache < Feature
     DEFAULT_PATH = "/tmp/halite/cache/"
@@ -117,8 +117,8 @@ module Halite
           end
 
           if @debug
-            headers["X-Cached-Key"] = key
-            headers["X-Cached-Expires-At"] = @expires ? (cache_created_time(file) + @expires.not_nil!).to_s : "None"
+            headers["X-Halite-Cached-Key"] = key
+            headers["X-Halite-Cached-Expires-At"] = @expires ? (cache_created_time(file) + @expires.not_nil!).to_s : "None"
           end
         end
       end
@@ -126,8 +126,8 @@ module Halite
       return unless file
 
       if @debug
-        headers["X-Cached-From"] = cache_from
-        headers["X-Cached-At"] = cache_created_time(file).to_s
+        headers["X-Halite-Cached-From"] = cache_from
+        headers["X-Halite-Cached-At"] = cache_created_time(file).to_s
       end
 
       body = File.read_lines(file).join("\n")
