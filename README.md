@@ -531,6 +531,28 @@ client.get("http://httpbin.org/cookies")
 
 All it support with [chainable methods](https://icyleaf.github.io/halite/Halite/Chainable.html) in the other examples list in [requests.Session](http://docs.python-requests.org/en/master/user/advanced/#session-objects).
 
+Note, however, that chainable methods will not be persisted across requests, even if using a session. This example will only send the cookies or headers with the first request, but not the second:
+
+```crystal
+client = Halite::Client.new
+r = client.cookies("username": "foobar").get("http://httpbin.org/cookies")
+r.body # => {"cookies":{"username":"foobar"}}
+
+r = client.get("http://httpbin.org/cookies")
+r.body # => {"cookies":{}}
+
+If you want to manually add cookies, headers (even features etc) to your session, use the methods start with `with_` in `Halite::Options`
+to manipulate them:
+
+```crystal
+r = client.get("http://httpbin.org/cookies")
+r.body # => {"cookies":{}}
+
+client.options.with_cookie("username": "foobar")
+r = client.get("http://httpbin.org/cookies")
+r.body # => {"cookies":{"username":"foobar"}}
+```
+
 ### Logging
 
 Halite does not enable logging on each request and response too.
