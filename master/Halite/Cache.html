@@ -345,11 +345,11 @@
 
 <p>With debug mode, cached response it always included some headers information:</p>
 
-<ul><li><code>X-Cached-From</code>: Cache source (cache or file)</li><li><code>X-Cached-Key</code>: Cache key with verb, uri and body (return with cache, not <code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code> passed)</li><li><code>X-Cached-At</code>:  Cache created time</li><li><code>X-Cached-Expires-At</code>: Cache expired time (return with cache, not <code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code> passed)</li></ul>
+<ul><li><code>X-<a href="../Halite.html">Halite</a>-Cached-From</code>: Cache source (cache or file)</li><li><code>X-<a href="../Halite.html">Halite</a>-Cached-Key</code>: Cache key with verb, uri and body (return with cache, not <code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code> passed)</li><li><code>X-<a href="../Halite.html">Halite</a>-Cached-At</code>:  Cache created time</li><li><code>X-<a href="../Halite.html">Halite</a>-Cached-Expires-At</code>: Cache expired time (return with cache, not <code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code> passed)</li></ul>
 
 <pre><code><span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span>     <span class="c"># request a HTTP</span>
 r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span> <span class="c"># request from local storage</span>
-r.headers                                                 <span class="c"># =&gt; {..., &quot;X-Cached-At&quot; =&gt; &quot;2018-08-30 10:41:14 UTC&quot;, &quot;X-Cached-By&quot; =&gt; &quot;Halite&quot;, &quot;X-Cached-Expires-At&quot; =&gt; &quot;2018-08-30 10:41:19 UTC&quot;, &quot;X-Cached-Key&quot; =&gt; &quot;2bb155e6c8c47627da3d91834eb4249a&quot;}}</span></code></pre>
+r.headers                                                 <span class="c"># =&gt; {..., &quot;X-Halite-Cached-At&quot; =&gt; &quot;2018-08-30 10:41:14 UTC&quot;, &quot;X-Halite-Cached-By&quot; =&gt; &quot;Halite&quot;, &quot;X-Halite-Cached-Expires-At&quot; =&gt; &quot;2018-08-30 10:41:19 UTC&quot;, &quot;X-Halite-Cached-Key&quot; =&gt; &quot;2bb155e6c8c47627da3d91834eb4249a&quot;}}</span></code></pre>
 
 
 
@@ -367,7 +367,7 @@ r.headers                                                 <span class="c"># =&gt
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/27ce5bbb7e947980ac98ff1f68868151b809c345/src/halite/features/cache.cr#L27" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/319315b7222c36b966343b52d1ca6ecbfdfe5f23/src/halite/features/cache.cr#L27" target="_blank">
         halite/features/cache.cr
       </a>
     
@@ -522,7 +522,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/27ce5bbb7e947980ac98ff1f68868151b809c345/src/halite/features/cache.cr#L42" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/319315b7222c36b966343b52d1ca6ecbfdfe5f23/src/halite/features/cache.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -545,7 +545,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/27ce5bbb7e947980ac98ff1f68868151b809c345/src/halite/features/cache.cr#L33" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/319315b7222c36b966343b52d1ca6ecbfdfe5f23/src/halite/features/cache.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -561,7 +561,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/27ce5bbb7e947980ac98ff1f68868151b809c345/src/halite/features/cache.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/319315b7222c36b966343b52d1ca6ecbfdfe5f23/src/halite/features/cache.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -577,7 +577,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/27ce5bbb7e947980ac98ff1f68868151b809c345/src/halite/features/cache.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/319315b7222c36b966343b52d1ca6ecbfdfe5f23/src/halite/features/cache.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -593,7 +593,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/27ce5bbb7e947980ac98ff1f68868151b809c345/src/halite/features/cache.cr#L64" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/319315b7222c36b966343b52d1ca6ecbfdfe5f23/src/halite/features/cache.cr#L64" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -609,7 +609,7 @@ r.headers                                                 <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/27ce5bbb7e947980ac98ff1f68868151b809c345/src/halite/features/cache.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/319315b7222c36b966343b52d1ca6ecbfdfe5f23/src/halite/features/cache.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
