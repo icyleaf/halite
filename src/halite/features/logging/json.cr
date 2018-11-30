@@ -1,18 +1,18 @@
 require "json"
 
 class Halite::Logging
-  # JSON logger format
+  # JSON logging format
   #
   # Instance variables to check `Halite::Logging::Abstract`.
   #
   # In JSON format, if you set skip some key, it will return `false`.
   #
   # ```
-  # Halite.use("logging", logger: Halite::Logging::JSON.new(skip_request_body: true))
+  # Halite.use("logging", logging: Halite::Logging::JSON.new(skip_request_body: true))
   #   .get("http://httpbin.org/get")
   #
   # # Or
-  # Halite.logger(format: "json", skip_request_body: true)
+  # Halite.logging(format: "json", skip_request_body: true)
   #   .get("http://httpbin.org/get")
   # ```
   #

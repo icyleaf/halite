@@ -203,15 +203,15 @@ module Halite
       self
     end
 
-    # Returns `Logger` self with given format and the options of format.
-    def with_logger(format : String, **opts)
+    # Returns `Options` iitself with given format and the options of format.
+    def with_logging(format : String, **opts)
       raise UnRegisterLoggerFormatError.new("Not available logging format: #{format}") unless format_cls = Logging[format]?
-      with_logger(format_cls.new(**opts))
+      with_logging(format_cls.new(**opts))
     end
 
-    # Returns `Logger` self with given logger, depend on `with_features`.
-    def with_logger(logger : Halite::Logging::Abstract)
-      with_features("logging", logger: logger)
+    # Returns `Options` self with given logging, depend on `with_features`.
+    def with_logging(logging : Halite::Logging::Abstract)
+      with_features("logging", logging: logging)
       self
     end
 
@@ -259,9 +259,9 @@ module Halite
       !@features.values.select { |v| v.is_a?(Halite::Logging) }.empty?
     end
 
-    # Quick enable logger
+    # Quick enable logging
     #
-    # By defaults, use `Logging::Common` as logger output.
+    # By defaults, use `Logging::Common` as logging output.
     def logging=(logging : Bool)
       if logging
         with_features("logging") unless @features.has_key?("logging")
