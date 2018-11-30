@@ -337,7 +337,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/7dd4913" target="_blank">#7dd4913</a> (2018-11-30 10:23:35 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/5ca1b11" target="_blank">#5ca1b11</a> (2018-11-30 10:42:00 +0800).</p>
 
 <h2>Index</h2>
 
@@ -781,7 +781,7 @@ r.body # => {"cookies":{"username":"foobar"}}</p>
 
 <h1>Logging json request</h1>
 
-<p>Halite.logger</p>
+<p>Halite.logging</p>
 
 <pre><code>  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
@@ -793,7 +793,7 @@ r.body # => {"cookies":{"username":"foobar"}}</p>
 
 <h1>Logging image request</h1>
 
-<p>Halite.logger</p>
+<p>Halite.logging</p>
 
 <pre><code>  .get(<span class="s">&quot;http://httpbin.org/image/png&quot;</span>)</code></pre>
 
@@ -803,7 +803,7 @@ r.body # => {"cookies":{"username":"foobar"}}</p>
 
 <h1>Logging with options</h1>
 
-<p>Halite.logger(skip_request_body: true, skip_response_body: true)</p>
+<p>Halite.logging(skip_request_body: true, skip_response_body: true)</p>
 
 <pre><code>  .post(<span class="s">&quot;http://httpbin.org/get&quot;</span>, form: {image: <span class="t">File</span>.open(<span class="s">&quot;halite-logo.png&quot;</span>)})</code></pre>
 
@@ -817,7 +817,7 @@ r.body # => {"cookies":{"username":"foobar"}}</p>
 <span class="t">It</span> has <span class="t">JSON</span> formatted <span class="k">for</span> developer friendly logging.
 </code></pre>
 
-<p>Halite.logger(format: "json")</p>
+<p>Halite.logging(format: "json")</p>
 
 <pre><code>  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
@@ -827,20 +827,20 @@ r.body # => {"cookies":{"username":"foobar"}}</p>
 
 <h1>Write plain text to a log file</h1>
 
-<p>Halite.logger(file: "logs/halite.log", skip_benchmark: true, colorize: false)</p>
+<p>Halite.logging(file: "logs/halite.log", skip_benchmark: true, colorize: false)</p>
 
 <pre><code>  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <h1>Write json data to a log file</h1>
 
-<p>Halite.logger(format: "json", file: "logs/halite.log")</p>
+<p>Halite.logging(format: "json", file: "logs/halite.log")</p>
 
 <pre><code>  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <pre><code>
 <span class="c">#### Use the custom logger</span>
 
-<span class="t">Creating</span> the custom logger by integration <span class="s">`Halite::Logger::Abstract`</span> <span class="k">abstract</span> <span class="k">class</span>.
+<span class="t">Creating</span> the custom logging by integration <span class="s">`Halite::Logger::Abstract`</span> <span class="k">abstract</span> <span class="k">class</span>.
 <span class="t">Here</span> has two methods must be implement: <span class="s">`#request`</span> and <span class="s">`#response`</span>.
 </code></pre>
 
@@ -862,13 +862,13 @@ end</p>
 
 <p>Halite::Logging.register "custom", CustomLogger.new</p>
 
-<p>Halite.logger(logger: CustomLogger.new)</p>
+<p>Halite.logging(logging: CustomLogger.new)</p>
 
 <pre><code>  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <h1>We can also call it use format name if you added it.</h1>
 
-<p>Halite.logger(format: "custom")</p>
+<p>Halite.logging(format: "custom")</p>
 
 <pre><code>  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 

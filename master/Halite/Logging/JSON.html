@@ -343,11 +343,11 @@
 
 <p>In JSON format, if you set skip some key, it will return <code>false</code>.</p>
 
-<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, logger: <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">JSON</span>.<span class="k">new</span>(skip_request_body: <span class="n">true</span>))
+<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, logging: <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">JSON</span>.<span class="k">new</span>(skip_request_body: <span class="n">true</span>))
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 
 <span class="c"># Or</span>
-<span class="t">Halite</span>.logger(format: <span class="s">&quot;json&quot;</span>, skip_request_body: <span class="n">true</span>)
+<span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, skip_request_body: <span class="n">true</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
 
 <p>Log will look like:</p>
@@ -388,7 +388,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/features/logging/json.cr#L42" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/features/logging/json.cr#L42" target="_blank">
         halite/features/logging/json.cr
       </a>
     
@@ -527,7 +527,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/features/logging/json.cr#L56" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/features/logging/json.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -543,7 +543,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/features/logging/json.cr#L46" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/features/logging/json.cr#L46" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -559,7 +559,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/features/logging/json.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/features/logging/json.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>

@@ -356,7 +356,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L4" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L4" target="_blank">
         halite/chainable.cr
       </a>
     
@@ -396,7 +396,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong>(cookies : HTTP::Cookies) : Halite::Client</a>
+        <a href="#cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Client</a>
         
           <div class="summary"><p>Make a request with the given cookies</p></div>
         
@@ -410,7 +410,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Client</a>
+        <a href="#cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong>(cookies : HTTP::Cookies) : Halite::Client</a>
         
           <div class="summary"><p>Make a request with the given cookies</p></div>
         
@@ -466,23 +466,16 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#logger%28logger%3AHalite%3A%3ALogging%3A%3AAbstract%3DHalite%3A%3ALogging%3A%3ACommon.new%29-instance-method" class="signature"><strong>#logger</strong>(logger : Halite::Logging::Abstract = <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Common</span>.<span class="k">new</span>)</a>
+        <a href="#logging%28logging%3AHalite%3A%3ALogging%3A%3AAbstract%3DHalite%3A%3ALogging%3A%3ACommon.new%29-instance-method" class="signature"><strong>#logging</strong>(logging : Halite::Logging::Abstract = <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Common</span>.<span class="k">new</span>)</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the logger which it integration from <code><a href="../Halite/Logging.html">Halite::Logging</a></code>.</p></div>
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the logging which it integration from <code><a href="../Halite/Logging.html">Halite::Logging</a></code>.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#logger%28format%3D%26quot%3Bcommon%26quot%3B%2Cfile%3AString%3F%3Dnil%2Cfilemode%3D%26quot%3Ba%26quot%3B%2Cskip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%29-instance-method" class="signature"><strong>#logger</strong>(format = <span class="s">&quot;common&quot;</span>, file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)</a>
+        <a href="#logging%28format%3D%26quot%3Bcommon%26quot%3B%2Cfile%3AString%3F%3Dnil%2Cfilemode%3D%26quot%3Ba%26quot%3B%2Cskip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%29-instance-method" class="signature"><strong>#logging</strong>(format = <span class="s">&quot;common&quot;</span>, file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the file with the path.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#logging%28enable%3Dtrue%29-instance-method" class="signature"><strong>#logging</strong>(enable = <span class="n">true</span>)</a>
-        
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with enable or disable logging.</p></div>
         
       </li>
     
@@ -589,7 +582,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L88" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L88" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -610,7 +603,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -633,50 +626,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L68" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="cookies(cookies:HTTP::Cookies):Halite::Client-instance-method">
-      <div class="signature">
-        
-        def <strong>cookies</strong>(cookies : HTTP::Cookies) : <a href="../Halite/Client.html">Halite::Client</a>
-
-        <a class="method-permalink" href="#cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AClient-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Make a request with the given cookies</p>
-
-<pre><code>cookies <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Cookies</span>.from_headers(headers)
-<span class="t">Halite</span>.cookies(cookies)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L145" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="cookies:Halite::Client-instance-method">
-      <div class="signature">
-        
-        def <strong>cookies</strong> : <a href="../Halite/Client.html">Halite::Client</a>
-
-        <a class="method-permalink" href="#cookies%3AHalite%3A%3AClient-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Make a request with the given cookies</p>
-
-<pre><code><span class="t">Halite</span>.cookies(name: <span class="s">&quot;icyleaf&quot;</span>, <span class="s">&quot;gender&quot;</span>: <span class="s">&quot;male&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L134" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -700,7 +650,50 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L124" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L124" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="cookies:Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>cookies</strong> : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#cookies%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Make a request with the given cookies</p>
+
+<pre><code><span class="t">Halite</span>.cookies(name: <span class="s">&quot;icyleaf&quot;</span>, <span class="s">&quot;gender&quot;</span>: <span class="s">&quot;male&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L134" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="cookies(cookies:HTTP::Cookies):Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>cookies</strong>(cookies : HTTP::Cookies) : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Make a request with the given cookies</p>
+
+<pre><code>cookies <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Cookies</span>.from_headers(headers)
+<span class="t">Halite</span>.cookies(cookies)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L145" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -736,7 +729,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -762,7 +755,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L191" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L191" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -788,7 +781,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L206" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L206" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -811,7 +804,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -834,7 +827,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -858,7 +851,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L101" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -879,24 +872,24 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L111" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L111" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="logger(logger:Halite::Logging::Abstract=Halite::Logging::Common.new)-instance-method">
+    <div class="entry-detail" id="logging(logging:Halite::Logging::Abstract=Halite::Logging::Common.new)-instance-method">
       <div class="signature">
         
-        def <strong>logger</strong>(logger : <a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a> = <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Common</span>.<span class="k">new</span>)
+        def <strong>logging</strong>(logging : <a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a> = <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Common</span>.<span class="k">new</span>)
 
-        <a class="method-permalink" href="#logger%28logger%3AHalite%3A%3ALogging%3A%3AAbstract%3DHalite%3A%3ALogging%3A%3ACommon.new%29-instance-method">#</a>
+        <a class="method-permalink" href="#logging%28logging%3AHalite%3A%3ALogging%3A%3AAbstract%3DHalite%3A%3ALogging%3A%3ACommon.new%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the logger which it integration from <code><a href="../Halite/Logging.html">Halite::Logging</a></code>.</p>
+        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the logging which it integration from <code><a href="../Halite/Logging.html">Halite::Logging</a></code>.</p>
 
 <h4>Simple logging</h4>
 
-<pre><code><span class="t">Halite</span>.logger
+<pre><code><span class="t">Halite</span>.logging
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 => <span class="n">2018</span></code></pre>
@@ -908,15 +901,15 @@ You can configuring the following options:</p>
 
 <ul><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
 
-<pre><code><span class="t">Halite</span>.logger(skip_request_body: <span class="n">true</span>, skip_response_body: <span class="n">true</span>)
+<pre><code><span class="t">Halite</span>.logging(skip_request_body: <span class="n">true</span>, skip_response_body: <span class="n">true</span>)
   .post(<span class="s">&quot;http://httpbin.org/get&quot;</span>, form: {image: <span class="t">File</span>.open(<span class="s">&quot;halite-logo.png&quot;</span>)})
 
 <span class="c"># =&gt; 2018-08-28 14:33:19 +08:00 | request  | POST   | http://httpbin.org/post</span>
 <span class="c"># =&gt; 2018-08-28 14:33:21 +08:00 | response | 200    | http://httpbin.org/post | 1.61s | application/json</span></code></pre>
 
-<h4>Use custom logger</h4>
+<h4>Use custom logging</h4>
 
-<p>Creating the custom logger by integration <code><a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code> abstract class.
+<p>Creating the custom logging by integration <code><a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code> abstract class.
 Here has two methods must be implement: <code><a href="../Halite/Chainable.html#request%28verb%3AString%2Curi%3AString%2Coptions%3AOptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method">#request</a></code> and <code>#response</code>.</p>
 
 <pre><code><span class="k">class</span> <span class="t">CustomLogger</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Abstract</span>
@@ -932,11 +925,11 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
 <span class="c"># Add to adapter list (optional)</span>
 <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span>.register_adapter <span class="s">&quot;custom&quot;</span>, <span class="t">CustomLogger</span>.<span class="k">new</span>
 
-<span class="t">Halite</span>.logger(logger: <span class="t">CustomLogger</span>.<span class="k">new</span>)
+<span class="t">Halite</span>.logging(logging: <span class="t">CustomLogger</span>.<span class="k">new</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># We can also call it use format name if you added it.</span>
-<span class="t">Halite</span>.logger(format: <span class="s">&quot;custom&quot;</span>)
+<span class="t">Halite</span>.logging(format: <span class="s">&quot;custom&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># =&gt; 2017-12-13 16:40:13 +08:00 | &gt;&gt; | GET | http://httpbin.org/get?name=foobar</span>
@@ -945,34 +938,34 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L290" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L290" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="logger(format=&amp;quot;common&amp;quot;,file:String?=nil,filemode=&amp;quot;a&amp;quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method">
+    <div class="entry-detail" id="logging(format=&amp;quot;common&amp;quot;,file:String?=nil,filemode=&amp;quot;a&amp;quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method">
       <div class="signature">
         
-        def <strong>logger</strong>(format = <span class="s">&quot;common&quot;</span>, file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)
+        def <strong>logging</strong>(format = <span class="s">&quot;common&quot;</span>, file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)
 
-        <a class="method-permalink" href="#logger%28format%3D%26quot%3Bcommon%26quot%3B%2Cfile%3AString%3F%3Dnil%2Cfilemode%3D%26quot%3Ba%26quot%3B%2Cskip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%29-instance-method">#</a>
+        <a class="method-permalink" href="#logging%28format%3D%26quot%3Bcommon%26quot%3B%2Cfile%3AString%3F%3Dnil%2Cfilemode%3D%26quot%3Ba%26quot%3B%2Cskip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%29-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the file with the path.</p>
 
 <h4>JSON-formatted logging</h4>
 
-<pre><code><span class="t">Halite</span>.logger(format: <span class="s">&quot;json&quot;</span>)
+<pre><code><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <h4>create a http request and log to file</h4>
 
-<pre><code><span class="t">Halite</span>.logger(file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
+<pre><code><span class="t">Halite</span>.logging(file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <h4>Always create new log file and store data to JSON formatted</h4>
 
-<pre><code><span class="t">Halite</span>.logger(format: <span class="s">&quot;json&quot;</span>, file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
+<pre><code><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <p>Check the log file content: <strong>/tmp/halite.log</strong></p></div>
@@ -980,35 +973,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L318" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="logging(enable=true)-instance-method">
-      <div class="signature">
-        
-        def <strong>logging</strong>(enable = <span class="n">true</span>)
-
-        <a class="method-permalink" href="#logging%28enable%3Dtrue%29-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with enable or disable logging.</p>
-
-<h4>Enable logging</h4>
-
-<p>Same as call <code><a href="../Halite/Chainable.html#logger%28logger%3AHalite%3A%3ALogging%3A%3AAbstract%3DHalite%3A%3ALogging%3A%3ACommon.new%29-instance-method">#logger</a></code> method without any argument.</p>
-
-<pre><code><span class="t">Halite</span>.logging.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
-
-<h4>Disable logging</h4>
-
-<pre><code><span class="t">Halite</span>.logging(<span class="n">false</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L225" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L318" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1044,7 +1009,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1080,7 +1045,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1116,7 +1081,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1152,7 +1117,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1178,7 +1143,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L399" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L399" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1202,7 +1167,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L378" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L378" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1228,7 +1193,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L160" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L160" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1255,7 +1220,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L176" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L176" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1272,14 +1237,14 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
 
 <p>Available features to review all subclasses of <code><a href="../Halite/Feature.html">Halite::Feature</a></code>.</p>
 
-<h4>Use JSON logger</h4>
+<h4>Use JSON logging</h4>
 
 <pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, format: <span class="s">&quot;json&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># =&gt; { ... }</span></code></pre>
 
-<h4>Use common format logger and skip response body</h4>
+<h4>Use common format logging and skip response body</h4>
 
 <pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, format: <span class="s">&quot;common&quot;</span>, skip_response_body: <span class="n">true</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
@@ -1290,7 +1255,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L353" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L353" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1313,7 +1278,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/7dd49132bdbecb9bb6ecb90e7084a33945a4fbb4/src/halite/chainable.cr#L365" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ca1b11f859e1d82af416bc70a4ce257465c780f/src/halite/chainable.cr#L365" target="_blank">View source</a>]
         
       </div>
     </div>
