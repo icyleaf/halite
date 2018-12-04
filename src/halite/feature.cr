@@ -4,17 +4,17 @@ module Halite
     end
 
     # Cooks with request
-    def request(request : Request) : Request
+    def request(request : Halite::Request) : Halite::Request
       request
     end
 
     # Cooking with response
-    def response(response : Response) : Response
+    def response(response : Halite::Response) : Halite::Response
       response
     end
 
     # Intercept and cooking request and response
-    def intercept(chain : Chain) : Chain
+    def intercept(chain : Halite::Feature::Chain) : Halite::Feature::Chain
       chain
     end
 

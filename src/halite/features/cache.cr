@@ -69,7 +69,7 @@ module Halite
       chain.return(response)
     end
 
-    private def cache(chain, &block : -> Response)
+    private def cache(chain, &block : -> Halite::Response)
       if response = find_cache(chain.request)
         return response
       end
@@ -79,7 +79,7 @@ module Halite
       response
     end
 
-    private def find_cache(request : Request) : Response?
+    private def find_cache(request : Halite::Request) : Halite::Response?
       if file = @file
         build_response(request, file)
       elsif response = build_response(request)
@@ -87,12 +87,12 @@ module Halite
       end
     end
 
-    private def find_file(file) : Response
+    private def find_file(file) : Halite::Response
       raise Error.new("Not find cache file: #{file}") if File.file?(file)
       build_response(file)
     end
 
-    private def build_response(request : Request, file : String? = nil) : Response?
+    private def build_response(request : Halite::Request, file : String? = nil) : Halite::Response?
       status_code = 200
       headers = HTTP::Headers.new
       cache_from = "file"
@@ -151,7 +151,7 @@ module Halite
       File.info(file).modification_time
     end
 
-    private def generate_cache_key(request : Request) : String
+    private def generate_cache_key(request) : String
       Digest::MD5.hexdigest("#{request.verb}-#{request.uri}-#{request.body}")
     end
 
