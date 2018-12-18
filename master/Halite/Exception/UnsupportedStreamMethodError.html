@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::MimeType::Adapter - github.com/icyleaf/halite</title>
+  <title>Halite::Exception::UnsupportedStreamMethodError - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -56,7 +56,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
       <a href="../../Halite/Exception.html">Exception</a>
       
         <ul>
@@ -146,7 +146,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedStreamMethodError" data-name="halite::exception::unsupportedstreammethoderror">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedStreamMethodError" data-name="halite::exception::unsupportedstreammethoderror">
       <a href="../../Halite/Exception/UnsupportedStreamMethodError.html">UnsupportedStreamMethodError</a>
       
     </li>
@@ -226,12 +226,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/MimeType" data-name="halite::mimetype">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/MimeType" data-name="halite::mimetype">
       <a href="../../Halite/MimeType.html">MimeType</a>
       
         <ul>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/MimeType/Adapter" data-name="halite::mimetype::adapter">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeType/Adapter" data-name="halite::mimetype::adapter">
       <a href="../../Halite/MimeType/Adapter.html">Adapter</a>
       
     </li>
@@ -330,12 +330,19 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">abstract class</span> Halite::MimeType::Adapter
+  <span class="kind">class</span> Halite::Exception::UnsupportedStreamMethodError
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/MimeType/Adapter.html">Halite::MimeType::Adapter</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Exception/UnsupportedStreamMethodError.html">Halite::Exception::UnsupportedStreamMethodError</a></li><li class="superclass"><a href="../../Halite/Exception/RequestError.html">Halite::Exception::RequestError</a></li><li class="superclass"><a href="../../Halite/Exception/Error.html">Halite::Exception::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>The head method can not streaming without empty response</p>
 
 
 
@@ -344,16 +351,6 @@
 
 
 
-
-
-
-
-  <h2>Direct Known Subclasses</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type"><a href="../../Halite/MimeType/JSON.html">Halite::MimeType::JSON</a></li>
-  
-  </ul>
 
 
 
@@ -363,8 +360,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/376bc02568dff64fca8af9a3c8eb13b1d5f39909/src/halite/mime_type.cr#L26" target="_blank">
-        halite/mime_type.cr
+      <a href="https://github.com/icyleaf/halite/blob/376bc02568dff64fca8af9a3c8eb13b1d5f39909/src/halite/error.cr#L25" target="_blank">
+        halite/error.cr
       </a>
     
     <br/>
@@ -377,21 +374,6 @@
 
 
 
-
-  <h2>Instance Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#decode%28string%29-instance-method" class="signature"><strong>#decode</strong>(string)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#encode%28obj%29-instance-method" class="signature"><strong>#encode</strong>(obj)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -419,47 +401,42 @@
 
 
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
 
 
 
-
-  <h2>Instance Method Detail</h2>
-  
-    <div class="entry-detail" id="decode(string)-instance-method">
-      <div class="signature">
-        abstract 
-        def <strong>decode</strong>(string)
-
-        <a class="method-permalink" href="#decode%28string%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/376bc02568dff64fca8af9a3c8eb13b1d5f39909/src/halite/mime_type.cr#L28" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="encode(obj)-instance-method">
-      <div class="signature">
-        abstract 
-        def <strong>encode</strong>(obj)
-
-        <a class="method-permalink" href="#encode%28obj%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/376bc02568dff64fca8af9a3c8eb13b1d5f39909/src/halite/mime_type.cr#L27" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
