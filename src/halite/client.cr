@@ -95,15 +95,15 @@ module Halite
     #
     # client = Halite::Client.new(options)
     # ```
-    def initialize(@options = Options.new)
+    def initialize(@options = Halite::Options.new)
       @history = [] of Response
     end
 
     # Make an HTTP request
-    def request(verb : String, uri : String, options : Options? = nil) : Halite::Response
+    def request(verb : String, uri : String, options : Halite::Options? = nil) : Halite::Response
       opts = options ? @options.merge(options.not_nil!) : @options
       request = build_request(verb, uri, opts)
-      response = perform(request, opts) do
+      response = perform_chain(request, opts) do
         perform(request, opts)
       end
 
@@ -114,8 +114,15 @@ module Halite
       end
     end
 
+    # Make an HTTP request
+    def request(verb : String, uri : String, options : Halite::Options? = nil, &block : Halite::Response ->)
+      opts = options ? @options.merge(options.not_nil!) : @options
+      request = build_request(verb, uri, opts)
+      perform(request, opts, &block)
+    end
+
     # Find interceptor and return `Response` else perform HTTP request.
-    private def perform(request : Halite::Request, options : Halite::Options, &block : -> Response)
+    private def perform_chain(request : Halite::Request, options : Halite::Options, &block : -> Response)
       chain = Feature::Chain.new(request, nil, options, &block)
       options.features.each do |_, feature|
         current_chain = feature.intercept(chain)
@@ -139,20 +146,28 @@ module Halite
     private def perform(request : Halite::Request, options : Halite::Options) : Halite::Response
       raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.tls
 
-      conn = HTTP::Client.new(request.domain, options.tls)
-      conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
-      conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
+      conn = make_connection(request, options)
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
-      response = Response.new(uri: request.uri, conn: conn_response, history: @history)
-      handle_response(response, options)
+      handle_response(request, conn_response, options)
     rescue ex : IO::Timeout
       raise TimeoutError.new(ex.message)
     rescue ex : Socket::Error | Errno
       raise ConnectionError.new(ex.message)
     end
 
+    # Perform a single (no follow) streaming HTTP request
+    private def perform(request : Halite::Request, option : Halite::Options, &block : Halite::Response ->)
+      raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.tls
+
+      conn = make_connection(request, options)
+      conn.exec(request.verb, request.full_path, request.headers, request.body) do |conn_response|
+        response = handle_response(request, conn_response, options)
+        yield response
+      end
+    end
+
     # Prepare a HTTP request
-    private def build_request(verb : String, uri : String, options : Options) : Halite::Request
+    private def build_request(verb : String, uri : String, options : Halite::Options) : Halite::Request
       uri = make_request_uri(uri, options)
       body_data = make_request_body(options)
       headers = make_request_headers(options, body_data.content_type)
@@ -206,6 +221,20 @@ module Halite
       end
     end
 
+    # Create the http connection
+    private def make_connection(request, options)
+      conn = HTTP::Client.new(request.domain, options.tls)
+      conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
+      conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
+      conn
+    end
+
+    # Convert HTTP::Client::Response to response and handles response (see below)
+    private def handle_response(request, conn_response : HTTP::Client::Response, options)
+      response = Response.new(uri: request.uri, conn: conn_response, history: @history)
+      handle_response(response, options)
+    end
+
     # Handles response by reduce the response of feature, add history and update options
     private def handle_response(response, options)
       response = options.features.reduce(response) do |res, (_, feature)|
@@ -225,7 +254,7 @@ module Halite
     end
 
     # Use in instance/session mode, it will replace same method in `Halite::Chainable`.
-    private def branch(options : Options? = nil)
+    private def branch(options : Halite::Options? = nil)
       oneshot_options.merge!(options)
       self
     end

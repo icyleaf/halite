@@ -1,7 +1,7 @@
 module Halite
   class Response
     def self.new(uri : URI, status_code : Int32, body : String? = nil, headers = HTTP::Headers.new,
-                 status_message = nil, body_io : IO? = nil, version = "HTTP/1.1", history = [] of Response)
+                 status_message = nil, body_io : IO? = nil, version = "HTTP/1.1", history = [] of Halite::Response)
       conn = HTTP::Client::Response.new(status_code, body, headers, status_message, version, body_io)
       new(uri, conn, history)
     end
@@ -10,7 +10,7 @@ module Halite
     getter conn
     getter history : Array(Response)
 
-    def initialize(@uri : URI, @conn : HTTP::Client::Response, @history = [] of Response)
+    def initialize(@uri : URI, @conn : HTTP::Client::Response, @history = [] of Halite::Response)
     end
 
     delegate version, to: @conn
@@ -46,7 +46,7 @@ module Halite
     end
 
     # Return a list of parsed link headers proxies or else nil.
-    def links : Hash(String, HeaderLink)?
+    def links : Hash(String, Halite::HeaderLink)?
       parse_links_from_headers
     end
 

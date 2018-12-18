@@ -18,7 +18,7 @@ module Halite
     getter max_hops : Int32
 
     # Instance a new Redirector
-    def initialize(@request : Request, @response : Response, @max_hops = 5, @strict = true)
+    def initialize(@request : Halite::Request, @response : Halite::Response, @max_hops = 5, @strict = true)
       @visited = [] of String
     end
 

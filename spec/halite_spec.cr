@@ -31,6 +31,23 @@ describe Halite do
       end
     end
 
+    context "streaming" do
+      it "is easy" do
+        data = [] of JSON::Any
+        Halite.headers("via": "foo").get(SERVER.api("stream?n=2")) do |response|
+          response.status_code.should eq 200
+          response.headers["Transfer-Encoding"].should eq "chunked"
+          while content = response.body_io.gets
+            data << JSON.parse(content)
+          end
+        end
+
+        data.size.should eq 2
+        data.first.as_h["verb"].should eq "GET"
+        data.first.as_h["headers"].as_h["Via"].should eq "foo"
+      end
+    end
+
     context "with headers" do
       it "is easy" do
         response = Halite.accept("application/json").get(SERVER.endpoint)
@@ -77,7 +94,7 @@ describe Halite do
       end
 
       it "should easy to request with json data" do
-        response = Halite.post(SERVER.api("form"), json: {"job" => { "title" => ["foo", "bar"], "info" => {gender: "male"}}})
+        response = Halite.post(SERVER.api("form"), json: {"job" => {"title" => ["foo", "bar"], "info" => {gender: "male"}}})
         response.to_s.should contain(%Q({"job":{"title":["foo","bar"],"info":{"gender":"male"}}}))
       end
     end
@@ -143,6 +160,188 @@ describe Halite do
         files["avatar"].as_a[1].as_h["filename"].should eq "halite-logo-small.png"
       end
     end
+
+    context "streaming" do
+      it "is easy" do
+        data = [] of JSON::Any
+        Halite.post(SERVER.api("stream?n=2")) do |response|
+          response.status_code.should eq 200
+          response.headers["Transfer-Encoding"].should eq "chunked"
+          while content = response.body_io.gets
+            data << JSON.parse(content)
+          end
+        end
+
+        data.size.should eq 2
+        data.first.as_h["verb"].should eq "POST"
+      end
+    end
+  end
+
+  describe ".put" do
+    it "should easy to request" do
+      response = Halite.put SERVER.endpoint
+      response.status_code.should eq(200)
+      response.content_type.should match(/html/)
+    end
+
+    context "streaming" do
+      it "is easy" do
+        data = [] of JSON::Any
+        Halite.put(SERVER.api("stream?n=2")) do |response|
+          response.status_code.should eq 200
+          response.headers["Transfer-Encoding"].should eq "chunked"
+          while content = response.body_io.gets
+            data << JSON.parse(content)
+          end
+        end
+
+        data.size.should eq 2
+        data.first.as_h["verb"].should eq "PUT"
+      end
+    end
+  end
+
+  describe ".delete" do
+    it "should easy to request" do
+      response = Halite.delete SERVER.endpoint
+      response.status_code.should eq(200)
+      response.content_type.should match(/html/)
+    end
+
+    context "streaming" do
+      it "is easy" do
+        data = [] of JSON::Any
+        Halite.delete(SERVER.api("stream?n=2")) do |response|
+          response.status_code.should eq 200
+          response.headers["Transfer-Encoding"].should eq "chunked"
+          while content = response.body_io.gets
+            data << JSON.parse(content)
+          end
+        end
+
+        data.size.should eq 2
+        data.first.as_h["verb"].should eq "DELETE"
+      end
+    end
+  end
+
+  describe ".patch" do
+    it "should easy to request" do
+      response = Halite.patch SERVER.endpoint
+      response.status_code.should eq(200)
+      response.content_type.should match(/html/)
+    end
+
+    context "streaming" do
+      it "is easy" do
+        data = [] of JSON::Any
+        Halite.patch(SERVER.api("stream?n=2")) do |response|
+          response.status_code.should eq 200
+          response.headers["Transfer-Encoding"].should eq "chunked"
+          while content = response.body_io.gets
+            data << JSON.parse(content)
+          end
+        end
+
+        data.size.should eq 2
+        data.first.as_h["verb"].should eq "PATCH"
+      end
+    end
+  end
+
+  describe ".head" do
+    it "should easy to request" do
+      response = Halite.head SERVER.endpoint
+      response.status_code.should eq(200)
+      response.content_type.should match(/html/)
+    end
+  end
+
+  describe ".options" do
+    it "should easy to request" do
+      response = Halite.options SERVER.endpoint
+      response.status_code.should eq(200)
+      response.content_type.should match(/html/)
+    end
+
+    context "streaming" do
+      it "is easy" do
+        data = [] of JSON::Any
+        Halite.options(SERVER.api("stream?n=2")) do |response|
+          response.status_code.should eq 200
+          response.headers["Transfer-Encoding"].should eq "chunked"
+          while content = response.body_io.gets
+            data << JSON.parse(content)
+          end
+        end
+
+        data.size.should eq 2
+        data.first.as_h["verb"].should eq "OPTIONS"
+      end
+    end
+  end
+
+  describe ".request" do
+    %w[get post put delete head patch options].each do |verb|
+      it "should easy to #{verb} request" do
+        response = Halite.request(verb, SERVER.endpoint)
+        response.status_code.should eq(200)
+      end
+
+      it "should easy to #{verb} request with hash or namedtuple" do
+        response = Halite.request(verb, SERVER.endpoint, params: {name: "foo"})
+        response.status_code.should eq(200)
+      end
+
+      it "should easy to #{verb} request with options" do
+        response = Halite.request(verb, SERVER.endpoint, Halite::Options.new)
+        response.status_code.should eq(200)
+      end
+
+      it "should easy to #{verb} streaming request" do
+        data = [] of JSON::Any
+        Halite.request(verb, SERVER.api("stream?n=2")) do |response|
+          response.status_code.should eq 200
+          response.headers["Transfer-Encoding"].should eq "chunked"
+
+          if verb != "head"
+            while content = response.body_io.gets
+              data << JSON.parse(content)
+            end
+          else
+            expect_raises Exception, "Nil assertion failed" do
+              response.body_io
+            end
+          end
+        end
+
+        if verb != "head"
+          data.size.should eq 2
+          data.first.as_h["verb"].should eq verb.upcase
+        else
+          data.size.should eq 0
+        end
+      end
+    end
+
+    it "throws an exception with non-support method" do
+      expect_raises Halite::UnsupportedMethodError do
+        Halite.request("abc", SERVER.endpoint)
+      end
+    end
+
+    it "throws an exception with non-support scheme" do
+      expect_raises Halite::UnsupportedSchemeError do
+        Halite.request("get", "ws://example.com/abc")
+      end
+    end
+
+    it "throws an exception without scheme" do
+      expect_raises Halite::UnsupportedSchemeError do
+        Halite.request("get", "example.com/abc")
+      end
+    end
   end
 
   describe ".follow" do
@@ -189,83 +388,6 @@ describe Halite do
         response = Halite.follow.get("#{SERVER.endpoint}/multi-redirect?n=#{times}")
         response.history.class.should eq Array(Halite::Response)
         response.history.size.should eq(times + 1)
-      end
-    end
-  end
-
-  describe ".put" do
-    it "should easy to request" do
-      response = Halite.put SERVER.endpoint
-      response.status_code.should eq(200)
-      response.content_type.should match(/html/)
-    end
-  end
-
-  describe ".delete" do
-    it "should easy to request" do
-      response = Halite.delete SERVER.endpoint
-      response.status_code.should eq(200)
-      response.content_type.should match(/html/)
-    end
-  end
-
-  describe ".patch" do
-    it "should easy to request" do
-      response = Halite.patch SERVER.endpoint
-      response.status_code.should eq(200)
-      response.content_type.should match(/html/)
-    end
-  end
-
-  describe ".head" do
-    it "should easy to request" do
-      response = Halite.head SERVER.endpoint
-      response.status_code.should eq(200)
-      response.content_type.should match(/html/)
-    end
-  end
-
-  describe ".options" do
-    it "should easy to request" do
-      response = Halite.options SERVER.endpoint
-      response.status_code.should eq(200)
-      response.content_type.should match(/html/)
-    end
-  end
-
-  describe ".request" do
-    %w[get post put delete head patch options].each do |verb|
-      it "should easy to #{verb} request" do
-        response = Halite.request(verb, SERVER.endpoint)
-        response.status_code.should eq(200)
-      end
-
-      it "should easy to #{verb} request with hash or namedtuple" do
-        response = Halite.request(verb, SERVER.endpoint, params: {name: "foo"})
-        response.status_code.should eq(200)
-      end
-
-      it "should easy to #{verb} request with options" do
-        response = Halite.request(verb, SERVER.endpoint, Halite::Options.new)
-        response.status_code.should eq(200)
-      end
-    end
-
-    it "throws an exception with non-support method" do
-      expect_raises Halite::UnsupportedMethodError do
-        Halite.request("abc", SERVER.endpoint)
-      end
-    end
-
-    it "throws an exception with non-support scheme" do
-      expect_raises Halite::UnsupportedSchemeError do
-        Halite.request("get", "ws://example.com/abc")
-      end
-    end
-
-    it "throws an exception without scheme" do
-      expect_raises Halite::UnsupportedSchemeError do
-        Halite.request("get", "example.com/abc")
       end
     end
   end

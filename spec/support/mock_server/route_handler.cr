@@ -64,6 +64,24 @@ class MockServer < HTTP::Server
       context
     end
 
+    any "/stream" do |context|
+      total = context.request.query_params["n"].to_i
+
+      body = {
+        "verb"    => context.request.method,
+        "url"     => context.request.resource,
+        "query"   => context.request.query,
+        "headers" => context.request.headers.to_flat_h,
+      }
+
+      total.times do |i|
+        context.response.puts body.to_json
+        context.response.flush
+      end
+
+      context
+    end
+
     # GET
     get "/" do |context|
       context.response.status_code = 200

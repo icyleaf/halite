@@ -19,7 +19,7 @@ module Halite
   # ```
   module FormData
     # FormData factory. Automatically selects best type depending on given `data` Hash
-    def self.create(data : Hash(String, Options::Type) = {} of String => Options::Type) : Halite::Request::Data
+    def self.create(data : Hash(String, Halite::Options::Type) = {} of String => Halite::Options::Type) : Halite::Request::Data
       if multipart?(data)
         io = IO::Memory.new
         builder = HTTP::FormData::Builder.new(io)
@@ -50,7 +50,7 @@ module Halite
     end
 
     # Tells whenever data contains multipart data or not.
-    private def self.multipart?(data : Hash(String, Options::Type)) : Bool
+    private def self.multipart?(data : Hash(String, Halite::Options::Type)) : Bool
       data.any? do |_, v|
         case v
         when File
