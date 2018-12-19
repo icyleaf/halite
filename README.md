@@ -29,8 +29,9 @@ Build in Crystal version >= `v0.25.0`, this document valid with latest commit.
     - [JSON data](#json-data)
     - [Raw String](#raw-string)
   - [Passing advanced options](#passing-advanced-options)
-    - [Headers](#headers)
     - [Auth](#auth)
+    - [User Agent](#user-agent)
+    - [Headers](#headers)
     - [Cookies](#cookies)
     - [Redirects and History](#redirects-and-history)
     - [Timeout](#timeout)
@@ -202,6 +203,25 @@ Halite.post("http://httpbin.org/post",
 
 ### Passing advanced options
 
+#### Auth
+
+Use the `#basic_auth` method to perform [HTTP Basic Authentication](http://tools.ietf.org/html/rfc2617) using a username and password:
+
+```crystal
+Halite.basic_auth(user: "user", password: "p@ss").get("http://httpbin.org/get")
+
+# We can pass a raw authorization header using the auth method:
+Halite.auth("Bearer dXNlcjpwQHNz").get("http://httpbin.org/get")
+```
+
+#### User Agent
+
+Use the `#user_agent` method to overwrite default one:
+
+```crystal
+Halite.user_agent("Crystal Client").get("http://httpbin.org/user-agent")
+```
+
 #### Headers
 
 Here are two way to passing headers data:
@@ -224,17 +244,6 @@ Halite.headers({ private_token: "T0k3n" }).get("http://httpbin.org/get")
 Halite.get("http://httpbin.org/anything" , headers: { private_token: "T0k3n" })
 
 Halite.post("http://httpbin.org/anything" , headers: { private_token: "T0k3n" })
-```
-
-#### Auth
-
-Use the `#basic_auth` method to perform [HTTP Basic Authentication](http://tools.ietf.org/html/rfc2617) using a username and password:
-
-```crystal
-Halite.basic_auth(user: "user", password: "p@ss").get("http://httpbin.org/get")
-
-# We can pass a raw authorization header using the auth method:
-Halite.auth("Bearer dXNlcjpwQHNz").get("http://httpbin.org/get")
 ```
 
 #### Cookies
