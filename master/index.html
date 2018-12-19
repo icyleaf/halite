@@ -342,13 +342,13 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/60abbb8" target="_blank">#60abbb8</a> (2018-12-19 16:02:57 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/dff3737" target="_blank">#dff3737</a> (2018-12-19 16:06:18 +0800).</p>
 
 <h2>Index</h2>
 
 <p>&lt;!-- TOC --></p>
 
-<ul><li><a href="#index" target="_blank">Index</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#configuring" target="_blank">Configuring</a></li><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#streaming-requests" target="_blank">Streaming Requests</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#json-formatted-logging" target="_blank">JSON-formatted logging</a></li><li><a href="#write-to-a-log-file" target="_blank">Write to a log file</a></li><li><a href="#use-the-custom-logging" target="_blank">Use the custom logging</a></li><li><a href="#middlewares" target="_blank">Middlewares</a></li><li><a href="#write-a-simple-feature" target="_blank">Write a simple feature</a></li><li><a href="#write-a-interceptor" target="_blank">Write a interceptor</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#donate" target="_blank">Donate</a></li><li><a href="#how-to-contribute" target="_blank">How to Contribute</a></li><li><a href="#you-may-also-like" target="_blank">You may also like</a></li><li><a href="#license" target="_blank">License</a></li></ul>
+<ul><li><a href="#index" target="_blank">Index</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#user-agent" target="_blank">User Agent</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#configuring" target="_blank">Configuring</a></li><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#streaming-requests" target="_blank">Streaming Requests</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#json-formatted-logging" target="_blank">JSON-formatted logging</a></li><li><a href="#write-to-a-log-file" target="_blank">Write to a log file</a></li><li><a href="#use-the-custom-logging" target="_blank">Use the custom logging</a></li><li><a href="#middlewares" target="_blank">Middlewares</a></li><li><a href="#write-a-simple-feature" target="_blank">Write a simple feature</a></li><li><a href="#write-a-interceptor" target="_blank">Write a interceptor</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#donate" target="_blank">Donate</a></li><li><a href="#how-to-contribute" target="_blank">How to Contribute</a></li><li><a href="#you-may-also-like" target="_blank">You may also like</a></li><li><a href="#license" target="_blank">License</a></li></ul>
 
 <p>&lt;!-- /TOC --></p>
 
@@ -466,6 +466,21 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 
 <h3>Passing advanced options</h3>
 
+<h4>Auth</h4>
+
+<p>Use the <code>#basic_auth</code> method to perform <a href="http://tools.ietf.org/html/rfc2617" target="_blank">HTTP Basic Authentication</a> using a username and password:</p>
+
+<pre><code class="language-crystal"><span class="t">Halite</span>.basic_auth(user: <span class="s">&quot;user&quot;</span>, password: <span class="s">&quot;p@ss&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+
+<span class="c"># We can pass a raw authorization header using the auth method:</span>
+<span class="t">Halite</span>.auth(<span class="s">&quot;Bearer dXNlcjpwQHNz&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
+
+<h4>User Agent</h4>
+
+<p>Use the <code>#user_agent</code> method to overwrite default one:</p>
+
+<pre><code class="language-crystal"><span class="t">Halite</span>.user_agent(<span class="s">&quot;Crystal Client&quot;</span>).get(<span class="s">&quot;http://httpbin.org/user-agent&quot;</span>)</code></pre>
+
 <h4>Headers</h4>
 
 <p>Here are two way to passing headers data:</p>
@@ -485,15 +500,6 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 <pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/anything&quot;</span> , headers: { private_token: <span class="s">&quot;T0k3n&quot;</span> })
 
 <span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span> , headers: { private_token: <span class="s">&quot;T0k3n&quot;</span> })</code></pre>
-
-<h4>Auth</h4>
-
-<p>Use the <code>#basic_auth</code> method to perform <a href="http://tools.ietf.org/html/rfc2617" target="_blank">HTTP Basic Authentication</a> using a username and password:</p>
-
-<pre><code class="language-crystal"><span class="t">Halite</span>.basic_auth(user: <span class="s">&quot;user&quot;</span>, password: <span class="s">&quot;p@ss&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
-
-<span class="c"># We can pass a raw authorization header using the auth method:</span>
-<span class="t">Halite</span>.auth(<span class="s">&quot;Bearer dXNlcjpwQHNz&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
 
 <h4>Cookies</h4>
 
