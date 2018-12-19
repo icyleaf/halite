@@ -18,6 +18,25 @@ module Halite
                         tls : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
         request({{ verb }}, uri, headers: headers, params: params, raw: raw, tls: tls)
       end
+
+      # {{ verb.id.capitalize }} a streaming resource
+      #
+      # ```
+      # Halite.{{ verb.id }}("http://httpbin.org/anything") do |response|
+      #   puts response.status_code
+      #   while line = response.body_io.gets
+      #     puts line
+      #   end
+      # end
+      # ```
+      def {{ verb.id }}(uri : String, *,
+                        headers : (Hash(String, _) | NamedTuple)? = nil,
+                        params : (Hash(String, _) | NamedTuple)? = nil,
+                        raw : String? = nil,
+                        tls : OpenSSL::SSL::Context::Client? = nil,
+                        &block : Halite::Response ->)
+        request({{ verb }}, uri, headers: headers, params: params, raw: raw, tls: tls, &block)
+      end
     {% end %}
 
     {% for verb in %w(put post patch delete options) %}
@@ -54,6 +73,27 @@ module Halite
                         raw : String? = nil,
                         tls : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
         request({{ verb }}, uri, headers: headers, params: params, form: form, json: json, raw: raw, tls: tls)
+      end
+
+      # {{ verb.id.capitalize }} a streaming resource
+      #
+      # ```
+      # Halite.{{ verb.id }}("http://httpbin.org/anything") do |response|
+      #   puts response.status_code
+      #   while line = response.body_io.gets
+      #     puts line
+      #   end
+      # end
+      # ```
+      def {{ verb.id }}(uri : String, *,
+                        headers : (Hash(String, _) | NamedTuple)? = nil,
+                        params : (Hash(String, _) | NamedTuple)? = nil,
+                        form : (Hash(String, _) | NamedTuple)? = nil,
+                        json : (Hash(String, _) | NamedTuple)? = nil,
+                        raw : String? = nil,
+                        tls : OpenSSL::SSL::Context::Client? = nil,
+                        &block : Halite::Response ->)
+        request({{ verb }}, uri, headers: headers, params: params, form: form, json: json, raw: raw, tls: tls, &block)
       end
     {% end %}
 
@@ -188,7 +228,7 @@ module Halite
     # Halite.follow(strict: false)
     #   .get("http://httpbin.org/get")
     # ```
-    def follow(strict = Follow::STRICT) : Halite::Client
+    def follow(strict = Halite::Options::Follow::STRICT) : Halite::Client
       branch(default_options.with_follow(strict: strict))
     end
 
@@ -203,7 +243,7 @@ module Halite
     # Halite.follow(4, strict: false)
     #   .get("http://httpbin.org/relative-redirect/4")
     # ```
-    def follow(hops : Int32, strict = Follow::STRICT) : Halite::Client
+    def follow(hops : Int32, strict = Halite::Options::Follow::STRICT) : Halite::Client
       branch(default_options.with_follow(hops, strict))
     end
 
@@ -316,8 +356,8 @@ module Halite
     #
     # Check the log file content: **/tmp/halite.log**
     def logging(format = "common", file : String? = nil, filemode = "a",
-               skip_request_body = false, skip_response_body = false,
-               skip_benchmark = false, colorize = true)
+                skip_request_body = false, skip_response_body = false,
+                skip_benchmark = false, colorize = true)
       opts = {
         file:               file,
         filemode:           filemode,
@@ -390,17 +430,56 @@ module Halite
     # > This method will be executed with oneshot request.
     #
     # ```
+    # Halite.request("get", "http://httpbin.org/stream/3", headers: {"user-agent" => "halite"}) do |response|
+    #   puts response.status_code
+    #   while line = response.body_io.gets
+    #     puts line
+    #   end
+    # end
+    # ```
+    def request(verb : String, uri : String, *,
+                headers : (Hash(String, _) | NamedTuple)? = nil,
+                params : (Hash(String, _) | NamedTuple)? = nil,
+                form : (Hash(String, _) | NamedTuple)? = nil,
+                json : (Hash(String, _) | NamedTuple)? = nil,
+                raw : String? = nil,
+                tls : OpenSSL::SSL::Context::Client? = nil,
+                &block : Halite::Response ->)
+      request(verb, uri, options_with(headers, params, form, json, raw, tls), &block)
+    end
+
+    # Make an HTTP request with the given verb and options
+    #
+    # > This method will be executed with oneshot request.
+    #
+    # ```
     # Halite.request("get", "http://httpbin.org/get", Halite::Options.new(
     #   "headers" = { "user_agent" => "halite" },
     #   "params" => { "nickname" => "foo" },
     #   "form" => { "username" => "bar" },
     # )
     # ```
-    def request(verb : String, uri : String, options : Options? = nil) : Halite::Response
+    def request(verb : String, uri : String, options : Halite::Options? = nil) : Halite::Response
       branch(options).request(verb, uri)
     end
 
-    private def branch(options : Options? = nil) : Halite::Client
+    # Make an HTTP request with the given verb and options
+    #
+    # > This method will be executed with oneshot request.
+    #
+    # ```
+    # Halite.request("get", "http://httpbin.org/stream/3") do |response|
+    #   puts response.status_code
+    #   while line = response.body_io.gets
+    #     puts line
+    #   end
+    # end
+    # ```
+    def request(verb : String, uri : String, options : Halite::Options? = nil, &block : Halite::Response ->)
+      branch(options).request(verb, uri, &block)
+    end
+
+    private def branch(options : Halite::Options? = nil) : Halite::Client
       options ||= default_options
       Halite::Client.new(options)
     end

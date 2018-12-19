@@ -45,6 +45,7 @@ Build in Crystal version >= `v0.25.0`, this document valid with latest commit.
 - [Advanced Usage](#advanced-usage)
   - [Configuring](#configuring)
   - [Sessions](#sessions)
+  - [Streaming Requests](#streaming-requests)
   - [Logging](#logging)
     - [JSON-formatted logging](#json-formatted-logging)
     - [Write to a log file](#write-to-a-log-file)
@@ -431,19 +432,16 @@ r.parse("yaml") # or "yml"
 
 #### Binary Data
 
-Store binary data(`application/octet-stream`) to file, you can do this:
+Store binary data (eg, `application/octet-stream`) to file, you can use [streaming requests](#streaming-requests):
 
 ```crystal
-r = Halite.get("http://example.com/foo/bar.zip")
-filename = r.headers["Content-Disposition"].split("filename=")[1]
-File.open(filename, "w") do |f|
-  while byte = r.body.read_byte
-    f.write_byte byte
+Halite.get("https://github.com/icyleaf/halite/archive/master.zip") do |response|
+  filename = response.filename || "halite-master.zip"
+  File.open(filename, "w") do |file|
+    IO.copy(response.body_io, file)
   end
 end
 ```
-
-> Use byte to byte will cost more memory and slow down the speed, here has no solution for now, the reason is Crystal only accept streaming by using block with [HTTP::Client](https://crystal-lang.org/api/0.27.0/HTTP/Client.html) (search keyword: **Streaming**).
 
 ### Error Handling
 
@@ -552,6 +550,27 @@ client.options.with_cookie("username": "foobar")
 r = client.get("http://httpbin.org/cookies")
 r.body # => {"cookies":{"username":"foobar"}}
 ```
+
+### Streaming Requests
+
+Similar to [HTTP::Client](https://crystal-lang.org/api/0.27.0/HTTP/Client.html) (search keyword "Streaming") usage with a block,
+you can easily use same way, but Halite returns a `Halite::Response` object:
+
+```crystal
+r = Halite.get("http://httpbin.org/stream/5") do |response|
+  response.status_code                  # => 200
+  response.body_io.each_line do |line|
+    puts JSON.parse(line)               # => {"url" => "http://httpbin.org/stream/5", "args" => {}, "headers" => {"Host" => "httpbin.org", "Connection" => "close", "User-Agent" => "Halite/0.8.0", "Accept" => "*/*", "Accept-Encoding" => "gzip, deflate"}, "id" => 0_i64}
+  end
+end
+```
+
+> **Warning**:
+>
+> `body_io` is avaiabled as an `IO` and not reentrant safe. Might throws a "Nil assertion failed" exception if there is no data in the `IO`
+(such like `head` requests). Calling this method multiple times causes some of the received data being lost.
+>
+> One more thing, use streaming requests the response will always [enable redirect](#redirects-and-history) automatically.
 
 ### Logging
 

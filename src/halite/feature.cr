@@ -34,9 +34,9 @@ module Halite
       getter response
       getter result
 
-      @performed_response : Response?
+      @performed_response : Halite::Response?
 
-      def initialize(@request : Request, @response : Response?, @options : Options, &block : -> Response)
+      def initialize(@request : Halite::Request, @response : Halite::Response?, @options : Halite::Options, &block : -> Halite::Response)
         @result = Result::Next
         @performed_response = nil
         @perform_request_block = block

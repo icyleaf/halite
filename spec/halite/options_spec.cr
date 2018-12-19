@@ -39,7 +39,7 @@ private def test_options
     follow_strict: false,
     tls: OpenSSL::SSL::Context::Client.new,
     features: {
-      "logging" => Halite::Logging.new.as(Halite::Feature)
+      "logging" => Halite::Logging.new.as(Halite::Feature),
     }
   )
 end
@@ -126,7 +126,7 @@ describe Halite::Options do
         follow: 1,
         tls: new_tls,
         features: {
-          "cache" => Halite::Cache.new.as(Halite::Feature)
+          "cache" => Halite::Cache.new.as(Halite::Feature),
         }
       ))
 
@@ -193,7 +193,7 @@ describe Halite::Options do
         follow: 1,
         tls: new_tls,
         features: {
-          "cache" => Halite::Cache.new.as(Halite::Feature)
+          "cache" => Halite::Cache.new.as(Halite::Feature),
         }
       ))
 
@@ -292,7 +292,7 @@ describe Halite::Options do
     options.tls.should_not be_nil
 
     data = {
-      "name" => "foo".as(Halite::Options::Type)
+      "name" => "foo".as(Halite::Options::Type),
     }
 
     new_options.params = data

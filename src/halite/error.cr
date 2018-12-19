@@ -21,6 +21,9 @@ module Halite
     # The scheme given was not understood
     class UnsupportedSchemeError < RequestError; end
 
+    # The head method can not streaming without empty response
+    class UnsupportedStreamMethodError < RequestError; end
+
     # Requested to do something when we're in the wrong state
     class StateError < RequestError; end
 

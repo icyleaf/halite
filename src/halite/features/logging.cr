@@ -44,7 +44,7 @@ module Halite
         new(skip_request_body, skip_response_body, skip_benchmark, colorize, io)
       end
 
-      setter logger : ::Logger
+      setter logger : Logger
       getter skip_request_body : Bool
       getter skip_response_body : Bool
       getter skip_benchmark : Bool

@@ -64,6 +64,24 @@ class MockServer < HTTP::Server
       context
     end
 
+    any "/stream" do |context|
+      total = context.request.query_params["n"].to_i
+
+      body = {
+        "verb"    => context.request.method,
+        "url"     => context.request.resource,
+        "query"   => context.request.query,
+        "headers" => context.request.headers.to_flat_h,
+      }
+
+      total.times do |i|
+        context.response.puts body.to_json
+        context.response.flush
+      end
+
+      context
+    end
+
     # GET
     get "/" do |context|
       context.response.status_code = 200
@@ -109,6 +127,17 @@ class MockServer < HTTP::Server
       context.response.content_type = "application/octet-stream"
       context.response.print bytes.map { |b| b.unsafe_chr }.join
 
+      context
+    end
+
+    get "/image" do |context|
+      path = File.expand_path("../../../../halite-logo.png", __FILE__)
+      context.response.content_type = "image/png"
+      context.response.content_length = File.size(path)
+      context.response.headers["Content-Disposition"] = "attachment; filename=logo.png"
+      File.open(path) do |file|
+        IO.copy(file, context.response)
+      end
       context
     end
 
