@@ -55,12 +55,24 @@ describe Halite do
       end
     end
 
-    # context "loading binary data" do
-    #   it "is encoded as bytes" do
-    #     response = Halite.get SERVER.api("bytes")
-    #     # response.to_s.encoding.should eq(Encoding::BINARY)
-    #   end
-    # end
+    context "loading binary data" do
+      it "is a png file" do
+        response = Halite.get SERVER.api("image")
+        response.headers["Content-Type"].should eq "image/png"
+        response.filename.should eq "logo.png"
+      end
+
+      it "with streaming" do
+        original_path = File.expand_path("../../halite-logo.png", __FILE__)
+        Halite.get SERVER.api("image") do |response|
+          File.open(original_path, "r") do |original_file|
+            while byte = response.body_io.read_byte
+              original_file.read_byte.should eq byte
+            end
+          end
+        end
+      end
+    end
 
     context "with a large request body" do
       [16_000, 16_500, 17_000, 34_000, 68_000].each do |size|

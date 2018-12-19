@@ -14,6 +14,10 @@ module Halite
     # Verbs which will remain unchanged upon See Other response.
     SEE_OTHER_ALLOWED_VERBS = %w(GET HEAD)
 
+    def self.new(request : Halite::Request, response : Halite::Response, options : Halite::Options)
+      new(request, response, options.follow.hops, options.follow.strict)
+    end
+
     getter strict : Bool
     getter max_hops : Int32
 
@@ -23,18 +27,32 @@ module Halite
     end
 
     # Follows redirects until non-redirect response found
-    def perform(&block) : Halite::Response
-      while REDIRECT_CODES.includes?(@response.status_code)
+    def perform(&block : Halite::Request -> Halite::Response) : Halite::Response
+      if avaiable?
+        each_redirect do |request|
+          block.call(request)
+        end
+      end
+
+      @response
+    end
+
+    # Loop each redirect request with block call
+    def each_redirect(&block : Halite::Request -> Halite::Response)
+      while avaiable?
         @visited << "#{@request.verb} #{@request.uri}"
 
         raise TooManyRedirectsError.new if too_many_hops?
         raise EndlessRedirectError.new if endless_loop?
 
         @request = redirect_to(@response.headers["Location"]?)
-        @response = yield @request
+        @response = block.call(@request)
       end
+    end
 
-      @response
+    # Return `true` if it should redirect, else `false`
+    def avaiable?
+      REDIRECT_CODES.includes?(@response.status_code)
     end
 
     # Redirect policy for follow

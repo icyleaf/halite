@@ -84,6 +84,13 @@ module Halite
       MimeType[name].decode to_s
     end
 
+    # Return filename if it exists, else `Nil`.
+    def filename : String?
+      headers["Content-Disposition"]?.try do |value|
+        value.split("filename=")[1]
+      end
+    end
+
     # Return raw of response
     def to_raw
       io = IO::Memory.new

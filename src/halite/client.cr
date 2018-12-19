@@ -109,7 +109,7 @@ module Halite
 
       return response if opts.follow.hops.zero?
 
-      Redirector.new(request, response, opts.follow.hops, opts.follow.strict).perform do |req|
+      Redirector.new(request, response, opts).perform do |req|
         perform(req, opts)
       end
     end
@@ -155,14 +155,23 @@ module Halite
       raise ConnectionError.new(ex.message)
     end
 
-    # Perform a single (no follow) streaming HTTP request
-    private def perform(request : Halite::Request, option : Halite::Options, &block : Halite::Response ->)
+    # Perform a single (no follow) streaming HTTP request and redirect automatically
+    private def perform(request : Halite::Request, options : Halite::Options, &block : Halite::Response ->)
       raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.tls
 
       conn = make_connection(request, options)
       conn.exec(request.verb, request.full_path, request.headers, request.body) do |conn_response|
         response = handle_response(request, conn_response, options)
-        yield response
+        redirector = Redirector.new(request, response, options)
+        if redirector.avaiable?
+          redirector.each_redirect do |req|
+            perform(req, options, &block)
+          end
+        else
+          block.call(response)
+        end
+
+        return response
       end
     end
 
@@ -230,13 +239,13 @@ module Halite
     end
 
     # Convert HTTP::Client::Response to response and handles response (see below)
-    private def handle_response(request, conn_response : HTTP::Client::Response, options)
+    private def handle_response(request, conn_response : HTTP::Client::Response, options) : Halite::Response
       response = Response.new(uri: request.uri, conn: conn_response, history: @history)
       handle_response(response, options)
     end
 
     # Handles response by reduce the response of feature, add history and update options
-    private def handle_response(response, options)
+    private def handle_response(response, options) : Halite::Response
       response = options.features.reduce(response) do |res, (_, feature)|
         feature.response(res)
       end
@@ -247,14 +256,14 @@ module Halite
     end
 
     # Store cookies for sessions use from response
-    private def store_cookies_from_response(response : Halite::Response)
+    private def store_cookies_from_response(response : Halite::Response) : Halite::Response
       return response unless response.headers
       @options.with_cookies(HTTP::Cookies.from_headers(response.headers))
       response
     end
 
     # Use in instance/session mode, it will replace same method in `Halite::Chainable`.
-    private def branch(options : Halite::Options? = nil)
+    private def branch(options : Halite::Options? = nil) : Halite::Client
       oneshot_options.merge!(options)
       self
     end

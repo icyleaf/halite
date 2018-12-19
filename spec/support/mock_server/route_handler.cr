@@ -130,6 +130,17 @@ class MockServer < HTTP::Server
       context
     end
 
+    get "/image" do |context|
+      path = File.expand_path("../../../../halite-logo.png", __FILE__)
+      context.response.content_type = "image/png"
+      context.response.content_length = File.size(path)
+      context.response.headers["Content-Disposition"] = "attachment; filename=logo.png"
+      File.open(path) do |file|
+        IO.copy(file, context.response)
+      end
+      context
+    end
+
     get "/redirect-301" do |context|
       context.response.status_code = 301
       location =
