@@ -7,7 +7,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-> TODO
+> List all changes before release a new version.
+
+### Todo
+
+- [ ] HTTP proxy support
+
+### Added
+
+- Add streaming requests (feature to store binary data chunk by chunk) [#53](https://github.com/icyleaf/halite/pull/53)
+- Add `user_agent` to Chainable methods. [#55](https://github.com/icyleaf/halite/pull/55)
+
+### Fixed
+
+- Fix overwrite the value with default headers when use `merge` or  `merge!` method in `Halite::Options`. [#54](https://github.com/icyleaf/halite/pull/54)
+
+### Changed
+
+- Remove default headers in `Halite::Options`.
+- Move header `User-Agent` to `Halite::Request`.
+- Change header `Connection` from "keep-alive" to "close" to `Halite::Request`.
+- Remove header `Accept`.
 
 ## [0.8.0] (2018-11-30)
 

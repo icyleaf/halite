@@ -374,7 +374,7 @@ Halite.get("https://httpbin.org/anything", tls: tls)
 After an HTTP request, `Halite::Response` object have several useful methods. (Also see the [API documentation](https://icyleaf.github.io/halite/Halite/Response.html)).
 
 - **#body**: The response body.
-- **#body_io**: The response body io.
+- **#body_io**: The response body io only available in streaming requests.
 - **#status_code**: The HTTP status code.
 - **#content_type**: The content type of the response.
 - **#content_length**: The content length of the response.
