@@ -342,7 +342,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/d8ff365" target="_blank">#d8ff365</a> (2018-12-19 14:41:32 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/a80f163" target="_blank">#a80f163</a> (2018-12-19 14:47:51 +0800).</p>
 
 <h2>Index</h2>
 
@@ -659,9 +659,7 @@ r.parse(<span class="s">&quot;yaml&quot;</span>) <span class="c"># or &quot;yml&
 <pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;https://github.com/icyleaf/halite/archive/master.zip&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   filename <span class="o">=</span> response.filename || <span class="s">&quot;halite-master.zip&quot;</span>
   <span class="t">File</span>.open(filename, <span class="s">&quot;w&quot;</span>) <span class="k">do</span> <span class="o">|</span>file<span class="o">|</span>
-    <span class="k">while</span> byte <span class="o">=</span> response.body_io.read_byte
-      file.write_byte byte
-    <span class="k">end</span>
+    <span class="t">IO</span>.copy(response.body_io, file)
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
 
