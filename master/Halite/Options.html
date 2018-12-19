@@ -146,11 +146,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedStreamMethodError" data-name="halite::exception::unsupportedstreammethoderror">
-      <a href="../Halite/Exception/UnsupportedStreamMethodError.html">UnsupportedStreamMethodError</a>
-      
-    </li>
-  
 </ul>
 
       
@@ -386,21 +381,21 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options/follow.cr#L2" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options/follow.cr#L2" target="_blank">
         halite/options/follow.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options/timeout.cr#L2" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options/timeout.cr#L2" target="_blank">
         halite/options/timeout.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L38" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L38" target="_blank">
         halite/options.cr
       </a>
     
@@ -408,22 +403,6 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
   
 
 
-
-  
-    <h2>Constant Summary</h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="USER_AGENT">
-        <strong>USER_AGENT</strong> = <code><span class="s">&quot;Halite/</span><span class="i">#{</span><span class="t">Halite</span><span class="t">::</span><span class="t">VERSION</span><span class="i">}</span><span class="s">&quot;</span></code>
-      </dt>
-      
-      <dd class="entry-const-doc">
-        <p>Request user-agent by default</p>
-      </dd>
-      
-    
-  </dl>
 
 
 
@@ -486,13 +465,6 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#default_headers%3AHTTP%3A%3AHeaders-instance-method" class="signature"><strong>#default_headers</strong> : HTTP::Headers</a>
-        
-          <div class="summary"><p>Return default headers</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#dup-instance-method" class="signature"><strong>#dup</strong></a>
         
           <div class="summary"><p>Produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference.</p></div>
@@ -515,14 +487,14 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#follow%3D%28hops%3AInt32%29-instance-method" class="signature"><strong>#follow=</strong>(hops : Int32)</a>
-        
-          <div class="summary"><p>Alias <code><a href="../Halite/Options/Follow.html#hops%3D%28hops%3AInt32%29-instance-method">Follow.hops=</a></code></p></div>
+        <a href="#follow%3D%28follow%3AFollow%29-instance-method" class="signature"><strong>#follow=</strong>(follow : Follow)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#follow%3D%28follow%3AFollow%29-instance-method" class="signature"><strong>#follow=</strong>(follow : Follow)</a>
+        <a href="#follow%3D%28hops%3AInt32%29-instance-method" class="signature"><strong>#follow=</strong>(hops : Int32)</a>
+        
+          <div class="summary"><p>Alias <code><a href="../Halite/Options/Follow.html#hops%3D%28hops%3AInt32%29-instance-method">Follow.hops=</a></code></p></div>
         
       </li>
     
@@ -679,14 +651,14 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#with_cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Options</a>
+        <a href="#with_cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : HTTP::Cookies) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given cookies combined.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : HTTP::Cookies) : Halite::Options</a>
+        <a href="#with_cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given cookies combined.</p></div>
         
@@ -742,16 +714,16 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#with_logging%28logging%3AHalite%3A%3ALogging%3A%3AAbstract%29-instance-method" class="signature"><strong>#with_logging</strong>(logging : Halite::Logging::Abstract)</a>
+        <a href="#with_logging%28format%3AString%2C%2A%2Aopts%29-instance-method" class="signature"><strong>#with_logging</strong>(format : String, **opts)</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features%28%2Afeatures%29-instance-method">#with_features</a></code>.</p></div>
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> iitself with given format and the options of format.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_logging%28format%3AString%2C%2A%2Aopts%29-instance-method" class="signature"><strong>#with_logging</strong>(format : String, **opts)</a>
+        <a href="#with_logging%28logging%3AHalite%3A%3ALogging%3A%3AAbstract%29-instance-method" class="signature"><strong>#with_logging</strong>(logging : Halite::Logging::Abstract)</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> iitself with given format and the options of format.</p></div>
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features%28%2Afeatures%29-instance-method">#with_features</a></code>.</p></div>
         
       </li>
     
@@ -806,7 +778,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L42" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -822,7 +794,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L84" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L81" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -838,7 +810,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L102" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L99" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -863,7 +835,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L316" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L305" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -881,7 +853,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L223" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L220" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -899,7 +871,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L228" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L225" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -915,7 +887,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -931,27 +903,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L72" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="default_headers:HTTP::Headers-instance-method">
-      <div class="signature">
-        
-        def <strong>default_headers</strong> : <a href="../HTTP/Headers.html">HTTP::Headers</a>
-
-        <a class="method-permalink" href="#default_headers%3AHTTP%3A%3AHeaders-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Return default headers</p>
-
-<p>Auto accept gzip deflate encoding by <a href="https://crystal-lang.org/api/0.25.1/HTTP/Client.html" target="_blank">HTTP::Client</a></p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L352" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -970,7 +922,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L333" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L322" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -986,7 +938,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L82" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L79" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1002,7 +954,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L82" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L79" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1018,7 +970,23 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L74" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L71" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="follow=(follow:Follow)-instance-method">
+      <div class="signature">
+        
+        def <strong>follow=</strong>(follow : <a href="../Halite/Options/Follow.html">Follow</a>)
+
+        <a class="method-permalink" href="#follow%3D%28follow%3AFollow%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L71" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1036,23 +1004,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L243" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="follow=(follow:Follow)-instance-method">
-      <div class="signature">
-        
-        def <strong>follow=</strong>(follow : <a href="../Halite/Options/Follow.html">Follow</a>)
-
-        <a class="method-permalink" href="#follow%3D%28follow%3AFollow%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L74" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L240" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1070,7 +1022,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L248" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L245" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1088,7 +1040,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L253" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L250" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1104,7 +1056,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1120,7 +1072,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1136,7 +1088,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L71" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1152,7 +1104,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L71" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1168,7 +1120,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L218" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L215" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1184,7 +1136,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L79" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L76" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1200,7 +1152,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L79" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L76" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1218,7 +1170,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L258" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L255" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1238,7 +1190,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L265" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L262" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1256,7 +1208,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L274" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L271" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1274,7 +1226,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L282" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L279" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1290,7 +1242,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L77" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1306,7 +1258,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L77" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1322,7 +1274,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L80" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1338,7 +1290,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L80" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1356,7 +1308,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L233" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L230" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1374,7 +1326,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L238" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L235" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1390,7 +1342,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1406,7 +1358,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1422,7 +1374,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L75" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1438,7 +1390,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L75" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1456,7 +1408,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L361" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L339" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1474,7 +1426,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L127" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L124" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1492,25 +1444,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L150" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="with_cookies(cookies:Hash(String,_)|NamedTuple):Halite::Options-instance-method">
-      <div class="signature">
-        
-        def <strong>with_cookies</strong>(cookies : Hash(String, _) | NamedTuple) : <a href="../Halite/Options.html">Halite::Options</a>
-
-        <a class="method-permalink" href="#with_cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given cookies combined.</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L132" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L147" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1528,7 +1462,25 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L141" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L138" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_cookies(cookies:Hash(String,_)|NamedTuple):Halite::Options-instance-method">
+      <div class="signature">
+        
+        def <strong>with_cookies</strong>(cookies : Hash(String, _) | NamedTuple) : <a href="../Halite/Options.html">Halite::Options</a>
+
+        <a class="method-permalink" href="#with_cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given cookies combined.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L129" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1546,7 +1498,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L181" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L178" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1564,7 +1516,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L189" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L186" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1582,7 +1534,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L201" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L198" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1600,7 +1552,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p></di
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L194" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L191" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1625,7 +1577,7 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L167" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L164" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1643,7 +1595,7 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L116" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L113" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1661,25 +1613,7 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L121" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="with_logging(logging:Halite::Logging::Abstract)-instance-method">
-      <div class="signature">
-        
-        def <strong>with_logging</strong>(logging : <a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a>)
-
-        <a class="method-permalink" href="#with_logging%28logging%3AHalite%3A%3ALogging%3A%3AAbstract%29-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features%28%2Afeatures%29-instance-method">#with_features</a></code>.</p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L213" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L118" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1697,7 +1631,25 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L207" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L204" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_logging(logging:Halite::Logging::Abstract)-instance-method">
+      <div class="signature">
+        
+        def <strong>with_logging</strong>(logging : <a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a>)
+
+        <a class="method-permalink" href="#with_logging%28logging%3AHalite%3A%3ALogging%3A%3AAbstract%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features%28%2Afeatures%29-instance-method">#with_features</a></code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L210" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1715,7 +1667,7 @@ options.with_follow(<span class="n">3</span>)</code></pre></div>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/a5f0726e32bdde3e1957fe793877ead8fd58fc58/src/halite/options.cr#L174" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/5ea28b55dc47678eaa6cc798feb2a00224070083/src/halite/options.cr#L171" target="_blank">View source</a>]
         
       </div>
     </div>
