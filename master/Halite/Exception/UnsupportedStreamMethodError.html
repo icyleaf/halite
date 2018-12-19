@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>Halite::Logging::JSON - github.com/icyleaf/halite</title>
+  <title>Halite::Exception::UnsupportedStreamMethodError - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -56,7 +56,7 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
       <a href="../../Halite/Exception.html">Exception</a>
       
         <ul>
@@ -146,7 +146,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedStreamMethodError" data-name="halite::exception::unsupportedstreammethoderror">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedStreamMethodError" data-name="halite::exception::unsupportedstreammethoderror">
       <a href="../../Halite/Exception/UnsupportedStreamMethodError.html">UnsupportedStreamMethodError</a>
       
     </li>
@@ -196,7 +196,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Logging" data-name="halite::logging">
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Logging" data-name="halite::logging">
       <a href="../../Halite/Logging.html">Logging</a>
       
         <ul>
@@ -211,7 +211,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Logging/JSON" data-name="halite::logging::json">
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logging/JSON" data-name="halite::logging::json">
       <a href="../../Halite/Logging/JSON.html">JSON</a>
       
     </li>
@@ -330,52 +330,19 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Halite::Logging::JSON
+  <span class="kind">class</span> Halite::Exception::UnsupportedStreamMethodError
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Logging/JSON.html">Halite::Logging::JSON</a></li><li class="superclass"><a href="../../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Exception/UnsupportedStreamMethodError.html">Halite::Exception::UnsupportedStreamMethodError</a></li><li class="superclass"><a href="../../Halite/Exception/RequestError.html">Halite::Exception::RequestError</a></li><li class="superclass"><a href="../../Halite/Exception/Error.html">Halite::Exception::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
   <h2>Overview</h2>
 
-  <p>JSON logging format</p>
-
-<p>Instance variables to check <code><a href="../../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code>.</p>
-
-<p>In JSON format, if you set skip some key, it will return <code>false</code>.</p>
-
-<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, logging: <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">JSON</span>.<span class="k">new</span>(skip_request_body: <span class="n">true</span>))
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
-
-<span class="c"># Or</span>
-<span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, skip_request_body: <span class="n">true</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
-
-<p>Log will look like:</p>
-
-<pre><code>{
-  <span class="s">&quot;created_at&quot;</span>: <span class="s">&quot;2018-08-31T16:53:57+08:00:00&quot;</span>,
-  <span class="s">&quot;entry&quot;</span>: {
-    <span class="s">&quot;request&quot;</span>: {
-      <span class="s">&quot;body&quot;</span>: <span class="s">&quot;&quot;</span>,
-      <span class="s">&quot;headers&quot;</span>: { ... },
-      <span class="s">&quot;method&quot;</span>: <span class="s">&quot;GET&quot;</span>,
-      <span class="s">&quot;url&quot;</span>: <span class="s">&quot;http://httpbin.org/anything&quot;</span>,
-      <span class="s">&quot;timestamp&quot;</span>: <span class="s">&quot;2018-08-31T16:53:59+08:00:00&quot;</span>
-    },
-    <span class="s">&quot;response&quot;</span>: {
-      <span class="s">&quot;body&quot;</span>: <span class="n">false</span>,
-      <span class="s">&quot;header&quot;</span>: { ... },
-      <span class="s">&quot;status_code&quot;</span>: <span class="n">200</span>,
-      <span class="s">&quot;http_version&quot;</span>: <span class="s">&quot;HTTP/1.1&quot;</span>,
-      <span class="s">&quot;timestamp&quot;</span>: <span class="s">&quot;2018-08-31T16:53:59+08:00:00&quot;</span>
-    }
-  }
-}</code></pre>
+  <p>The head method can not streaming without empty response</p>
 
 
 
@@ -393,8 +360,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/features/logging/json.cr#L42" target="_blank">
-        halite/features/logging/json.cr
+      <a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/error.cr#L25" target="_blank">
+        halite/error.cr
       </a>
     
     <br/>
@@ -408,26 +375,6 @@
 
 
 
-  <h2>Instance Method Summary</h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#default_formatter-instance-method" class="signature"><strong>#default_formatter</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#request%28request%29-instance-method" class="signature"><strong>#request</strong>(request)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#response%28response%29-instance-method" class="signature"><strong>#response</strong>(response)</a>
-        
-      </li>
-    
-  </ul>
-
 
 
 
@@ -436,56 +383,28 @@
   
     
 
-  <h3>Instance methods inherited from class <code><a href="../../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code></h3>
-  
-  
-    <a href="../../Halite/Logging/Abstract.html#colorize%3ABool-instance-method" class="tooltip">
-      <span>colorize : Bool</span>
-    colorize</a>, 
+
     
-  
-    <a href="../../Halite/Logging/Abstract.html#logger%3D%28logger%3ALogger%29-instance-method" class="tooltip">
-      <span>logger=(logger : Logger)</span>
-    logger=</a>, 
-    
-  
-    <a href="../../Halite/Logging/Abstract.html#request%28request%29-instance-method" class="tooltip">
-      <span>request(request)</span>
-    request</a>, 
-    
-  
-    <a href="../../Halite/Logging/Abstract.html#response%28response%29-instance-method" class="tooltip">
-      <span>response(response)</span>
-    response</a>, 
-    
-  
-    <a href="../../Halite/Logging/Abstract.html#skip_benchmark%3ABool-instance-method" class="tooltip">
-      <span>skip_benchmark : Bool</span>
-    skip_benchmark</a>, 
-    
-  
-    <a href="../../Halite/Logging/Abstract.html#skip_request_body%3ABool-instance-method" class="tooltip">
-      <span>skip_request_body : Bool</span>
-    skip_request_body</a>, 
-    
-  
-    <a href="../../Halite/Logging/Abstract.html#skip_response_body%3ABool-instance-method" class="tooltip">
-      <span>skip_response_body : Bool</span>
-    skip_response_body</a>
-    
-  
 
 
     
 
-  <h3>Constructor methods inherited from class <code><a href="../../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code></h3>
+
   
-  
-    <a href="../../Halite/Logging/Abstract.html#new%28file%3AString%3F%3Dnil%2Cfilemode%3D%26quot%3Ba%26quot%3B%2Cskip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%29-class-method" class="tooltip">
-      <span>new(file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)<br/>new(skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>, io : IO = <span class="t">STDOUT</span>)</span>
-    new</a>
     
+
+
+    
+
+
+    
+
+
   
+    
+
+
+    
 
 
     
@@ -518,57 +437,6 @@
 
 
 
-
-  <h2>Instance Method Detail</h2>
-  
-    <div class="entry-detail" id="default_formatter-instance-method">
-      <div class="signature">
-        
-        def <strong>default_formatter</strong>
-
-        <a class="method-permalink" href="#default_formatter-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/features/logging/json.cr#L56" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="request(request)-instance-method">
-      <div class="signature">
-        
-        def <strong>request</strong>(request)
-
-        <a class="method-permalink" href="#request%28request%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/features/logging/json.cr#L46" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="response(response)-instance-method">
-      <div class="signature">
-        
-        def <strong>response</strong>(response)
-
-        <a class="method-permalink" href="#response%28response%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/features/logging/json.cr#L51" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 

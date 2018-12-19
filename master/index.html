@@ -146,6 +146,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedStreamMethodError" data-name="halite::exception::unsupportedstreammethoderror">
+      <a href="Halite/Exception/UnsupportedStreamMethodError.html">UnsupportedStreamMethodError</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -337,13 +342,13 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/66bfca8" target="_blank">#66bfca8</a> (2018-12-19 15:52:59 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/e7f1578" target="_blank">#e7f1578</a> (2018-12-19 15:53:23 +0800).</p>
 
 <h2>Index</h2>
 
 <p>&lt;!-- TOC --></p>
 
-<ul><li><a href="#index" target="_blank">Index</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#configuring" target="_blank">Configuring</a></li><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#json-formatted-logging" target="_blank">JSON-formatted logging</a></li><li><a href="#write-to-a-log-file" target="_blank">Write to a log file</a></li><li><a href="#use-the-custom-logging" target="_blank">Use the custom logging</a></li><li><a href="#middlewares" target="_blank">Middlewares</a></li><li><a href="#write-a-simple-feature" target="_blank">Write a simple feature</a></li><li><a href="#write-a-interceptor" target="_blank">Write a interceptor</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#donate" target="_blank">Donate</a></li><li><a href="#how-to-contribute" target="_blank">How to Contribute</a></li><li><a href="#you-may-also-like" target="_blank">You may also like</a></li><li><a href="#license" target="_blank">License</a></li></ul>
+<ul><li><a href="#index" target="_blank">Index</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#configuring" target="_blank">Configuring</a></li><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#streaming-requests" target="_blank">Streaming Requests</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#json-formatted-logging" target="_blank">JSON-formatted logging</a></li><li><a href="#write-to-a-log-file" target="_blank">Write to a log file</a></li><li><a href="#use-the-custom-logging" target="_blank">Use the custom logging</a></li><li><a href="#middlewares" target="_blank">Middlewares</a></li><li><a href="#write-a-simple-feature" target="_blank">Write a simple feature</a></li><li><a href="#write-a-interceptor" target="_blank">Write a interceptor</a></li><li><a href="#link-headers" target="_blank">Link Headers</a></li></ul><li><a href="#help-and-discussion" target="_blank">Help and Discussion</a></li><li><a href="#donate" target="_blank">Donate</a></li><li><a href="#how-to-contribute" target="_blank">How to Contribute</a></li><li><a href="#you-may-also-like" target="_blank">You may also like</a></li><li><a href="#license" target="_blank">License</a></li></ul>
 
 <p>&lt;!-- /TOC --></p>
 
@@ -649,17 +654,14 @@ r.parse(<span class="s">&quot;yaml&quot;</span>) <span class="c"># or &quot;yml&
 
 <h4>Binary Data</h4>
 
-<p>Store binary data(<code>application/octet-stream</code>) to file, you can do this:</p>
+<p>Store binary data (eg, <code>application/octet-stream</code>) to file, you can use <a href="#streaming-requests" target="_blank">streaming requests</a>:</p>
 
-<pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://example.com/foo/bar.zip&quot;</span>)
-filename <span class="o">=</span> r.headers[<span class="s">&quot;Content-Disposition&quot;</span>].split(<span class="s">&quot;filename=&quot;</span>)[<span class="n">1</span>]
-<span class="t">File</span>.open(filename, <span class="s">&quot;w&quot;</span>) <span class="k">do</span> <span class="o">|</span>f<span class="o">|</span>
-  <span class="k">while</span> byte <span class="o">=</span> r.body.read_byte
-    f.write_byte byte
+<pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;https://github.com/icyleaf/halite/archive/master.zip&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+  filename <span class="o">=</span> response.filename || <span class="s">&quot;halite-master.zip&quot;</span>
+  <span class="t">File</span>.open(filename, <span class="s">&quot;w&quot;</span>) <span class="k">do</span> <span class="o">|</span>file<span class="o">|</span>
+    <span class="t">IO</span>.copy(response.body_io, file)
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
-
-<blockquote>Use byte to byte will cost more memory and slow down the speed, here has no solution for now, the reason is Crystal only accept streaming by using block with <a href="https://crystal-lang.org/api/0.27.0/HTTP/Client.html" target="_blank">HTTP::Client</a> (search keyword: <strong>Streaming</strong>).</blockquote>
 
 <h3>Error Handling</h3>
 
@@ -758,6 +760,29 @@ r = client.get("http://httpbin.org/cookies")
 r.body # => {"cookies":{"username":"foobar"}}</p>
 
 <pre><code>
+<span class="c">### Streaming Requests</span>
+
+<span class="t">Similar</span> to [<span class="t">HTTP</span><span class="t">::</span><span class="t">Client</span>](https<span class="n">://</span>crystal<span class="o">-</span>lang.org<span class="s">/api/</span><span class="n">0.27</span>.<span class="n">0</span><span class="s">/HTTP/</span><span class="t">Client</span>.html) (search keyword <span class="s">&quot;Streaming&quot;</span>) usage <span class="k">with</span> a block,
+you can easily use same way, but <span class="t">Halite</span> returns a <span class="s">`Halite::Response`</span> object:
+</code></pre>
+
+<p>r = Halite.get("http://httpbin.org/stream/5") do |response|
+  response.status_code                  # => 200
+  response.body_io.each_line do |line|</p>
+
+<pre><code>puts <span class="t">JSON</span>.parse(line)               <span class="c"># =&gt; {&quot;url&quot; =&gt; &quot;http://httpbin.org/stream/5&quot;, &quot;args&quot; =&gt; {}, &quot;headers&quot; =&gt; {&quot;Host&quot; =&gt; &quot;httpbin.org&quot;, &quot;Connection&quot; =&gt; &quot;close&quot;, &quot;User-Agent&quot; =&gt; &quot;Halite/0.8.0&quot;, &quot;Accept&quot; =&gt; &quot;*/*&quot;, &quot;Accept-Encoding&quot; =&gt; &quot;gzip, deflate&quot;}, &quot;id&quot; =&gt; 0_i64}</span></code></pre>
+
+<p>end
+end</p>
+
+<pre><code>
+<span class="o">&gt;</span> <span class="o">**</span><span class="t">Warning</span><span class="o">**</span>:
+<span class="o">&gt;</span>
+<span class="o">&gt;</span> <span class="s">`body_io`</span> is avaiabled <span class="k">as</span> an <span class="s">`IO`</span> and not reentrant safe. <span class="t">Might</span> throws a <span class="s">&quot;Nil assertion failed&quot;</span> exception <span class="k">if</span> there is no data <span class="k">in</span> the <span class="s">`IO`</span>
+(such like <span class="s">`head`</span> requests). <span class="t">Calling</span> this method multiple times causes some <span class="k">of</span> the received data being lost.
+<span class="o">&gt;</span>
+<span class="o">&gt;</span> <span class="t">One</span> more thing, use streaming requests the response will always [enable redirect](<span class="c">#redirects-and-history) automatically.</span>
+
 <span class="c">### Logging</span>
 
 <span class="t">Halite</span> does not enable logging on each request and response too.

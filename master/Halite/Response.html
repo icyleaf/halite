@@ -146,6 +146,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedStreamMethodError" data-name="halite::exception::unsupportedstreammethoderror">
+      <a href="../Halite/Exception/UnsupportedStreamMethodError.html">UnsupportedStreamMethodError</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -351,7 +356,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L2" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L2" target="_blank">
         halite/response.cr
       </a>
     
@@ -366,12 +371,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28uri%3AURI%2Cstatus_code%3AInt32%2Cbody%3AString%3F%3Dnil%2Cheaders%3DHTTP%3A%3AHeaders.new%2Cstatus_message%3Dnil%2Cbody_io%3AIO%3F%3Dnil%2Cversion%3D%26quot%3BHTTP%2F1.1%26quot%3B%2Chistory%3D%5B%5DofResponse%29-class-method" class="signature"><strong>.new</strong>(uri : URI, status_code : Int32, body : String? = <span class="n">nil</span>, headers = <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.<span class="k">new</span>, status_message = <span class="n">nil</span>, body_io : IO? = <span class="n">nil</span>, version = <span class="s">&quot;HTTP/1.1&quot;</span>, history = <span class="o">[]</span> <span class="k">of</span> <span class="t">Response</span>)</a>
+        <a href="#new%28uri%3AURI%2Cstatus_code%3AInt32%2Cbody%3AString%3F%3Dnil%2Cheaders%3DHTTP%3A%3AHeaders.new%2Cstatus_message%3Dnil%2Cbody_io%3AIO%3F%3Dnil%2Cversion%3D%26quot%3BHTTP%2F1.1%26quot%3B%2Chistory%3D%5B%5DofHalite%3A%3AResponse%29-class-method" class="signature"><strong>.new</strong>(uri : URI, status_code : Int32, body : String? = <span class="n">nil</span>, headers = <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.<span class="k">new</span>, status_message = <span class="n">nil</span>, body_io : IO? = <span class="n">nil</span>, version = <span class="s">&quot;HTTP/1.1&quot;</span>, history = <span class="o">[]</span> <span class="k">of</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Response</span>)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28uri%3AURI%2Cconn%3AHTTP%3A%3AClient%3A%3AResponse%2Chistory%3D%5B%5DofResponse%29-class-method" class="signature"><strong>.new</strong>(uri : URI, conn : HTTP::Client::Response, history = <span class="o">[]</span> <span class="k">of</span> <span class="t">Response</span>)</a>
+        <a href="#new%28uri%3AURI%2Cconn%3AHTTP%3A%3AClient%3A%3AResponse%2Chistory%3D%5B%5DofHalite%3A%3AResponse%29-class-method" class="signature"><strong>.new</strong>(uri : URI, conn : HTTP::Client::Response, history = <span class="o">[]</span> <span class="k">of</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Response</span>)</a>
         
       </li>
     
@@ -405,12 +410,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#charset%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#charset</strong>(*args, **options)</a>
+        <a href="#charset%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#charset</strong>(*args, **options, &block)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#charset%28%2Aargs%2C%2A%2Aoptions%2C%26block%29-instance-method" class="signature"><strong>#charset</strong>(*args, **options, &block)</a>
+        <a href="#charset%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#charset</strong>(*args, **options)</a>
         
       </li>
     
@@ -444,6 +449,13 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#filename%3AString%3F-instance-method" class="signature"><strong>#filename</strong> : String?</a>
+        
+          <div class="summary"><p>Return filename if it exists, else <code>Nil</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#headers%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#headers</strong>(*args, **options)</a>
         
       </li>
@@ -464,7 +476,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#links%3AHash%28String%2CHeaderLink%29%3F-instance-method" class="signature"><strong>#links</strong> : Hash(String, HeaderLink)?</a>
+        <a href="#links%3AHash%28String%2CHalite%3A%3AHeaderLink%29%3F-instance-method" class="signature"><strong>#links</strong> : Hash(String, Halite::HeaderLink)?</a>
         
           <div class="summary"><p>Return a list of parsed link headers proxies or else nil.</p></div>
         
@@ -588,34 +600,34 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="new(uri:URI,status_code:Int32,body:String?=nil,headers=HTTP::Headers.new,status_message=nil,body_io:IO?=nil,version=&amp;quot;HTTP/1.1&amp;quot;,history=[]ofResponse)-class-method">
+    <div class="entry-detail" id="new(uri:URI,status_code:Int32,body:String?=nil,headers=HTTP::Headers.new,status_message=nil,body_io:IO?=nil,version=&amp;quot;HTTP/1.1&amp;quot;,history=[]ofHalite::Response)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(uri : URI, status_code : Int32, body : String? = <span class="n">nil</span>, headers = <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.<span class="k">new</span>, status_message = <span class="n">nil</span>, body_io : IO? = <span class="n">nil</span>, version = <span class="s">&quot;HTTP/1.1&quot;</span>, history = <span class="o">[]</span> <span class="k">of</span> <span class="t">Response</span>)
+        def self.<strong>new</strong>(uri : URI, status_code : Int32, body : String? = <span class="n">nil</span>, headers = <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.<span class="k">new</span>, status_message = <span class="n">nil</span>, body_io : IO? = <span class="n">nil</span>, version = <span class="s">&quot;HTTP/1.1&quot;</span>, history = <span class="o">[]</span> <span class="k">of</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Response</span>)
 
-        <a class="method-permalink" href="#new%28uri%3AURI%2Cstatus_code%3AInt32%2Cbody%3AString%3F%3Dnil%2Cheaders%3DHTTP%3A%3AHeaders.new%2Cstatus_message%3Dnil%2Cbody_io%3AIO%3F%3Dnil%2Cversion%3D%26quot%3BHTTP%2F1.1%26quot%3B%2Chistory%3D%5B%5DofResponse%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28uri%3AURI%2Cstatus_code%3AInt32%2Cbody%3AString%3F%3Dnil%2Cheaders%3DHTTP%3A%3AHeaders.new%2Cstatus_message%3Dnil%2Cbody_io%3AIO%3F%3Dnil%2Cversion%3D%26quot%3BHTTP%2F1.1%26quot%3B%2Chistory%3D%5B%5DofHalite%3A%3AResponse%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(uri:URI,conn:HTTP::Client::Response,history=[]ofResponse)-class-method">
+    <div class="entry-detail" id="new(uri:URI,conn:HTTP::Client::Response,history=[]ofHalite::Response)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(uri : URI, conn : HTTP::Client::Response, history = <span class="o">[]</span> <span class="k">of</span> <span class="t">Response</span>)
+        def self.<strong>new</strong>(uri : URI, conn : HTTP::Client::Response, history = <span class="o">[]</span> <span class="k">of</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Response</span>)
 
-        <a class="method-permalink" href="#new%28uri%3AURI%2Cconn%3AHTTP%3A%3AClient%3A%3AResponse%2Chistory%3D%5B%5DofResponse%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28uri%3AURI%2Cconn%3AHTTP%3A%3AClient%3A%3AResponse%2Chistory%3D%5B%5DofHalite%3A%3AResponse%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -638,7 +650,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -654,7 +666,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -670,7 +682,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -686,23 +698,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L26" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="charset(*args,**options)-instance-method">
-      <div class="signature">
-        
-        def <strong>charset</strong>(*args, **options)
-
-        <a class="method-permalink" href="#charset%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -718,7 +714,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="charset(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>charset</strong>(*args, **options)
+
+        <a class="method-permalink" href="#charset%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -734,7 +746,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -752,7 +764,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -768,7 +780,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -784,7 +796,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -802,7 +814,25 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L36" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L36" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="filename:String?-instance-method">
+      <div class="signature">
+        
+        def <strong>filename</strong> : String?
+
+        <a class="method-permalink" href="#filename%3AString%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Return filename if it exists, else <code>Nil</code>.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L88" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -818,7 +848,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -834,7 +864,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -850,7 +880,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -866,17 +896,17 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L104" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L111" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="links:Hash(String,HeaderLink)?-instance-method">
+    <div class="entry-detail" id="links:Hash(String,Halite::HeaderLink)?-instance-method">
       <div class="signature">
         
-        def <strong>links</strong> : Hash(String, HeaderLink)?
+        def <strong>links</strong> : Hash(String, Halite::HeaderLink)?
 
-        <a class="method-permalink" href="#links%3AHash%28String%2CHeaderLink%29%3F-instance-method">#</a>
+        <a class="method-permalink" href="#links%3AHash%28String%2CHalite%3A%3AHeaderLink%29%3F-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Return a list of parsed link headers proxies or else nil.</p></div>
@@ -884,7 +914,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L49" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -902,7 +932,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -931,7 +961,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L69" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L69" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -947,7 +977,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -963,7 +993,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -979,7 +1009,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -995,7 +1025,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1011,7 +1041,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1027,7 +1057,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1045,7 +1075,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L95" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L102" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1063,7 +1093,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L88" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L95" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1079,7 +1109,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L108" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L115" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1097,7 +1127,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L100" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L107" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1113,7 +1143,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1129,7 +1159,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1145,7 +1175,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/response.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/response.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>

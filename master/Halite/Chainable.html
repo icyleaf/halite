@@ -146,6 +146,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedStreamMethodError" data-name="halite::exception::unsupportedstreammethoderror">
+      <a href="../Halite/Exception/UnsupportedStreamMethodError.html">UnsupportedStreamMethodError</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -356,7 +361,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L4" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L4" target="_blank">
         halite/chainable.cr
       </a>
     
@@ -396,13 +401,6 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Client</a>
-        
-          <div class="summary"><p>Make a request with the given cookies</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#cookies%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong> : Halite::Client</a>
         
           <div class="summary"><p>Make a request with the given cookies</p></div>
@@ -417,6 +415,13 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Client</a>
+        
+          <div class="summary"><p>Make a request with the given cookies</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#delete%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#delete</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>) : Halite::Response</a>
         
           <div class="summary"><p>Delete a resource</p></div>
@@ -424,14 +429,21 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#follow%28strict%3DFollow%3A%3ASTRICT%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#follow</strong>(strict = <span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : Halite::Client</a>
+        <a href="#delete%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method" class="signature"><strong>#delete</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : Halite::Response -> )</a>
+        
+          <div class="summary"><p>Delete a streaming resource</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#follow%28strict%3DHalite%3A%3AOptions%3A%3AFollow%3A%3ASTRICT%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#follow</strong>(strict = <span class="t">Halite</span><span class="t">::</span><span class="t">Options</span><span class="t">::</span><span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : Halite::Client</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with automatically following redirects.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#follow%28hops%3AInt32%2Cstrict%3DFollow%3A%3ASTRICT%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#follow</strong>(hops : Int32, strict = <span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : Halite::Client</a>
+        <a href="#follow%28hops%3AInt32%2Cstrict%3DHalite%3A%3AOptions%3A%3AFollow%3A%3ASTRICT%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#follow</strong>(hops : Int32, strict = <span class="t">Halite</span><span class="t">::</span><span class="t">Options</span><span class="t">::</span><span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : Halite::Client</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given max hops of redirect times.</p></div>
         
@@ -445,6 +457,13 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#get%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method" class="signature"><strong>#get</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : Halite::Response -> )</a>
+        
+          <div class="summary"><p>Get a streaming resource</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#head%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#head</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>) : Halite::Response</a>
         
           <div class="summary"><p>Head a resource</p></div>
@@ -452,9 +471,9 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#headers%28headers%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#headers</strong>(headers : Hash(String, _) | NamedTuple) : Halite::Client</a>
+        <a href="#head%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method" class="signature"><strong>#head</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : Halite::Response -> )</a>
         
-          <div class="summary"><p>Make a request with the given headers</p></div>
+          <div class="summary"><p>Head a streaming resource</p></div>
         
       </li>
     
@@ -466,9 +485,9 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#logging%28logging%3AHalite%3A%3ALogging%3A%3AAbstract%3DHalite%3A%3ALogging%3A%3ACommon.new%29-instance-method" class="signature"><strong>#logging</strong>(logging : Halite::Logging::Abstract = <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Common</span>.<span class="k">new</span>)</a>
+        <a href="#headers%28headers%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#headers</strong>(headers : Hash(String, _) | NamedTuple) : Halite::Client</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the logging which it integration from <code><a href="../Halite/Logging.html">Halite::Logging</a></code>.</p></div>
+          <div class="summary"><p>Make a request with the given headers</p></div>
         
       </li>
     
@@ -480,6 +499,20 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#logging%28logging%3AHalite%3A%3ALogging%3A%3AAbstract%3DHalite%3A%3ALogging%3A%3ACommon.new%29-instance-method" class="signature"><strong>#logging</strong>(logging : Halite::Logging::Abstract = <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Common</span>.<span class="k">new</span>)</a>
+        
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the logging which it integration from <code><a href="../Halite/Logging.html">Halite::Logging</a></code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#options%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method" class="signature"><strong>#options</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : Halite::Response -> )</a>
+        
+          <div class="summary"><p>Options a streaming resource</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#options%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#options</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>) : Halite::Response</a>
         
           <div class="summary"><p>Options a resource</p></div>
@@ -487,9 +520,23 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#patch%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method" class="signature"><strong>#patch</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : Halite::Response -> )</a>
+        
+          <div class="summary"><p>Patch a streaming resource</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#patch%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#patch</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>) : Halite::Response</a>
         
           <div class="summary"><p>Patch a resource</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#post%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method" class="signature"><strong>#post</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : Halite::Response -> )</a>
+        
+          <div class="summary"><p>Post a streaming resource</p></div>
         
       </li>
     
@@ -508,7 +555,14 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#request%28verb%3AString%2Curi%3AString%2Coptions%3AOptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#request</strong>(verb : String, uri : String, options : Options? = <span class="n">nil</span>) : Halite::Response</a>
+        <a href="#put%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method" class="signature"><strong>#put</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : Halite::Response -> )</a>
+        
+          <div class="summary"><p>Put a streaming resource</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#request%28verb%3AString%2Curi%3AString%2Coptions%3AHalite%3A%3AOptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#request</strong>(verb : String, uri : String, options : Halite::Options? = <span class="n">nil</span>) : Halite::Response</a>
         
           <div class="summary"><p>Make an HTTP request with the given verb and options</p></div>
         
@@ -522,14 +576,28 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span) : Halite::Client</a>
+        <a href="#request%28verb%3AString%2Curi%3AString%2Coptions%3AHalite%3A%3AOptions%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method" class="signature"><strong>#request</strong>(verb : String, uri : String, options : Halite::Options? = <span class="n">nil</span>, &block : Halite::Response -> )</a>
+        
+          <div class="summary"><p>Make an HTTP request with the given verb and options</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#request%28verb%3AString%2Curi%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method" class="signature"><strong>#request</strong>(verb : String, uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : Halite::Response -> )</a>
+        
+          <div class="summary"><p>Make an HTTP request with the given verb and options</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#timeout</strong>(connect : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read : Int32 | Float64 | Time::Span? = <span class="n">nil</span>) : Halite::Client</a>
         
           <div class="summary"><p>Adds a timeout to the request.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#timeout</strong>(connect : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read : Int32 | Float64 | Time::Span? = <span class="n">nil</span>) : Halite::Client</a>
+        <a href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method" class="signature"><strong>#timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span) : Halite::Client</a>
         
           <div class="summary"><p>Adds a timeout to the request.</p></div>
         
@@ -582,7 +650,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L88" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L128" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -603,7 +671,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L118" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -626,7 +694,50 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L68" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L108" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="cookies:Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>cookies</strong> : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#cookies%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Make a request with the given cookies</p>
+
+<pre><code><span class="t">Halite</span>.cookies(name: <span class="s">&quot;icyleaf&quot;</span>, <span class="s">&quot;gender&quot;</span>: <span class="s">&quot;male&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L174" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="cookies(cookies:HTTP::Cookies):Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>cookies</strong>(cookies : HTTP::Cookies) : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Make a request with the given cookies</p>
+
+<pre><code>cookies <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Cookies</span>.from_headers(headers)
+<span class="t">Halite</span>.cookies(cookies)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L185" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -650,50 +761,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L124" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="cookies:Halite::Client-instance-method">
-      <div class="signature">
-        
-        def <strong>cookies</strong> : <a href="../Halite/Client.html">Halite::Client</a>
-
-        <a class="method-permalink" href="#cookies%3AHalite%3A%3AClient-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Make a request with the given cookies</p>
-
-<pre><code><span class="t">Halite</span>.cookies(name: <span class="s">&quot;icyleaf&quot;</span>, <span class="s">&quot;gender&quot;</span>: <span class="s">&quot;male&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L134" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="cookies(cookies:HTTP::Cookies):Halite::Client-instance-method">
-      <div class="signature">
-        
-        def <strong>cookies</strong>(cookies : HTTP::Cookies) : <a href="../Halite/Client.html">Halite::Client</a>
-
-        <a class="method-permalink" href="#cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AClient-instance-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Make a request with the given cookies</p>
-
-<pre><code>cookies <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Cookies</span>.from_headers(headers)
-<span class="t">Halite</span>.cookies(cookies)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L145" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L164" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -729,17 +797,42 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="follow(strict=Follow::STRICT):Halite::Client-instance-method">
+    <div class="entry-detail" id="delete(uri:String,*,headers:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,tls:OpenSSL::SSL::Context::Client?=nil,&amp;block:Halite::Response-&gt;)-instance-method">
       <div class="signature">
         
-        def <strong>follow</strong>(strict = <span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : <a href="../Halite/Client.html">Halite::Client</a>
+        def <strong>delete</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : <a href="../Halite/Response.html">Halite::Response</a> -> )
 
-        <a class="method-permalink" href="#follow%28strict%3DFollow%3A%3ASTRICT%29%3AHalite%3A%3AClient-instance-method">#</a>
+        <a class="method-permalink" href="#delete%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Delete a streaming resource</p>
+
+<pre><code><span class="t">Halite</span>.delete(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+  puts response.status_code
+  <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
+    puts line
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="follow(strict=Halite::Options::Follow::STRICT):Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>follow</strong>(strict = <span class="t">Halite</span><span class="t">::</span><span class="t">Options</span><span class="t">::</span><span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#follow%28strict%3DHalite%3A%3AOptions%3A%3AFollow%3A%3ASTRICT%29%3AHalite%3A%3AClient-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with automatically following redirects.</p>
@@ -755,17 +848,17 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L191" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L231" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="follow(hops:Int32,strict=Follow::STRICT):Halite::Client-instance-method">
+    <div class="entry-detail" id="follow(hops:Int32,strict=Halite::Options::Follow::STRICT):Halite::Client-instance-method">
       <div class="signature">
         
-        def <strong>follow</strong>(hops : Int32, strict = <span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : <a href="../Halite/Client.html">Halite::Client</a>
+        def <strong>follow</strong>(hops : Int32, strict = <span class="t">Halite</span><span class="t">::</span><span class="t">Options</span><span class="t">::</span><span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : <a href="../Halite/Client.html">Halite::Client</a>
 
-        <a class="method-permalink" href="#follow%28hops%3AInt32%2Cstrict%3DFollow%3A%3ASTRICT%29%3AHalite%3A%3AClient-instance-method">#</a>
+        <a class="method-permalink" href="#follow%28hops%3AInt32%2Cstrict%3DHalite%3A%3AOptions%3A%3AFollow%3A%3ASTRICT%29%3AHalite%3A%3AClient-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given max hops of redirect times.</p>
@@ -781,7 +874,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L206" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L246" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -804,7 +897,32 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get(uri:String,*,headers:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,tls:OpenSSL::SSL::Context::Client?=nil,&amp;block:Halite::Response-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>get</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : <a href="../Halite/Response.html">Halite::Response</a> -> )
+
+        <a class="method-permalink" href="#get%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Get a streaming resource</p>
+
+<pre><code><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+  puts response.status_code
+  <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
+    puts line
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -827,7 +945,53 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="head(uri:String,*,headers:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,tls:OpenSSL::SSL::Context::Client?=nil,&amp;block:Halite::Response-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>head</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : <a href="../Halite/Response.html">Halite::Response</a> -> )
+
+        <a class="method-permalink" href="#head%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Head a streaming resource</p>
+
+<pre><code><span class="t">Halite</span>.head(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+  puts response.status_code
+  <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
+    puts line
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="headers:Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>headers</strong> : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#headers%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Make a request with the given headers</p>
+
+<pre><code><span class="t">Halite</span>.headers(content_type: <span class="s">&quot;application/json&quot;</span>, connection: <span class="s">&quot;keep-alive&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L151" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -851,28 +1015,42 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L141" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="headers:Halite::Client-instance-method">
+    <div class="entry-detail" id="logging(format=&amp;quot;common&amp;quot;,file:String?=nil,filemode=&amp;quot;a&amp;quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method">
       <div class="signature">
         
-        def <strong>headers</strong> : <a href="../Halite/Client.html">Halite::Client</a>
+        def <strong>logging</strong>(format = <span class="s">&quot;common&quot;</span>, file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)
 
-        <a class="method-permalink" href="#headers%3AHalite%3A%3AClient-instance-method">#</a>
+        <a class="method-permalink" href="#logging%28format%3D%26quot%3Bcommon%26quot%3B%2Cfile%3AString%3F%3Dnil%2Cfilemode%3D%26quot%3Ba%26quot%3B%2Cskip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Make a request with the given headers</p>
+        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the file with the path.</p>
 
-<pre><code><span class="t">Halite</span>.headers(content_type: <span class="s">&quot;application/json&quot;</span>, connection: <span class="s">&quot;keep-alive&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre></div>
+<h4>JSON-formatted logging</h4>
+
+<pre><code><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
+
+<h4>create a http request and log to file</h4>
+
+<pre><code><span class="t">Halite</span>.logging(file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
+
+<h4>Always create new log file and store data to JSON formatted</h4>
+
+<pre><code><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
+
+<p>Check the log file content: <strong>/tmp/halite.log</strong></p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L111" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L358" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -910,7 +1088,7 @@ You can configuring the following options:</p>
 <h4>Use custom logging</h4>
 
 <p>Creating the custom logging by integration <code><a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code> abstract class.
-Here has two methods must be implement: <code><a href="../Halite/Chainable.html#request%28verb%3AString%2Curi%3AString%2Coptions%3AOptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method">#request</a></code> and <code>#response</code>.</p>
+Here has two methods must be implement: <code><a href="../Halite/Chainable.html#request%28verb%3AString%2Curi%3AString%2Coptions%3AHalite%3A%3AOptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method">#request</a></code> and <code>#response</code>.</p>
 
 <pre><code><span class="k">class</span> <span class="t">CustomLogger</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Abstract</span>
   <span class="k">def</span> <span class="m">request</span>(request)
@@ -938,42 +1116,32 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L290" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L330" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="logging(format=&amp;quot;common&amp;quot;,file:String?=nil,filemode=&amp;quot;a&amp;quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method">
+    <div class="entry-detail" id="options(uri:String,*,headers:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,tls:OpenSSL::SSL::Context::Client?=nil,&amp;block:Halite::Response-&gt;)-instance-method">
       <div class="signature">
         
-        def <strong>logging</strong>(format = <span class="s">&quot;common&quot;</span>, file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)
+        def <strong>options</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : <a href="../Halite/Response.html">Halite::Response</a> -> )
 
-        <a class="method-permalink" href="#logging%28format%3D%26quot%3Bcommon%26quot%3B%2Cfile%3AString%3F%3Dnil%2Cfilemode%3D%26quot%3Ba%26quot%3B%2Cskip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%29-instance-method">#</a>
+        <a class="method-permalink" href="#options%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the file with the path.</p>
+        <div class="doc"><p>Options a streaming resource</p>
 
-<h4>JSON-formatted logging</h4>
-
-<pre><code><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
-
-<h4>create a http request and log to file</h4>
-
-<pre><code><span class="t">Halite</span>.logging(file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
-
-<h4>Always create new log file and store data to JSON formatted</h4>
-
-<pre><code><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
-
-<p>Check the log file content: <strong>/tmp/halite.log</strong></p></div>
+<pre><code><span class="t">Halite</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+  puts response.status_code
+  <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
+    puts line
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L318" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1009,7 +1177,32 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="patch(uri:String,*,headers:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,tls:OpenSSL::SSL::Context::Client?=nil,&amp;block:Halite::Response-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>patch</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : <a href="../Halite/Response.html">Halite::Response</a> -> )
+
+        <a class="method-permalink" href="#patch%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Patch a streaming resource</p>
+
+<pre><code><span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+  puts response.status_code
+  <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
+    puts line
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1045,7 +1238,32 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="post(uri:String,*,headers:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,tls:OpenSSL::SSL::Context::Client?=nil,&amp;block:Halite::Response-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>post</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : <a href="../Halite/Response.html">Halite::Response</a> -> )
+
+        <a class="method-permalink" href="#post%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Post a streaming resource</p>
+
+<pre><code><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+  puts response.status_code
+  <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
+    puts line
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1081,7 +1299,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1117,17 +1335,42 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="request(verb:String,uri:String,options:Options?=nil):Halite::Response-instance-method">
+    <div class="entry-detail" id="put(uri:String,*,headers:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,tls:OpenSSL::SSL::Context::Client?=nil,&amp;block:Halite::Response-&gt;)-instance-method">
       <div class="signature">
         
-        def <strong>request</strong>(verb : String, uri : String, options : <a href="../Halite/Options.html">Options</a>? = <span class="n">nil</span>) : <a href="../Halite/Response.html">Halite::Response</a>
+        def <strong>put</strong>(uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : <a href="../Halite/Response.html">Halite::Response</a> -> )
 
-        <a class="method-permalink" href="#request%28verb%3AString%2Curi%3AString%2Coptions%3AOptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method">#</a>
+        <a class="method-permalink" href="#put%28uri%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Put a streaming resource</p>
+
+<pre><code><span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+  puts response.status_code
+  <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
+    puts line
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="request(verb:String,uri:String,options:Halite::Options?=nil):Halite::Response-instance-method">
+      <div class="signature">
+        
+        def <strong>request</strong>(verb : String, uri : String, options : <a href="../Halite/Options.html">Halite::Options</a>? = <span class="n">nil</span>) : <a href="../Halite/Response.html">Halite::Response</a>
+
+        <a class="method-permalink" href="#request%28verb%3AString%2Curi%3AString%2Coptions%3AHalite%3A%3AOptions%3F%3Dnil%29%3AHalite%3A%3AResponse-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Make an HTTP request with the given verb and options</p>
@@ -1143,7 +1386,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L399" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L462" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1167,33 +1410,61 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L378" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L418" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="timeout(connect_and_read:Int32|Float64|Time::Span):Halite::Client-instance-method">
+    <div class="entry-detail" id="request(verb:String,uri:String,options:Halite::Options?=nil,&amp;block:Halite::Response-&gt;)-instance-method">
       <div class="signature">
         
-        def <strong>timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span) : <a href="../Halite/Client.html">Halite::Client</a>
+        def <strong>request</strong>(verb : String, uri : String, options : <a href="../Halite/Options.html">Halite::Options</a>? = <span class="n">nil</span>, &block : <a href="../Halite/Response.html">Halite::Response</a> -> )
 
-        <a class="method-permalink" href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method">#</a>
+        <a class="method-permalink" href="#request%28verb%3AString%2Curi%3AString%2Coptions%3AHalite%3A%3AOptions%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Adds a timeout to the request.</p>
+        <div class="doc"><p>Make an HTTP request with the given verb and options</p>
 
-<p>How long to wait for the server to send data before giving up, as a int, float or time span.
-The timeout value will be applied to both the connect and the read timeouts.</p>
+<blockquote>This method will be executed with oneshot request.</blockquote>
 
-<pre><code><span class="t">Halite</span>.timeout(<span class="n">5.5</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
-<span class="c"># Or</span>
-<span class="t">Halite</span>.timeout(<span class="n">2</span>.minutes)
-  .post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {file: <span class="s">&quot;file.txt&quot;</span>})</code></pre></div>
+<pre><code><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/stream/3&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+  puts response.status_code
+  <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
+    puts line
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L160" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L478" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="request(verb:String,uri:String,*,headers:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,tls:OpenSSL::SSL::Context::Client?=nil,&amp;block:Halite::Response-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>request</strong>(verb : String, uri : String, *, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, &block : <a href="../Halite/Response.html">Halite::Response</a> -> )
+
+        <a class="method-permalink" href="#request%28verb%3AString%2Curi%3AString%2C%2A%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2C%26block%3AHalite%3A%3AResponse-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Make an HTTP request with the given verb and options</p>
+
+<blockquote>This method will be executed with oneshot request.</blockquote>
+
+<pre><code><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/stream/3&quot;</span>, headers: {<span class="s">&quot;user-agent&quot;</span> => <span class="s">&quot;halite&quot;</span>}) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+  puts response.status_code
+  <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
+    puts line
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L440" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1220,7 +1491,33 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L176" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L216" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="timeout(connect_and_read:Int32|Float64|Time::Span):Halite::Client-instance-method">
+      <div class="signature">
+        
+        def <strong>timeout</strong>(connect_and_read : Int32 | Float64 | Time::Span) : <a href="../Halite/Client.html">Halite::Client</a>
+
+        <a class="method-permalink" href="#timeout%28connect_and_read%3AInt32%7CFloat64%7CTime%3A%3ASpan%29%3AHalite%3A%3AClient-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Adds a timeout to the request.</p>
+
+<p>How long to wait for the server to send data before giving up, as a int, float or time span.
+The timeout value will be applied to both the connect and the read timeouts.</p>
+
+<pre><code><span class="t">Halite</span>.timeout(<span class="n">5.5</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+<span class="c"># Or</span>
+<span class="t">Halite</span>.timeout(<span class="n">2</span>.minutes)
+  .post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {file: <span class="s">&quot;file.txt&quot;</span>})</code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L200" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1255,7 +1552,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L353" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L393" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1278,7 +1575,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/66bfca8b59c44013f34d1bea8feff818a3853427/src/halite/chainable.cr#L365" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/e7f1578d38969e56de5b74f77d3cb1bab597ea2b/src/halite/chainable.cr#L405" target="_blank">View source</a>]
         
       </div>
     </div>
