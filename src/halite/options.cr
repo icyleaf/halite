@@ -36,9 +36,6 @@ module Halite
   # o.follow.strict # => false
   # ```
   class Options
-    # Request user-agent by default
-    USER_AGENT = "Halite/#{Halite::VERSION}"
-
     def self.new(headers : (Hash(String, _) | NamedTuple)? = nil,
                  cookies : (Hash(String, _) | NamedTuple)? = nil,
                  params : (Hash(String, _) | NamedTuple)? = nil,
@@ -92,7 +89,7 @@ module Halite
                    @follow = Follow.new,
                    @tls : OpenSSL::SSL::Context::Client? = nil,
                    @features = {} of String => Feature)
-      @headers = default_headers.merge!(parse_headers(headers))
+      @headers = parse_headers(headers)
       @cookies = parse_cookies(cookies)
       @params = parse_params(params)
       @form = parse_form(form)
@@ -280,15 +277,7 @@ module Halite
 
     # Merge with other `Options` and return self
     def merge!(other : Halite::Options) : Halite::Options
-      # if other.headers != default_headers
-      #   # Remove default key to make sure it is not to overwrite new one.
-      #   default_headers.each do |key, value|
-      #     other.headers.delete(key) if other.headers.get?(key) == value
-      #   end
-
-      #   @headers.merge!(other.headers)
-      # end
-      @headers.merge!(other.headers) if other.headers != default_headers
+      @headers.merge!(other.headers)
 
       other.cookies.each do |cookie|
         @cookies << cookie
@@ -314,7 +303,7 @@ module Halite
 
     # Reset options
     def clear! : Halite::Options
-      @headers = default_headers
+      @headers = HTTP::Headers.new
       @cookies = HTTP::Cookies.new
       @params = {} of String => Type
       @form = {} of String => Type
@@ -344,17 +333,6 @@ module Halite
         tls: @tls
       )
       options
-    end
-
-    # Return default headers
-    #
-    # Auto accept gzip deflate encoding by [HTTP::Client](https://crystal-lang.org/api/0.25.1/HTTP/Client.html)
-    def default_headers : HTTP::Headers
-      HTTP::Headers{
-        "User-Agent" => USER_AGENT,
-        "Accept"     => "*/*",
-        "Connection" => "keep-alive",
-      }
     end
 
     # Returns this collection as a plain Hash.
