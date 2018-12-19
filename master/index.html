@@ -342,7 +342,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/a455b2e" target="_blank">#a455b2e</a> (2018-12-19 18:30:46 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/5208068" target="_blank">#5208068</a> (2018-12-19 18:35:16 +0800).</p>
 
 <h2>Index</h2>
 
@@ -610,7 +610,7 @@ tls.private_key <span class="o">=</span> <span class="t">File</span>.expand_path
 
 <p>After an HTTP request, <code><a href="Halite/Response.html">Halite::Response</a></code> object have several useful methods. (Also see the <a href="https://icyleaf.github.io/halite/Halite/Response.html" target="_blank">API documentation</a>).</p>
 
-<ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io only avaiable in streaming request.</li><li><strong>#status_code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: A <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#links</strong>: A list of <code>Halite::HeaderLink</code> set from headers.</li><li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the <code>#content_type</code>.</li><li><strong>#to_a</strong>: Return a <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_raw</strong>: Return a raw of response as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li><li><strong>#version</strong>: The HTTP version.</li></ul>
+<ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io only available in streaming request.</li><li><strong>#status_code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: A <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#links</strong>: A list of <code>Halite::HeaderLink</code> set from headers.</li><li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the <code>#content_type</code>.</li><li><strong>#to_a</strong>: Return a <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_raw</strong>: Return a raw of response as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li><li><strong>#version</strong>: The HTTP version.</li></ul>
 
 <h4>Response Content</h4>
 
