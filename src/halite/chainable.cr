@@ -129,6 +129,16 @@ module Halite
       headers({"Accept" => value})
     end
 
+    # Set requests user agent
+    #
+    # ```
+    # Halite.user_agent("Custom User Agent")
+    #   .get("http://httpbin.org/get")
+    # ```
+    def user_agent(value : String) : Halite::Client
+      headers({"User-Agent" => value})
+    end
+
     # Make a request with the given headers
     #
     # ```

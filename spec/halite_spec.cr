@@ -418,6 +418,22 @@ describe Halite do
     end
   end
 
+  describe ".user_agent" do
+    it "uses default user agent" do
+      r = Halite.get SERVER.api("user_agent")
+      r.body.should eq(Halite::Request::USER_AGENT)
+    end
+
+    it "sets user agent" do
+      user_agent = "Awesome Halite Client"
+      client = Halite.user_agent(user_agent)
+      client.options.headers["User-Agent"].should eq(user_agent)
+
+      r = client.get SERVER.api("user_agent")
+      r.body.should eq(user_agent)
+    end
+  end
+
   describe ".timeout" do
     context "without timeout type" do
       it "sets given timeout options" do

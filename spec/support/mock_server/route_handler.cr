@@ -218,6 +218,12 @@ class MockServer < HTTP::Server
       context
     end
 
+    get "/user_agent" do |context|
+      body = context.request.headers["User-Agent"]
+      context.response.print body
+      context
+    end
+
     # POST
     post "/" do |context|
       context.response.status_code = 200
