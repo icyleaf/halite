@@ -27,8 +27,8 @@ describe Halite::Request do
     end
 
     it "could not set header with key and value" do
-      request.headers["User-Agent"] = "Halite"
-      request.headers["User-Agent"]?.should eq nil
+      request.headers["Via"] = "Halite"
+      request.headers["Via"]?.should eq nil
     end
   end
 

@@ -8,6 +8,9 @@ module Halite
     # Allowed schemes
     SCHEMES = %w(http https)
 
+    # Request user-agent by default
+    USER_AGENT = "Halite/#{Halite::VERSION}"
+
     # The verb name of request
     getter verb : String
 
@@ -33,6 +36,9 @@ module Halite
       @scheme = @uri.scheme.not_nil!
 
       raise UnsupportedSchemeError.new("Unknown scheme: #{@scheme}") unless SCHEMES.includes?(@scheme)
+
+      @headers["User-Agent"] ||= USER_AGENT
+      @headers["Connection"] ||= "close"
     end
 
     # Returns new Request with updated uri

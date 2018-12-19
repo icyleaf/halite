@@ -49,7 +49,7 @@ describe Halite::Options do
     it "should initial with nothing" do
       options = Halite::Options.new
       options.should be_a(Halite::Options)
-      options.headers.should eq(HTTP::Headers{"User-Agent" => "Halite/#{Halite::VERSION}", "Accept" => "*/*", "Connection" => "keep-alive"})
+      options.headers.empty?.should be_true
 
       options.cookies.should be_a(HTTP::Cookies)
       options.cookies.size.should eq(0)
@@ -130,7 +130,7 @@ describe Halite::Options do
         }
       ))
 
-      old_options.headers.should eq(HTTP::Headers{"User-Agent" => "spec", "Accept" => "*/*", "Connection" => "keep-alive"})
+      old_options.headers.should eq(HTTP::Headers{"User-Agent" => "spec"})
       old_options.cookies.size.should eq(0)
       old_options.timeout.connect.should eq(1)
       old_options.timeout.read.should eq(3.2)
@@ -145,7 +145,7 @@ describe Halite::Options do
       old_options.features["logging"].should be_a(Halite::Logging)
       old_options.tls.not_nil!.should_not eq(new_tls)
 
-      options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec", "Accept" => "*/*", "Connection" => "keep-alive"})
+      options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec"})
       options.cookies.size.should eq(0)
       options.timeout.connect.should eq(2)
       options.timeout.read.should be_nil
@@ -162,12 +162,6 @@ describe Halite::Options do
       options.features.size.should eq(2)
       options.features["logging"].should be_a(Halite::Logging)
       options.features["cache"].should be_a(Halite::Cache)
-    end
-
-    it "should keep defaults headers if same as others" do
-      options = Halite::Options.new
-      new_options = options.merge(Halite::Options.new)
-      new_options.headers.should eq(options.default_headers)
     end
 
     it "should overwrite exists value of headers from other" do
@@ -203,7 +197,7 @@ describe Halite::Options do
         }
       ))
 
-      old_options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec", "Accept" => "*/*", "Connection" => "keep-alive"})
+      old_options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec"})
       old_options.cookies.size.should eq(0)
       old_options.timeout.connect.should eq(2)
       old_options.timeout.read.should be_nil
@@ -220,7 +214,7 @@ describe Halite::Options do
       options.features["logging"].should be_a(Halite::Logging)
       options.features["cache"].should be_a(Halite::Cache)
 
-      options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec", "Accept" => "*/*", "Connection" => "keep-alive"})
+      options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec"})
       options.cookies.size.should eq(0)
       options.timeout.connect.should eq(2)
       options.timeout.read.should be_nil
@@ -242,7 +236,7 @@ describe Halite::Options do
   describe "#clear!" do
     options = test_options
     options.clear!
-    options.headers.should eq(HTTP::Headers{"User-Agent" => "Halite/#{Halite::VERSION}", "Accept" => "*/*", "Connection" => "keep-alive"})
+    options.headers.size.should eq(0)
 
     options.cookies.should be_a(HTTP::Cookies)
     options.cookies.size.should eq(0)
@@ -273,7 +267,7 @@ describe Halite::Options do
 
     new_options.headers = HTTP::Headers.new
     new_options.headers.empty?.should be_true
-    options.headers.size.should eq(3)
+    options.headers.size.should eq(1)
 
     cookies = HTTP::Cookies.new
     cookies << HTTP::Cookie.new("name", "foobar")
@@ -406,7 +400,7 @@ describe Halite::Options do
       options = options.with_follow(follow: 5, strict: false)
 
       options.follow.hops.should eq(5)
-      options.follow.strict.should eq(false)
+      options.follow.strict.should be_false
     end
   end
 
@@ -490,14 +484,14 @@ describe Halite::Options do
       )
       options.clear!
 
-      options.headers.should eq(options.default_headers)
-      options.cookies.empty?.should eq(true)
-      options.params.empty?.should eq(true)
-      options.form.empty?.should eq(true)
-      options.json.empty?.should eq(true)
+      options.headers.empty?.should be_true
+      options.cookies.empty?.should be_true
+      options.params.empty?.should be_true
+      options.form.empty?.should be_true
+      options.json.empty?.should be_true
 
-      options.timeout.connect.nil?.should eq(true)
-      options.timeout.read.nil?.should eq(true)
+      options.timeout.connect.nil?.should be_true
+      options.timeout.read.nil?.should be_true
 
       options.follow.hops.should eq(Halite::Follow::DEFAULT_HOPS)
       options.follow.strict.should eq(Halite::Follow::STRICT)
@@ -566,17 +560,17 @@ describe Halite::Options do
         options = Halite::Options.new
 
         options.follow_strict = false
-        options.follow.strict.should eq(false)
+        options.follow.strict.should be_false
 
         options.follow.strict = true
-        options.follow.strict.should eq(true)
+        options.follow.strict.should be_true
       end
 
       it "getter" do
         options = Halite::Options.new(follow: Halite::Follow.new(strict: false))
 
-        options.follow_strict.should eq(false)
-        options.follow.strict.should eq(false)
+        options.follow_strict.should be_false
+        options.follow.strict.should be_false
       end
     end
   end
