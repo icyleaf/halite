@@ -24,6 +24,9 @@ describe Halite::Request do
   describe "#headers" do
     it "provides a given headers" do
       request.headers["Accept"].should eq "text/html"
+      request.headers["Host"].should eq "example.com"
+      request.headers["User-Agent"].should eq Halite::Request::USER_AGENT
+      request.headers["Connection"].should eq "close"
     end
 
     it "could not set header with key and value" do
@@ -58,25 +61,27 @@ describe Halite::Request do
 
   describe "#redirect" do
     it "should return a new request" do
-      request = Halite::Request.new("GET", "http://httpbin.com/redirect/3", headers: HTTP::Headers{"Host" => "httpbin.com"})
-      new_request = request.redirect("http://httpbin.com/redirect/2")
-      new_request.uri.to_s.should eq("http://httpbin.com/redirect/2")
-      new_request.headers.has_key?("Host").should be_false
-      new_request.verb.should eq("GET")
-      request.uri.to_s.should eq("http://httpbin.com/redirect/3")
+      request = Halite::Request.new("GET", "http://example.com/redirect/3", headers: HTTP::Headers{"Host" => "example.com"})
+      request.uri.to_s.should eq("http://example.com/redirect/3")
       request.verb.should eq("GET")
-      request.headers.has_key?("Host").should be_true
+      request.headers["Host"].should eq("example.com")
+
+      new_request = request.redirect("http://another.example.com/redirect/2")
+      new_request.uri.to_s.should eq("http://another.example.com/redirect/2")
+      new_request.headers["Host"].should eq("another.example.com")
+      new_request.verb.should eq("GET")
     end
 
-    it "should return a new request without Host" do
-      request = Halite::Request.new("POST", "http://httpbin.com/redirect/3")
-      new_request = request.redirect("http://httpbin.com/redirect/2", "GET")
-      new_request.uri.to_s.should eq("http://httpbin.com/redirect/2")
+    it "should return a new request with non-standard port given" do
+      request = Halite::Request.new("GET", "http://example.com:8080/redirect/3")
+      request.uri.to_s.should eq("http://example.com:8080/redirect/3")
+      request.verb.should eq("GET")
+      request.headers["Host"].should eq("example.com:8080")
+
+      new_request = request.redirect("http://another.example.com:3000/redirect/2")
+      new_request.uri.to_s.should eq("http://another.example.com:3000/redirect/2")
+      new_request.headers["Host"].should eq("another.example.com:3000")
       new_request.verb.should eq("GET")
-      new_request.headers.has_key?("Host").should be_false
-      request.uri.to_s.should eq("http://httpbin.com/redirect/3")
-      request.verb.should eq("POST")
-      request.headers.has_key?("Host").should be_false
     end
   end
 

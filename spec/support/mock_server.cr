@@ -2,8 +2,6 @@ require "http/server"
 require "./mock_server/route_handler"
 
 class MockServer < HTTP::Server
-  HANDLERS = MockServer::RouteHandler.new
-
   BIND_ADDRESS = "127.0.0.1"
   BIND_PORT    = 18624
 
@@ -16,7 +14,7 @@ class MockServer < HTTP::Server
   end
 
   def initialize
-    super(HANDLERS)
+    super(MockServer::RouteHandler.new)
     @running = false
   end
 
@@ -34,12 +32,16 @@ class MockServer < HTTP::Server
     "#{scheme}://#{BIND_ADDRESS}:#{BIND_PORT}"
   end
 
+  def scheme
+    "http"
+  end
+
   def host
     BIND_ADDRESS
   end
 
-  def scheme
-    "http"
+  def port
+    BIND_PORT
   end
 
   def api(path : String)

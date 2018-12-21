@@ -1,3 +1,5 @@
+require "./requests/*"
+
 module Halite
   class Request
     # Allowed methods
@@ -10,6 +12,14 @@ module Halite
 
     # Request user-agent by default
     USER_AGENT = "Halite/#{Halite::VERSION}"
+
+    # Default ports of supported schemes
+    PORTS = {
+      "http"  => 80,
+      "https" => 443,
+      "ws"    => 80,
+      "wss"   => 443,
+    }
 
     # The verb name of request
     getter verb : String
@@ -37,6 +47,7 @@ module Halite
 
       raise UnsupportedSchemeError.new("Unknown scheme: #{@scheme}") unless SCHEMES.includes?(@scheme)
 
+      @headers["Host"] ||= default_host_to_header
       @headers["User-Agent"] ||= USER_AGENT
       @headers["Connection"] ||= "close"
     end
@@ -49,24 +60,37 @@ module Halite
       Request.new(verb, redirect_uri(domain, uri), headers, body)
     end
 
-    # @return `URI` with the scheme, user, password, port and host combined
+    # Return  a`URI` with the scheme, user, password, port and host combined
     def domain
       URI.new(@uri.scheme, @uri.host, @uri.port, nil, nil, @uri.user, @uri.password, nil, @uri.opaque)
     end
 
-    # @return `String` with the path, query and fragment combined
-    def full_path
+    # Return a `String` with the path, query and fragment(omit with argument `with_fragment: false`) combined
+    def full_path(with_fragment = true)
       String.build do |str|
         str << @uri.full_path
-        if @uri.fragment
+        if @uri.fragment && with_fragment
           str << "#" << @uri.fragment
         end
       end
     end
 
+    def host
+      @uri.host.not_nil!
+    end
+
+    def port
+      @uri.port ||= @uri.scheme == "https" ? 443 : 80
+      @uri.port.not_nil!
+    end
+
     # @return `URI` with all components but query being normalized.
     private def normalize_uri(uri : String) : URI
       URI.parse(uri)
+    end
+
+    private def default_host_to_header
+      PORTS[@scheme] != port ? "#{host}:#{port}" : host
     end
 
     private def redirect_uri(source : URI, uri : String) : String

@@ -50,7 +50,7 @@ module Halite
                  raw : String? = nil,
                  timeout = Timeout.new,
                  follow = Follow.new,
-                 tls : OpenSSL::SSL::Context::Client? = nil)
+                 tls : (Bool | OpenSSL::SSL::Context::Client) = false)
       new(Options.new(
         headers: headers,
         cookies: cookies,
@@ -232,7 +232,7 @@ module Halite
 
     # Create the http connection
     private def make_connection(request, options)
-      conn = HTTP::Client.new(request.domain, options.tls)
+      conn = HTTP::Client.new(request.host, request.port, options.tls)
       conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
       conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
       conn

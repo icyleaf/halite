@@ -64,8 +64,8 @@ describe Halite::Options do
       options.follow.hops.should eq(Halite::Follow::DEFAULT_HOPS)
       options.follow.strict.should eq(Halite::Follow::STRICT)
       options.follow_strict.should eq(Halite::Follow::STRICT)
-
-      options.tls.should be_nil
+      options.proxy.should be_nil
+      options.tls.should be_false
       options.params.should eq({} of String => Halite::Options::Type)
       options.form.should eq({} of String => Halite::Options::Type)
       options.json.should eq({} of String => Halite::Options::Type)
@@ -143,7 +143,7 @@ describe Halite::Options do
       old_options.raw.not_nil!.should eq("title=h4")
       old_options.features.size.should eq(1)
       old_options.features["logging"].should be_a(Halite::Logging)
-      old_options.tls.not_nil!.should_not eq(new_tls)
+      old_options.tls.should_not eq(new_tls)
 
       options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec"})
       options.cookies.size.should eq(0)
@@ -158,7 +158,7 @@ describe Halite::Options do
       options.json.should eq({"title" => "3"})
       options.raw.should_not be_nil
       options.raw.not_nil!.should eq("title=4")
-      options.tls.not_nil!.should eq(new_tls)
+      options.tls.should eq(new_tls)
       options.features.size.should eq(2)
       options.features["logging"].should be_a(Halite::Logging)
       options.features["cache"].should be_a(Halite::Cache)
@@ -210,7 +210,7 @@ describe Halite::Options do
       old_options.json.should eq({"title" => "3"})
       old_options.raw.should_not be_nil
       old_options.raw.not_nil!.should eq("title=4")
-      old_options.tls.not_nil!.should eq(new_tls)
+      old_options.tls.should eq(new_tls)
       options.features["logging"].should be_a(Halite::Logging)
       options.features["cache"].should be_a(Halite::Cache)
 
@@ -227,7 +227,7 @@ describe Halite::Options do
       options.json.should eq({"title" => "3"})
       options.raw.should_not be_nil
       options.raw.not_nil!.should eq("title=4")
-      options.tls.not_nil!.should eq(new_tls)
+      options.tls.should eq(new_tls)
       options.features["logging"].should be_a(Halite::Logging)
       options.features["cache"].should be_a(Halite::Cache)
     end
@@ -252,7 +252,8 @@ describe Halite::Options do
     options.follow.strict.should eq(Halite::Follow::STRICT)
     options.follow_strict.should eq(Halite::Follow::STRICT)
 
-    options.tls.should be_nil
+    options.proxy.should be_nil
+    options.tls.should be_false
     options.params.should eq({} of String => Halite::Options::Type)
     options.form.should eq({} of String => Halite::Options::Type)
     options.json.should eq({} of String => Halite::Options::Type)
@@ -287,9 +288,9 @@ describe Halite::Options do
     options.follow.hops.should eq(test_options.follow.hops)
     options.follow.strict.should eq(test_options.follow.strict)
 
-    new_options.tls = nil
-    new_options.tls.should be_nil
-    options.tls.should_not be_nil
+    new_options.tls = false
+    new_options.tls.should be_false
+    options.tls.should_not be_false
 
     data = {
       "name" => "foo".as(Halite::Options::Type),

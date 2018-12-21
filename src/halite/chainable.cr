@@ -15,7 +15,7 @@ module Halite
                         headers : (Hash(String, _) | NamedTuple)? = nil,
                         params : (Hash(String, _) | NamedTuple)? = nil,
                         raw : String? = nil,
-                        tls : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
+                        tls : (Bool | OpenSSL::SSL::Context::Client) = false) : Halite::Response
         request({{ verb }}, uri, headers: headers, params: params, raw: raw, tls: tls)
       end
 
@@ -33,7 +33,7 @@ module Halite
                         headers : (Hash(String, _) | NamedTuple)? = nil,
                         params : (Hash(String, _) | NamedTuple)? = nil,
                         raw : String? = nil,
-                        tls : OpenSSL::SSL::Context::Client? = nil,
+                        tls : (Bool | OpenSSL::SSL::Context::Client) = false,
                         &block : Halite::Response ->)
         request({{ verb }}, uri, headers: headers, params: params, raw: raw, tls: tls, &block)
       end
@@ -71,7 +71,7 @@ module Halite
                         form : (Hash(String, _) | NamedTuple)? = nil,
                         json : (Hash(String, _) | NamedTuple)? = nil,
                         raw : String? = nil,
-                        tls : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
+                        tls : (Bool | OpenSSL::SSL::Context::Client) = false) : Halite::Response
         request({{ verb }}, uri, headers: headers, params: params, form: form, json: json, raw: raw, tls: tls)
       end
 
@@ -91,7 +91,7 @@ module Halite
                         form : (Hash(String, _) | NamedTuple)? = nil,
                         json : (Hash(String, _) | NamedTuple)? = nil,
                         raw : String? = nil,
-                        tls : OpenSSL::SSL::Context::Client? = nil,
+                        tls : (Bool | OpenSSL::SSL::Context::Client) = false,
                         &block : Halite::Response ->)
         request({{ verb }}, uri, headers: headers, params: params, form: form, json: json, raw: raw, tls: tls, &block)
       end
@@ -238,7 +238,7 @@ module Halite
     # Halite.follow(strict: false)
     #   .get("http://httpbin.org/get")
     # ```
-    def follow(strict = Halite::Options::Follow::STRICT) : Halite::Client
+    def follow(strict = Halite::Follow::STRICT) : Halite::Client
       branch(default_options.with_follow(strict: strict))
     end
 
@@ -253,7 +253,7 @@ module Halite
     # Halite.follow(4, strict: false)
     #   .get("http://httpbin.org/relative-redirect/4")
     # ```
-    def follow(hops : Int32, strict = Halite::Options::Follow::STRICT) : Halite::Client
+    def follow(hops : Int32, strict = Halite::Follow::STRICT) : Halite::Client
       branch(default_options.with_follow(hops, strict))
     end
 
@@ -431,7 +431,7 @@ module Halite
                 form : (Hash(String, _) | NamedTuple)? = nil,
                 json : (Hash(String, _) | NamedTuple)? = nil,
                 raw : String? = nil,
-                tls : OpenSSL::SSL::Context::Client? = nil) : Halite::Response
+                tls : (Bool | OpenSSL::SSL::Context::Client) = false) : Halite::Response
       request(verb, uri, options_with(headers, params, form, json, raw, tls))
     end
 
@@ -453,7 +453,7 @@ module Halite
                 form : (Hash(String, _) | NamedTuple)? = nil,
                 json : (Hash(String, _) | NamedTuple)? = nil,
                 raw : String? = nil,
-                tls : OpenSSL::SSL::Context::Client? = nil,
+                tls : (Bool | OpenSSL::SSL::Context::Client) = false,
                 &block : Halite::Response ->)
       request(verb, uri, options_with(headers, params, form, json, raw, tls), &block)
     end
@@ -509,7 +509,7 @@ module Halite
                              form : (Hash(String, _) | NamedTuple)? = nil,
                              json : (Hash(String, _) | NamedTuple)? = nil,
                              raw : String? = nil,
-                             tls : OpenSSL::SSL::Context::Client? = nil)
+                             tls : (Bool | OpenSSL::SSL::Context::Client) = false)
       options = Halite::Options.new(headers: headers, params: params, form: form, json: json, raw: raw, tls: tls)
       default_options.merge!(options)
     end

@@ -1,5 +1,4 @@
 require "openssl"
-require "./options/*"
 
 module Halite
   # Options class
@@ -46,8 +45,13 @@ module Halite
                  read_timeout : (Int32 | Float64 | Time::Span)? = nil,
                  follow : Int32? = nil,
                  follow_strict : Bool? = nil,
-                 tls : OpenSSL::SSL::Context::Client? = nil,
-                 features = {} of String => Feature)
+                 proxy_host : String? = nil,
+                 proxy_port : Int32? = nil,
+                 tls : (Bool | OpenSSL::SSL::Context::Client) = false,
+                 features = Hash(String, Feature).new)
+
+      proxy = (host = proxy_host) && (port = proxy_port) ? Proxy.new(host, port) : nil
+
       new(
         headers: headers,
         cookies: cookies,
@@ -55,6 +59,7 @@ module Halite
         form: form,
         json: json,
         raw: raw,
+        proxy: proxy,
         timeout: Timeout.new(connect: connect_timeout, read: read_timeout),
         follow: Follow.new(hops: follow, strict: follow_strict),
         tls: tls,
@@ -67,15 +72,14 @@ module Halite
 
     property headers : HTTP::Headers
     property cookies : HTTP::Cookies
-    property timeout : Timeout
-    property follow : Follow
-    property tls : OpenSSL::SSL::Context::Client?
-
     property params : Hash(String, Type)
     property form : Hash(String, Type)
     property json : Hash(String, Type)
     property raw : String?
-
+    property timeout : Timeout
+    property follow : Follow
+    property proxy : Proxy?
+    property tls : (Bool | OpenSSL::SSL::Context::Client)
     property features : Hash(String, Feature)
 
     def initialize(*,
@@ -87,8 +91,9 @@ module Halite
                    @raw : String? = nil,
                    @timeout = Timeout.new,
                    @follow = Follow.new,
-                   @tls : OpenSSL::SSL::Context::Client? = nil,
-                   @features = {} of String => Feature)
+                   @proxy : Proxy? = nil,
+                   @tls : (Bool | OpenSSL::SSL::Context::Client) = false,
+                   @features = Hash(String, Feature).new)
       @headers = parse_headers(headers)
       @cookies = parse_cookies(cookies)
       @params = parse_params(params)
@@ -105,8 +110,9 @@ module Halite
                    @raw : String? = nil,
                    @timeout = Timeout.new,
                    @follow = Follow.new,
-                   @tls : OpenSSL::SSL::Context::Client? = nil,
-                   @features = {} of String => Feature)
+                   @proxy : Proxy? = nil,
+                   @tls : (Bool | OpenSSL::SSL::Context::Client) = false,
+                   @features = Hash(String, Feature).new)
     end
 
     # Alias `with_headers` method.
@@ -277,6 +283,11 @@ module Halite
 
     # Merge with other `Options` and return self
     def merge!(other : Halite::Options) : Halite::Options
+      @params.merge!(other.params) if other.params
+      @form.merge!(other.form) if other.form
+      @json.merge!(other.json) if other.json
+      @raw = other.raw if other.raw
+
       @headers.merge!(other.headers)
 
       other.cookies.each do |cookie|
@@ -291,12 +302,9 @@ module Halite
         @follow = other.follow
       end
 
+      @proxy = other.proxy if other.proxy
+      @tls = other.tls
       @features.merge!(other.features) unless other.features.empty?
-      @params.merge!(other.params) if other.params
-      @form.merge!(other.form) if other.form
-      @json.merge!(other.json) if other.json
-      @raw = other.raw if other.raw
-      @tls = other.tls if other.tls
 
       self
     end
@@ -311,8 +319,9 @@ module Halite
       @raw = nil
       @timeout = Timeout.new
       @follow = Follow.new
+      @proxy = nil
       @features = {} of String => Feature
-      @tls = nil
+      @tls = false
 
       self
     end
@@ -320,7 +329,7 @@ module Halite
     # Produces a shallow copy of obj—the instance variables of obj are copied,
     # but not the objects they reference. dup copies the tainted state of obj.
     def dup
-      options = Halite::Options.new(
+      Halite::Options.new(
         headers: @headers.dup,
         cookies: @cookies,
         params: @params,
@@ -329,10 +338,10 @@ module Halite
         raw: @raw,
         timeout: @timeout,
         follow: @follow,
+        proxy: @proxy,
+        tls: @tls,
         features: @features,
-        tls: @tls
       )
-      options
     end
 
     # Returns this collection as a plain Hash.
@@ -348,6 +357,9 @@ module Halite
         "read_timeout"    => @timeout.read,
         "follow"          => @follow.hops,
         "follow_strict"   => @follow.strict,
+        "proxy_host"      => @proxy ? @proxy.host : nil,
+        "proxy_port"      => @proxy ? @proxy.port : nil,
+        "tls"             => @tls,
       }
     end
 
