@@ -677,6 +677,32 @@ Halite.logging(format: "custom")
 # => 2017-12-13 16:40:15 +08:00 | << | 200 | http://httpbin.org/get?name=foobar application/json
 ```
 
+### Local Cache
+
+Local cache feature is caching responses easily with Halite through an chainable method that is simple and elegant
+yet powerful. Its aim is to focus on the HTTP part of caching and do not worrying about how stuff stored, api rate limiting
+even works without network(offline).
+
+It has the following options:
+
+- `file`: Load cache from file. it conflict with `path` and `expires`.
+- `path`: The path of cache, default is "/tmp/halite/cache/"
+- `expires`: The expires time of cache, default is never expires.
+- `debug`: The debug mode of cache, default is `true`
+
+With debug mode, cached response it always included some headers information:
+
+- `X-Halite-Cached-From`: Cache source (cache or file)
+- `X-Halite-Cached-Key`: Cache key with verb, uri and body (return with cache, not `file` passed)
+- `X-Halite-Cached-At`:  Cache created time
+- `X-Halite-Cached-Expires-At`: Cache expired time (return with cache, not `file` passed)
+
+```crystal
+Halite.use("cache").get "http://httpbin.org/anything"     # request a HTTP
+r = Halite.use("cache").get "http://httpbin.org/anything" # request from local storage
+r.headers                                                 # => {..., "X-Halite-Cached-At" => "2018-08-30 10:41:14 UTC", "X-Halite-Cached-By" => "Halite", "X-Halite-Cached-Expires-At" => "2018-08-30 10:41:19 UTC", "X-Halite-Cached-Key" => "2bb155e6c8c47627da3d91834eb4249a"}}
+```
+
 ### Middleware
 
 Halite now has middleware (a.k.a features) support providing a simple way to plug in intermediate custom logic
