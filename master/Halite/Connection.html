@@ -14,7 +14,7 @@
 </script>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
-  <title>HTTP::Headers - github.com/icyleaf/halite</title>
+  <title>Halite::Connection - github.com/icyleaf/halite</title>
 </head>
 <body>
 
@@ -36,7 +36,7 @@
   <div class="types-list">
     <ul>
   
-  <li class="parent " data-id="github.com/icyleaf/halite/Halite" data-name="halite">
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite" data-name="halite">
       <a href="../Halite.html">Halite</a>
       
         <ul>
@@ -56,7 +56,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Connection" data-name="halite::connection">
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Connection" data-name="halite::connection">
       <a href="../Halite/Connection.html">Connection</a>
       
     </li>
@@ -311,12 +311,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/icyleaf/halite/HTTP" data-name="http">
+  <li class="parent " data-id="github.com/icyleaf/halite/HTTP" data-name="http">
       <a href="../HTTP.html">HTTP</a>
       
         <ul>
   
-  <li class=" current" data-id="github.com/icyleaf/halite/HTTP/Headers" data-name="http::headers">
+  <li class=" " data-id="github.com/icyleaf/halite/HTTP/Headers" data-name="http::headers">
       <a href="../HTTP/Headers.html">Headers</a>
       
     </li>
@@ -340,30 +340,19 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> HTTP::Headers
+  <span class="kind">class</span> Halite::Connection
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HTTP/Headers.html">HTTP::Headers</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
-
-
-
-
-  <h2>Overview</h2>
-
-  <p>This is <strong>extension</strong> apply in Halite.</p>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/Connection.html">Halite::Connection</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
 
-  <h2>Included Modules</h2>
-  <ul class="other-types-list">
-  
-    <li class="other-type">Enumerable({String, Array(String)})</li>
-  
-  </ul>
+
+
 
 
 
@@ -377,8 +366,8 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/ext/http_headers_encode.cr#L3" target="_blank">
-        halite/ext/http_headers_encode.cr
+      <a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L4" target="_blank">
+        halite/connection.cr
       </a>
     
     <br/>
@@ -386,24 +375,29 @@
 
 
 
+  
+    <h2>Constant Summary</h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="HTTP_VERSION">
+        <strong>HTTP_VERSION</strong> = <code><span class="s">&quot;HTTP/1.1&quot;</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>The version of HTTP</p>
+      </dd>
+      
+    
+  </dl>
 
 
 
-
-  <h2>Class Method Summary</h2>
+  <h2>Constructors</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#encode%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method" class="signature"><strong>.encode</strong>(data : Hash(String, _) | NamedTuple) : HTTP::Headers</a>
-        
-          <div class="summary"><p>Returns the given key value pairs as HTTP Headers</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#encode-class-method" class="signature"><strong>.encode</strong></a>
-        
-          <div class="summary"><p>Same as <code><a href="../HTTP/Headers.html#encode-class-method">#encode</a></code></p></div>
+        <a href="#new%28request%3AHalite%3A%3ARequest%2Coptions%3AHalite%3A%3AOptions%2Cversion%3DHTTP_VERSION%29-class-method" class="signature"><strong>.new</strong>(request : Halite::Request, options : Halite::Options, version = <span class="t">HTTP_VERSION</span>)</a>
         
       </li>
     
@@ -411,13 +405,57 @@
 
 
 
+
+
   <h2>Instance Method Summary</h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#to_flat_h-instance-method" class="signature"><strong>#to_flat_h</strong></a>
+        <a href="#close-instance-method" class="signature"><strong>#close</strong></a>
         
-          <div class="summary"><p>Similar as <code>Hahs#to_h</code> but return <code>String</code> if it has one value of the key.</p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#closed%3F-instance-method" class="signature"><strong>#closed?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#response-instance-method" class="signature"><strong>#response</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#send_request-instance-method" class="signature"><strong>#send_request</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#socket%3ATCPSocket%7COpenSSL%3A%3ASSL%3A%3ASocket-instance-method" class="signature"><strong>#socket</strong> : TCPSocket | OpenSSL::SSL::Socket</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#timeout%3AHalite%3A%3ATimeout-instance-method" class="signature"><strong>#timeout</strong> : Halite::Timeout</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F-instance-method" class="signature"><strong>#tls</strong> : OpenSSL::SSL::Context::Client?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#using_authenticated_proxy%3F-instance-method" class="signature"><strong>#using_authenticated_proxy?</strong></a>
+        
+          <div class="summary"><p>Is this request using an authenticated proxy?</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#using_proxy%3F-instance-method" class="signature"><strong>#using_proxy?</strong></a>
+        
+          <div class="summary"><p>Is this request using proxy?</p></div>
         
       </li>
     
@@ -449,104 +487,178 @@
 
 
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
-
-
-  <h2>Class Method Detail</h2>
+  <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="encode(data:Hash(String,_)|NamedTuple):HTTP::Headers-class-method">
+    <div class="entry-detail" id="new(request:Halite::Request,options:Halite::Options,version=HTTP_VERSION)-class-method">
       <div class="signature">
         
-        def self.<strong>encode</strong>(data : Hash(String, _) | NamedTuple) : <a href="../HTTP/Headers.html">HTTP::Headers</a>
+        def self.<strong>new</strong>(request : <a href="../Halite/Request.html">Halite::Request</a>, options : <a href="../Halite/Options.html">Halite::Options</a>, version = <span class="t">HTTP_VERSION</span>)
 
-        <a class="method-permalink" href="#encode%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method">#</a>
+        <a class="method-permalink" href="#new%28request%3AHalite%3A%3ARequest%2Coptions%3AHalite%3A%3AOptions%2Cversion%3DHTTP_VERSION%29-class-method">#</a>
       </div>
-      
-        <div class="doc"><p>Returns the given key value pairs as HTTP Headers</p>
-
-<p>Every parameter added is directly written to an IO, where keys are properly escaped.</p>
-
-<pre><code><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.encode({
-  content_type: <span class="s">&quot;application/json&quot;</span>,
-})
-<span class="c"># =&gt; &quot;HTTP::Headers{&quot;Content-Type&quot; =&gt; &quot;application/json&quot;}&quot;</span>
-
-<span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.encode({
-  <span class="s">&quot;conTENT-type&quot;</span>: <span class="s">&quot;application/json&quot;</span>,
-})
-<span class="c"># =&gt; &quot;HTTP::Headers{&quot;Content-Type&quot; =&gt; &quot;application/json&quot;}&quot;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/ext/http_headers_encode.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="encode-class-method">
-      <div class="signature">
-        
-        def self.<strong>encode</strong>
 
-        <a class="method-permalink" href="#encode-class-method">#</a>
-      </div>
-      
-        <div class="doc"><p>Same as <code><a href="../HTTP/Headers.html#encode-class-method">#encode</a></code></p></div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/ext/http_headers_encode.cr#L33" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
+
 
 
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="to_flat_h-instance-method">
+    <div class="entry-detail" id="close-instance-method">
       <div class="signature">
         
-        def <strong>to_flat_h</strong>
+        def <strong>close</strong>
 
-        <a class="method-permalink" href="#to_flat_h-instance-method">#</a>
+        <a class="method-permalink" href="#close-instance-method">#</a>
       </div>
-      
-        <div class="doc"><p>Similar as <code>Hahs#to_h</code> but return <code>String</code> if it has one value of the key.</p>
-
-<pre><code>headers <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>{<span class="s">&quot;Accepts&quot;</span> => [<span class="s">&quot;application/json&quot;</span>, <span class="s">&quot;text/html&quot;</span>], <span class="s">&quot;Content-Type&quot;</span> => [<span class="s">&quot;text/html&quot;</span>]}
-headers[<span class="s">&quot;Accepts&quot;</span>]      <span class="c"># =&gt; [&quot;application/json&quot;, &quot;text/html&quot;]</span>
-headers[<span class="s">&quot;Content-Type&quot;</span>] <span class="c"># =&gt; &quot;text/html&quot;</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/ext/http_headers_encode.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="closed?-instance-method">
+      <div class="signature">
+        
+        def <strong>closed?</strong>
+
+        <a class="method-permalink" href="#closed%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="response-instance-method">
+      <div class="signature">
+        
+        def <strong>response</strong>
+
+        <a class="method-permalink" href="#response-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="send_request-instance-method">
+      <div class="signature">
+        
+        def <strong>send_request</strong>
+
+        <a class="method-permalink" href="#send_request-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="socket:TCPSocket|OpenSSL::SSL::Socket-instance-method">
+      <div class="signature">
+        
+        def <strong>socket</strong> : TCPSocket | OpenSSL::SSL::Socket
+
+        <a class="method-permalink" href="#socket%3ATCPSocket%7COpenSSL%3A%3ASSL%3A%3ASocket-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="timeout:Halite::Timeout-instance-method">
+      <div class="signature">
+        
+        def <strong>timeout</strong> : <a href="../Halite/Timeout.html">Halite::Timeout</a>
+
+        <a class="method-permalink" href="#timeout%3AHalite%3A%3ATimeout-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="tls:OpenSSL::SSL::Context::Client?-instance-method">
+      <div class="signature">
+        
+        def <strong>tls</strong> : OpenSSL::SSL::Context::Client?
+
+        <a class="method-permalink" href="#tls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="using_authenticated_proxy?-instance-method">
+      <div class="signature">
+        
+        def <strong>using_authenticated_proxy?</strong>
+
+        <a class="method-permalink" href="#using_authenticated_proxy%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Is this request using an authenticated proxy?</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="using_proxy?-instance-method">
+      <div class="signature">
+        
+        def <strong>using_proxy?</strong>
+
+        <a class="method-permalink" href="#using_proxy%3F-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Is this request using proxy?</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/81b30a37801690fdaf02cfa7b494adb5c9a7cec3/src/halite/connection.cr#L46" target="_blank">View source</a>]
         
       </div>
     </div>
