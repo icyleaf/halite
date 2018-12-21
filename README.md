@@ -51,6 +51,7 @@ Build in Crystal version >= `v0.25.0`, this document valid with latest commit.
     - [JSON-formatted logging](#json-formatted-logging)
     - [Write to a log file](#write-to-a-log-file)
     - [Use the custom logging](#use-the-custom-logging)
+  - [Local Cache](#local-cache)
   - [Middlewares](#middlewares)
     - [Write a simple feature](#write-a-simple-feature)
     - [Write a interceptor](#write-a-interceptor)
