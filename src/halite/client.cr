@@ -1,8 +1,3 @@
-require "./request"
-require "./response"
-require "./redirector"
-
-require "http/client"
 require "json"
 
 module Halite
@@ -86,6 +81,8 @@ module Halite
       instance
     end
 
+    @connection : Connection?
+
     # Instance a new client
     #
     # ```
@@ -97,6 +94,7 @@ module Halite
     # ```
     def initialize(@options = Halite::Options.new)
       @history = [] of Response
+      @connection = nil
     end
 
     # Make an HTTP request
@@ -119,6 +117,11 @@ module Halite
       opts = options ? @options.merge(options.not_nil!) : @options
       request = build_request(verb, uri, opts)
       perform(request, opts, &block)
+    end
+
+    def close
+      @connection.try(&.close)
+      @connection = nil
     end
 
     # Find interceptor and return `Response` else perform HTTP request.
@@ -144,35 +147,41 @@ module Halite
 
     # Perform a single (no follow) HTTP request
     private def perform(request : Halite::Request, options : Halite::Options) : Halite::Response
-      raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.tls
-
-      conn = make_connection(request, options)
-      conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
-      handle_response(request, conn_response, options)
+      conn = build_connection(request, options)
+      conn.send_request
+      response = conn.receive_response
+      handle_response(request, response, options)
     rescue ex : IO::Timeout
       raise TimeoutError.new(ex.message)
     rescue ex : Socket::Error | Errno
       raise ConnectionError.new(ex.message)
+    ensure
+      close
     end
 
     # Perform a single (no follow) streaming HTTP request and redirect automatically
-    private def perform(request : Halite::Request, options : Halite::Options, &block : Halite::Response ->)
-      raise RequestError.new("SSL context given for HTTP URI = #{request.uri}") if request.scheme == "http" && options.tls
+    # private def perform(request : Halite::Request, options : Halite::Options, &block : Halite::Response ->)
+    #   conn = build_connection(request, options)
+    #   conn.send_request
+    #   response = handle_response(request, conn.receive_response, options)
 
-      conn = make_connection(request, options)
-      conn.exec(request.verb, request.full_path, request.headers, request.body) do |conn_response|
-        response = handle_response(request, conn_response, options)
-        redirector = Redirector.new(request, response, options)
-        if redirector.avaiable?
-          redirector.each_redirect do |req|
-            perform(req, options, &block)
-          end
-        else
-          block.call(response)
-        end
+    #   redirector = Redirector.new(request, response, options)
+    #   if redirector.avaiable?
+    #     redirector.each_redirect do |req|
+    #       perform(req, options, &block)
+    #     end
+    #   else
+    #     block.call(response)
+    #   end
 
-        return response
-      end
+    #   response
+    # end
+
+    private def build_connection(request, options)
+      return @connection.not_nil! if (connection = @connection) && !connection.closed?
+
+      @connection = Connection.new(request, options)
+      @connection.not_nil!
     end
 
     # Prepare a HTTP request
@@ -230,13 +239,14 @@ module Halite
       end
     end
 
-    # Create the http connection
-    private def make_connection(request, options)
-      conn = HTTP::Client.new(request.host, request.port, options.tls)
-      conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
-      conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
-      conn
-    end
+    # REMOVED: legcy
+    # # Create the http connection
+    # private def make_connection(request, options)
+    #   conn = HTTP::Client.new(request.host, request.port, options.tls)
+    #   conn.connect_timeout = options.timeout.connect.not_nil! if options.timeout.connect
+    #   conn.read_timeout = options.timeout.read.not_nil! if options.timeout.read
+    #   conn
+    # end
 
     # Convert HTTP::Client::Response to response and handles response (see below)
     private def handle_response(request, conn_response : HTTP::Client::Response, options) : Halite::Response
@@ -260,6 +270,13 @@ module Halite
       return response unless response.headers
       @options.with_cookies(HTTP::Cookies.from_headers(response.headers))
       response
+    end
+
+    private def connection
+      raise "Not found connection" unless @connection
+      raise "Connection was closed" if @connection.try(&.closed?)
+
+      @connection.not_nil!
     end
 
     # Use in instance/session mode, it will replace same method in `Halite::Chainable`.

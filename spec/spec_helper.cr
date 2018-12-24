@@ -89,6 +89,18 @@ def load_fixture(file)
   File.read_lines(fixture_path(file)).join("\n")
 end
 
+def temp_envorinment(envorinments : Hash(String, String))
+  envorinments.each do |key, value|
+    ENV[key] = value
+  end
+
+  yield
+
+  envorinments.each do |key, value|
+    ENV.delete(key)
+  end
+end
+
 ####################
 # Start mock server
 ####################

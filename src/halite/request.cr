@@ -49,7 +49,7 @@ module Halite
 
       @headers["Host"] ||= default_host_to_header
       @headers["User-Agent"] ||= USER_AGENT
-      @headers["Connection"] ||= "close"
+      @headers["Connection"] ||= "keek-alive"
     end
 
     # Returns new Request with updated uri
@@ -80,7 +80,7 @@ module Halite
     end
 
     def port
-      @uri.port ||= @uri.scheme == "https" ? 443 : 80
+      @uri.port ||= @uri.https? ? 443 : 80
       @uri.port.not_nil!
     end
 
@@ -114,5 +114,15 @@ module Halite
       def initialize(@body : String, @content_type : String? = nil)
       end
     end
+  end
+end
+
+class URI
+  def http?
+    scheme == "http"
+  end
+
+  def https?
+    scheme == "https"
   end
 end

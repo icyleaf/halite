@@ -55,6 +55,7 @@ class MockServer < HTTP::Server
         "verb"    => context.request.method,
         "url"     => context.request.resource,
         "query"   => context.request.query,
+        "body"    => (request_body = context.request.body) ? request_body.gets_to_end : nil,
         "headers" => context.request.headers.to_flat_h,
       }
 

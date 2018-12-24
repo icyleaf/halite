@@ -1,3 +1,5 @@
+require "http/cookie"
+require "http/headers"
 require "openssl"
 
 module Halite
@@ -47,10 +49,10 @@ module Halite
                  follow_strict : Bool? = nil,
                  proxy_host : String? = nil,
                  proxy_port : Int32? = nil,
+                 proxy_verify : Bool = true,
                  tls : (Bool | OpenSSL::SSL::Context::Client) = false,
                  features = Hash(String, Feature).new)
-
-      proxy = (host = proxy_host) && (port = proxy_port) ? Proxy.new(host, port) : nil
+      proxy = (host = proxy_host) && (port = proxy_port) ? Proxy.new(host, port, verify: proxy_verify) : nil
 
       new(
         headers: headers,
@@ -218,6 +220,16 @@ module Halite
       self
     end
 
+    def with_proxy(host : String, port : Int32, username : String? = nil, password : String? = nil, verify : Bool = true)
+      @proxy = Proxy.new(host, port, username, password, verify)
+      self
+    end
+
+    def with_proxy(*, url : String, verify : Bool = true)
+      @proxy = Proxy.from_url(url, verify)
+      self
+    end
+
     def headers=(headers : (Hash(String, _) | NamedTuple))
       @headers = parse_headers(headers)
     end
@@ -256,6 +268,26 @@ module Halite
     def follow_strict=(strict : Bool)
       @follow.strict = strict
     end
+
+    # Alias `Proxy.scheme`
+    def proxy_scheme
+      @proxy.scheme
+    end
+
+    # Alias `Proxy.host`
+    def proxy_host
+      @proxy.host
+    end
+
+    # Alias `Proxy.port`
+    def proxy_port
+      @proxy.port
+    end
+
+    # Alias `Proxy.verify_mode`
+    # def verify_mode
+    #   @proxy.verify_mode
+    # end
 
     # Get logging status
     def logging : Bool

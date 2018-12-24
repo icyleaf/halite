@@ -1,18 +1,15 @@
 module Halite
   # Proxy struct in request
   struct Proxy
-    # Avaiable schemes of proxy
-    PROXY_SCHEMES = %w(http)
-
     # Get proxies from environment
     #
     # It scans the environment for variables named <scheme>_proxy (case-insensitive) and return.
     #
     # ```
-    # Halite::Proxy.proxies_from_environment
+    # Halite::Proxy.environment_proxies
     # # => {"http" => "http://127.0.0.1:8080", "https" => "https://127.0.0.1:8081", "all" => "socks5://127.0.0.1:8082"}
     # ```
-    def self.proxies_from_environment
+    def self.environment_proxies
       keyword = "_proxy"
       keyword_length = keyword.size + 1
       Hash(String, String).new.tap do |obj|
@@ -29,32 +26,28 @@ module Halite
     # Return a `Proxy` with `all_proxy` value from Environment
     #
     # `all_proxy` is case-insensitive
-    def self.from_environment
-      raise "Not find `all_proxy` in Environment" unless url = proxies_from_environment["all"]?
-      new(url: url)
+    def self.from_environment(verify : Bool = true)
+      raise "Not find `all_proxy` in Environment" unless url = environment_proxies["all"]?
+      new(url: url, verify: verify)
     end
 
-    # Return a `Proxy` with url (only accept http scheme)
+    # Return a `Proxy` with url
     #
     # ```
-    # Halite::Proxy.new(url: "http://localhost:8080")
+    # Halite::Proxy.from_url(url: "http://localhost:8080")
+    # # Use Basic Auth
+    # Halite::Proxy.from_url(url: "http://user:pass@localhost:8080")
     # ```
-    def self.new(*, url : String)
+    def self.new(*, url : String, verify : Bool = true)
       uri = URI.parse(url)
-
-      unless (scheme = uri.scheme) && PROXY_SCHEMES.includes?(uri.scheme)
-        raise "Not support proxy scheme: #{uri.scheme}, avaiables in #{PROXY_SCHEMES}"
-      end
-
       if (host = uri.host) && (port = uri.port)
-        return new(host, port, uri.user, uri.password, uri.scheme)
+        return new(host, port, uri.user, uri.password, verify)
       end
 
       raise "Invaild proxy url: #{url}"
     end
 
-    getter scheme : String
-    getter host, port, username, password, headers
+    getter host, port, username, password
 
     # Return a `Proxy` with arguments
     #
@@ -69,29 +62,22 @@ module Halite
     # ```
     # Halite::Proxy.new("localhost", 8080, "user", "p@ssw0rd")
     # ```
-    #
-    # ### Using custom headers in a proxy
-    #
-    # ```
-    # Halite::Proxy.new("localhost", 8080, headers: HTTP::Headers{"Proxy-Connection" => "keep-alive"})
-    # ```
     def initialize(@host : String, @port : Int32, @username : String? = nil,
-                   @password : String? = nil, scheme : String? = nil, @headers = HTTP::Headers.new)
-      @scheme = scheme || "http"
+                   @password : String? = nil, @verify : Bool = true)
     end
 
-    def to_headers
-      headers = @headers.dup
-      using_authenticated? ? headers.merge!(authorization_header) : headers
+    def skip_verify?
+      @verify == false
     end
 
     def authorization_header
+      return unless using_authenticated?
       digest = Base64.strict_encode("#{@username}:#{@password}")
       HTTP::Headers{"Proxy-Authentication" => "Basic #{digest}"}
     end
 
     def using_authenticated?
-      @username && @password
+      !@username.nil? && !@password.nil?
     end
   end
 end

@@ -1,36 +1,47 @@
 require "socket"
 
 module Halite
+  # A connection to the HTTP server
   class Connection
     # The version of HTTP
     HTTP_VERSION = "HTTP/1.1"
 
-    getter tls : OpenSSL::SSL::Context::Client?
-    getter socket : TCPSocket | OpenSSL::SSL::Socket
-    getter timeout : Halite::Timeout
     getter proxy : Halite::Proxy?
+    getter tls : OpenSSL::SSL::Context::Client?
+    getter timeout : Halite::Timeout
+    getter socket : TCPSocket | OpenSSL::SSL::Socket
 
-    def initialize(@request : Halite::Request, options : Halite::Options, @version = HTTP_VERSION)
+    getter proxy_response_headers : HTTP::Headers? = nil
+
+    def initialize(@request : Halite::Request, options = Halite::Options.new, @version = HTTP_VERSION)
+      raise ConnectionError.new("SSL context given for HTTP URI = #{request.uri}") if @request.uri.http? && options.tls
+
       @timeout = options.timeout
-      @proxy = options.proxy
-      @tls = build_tls(tls)
+      @proxy = build_proxy(options.proxy)
+      @tls = build_tls(tls, @proxy)
       @socket = build_socket
 
       verif_proxy_connection if using_proxy?
     end
 
     def send_request
-      @request.headers.merge!(proxy.not_nil!.to_headers) if proxy
+      append_proxy_authorization_header
+      Request::Writer.new(@socket, @request.body, @request.headers, request_line).stream
 
-      socket << request_line
-      @request.headers.each do |key, value|
-        socket << key << ": " << value.join(", ") << "\r\n"
-      end
-      socket << "\r\n"
-      socket.flush
+      # # request line
+      # @socket << request_line
+      # # request headers
+      # @request.headers.each do |key, value|
+      #   @socket << key << ": " << value.join(", ") << "\r\n"
+      # end
+      # @socket << "Content-Length: " << @request.body.bytesize.to_s << "\r\n"
+      # @socket << "\r\n"
+      # # request body
+      # @socket << @request.body << "\r\n"
+      # @socket.flush
     end
 
-    def response
+    def receive_response
       HTTP::Client::Response.from_io @socket
     end
 
@@ -44,27 +55,30 @@ module Halite
 
     # Is this request using proxy?
     def using_proxy?
-      !proxy.nil?
+      !@proxy.nil?
     end
 
     # Is this request using an authenticated proxy?
     def using_authenticated_proxy?
-      proxy.try(&.using_authenticated?) == true
+      @proxy.try(&.using_authenticated?) == true
     end
 
     private def request_line
       request_line @request.verb, @request.full_path(false)
     end
 
-    private def verif_proxy_connection
-      connect_using_proxy @socket
-      HTTP::Client::Response.from_io(@socket, ignore_body: true, decompress: false) do |response|
-        if response.status_code != 200
-          raise "Failure to connect http proxy"
-        end
+    private def append_proxy_authorization_header
+      if (temp_proxy = @proxy) && (auth_header = temp_proxy.authorization_header)
+        @request.headers.merge!(auth_header)
       end
-    rescue
-      raise "Failure to connect http proxy"
+    end
+
+    private def verif_proxy_connection
+      connect_using_proxy(@socket)
+      HTTP::Client::Response.from_io(@socket, ignore_body: true, decompress: false) do |response|
+        @proxy_response_headers = response.headers
+        raise "Failure to connect http proxy" if response.status_code != 200
+      end
     end
 
     private def connect_using_proxy(socket)
@@ -84,21 +98,25 @@ module Halite
       end
     end
 
-    private def proxy
-      return @proxy if @proxy
-      Halite::Proxy.proxies_from_environment.each do |name, url|
-        begin
-          @proxy ||= Halite::Proxy.new url: url
-          return @proxy.not_nil!
-        rescue
-          # Ignore invalid proxy
-          @proxy = nil
-          next
-        end
+    private def build_proxy(proxy)
+      return proxy if proxy
+
+      # Load from environment
+      Halite::Proxy.environment_proxies.each do |_, url|
+        proxy = Halite::Proxy.new(url: url)
+        return proxy
       end
     end
 
-    private def build_tls(tls)
+    private def build_tls(tls, proxy)
+      # Use ssl context if request scheme is https
+      if @request.uri.https?
+        ssl_context = OpenSSL::SSL::Context::Client.new
+        # Set non-verify mode SSL context if proxy seted false to verify,
+        ssl_context.verify_mode = OpenSSL::SSL::VerifyMode::NONE if proxy.try(&.skip_verify?)
+        return ssl_context
+      end
+
       case tls
       when true
         OpenSSL::SSL::Context::Client.new
@@ -111,26 +129,34 @@ module Halite
 
     private def build_socket
       socket = TCPSocket.new socket_host, socket_port, nil, @timeout.connect
-      socket.read_timeout = @timeout.connect
-      socket.sync = false
-
-      {% if !flag?(:without_openssl) %}
-        if tls = @tls
-          socket = OpenSSL::SSL::Socket::Client.new socket, context: tls, sync_close: true, hostname: @request.host
-        end
-      {% end %}
-
+      socket.read_timeout = @timeout.read if @timeout.read
+      socket.sync = true
+      if context = @tls
+        socket = OpenSSL::SSL::Socket::Client.new socket, context: context, sync_close: true, hostname: @request.host
+      end
       socket
+    rescue ex : Socket::Error | Errno
+      if using_proxy?
+        raise ProxyError.new("Failure to connect proxy address: '#{socket_host}:#{socket_port}'")
+      else
+        raise ConnectionError.new(ex.message, ex)
+      end
+    rescue ex : OpenSSL::SSL::Error
+      if (message = ex.message) && message.includes?("certificate verify failed")
+        raise SSLError.new("Certificate verify failed", ex)
+      else
+        raise ex
+      end
     end
 
     # Host for tcp socket
     private def socket_host
-      using_proxy? ? proxy.not_nil!.host : @request.host
+      using_proxy? ? @proxy.not_nil!.host : @request.host
     end
 
     # Port for tcp socket
     private def socket_port
-      using_proxy? ? proxy.not_nil!.port : @request.port
+      using_proxy? ? @proxy.not_nil!.port : @request.port
     end
   end
 end

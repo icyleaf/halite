@@ -257,6 +257,53 @@ module Halite
       branch(default_options.with_follow(hops, strict))
     end
 
+    # Returns 'Options' self with proxy
+    #
+    # ### HTTP proxy
+    #
+    # ```
+    # Halite.via("localhost", 8080)
+    #   .get("http://httpbin.org/get")
+    # ```
+    #
+    # ### HTTP proxy with authorization
+    #
+    # ```
+    # Halite.via("localhost", 8080, "user", "password")
+    #   .get("http://httpbin.org/get")
+    # ```
+    def via(host : String, port : Int32, username : String? = nil, password : String? = nil, verify : Bool = true)
+      branch(default_options.with_proxy(host, port, username, password, verify))
+    end
+
+    # Returns 'Options' self with url proxy
+    #
+    # ```
+    # Halite.via(url: "http://user:pass@localhost:8080")
+    #   .get("http://httpbin.org/get")
+    #
+    # # Use Basic Auth
+    # Halite.via(url: "http://user:pass@localhost:8080")
+    #   .get("http://httpbin.org/get")
+    # ```
+    def via(*, url : String, verify : Bool = true)
+      branch(default_options.with_proxy(url: url, verify: verify))
+    end
+
+    # # Returns 'Options' self with multiple proxies
+    # #
+    # # ```
+    # # Halite.via({"http"  => "http://localhost:8080", "https" => "http://localhost:8080", "all" => "http://localhost:8080"})
+    # #       .get("http://httpbin.org/get")
+    # # ```
+    # def via(proxies : Hash(String, String) | NamedTuple, verify : Bool = true)
+
+    # end
+
+    # def via(**args)
+    #   via(args)
+    # end
+
     # Returns `Options` self with enable or disable logging.
     #
     # #### Enable logging

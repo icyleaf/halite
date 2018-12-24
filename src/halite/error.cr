@@ -30,6 +30,12 @@ module Halite
     # Generic Timeout error
     class TimeoutError < RequestError; end
 
+    # SSL Certificate verify error
+    class SSLError < RequestError; end
+
+    # Generic proxy error
+    class ProxyError < RequestError; end
+
     # The feature given was not understood
     class UnRegisterFeatureError < FeatureError; end
 
