@@ -178,8 +178,9 @@ module Halite
     # end
 
     private def build_connection(request, options)
-      return @connection.not_nil! if (connection = @connection) && !connection.closed?
-
+      if (connection = @connection) && !connection.closed?
+        return connection
+      end
       @connection = Connection.new(request, options)
       @connection.not_nil!
     end

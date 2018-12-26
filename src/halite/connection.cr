@@ -27,18 +27,6 @@ module Halite
     def send_request
       append_proxy_authorization_header
       Request::Writer.new(@socket, @request.body, @request.headers, request_line).stream
-
-      # # request line
-      # @socket << request_line
-      # # request headers
-      # @request.headers.each do |key, value|
-      #   @socket << key << ": " << value.join(", ") << "\r\n"
-      # end
-      # @socket << "Content-Length: " << @request.body.bytesize.to_s << "\r\n"
-      # @socket << "\r\n"
-      # # request body
-      # @socket << @request.body << "\r\n"
-      # @socket.flush
     end
 
     def receive_response
@@ -94,7 +82,7 @@ module Halite
 
     private def request_line(verb : String, uri : String, version = @version)
       String.build do |io|
-        io << verb.upcase << ' ' << uri << ' ' << version << "\r\n"
+        io << verb.upcase << ' ' << uri << ' ' << version
       end
     end
 

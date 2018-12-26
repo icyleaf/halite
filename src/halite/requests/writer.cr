@@ -25,8 +25,8 @@ module Halite
       # Stream the request to a socket
       def stream
         add_headers
-        add_body_type_headers
         send_request
+        @socket.flush
       end
 
       # Adds headers to the request header from the headers array
@@ -34,24 +34,17 @@ module Halite
         @headers.each do |name, value|
           @request_headers << "#{name}: #{value.join(", ")}"
         end
-      end
 
-      # Adds the headers to the header array for the given request body we are working with
-      def add_body_type_headers
-        return if has_content_length? || chunked?
-        @request_headers << "Content-Length: #{@body.size}"
+        unless has_content_length? || chunked?
+          @request_headers << "Content-Length: #{@body.size}"
+        end
       end
 
       # Writes HTTP request data into the socket.
       def send_request
-        send_each_chunk
-        @socket.flush
-      end
-
-      def send_each_chunk
-        @socket << join_headers
-        @body.each {|chunk| write chunk}
-        @socket << CHUNKED_END if chunked?
+        join_headers
+        each_chunks
+        closure_chunked
       end
 
       # Joins the headers specified in the request into a correctly formatted
@@ -59,8 +52,18 @@ module Halite
       def join_headers
         # join the headers array with crlfs, stick two on the end because
         # that ends the request header
-        String.build do |io|
-          io << @request_headers.join(CRLF) << CRLF * 2
+        @socket << @request_headers.join(CRLF) << CRLF * 2
+      end
+
+      def each_chunks
+        @body.each {|chunk| write chunk}
+      end
+
+      def closure_chunked
+        if chunked?
+          @socket << CHUNKED_END
+        else
+          @socket << CRLF
         end
       end
 

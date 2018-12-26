@@ -1,7 +1,7 @@
 require "../../spec_helper"
 
 private def headline
-  "GET /halite HTTP/1.1"
+  "GET /ping HTTP/1.1"
 end
 
 private def writer(io, body, headers = HTTP::Headers.new, headline : String = headline)

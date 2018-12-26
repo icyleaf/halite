@@ -49,7 +49,7 @@ module Halite
 
       @headers["Host"] ||= default_host_to_header
       @headers["User-Agent"] ||= USER_AGENT
-      @headers["Connection"] ||= "keek-alive"
+      @headers["Connection"] ||= "close"
     end
 
     # Returns new Request with updated uri

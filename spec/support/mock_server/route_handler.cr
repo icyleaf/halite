@@ -281,14 +281,14 @@ class MockServer < HTTP::Server
                         v.as(Array).each do |vv|
                           json.object do
                             json.field "filename", vv.filename
-                            json.field "body", "[binary file]"
+                            json.field "body", upload_file_base64(vv.path)
                           end
                         end
                       end
                     else
                       json.object do
                         json.field "filename", v.filename
-                        json.field "body", "[binary file]"
+                        json.field "body", upload_file_base64(v.path)
                       end
                     end
                   end
@@ -366,6 +366,13 @@ class MockServer < HTTP::Server
       end
     end
 
+    private def self.upload_file_base64(path, content_type = "application/octet-stream")
+      string = File.read(path)
+      String.build do |io|
+        io << "data:" << content_type << ";base64," << Base64.strict_encode(string)
+      end
+    end
+
     private def self.multipart?(headers : HTTP::Headers)
       if content_type = headers["content_type"]?
         return content_type.includes?("multipart/form-data") ? true : false
@@ -380,19 +387,28 @@ class MockServer < HTTP::Server
 
     private def self.parse_upload_form(request : HTTP::Request) : UploadParams
       params = HTTP::Params.parse("")
-      files = {} of String => HTTP::FormData::Part | Array(HTTP::FormData::Part)
+      files = {} of String => UploadFile | Array(UploadFile)
 
       HTTP::FormData.parse(request) do |part|
         next unless part
 
         name = part.name
-        if part.filename
-          if files.has_key?(name) && files[name].is_a?(HTTP::FormData::Part)
-            file = files.delete(name).as(HTTP::FormData::Part)
-            files[name] = [file, part]
+        if filename = part.filename
+          tempfile = File.tempfile("upload-#{File.basename(filename)}", File.extname(filename))
+          IO.copy(part.body, tempfile)
+          file = UploadFile.new filename, tempfile.path
+
+          if (object = files[name]?)
+            files.delete(name)
+            if object.is_a?(UploadFile)
+              files[name] = [object, file]
+            elsif object.is_a?(Array)
+              files[name] = object.as(Array).concat([file])
+            end
           else
-            files[name] = part
+            files[name] = file
           end
+          tempfile.close
         else
           params.add name, part.body.gets_to_end
         end
@@ -401,6 +417,7 @@ class MockServer < HTTP::Server
       UploadParams.new(params, files)
     end
 
-    record UploadParams, params : HTTP::Params, files : Hash(String, HTTP::FormData::Part | Array(HTTP::FormData::Part))
+    record UploadParams, params : HTTP::Params, files : Hash(String, UploadFile | Array(UploadFile))
+    record UploadFile, filename : String, path : String
   end
 end
