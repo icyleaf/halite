@@ -56,11 +56,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Connection" data-name="halite::connection">
-      <a href="Halite/Connection.html">Connection</a>
-      
-    </li>
-  
   <li class="parent " data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
       <a href="Halite/Exception.html">Exception</a>
       
@@ -191,11 +186,6 @@
       
     </li>
   
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Follow" data-name="halite::follow">
-      <a href="Halite/Follow.html">Follow</a>
-      
-    </li>
-  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
       <a href="Halite/FormData.html">FormData</a>
       
@@ -261,6 +251,16 @@
       
         <ul>
   
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Follow" data-name="halite::options::follow">
+      <a href="Halite/Options/Follow.html">Follow</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Timeout" data-name="halite::options::timeout">
+      <a href="Halite/Options/Timeout.html">Timeout</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Type" data-name="halite::options::type">
       <a href="Halite/Options/Type.html">Type</a>
       
@@ -268,11 +268,6 @@
   
 </ul>
 
-      
-    </li>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Proxy" data-name="halite::proxy">
-      <a href="Halite/Proxy.html">Proxy</a>
       
     </li>
   
@@ -298,11 +293,6 @@
   
   <li class=" " data-id="github.com/icyleaf/halite/Halite/Response" data-name="halite::response">
       <a href="Halite/Response.html">Response</a>
-      
-    </li>
-  
-  <li class=" " data-id="github.com/icyleaf/halite/Halite/Timeout" data-name="halite::timeout">
-      <a href="Halite/Timeout.html">Timeout</a>
       
     </li>
   
@@ -352,7 +342,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/81b30a3" target="_blank">#81b30a3</a> (2018-12-21 18:09:07 +0800).</p>
+<p>Build in Crystal version >= <code>v0.25.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/322f5c3" target="_blank">#322f5c3</a> (2019-01-09 13:54:27 +0800).</p>
 
 <h2>Index</h2>
 
@@ -480,7 +470,7 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 
 <p>Use the <code>#basic_auth</code> method to perform <a href="http://tools.ietf.org/html/rfc2617" target="_blank">HTTP Basic Authentication</a> using a username and password:</p>
 
-<pre><code class="language-crystal"><span class="t">Halite</span>.basic_auth(user: <span class="s">&quot;user&quot;</span>, password: <span class="s">&quot;p@ss&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.basic_auth(user: <span class="s">&quot;user&quot;</span>, pass: <span class="s">&quot;p@ss&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 
 <span class="c"># We can pass a raw authorization header using the auth method:</span>
 <span class="t">Halite</span>.auth(<span class="s">&quot;Bearer dXNlcjpwQHNz&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
