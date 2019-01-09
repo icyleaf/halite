@@ -209,7 +209,7 @@ Halite.post("http://httpbin.org/post",
 Use the `#basic_auth` method to perform [HTTP Basic Authentication](http://tools.ietf.org/html/rfc2617) using a username and password:
 
 ```crystal
-Halite.basic_auth(user: "user", password: "p@ss").get("http://httpbin.org/get")
+Halite.basic_auth(user: "user", pass: "p@ss").get("http://httpbin.org/get")
 
 # We can pass a raw authorization header using the auth method:
 Halite.auth("Bearer dXNlcjpwQHNz").get("http://httpbin.org/get")
