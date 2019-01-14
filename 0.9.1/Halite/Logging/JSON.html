@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.27.0">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../../";
+</script>
+
+  <meta id="repository-name" content="github.com/icyleaf/halite">
+  <title>Halite::Logging::JSON - github.com/icyleaf/halite</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite" data-name="halite">
+      <a href="../../Halite.html">Halite</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Cache" data-name="halite::cache">
+      <a href="../../Halite/Cache.html">Cache</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Chainable" data-name="halite::chainable">
+      <a href="../../Halite/Chainable.html">Chainable</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Client" data-name="halite::client">
+      <a href="../../Halite/Client.html">Client</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Exception" data-name="halite::exception">
+      <a href="../../Halite/Exception.html">Exception</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/APIError" data-name="halite::exception::apierror">
+      <a href="../../Halite/Exception/APIError.html">APIError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/ClientError" data-name="halite::exception::clienterror">
+      <a href="../../Halite/Exception/ClientError.html">ClientError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/ConnectionError" data-name="halite::exception::connectionerror">
+      <a href="../../Halite/Exception/ConnectionError.html">ConnectionError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/EndlessRedirectError" data-name="halite::exception::endlessredirecterror">
+      <a href="../../Halite/Exception/EndlessRedirectError.html">EndlessRedirectError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/Error" data-name="halite::exception::error">
+      <a href="../../Halite/Exception/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/FeatureError" data-name="halite::exception::featureerror">
+      <a href="../../Halite/Exception/FeatureError.html">FeatureError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/RequestError" data-name="halite::exception::requesterror">
+      <a href="../../Halite/Exception/RequestError.html">RequestError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/ResponseError" data-name="halite::exception::responseerror">
+      <a href="../../Halite/Exception/ResponseError.html">ResponseError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/ServerError" data-name="halite::exception::servererror">
+      <a href="../../Halite/Exception/ServerError.html">ServerError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/StateError" data-name="halite::exception::stateerror">
+      <a href="../../Halite/Exception/StateError.html">StateError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/TimeoutError" data-name="halite::exception::timeouterror">
+      <a href="../../Halite/Exception/TimeoutError.html">TimeoutError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/TooManyRedirectsError" data-name="halite::exception::toomanyredirectserror">
+      <a href="../../Halite/Exception/TooManyRedirectsError.html">TooManyRedirectsError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnRegisterFeatureError" data-name="halite::exception::unregisterfeatureerror">
+      <a href="../../Halite/Exception/UnRegisterFeatureError.html">UnRegisterFeatureError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnRegisterLoggerFormatError" data-name="halite::exception::unregisterloggerformaterror">
+      <a href="../../Halite/Exception/UnRegisterLoggerFormatError.html">UnRegisterLoggerFormatError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnRegisterMimeTypeError" data-name="halite::exception::unregistermimetypeerror">
+      <a href="../../Halite/Exception/UnRegisterMimeTypeError.html">UnRegisterMimeTypeError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedMethodError" data-name="halite::exception::unsupportedmethoderror">
+      <a href="../../Halite/Exception/UnsupportedMethodError.html">UnsupportedMethodError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedSchemeError" data-name="halite::exception::unsupportedschemeerror">
+      <a href="../../Halite/Exception/UnsupportedSchemeError.html">UnsupportedSchemeError</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Exception/UnsupportedStreamMethodError" data-name="halite::exception::unsupportedstreammethoderror">
+      <a href="../../Halite/Exception/UnsupportedStreamMethodError.html">UnsupportedStreamMethodError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Feature" data-name="halite::feature">
+      <a href="../../Halite/Feature.html">Feature</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Feature/Chain" data-name="halite::feature::chain">
+      <a href="../../Halite/Feature/Chain.html">Chain</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Feature/Chain/Result" data-name="halite::feature::chain::result">
+      <a href="../../Halite/Feature/Chain/Result.html">Result</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/FeatureRegister" data-name="halite::featureregister">
+      <a href="../../Halite/FeatureRegister.html">FeatureRegister</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/FormData" data-name="halite::formdata">
+      <a href="../../Halite/FormData.html">FormData</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/HeaderLinkParser" data-name="halite::headerlinkparser">
+      <a href="../../Halite/HeaderLinkParser.html">HeaderLinkParser</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/icyleaf/halite/Halite/Logging" data-name="halite::logging">
+      <a href="../../Halite/Logging.html">Logging</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logging/Abstract" data-name="halite::logging::abstract">
+      <a href="../../Halite/Logging/Abstract.html">Abstract</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logging/Common" data-name="halite::logging::common">
+      <a href="../../Halite/Logging/Common.html">Common</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/icyleaf/halite/Halite/Logging/JSON" data-name="halite::logging::json">
+      <a href="../../Halite/Logging/JSON.html">JSON</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Logging/Register" data-name="halite::logging::register">
+      <a href="../../Halite/Logging/Register.html">Register</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/MimeType" data-name="halite::mimetype">
+      <a href="../../Halite/MimeType.html">MimeType</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeType/Adapter" data-name="halite::mimetype::adapter">
+      <a href="../../Halite/MimeType/Adapter.html">Adapter</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/MimeType/JSON" data-name="halite::mimetype::json">
+      <a href="../../Halite/MimeType/JSON.html">JSON</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Options" data-name="halite::options">
+      <a href="../../Halite/Options.html">Options</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Follow" data-name="halite::options::follow">
+      <a href="../../Halite/Options/Follow.html">Follow</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Timeout" data-name="halite::options::timeout">
+      <a href="../../Halite/Options/Timeout.html">Timeout</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Options/Type" data-name="halite::options::type">
+      <a href="../../Halite/Options/Type.html">Type</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Redirector" data-name="halite::redirector">
+      <a href="../../Halite/Redirector.html">Redirector</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/Halite/Request" data-name="halite::request">
+      <a href="../../Halite/Request.html">Request</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Request/Data" data-name="halite::request::data">
+      <a href="../../Halite/Request/Data.html">Data</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/Halite/Response" data-name="halite::response">
+      <a href="../../Halite/Response.html">Response</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/halite/HTTP" data-name="http">
+      <a href="../../HTTP.html">HTTP</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/HTTP/Headers" data-name="http::headers">
+      <a href="../../HTTP/Headers.html">Headers</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/halite/HTTP/Params" data-name="http::params">
+      <a href="../../HTTP/Params.html">Params</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Halite::Logging::JSON
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Logging/JSON.html">Halite::Logging::JSON</a></li><li class="superclass"><a href="../../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>JSON logging format</p>
+
+<p>Instance variables to check <code><a href="../../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code>.</p>
+
+<p>In JSON format, if you set skip some key, it will return <code>false</code>.</p>
+
+<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, logging: <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">JSON</span>.<span class="k">new</span>(skip_request_body: <span class="n">true</span>))
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+
+<span class="c"># Or</span>
+<span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, skip_request_body: <span class="n">true</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
+
+<p>Log will look like:</p>
+
+<pre><code>{
+  <span class="s">&quot;created_at&quot;</span>: <span class="s">&quot;2018-08-31T16:53:57+08:00:00&quot;</span>,
+  <span class="s">&quot;entry&quot;</span>: {
+    <span class="s">&quot;request&quot;</span>: {
+      <span class="s">&quot;body&quot;</span>: <span class="s">&quot;&quot;</span>,
+      <span class="s">&quot;headers&quot;</span>: { ... },
+      <span class="s">&quot;method&quot;</span>: <span class="s">&quot;GET&quot;</span>,
+      <span class="s">&quot;url&quot;</span>: <span class="s">&quot;http://httpbin.org/anything&quot;</span>,
+      <span class="s">&quot;timestamp&quot;</span>: <span class="s">&quot;2018-08-31T16:53:59+08:00:00&quot;</span>
+    },
+    <span class="s">&quot;response&quot;</span>: {
+      <span class="s">&quot;body&quot;</span>: <span class="n">false</span>,
+      <span class="s">&quot;header&quot;</span>: { ... },
+      <span class="s">&quot;status_code&quot;</span>: <span class="n">200</span>,
+      <span class="s">&quot;http_version&quot;</span>: <span class="s">&quot;HTTP/1.1&quot;</span>,
+      <span class="s">&quot;timestamp&quot;</span>: <span class="s">&quot;2018-08-31T16:53:59+08:00:00&quot;</span>
+    }
+  }
+}</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/icyleaf/halite/blob/e257ec5fdcbb368f043188f1ab2f7bd43aa7544f/src/halite/features/logging/json.cr#L42" target="_blank">
+        halite/features/logging/json.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#default_formatter-instance-method" class="signature"><strong>#default_formatter</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#request%28request%29-instance-method" class="signature"><strong>#request</strong>(request)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#response%28response%29-instance-method" class="signature"><strong>#response</strong>(response)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code></h3>
+  
+  
+    <a href="../../Halite/Logging/Abstract.html#colorize%3ABool-instance-method" class="tooltip">
+      <span>colorize : Bool</span>
+    colorize</a>, 
+    
+  
+    <a href="../../Halite/Logging/Abstract.html#logger%3D%28logger%3ALogger%29-instance-method" class="tooltip">
+      <span>logger=(logger : Logger)</span>
+    logger=</a>, 
+    
+  
+    <a href="../../Halite/Logging/Abstract.html#request%28request%29-instance-method" class="tooltip">
+      <span>request(request)</span>
+    request</a>, 
+    
+  
+    <a href="../../Halite/Logging/Abstract.html#response%28response%29-instance-method" class="tooltip">
+      <span>response(response)</span>
+    response</a>, 
+    
+  
+    <a href="../../Halite/Logging/Abstract.html#skip_benchmark%3ABool-instance-method" class="tooltip">
+      <span>skip_benchmark : Bool</span>
+    skip_benchmark</a>, 
+    
+  
+    <a href="../../Halite/Logging/Abstract.html#skip_request_body%3ABool-instance-method" class="tooltip">
+      <span>skip_request_body : Bool</span>
+    skip_request_body</a>, 
+    
+  
+    <a href="../../Halite/Logging/Abstract.html#skip_response_body%3ABool-instance-method" class="tooltip">
+      <span>skip_response_body : Bool</span>
+    skip_response_body</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from class <code><a href="../../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code></h3>
+  
+  
+    <a href="../../Halite/Logging/Abstract.html#new%28file%3AString%3F%3Dnil%2Cfilemode%3D%26quot%3Ba%26quot%3B%2Cskip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%29-class-method" class="tooltip">
+      <span>new(file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)<br/>new(skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>, io : IO = <span class="t">STDOUT</span>)</span>
+    new</a>
+    
+  
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="default_formatter-instance-method">
+      <div class="signature">
+        
+        def <strong>default_formatter</strong>
+
+        <a class="method-permalink" href="#default_formatter-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e257ec5fdcbb368f043188f1ab2f7bd43aa7544f/src/halite/features/logging/json.cr#L56" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="request(request)-instance-method">
+      <div class="signature">
+        
+        def <strong>request</strong>(request)
+
+        <a class="method-permalink" href="#request%28request%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e257ec5fdcbb368f043188f1ab2f7bd43aa7544f/src/halite/features/logging/json.cr#L46" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="response(response)-instance-method">
+      <div class="signature">
+        
+        def <strong>response</strong>(response)
+
+        <a class="method-permalink" href="#response%28response%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/halite/blob/e257ec5fdcbb368f043188f1ab2f7bd43aa7544f/src/halite/features/logging/json.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
