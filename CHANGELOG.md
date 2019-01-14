@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - [ ] Rewrite HTTP Connection
   - [ ] New Connection for Halite
-  - [ ] Proxy support
+  - [x] Proxy support
   - [ ] Reuse connection
 
 ## [0.9.1] (2019-01-14)
