@@ -16,6 +16,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - [ ] Proxy support
   - [ ] Reuse connection
 
+## [0.9.1] (2019-01-14)
+
+> Minor typo fix (same as v0.9.0)
+
+### Fixed
+
+- Correct version both in `shard.yml` and `version.cr`. (thanks @[matthewmcgarvey](https://github.com/matthewmcgarvey))
+- Update basic auth example in `README.md`. (thanks @[matthewmcgarvey](https://github.com/matthewmcgarvey))
+
 ## [0.9.0] (2018-12-21)
 
 > New features with performance improved.
@@ -271,7 +280,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.9.1...HEAD
+[0.9.1]: https://github.com/icyleaf/halite/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/icyleaf/halite/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/icyleaf/halite/compare/v0.7.5...v0.8.0
 [0.7.5]: https://github.com/icyleaf/halite/compare/v0.7.4...v0.7.5
