@@ -51,7 +51,7 @@ module Halite
 
     # @return `URI` with the scheme, user, password, port and host combined
     def domain
-      URI.new(@uri.scheme, @uri.host, @uri.port, nil, nil, @uri.user, @uri.password, nil, @uri.opaque)
+      URI.new(@uri.scheme, @uri.host, @uri.port, @uri.path, nil, @uri.user, @uri.password, nil)
     end
 
     # @return `String` with the path, query and fragment combined
