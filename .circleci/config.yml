@@ -35,61 +35,10 @@ jobs:
             git add -A .
             git commit --allow-empty -m "Updating documents"
             git push origin HEAD:gh-pages
-  test_crystal_0_27:
-    docker:
-      - image: "crystallang/crystal:0.27.2"
-    working_directory: ~/halite
-    steps:
-      - checkout
-      - run:
-          name: "Crystal Version"
-          command: crystal version
-      - run:
-          name: "Specs"
-          command: crystal spec
-  test_crystal_0_26:
-    docker:
-      - image: "crystallang/crystal:0.26.1"
-    working_directory: ~/halite
-    steps:
-      - checkout
-      - run:
-          name: "Crystal Version"
-          command: crystal version
-      - run:
-          name: "Specs"
-          command: crystal spec
-  test_crystal_0_25:
-    docker:
-      - image: "crystallang/crystal:0.25.0"
-    working_directory: ~/halite
-    steps:
-      - checkout
-      - run:
-          name: "Crystal Version"
-          command: crystal version
-      - run:
-          name: "Specs"
-          command: crystal spec
 workflows:
   version: 2
   build_test_deploy:
     jobs:
-      - test_crystal_0_25:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-      - test_crystal_0_26:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-      - test_crystal_0_27:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
       - test_crystal_0_28:
           filters:
             branches:

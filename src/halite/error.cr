@@ -53,7 +53,7 @@ module Halite
 
       def initialize(@message : String? = nil, @status_code : Int32? = nil, @uri : URI? = nil)
         if status_code = @status_code
-          status_message = [HTTP.default_status_message_for(status_code).downcase]
+          status_message = [HTTP::Status.new(status_code).description.to_s.downcase]
           status_message << "error"
           status_message << "with url: #{@uri.not_nil!}" if @uri
 
