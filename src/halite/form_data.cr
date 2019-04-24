@@ -1,5 +1,9 @@
 require "http/formdata"
+{% if Crystal::VERSION < "0.28.0" %}
 require "http/multipart"
+{% else %}
+require "mime/multipart"
+{% end %}
 
 module Halite
   # Utility-belt to build form data request bodies.
