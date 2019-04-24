@@ -75,10 +75,5 @@ module HTTP
     def self.encode(**named_tuple) : String
       encode(named_tuple)
     end
-
-    {% if Crystal::VERSION < "0.26.0" %}
-      # Return `true` if params is empty.
-      delegate empty?, to: raw_params
-    {% end %}
   end
 end

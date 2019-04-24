@@ -16,6 +16,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - [x] Proxy support
   - [ ] Reuse connection
 
+### Fixed
+
+- Compatibility with Crystal 0.28.0
+
+### Changed
+
+- Drop Crystal 0.25.x, 0.26.x, 0.27.x support.
+
 ## [0.9.1] (2019-01-14)
 
 > Minor typo fix (same as v0.9.0)
