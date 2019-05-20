@@ -196,7 +196,7 @@ module Halite
     private def make_request_uri(url : String, options : Halite::Options) : String
       if endpoint = options.endpoint
         uri = endpoint
-        uri.path = url.starts_with?("/") ? url : "#{uri.path}/#{url}" unless url.empty?
+        uri.path = url[0] == '/' ? url : "#{uri.path}/#{url}" unless url.empty? || uri.path == url
       else
         uri = URI.parse(url)
       end
@@ -206,7 +206,6 @@ module Halite
         uri.query = [uri.query, query].compact.join("&") unless query.empty?
       end
 
-      uri.path = "/" if uri.path.to_s.empty?
       uri.to_s
     end
 
