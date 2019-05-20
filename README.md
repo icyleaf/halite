@@ -45,22 +45,8 @@ Build in Crystal version >= `v0.28.0`, this document valid with latest commit.
     - [Raise for status code](#raise-for-status-code)
 - [Advanced Usage](#advanced-usage)
   - [Configuring](#configuring)
+  - [Endpoint](#endpoint)
   - [Sessions](#sessions)
-  - [Streaming Requests](#streaming-requests)
-  - [Logging](#logging)
-    - [JSON-formatted logging](#json-formatted-logging)
-    - [Write to a log file](#write-to-a-log-file)
-    - [Use the custom logging](#use-the-custom-logging)
-  - [Local Cache](#local-cache)
-  - [Middlewares](#middlewares)
-    - [Write a simple feature](#write-a-simple-feature)
-    - [Write a interceptor](#write-a-interceptor)
-  - [Link Headers](#link-headers)
-- [Help and Discussion](#help-and-discussion)
-- [Donate](#donate)
-- [How to Contribute](#how-to-contribute)
-- [You may also like](#you-may-also-like)
-- [License](#license)
 
 <!-- /TOC -->
 
@@ -514,6 +500,22 @@ end
 client.accept("application/json")
 
 r = client.get("http://httpbin.org/get")
+```
+
+### Endpoint
+
+No more given endpoint per request, use `endpoint` will make the request URI shorter, you can set it in flexible way:
+
+```crystal
+client = Halite::Client.new do
+  endpoint "https://gitlab.org/api/v4"
+  user_agent "Halite"
+end
+
+client.get("users")       # GET https://gitlab.org/api/v4/users
+
+# You can override the path by using an absolute path
+client.get("/users")      # GET https://gitlab.org/users
 ```
 
 ### Sessions

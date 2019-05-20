@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - [x] Proxy support
   - [ ] Reuse connection
 
+## [0.10.0] (2019-05-20)
+
+### Added
+
+- Add `endpoint` chainable method, also add it as configuration option. [#66](https://github.com/icyleaf/halite/pull/66)
+
 ## [0.9.2] (2019-05-20)
 
 ### Fixed
@@ -290,7 +296,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.9.2...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.0...HEAD
+[0.9.2]: https://github.com/icyleaf/halite/compare/v0.9.2...v0.10.0
 [0.9.2]: https://github.com/icyleaf/halite/compare/v0.9.1...v0.9.2
 [0.9.1]: https://github.com/icyleaf/halite/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/icyleaf/halite/compare/v0.8.0...v0.9.0
