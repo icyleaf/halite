@@ -4,6 +4,8 @@ require "./halite/ext/*"
 module Halite
   extend Chainable
 
+  VERSION = "0.9.2"
+
   @@features = {} of String => Feature.class
 
   module FeatureRegister
