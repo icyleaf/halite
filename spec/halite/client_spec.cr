@@ -2,6 +2,8 @@ require "../spec_helper"
 require "../support/mock_server"
 
 describe Halite::Client do
+  # It accepts all chainable methods, see spec/halite_spec.cr
+
   describe "#initialize" do
     it "should initial with nothing" do
       client = Halite::Client.new
@@ -36,12 +38,43 @@ describe Halite::Client do
     end
   end
 
+  describe "#endpoint" do
+    it "should set String from arguments" do
+      client = Halite::Client.new(endpoint: SERVER.endpoint)
+      response = client.get("/")
+      response.status_code.should eq(200)
+    end
+
+    it "should set String from block" do
+      client = Halite::Client.new do
+        endpoint SERVER.endpoint
+      end
+
+      response = client.get("")
+      response.status_code.should eq(200)
+    end
+
+    it "should always overwrite the path of uri if path starts with '/' char" do
+      client = Halite::Client.new do
+        endpoint "#{SERVER.endpoint}/redirect-301"
+      end
+
+      response = client.get("")
+      response.status_code.should eq(301)
+
+      response = client.accept("application/json").get("/")
+      response.status_code.should eq(200)
+      response.to_s.should match(/json/)
+    end
+  end
+
   describe "#request" do
     %w[get post put delete head patch options].each do |verb|
       it "should easy to #{verb} request" do
         response = Halite::Client.new.request(verb, SERVER.endpoint)
         response.status_code.should eq(200)
       end
+
       it "should easy to #{verb} request with hash or namedtuple" do
         response = Halite::Client.new.request(verb, SERVER.endpoint, params: {name: "foo"})
         response.status_code.should eq(200)
@@ -78,8 +111,6 @@ describe Halite::Client do
       end
     end
   end
-
-  # It accepts all chainable methods, see halite_spec.cr
 
   describe "#sessions" do
     it "should store and send cookies" do

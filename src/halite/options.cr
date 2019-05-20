@@ -36,7 +36,8 @@ module Halite
   # o.follow.strict # => false
   # ```
   class Options
-    def self.new(headers : (Hash(String, _) | NamedTuple)? = nil,
+    def self.new(endpoint : (String | URI)? = nil,
+                 headers : (Hash(String, _) | NamedTuple)? = nil,
                  cookies : (Hash(String, _) | NamedTuple)? = nil,
                  params : (Hash(String, _) | NamedTuple)? = nil,
                  form : (Hash(String, _) | NamedTuple)? = nil,
@@ -49,6 +50,7 @@ module Halite
                  tls : OpenSSL::SSL::Context::Client? = nil,
                  features = {} of String => Feature)
       new(
+        endpoint: endpoint,
         headers: headers,
         cookies: cookies,
         params: params,
@@ -65,6 +67,7 @@ module Halite
     # Types of options in a Hash
     alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(String, Type)
 
+    property endpoint : URI?
     property headers : HTTP::Headers
     property cookies : HTTP::Cookies
     property timeout : Timeout
@@ -79,6 +82,7 @@ module Halite
     property features : Hash(String, Feature)
 
     def initialize(*,
+                   endpoint : (String | URI)? = nil,
                    headers : (Hash(String, _) | NamedTuple)? = nil,
                    cookies : (Hash(String, _) | NamedTuple)? = nil,
                    params : (Hash(String, _) | NamedTuple)? = nil,
@@ -89,6 +93,7 @@ module Halite
                    @follow = Follow.new,
                    @tls : OpenSSL::SSL::Context::Client? = nil,
                    @features = {} of String => Feature)
+      @endpoint = parse_endpoint(endpoint)
       @headers = parse_headers(headers)
       @cookies = parse_cookies(cookies)
       @params = parse_params(params)
@@ -97,6 +102,7 @@ module Halite
     end
 
     def initialize(*,
+                   @endpoint : URI?,
                    @headers : HTTP::Headers,
                    @cookies : HTTP::Cookies,
                    @params : Hash(String, Type),
@@ -107,6 +113,11 @@ module Halite
                    @follow = Follow.new,
                    @tls : OpenSSL::SSL::Context::Client? = nil,
                    @features = {} of String => Feature)
+    end
+
+    def with_endpoint(endpoint : String | URI)
+      self.endpoint = endpoint
+      self
     end
 
     # Alias `with_headers` method.
@@ -212,6 +223,10 @@ module Halite
       self
     end
 
+    def endpoint=(endpoint : String)
+      @endpoint = URI.parse(endpoint)
+    end
+
     def headers=(headers : (Hash(String, _) | NamedTuple))
       @headers = parse_headers(headers)
     end
@@ -277,6 +292,8 @@ module Halite
 
     # Merge with other `Options` and return self
     def merge!(other : Halite::Options) : Halite::Options
+      @endpoint = other.endpoint if other.endpoint
+
       @headers.merge!(other.headers)
 
       other.cookies.each do |cookie|
@@ -303,6 +320,7 @@ module Halite
 
     # Reset options
     def clear! : Halite::Options
+      @endpoint = nil
       @headers = HTTP::Headers.new
       @cookies = HTTP::Cookies.new
       @params = {} of String => Type
@@ -320,7 +338,8 @@ module Halite
     # Produces a shallow copy of obj—the instance variables of obj are copied,
     # but not the objects they reference. dup copies the tainted state of obj.
     def dup
-      options = Halite::Options.new(
+      Halite::Options.new(
+        endpoint: @endpoint,
         headers: @headers.dup,
         cookies: @cookies,
         params: @params,
@@ -332,12 +351,12 @@ module Halite
         features: @features,
         tls: @tls
       )
-      options
     end
 
     # Returns this collection as a plain Hash.
     def to_h
       {
+        "endpoint"        => @endpoint,
         "headers"         => @headers.to_h,
         "cookies"         => @cookies.to_h,
         "params"          => @params ? @params.to_h : nil,
@@ -349,6 +368,15 @@ module Halite
         "follow"          => @follow.hops,
         "follow_strict"   => @follow.strict,
       }
+    end
+
+    private def parse_endpoint(endpoint : (String | URI)?) : URI?
+      case endpoint
+      when String
+        URI.parse(endpoint)
+      when URI
+        endpoint.as(URI)
+      end
     end
 
     private def parse_headers(raw : (Hash(String, _) | NamedTuple | HTTP::Headers)?) : HTTP::Headers

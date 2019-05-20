@@ -404,6 +404,20 @@ describe Halite do
     end
   end
 
+  describe ".endpoint" do
+    it "sets endpoint with String" do
+      endpoint = "https://example.com"
+      client = Halite.endpoint(endpoint)
+      client.options.endpoint.should eq(URI.parse(endpoint))
+    end
+
+    it "sets endpoint with String" do
+      endpoint = URI.parse("https://example.com")
+      client = Halite.endpoint(endpoint)
+      client.options.endpoint.should eq(endpoint)
+    end
+  end
+
   describe ".auth" do
     it "sets Authorization header to the given value" do
       client = Halite.auth("abc")

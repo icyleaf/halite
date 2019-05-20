@@ -42,6 +42,7 @@ module Halite
     # Halite::Client.new(headers: {"private-token" => "bdf39d82661358f80b31b67e6f89fee4"})
     # ```
     def self.new(*,
+                 endpoint : (String | URI)? = nil,
                  headers : (Hash(String, _) | NamedTuple)? = nil,
                  cookies : (Hash(String, _) | NamedTuple)? = nil,
                  params : (Hash(String, _) | NamedTuple)? = nil,
@@ -52,6 +53,7 @@ module Halite
                  follow = Follow.new,
                  tls : OpenSSL::SSL::Context::Client? = nil)
       new(Options.new(
+        endpoint: endpoint,
         headers: headers,
         cookies: cookies,
         params: params,
@@ -191,14 +193,19 @@ module Halite
     end
 
     # Merges query params if needed
-    private def make_request_uri(uri : String, options : Halite::Options) : String
-      uri = URI.parse uri
+    private def make_request_uri(url : String, options : Halite::Options) : String
+      if endpoint = options.endpoint
+        uri = endpoint
+        uri.path = url[0] == '/' ? url : "#{uri.path}/#{url}" unless url.empty? || uri.path == url
+      else
+        uri = URI.parse(url)
+      end
+
       if params = options.params
         query = HTTP::Params.encode(params)
         uri.query = [uri.query, query].compact.join("&") unless query.empty?
       end
 
-      uri.path = "/" if uri.path.to_s.empty?
       uri.to_s
     end
 

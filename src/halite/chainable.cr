@@ -97,6 +97,17 @@ module Halite
       end
     {% end %}
 
+    # Adds a endpoint to the request.
+    #
+    #
+    # ```
+    # Halite.endpoint("https://httpbin.org")
+    #   .get("/get")
+    # ```
+    def endpoint(endpoint : String | URI) : Halite::Client
+      branch(default_options.with_endpoint(endpoint))
+    end
+
     # Make a request with the given Basic authorization header
     #
     # ```
