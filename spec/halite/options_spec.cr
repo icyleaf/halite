@@ -26,6 +26,7 @@ end
 
 private def test_options
   Halite::Options.new(
+    endpoint: "https://spec.example.com",
     headers: {
       user_agent: "spec",
     },
@@ -49,6 +50,9 @@ describe Halite::Options do
     it "should initial with nothing" do
       options = Halite::Options.new
       options.should be_a(Halite::Options)
+
+      options.endpoint.should be_nil
+
       options.headers.empty?.should be_true
 
       options.cookies.should be_a(HTTP::Cookies)
@@ -76,23 +80,28 @@ describe Halite::Options do
       options = Halite::Options.new(headers: {
         "private_token" => "token",
       },
-        timeout: Halite::Timeout.new(connect: 3.2)
+        timeout: Halite::Timeout.new(connect: 3.2),
+        endpoint: "https://example.com"
       )
 
       options.should be_a(Halite::Options)
+      options.endpoint.should eq(URI.parse("https://example.com"))
       options.headers.should be_a(HTTP::Headers)
       options.headers["Private-Token"].should eq("token")
       options.timeout.connect.should eq(3.2)
     end
 
     it "should initial with quick setup" do
+      endpoint = URI.parse("https://example.com")
       options = Halite::Options.new(headers: {
         private_token: "token",
       },
-        connect_timeout: 1.minutes
+        connect_timeout: 1.minutes,
+        endpoint: endpoint
       )
 
       options.should be_a(Halite::Options)
+      options.endpoint.should eq(endpoint)
       options.headers.should be_a(HTTP::Headers)
       options.headers["Private-Token"].should eq("token")
       options.timeout.connect.should eq(60)
@@ -110,11 +119,12 @@ describe Halite::Options do
     end
   end
 
-  describe "#merge" do
+  describe "#merge!" do
     it "should works with Halite::Options" do
       old_options = test_options
+      endpoint = old_options.endpoint
       new_tls = OpenSSL::SSL::Context::Client.new
-      options = old_options.merge(Halite::Options.new(
+      options = old_options.merge!(Halite::Options.new(
         headers: {
           user_agent: "new_spec",
         },
@@ -130,6 +140,67 @@ describe Halite::Options do
         }
       ))
 
+      old_options.endpoint.should eq(endpoint)
+      old_options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec"})
+      old_options.cookies.size.should eq(0)
+      old_options.timeout.connect.should eq(2)
+      old_options.timeout.read.should be_nil
+      old_options.connect_timeout.should eq(2)
+      old_options.read_timeout.should be_nil
+      old_options.follow.hops.should eq(1)
+      old_options.follow.strict.should be_true
+      old_options.params.should eq({"title" => "1"})
+      old_options.form.should eq({"title" => "2"})
+      old_options.json.should eq({"title" => "3"})
+      old_options.raw.should_not be_nil
+      old_options.raw.not_nil!.should eq("title=4")
+      old_options.tls.not_nil!.should eq(new_tls)
+      options.features["logging"].should be_a(Halite::Logging)
+      options.features["cache"].should be_a(Halite::Cache)
+
+      options.endpoint.should eq(endpoint)
+      options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec"})
+      options.cookies.size.should eq(0)
+      options.timeout.connect.should eq(2)
+      options.timeout.read.should be_nil
+      options.connect_timeout.should eq(2)
+      options.read_timeout.should be_nil
+      options.follow.hops.should eq(1)
+      options.follow.strict.should be_true
+      options.params.should eq({"title" => "1"})
+      options.form.should eq({"title" => "2"})
+      options.json.should eq({"title" => "3"})
+      options.raw.should_not be_nil
+      options.raw.not_nil!.should eq("title=4")
+      options.tls.not_nil!.should eq(new_tls)
+      options.features["logging"].should be_a(Halite::Logging)
+      options.features["cache"].should be_a(Halite::Cache)
+    end
+  end
+
+  describe "#merge" do
+    it "should works with Halite::Options" do
+      old_options = test_options
+      endpoint = old_options.endpoint
+      new_tls = OpenSSL::SSL::Context::Client.new
+      options = old_options.merge(Halite::Options.new(
+        endpoint: "https://new.exaple.com",
+        headers: {
+          user_agent: "new_spec",
+        },
+        params: {"title" => "1"},
+        form: {"title" => "2"},
+        json: {"title" => "3"},
+        raw: "title=4",
+        connect_timeout: 2,
+        follow: 1,
+        tls: new_tls,
+        features: {
+          "cache" => Halite::Cache.new.as(Halite::Feature),
+        }
+      ))
+
+      old_options.endpoint.should eq(endpoint)
       old_options.headers.should eq(HTTP::Headers{"User-Agent" => "spec"})
       old_options.cookies.size.should eq(0)
       old_options.timeout.connect.should eq(1)
@@ -145,6 +216,7 @@ describe Halite::Options do
       old_options.features["logging"].should be_a(Halite::Logging)
       old_options.tls.not_nil!.should_not eq(new_tls)
 
+      options.endpoint.should eq(URI.parse("https://new.exaple.com"))
       options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec"})
       options.cookies.size.should eq(0)
       options.timeout.connect.should eq(2)
@@ -177,65 +249,10 @@ describe Halite::Options do
     end
   end
 
-  describe "#merge!" do
-    it "should works with Halite::Options" do
-      old_options = test_options
-      new_tls = OpenSSL::SSL::Context::Client.new
-      options = old_options.merge!(Halite::Options.new(
-        headers: {
-          user_agent: "new_spec",
-        },
-        params: {"title" => "1"},
-        form: {"title" => "2"},
-        json: {"title" => "3"},
-        raw: "title=4",
-        connect_timeout: 2,
-        follow: 1,
-        tls: new_tls,
-        features: {
-          "cache" => Halite::Cache.new.as(Halite::Feature),
-        }
-      ))
-
-      old_options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec"})
-      old_options.cookies.size.should eq(0)
-      old_options.timeout.connect.should eq(2)
-      old_options.timeout.read.should be_nil
-      old_options.connect_timeout.should eq(2)
-      old_options.read_timeout.should be_nil
-      old_options.follow.hops.should eq(1)
-      old_options.follow.strict.should be_true
-      old_options.params.should eq({"title" => "1"})
-      old_options.form.should eq({"title" => "2"})
-      old_options.json.should eq({"title" => "3"})
-      old_options.raw.should_not be_nil
-      old_options.raw.not_nil!.should eq("title=4")
-      old_options.tls.not_nil!.should eq(new_tls)
-      options.features["logging"].should be_a(Halite::Logging)
-      options.features["cache"].should be_a(Halite::Cache)
-
-      options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec"})
-      options.cookies.size.should eq(0)
-      options.timeout.connect.should eq(2)
-      options.timeout.read.should be_nil
-      options.connect_timeout.should eq(2)
-      options.read_timeout.should be_nil
-      options.follow.hops.should eq(1)
-      options.follow.strict.should be_true
-      options.params.should eq({"title" => "1"})
-      options.form.should eq({"title" => "2"})
-      options.json.should eq({"title" => "3"})
-      options.raw.should_not be_nil
-      options.raw.not_nil!.should eq("title=4")
-      options.tls.not_nil!.should eq(new_tls)
-      options.features["logging"].should be_a(Halite::Logging)
-      options.features["cache"].should be_a(Halite::Cache)
-    end
-  end
-
   describe "#clear!" do
     options = test_options
     options.clear!
+    options.endpoint.should be_nil
     options.headers.size.should eq(0)
 
     options.cookies.should be_a(HTTP::Cookies)
@@ -264,6 +281,10 @@ describe Halite::Options do
   describe "#dup" do
     options = test_options
     new_options = options.dup
+
+    new_options.endpoint = "https://example.com"
+    new_options.endpoint.should eq(URI.parse("https://example.com"))
+    options.endpoint.should eq(URI.parse("https://spec.example.com"))
 
     new_options.headers = HTTP::Headers.new
     new_options.headers.empty?.should be_true
@@ -321,6 +342,23 @@ describe Halite::Options do
     new_options.logging = false
     new_options.logging.should be_false
     options.logging.should be_true
+  end
+
+  describe "#with_endpoint" do
+    it "should overwrite String value" do
+      options = Halite::Options.new
+      options.with_endpoint("https://with.example.com")
+
+      options.endpoint.should eq(URI.parse("https://with.example.com"))
+    end
+
+    it "should overwrite URI value" do
+      endpoint = URI.parse("https://with.example.com")
+      options = Halite::Options.new(endpoint: "https://new.example.com")
+      options.with_endpoint(endpoint)
+
+      options.endpoint.should eq(endpoint)
+    end
   end
 
   describe "#with_headers" do
@@ -499,6 +537,32 @@ describe Halite::Options do
   end
 
   describe "alias methods" do
+    context "endpoint" do
+      it "getter" do
+        options = Halite::Options.new(endpoint: "https://with.example.com")
+        options.endpoint.should eq(URI.parse("https://with.example.com"))
+      end
+
+      it "setter" do
+        endpoint_string = "https://with.example.com"
+        endpoint = URI.parse(endpoint_string)
+        options = Halite::Options.new(endpoint: endpoint_string)
+        options.endpoint.should eq(endpoint)
+
+        options = Halite::Options.new(endpoint: endpoint)
+        options.endpoint.should eq(endpoint)
+
+        options = Halite::Options.new
+        options.endpoint = endpoint_string
+        options.endpoint.should eq(endpoint)
+
+        options = Halite::Options.new
+        options.endpoint = endpoint
+        options.endpoint.should eq(endpoint)
+      end
+    end
+
+
     context "read_timeout alias to timeout.read" do
       it "getter" do
         options = Halite::Options.new(timeout: Halite::Timeout.new(read: 34))
