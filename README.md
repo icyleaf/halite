@@ -80,7 +80,7 @@ Halite.get("http://httpbin.org/get", params: {
   shard: "halite"
 })
 
-# Also support Array as query params
+# Also support Hash as query params
 Halite.get("http://httpbin.org/get", headers: {
     "Private-Token" => "T0k3n"
   }, params: {
