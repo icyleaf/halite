@@ -195,7 +195,7 @@ module Halite
     # Merges query params if needed
     private def make_request_uri(url : String, options : Halite::Options) : String
       if endpoint = options.endpoint
-        uri = endpoint
+        uri = endpoint.dup
         uri.path = url[0] == '/' ? url : File.join(uri.path, url) unless url.empty? || uri.path == url
       else
         uri = URI.parse(url)
