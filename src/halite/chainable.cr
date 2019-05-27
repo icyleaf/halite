@@ -283,7 +283,7 @@ module Halite
     # ```
     # Halite.logging(false).get("http://httpbin.org/get")
     # ```
-    def logging(enable = true)
+    def logging(enable : Bool = true)
       default_options.logging = enable
       branch(default_options)
     end
@@ -376,7 +376,7 @@ module Halite
     # ```
     #
     # Check the log file content: **/tmp/halite.log**
-    def logging(format = "common", file : String? = nil, filemode = "a",
+    def logging(format : String = "common", file : String? = nil, filemode = "a",
                 skip_request_body = false, skip_response_body = false,
                 skip_benchmark = false, colorize = true)
       opts = {
