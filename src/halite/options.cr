@@ -223,10 +223,12 @@ module Halite
       self
     end
 
+    # Set endpoint of request
     def endpoint=(endpoint : String)
       @endpoint = URI.parse(endpoint)
     end
 
+    # Set headers of request
     def headers=(headers : (Hash(String, _) | NamedTuple))
       @headers = parse_headers(headers)
     end
@@ -274,9 +276,9 @@ module Halite
     # Quick enable logging
     #
     # By defaults, use `Logging::Common` as logging output.
-    def logging=(logging : Bool)
-      if logging
-        with_features("logging") unless @features.has_key?("logging")
+    def logging=(enable : Bool)
+      if enable
+        with_features("logging") unless logging
       else
         @features.delete("logging")
       end
