@@ -284,8 +284,9 @@ module Halite
     # Halite.logging(false).get("http://httpbin.org/get")
     # ```
     def logging(enable : Bool = true)
-      default_options.logging = enable
-      branch(default_options)
+      options = default_options
+      options.logging = enable
+      branch(options)
     end
 
     # Returns `Options` self with given the logging which it integration from `Halite::Logging`.
