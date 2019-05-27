@@ -66,6 +66,18 @@ describe Halite::Client do
       response.status_code.should eq(200)
       response.to_s.should match(/json/)
     end
+
+    it "should use default uri by each requests" do
+      client = Halite::Client.new do
+        endpoint SERVER.endpoint
+      end
+
+      response = client.get("anything", params: {"foo" => "bar"})
+      response.parse["url"].should eq("/anything?foo=bar")
+
+      response = client.get("anything", params: {"foo" => "bar"})
+      response.parse["url"].should eq("/anything?foo=bar")
+    end
   end
 
   describe "#request" do
