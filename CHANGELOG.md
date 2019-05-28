@@ -16,11 +16,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - [x] Proxy support
   - [ ] Reuse connection
 
+## [0.10.1] (2019-05-28)
+
+### Fixed
+
+- Fixed duplica query and backslash when reuse client. [#67](https://github.com/icyleaf/halite/pull/67), [#68](https://github.com/icyleaf/halite/issues/68) (thanks @[watzon](https://github.com/watzon))
+- Fixed no effect to call `logging(true)` method in Crystal 0.28. [#69](https://github.com/icyleaf/halite/issues/69)
+
 ## [0.10.0] (2019-05-20)
 
 ### Added
 
-- Add `endpoint` chainable method, also add it as configuration option. [#66](https://github.com/icyleaf/halite/pull/66)
+- Add `endpoint` chainable method, also add it as configuration option to reuse client. [#66](https://github.com/icyleaf/halite/pull/66)
 
 ## [0.9.2] (2019-05-20)
 
@@ -296,8 +303,9 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.0...HEAD
-[0.9.2]: https://github.com/icyleaf/halite/compare/v0.9.2...v0.10.0
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.1...HEAD
+[0.10.1]: https://github.com/icyleaf/halite/compare/v0.10.0...v0.10.1
+[0.10.0]: https://github.com/icyleaf/halite/compare/v0.9.2...v0.10.0
 [0.9.2]: https://github.com/icyleaf/halite/compare/v0.9.1...v0.9.2
 [0.9.1]: https://github.com/icyleaf/halite/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/icyleaf/halite/compare/v0.8.0...v0.9.0
