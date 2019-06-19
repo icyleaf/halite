@@ -19,22 +19,15 @@ jobs:
       - run:
           name: "Specs"
           command: crystal spec
-      - run:
-          name: "Generate API documents"
-          command: ./.circleci/generate_docs.sh
       - deploy:
-          name: "Upload to gh-page"
+          name: "API documents"
           command: |
-            git config --global user.name "$GIT_USER"
-            git config --global user.email "$GIT_EMAIL"
-            cd "${DOCS_PATH}"
-            git init
-            git remote add origin $GIT_REPO
-            git fetch origin
-            git reset origin/gh-pages
-            git add -A .
-            git commit --allow-empty -m "Updating documents"
-            git push origin HEAD:gh-pages
+            if [ "${CIRCLE_BRANCH}" == "master" ] && [ ! "${CIRCLE_PR_NUMBER}" ]; then
+              echo "Generate API documents"
+              ./.circleci/generate_docs.sh
+              echo "Upload API documents"
+              ./.circleci/upload_docs.sh
+            fi
   test_crystal_0_28:
     docker:
       - image: "crystallang/crystal:0.28.0"
