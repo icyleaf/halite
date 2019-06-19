@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - [x] Proxy support
   - [ ] Reuse connection
 
+## [0.10.2] (2019-06-?)
+
+### Fixed
+
+- Fixed Basic Auth creates bad headers in crystal 0.29.0. [#73](https://github.com/icyleaf/halite/pull/73) (thanks @[kalinon](https://github.com/kalinon))
+
 ## [0.10.1] (2019-05-28)
 
 ### Fixed
@@ -303,7 +309,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.1...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.2...HEAD
+[0.10.2]: https://github.com/icyleaf/halite/compare/v0.10.1...v0.10.2
 [0.10.1]: https://github.com/icyleaf/halite/compare/v0.10.0...v0.10.1
 [0.10.0]: https://github.com/icyleaf/halite/compare/v0.9.2...v0.10.0
 [0.9.2]: https://github.com/icyleaf/halite/compare/v0.9.1...v0.9.2
