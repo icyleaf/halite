@@ -117,7 +117,7 @@ module Halite
     #
     # See Also: [http://tools.ietf.org/html/rfc2617](http://tools.ietf.org/html/rfc2617)
     def basic_auth(user : String, pass : String) : Halite::Client
-      auth("Basic " + Base64.strict_encode(user + ":" + pass).chomp)
+      auth("Basic " + Base64.strict_encode(user + ":" + pass))
     end
 
     # Make a request with the given Authorization header

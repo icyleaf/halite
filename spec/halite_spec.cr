@@ -53,6 +53,22 @@ describe Halite do
         response = Halite.accept("application/json").get(SERVER.endpoint)
         response.to_s.should match(/json/)
       end
+
+      it "is auth" do
+        user = "halite"
+        password = "p@ssword"
+        secret = Base64.strict_encode("#{user}:#{password}")
+        response = Halite.auth(secret).get(SERVER.api("auth"))
+        response.to_s.should eq(secret)
+      end
+
+      it "is basic auth" do
+        user = "halite"
+        password = "p@ssword"
+        credentials = Base64.strict_encode("#{user}:#{password}")
+        response = Halite.basic_auth(user, password).get(SERVER.api("auth"))
+        response.to_s.should eq("Basic #{credentials}")
+      end
     end
 
     context "loading binary data" do
