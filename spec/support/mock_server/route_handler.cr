@@ -224,6 +224,12 @@ class MockServer < HTTP::Server
       context
     end
 
+    get "/auth" do |context|
+      body = context.request.headers["Authorization"]
+      context.response.print body
+      context
+    end
+
     # POST
     post "/" do |context|
       context.response.status_code = 200
