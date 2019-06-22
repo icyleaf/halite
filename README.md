@@ -856,10 +856,6 @@ You can donate via [Paypal](https://www.paypal.me/icyleaf/5).
 
 Your contributions are always welcome! Please submit a pull request or create an issue to add a new question, bug or feature to the list.
 
-Here is a throughput graph of the repository for the last few weeks:
-
-[![Throughput Graph](https://graphs.waffle.io/icyleaf/halite/throughput.svg)](https://github.com/icyleaf/halite/issues/)
-
 All [Contributors](https://github.com/icyleaf/halite/graphs/contributors) are on the wall.
 
 ## You may also like
