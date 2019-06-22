@@ -142,4 +142,24 @@ describe Halite::Client do
       r.parse("json").as_h["foo"].should eq("bar")
     end
   end
+
+  describe "#multiple" do
+    it "should use independent and share options" do
+      client1 = Halite::Client.new do
+        endpoint SERVER.api("/user_agent")
+        user_agent "foo"
+      end
+
+      client2 = Halite::Client.new do
+        endpoint SERVER.api("/")
+        user_agent "bar"
+      end
+
+      r1 = client1.get("")
+      r1.to_s.should eq("foo")
+
+      r2 = client2.post("")
+      r2.to_s.should eq("<!doctype html><body>Mock Server is running.</body></html>")
+    end
+  end
 end
