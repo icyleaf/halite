@@ -78,11 +78,11 @@ module Halite
     # ```
     def self.new(&block)
       instance = new
-      value = with instance yield
-      if value
-        value.options.merge!(value.oneshot_options)
-        value.oneshot_options.clear!
-        instance = value
+      yield_instance = with instance yield
+      if yield_instance
+        yield_instance.options.merge!(yield_instance.oneshot_options)
+        yield_instance.oneshot_options.clear!
+        instance = yield_instance
       end
 
       instance
@@ -99,6 +99,12 @@ module Halite
     # ```
     def initialize(@options = Halite::Options.new)
       @history = [] of Response
+
+      DEFAULT_OPTIONS[object_id] = Halite::Options.new
+    end
+
+    def finalize
+      DEFAULT_OPTIONS.delete(object_id)
     end
 
     # Make an HTTP request
