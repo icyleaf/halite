@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 - Fixed Basic Auth creates bad headers in crystal 0.29.0. [#73](https://github.com/icyleaf/halite/pull/73) (thanks @[kalinon](https://github.com/kalinon))
+- Fixed use one shared options in multiple instanced `Halite::Client`. [#72](https://github.com/icyleaf/halite/issues/72) (thanks @[qszhu](https://github.com/qszhu))
 
 ## [0.10.1] (2019-05-28)
 
