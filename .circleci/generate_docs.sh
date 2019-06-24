@@ -17,9 +17,9 @@ sed -i -e "s/latest commit/$(echo ${COMMIT_STATUS} | sed -e "s/\//\\\\\//g") (${
 crystal docs --output="${DOCS_PATH}/master"
 git reset --hard
 
-
-function version_gt() { test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1"; }
-
+version_gt () {
+  test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1"
+}
 
 # Generate version docs
 for TAG in $TAGS; do
