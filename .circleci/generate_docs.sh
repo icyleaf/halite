@@ -25,8 +25,8 @@ version_gt () {
 for TAG in $TAGS; do
   NAME=$(echo $TAG | awk '{gsub(/^v/, ""); print}')
 
-  # Crystal version 0.28 complie version must great than 0.9.2.
-  if version_gt $NAME "0.9.2"; then
+  # Crystal version 0.30 complie version must great than 0.10.3.
+  if version_gt $NAME "0.10.2"; then
     git checkout -b $NAME $TAG
 
     COMMIT_STATUS="[${TAG}](${GH_REF}/blob/master/CHANGELOG.md)"
