@@ -1,8 +1,8 @@
 version: 2
 jobs:
-  test_crystal_0_29:
+  test_crystal_0_30:
     docker:
-      - image: "crystallang/crystal:0.29.0"
+      - image: "crystallang/crystal:0.30.0"
     environment:
       DOCS_PATH: "docs"
       GIT_USER: "icyleaf"
@@ -28,28 +28,11 @@ jobs:
               echo "Upload API documents"
               ./.circleci/upload_docs.sh
             fi
-  test_crystal_0_28:
-    docker:
-      - image: "crystallang/crystal:0.28.0"
-    working_directory: ~/halite
-    steps:
-      - checkout
-      - run:
-          name: "Crystal Version"
-          command: crystal version
-      - run:
-          name: "Specs"
-          command: crystal spec
 workflows:
   version: 2
   build_test_deploy:
     jobs:
-      - test_crystal_0_29:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-      - test_crystal_0_28:
+      - test_crystal_0_30:
           filters:
             branches:
               ignore:
