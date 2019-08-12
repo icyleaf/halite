@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.29.0">
+<meta name="generator" content="Crystal Docs 0.30.0">
 
 
 <link href="../../css/style.css" rel="stylesheet" type="text/css">
@@ -369,7 +369,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L32" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L32" target="_blank">
         halite/features/logging.cr
       </a>
     
@@ -384,12 +384,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28file%3AString%3F%3Dnil%2Cfilemode%3D%26quot%3Ba%26quot%3B%2Cskip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%29-class-method" class="signature"><strong>.new</strong>(file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)</a>
+        <a href="#new(file:String?=nil,filemode=&quot;a&quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-class-method" class="signature"><strong>.new</strong>(file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28skip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%2Cio%3AIO%3DSTDOUT%29-class-method" class="signature"><strong>.new</strong>(skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>, io : IO = <span class="t">STDOUT</span>)</a>
+        <a href="#new(skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true,io:IO=STDOUT)-class-method" class="signature"><strong>.new</strong>(skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>, io : IO = <span class="t">STDOUT</span>)</a>
         
       </li>
     
@@ -403,37 +403,37 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#colorize%3ABool-instance-method" class="signature"><strong>#colorize</strong> : Bool</a>
+        <a href="#colorize:Bool-instance-method" class="signature"><strong>#colorize</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#logger%3D%28logger%3ALogger%29-instance-method" class="signature"><strong>#logger=</strong>(logger : Logger)</a>
+        <a href="#logger=(logger:Logger)-instance-method" class="signature"><strong>#logger=</strong>(logger : Logger)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#request%28request%29-instance-method" class="signature"><strong>#request</strong>(request)</a>
+        <a href="#request(request)-instance-method" class="signature"><strong>#request</strong>(request)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#response%28response%29-instance-method" class="signature"><strong>#response</strong>(response)</a>
+        <a href="#response(response)-instance-method" class="signature"><strong>#response</strong>(response)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#skip_benchmark%3ABool-instance-method" class="signature"><strong>#skip_benchmark</strong> : Bool</a>
+        <a href="#skip_benchmark:Bool-instance-method" class="signature"><strong>#skip_benchmark</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#skip_request_body%3ABool-instance-method" class="signature"><strong>#skip_request_body</strong> : Bool</a>
+        <a href="#skip_request_body:Bool-instance-method" class="signature"><strong>#skip_request_body</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#skip_response_body%3ABool-instance-method" class="signature"><strong>#skip_response_body</strong> : Bool</a>
+        <a href="#skip_response_body:Bool-instance-method" class="signature"><strong>#skip_response_body</strong> : Bool</a>
         
       </li>
     
@@ -445,7 +445,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#method_missing%28call%29-macro" class="signature"><strong>method_missing</strong>(call)</a>
+        <a href="#method_missing(call)-macro" class="signature"><strong>method_missing</strong>(call)</a>
         
       </li>
     
@@ -485,13 +485,13 @@
         
         def self.<strong>new</strong>(file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)
 
-        <a class="method-permalink" href="#new%28file%3AString%3F%3Dnil%2Cfilemode%3D%26quot%3Ba%26quot%3B%2Cskip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%29-class-method">#</a>
+        <a class="method-permalink" href="#new(file:String?=nil,filemode=&quot;a&quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L33" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -501,13 +501,13 @@
         
         def self.<strong>new</strong>(skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>, io : IO = <span class="t">STDOUT</span>)
 
-        <a class="method-permalink" href="#new%28skip_request_body%3Dfalse%2Cskip_response_body%3Dfalse%2Cskip_benchmark%3Dfalse%2Ccolorize%3Dtrue%2Cio%3AIO%3DSTDOUT%29-class-method">#</a>
+        <a class="method-permalink" href="#new(skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true,io:IO=STDOUT)-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -524,13 +524,13 @@
         
         def <strong>colorize</strong> : Bool
 
-        <a class="method-permalink" href="#colorize%3ABool-instance-method">#</a>
+        <a class="method-permalink" href="#colorize:Bool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -540,13 +540,13 @@
         
         def <strong>logger=</strong>(logger : Logger)
 
-        <a class="method-permalink" href="#logger%3D%28logger%3ALogger%29-instance-method">#</a>
+        <a class="method-permalink" href="#logger=(logger:Logger)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L49" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -556,13 +556,13 @@
         abstract 
         def <strong>request</strong>(request)
 
-        <a class="method-permalink" href="#request%28request%29-instance-method">#</a>
+        <a class="method-permalink" href="#request(request)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L63" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -572,13 +572,13 @@
         abstract 
         def <strong>response</strong>(response)
 
-        <a class="method-permalink" href="#response%28response%29-instance-method">#</a>
+        <a class="method-permalink" href="#response(response)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L64" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L64" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -588,13 +588,13 @@
         
         def <strong>skip_benchmark</strong> : Bool
 
-        <a class="method-permalink" href="#skip_benchmark%3ABool-instance-method">#</a>
+        <a class="method-permalink" href="#skip_benchmark:Bool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L52" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L52" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -604,13 +604,13 @@
         
         def <strong>skip_request_body</strong> : Bool
 
-        <a class="method-permalink" href="#skip_request_body%3ABool-instance-method">#</a>
+        <a class="method-permalink" href="#skip_request_body:Bool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L50" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L50" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -620,13 +620,13 @@
         
         def <strong>skip_response_body</strong> : Bool
 
-        <a class="method-permalink" href="#skip_response_body%3ABool-instance-method">#</a>
+        <a class="method-permalink" href="#skip_response_body:Bool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -641,13 +641,13 @@
         
         macro <strong>method_missing</strong>(call)
 
-        <a class="method-permalink" href="#method_missing%28call%29-macro">#</a>
+        <a class="method-permalink" href="#method_missing(call)-macro">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/features/logging.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/features/logging.cr#L61" target="_blank">View source</a>]
         
       </div>
     </div>

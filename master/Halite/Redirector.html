@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.29.0">
+<meta name="generator" content="Crystal Docs 0.30.0">
 
 
 <link href="../css/style.css" rel="stylesheet" type="text/css">
@@ -356,7 +356,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/redirector.cr#L2" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/redirector.cr#L2" target="_blank">
         halite/redirector.cr
       </a>
     
@@ -416,12 +416,12 @@ upon {STRICT_SENSITIVE_CODES}</p>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28request%3AHalite%3A%3ARequest%2Cresponse%3AHalite%3A%3AResponse%2Coptions%3AHalite%3A%3AOptions%29-class-method" class="signature"><strong>.new</strong>(request : Halite::Request, response : Halite::Response, options : Halite::Options)</a>
+        <a href="#new(request:Halite::Request,response:Halite::Response,options:Halite::Options)-class-method" class="signature"><strong>.new</strong>(request : Halite::Request, response : Halite::Response, options : Halite::Options)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28request%3AHalite%3A%3ARequest%2Cresponse%3AHalite%3A%3AResponse%2Cmax_hops%3D5%2Cstrict%3Dtrue%29-class-method" class="signature"><strong>.new</strong>(request : Halite::Request, response : Halite::Response, max_hops = <span class="n">5</span>, strict = <span class="n">true</span>)</a>
+        <a href="#new(request:Halite::Request,response:Halite::Response,max_hops=5,strict=true)-class-method" class="signature"><strong>.new</strong>(request : Halite::Request, response : Halite::Response, max_hops = <span class="n">5</span>, strict = <span class="n">true</span>)</a>
         
           <div class="summary"><p>Instance a new Redirector</p></div>
         
@@ -437,40 +437,40 @@ upon {STRICT_SENSITIVE_CODES}</p>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#avaiable%3F-instance-method" class="signature"><strong>#avaiable?</strong></a>
+        <a href="#avaiable?-instance-method" class="signature"><strong>#avaiable?</strong></a>
         
           <div class="summary"><p>Return <code>true</code> if it should redirect, else <code>false</code></p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#each_redirect%28%26block%3AHalite%3A%3ARequest-%3EHalite%3A%3AResponse%29-instance-method" class="signature"><strong>#each_redirect</strong>(&block : Halite::Request -> Halite::Response)</a>
+        <a href="#each_redirect(&block:Halite::Request-%3EHalite::Response)-instance-method" class="signature"><strong>#each_redirect</strong>(&block : Halite::Request -> Halite::Response)</a>
         
           <div class="summary"><p>Loop each redirect request with block call</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#endless_loop%3F-instance-method" class="signature"><strong>#endless_loop?</strong></a>
+        <a href="#endless_loop?-instance-method" class="signature"><strong>#endless_loop?</strong></a>
         
           <div class="summary"><p>Check if we got into an endless loop</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#max_hops%3AInt32-instance-method" class="signature"><strong>#max_hops</strong> : Int32</a>
+        <a href="#max_hops:Int32-instance-method" class="signature"><strong>#max_hops</strong> : Int32</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#perform%28%26block%3AHalite%3A%3ARequest-%3EHalite%3A%3AResponse%29%3AHalite%3A%3AResponse-instance-method" class="signature"><strong>#perform</strong>(&block : Halite::Request -> Halite::Response) : Halite::Response</a>
+        <a href="#perform(&block:Halite::Request-%3EHalite::Response):Halite::Response-instance-method" class="signature"><strong>#perform</strong>(&block : Halite::Request -> Halite::Response) : Halite::Response</a>
         
           <div class="summary"><p>Follows redirects until non-redirect response found</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#strict%3ABool-instance-method" class="signature"><strong>#strict</strong> : Bool</a>
+        <a href="#strict:Bool-instance-method" class="signature"><strong>#strict</strong> : Bool</a>
         
       </li>
     
@@ -512,13 +512,13 @@ upon {STRICT_SENSITIVE_CODES}</p>
         
         def self.<strong>new</strong>(request : <a href="../Halite/Request.html">Halite::Request</a>, response : <a href="../Halite/Response.html">Halite::Response</a>, options : <a href="../Halite/Options.html">Halite::Options</a>)
 
-        <a class="method-permalink" href="#new%28request%3AHalite%3A%3ARequest%2Cresponse%3AHalite%3A%3AResponse%2Coptions%3AHalite%3A%3AOptions%29-class-method">#</a>
+        <a class="method-permalink" href="#new(request:Halite::Request,response:Halite::Response,options:Halite::Options)-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/redirector.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/redirector.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -528,7 +528,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
         
         def self.<strong>new</strong>(request : <a href="../Halite/Request.html">Halite::Request</a>, response : <a href="../Halite/Response.html">Halite::Response</a>, max_hops = <span class="n">5</span>, strict = <span class="n">true</span>)
 
-        <a class="method-permalink" href="#new%28request%3AHalite%3A%3ARequest%2Cresponse%3AHalite%3A%3AResponse%2Cmax_hops%3D5%2Cstrict%3Dtrue%29-class-method">#</a>
+        <a class="method-permalink" href="#new(request:Halite::Request,response:Halite::Response,max_hops=5,strict=true)-class-method">#</a>
       </div>
       
         <div class="doc"><p>Instance a new Redirector</p></div>
@@ -536,7 +536,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/redirector.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/redirector.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -553,7 +553,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
         
         def <strong>avaiable?</strong>
 
-        <a class="method-permalink" href="#avaiable%3F-instance-method">#</a>
+        <a class="method-permalink" href="#avaiable?-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Return <code>true</code> if it should redirect, else <code>false</code></p></div>
@@ -561,7 +561,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/redirector.cr#L54" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/redirector.cr#L54" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -571,7 +571,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
         
         def <strong>each_redirect</strong>(&block : <a href="../Halite/Request.html">Halite::Request</a> -> <a href="../Halite/Response.html">Halite::Response</a>)
 
-        <a class="method-permalink" href="#each_redirect%28%26block%3AHalite%3A%3ARequest-%3EHalite%3A%3AResponse%29-instance-method">#</a>
+        <a class="method-permalink" href="#each_redirect(&block:Halite::Request-%3EHalite::Response)-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Loop each redirect request with block call</p></div>
@@ -579,7 +579,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/redirector.cr#L41" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/redirector.cr#L41" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -589,7 +589,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
         
         def <strong>endless_loop?</strong>
 
-        <a class="method-permalink" href="#endless_loop%3F-instance-method">#</a>
+        <a class="method-permalink" href="#endless_loop?-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Check if we got into an endless loop</p></div>
@@ -597,7 +597,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/redirector.cr#L80" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/redirector.cr#L80" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -607,13 +607,13 @@ upon {STRICT_SENSITIVE_CODES}</p>
         
         def <strong>max_hops</strong> : Int32
 
-        <a class="method-permalink" href="#max_hops%3AInt32-instance-method">#</a>
+        <a class="method-permalink" href="#max_hops:Int32-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/redirector.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/redirector.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -623,7 +623,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
         
         def <strong>perform</strong>(&block : <a href="../Halite/Request.html">Halite::Request</a> -> <a href="../Halite/Response.html">Halite::Response</a>) : <a href="../Halite/Response.html">Halite::Response</a>
 
-        <a class="method-permalink" href="#perform%28%26block%3AHalite%3A%3ARequest-%3EHalite%3A%3AResponse%29%3AHalite%3A%3AResponse-instance-method">#</a>
+        <a class="method-permalink" href="#perform(&block:Halite::Request-%3EHalite::Response):Halite::Response-instance-method">#</a>
       </div>
       
         <div class="doc"><p>Follows redirects until non-redirect response found</p></div>
@@ -631,7 +631,7 @@ upon {STRICT_SENSITIVE_CODES}</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/redirector.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/redirector.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -641,13 +641,13 @@ upon {STRICT_SENSITIVE_CODES}</p>
         
         def <strong>strict</strong> : Bool
 
-        <a class="method-permalink" href="#strict%3ABool-instance-method">#</a>
+        <a class="method-permalink" href="#strict:Bool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/391e846b2ea864e1ddd71d04789b778f3cfac30b/src/halite/redirector.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/315c7cde0abac0c0f84fe79c47f030870b4f39c3/src/halite/redirector.cr#L23" target="_blank">View source</a>]
         
       </div>
     </div>
