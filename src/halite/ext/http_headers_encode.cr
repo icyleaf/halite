@@ -43,7 +43,7 @@ module HTTP
     # ```
     def to_flat_h
       @hash.each_with_object({} of String => String | Array(String)) do |(key, values), obj|
-        obj[key.name] = values.size == 1 ? values[0].as(String) : values.as(Array(String))
+        obj[key.name] = values.is_a?(String) ? values.as(String) : (values.size == 1 ? values[0].as(String) : values.as(Array(String)))
       end
     end
   end
