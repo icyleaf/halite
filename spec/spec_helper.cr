@@ -85,11 +85,3 @@ SERVER = MockServer.new
 spawn do
   SERVER.listen
 end
-
-# Wait server a moment
-sleep 1.milliseconds
-
-# Close server
-at_exit do
-  SERVER.close
-end
