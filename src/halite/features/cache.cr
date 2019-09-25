@@ -144,7 +144,7 @@ module Halite
     private def cache_expired?(file)
       return false unless expires = @expires
       file_modified_time = cache_created_time(file)
-      Time.utc_now >= (file_modified_time + expires)
+      Time.utc >= (file_modified_time + expires)
     end
 
     private def cache_created_time(file)

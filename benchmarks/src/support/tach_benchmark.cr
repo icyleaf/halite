@@ -29,9 +29,9 @@ module Benchmark
           label, block = benchmark
           durations = [] of Float64
           @times.times do
-            before = Time.now
+            before = Time.utc
             block.call
-            after = Time.now
+            after = Time.utc
 
             durations << (after - before).total_seconds
           end

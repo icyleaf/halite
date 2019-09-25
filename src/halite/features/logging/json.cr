@@ -44,7 +44,7 @@ class Halite::Logging
     @response : Response? = nil
 
     def request(request)
-      @request_time = Time.now
+      @request_time = Time.utc
       @request = Request.new(request, @skip_request_body)
     end
 
@@ -62,7 +62,7 @@ class Halite::Logging
     private def raw
       elapsed : String? = nil
       if !@skip_benchmark && (request_time = @request_time)
-        elapsed = human_time(Time.now - request_time)
+        elapsed = human_time(Time.utc - request_time)
       end
 
       {
@@ -86,7 +86,7 @@ class Halite::Logging
           "headers"   => @request.headers.to_flat_h,
           "method"    => @request.verb,
           "url"       => @request.uri.to_s,
-          "timestamp" => Time::Format::RFC_3339.format(Time.now, 0),
+          "timestamp" => Time::Format::RFC_3339.format(Time.local, 0),
         }
       end
     end
@@ -102,7 +102,7 @@ class Halite::Logging
           "header"       => @response.headers.to_flat_h,
           "status_code"  => @response.status_code,
           "http_version" => @response.version,
-          "timestamp"    => Time::Format::RFC_3339.format(Time.now, 0),
+          "timestamp"    => Time::Format::RFC_3339.format(Time.local, 0),
         }
       end
     end
