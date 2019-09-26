@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.30.0">
+<meta name="generator" content="Crystal Docs 0.30.1">
 
 
 <link href="../css/style.css" rel="stylesheet" type="text/css">
@@ -367,7 +367,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/bd5d2df4e723cf4a08130478babe5abe6ee6e3da/src/halite/ext/http_headers_encode.cr#L3" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/6366aedec21a9d7b1f642172d82d1f6e16d865f5/src/halite/ext/http_headers_encode.cr#L3" target="_blank">
         halite/ext/http_headers_encode.cr
       </a>
     
@@ -474,7 +474,9 @@
         <a class="method-permalink" href="#encode(data:Hash(String,UNDERSCORE)%7CNamedTuple):HTTP::Headers-class-method">#</a>
       </div>
       
-        <div class="doc"><p>Returns the given key value pairs as HTTP Headers</p>
+        <div class="doc">
+          
+          <p>Returns the given key value pairs as HTTP Headers</p>
 
 <p>Every parameter added is directly written to an IO, where keys are properly escaped.</p>
 
@@ -486,12 +488,13 @@
 <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.encode({
   <span class="s">&quot;conTENT-type&quot;</span>: <span class="s">&quot;application/json&quot;</span>,
 })
-<span class="c"># =&gt; &quot;HTTP::Headers{&quot;Content-Type&quot; =&gt; &quot;application/json&quot;}&quot;</span></code></pre></div>
+<span class="c"># =&gt; &quot;HTTP::Headers{&quot;Content-Type&quot; =&gt; &quot;application/json&quot;}&quot;</span></code></pre>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/bd5d2df4e723cf4a08130478babe5abe6ee6e3da/src/halite/ext/http_headers_encode.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/6366aedec21a9d7b1f642172d82d1f6e16d865f5/src/halite/ext/http_headers_encode.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -504,12 +507,15 @@
         <a class="method-permalink" href="#encode(**data)-class-method">#</a>
       </div>
       
-        <div class="doc"><p>Same as <code><a href="../HTTP/Headers.html#encode(**data)-class-method">#encode</a></code></p></div>
+        <div class="doc">
+          
+          <p>Same as <code><a href="../HTTP/Headers.html#encode(**data)-class-method">#encode</a></code></p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/bd5d2df4e723cf4a08130478babe5abe6ee6e3da/src/halite/ext/http_headers_encode.cr#L33" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/6366aedec21a9d7b1f642172d82d1f6e16d865f5/src/halite/ext/http_headers_encode.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -527,16 +533,19 @@
         <a class="method-permalink" href="#to_flat_h-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Similar as <code>Hahs#to_h</code> but return <code>String</code> if it has one value of the key.</p>
+        <div class="doc">
+          
+          <p>Similar as <code>Hahs#to_h</code> but return <code>String</code> if it has one value of the key.</p>
 
 <pre><code>headers <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>{<span class="s">&quot;Accepts&quot;</span> => [<span class="s">&quot;application/json&quot;</span>, <span class="s">&quot;text/html&quot;</span>], <span class="s">&quot;Content-Type&quot;</span> => [<span class="s">&quot;text/html&quot;</span>]}
 headers[<span class="s">&quot;Accepts&quot;</span>]      <span class="c"># =&gt; [&quot;application/json&quot;, &quot;text/html&quot;]</span>
-headers[<span class="s">&quot;Content-Type&quot;</span>] <span class="c"># =&gt; &quot;text/html&quot;</span></code></pre></div>
+headers[<span class="s">&quot;Content-Type&quot;</span>] <span class="c"># =&gt; &quot;text/html&quot;</span></code></pre>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/bd5d2df4e723cf4a08130478babe5abe6ee6e3da/src/halite/ext/http_headers_encode.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/6366aedec21a9d7b1f642172d82d1f6e16d865f5/src/halite/ext/http_headers_encode.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>
