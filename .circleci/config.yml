@@ -1,8 +1,8 @@
 version: 2
 jobs:
-  test_crystal_0_30:
+  test_crystal_0_31:
     docker:
-      - image: "crystallang/crystal:0.30.0"
+      - image: "crystallang/crystal:0.31.0"
     environment:
       DOCS_PATH: "docs"
       GIT_USER: "icyleaf"
@@ -32,7 +32,7 @@ workflows:
   version: 2
   build_test_deploy:
     jobs:
-      - test_crystal_0_30:
+      - test_crystal_0_31:
           filters:
             branches:
               ignore:

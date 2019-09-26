@@ -25,7 +25,7 @@ class Halite::Logging
       end
 
       @logger.info message
-      @request_time = Time.now unless @skip_benchmark
+      @request_time = Time.utc unless @skip_benchmark
     end
 
     def response(response)
@@ -34,7 +34,7 @@ class Halite::Logging
         io << "| response |" << colorful_status_code(response.status_code)
         io << "| " << response.uri
         if !@skip_benchmark && (request_time = @request_time)
-          elapsed = Time.now - request_time
+          elapsed = Time.utc - request_time
           io << " | " << human_time(elapsed)
         end
 
