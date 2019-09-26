@@ -12,7 +12,7 @@ HTTP Requests with a chainable REST API, built-in sessions and middleware writte
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client)
 and Python's [requests](https://github.com/requests/requests).
 
-Build in Crystal version >= `v0.30.0`, this document valid with latest commit.
+Build in Crystal version >= `v0.31.0`, this document valid with latest commit.
 
 ## Index
 
