@@ -2,7 +2,7 @@
 
 DOCS_PATH="docs"
 TAGS=$(git tag -l)
-DEFAULT_VERSION=$(git tag --merged master | sort | tail -n 1)
+DEFAULT_VERSION=$(git tag --merged master | sort -V | tail -n 1)
 DEFAULT_VERSION=$(echo $DEFAULT_VERSION | awk '{gsub(/^v/, ""); print}')
 
 # Clean up
