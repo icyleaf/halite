@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.30.1">
+<meta name="generator" content="Crystal Docs 0.31.1">
 
-
-<link href="../css/style.css" rel="stylesheet" type="text/css">
-
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/doc.js"></script>
-<script type="text/javascript">
-  CrystalDoc.base_path = "../";
-</script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
 
   <meta id="repository-name" content="github.com/icyleaf/halite">
   <title>Halite::Options - github.com/icyleaf/halite</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "../";
+  </script>
 </head>
 <body>
 
@@ -340,11 +344,22 @@
 
 
 
-  <h2>Overview</h2>
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
 
   <p>Options class</p>
 
-<h3>Init with splats options</h3>
+<h3><a id="init-with-splats-options" class="anchor" href="#init-with-splats-options">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Init with splats options</h3>
 
 <pre><code>o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(
   headers: {
@@ -354,7 +369,11 @@
 o.headers.<span class="k">class</span> <span class="c"># =&gt; HTTP::Headers</span>
 o.cookies.<span class="k">class</span> <span class="c"># =&gt; HTTP::Cookies</span></code></pre>
 
-<h3>Set/Get timeout</h3>
+<h3><a id="setget-timeout" class="anchor" href="#setget-timeout">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Set/Get timeout</h3>
 
 <p>Set it with <code><a href="../Halite/Options.html#connect_timeout-instance-method">#connect_timeout</a></code>/<code><a href="../Halite/Options.html#read_timeout-instance-method">#read_timeout</a></code> keys, but get it call <code><a href="../Halite/Options/Timeout.html">Timeout</a></code> class.</p>
 
@@ -362,7 +381,11 @@ o.cookies.<span class="k">class</span> <span class="c"># =&gt; HTTP::Cookies</sp
 o.timeout.connect <span class="c"># =&gt; 30.0</span>
 o.timeout.read    <span class="c"># =&gt; 30.0</span></code></pre>
 
-<h3>Set/Get follow</h3>
+<h3><a id="setget-follow" class="anchor" href="#setget-follow">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Set/Get follow</h3>
 
 <p>Set it with <code><a href="../Halite/Options.html#follow:Follow-instance-method">#follow</a></code>/<code><a href="../Halite/Options.html#follow_strict-instance-method">#follow_strict</a></code> keys, but get it call <code><a href="../Halite/Options/Follow.html">Follow</a></code> class.</p>
 
@@ -383,7 +406,14 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
 
 
 
-  <h2>Defined in:</h2>
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
   
     
       <a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options/follow.cr#L2" target="_blank">
@@ -411,16 +441,23 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
 
 
 
-  <h2>Constructors</h2>
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(endpoint:String%7CURI?=nil,headers:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,cookies:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,params:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,form:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,json:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,raw:String?=nil,connect_timeout:Int32%7CFloat64%7CTime::Span?=nil,read_timeout:Int32%7CFloat64%7CTime::Span?=nil,follow:Int32?=nil,follow_strict:Bool?=nil,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method" class="signature"><strong>.new</strong>(endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, connect_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, follow : Int32? = <span class="n">nil</span>, follow_strict : Bool? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)</a>
+        <a href="#new(endpoint:String%7CURI?=nil,headers:Hash(String,_)%7CNamedTuple?=nil,cookies:Hash(String,_)%7CNamedTuple?=nil,params:Hash(String,_)%7CNamedTuple?=nil,form:Hash(String,_)%7CNamedTuple?=nil,json:Hash(String,_)%7CNamedTuple?=nil,raw:String?=nil,connect_timeout:Int32%7CFloat64%7CTime::Span?=nil,read_timeout:Int32%7CFloat64%7CTime::Span?=nil,follow:Int32?=nil,follow_strict:Bool?=nil,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method" class="signature"><strong>.new</strong>(endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, connect_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, follow : Int32? = <span class="n">nil</span>, follow_strict : Bool? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new(*,endpoint:String%7CURI?=nil,headers:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,cookies:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,params:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,form:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,json:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method" class="signature"><strong>.new</strong>(*, endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)</a>
+        <a href="#new(*,endpoint:String%7CURI?=nil,headers:Hash(String,_)%7CNamedTuple?=nil,cookies:Hash(String,_)%7CNamedTuple?=nil,params:Hash(String,_)%7CNamedTuple?=nil,form:Hash(String,_)%7CNamedTuple?=nil,json:Hash(String,_)%7CNamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method" class="signature"><strong>.new</strong>(*, endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)</a>
         
       </li>
     
@@ -435,7 +472,14 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
 
 
 
-  <h2>Instance Method Summary</h2>
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
@@ -550,7 +594,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#headers=(headers:Hash(String,UNDERSCORE)%7CNamedTuple)-instance-method" class="signature"><strong>#headers=</strong>(headers : Hash(String, UNDERSCORE) | NamedTuple)</a>
+        <a href="#headers=(headers:Hash(String,_)%7CNamedTuple)-instance-method" class="signature"><strong>#headers=</strong>(headers : Hash(String, _) | NamedTuple)</a>
         
           <div class="summary"><p>Set headers of request</p></div>
         
@@ -682,7 +726,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#with_cookies(cookies:Hash(String,UNDERSCORE)%7CNamedTuple):Halite::Options-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : Hash(String, UNDERSCORE) | NamedTuple) : Halite::Options</a>
+        <a href="#with_cookies(cookies:Hash(String,_)%7CNamedTuple):Halite::Options-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given cookies combined.</p></div>
         
@@ -736,7 +780,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#with_headers(headers:Hash(String,UNDERSCORE)%7CNamedTuple):Halite::Options-instance-method" class="signature"><strong>#with_headers</strong>(headers : Hash(String, UNDERSCORE) | NamedTuple) : Halite::Options</a>
+        <a href="#with_headers(headers:Hash(String,_)%7CNamedTuple):Halite::Options-instance-method" class="signature"><strong>#with_headers</strong>(headers : Hash(String, _) | NamedTuple) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given headers combined.</p></div>
         
@@ -794,14 +838,21 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
 </div>
 
 
-  <h2>Constructor Detail</h2>
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
   
-    <div class="entry-detail" id="new(endpoint:String|URI?=nil,headers:Hash(String,UNDERSCORE)|NamedTuple?=nil,cookies:Hash(String,UNDERSCORE)|NamedTuple?=nil,params:Hash(String,UNDERSCORE)|NamedTuple?=nil,form:Hash(String,UNDERSCORE)|NamedTuple?=nil,json:Hash(String,UNDERSCORE)|NamedTuple?=nil,raw:String?=nil,connect_timeout:Int32|Float64|Time::Span?=nil,read_timeout:Int32|Float64|Time::Span?=nil,follow:Int32?=nil,follow_strict:Bool?=nil,tls:OpenSSL::SSL::Context::Client?=nil,features={}ofString=&gt;Feature)-class-method">
+    <div class="entry-detail" id="new(endpoint:String|URI?=nil,headers:Hash(String,_)|NamedTuple?=nil,cookies:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,connect_timeout:Int32|Float64|Time::Span?=nil,read_timeout:Int32|Float64|Time::Span?=nil,follow:Int32?=nil,follow_strict:Bool?=nil,tls:OpenSSL::SSL::Context::Client?=nil,features={}ofString=&gt;Feature)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, connect_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, follow : Int32? = <span class="n">nil</span>, follow_strict : Bool? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)
+        def self.<strong>new</strong>(endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, connect_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, follow : Int32? = <span class="n">nil</span>, follow_strict : Bool? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)
 
-        <a class="method-permalink" href="#new(endpoint:String%7CURI?=nil,headers:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,cookies:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,params:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,form:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,json:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,raw:String?=nil,connect_timeout:Int32%7CFloat64%7CTime::Span?=nil,read_timeout:Int32%7CFloat64%7CTime::Span?=nil,follow:Int32?=nil,follow_strict:Bool?=nil,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method">#</a>
+        <a class="method-permalink" href="#new(endpoint:String%7CURI?=nil,headers:Hash(String,_)%7CNamedTuple?=nil,cookies:Hash(String,_)%7CNamedTuple?=nil,params:Hash(String,_)%7CNamedTuple?=nil,form:Hash(String,_)%7CNamedTuple?=nil,json:Hash(String,_)%7CNamedTuple?=nil,raw:String?=nil,connect_timeout:Int32%7CFloat64%7CTime::Span?=nil,read_timeout:Int32%7CFloat64%7CTime::Span?=nil,follow:Int32?=nil,follow_strict:Bool?=nil,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method">#</a>
       </div>
       
       <br/>
@@ -812,12 +863,12 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </div>
     </div>
   
-    <div class="entry-detail" id="new(*,endpoint:String|URI?=nil,headers:Hash(String,UNDERSCORE)|NamedTuple?=nil,cookies:Hash(String,UNDERSCORE)|NamedTuple?=nil,params:Hash(String,UNDERSCORE)|NamedTuple?=nil,form:Hash(String,UNDERSCORE)|NamedTuple?=nil,json:Hash(String,UNDERSCORE)|NamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features={}ofString=&gt;Feature)-class-method">
+    <div class="entry-detail" id="new(*,endpoint:String|URI?=nil,headers:Hash(String,_)|NamedTuple?=nil,cookies:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features={}ofString=&gt;Feature)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(*, endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, UNDERSCORE) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)
+        def self.<strong>new</strong>(*, endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)
 
-        <a class="method-permalink" href="#new(*,endpoint:String%7CURI?=nil,headers:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,cookies:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,params:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,form:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,json:Hash(String,UNDERSCORE)%7CNamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method">#</a>
+        <a class="method-permalink" href="#new(*,endpoint:String%7CURI?=nil,headers:Hash(String,_)%7CNamedTuple?=nil,cookies:Hash(String,_)%7CNamedTuple?=nil,params:Hash(String,_)%7CNamedTuple?=nil,form:Hash(String,_)%7CNamedTuple?=nil,json:Hash(String,_)%7CNamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method">#</a>
       </div>
       
       <br/>
@@ -849,7 +900,14 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
 
 
 
-  <h2>Instance Method Detail</h2>
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
   
     <div class="entry-detail" id="clear!:Halite::Options-instance-method">
       <div class="signature">
@@ -925,7 +983,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L74" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -941,7 +999,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -979,7 +1037,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -995,7 +1053,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L76" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1032,7 +1090,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L84" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1048,7 +1106,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L88" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1064,7 +1122,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L76" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1080,7 +1138,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L80" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1159,7 +1217,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L80" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1175,7 +1233,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L84" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1191,17 +1249,17 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L71" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="headers=(headers:Hash(String,UNDERSCORE)|NamedTuple)-instance-method">
+    <div class="entry-detail" id="headers=(headers:Hash(String,_)|NamedTuple)-instance-method">
       <div class="signature">
         
-        def <strong>headers=</strong>(headers : Hash(String, UNDERSCORE) | NamedTuple)
+        def <strong>headers=</strong>(headers : Hash(String, _) | NamedTuple)
 
-        <a class="method-permalink" href="#headers=(headers:Hash(String,UNDERSCORE)%7CNamedTuple)-instance-method">#</a>
+        <a class="method-permalink" href="#headers=(headers:Hash(String,_)%7CNamedTuple)-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1228,7 +1286,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L77" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L71" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1244,7 +1302,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L81" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L79" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1260,7 +1318,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L85" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L79" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1362,7 +1420,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L79" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1378,7 +1436,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L83" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1394,7 +1452,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L82" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L80" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1410,7 +1468,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L86" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L80" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1468,7 +1526,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L75" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L73" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1484,7 +1542,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L79" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L73" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1500,7 +1558,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L77" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1516,7 +1574,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L81" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/785614874fb4c6459185fdf4a8a01eb98242fcea/src/halite/options.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1605,12 +1663,12 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       </div>
     </div>
   
-    <div class="entry-detail" id="with_cookies(cookies:Hash(String,UNDERSCORE)|NamedTuple):Halite::Options-instance-method">
+    <div class="entry-detail" id="with_cookies(cookies:Hash(String,_)|NamedTuple):Halite::Options-instance-method">
       <div class="signature">
         
-        def <strong>with_cookies</strong>(cookies : Hash(String, UNDERSCORE) | NamedTuple) : <a href="../Halite/Options.html">Halite::Options</a>
+        def <strong>with_cookies</strong>(cookies : Hash(String, _) | NamedTuple) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_cookies(cookies:Hash(String,UNDERSCORE)%7CNamedTuple):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#with_cookies(cookies:Hash(String,_)%7CNamedTuple):Halite::Options-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1775,12 +1833,12 @@ options.with_follow(<span class="n">3</span>)</code></pre>
       </div>
     </div>
   
-    <div class="entry-detail" id="with_headers(headers:Hash(String,UNDERSCORE)|NamedTuple):Halite::Options-instance-method">
+    <div class="entry-detail" id="with_headers(headers:Hash(String,_)|NamedTuple):Halite::Options-instance-method">
       <div class="signature">
         
-        def <strong>with_headers</strong>(headers : Hash(String, UNDERSCORE) | NamedTuple) : <a href="../Halite/Options.html">Halite::Options</a>
+        def <strong>with_headers</strong>(headers : Hash(String, _) | NamedTuple) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_headers(headers:Hash(String,UNDERSCORE)%7CNamedTuple):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#with_headers(headers:Hash(String,_)%7CNamedTuple):Halite::Options-instance-method">#</a>
       </div>
       
         <div class="doc">
