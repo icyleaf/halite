@@ -108,7 +108,7 @@ describe Halite::Client do
               data << JSON.parse(content)
             end
           else
-            expect_raises Exception, "Nil assertion failed" do
+            expect_raises NilAssertionError do
               response.body_io
             end
           end

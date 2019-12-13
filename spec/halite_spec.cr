@@ -105,6 +105,18 @@ describe Halite do
             end
           end
         end
+
+        [nil, 10, {connect: 2, read: 2, write: 2}].each do |timeout|
+          context "with `.timeout(#{timeout.inspect})`" do
+            it "writes the whole body" do
+              body =  "“" * 1_000_000
+              response = Halite.post SERVER.api("echo-body"), raw: body
+
+              response.to_s.should eq(body)
+              response.content_length.should eq(body.bytesize)
+            end
+          end
+        end
       end
     end
   end
@@ -338,7 +350,7 @@ describe Halite do
               data << JSON.parse(content)
             end
           else
-            expect_raises Exception, "Nil assertion failed" do
+            expect_raises NilAssertionError do
               response.body_io
             end
           end
@@ -467,9 +479,10 @@ describe Halite do
   describe ".timeout" do
     context "without timeout type" do
       it "sets given timeout options" do
-        client = Halite.timeout(connect: 12, read: 6)
-        client.options.timeout.read.should eq(6)
+        client = Halite.timeout(connect: 12, read: 6, write: 36)
         client.options.timeout.connect.should eq(12)
+        client.options.timeout.read.should eq(6)
+        client.options.timeout.write.should eq(36)
       end
     end
   end

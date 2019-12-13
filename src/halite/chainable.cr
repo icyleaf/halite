@@ -212,14 +212,16 @@ module Halite
     # How long to wait for the server to send data before giving up, as a int, float or time span.
     # The timeout value will be applied to both the connect and the read timeouts.
     #
+    # Set `nil` to timeout to ignore timeout.
+    #
     # ```
     # Halite.timeout(5.5).get("http://httpbin.org/get")
     # # Or
     # Halite.timeout(2.minutes)
     #   .post("http://httpbin.org/post", form: {file: "file.txt"})
     # ```
-    def timeout(connect_and_read : Int32 | Float64 | Time::Span) : Halite::Client
-      timeout(connect_and_read, connect_and_read)
+    def timeout(timeout : Int32? | Float64? | Time::Span?)
+      timeout ? timeout(timeout, timeout, timeout) : branch
     end
 
     # Adds a timeout to the request.
@@ -228,14 +230,16 @@ module Halite
     # The timeout value will be applied to both the connect and the read timeouts.
     #
     # ```
-    # Halite.timeout(3, 3.minutes)
+    # Halite.timeout(3, 3.minutes, 5)
     #   .post("http://httpbin.org/post", form: {file: "file.txt"})
     # # Or
-    # Halite.timeout(3.04, 64)
+    # Halite.timeout(3.04, 64, 10.0)
     #   .get("http://httpbin.org/get")
     # ```
-    def timeout(connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil) : Halite::Client
-      branch(default_options.with_timeout(connect, read))
+    def timeout(connect : (Int32 | Float64 | Time::Span)? = nil,
+                read : (Int32 | Float64 | Time::Span)? = nil,
+                write : (Int32 | Float64 | Time::Span)? = nil)
+      branch(default_options.with_timeout(connect, read, write))
     end
 
     # Returns `Options` self with automatically following redirects.
