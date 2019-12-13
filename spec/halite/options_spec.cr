@@ -36,6 +36,7 @@ private def test_options
     raw: "title=h4",
     connect_timeout: 1,
     read_timeout: 3.2,
+    write_timeout: 5,
     follow: 2,
     follow_strict: false,
     tls: OpenSSL::SSL::Context::Client.new,
@@ -61,8 +62,10 @@ describe Halite::Options do
       options.timeout.should be_a(Halite::Timeout)
       options.timeout.connect.should be_nil
       options.timeout.read.should be_nil
+      options.timeout.write.should be_nil
       options.connect_timeout.should be_nil
       options.read_timeout.should be_nil
+      options.write_timeout.should be_nil
 
       options.follow.should be_a(Halite::Follow)
       options.follow.hops.should eq(Halite::Follow::DEFAULT_HOPS)
@@ -89,6 +92,8 @@ describe Halite::Options do
       options.headers.should be_a(HTTP::Headers)
       options.headers["Private-Token"].should eq("token")
       options.timeout.connect.should eq(3.2)
+      options.timeout.read.should be_nil
+      options.timeout.write.should be_nil
     end
 
     it "should initial with quick setup" do
@@ -104,7 +109,9 @@ describe Halite::Options do
       options.endpoint.should eq(endpoint)
       options.headers.should be_a(HTTP::Headers)
       options.headers["Private-Token"].should eq("token")
-      options.timeout.connect.should eq(60)
+      options.timeout.connect.should eq(60.0)
+      options.timeout.read.should be_nil
+      options.timeout.write.should be_nil
     end
 
     it "should overwrite default headers" do
@@ -140,13 +147,16 @@ describe Halite::Options do
         }
       ))
 
+      # TODO: write_timeout
       old_options.endpoint.should eq(endpoint)
       old_options.headers.should eq(HTTP::Headers{"User-Agent" => "new_spec"})
       old_options.cookies.size.should eq(0)
       old_options.timeout.connect.should eq(2)
       old_options.timeout.read.should be_nil
+      old_options.timeout.write.should be_nil
       old_options.connect_timeout.should eq(2)
       old_options.read_timeout.should be_nil
+      old_options.write_timeout.should be_nil
       old_options.follow.hops.should eq(1)
       old_options.follow.strict.should be_true
       old_options.params.should eq({"title" => "1"})
@@ -163,8 +173,10 @@ describe Halite::Options do
       options.cookies.size.should eq(0)
       options.timeout.connect.should eq(2)
       options.timeout.read.should be_nil
+      options.timeout.write.should be_nil
       options.connect_timeout.should eq(2)
       options.read_timeout.should be_nil
+      options.write_timeout.should be_nil
       options.follow.hops.should eq(1)
       options.follow.strict.should be_true
       options.params.should eq({"title" => "1"})
@@ -205,6 +217,7 @@ describe Halite::Options do
       old_options.cookies.size.should eq(0)
       old_options.timeout.connect.should eq(1)
       old_options.timeout.read.should eq(3.2)
+      old_options.timeout.write.should eq(5.0)
       old_options.follow.hops.should eq(2)
       old_options.follow.strict.should be_false
       old_options.params.should eq({"title" => "h1"})
@@ -221,8 +234,10 @@ describe Halite::Options do
       options.cookies.size.should eq(0)
       options.timeout.connect.should eq(2)
       options.timeout.read.should be_nil
+      options.timeout.write.should be_nil
       options.connect_timeout.should eq(2)
       options.read_timeout.should be_nil
+      options.write_timeout.should be_nil
       options.follow.hops.should eq(1)
       options.follow.strict.should be_true
       options.params.should eq({"title" => "1"})
@@ -261,8 +276,10 @@ describe Halite::Options do
     options.timeout.should be_a(Halite::Timeout)
     options.timeout.connect.should be_nil
     options.timeout.read.should be_nil
+    options.timeout.write.should be_nil
     options.connect_timeout.should be_nil
     options.read_timeout.should be_nil
+    options.write_timeout.should be_nil
 
     options.follow.should be_a(Halite::Follow)
     options.follow.hops.should eq(Halite::Follow::DEFAULT_HOPS)
@@ -299,8 +316,9 @@ describe Halite::Options do
     timeout = Halite::Timeout.new(10, 20)
     new_options.timeout = timeout
     new_options.timeout.should eq(timeout)
-    options.timeout.read.should eq(test_options.timeout.read)
     options.timeout.connect.should eq(test_options.timeout.connect)
+    options.timeout.read.should eq(test_options.timeout.read)
+    options.timeout.write.should eq(test_options.timeout.write)
 
     follow = Halite::Follow.new(6, true)
     new_options.follow = follow
@@ -424,11 +442,12 @@ describe Halite::Options do
 
   describe "#with_timeout" do
     it "should overwrite timeout" do
-      options = Halite::Options.new(timeout: Halite::Timeout.new(connect: 1, read: 3))
-      options = options.with_timeout(read: 4.minutes, connect: 1.2)
+      options = Halite::Options.new(timeout: Halite::Timeout.new(connect: 1, read: 3, write: 4))
+      options = options.with_timeout(read: 4.minutes, connect: 1.2, write: 10)
 
       options.timeout.connect.should eq(1.2)
       options.timeout.read.should eq(4.minutes.to_f)
+      options.timeout.write.should eq(10.0)
     end
   end
 
@@ -530,6 +549,7 @@ describe Halite::Options do
 
       options.timeout.connect.nil?.should be_true
       options.timeout.read.nil?.should be_true
+      options.timeout.write.nil?.should be_true
 
       options.follow.hops.should eq(Halite::Follow::DEFAULT_HOPS)
       options.follow.strict.should eq(Halite::Follow::STRICT)
@@ -562,6 +582,25 @@ describe Halite::Options do
       end
     end
 
+    context "connect_timeout alias to timeout.connect" do
+      it "getter" do
+        options = Halite::Options.new(timeout: Halite::Timeout.new(connect: 34))
+        options.timeout.connect.should eq(34)
+        options.connect_timeout.should eq(34)
+      end
+
+      it "setter" do
+        options = Halite::Options.new
+
+        options.timeout.connect = 12
+        options.connect_timeout.should eq(12)
+        options.timeout.connect.should eq(12)
+
+        options.connect_timeout = 21
+        options.connect_timeout.should eq(21)
+        options.timeout.connect.should eq(21)
+      end
+    end
 
     context "read_timeout alias to timeout.read" do
       it "getter" do
@@ -583,23 +622,23 @@ describe Halite::Options do
       end
     end
 
-    context "connect_timeout alias to timeout.connect" do
+    context "write_timeout alias to timeout.write" do
       it "getter" do
-        options = Halite::Options.new(timeout: Halite::Timeout.new(connect: 34))
-        options.timeout.connect.should eq(34)
-        options.connect_timeout.should eq(34)
+        options = Halite::Options.new(timeout: Halite::Timeout.new(write: 56))
+        options.timeout.write.should eq(56)
+        options.write_timeout.should eq(56)
       end
 
       it "setter" do
         options = Halite::Options.new
 
-        options.timeout.connect = 12
-        options.connect_timeout.should eq(12)
-        options.timeout.connect.should eq(12)
+        options.timeout.write = 12
+        options.write_timeout.should eq(12)
+        options.timeout.write.should eq(12)
 
-        options.connect_timeout = 21
-        options.connect_timeout.should eq(21)
-        options.timeout.connect.should eq(21)
+        options.write_timeout = 21
+        options.write_timeout.should eq(21)
+        options.timeout.write.should eq(21)
       end
     end
 

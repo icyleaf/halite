@@ -18,12 +18,14 @@ module Halite
   #
   # ### Set/Get timeout
   #
-  # Set it with `connect_timeout`/`read_timeout` keys, but get it call `Timeout` class.
+  # Set it with `connect_timeout`/`read_timeout`/`write_timeout` keys,
+  # but get it call `Timeout` class.
   #
   # ```
   # o = Options.new(connect_timeout: 30, read_timeout: 30)
   # o.timeout.connect # => 30.0
   # o.timeout.read    # => 30.0
+  # o.timeout.write   # => nil
   # ```
   #
   # ### Set/Get follow
@@ -45,6 +47,7 @@ module Halite
                  raw : String? = nil,
                  connect_timeout : (Int32 | Float64 | Time::Span)? = nil,
                  read_timeout : (Int32 | Float64 | Time::Span)? = nil,
+                 write_timeout : (Int32 | Float64 | Time::Span)? = nil,
                  follow : Int32? = nil,
                  follow_strict : Bool? = nil,
                  tls : OpenSSL::SSL::Context::Client? = nil,
@@ -57,7 +60,7 @@ module Halite
         form: form,
         json: json,
         raw: raw,
-        timeout: Timeout.new(connect: connect_timeout, read: read_timeout),
+        timeout: Timeout.new(connect: connect_timeout, read: read_timeout, write: write_timeout),
         follow: Follow.new(hops: follow, strict: follow_strict),
         tls: tls,
         features: features
@@ -179,9 +182,13 @@ module Halite
     end
 
     # Returns `Options` self with given connect, read timeout.
-    def with_timeout(connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil) : Halite::Options
+    def with_timeout(connect : (Int32 | Float64 | Time::Span)? = nil,
+                     read : (Int32 | Float64 | Time::Span)? = nil,
+                     write : (Int32 | Float64 | Time::Span)? = nil) : Halite::Options
       @timeout.connect = connect.to_f if connect
       @timeout.read = read.to_f if read
+      @timeout.write = write.to_f if write
+
       self
     end
 
@@ -253,6 +260,16 @@ module Halite
       @timeout.read = timeout
     end
 
+    # Alias `Timeout.write`
+    def write_timeout
+      @timeout.write
+    end
+
+    # Alias `Timeout.write=`
+    def write_timeout=(timeout : Int32 | Float64 | Time::Span)
+      @timeout.write = timeout
+    end
+
     # Alias `Follow.hops=`
     def follow=(hops : Int32)
       @follow.hops = hops
@@ -302,7 +319,7 @@ module Halite
         @cookies << cookie
       end if other.cookies != @cookies
 
-      if other.timeout.connect || other.timeout.read
+      if other.timeout.connect || other.timeout.read || other.timeout.write
         @timeout = other.timeout
       end
 

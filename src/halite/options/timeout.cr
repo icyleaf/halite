@@ -4,10 +4,14 @@ module Halite
     struct Timeout
       getter connect : Float64?
       getter read : Float64?
+      getter write : Float64?
 
-      def initialize(connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil)
+      def initialize(connect : (Int32 | Float64 | Time::Span)? = nil,
+                     read : (Int32 | Float64 | Time::Span)? = nil,
+                     write : (Int32 | Float64 | Time::Span)? = nil)
         @connect = timeout_value(connect)
         @read = timeout_value(read)
+        @write = timeout_value(write)
       end
 
       def connect=(connect : (Int32 | Float64 | Time::Span)?)
@@ -16,6 +20,10 @@ module Halite
 
       def read=(read : (Int32 | Float64 | Time::Span)?)
         @read = timeout_value(read)
+      end
+
+      def write=(write : (Int32 | Float64 | Time::Span)?)
+        @write = timeout_value(write)
       end
 
       private def timeout_value(value : (Int32 | Float64 | Time::Span)? = nil) : Float64?
