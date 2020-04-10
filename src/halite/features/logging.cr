@@ -1,4 +1,4 @@
-require "logger"
+require "log"
 require "colorize"
 require "file_utils"
 
@@ -44,7 +44,7 @@ module Halite
         new(skip_request_body, skip_response_body, skip_benchmark, colorize, io)
       end
 
-      setter logger : Logger
+      setter logger : Log
       getter skip_request_body : Bool
       getter skip_response_body : Bool
       getter skip_benchmark : Bool
@@ -54,18 +54,18 @@ module Halite
 
       def initialize(@skip_request_body = false, @skip_response_body = false,
                      @skip_benchmark = false, @colorize = true, @io : IO = STDOUT)
-        @logger = Logger.new(@io, ::Logger::DEBUG, default_formatter, "halite")
+        backend = Log::IOBackend.new(@io)
+        backend.formatter = default_formatter
+        @logger = Log.new("halite", backend, :debug)
         Colorize.enabled = @colorize
       end
-
-      forward_missing_to @logger
 
       abstract def request(request)
       abstract def response(response)
 
       protected def default_formatter
-        Logger::Formatter.new do |_, datetime, _, message, io|
-          io << datetime.to_s << " " << message
+        Log::Formatter.new do |entry, io|
+          io << entry.message
         end
       end
 

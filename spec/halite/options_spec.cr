@@ -12,18 +12,6 @@ private class SimpleFeature < Halite::Feature
   Halite.register_feature "simple", self
 end
 
-private class SimpleLogger < Halite::Logging::Abstract
-  def request(request)
-    @logger.info "request"
-  end
-
-  def response(response)
-    @logger.info "response"
-  end
-
-  Halite::Logging.register "simple", self
-end
-
 private def test_options
   Halite::Options.new(
     endpoint: "https://spec.example.com",

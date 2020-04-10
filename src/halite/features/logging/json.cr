@@ -21,22 +21,22 @@ class Halite::Logging
   # ```
   # {
   #   "created_at": "2018-08-31T16:53:57+08:00:00",
-  #   "entry": {
+  #   "entry":      {
   #     "request": {
-  #       "body": "",
-  #       "headers": { ... },
-  #       "method": "GET",
-  #       "url": "http://httpbin.org/anything",
-  #       "timestamp": "2018-08-31T16:53:59+08:00:00"
+  #       "body":      "",
+  #       "headers":   {...},
+  #       "method":    "GET",
+  #       "url":       "http://httpbin.org/anything",
+  #       "timestamp": "2018-08-31T16:53:59+08:00:00",
   #     },
   #     "response": {
-  #       "body": false,
-  #       "header": { ... },
-  #       "status_code": 200,
+  #       "body":         false,
+  #       "header":       {...},
+  #       "status_code":  200,
   #       "http_version": "HTTP/1.1",
-  #       "timestamp": "2018-08-31T16:53:59+08:00:00"
-  #     }
-  #   }
+  #       "timestamp":    "2018-08-31T16:53:59+08:00:00",
+  #     },
+  #   },
   # }
   # ```
   class JSON < Abstract
@@ -50,13 +50,7 @@ class Halite::Logging
 
     def response(response)
       @response = Response.new(response, @skip_response_body)
-      @logger.info raw
-    end
-
-    def default_formatter
-      ::Logger::Formatter.new do |_, _, _, message, io|
-        io << message
-      end
+      @logger.info { raw }
     end
 
     private def raw
