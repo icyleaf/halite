@@ -370,22 +370,22 @@
 
 <pre><code>{
   <span class="s">&quot;created_at&quot;</span>: <span class="s">&quot;2018-08-31T16:53:57+08:00:00&quot;</span>,
-  <span class="s">&quot;entry&quot;</span>: {
+  <span class="s">&quot;entry&quot;</span>:      {
     <span class="s">&quot;request&quot;</span>: {
-      <span class="s">&quot;body&quot;</span>: <span class="s">&quot;&quot;</span>,
-      <span class="s">&quot;headers&quot;</span>: { ... },
-      <span class="s">&quot;method&quot;</span>: <span class="s">&quot;GET&quot;</span>,
-      <span class="s">&quot;url&quot;</span>: <span class="s">&quot;http://httpbin.org/anything&quot;</span>,
-      <span class="s">&quot;timestamp&quot;</span>: <span class="s">&quot;2018-08-31T16:53:59+08:00:00&quot;</span>
+      <span class="s">&quot;body&quot;</span>:      <span class="s">&quot;&quot;</span>,
+      <span class="s">&quot;headers&quot;</span>:   {...},
+      <span class="s">&quot;method&quot;</span>:    <span class="s">&quot;GET&quot;</span>,
+      <span class="s">&quot;url&quot;</span>:       <span class="s">&quot;http://httpbin.org/anything&quot;</span>,
+      <span class="s">&quot;timestamp&quot;</span>: <span class="s">&quot;2018-08-31T16:53:59+08:00:00&quot;</span>,
     },
     <span class="s">&quot;response&quot;</span>: {
-      <span class="s">&quot;body&quot;</span>: <span class="n">false</span>,
-      <span class="s">&quot;header&quot;</span>: { ... },
-      <span class="s">&quot;status_code&quot;</span>: <span class="n">200</span>,
+      <span class="s">&quot;body&quot;</span>:         <span class="n">false</span>,
+      <span class="s">&quot;header&quot;</span>:       {...},
+      <span class="s">&quot;status_code&quot;</span>:  <span class="n">200</span>,
       <span class="s">&quot;http_version&quot;</span>: <span class="s">&quot;HTTP/1.1&quot;</span>,
-      <span class="s">&quot;timestamp&quot;</span>: <span class="s">&quot;2018-08-31T16:53:59+08:00:00&quot;</span>
-    }
-  }
+      <span class="s">&quot;timestamp&quot;</span>:    <span class="s">&quot;2018-08-31T16:53:59+08:00:00&quot;</span>,
+    },
+  },
 }</code></pre>
 
 
@@ -411,7 +411,7 @@
   </h2>
   
     
-      <a href="https://github.com/icyleaf/halite/blob/34303929644849842aa77fb3b4c0bcc8bca0f3f5/src/halite/features/logging/json.cr#L42" target="_blank">
+      <a href="https://github.com/icyleaf/halite/blob/04d713ce3a8ca4a57262e9cf3b97aa7f2bf86c77/src/halite/features/logging/json.cr#L42" target="_blank">
         halite/features/logging/json.cr
       </a>
     
@@ -435,11 +435,6 @@
     Instance Method Summary
   </h2>
   <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#default_formatter-instance-method" class="signature"><strong>#default_formatter</strong></a>
-        
-      </li>
     
       <li class="entry-summary">
         <a href="#request(request)-instance-method" class="signature"><strong>#request</strong>(request)</a>
@@ -469,8 +464,8 @@
     colorize</a>, 
     
   
-    <a href="../../Halite/Logging/Abstract.html#logger=(logger:Logger)-instance-method" class="tooltip">
-      <span>logger=(logger : Logger)</span>
+    <a href="../../Halite/Logging/Abstract.html#logger=(logger:Log)-instance-method" class="tooltip">
+      <span>logger=(logger : Log)</span>
     logger=</a>, 
     
   
@@ -553,22 +548,6 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="default_formatter-instance-method">
-      <div class="signature">
-        
-        def <strong>default_formatter</strong>
-
-        <a class="method-permalink" href="#default_formatter-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/halite/blob/34303929644849842aa77fb3b4c0bcc8bca0f3f5/src/halite/features/logging/json.cr#L56" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="request(request)-instance-method">
       <div class="signature">
         
@@ -580,7 +559,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/34303929644849842aa77fb3b4c0bcc8bca0f3f5/src/halite/features/logging/json.cr#L46" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/04d713ce3a8ca4a57262e9cf3b97aa7f2bf86c77/src/halite/features/logging/json.cr#L46" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -596,7 +575,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/halite/blob/34303929644849842aa77fb3b4c0bcc8bca0f3f5/src/halite/features/logging/json.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/halite/blob/04d713ce3a8ca4a57262e9cf3b97aa7f2bf86c77/src/halite/features/logging/json.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
