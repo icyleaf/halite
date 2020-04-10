@@ -395,6 +395,8 @@ module Halite
         URI.parse(endpoint)
       when URI
         endpoint.as(URI)
+      else
+        nil
       end
     end
 

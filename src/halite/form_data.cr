@@ -59,6 +59,8 @@ module Halite
           v.any? do |vv|
             next true if vv.is_a?(File)
           end
+        else
+          false
         end
       end
     end
