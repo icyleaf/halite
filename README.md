@@ -12,7 +12,7 @@ HTTP Requests with a chainable REST API, built-in sessions and middleware writte
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client)
 and Python's [requests](https://github.com/requests/requests).
 
-Build in Crystal version >= `v0.31.0`, this document valid with latest commit.
+Build in Crystal version >= `v0.34.0`, this document valid with latest commit.
 
 ## Index
 
@@ -757,11 +757,11 @@ Here has two methods must be implement: `#request` and `#response`.
 ```crystal
 class CustomLogging < Halite::Logging::Abstract
   def request(request)
-    @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
+    @logger.info { "| >> | %s | %s %s" % [request.verb, request.uri, request.body] }
   end
 
   def response(response)
-    @logger.info "| << | %s | %s %s" % [response.status_code, response.uri, response.content_type]
+    @logger.info { "| << | %s | %s %s" % [response.status_code, response.uri, response.content_type] }
   end
 end
 
