@@ -18,7 +18,6 @@ Build in Crystal version >= `v0.31.0`, this document valid with latest commit.
 
 <!-- TOC -->
 
-- [Index](#index)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Making Requests](#making-requests)
@@ -43,11 +42,17 @@ Build in Crystal version >= `v0.31.0`, this document valid with latest commit.
     - [Binary Data](#binary-data)
   - [Error Handling](#error-handling)
     - [Raise for status code](#raise-for-status-code)
+- [Middleware](#middleware)
+  - [Write a simple feature](#write-a-simple-feature)
+  - [Write a interceptor](#write-a-interceptor)
 - [Advanced Usage](#advanced-usage)
   - [Configuring](#configuring)
   - [Endpoint](#endpoint)
   - [Sessions](#sessions)
-
+  - [Streaming Requests](#streaming-requests)
+  - [Logging](#logging)
+  - [Local Cache](#local-cache)
+  - [Link Headers](#link-headers)
 <!-- /TOC -->
 
 ## Installation
@@ -475,6 +480,100 @@ end
 # => ""
 ```
 
+## Middleware
+
+Halite now has middleware (a.k.a features) support providing a simple way to plug in intermediate custom logic
+in your HTTP client, allowing you to monitor outgoing requests, incoming responses, and use it as an interceptor.
+
+Available features:
+
+- [Logging](#logging) (Yes, logging is based on feature, cool, aha!)
+- [Local Cache](#local-cache) (local storage, speed up in development)
+
+### Write a simple feature
+
+Let's implement simple middleware that prints each request:
+
+```crystal
+class RequestMonister < Halite::Feature
+  @label : String
+  def initialize(**options)
+    @label = options.fetch(:label, "")
+  end
+
+  def request(request) : Halite::Request
+    puts @label
+    puts request.verb
+    puts request.uri
+    puts request.body
+
+    request
+  end
+
+  Halite.register_feature "request_monster", self
+end
+```
+
+Then use it in Halite:
+
+```crystal
+Halite.use("request_monster", label: "testing")
+      .post("http://httpbin.org/post", form: {name: "foo"})
+
+# Or configure to client
+client = Halite::Client.new do
+  use "request_monster", label: "testing"
+end
+
+client.post("http://httpbin.org/post", form: {name: "foo"})
+
+# => testing
+# => POST
+# => http://httpbin.org/post
+# => name=foo
+```
+
+### Write a interceptor
+
+Halite's killer feature is the **interceptor**, Use `Halite::Feature::Chain` to process with two result:
+
+- `next`: perform and run next interceptor
+- `return`: perform and return
+
+So, you can intercept and turn to the following registered features.
+
+```crystal
+class AlwaysNotFound < Halite::Feature
+  def intercept(chain)
+    response = chain.perform
+    response = Halite::Response.new(chain.request.uri, 404, response.body, response.headers)
+    chain.next(response)
+  end
+
+  Halite.register_feature "404", self
+end
+
+class PoweredBy < Halite::Feature
+  def intercept(chain)
+    if response = chain.response
+      response.headers["X-Powered-By"] = "Halite"
+      chain.return(response)
+    else
+      chain
+    end
+  end
+
+  Halite.register_feature "powered_by", self
+end
+
+r = Halite.use("404").use("powered_by").get("http://httpbin.org/user-agent")
+r.status_code               # => 404
+r.headers["X-Powered-By"]   # => Halite
+r.body                      # => {"user-agent":"Halite/0.6.0"}
+```
+
+For more implementation details about the feature layer, see the [Feature](https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features) and [specs](https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23).
+
 ## Advanced Usage
 
 ### Configuring
@@ -705,100 +804,6 @@ Halite.use("cache").get "http://httpbin.org/anything"     # request a HTTP
 r = Halite.use("cache").get "http://httpbin.org/anything" # request from local storage
 r.headers                                                 # => {..., "X-Halite-Cached-At" => "2018-08-30 10:41:14 UTC", "X-Halite-Cached-By" => "Halite", "X-Halite-Cached-Expires-At" => "2018-08-30 10:41:19 UTC", "X-Halite-Cached-Key" => "2bb155e6c8c47627da3d91834eb4249a"}}
 ```
-
-### Middleware
-
-Halite now has middleware (a.k.a features) support providing a simple way to plug in intermediate custom logic
-in your HTTP client, allowing you to monitor outgoing requests, incoming responses, and use it as an interceptor.
-
-Available features:
-
-- logging (Yes, logging is based on feature, cool, aha!)
-- cache (local storage, speed up in development)
-
-#### Write a simple feature
-
-Let's implement simple middleware that prints each request:
-
-```crystal
-class RequestMonister < Halite::Feature
-  @label : String
-  def initialize(**options)
-    @label = options.fetch(:label, "")
-  end
-
-  def request(request) : Halite::Request
-    puts @label
-    puts request.verb
-    puts request.uri
-    puts request.body
-
-    request
-  end
-
-  Halite.register_feature "request_monster", self
-end
-```
-
-Then use it in Halite:
-
-```crystal
-Halite.use("request_monster", label: "testing")
-      .post("http://httpbin.org/post", form: {name: "foo"})
-
-# Or configure to client
-client = Halite::Client.new do
-  use "request_monster", label: "testing"
-end
-
-client.post("http://httpbin.org/post", form: {name: "foo"})
-
-# => testing
-# => POST
-# => http://httpbin.org/post
-# => name=foo
-```
-
-#### Write a interceptor
-
-Halite's killer feature is the **interceptor**, Use `Halite::Feature::Chain` to process with two result:
-
-- `next`: perform and run next interceptor
-- `return`: perform and return
-
-So, you can intercept and turn to the following registered features.
-
-```crystal
-class AlwaysNotFound < Halite::Feature
-  def intercept(chain)
-    response = chain.perform
-    response = Halite::Response.new(chain.request.uri, 404, response.body, response.headers)
-    chain.next(response)
-  end
-
-  Halite.register_feature "404", self
-end
-
-class PoweredBy < Halite::Feature
-  def intercept(chain)
-    if response = chain.response
-      response.headers["X-Powered-By"] = "Halite"
-      chain.return(response)
-    else
-      chain
-    end
-  end
-
-  Halite.register_feature "powered_by", self
-end
-
-r = Halite.use("404").use("powered_by").get("http://httpbin.org/user-agent")
-r.status_code               # => 404
-r.headers["X-Powered-By"]   # => Halite
-r.body                      # => {"user-agent":"Halite/0.6.0"}
-```
-
-For more implementation details about the feature layer, see the [Feature](https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features) and [specs](https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23).
 
 ### Link Headers
 
