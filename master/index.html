@@ -350,7 +350,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.31.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/04d713ce" target="_blank">#04d713ce</a> (2020-04-10 14:48:14 +0800).</p>
+<p>Build in Crystal version >= <code>v0.31.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/873195c1" target="_blank">#873195c1</a> (2020-04-10 14:58:19 +0800).</p>
 
 <h2><a id="index" class="anchor" href="#index">
   <svg class="octicon-link" aria-hidden="true">
@@ -360,9 +360,8 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 
 <p>&lt;!-- TOC --></p>
 
-<ul><li><a href="#index" target="_blank">Index</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#user-agent" target="_blank">User Agent</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#configuring" target="_blank">Configuring</a></li><li><a href="#endpoint" target="_blank">Endpoint</a></li><li><a href="#sessions" target="_blank">Sessions</a></li></ul></ul>
-
-<p>&lt;!-- /TOC --></p>
+<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#user-agent" target="_blank">User Agent</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#middleware" target="_blank">Middleware</a></li><ul><li><a href="#write-a-simple-feature" target="_blank">Write a simple feature</a></li><li><a href="#write-a-interceptor" target="_blank">Write a interceptor</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#configuring" target="_blank">Configuring</a></li><li><a href="#endpoint" target="_blank">Endpoint</a></li><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#streaming-requests" target="_blank">Streaming Requests</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#local-cache" target="_blank">Local Cache</a></li><li><a href="#link-headers" target="_blank">Link Headers</a>
+&lt;!-- /TOC --></li></ul></ul>
 
 <h2><a id="installation" class="anchor" href="#installation">
   <svg class="octicon-link" aria-hidden="true">
@@ -839,6 +838,104 @@ urls.each <span class="k">do</span> <span class="o">|</span>url<span class="o">|
 <span class="c"># =&gt; &quot;[500] internal server error error with url: https://httpbin.org/status/500?foo=bar  (Halite::ServerError)&quot;</span>
 <span class="c"># =&gt; &quot;&quot;</span></code></pre>
 
+<h2><a id="middleware" class="anchor" href="#middleware">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Middleware</h2>
+
+<p>Halite now has middleware (a.k.a features) support providing a simple way to plug in intermediate custom logic
+in your HTTP client, allowing you to monitor outgoing requests, incoming responses, and use it as an interceptor.</p>
+
+<p>Available features:</p>
+
+<ul><li><a href="#logging" target="_blank">Logging</a> (Yes, logging is based on feature, cool, aha!)</li><li><a href="#local-cache" target="_blank">Local Cache</a> (local storage, speed up in development)</li></ul>
+
+<h3><a id="write-a-simple-feature" class="anchor" href="#write-a-simple-feature">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Write a simple feature</h3>
+
+<p>Let's implement simple middleware that prints each request:</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">RequestMonister</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Feature</span>
+  @label : <span class="t">String</span>
+  <span class="k">def</span> <span class="m">initialize</span>(<span class="o">**</span>options)
+    @label <span class="o">=</span> options.fetch(<span class="n">:label</span>, <span class="s">&quot;&quot;</span>)
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="m">request</span>(request) : <span class="t">Halite</span><span class="t">::</span><span class="t">Request</span>
+    puts @label
+    puts request.verb
+    puts request.uri
+    puts request.body
+
+    request
+  <span class="k">end</span>
+
+  <span class="t">Halite</span>.register_feature <span class="s">&quot;request_monster&quot;</span>, <span class="k">self</span>
+<span class="k">end</span></code></pre>
+
+<p>Then use it in Halite:</p>
+
+<pre><code class="language-crystal"><span class="t">Halite</span>.use(<span class="s">&quot;request_monster&quot;</span>, label: <span class="s">&quot;testing&quot;</span>)
+      .post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {name: <span class="s">&quot;foo&quot;</span>})
+
+<span class="c"># Or configure to client</span>
+client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span> <span class="k">do</span>
+  use <span class="s">&quot;request_monster&quot;</span>, label: <span class="s">&quot;testing&quot;</span>
+<span class="k">end</span>
+
+client.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {name: <span class="s">&quot;foo&quot;</span>})
+
+<span class="c"># =&gt; testing</span>
+<span class="c"># =&gt; POST</span>
+<span class="c"># =&gt; http://httpbin.org/post</span>
+<span class="c"># =&gt; name=foo</span></code></pre>
+
+<h3><a id="write-a-interceptor" class="anchor" href="#write-a-interceptor">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Write a interceptor</h3>
+
+<p>Halite's killer feature is the <strong>interceptor</strong>, Use <code><a href="Halite/Feature/Chain.html">Halite::Feature::Chain</a></code> to process with two result:</p>
+
+<ul><li><code>next</code>: perform and run next interceptor</li><li><code>return</code>: perform and return</li></ul>
+
+<p>So, you can intercept and turn to the following registered features.</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">AlwaysNotFound</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Feature</span>
+  <span class="k">def</span> <span class="m">intercept</span>(chain)
+    response <span class="o">=</span> chain.perform
+    response <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Response</span>.<span class="k">new</span>(chain.request.uri, <span class="n">404</span>, response.body, response.headers)
+    chain.<span class="k">next</span>(response)
+  <span class="k">end</span>
+
+  <span class="t">Halite</span>.register_feature <span class="s">&quot;404&quot;</span>, <span class="k">self</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="t">PoweredBy</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Feature</span>
+  <span class="k">def</span> <span class="m">intercept</span>(chain)
+    <span class="k">if</span> response <span class="o">=</span> chain.response
+      response.headers[<span class="s">&quot;X-Powered-By&quot;</span>] <span class="o">=</span> <span class="s">&quot;Halite&quot;</span>
+      chain.<span class="k">return</span>(response)
+    <span class="k">else</span>
+      chain
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="t">Halite</span>.register_feature <span class="s">&quot;powered_by&quot;</span>, <span class="k">self</span>
+<span class="k">end</span>
+
+r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&quot;404&quot;</span>).use(<span class="s">&quot;powered_by&quot;</span>).get(<span class="s">&quot;http://httpbin.org/user-agent&quot;</span>)
+r.status_code               <span class="c"># =&gt; 404</span>
+r.headers[<span class="s">&quot;X-Powered-By&quot;</span>]   <span class="c"># =&gt; Halite</span>
+r.body                      <span class="c"># =&gt; {&quot;user-agent&quot;:&quot;Halite/0.6.0&quot;}</span></code></pre>
+
+<p>For more implementation details about the feature layer, see the <a href="https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2" target="_blank">Feature</a> class and <a href="https://github.com/icyleaf/halite/tree/master/src/halite/features" target="_blank">examples</a> and <a href="https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23" target="_blank">specs</a>.</p>
+
 <h2><a id="advanced-usage" class="anchor" href="#advanced-usage">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -1096,13 +1193,13 @@ end</p>
 <p>class CustomLogging &lt; Halite::Logging::Abstract
   def request(request)</p>
 
-<pre><code>@logger.info <span class="s">&quot;| &gt;&gt; | %s | %s %s&quot;</span> <span class="o">%</span> [request.verb, request.uri, request.body]</code></pre>
+<pre><code>@logger.info { <span class="s">&quot;| &gt;&gt; | %s | %s %s&quot;</span> <span class="o">%</span> [request.verb, request.uri, request.body] }</code></pre>
 
 <p>end</p>
 
 <p>def response(response)</p>
 
-<pre><code>@logger.info <span class="s">&quot;| &lt;&lt; | %s | %s %s&quot;</span> <span class="o">%</span> [response.status_code, response.uri, response.content_type]</code></pre>
+<pre><code>@logger.info { <span class="s">&quot;| &lt;&lt; | %s | %s %s&quot;</span> <span class="o">%</span> [response.status_code, response.uri, response.content_type] }</code></pre>
 
 <p>end
 end</p>
@@ -1168,126 +1265,6 @@ r = Halite.use("cache").get "http://httpbin.org/anything" # request from local s
 r.headers                                                 # => {..., "X-Halite-Cached-At" => "2018-08-30 10:41:14 UTC", "X-Halite-Cached-By" => "Halite", "X-Halite-Cached-Expires-At" => "2018-08-30 10:41:19 UTC", "X-Halite-Cached-Key" => "2bb155e6c8c47627da3d91834eb4249a"}}</p>
 
 <pre><code>
-<span class="c">### Middleware</span>
-
-<span class="t">Halite</span> now has middleware (a.k.a features) support providing a simple way to plug <span class="k">in</span> intermediate custom logic
-<span class="k">in</span> your <span class="t">HTTP</span> client, allowing you to monitor outgoing requests, incoming responses, and use it <span class="k">as</span> an interceptor.
-
-<span class="t">Available</span> features:
-
-<span class="o">-</span> logging (<span class="t">Yes</span>, logging is based on feature, cool, aha!)
-<span class="o">-</span> cache (local storage, speed up <span class="k">in</span> development)
-
-<span class="c">#### Write a simple feature</span>
-
-<span class="t">Let</span></code></pre>
-
-<p>class RequestMonister &lt; Halite::Feature
-  @label : String
-  def initialize(**options)</p>
-
-<pre><code>@label <span class="o">=</span> options.fetch(<span class="n">:label</span>, <span class="s">&quot;&quot;</span>)</code></pre>
-
-<p>end</p>
-
-<p>def request(request) : Halite::Request</p>
-
-<pre><code>puts @label
-puts request.verb
-puts request.uri
-puts request.body
-
-request</code></pre>
-
-<p>end</p>
-
-<p>Halite.register_feature "request_monster", self
-end</p>
-
-<pre><code>
-<span class="t">Then</span> use it <span class="k">in</span> <span class="t">Halite</span>:
-</code></pre>
-
-<p>Halite.use("request_monster", label: "testing")</p>
-
-<pre><code>  .post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {name: <span class="s">&quot;foo&quot;</span>})</code></pre>
-
-<h1><a id="or-configure-to-client" class="anchor" href="#or-configure-to-client">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>Or configure to client</h1>
-
-<p>client = Halite::Client.new do
-  use "request_monster", label: "testing"
-end</p>
-
-<p>client.post("http://httpbin.org/post", form: {name: "foo"})</p>
-
-<h1><a id="testing" class="anchor" href="#testing">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>=> testing</h1>
-
-<h1><a id="post" class="anchor" href="#post">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>=> POST</h1>
-
-<h1><a id="httphttpbin.orgpost" class="anchor" href="#httphttpbin.orgpost">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>=> http://httpbin.org/post</h1>
-
-<h1><a id="namefoo" class="anchor" href="#namefoo">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>=> name=foo</h1>
-
-<pre><code>
-<span class="c">#### Write a interceptor</span>
-
-<span class="t">Halite</span></code></pre>
-
-<p>class AlwaysNotFound &lt; Halite::Feature
-  def intercept(chain)</p>
-
-<pre><code>response <span class="o">=</span> chain.perform
-response <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Response</span>.<span class="k">new</span>(chain.request.uri, <span class="n">404</span>, response.body, response.headers)
-chain.<span class="k">next</span>(response)</code></pre>
-
-<p>end</p>
-
-<p>Halite.register_feature "404", self
-end</p>
-
-<p>class PoweredBy &lt; Halite::Feature
-  def intercept(chain)</p>
-
-<pre><code><span class="k">if</span> response <span class="o">=</span> chain.response
-  response.headers[<span class="s">&quot;X-Powered-By&quot;</span>] <span class="o">=</span> <span class="s">&quot;Halite&quot;</span>
-  chain.<span class="k">return</span>(response)
-<span class="k">else</span>
-  chain
-<span class="k">end</span></code></pre>
-
-<p>end</p>
-
-<p>Halite.register_feature "powered_by", self
-end</p>
-
-<p>r = Halite.use("404").use("powered_by").get("http://httpbin.org/user-agent")
-r.status_code               # => 404
-r.headers["X-Powered-By"]   # => Halite
-r.body                      # => {"user-agent":"Halite/0.6.0"}</p>
-
-<pre><code>
-<span class="t">For</span> more implementation details about the feature layer, see the [<span class="t">Feature</span>](https<span class="n">://</span>github.com<span class="s">/icyleaf/</span>halite<span class="s">/blob/</span>master<span class="s">/src/</span>halite<span class="s">/feature.cr#L2) class and [examples](https:/</span><span class="s">/github.com/</span>icyleaf<span class="s">/halite/</span>tree<span class="s">/master/</span>src<span class="s">/halite/</span>features) and [specs](https<span class="n">://</span>github.com<span class="s">/icyleaf/</span>halite<span class="s">/blob/</span>master<span class="s">/spec/</span>spec_helper.cr<span class="c">#L23).</span>
-
 <span class="c">### Link Headers</span>
 
 <span class="t">Many</span> <span class="t">HTTP</span> <span class="t">APIs</span> feature [<span class="t">Link</span> headers](https<span class="n">://</span>tools.ietf.org<span class="s">/html/</span>rfc5988). <span class="t">GitHub</span> uses
