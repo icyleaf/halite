@@ -157,9 +157,9 @@ module Halite
       conn = make_connection(request, options)
       conn_response = conn.exec(request.verb, request.full_path, request.headers, request.body)
       handle_response(request, conn_response, options)
-    rescue ex : IO::Timeout
+    rescue ex : IO::TimeoutError
       raise TimeoutError.new(ex.message)
-    rescue ex : Socket::Error | Errno
+    rescue ex : Socket::Error
       raise ConnectionError.new(ex.message)
     end
 
