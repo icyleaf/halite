@@ -43,6 +43,6 @@ class MockServer < HTTP::Server
   end
 
   def api(path : String)
-    File.join(endpoint, path)
+    URI.parse(endpoint).resolve(path).to_s
   end
 end
