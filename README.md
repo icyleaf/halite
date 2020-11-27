@@ -475,8 +475,8 @@ urls.each do |url|
   end
 end
 
-# => "[404] not found error with url: https://httpbin.org/status/404  (Halite::ClientError)"
-# => "[500] internal server error error with url: https://httpbin.org/status/500?foo=bar  (Halite::ServerError)"
+# => "[404] not found error with url: https://httpbin.org/status/404 (Halite::Exception::ClientError)"
+# => "[500] internal server error error with url: https://httpbin.org/status/500?foo=bar (Halite::Exception::ServerError)"
 # => ""
 ```
 
