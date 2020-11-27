@@ -57,7 +57,7 @@ module Halite
           status_message << "error"
           status_message << "with url: #{@uri.not_nil!}" if @uri
 
-          @message ||= "#{status_code} #{status_message.join(" ")} "
+          @message ||= "#{status_code} #{status_message.join(" ")}"
         end
 
         super(@message)
