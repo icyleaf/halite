@@ -350,7 +350,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.34.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/c2c3e898" target="_blank">#c2c3e898</a> (2020-11-24 10:55:54 +0800).</p>
+<p>Build in Crystal version >= <code>v0.34.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/a0a0818d" target="_blank">#a0a0818d</a> (2020-12-01 14:56:28 +0800).</p>
 
 <h2><a id="index" class="anchor" href="#index">
   <svg class="octicon-link" aria-hidden="true">
@@ -834,8 +834,8 @@ urls.each <span class="k">do</span> <span class="o">|</span>url<span class="o">|
   <span class="k">end</span>
 <span class="k">end</span>
 
-<span class="c"># =&gt; &quot;[404] not found error with url: https://httpbin.org/status/404  (Halite::ClientError)&quot;</span>
-<span class="c"># =&gt; &quot;[500] internal server error error with url: https://httpbin.org/status/500?foo=bar  (Halite::ServerError)&quot;</span>
+<span class="c"># =&gt; &quot;[404] not found error with url: https://httpbin.org/status/404 (Halite::Exception::ClientError)&quot;</span>
+<span class="c"># =&gt; &quot;[500] internal server error error with url: https://httpbin.org/status/500?foo=bar (Halite::Exception::ServerError)&quot;</span>
 <span class="c"># =&gt; &quot;&quot;</span></code></pre>
 
 <h2><a id="middleware" class="anchor" href="#middleware">
