@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - [x] Proxy support
   - [ ] Reuse connection
 
+## [0.10.7] (2020-12-08)
+### Fixed
+
+- Fix initial status_message[#91](https://github.com/icyleaf/halite/issues/91) (thanks @[oprypin](https://github.com/oprypin))
+
 ## [0.10.6] (2020-11-24)
 ### Fixed
 
@@ -333,7 +338,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.6...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.7...HEAD
+[0.10.7]: https://github.com/icyleaf/halite/compare/v0.10.6...v0.10.7
 [0.10.6]: https://github.com/icyleaf/halite/compare/v0.10.5...v0.10.6
 [0.10.5]: https://github.com/icyleaf/halite/compare/v0.10.4...v0.10.5
 [0.10.4]: https://github.com/icyleaf/halite/compare/v0.10.3...v0.10.4
