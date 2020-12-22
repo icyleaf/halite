@@ -16,33 +16,39 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - [x] Proxy support
   - [ ] Reuse connection
 
+## [0.10.8] (2020-12-22)
+
+### Fixed
+
+- Resolve path of endpoint ending without slash. [#94](https://github.com/icyleaf/halite/issues/94) (thanks @[mipmip](https://github.com/mipmip))
+
 ## [0.10.7] (2020-12-08)
 ### Fixed
 
-- Fix initial status_message[#91](https://github.com/icyleaf/halite/issues/91) (thanks @[oprypin](https://github.com/oprypin))
+- Fix initial status_message. [#91](https://github.com/icyleaf/halite/issues/91) (thanks @[oprypin](https://github.com/oprypin))
 
 ## [0.10.6] (2020-11-24)
 ### Fixed
 
-- Improve resolve of URI [#88](https://github.com/icyleaf/halite/issues/88) (thanks @[oprypin](https://github.com/oprypin))
+- Improve resolve of URI. [#88](https://github.com/icyleaf/halite/issues/88) (thanks @[oprypin](https://github.com/oprypin))
 
 ## [0.10.5] (2020-04-15)
 
 ### Fixed
 
-- Compatibility with Crystal 0.34.0
+- Compatibility with Crystal 0.34.0.
 
 ## [0.10.4] (2019-09-26)
 
 ### Fixed
 
-- Compatibility with Crystal 0.31.0
+- Compatibility with Crystal 0.31.0.
 
 ## [0.10.3] (2019-08-12)
 
 ### Fixed
 
-- Compatibility with Crystal 0.30.0
+- Compatibility with Crystal 0.30.0.
 
 ## [0.10.2] (2019-06-24)
 
@@ -338,7 +344,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.7...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.8...HEAD
+[0.10.8]: https://github.com/icyleaf/halite/compare/v0.10.7...v0.10.8
 [0.10.7]: https://github.com/icyleaf/halite/compare/v0.10.6...v0.10.7
 [0.10.6]: https://github.com/icyleaf/halite/compare/v0.10.5...v0.10.6
 [0.10.5]: https://github.com/icyleaf/halite/compare/v0.10.4...v0.10.5
