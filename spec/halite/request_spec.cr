@@ -3,7 +3,7 @@ require "../spec_helper"
 private def request
   Halite::Request.new(
     "get",
-    "http://example.com/foo/bar?q=halite#result",
+    URI.parse("http://example.com/foo/bar?q=halite#result"),
     HTTP::Headers{"Accept" => "text/html"},
   )
 end
@@ -39,7 +39,7 @@ describe Halite::Request do
 
     context "when subdomain and path are the same" do
       it "return `URI` with the scheme, user, password, port and host combined" do
-        Halite::Request.new("get", "https://login.example.com/login").domain.to_s.should eq "https://login.example.com"
+        Halite::Request.new("get", URI.parse("https://login.example.com/login")).domain.to_s.should eq "https://login.example.com"
       end
     end
   end
@@ -58,7 +58,7 @@ describe Halite::Request do
 
   describe "#redirect" do
     it "should return a new request" do
-      request = Halite::Request.new("GET", "http://httpbin.com/redirect/3", headers: HTTP::Headers{"Host" => "httpbin.com"})
+      request = Halite::Request.new("GET", URI.parse("http://httpbin.com/redirect/3"), headers: HTTP::Headers{"Host" => "httpbin.com"})
       new_request = request.redirect("http://httpbin.com/redirect/2")
       new_request.uri.to_s.should eq("http://httpbin.com/redirect/2")
       new_request.headers.has_key?("Host").should be_false
@@ -69,7 +69,7 @@ describe Halite::Request do
     end
 
     it "should return a new request without Host" do
-      request = Halite::Request.new("POST", "http://httpbin.com/redirect/3")
+      request = Halite::Request.new("POST", URI.parse("http://httpbin.com/redirect/3"))
       new_request = request.redirect("http://httpbin.com/redirect/2", "GET")
       new_request.uri.to_s.should eq("http://httpbin.com/redirect/2")
       new_request.verb.should eq("GET")
@@ -83,19 +83,19 @@ describe Halite::Request do
   describe "raises" do
     it "should throws an exception with not allowed request method" do
       expect_raises Halite::UnsupportedMethodError, "Unknown method: TRACE" do
-        Halite::Request.new("trace", "http://httpbin.org/get")
+        Halite::Request.new("trace", URI.parse("http://httpbin.org/get"))
       end
     end
 
     it "should throws an exception without scheme part of URI" do
       expect_raises Halite::UnsupportedSchemeError, "Missing scheme: example.com" do
-        Halite::Request.new("get", "example.com")
+        Halite::Request.new("get", URI.parse("example.com"))
       end
     end
 
     it "should throws an exception with not allowed scheme part of URI" do
       expect_raises Halite::UnsupportedSchemeError, "Unknown scheme: ws" do
-        Halite::Request.new("get", "ws://example.com")
+        Halite::Request.new("get", URI.parse("ws://example.com"))
       end
     end
   end

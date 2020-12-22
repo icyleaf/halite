@@ -199,19 +199,14 @@ module Halite
     end
 
     # Merges query params if needed
-    private def make_request_uri(url : String, options : Halite::Options) : String
-      uri = if endpoint = options.endpoint
-              endpoint.resolve(url)
-            else
-              URI.parse(url)
-            end
-
+    private def make_request_uri(url : String, options : Halite::Options) : URI
+      uri = resolve_uri(url, options)
       if params = options.params
         query = HTTP::Params.encode(params)
-        uri.query = [uri.query, query].compact.join("&") unless query.empty?
+        uri.query = [uri.query, query].compact.join('&') unless query.empty?
       end
 
-      uri.to_s
+      uri
     end
 
     # Merges request headers
@@ -279,6 +274,14 @@ module Halite
     private def branch(options : Halite::Options? = nil) : Halite::Client
       oneshot_options.merge!(options)
       self
+    end
+
+    private def resolve_uri(url : String, options : Halite::Options) : URI
+      return URI.parse(url) unless endpoint = options.endpoint
+      return endpoint if url.empty?
+
+      endpoint.path += '/' unless endpoint.path.ends_with?('/')
+      endpoint.resolve(url)
     end
 
     # :nodoc:

@@ -54,13 +54,19 @@ describe Halite::Client do
       response.status_code.should eq(200)
     end
 
-    it "should always overwrite the path of uri if path starts with '/' char" do
+    it "should not overwrite the path of uri if path is empty string" do
       client = Halite::Client.new do
         endpoint "#{SERVER.endpoint}/redirect-301"
       end
 
       response = client.get("")
       response.status_code.should eq(301)
+    end
+
+    it "should always overwrite the path of uri if path starts with '/' char" do
+      client = Halite::Client.new do
+        endpoint "#{SERVER.endpoint}/redirect-301"
+      end
 
       response = client.accept("application/json").get("/")
       response.status_code.should eq(200)
