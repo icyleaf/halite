@@ -33,14 +33,16 @@ module Halite
       def self.new(file : String? = nil, filemode = "a",
                    skip_request_body = false, skip_response_body = false,
                    skip_benchmark = false, colorize = true)
-        io = STDOUT
-        if file
-          file = File.expand_path(file)
-          filepath = File.dirname(file)
-          FileUtils.mkdir_p(filepath) unless Dir.exists?(filepath)
+        io = if file
+               file = File.expand_path(file)
+               filepath = File.dirname(file)
+               FileUtils.mkdir_p(filepath) unless Dir.exists?(filepath)
 
-          io = File.open(file, filemode)
-        end
+               File.new(file, filemode)
+             else
+               STDOUT
+             end
+
         new(skip_request_body, skip_response_body, skip_benchmark, colorize, io)
       end
 
