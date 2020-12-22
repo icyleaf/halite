@@ -6,7 +6,7 @@
 [![Tag](https://img.shields.io/github/tag/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/CHANGELOG.md)
 [![Source](https://img.shields.io/badge/source-github-brightgreen.svg)](https://github.com/icyleaf/halite/)
 [![Document](https://img.shields.io/badge/document-api-brightgreen.svg)](https://icyleaf.github.io/halite/)
-[![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
+[![Build Status](https://github.com/icyleaf/halite/workflows/Linux%20CI/badge.svg)](https://github.com/icyleaf/halite/actions?query=workflow%3A%22Linux+CI%22)
 
 HTTP Requests with a chainable REST API, built-in sessions and middleware written by [Crystal](https://crystal-lang.org/).
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client)
