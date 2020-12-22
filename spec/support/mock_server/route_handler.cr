@@ -149,7 +149,11 @@ class MockServer < HTTP::Server
         elsif context.request.query_params["relative_path_without_slash"]?
           "sleep"
         else
-          "http://#{context.request.host_with_port}/"
+          {% if Crystal::VERSION < "0.36.0" %}
+            "http://#{context.request.host_with_port}/"
+          {% else %}
+            "http://#{context.request.headers["Host"]?}/"
+          {% end %}
         end
 
       context.response.headers["Location"] = location
@@ -162,7 +166,11 @@ class MockServer < HTTP::Server
         if context.request.query_params["relative_path"]?
           "/"
         else
+          {% if Crystal::VERSION < "0.36.0" %}
           "http://#{context.request.host_with_port}/"
+          {% else %}
+            "http://#{context.request.headers["Host"]?}/"
+          {% end %}
         end
 
       context.response.headers["Location"] = location
