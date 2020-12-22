@@ -544,7 +544,11 @@ describe Halite do
         logging.writer.colorize.should be_true
 
         client.get SERVER.endpoint
-        logs = File.read_lines(file).join("\n")
+
+        # waiting file writes
+        sleep 1
+
+        logs = File.read(file)
         logs.should contain("request")
         logs.should contain("response")
         logs.should_not contain("<!doctype html><body>Mock Server is running.</body></html>")

@@ -3,7 +3,7 @@ require "./support/mock_server"
 require "../src/halite"
 
 def with_tempfile(filename)
-  yield File.tempname("halite-spec-logging")
+  yield File.tempname(filename)
 end
 
 module TestFeatures

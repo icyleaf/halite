@@ -30,7 +30,7 @@ class Halite::Logging
 
     def response(response)
       message = String.build do |io|
-        content_type = response.content_type.nil? ? "Unknown MIME" : response.content_type.not_nil!
+        content_type = response.content_type || "Unknown MIME"
         io << "< | response | " << current_timestamp << colorful_status_code(response.status_code)
         io << "| " << response.uri
         if !@skip_benchmark && (request_time = @request_time)
