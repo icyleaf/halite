@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 private def request
-  Halite::Request.new("head", "http://example.com/foo?bar=baz")
+  Halite::Request.new("head", URI.parse("http://example.com/foo?bar=baz"))
 end
 
 def response(uri : URI, status_code = 200, headers = {} of String => String, body = "")
@@ -84,7 +84,7 @@ describe Halite::Redirector do
     context "following 300/301/302 redirect" do
       context "with strict mode" do
         it "it follows with original verb if it's safe" do
-          req = Halite::Request.new "get", "http://example.com/foo?bar=baz"
+          req = Halite::Request.new "get", URI.parse("http://example.com/foo?bar=baz")
           res = redirect_response 300, "http://example.com/1"
 
           redirector(req, res, true).perform do |prev_req|
@@ -94,7 +94,7 @@ describe Halite::Redirector do
         end
 
         it "raises StateError if original request was PUT" do
-          req = Halite::Request.new "put", "http://example.com/foo?bar=baz"
+          req = Halite::Request.new "put", URI.parse("http://example.com/foo?bar=baz")
           res = redirect_response 300, "http://example.com/1"
           expect_raises Halite::StateError do
             redirector(req, res, true).perform { |_| simple_response 200 }
@@ -102,7 +102,7 @@ describe Halite::Redirector do
         end
 
         it "raises StateError if original request was POST" do
-          req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
+          req = Halite::Request.new "post", URI.parse("http://example.com/foo?bar=baz")
           res = redirect_response 301, "http://example.com/1"
           expect_raises Halite::StateError do
             redirector(req, res, true).perform { |_| simple_response 200 }
@@ -110,7 +110,7 @@ describe Halite::Redirector do
         end
 
         it "raises StateError if original request was DELETE" do
-          req = Halite::Request.new "delete", "http://example.com/foo?bar=baz"
+          req = Halite::Request.new "delete", URI.parse("http://example.com/foo?bar=baz")
           res = redirect_response 302, "http://example.com/1"
           expect_raises Halite::StateError do
             redirector(req, res, true).perform { |_| simple_response 200 }
@@ -120,7 +120,7 @@ describe Halite::Redirector do
 
       context "without strict mode" do
         it "it follows with original verb if it's safe" do
-          req = Halite::Request.new "get", "http://example.com/foo?bar=baz"
+          req = Halite::Request.new "get", URI.parse("http://example.com/foo?bar=baz")
           res = redirect_response 300, "http://example.com/1"
 
           redirector(req, res, false).perform do |prev_req|
@@ -130,7 +130,7 @@ describe Halite::Redirector do
         end
 
         it "raises StateError if original request was PUT" do
-          req = Halite::Request.new "put", "http://example.com/foo?bar=baz"
+          req = Halite::Request.new "put", URI.parse("http://example.com/foo?bar=baz")
           res = redirect_response 300, "http://example.com/1"
           redirector(req, res, false).perform do |prev_req|
             prev_req.verb.should eq "GET"
@@ -139,7 +139,7 @@ describe Halite::Redirector do
         end
 
         it "raises StateError if original request was POST" do
-          req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
+          req = Halite::Request.new "post", URI.parse("http://example.com/foo?bar=baz")
           res = redirect_response 301, "http://example.com/1"
           redirector(req, res, false).perform do |prev_req|
             prev_req.verb.should eq "GET"
@@ -148,7 +148,7 @@ describe Halite::Redirector do
         end
 
         it "raises StateError if original request was DELETE" do
-          req = Halite::Request.new "delete", "http://example.com/foo?bar=baz"
+          req = Halite::Request.new "delete", URI.parse("http://example.com/foo?bar=baz")
           res = redirect_response 302, "http://example.com/1"
           redirector(req, res, false).perform do |prev_req|
             prev_req.verb.should eq "GET"
@@ -160,7 +160,7 @@ describe Halite::Redirector do
 
     context "following 303 redirect" do
       it "follows with HEAD if original request was HEAD" do
-        req = Halite::Request.new "head", "http://example.com/foo?bar=baz"
+        req = Halite::Request.new "head", URI.parse("http://example.com/foo?bar=baz")
         res = redirect_response 303, "http://example.com/1"
 
         redirector(req, res).perform do |prev_req|
@@ -170,7 +170,7 @@ describe Halite::Redirector do
       end
 
       it "follows with GET if original request was GET" do
-        req = Halite::Request.new "get", "http://example.com/foo?bar=baz"
+        req = Halite::Request.new "get", URI.parse("http://example.com/foo?bar=baz")
         res = redirect_response 303, "http://example.com/1"
 
         redirector(req, res).perform do |prev_req|
@@ -180,7 +180,7 @@ describe Halite::Redirector do
       end
 
       it "follows with GET if original request was neither GET nor HEAD" do
-        req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
+        req = Halite::Request.new "post", URI.parse("http://example.com/foo?bar=baz")
         res = redirect_response 303, "http://example.com/1"
 
         redirector(req, res).perform do |prev_req|
@@ -192,7 +192,7 @@ describe Halite::Redirector do
 
     context "following 307 redirect" do
       it "follows with original request's verb" do
-        req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
+        req = Halite::Request.new "post", URI.parse("http://example.com/foo?bar=baz")
         res = redirect_response 307, "http://example.com/1"
 
         redirector(req, res).perform do |prev_req|
@@ -204,7 +204,7 @@ describe Halite::Redirector do
 
     context "following 308 redirect" do
       it "follows with original request's verb" do
-        req = Halite::Request.new "post", "http://example.com/foo?bar=baz"
+        req = Halite::Request.new "post", URI.parse("http://example.com/foo?bar=baz")
         res = redirect_response 308, "http://example.com/1"
 
         redirector(req, res).perform do |prev_req|

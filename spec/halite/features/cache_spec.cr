@@ -78,7 +78,7 @@ describe Halite::Cache do
   describe "intercept" do
     it "should cache to local storage" do
       body = {name: "foo"}.to_json
-      request = Halite::Request.new("get", SERVER.api("/anything?q=halite1#result"), HTTP::Headers{"Accept" => "application/json"})
+      request = Halite::Request.new("get", URI.parse(SERVER.api("/anything?q=halite1#result")), HTTP::Headers{"Accept" => "application/json"})
       response = Halite::Response.new(request.uri, 200, body, HTTP::Headers{"Content-Type" => "application/json", "Content-Length" => body.size.to_s})
       feature = Halite::Cache.new
       feature.file.should be_nil
@@ -114,7 +114,7 @@ describe Halite::Cache do
 
     it "should cache without debug mode" do
       body = {name: "foo1"}.to_json
-      request = Halite::Request.new("get", SERVER.api("/anything?q=halite2#result"), HTTP::Headers{"Accept" => "application/json"})
+      request = Halite::Request.new("get", URI.parse(SERVER.api("/anything?q=halite2#result")), HTTP::Headers{"Accept" => "application/json"})
       response = Halite::Response.new(request.uri, 200, body, HTTP::Headers{"Content-Type" => "application/json", "Content-Length" => body.size.to_s})
       feature = Halite::Cache.new(debug: false)
       feature.file.should be_nil
@@ -138,7 +138,7 @@ describe Halite::Cache do
 
     it "should return no cache if expired" do
       body = {name: "foo2"}.to_json
-      request = Halite::Request.new("get", SERVER.api("/anything?q=halite3#result"), HTTP::Headers{"Accept" => "application/json"})
+      request = Halite::Request.new("get", URI.parse(SERVER.api("/anything?q=halite3#result")), HTTP::Headers{"Accept" => "application/json"})
       response = Halite::Response.new(request.uri, 200, body, HTTP::Headers{"Content-Type" => "application/json", "Content-Length" => body.size.to_s})
       feature = Halite::Cache.new(expires: 1.milliseconds)
       feature.file.should be_nil
@@ -164,7 +164,7 @@ describe Halite::Cache do
     it "should load cache from file" do
       file = fixture_path("cache_file.json")
       body = load_fixture("cache_file.json")
-      request = Halite::Request.new("get", SERVER.api("/anything?q=halite4#result"), HTTP::Headers{"Accept" => "application/json"})
+      request = Halite::Request.new("get", URI.parse(SERVER.api("/anything?q=halite4#result")), HTTP::Headers{"Accept" => "application/json"})
       response = Halite::Response.new(request.uri, 200, body, HTTP::Headers{"Content-Type" => "application/json", "Content-Length" => body.size.to_s})
       feature = Halite::Cache.new(file: file)
       feature.file.should eq(file)

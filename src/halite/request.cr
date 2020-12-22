@@ -26,9 +26,8 @@ module Halite
     # The payload of request
     getter body : String
 
-    def initialize(verb : String, uri : String, @headers : HTTP::Headers = HTTP::Headers.new, @body : String = "")
+    def initialize(verb : String, @uri : URI, @headers : HTTP::Headers = HTTP::Headers.new, @body : String = "")
       @verb = verb.upcase
-      @uri = normalize_uri(uri)
 
       raise UnsupportedMethodError.new("Unknown method: #{@verb}") unless METHODS.includes?(@verb)
       raise UnsupportedSchemeError.new("Missing scheme: #{@uri}") unless @uri.scheme
@@ -64,13 +63,8 @@ module Halite
       end
     end
 
-    # @return `URI` with all components but query being normalized.
-    private def normalize_uri(uri : String) : URI
-      URI.parse(uri)
-    end
-
-    private def redirect_uri(source : URI, uri : String) : String
-      return source.to_s if uri == '/'
+    private def redirect_uri(source : URI, uri : String) : URI
+      return source if uri == '/'
 
       new_uri = URI.parse(uri)
       # return a new uri with source and relative path
@@ -80,7 +74,7 @@ module Halite
         end
       end
 
-      new_uri.to_s
+      new_uri
     end
 
     # Request data of body
