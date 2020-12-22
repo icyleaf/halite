@@ -167,7 +167,7 @@ class MockServer < HTTP::Server
           "/"
         else
           {% if Crystal::VERSION < "0.36.0" %}
-          "http://#{context.request.host_with_port}/"
+            "http://#{context.request.host_with_port}/"
           {% else %}
             "http://#{context.request.headers["Host"]?}/"
           {% end %}

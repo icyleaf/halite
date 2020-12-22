@@ -3,8 +3,8 @@ require "crest"
 module Servers
   MEMBERS << {
     "name" => "crest",
-    "proc" => -> (url : String) {
+    "proc" => ->(url : String) {
       Crest.get(url).body
-    }
+    },
   }
 end

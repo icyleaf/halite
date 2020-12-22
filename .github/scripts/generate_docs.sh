@@ -1,9 +1,16 @@
 #!/usr/bin/env sh
 
+set -ex
+
 DOCS_PATH="docs"
 TAGS=$(git tag -l)
-DEFAULT_VERSION=$(git tag --merged master | sort -V | tail -n 1)
+DEFAULT_VERSION=$(git tag -l | sort -V | tail -n 1)
 DEFAULT_VERSION=$(echo $DEFAULT_VERSION | awk '{gsub(/^v/, ""); print}')
+
+if [ -z "$DEFAULT_VERSION" ]; then
+  echo "Not fount default version"
+  exit 1
+fi
 
 # Clean up
 rm -rf $DOCS_PATH
@@ -31,7 +38,7 @@ for TAG in $TAGS; do
 
     COMMIT_STATUS="[${TAG}](${GH_REF}/blob/master/CHANGELOG.md)"
     sed -i -e "s/latest commit/$(echo ${COMMIT_STATUS} | sed -e "s/\//\\\\\//g")/" README.md
-    crystal docs --output="${DOCS_PATH}/${NAME}"
+    crystal docs --output="${DOCS_PATH}/${NAME}" --project-version="${NAME}"
     git reset --hard
     git checkout master
     git branch -d $NAME

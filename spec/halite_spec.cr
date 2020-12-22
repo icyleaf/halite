@@ -109,7 +109,7 @@ describe Halite do
         [nil, 10, {connect: 2, read: 2, write: 2}].each do |timeout|
           context "with `.timeout(#{timeout.inspect})`" do
             it "writes the whole body" do
-              body =  "“" * 1_000_000
+              body = "“" * 1_000_000
               response = Halite.post SERVER.api("echo-body"), raw: body
 
               response.to_s.should eq(body)
