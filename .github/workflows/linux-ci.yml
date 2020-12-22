@@ -17,27 +17,16 @@ jobs:
     - uses: oprypin/install-crystal@v1
       with:
         crystal: ${{ matrix.crystal }}
-    - name: Crystal version
+    - name: Print Crystal version
       run: crystal version
     - name: Install dependencies
       run: shards install
     - name: Run tests
       run: crystal spec --error-on-warnings --error-trace
-
-  # ameba:
-  #   runs-on: ubuntu-latest
-  #   if: ${{ secrets.GITHUB_TOKEN }} != null
-
-  #   container:
-  #     image: crystallang/crystal
-  #   steps:
-  #   - uses: actions/checkout@master
-  #   - name: Crystal version
-  #     run: crystal version
-  #   - name: Crystal Ameba Linter
-  #     id: crystal-ameba
-  #     uses: crystal-ameba/github-action@v0.2.7
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #   - name: Install dependencies
-  #     run: shards install
+    - name: Run code format check
+      run: |
+        if ! crystal tool format --check; then
+          crystal tool format
+          git diff
+          exit 1
+        fi

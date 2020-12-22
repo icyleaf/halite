@@ -1,0 +1,30 @@
+name: Publish release version
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - v*
+
+env:
+  DOCS_PATH: docs
+  GIT_USER: icyleaf
+  GIT_EMAIL: icyleaf.cn@gmail.com
+  GIT_REPO: git@github.com:icyleaf/halite.git
+  GH_REF: https://github.com/icyleaf/halite
+  GH_URL: https://icyleaf.github.io/halite
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Generate docs
+      run: |
+        chmod +x .github/scripts/generate_docs.sh
+        ./.github/scripts/generate_docs.sh
+    - name: Upload docs
+      run: |
+        chmod +x .github/scripts/upload_docs.sh
+        ./.github/scripts/upload_docs.sh
+
