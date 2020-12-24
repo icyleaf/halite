@@ -649,6 +649,7 @@ r.body # => {"cookies":{"username":"foobar"}}
 
 r = client.get("http://httpbin.org/cookies")
 r.body # => {"cookies":{}}
+```
 
 If you want to manually add cookies, headers (even features etc) to your session, use the methods start with `with_` in `Halite::Options`
 to manipulate them:

@@ -19,7 +19,7 @@ COMMIT_DATE=$(git log -1 --format=%ci)
 MASTER_COMMIT_HASH=$(git rev-parse --short HEAD)
 COMMIT_STATUS="[#${MASTER_COMMIT_HASH}](${GH_REF}/commit/${MASTER_COMMIT_HASH})"
 sed -i -e "s/latest commit/$(echo ${COMMIT_STATUS} | sed -e "s/\//\\\\\//g") (${COMMIT_DATE})/" README.md
-crystal docs --output="${DOCS_PATH}/master" --project-version="master-dev" --json-config-url="../version.json"
+crystal docs --output="${DOCS_PATH}/master" --project-version="master-dev" --json-config-url="/halite/version.json"
 git reset --hard
 
 version_gt () {
@@ -27,7 +27,7 @@ version_gt () {
 }
 
 echo "{\"versions\": [" > docs/version.json
-echo "{\"name\": \"master-dev\", \"url\": \"/master/\", \"released\": false}" >> docs/version.json
+echo "{\"name\": \"master-dev\", \"url\": \"/halite/master/\", \"released\": false}" >> docs/version.json
 
 # Generate version docs
 for TAG in $(git tag -l | sort -r -V); do
@@ -37,11 +37,11 @@ for TAG in $(git tag -l | sort -r -V); do
   if version_gt $NAME "0.10.3"; then
     git checkout -b $NAME $TAG
 
-    echo ",{\"name\": \"$NAME\", \"url\": \"/$NAME/\"}" >> docs/version.json
+    echo ",{\"name\": \"$NAME\", \"url\": \"/halite/$NAME/\"}" >> docs/version.json
 
     COMMIT_STATUS="[${TAG}](${GH_REF}/blob/master/CHANGELOG.md)"
     sed -i -e "s/latest commit/$(echo ${COMMIT_STATUS} | sed -e "s/\//\\\\\//g")/" README.md
-    crystal docs --output="${DOCS_PATH}/${NAME}" --project-version="${NAME}" --json-config-url="../version.json"
+    crystal docs --output="${DOCS_PATH}/${NAME}" --project-version="${NAME}" --json-config-url="/halite/version.json"
     git reset --hard
     git checkout master
     git branch -d $NAME
