@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-set -ex
-
 DOCS_PATH="docs"
 TAGS=$(git tag -l)
 DEFAULT_VERSION=$(git tag -l | sort -V | tail -n 1)
@@ -21,29 +19,36 @@ COMMIT_DATE=$(git log -1 --format=%ci)
 MASTER_COMMIT_HASH=$(git rev-parse --short HEAD)
 COMMIT_STATUS="[#${MASTER_COMMIT_HASH}](${GH_REF}/commit/${MASTER_COMMIT_HASH})"
 sed -i -e "s/latest commit/$(echo ${COMMIT_STATUS} | sed -e "s/\//\\\\\//g") (${COMMIT_DATE})/" README.md
-crystal docs --output="${DOCS_PATH}/master"
+crystal docs --output="${DOCS_PATH}/master" --project-version="master-dev" --json-config-url="../version.json"
 git reset --hard
 
 version_gt () {
   test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1"
 }
 
+echo "{\"versions\": [" > docs/version.json
+echo "{\"name\": \"master-dev\", \"url\": \"/master/\", \"released\": false}" >> docs/version.json
+
 # Generate version docs
-for TAG in $TAGS; do
+for TAG in $(git tag -l | sort -r -V); do
   NAME=$(echo $TAG | awk '{gsub(/^v/, ""); print}')
 
   # Crystal version 0.31 complie version must great than 0.10.4.
   if version_gt $NAME "0.10.3"; then
     git checkout -b $NAME $TAG
 
+    echo ",{\"name\": \"$NAME\", \"url\": \"/$NAME/\"}" >> docs/version.json
+
     COMMIT_STATUS="[${TAG}](${GH_REF}/blob/master/CHANGELOG.md)"
     sed -i -e "s/latest commit/$(echo ${COMMIT_STATUS} | sed -e "s/\//\\\\\//g")/" README.md
-    crystal docs --output="${DOCS_PATH}/${NAME}" --project-version="${NAME}"
+    crystal docs --output="${DOCS_PATH}/${NAME}" --project-version="${NAME}" --json-config-url="../version.json"
     git reset --hard
     git checkout master
     git branch -d $NAME
   fi
 done
+
+echo "]}" >> docs/version.json
 
 echo "<html>
 <header>
