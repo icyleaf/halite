@@ -1,6 +1,8 @@
 name: Deploy API documents
 on:
   push:
+    paths-ignore:
+      - "benchmarks/**"
     branches:
       - "master"
     tags:

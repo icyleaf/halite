@@ -1,6 +1,8 @@
 name: Linux CI
 on:
   push:
+    paths-ignore:
+      - "benchmarks/**"
     branches:
       - "master"
   pull_request:
