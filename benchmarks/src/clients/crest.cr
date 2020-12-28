@@ -1,9 +1,9 @@
 require "crest"
 
-module Servers
+module Client
   MEMBERS << {
-    "name" => "crest",
-    "proc" => ->(url : String) {
+    name: "crest",
+    proc: ->(url : String) {
       Crest.get(url).body
     },
   }

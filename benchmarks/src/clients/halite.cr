@@ -1,16 +1,16 @@
 require "halite"
 
-module Servers
+module Client
   MEMBERS << {
-    "name" => "halite",
-    "proc" => ->(url : String) {
+    name: "halite",
+    proc: ->(url : String) {
       Halite::Client.new.request("get", url).body
     },
   }
 
   MEMBERS << {
-    "name" => "halite (persistent)",
-    "proc" => ->(url : String) {
+    name: "halite (persistent)",
+    proc: ->(url : String) {
       Halite.get(url).body
     },
   }

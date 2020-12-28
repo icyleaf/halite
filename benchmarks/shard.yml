@@ -9,15 +9,12 @@ targets:
     main: src/run_benchmark.cr
 
 dependencies:
-  cossack:
-    github: crystal-community/cossack
-    version: ~> 0.1.4
   crest:
     github: mamantoha/crest
-    version: ~> 0.14.0
+    version: ~> 0.26.1
   halite:
     path: ../
 
-crystal: 0.26.0
+crystal: 0.35.1
 
 license: MIT

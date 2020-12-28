@@ -1,9 +1,9 @@
 require "http/server"
 
-module Servers
+module Client
   MEMBERS << {
-    "name" => "built-in http client",
-    "proc" => ->(url : String) {
+    name: "built-in HTTP::Client",
+    proc: ->(url : String) {
       HTTP::Client.get(url).body
     },
   }
