@@ -3,23 +3,18 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="generator" content="Crystal Docs 0.35.1">
 <meta name="crystal_docs.project_version" content="0.10.8">
 <meta name="crystal_docs.project_name" content="halite">
 
   <meta name="crystal_docs.json_config_url" content="/halite/version.json">
 
 
+
 <link href="../css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/doc.js"></script>
 
-<svg class="hidden">
-  <symbol id="octicon-link" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
-  </symbol>
-</svg>
-
-  <meta id="repository-name" content="halite">
+  <meta name="repository-name" content="halite">
   <title>Halite::Chainable - halite 0.10.8</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
@@ -27,6 +22,11 @@
 </head>
 <body>
 
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <div class="search-results" class="hidden">
+  <div class="search-results hidden">
     <ul class="search-list"></ul>
   </div>
 
@@ -328,8 +328,8 @@
       
     </li>
   
-  <li class=" " data-id="halite/HTTP/Params" data-name="http::params">
-      <a href="../HTTP/Params.html">Params</a>
+  <li class=" " data-id="halite/URI/Params" data-name="uri::params">
+      <a href="../URI/Params.html">Params</a>
       
     </li>
   
@@ -674,16 +674,16 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#use(feature:String,**opts)-instance-method" class="signature"><strong>#use</strong>(feature : String, **opts)</a>
+        <a href="#use(*features)-instance-method" class="signature"><strong>#use</strong>(*features)</a>
         
-          <div class="summary"><p>Turn on given features and its options.</p></div>
+          <div class="summary"><p>Turn on given the name of features.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#use(*features)-instance-method" class="signature"><strong>#use</strong>(*features)</a>
+        <a href="#use(feature:String,**opts)-instance-method" class="signature"><strong>#use</strong>(feature : String, **opts)</a>
         
-          <div class="summary"><p>Turn on given the name of features.</p></div>
+          <div class="summary"><p>Turn on given features and its options.</p></div>
         
       </li>
     
@@ -730,7 +730,7 @@
           
           <p>Accept the given MIME type</p>
 
-<pre><code><span class="t">Halite</span>.accept(<span class="s">&quot;application/json&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.accept(<span class="s">&quot;application/json&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
         </div>
       
@@ -752,7 +752,7 @@
           
           <p>Make a request with the given Authorization header</p>
 
-<pre><code><span class="t">Halite</span>.auth(<span class="s">&quot;private-token&quot;</span>, <span class="s">&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.auth(<span class="s">&quot;private-token&quot;</span>, <span class="s">&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
         </div>
       
@@ -774,10 +774,10 @@
           
           <p>Make a request with the given Basic authorization header</p>
 
-<pre><code><span class="t">Halite</span>.basic_auth(<span class="s">&quot;icyleaf&quot;</span>, <span class="s">&quot;p@ssw0rd&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.basic_auth(<span class="s">&quot;icyleaf&quot;</span>, <span class="s">&quot;p@ssw0rd&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
 
-<p>See Also: <a href="http://tools.ietf.org/html/rfc2617" target="_blank">http://tools.ietf.org/html/rfc2617</a></p>
+<p>See Also: <a href="http://tools.ietf.org/html/rfc2617">http://tools.ietf.org/html/rfc2617</a></p>
         </div>
       
       <br/>
@@ -798,7 +798,7 @@
           
           <p>Make a request with the given cookies</p>
 
-<pre><code><span class="t">Halite</span>.cookies(name: <span class="s">&quot;icyleaf&quot;</span>, <span class="s">&quot;gender&quot;</span>: <span class="s">&quot;male&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.cookies(name: <span class="s">&quot;icyleaf&quot;</span>, <span class="s">&quot;gender&quot;</span>: <span class="s">&quot;male&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
         </div>
       
@@ -820,7 +820,7 @@
           
           <p>Make a request with the given cookies</p>
 
-<pre><code>cookies <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Cookies</span>.from_headers(headers)
+<pre><code class="language-crystal">cookies <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Cookies</span>.from_headers(headers)
 <span class="t">Halite</span>.cookies(cookies)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
         </div>
@@ -843,7 +843,7 @@
           
           <p>Make a request with the given cookies</p>
 
-<pre><code><span class="t">Halite</span>.cookies({<span class="s">&quot;private-token&quot;</span>, <span class="s">&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>})
+<pre><code class="language-crystal"><span class="t">Halite</span>.cookies({<span class="s">&quot;private-token&quot;</span>, <span class="s">&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>})
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 <span class="c"># Or</span>
 <span class="t">Halite</span>.cookies({<span class="k">private</span><span class="o">-</span>token: <span class="s">&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>})
@@ -874,7 +874,7 @@
   </svg>
 </a>Request with form data</h3>
 
-<pre><code><span class="t">Halite</span>.delete(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, form: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.delete(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, form: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -885,7 +885,7 @@
   </svg>
 </a>Request with json data</h3>
 
-<pre><code><span class="t">Halite</span>.delete(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.delete(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -896,7 +896,7 @@
   </svg>
 </a>Request with raw string</h3>
 
-<pre><code><span class="t">Halite</span>.delete(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.delete(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
         </div>
       
       <br/>
@@ -917,7 +917,7 @@
           
           <p>Delete a streaming resource</p>
 
-<pre><code><span class="t">Halite</span>.delete(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+<pre><code class="language-crystal"><span class="t">Halite</span>.delete(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   puts response.status_code
   <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
     puts line
@@ -943,7 +943,7 @@
           
           <p>Adds a endpoint to the request.</p>
 
-<pre><code><span class="t">Halite</span>.endpoint(<span class="s">&quot;https://httpbin.org&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.endpoint(<span class="s">&quot;https://httpbin.org&quot;</span>)
   .get(<span class="s">&quot;/get&quot;</span>)</code></pre>
         </div>
       
@@ -965,7 +965,7 @@
           
           <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with automatically following redirects.</p>
 
-<pre><code><span class="c"># Automatically following redirects.</span>
+<pre><code class="language-crystal"><span class="c"># Automatically following redirects.</span>
 <span class="t">Halite</span>.follow
   .get(<span class="s">&quot;http://httpbin.org/relative-redirect/5&quot;</span>)
 
@@ -992,7 +992,7 @@
           
           <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given max hops of redirect times.</p>
 
-<pre><code><span class="c"># Max hops 3 times</span>
+<pre><code class="language-crystal"><span class="c"># Max hops 3 times</span>
 <span class="t">Halite</span>.follow(<span class="n">3</span>)
   .get(<span class="s">&quot;http://httpbin.org/relative-redirect/3&quot;</span>)
 
@@ -1019,7 +1019,7 @@
           
           <p>Get a resource</p>
 
-<pre><code><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, params: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, params: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -1043,7 +1043,7 @@
           
           <p>Get a streaming resource</p>
 
-<pre><code><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+<pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   puts response.status_code
   <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
     puts line
@@ -1069,7 +1069,7 @@
           
           <p>Head a resource</p>
 
-<pre><code><span class="t">Halite</span>.head(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, params: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.head(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, params: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -1093,7 +1093,7 @@
           
           <p>Head a streaming resource</p>
 
-<pre><code><span class="t">Halite</span>.head(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+<pre><code class="language-crystal"><span class="t">Halite</span>.head(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   puts response.status_code
   <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
     puts line
@@ -1119,7 +1119,7 @@
           
           <p>Make a request with the given headers</p>
 
-<pre><code><span class="t">Halite</span>.headers({<span class="s">&quot;Content-Type&quot;</span>, <span class="s">&quot;application/json&quot;</span>, <span class="s">&quot;Connection&quot;</span>: <span class="s">&quot;keep-alive&quot;</span>})
+<pre><code class="language-crystal"><span class="t">Halite</span>.headers({<span class="s">&quot;Content-Type&quot;</span>, <span class="s">&quot;application/json&quot;</span>, <span class="s">&quot;Connection&quot;</span>: <span class="s">&quot;keep-alive&quot;</span>})
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 <span class="c"># Or</span>
 <span class="t">Halite</span>.headers({content_type: <span class="s">&quot;application/json&quot;</span>, connection: <span class="s">&quot;keep-alive&quot;</span>})
@@ -1144,7 +1144,7 @@
           
           <p>Make a request with the given headers</p>
 
-<pre><code><span class="t">Halite</span>.headers(content_type: <span class="s">&quot;application/json&quot;</span>, connection: <span class="s">&quot;keep-alive&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.headers(content_type: <span class="s">&quot;application/json&quot;</span>, connection: <span class="s">&quot;keep-alive&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
         </div>
       
@@ -1172,10 +1172,12 @@
   </svg>
 </a>Simple logging</h4>
 
-<pre><code><span class="t">Halite</span>.logging
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
+<pre><code class="language-crystal">Halite.logging
+  .get("http://httpbin.org/get", params: {name: "foobar"})
 
-=> <span class="n">2018</span></code></pre>
+=> 2018-08-28 14:33:19 +08:00 | request  | POST   | http://httpbin.org/post
+=> 2018-08-28 14:33:21 +08:00 | response | 200    | http://httpbin.org/post | 1.61s | application/json
+{ ... }</code></pre>
 
 <h4><a id="logger-configuration" class="anchor" href="#logger-configuration">
   <svg class="octicon-link" aria-hidden="true">
@@ -1188,7 +1190,7 @@ You can configuring the following options:</p>
 
 <ul><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
 
-<pre><code><span class="t">Halite</span>.logging(skip_request_body: <span class="n">true</span>, skip_response_body: <span class="n">true</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.logging(skip_request_body: <span class="n">true</span>, skip_response_body: <span class="n">true</span>)
   .post(<span class="s">&quot;http://httpbin.org/get&quot;</span>, form: {image: <span class="t">File</span>.open(<span class="s">&quot;halite-logo.png&quot;</span>)})
 
 <span class="c"># =&gt; 2018-08-28 14:33:19 +08:00 | request  | POST   | http://httpbin.org/post</span>
@@ -1203,7 +1205,7 @@ You can configuring the following options:</p>
 <p>Creating the custom logging by integration <code><a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code> abstract class.
 Here has two methods must be implement: <code><a href="../Halite/Chainable.html#request(verb:String,uri:String,options:Halite::Options?=nil,&block:Halite::Response-%3E)-instance-method">#request</a></code> and <code>#response</code>.</p>
 
-<pre><code><span class="k">class</span> <span class="t">CustomLogger</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Abstract</span>
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">CustomLogger</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Abstract</span>
   <span class="k">def</span> <span class="m">request</span>(request)
     @logger.info <span class="s">&quot;| &gt;&gt; | %s | %s %s&quot;</span> <span class="o">%</span> [request.verb, request.uri, request.body]
   <span class="k">end</span>
@@ -1251,7 +1253,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>JSON-formatted logging</h4>
 
-<pre><code><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <h4><a id="create-a-http-request-and-log-to-file" class="anchor" href="#create-a-http-request-and-log-to-file">
@@ -1260,7 +1262,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>create a http request and log to file</h4>
 
-<pre><code><span class="t">Halite</span>.logging(file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.logging(file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <h4><a id="always-create-new-log-file-and-store-data-to-json-formatted" class="anchor" href="#always-create-new-log-file-and-store-data-to-json-formatted">
@@ -1269,7 +1271,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Always create new log file and store data to JSON formatted</h4>
 
-<pre><code><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <p>Check the log file content: <strong>/tmp/halite.log</strong></p>
@@ -1301,7 +1303,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
 
 <p>Same as call <code><a href="../Halite/Chainable.html#logging(logging:Halite::Logging::Abstract=Halite::Logging::Common.new)-instance-method">#logging</a></code> method without any argument.</p>
 
-<pre><code><span class="t">Halite</span>.logging.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.logging.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
 
 <h4><a id="disable-logging" class="anchor" href="#disable-logging">
   <svg class="octicon-link" aria-hidden="true">
@@ -1309,7 +1311,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Disable logging</h4>
 
-<pre><code><span class="t">Halite</span>.logging(<span class="n">false</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.logging(<span class="n">false</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
         </div>
       
       <br/>
@@ -1336,7 +1338,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with form data</h3>
 
-<pre><code><span class="t">Halite</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, form: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, form: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -1347,7 +1349,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with json data</h3>
 
-<pre><code><span class="t">Halite</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -1358,7 +1360,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with raw string</h3>
 
-<pre><code><span class="t">Halite</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
         </div>
       
       <br/>
@@ -1379,7 +1381,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
           
           <p>Options a streaming resource</p>
 
-<pre><code><span class="t">Halite</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+<pre><code class="language-crystal"><span class="t">Halite</span>.options(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   puts response.status_code
   <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
     puts line
@@ -1411,7 +1413,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with form data</h3>
 
-<pre><code><span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, form: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, form: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -1422,7 +1424,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with json data</h3>
 
-<pre><code><span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -1433,7 +1435,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with raw string</h3>
 
-<pre><code><span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
         </div>
       
       <br/>
@@ -1454,7 +1456,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
           
           <p>Patch a streaming resource</p>
 
-<pre><code><span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+<pre><code class="language-crystal"><span class="t">Halite</span>.patch(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   puts response.status_code
   <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
     puts line
@@ -1486,7 +1488,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with form data</h3>
 
-<pre><code><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, form: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, form: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -1497,7 +1499,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with json data</h3>
 
-<pre><code><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -1508,7 +1510,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with raw string</h3>
 
-<pre><code><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
         </div>
       
       <br/>
@@ -1529,7 +1531,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
           
           <p>Post a streaming resource</p>
 
-<pre><code><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   puts response.status_code
   <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
     puts line
@@ -1561,7 +1563,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with form data</h3>
 
-<pre><code><span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, form: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, form: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -1572,7 +1574,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with json data</h3>
 
-<pre><code><span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: {
+<pre><code class="language-crystal"><span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, json: {
   first_name: <span class="s">&quot;foo&quot;</span>,
   last_name:  <span class="s">&quot;bar&quot;</span>
 })</code></pre>
@@ -1583,7 +1585,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Request with raw string</h3>
 
-<pre><code><span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/anything&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;Language=C%2B%2B&quot;</span>)</code></pre>
         </div>
       
       <br/>
@@ -1604,7 +1606,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
           
           <p>Put a streaming resource</p>
 
-<pre><code><span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+<pre><code class="language-crystal"><span class="t">Halite</span>.put(<span class="s">&quot;http://httpbin.org/anything&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   puts response.status_code
   <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
     puts line
@@ -1632,7 +1634,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
 
 <blockquote>This method will be executed with oneshot request.</blockquote>
 
-<pre><code><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/stream/3&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+<pre><code class="language-crystal"><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/stream/3&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   puts response.status_code
   <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
     puts line
@@ -1658,7 +1660,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
           
           <p>Make an HTTP request with the given verb</p>
 
-<pre><code><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/get&quot;</span>, {
+<pre><code class="language-crystal"><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/get&quot;</span>, {
   <span class="s">&quot;headers&quot;</span> <span class="o">=</span> { <span class="s">&quot;user_agent&quot;</span> => <span class="s">&quot;halite&quot;</span> },
   <span class="s">&quot;params&quot;</span> => { <span class="s">&quot;nickname&quot;</span> => <span class="s">&quot;foo&quot;</span> },
   <span class="s">&quot;form&quot;</span> => { <span class="s">&quot;username&quot;</span> => <span class="s">&quot;bar&quot;</span> },
@@ -1685,7 +1687,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
 
 <blockquote>This method will be executed with oneshot request.</blockquote>
 
-<pre><code><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/get&quot;</span>, <span class="t">Halite</span><span class="t">::</span><span class="t">Options</span>.<span class="k">new</span>(
+<pre><code class="language-crystal"><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/get&quot;</span>, <span class="t">Halite</span><span class="t">::</span><span class="t">Options</span>.<span class="k">new</span>(
   <span class="s">&quot;headers&quot;</span> <span class="o">=</span> { <span class="s">&quot;user_agent&quot;</span> => <span class="s">&quot;halite&quot;</span> },
   <span class="s">&quot;params&quot;</span> => { <span class="s">&quot;nickname&quot;</span> => <span class="s">&quot;foo&quot;</span> },
   <span class="s">&quot;form&quot;</span> => { <span class="s">&quot;username&quot;</span> => <span class="s">&quot;bar&quot;</span> },
@@ -1712,7 +1714,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
 
 <blockquote>This method will be executed with oneshot request.</blockquote>
 
-<pre><code><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/stream/3&quot;</span>, headers: {<span class="s">&quot;user-agent&quot;</span> => <span class="s">&quot;halite&quot;</span>}) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+<pre><code class="language-crystal"><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/stream/3&quot;</span>, headers: {<span class="s">&quot;user-agent&quot;</span> => <span class="s">&quot;halite&quot;</span>}) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   puts response.status_code
   <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
     puts line
@@ -1741,7 +1743,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
 <p>How long to wait for the server to send data before giving up, as a int, float or time span.
 The timeout value will be applied to both the connect and the read timeouts.</p>
 
-<pre><code><span class="t">Halite</span>.timeout(<span class="n">3</span>, <span class="n">3</span>.minutes, <span class="n">5</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.timeout(<span class="n">3</span>, <span class="n">3</span>.minutes, <span class="n">5</span>)
   .post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {file: <span class="s">&quot;file.txt&quot;</span>})
 <span class="c"># Or</span>
 <span class="t">Halite</span>.timeout(<span class="n">3.04</span>, <span class="n">64</span>, <span class="n">10.0</span>)
@@ -1771,10 +1773,34 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
 
 <p>Set <code>nil</code> to timeout to ignore timeout.</p>
 
-<pre><code><span class="t">Halite</span>.timeout(<span class="n">5.5</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.timeout(<span class="n">5.5</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 <span class="c"># Or</span>
 <span class="t">Halite</span>.timeout(<span class="n">2</span>.minutes)
   .post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {file: <span class="s">&quot;file.txt&quot;</span>})</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="use(*features)-instance-method">
+      <div class="signature">
+        
+        def <strong>use</strong>(*features)
+
+        <a class="method-permalink" href="#use(*features)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Turn on given the name of features.</p>
+
+<p>Available features to review all subclasses of <code><a href="../Halite/Feature.html">Halite::Feature</a></code>.</p>
+
+<pre><code class="language-crystal"><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, <span class="s">&quot;your-custom-feature-name&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
         </div>
       
       <br/>
@@ -1803,7 +1829,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
   </svg>
 </a>Use JSON logging</h4>
 
-<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, format: <span class="s">&quot;json&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, format: <span class="s">&quot;json&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># =&gt; { ... }</span></code></pre>
@@ -1814,35 +1840,11 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
   </svg>
 </a>Use common format logging and skip response body</h4>
 
-<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, format: <span class="s">&quot;common&quot;</span>, skip_response_body: <span class="n">true</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, format: <span class="s">&quot;common&quot;</span>, skip_response_body: <span class="n">true</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># =&gt; 2018-08-28 14:58:26 +08:00 | request  | GET    | http://httpbin.org/get</span>
 <span class="c"># =&gt; 2018-08-28 14:58:27 +08:00 | response | 200    | http://httpbin.org/get | 615.8ms | application/json</span></code></pre>
-        </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="use(*features)-instance-method">
-      <div class="signature">
-        
-        def <strong>use</strong>(*features)
-
-        <a class="method-permalink" href="#use(*features)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Turn on given the name of features.</p>
-
-<p>Available features to review all subclasses of <code><a href="../Halite/Feature.html">Halite::Feature</a></code>.</p>
-
-<pre><code><span class="t">Halite</span>.use(<span class="s">&quot;logging&quot;</span>, <span class="s">&quot;your-custom-feature-name&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
         </div>
       
       <br/>
@@ -1863,7 +1865,7 @@ The timeout value will be applied to both the connect and the read timeouts.</p>
           
           <p>Set requests user agent</p>
 
-<pre><code><span class="t">Halite</span>.user_agent(<span class="s">&quot;Custom User Agent&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.user_agent(<span class="s">&quot;Custom User Agent&quot;</span>)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
         </div>
       

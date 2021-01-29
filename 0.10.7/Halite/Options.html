@@ -3,23 +3,18 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="generator" content="Crystal Docs 0.35.1">
 <meta name="crystal_docs.project_version" content="0.10.7">
 <meta name="crystal_docs.project_name" content="halite">
 
   <meta name="crystal_docs.json_config_url" content="/halite/version.json">
 
 
+
 <link href="../css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/doc.js"></script>
 
-<svg class="hidden">
-  <symbol id="octicon-link" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
-  </symbol>
-</svg>
-
-  <meta id="repository-name" content="halite">
+  <meta name="repository-name" content="halite">
   <title>Halite::Options - halite 0.10.7</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
@@ -27,6 +22,11 @@
 </head>
 <body>
 
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <div class="search-results" class="hidden">
+  <div class="search-results hidden">
     <ul class="search-list"></ul>
   </div>
 
@@ -328,8 +328,8 @@
       
     </li>
   
-  <li class=" " data-id="halite/HTTP/Params" data-name="http::params">
-      <a href="../HTTP/Params.html">Params</a>
+  <li class=" " data-id="halite/URI/Params" data-name="uri::params">
+      <a href="../URI/Params.html">Params</a>
       
     </li>
   
@@ -374,7 +374,7 @@
   </svg>
 </a>Init with splats options</h3>
 
-<pre><code>o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(
+<pre><code class="language-crystal">o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(
   headers: {
     user_agent: <span class="s">&quot;foobar&quot;</span>
   }
@@ -391,7 +391,7 @@ o.cookies.<span class="k">class</span> <span class="c"># =&gt; HTTP::Cookies</sp
 <p>Set it with <code><a href="../Halite/Options.html#connect_timeout-instance-method">#connect_timeout</a></code>/<code><a href="../Halite/Options.html#read_timeout-instance-method">#read_timeout</a></code>/<code><a href="../Halite/Options.html#write_timeout-instance-method">#write_timeout</a></code> keys,
 but get it call <code><a href="../Halite/Options/Timeout.html">Timeout</a></code> class.</p>
 
-<pre><code>o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(connect_timeout: <span class="n">30</span>, read_timeout: <span class="n">30</span>)
+<pre><code class="language-crystal">o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(connect_timeout: <span class="n">30</span>, read_timeout: <span class="n">30</span>)
 o.timeout.connect <span class="c"># =&gt; 30.0</span>
 o.timeout.read    <span class="c"># =&gt; 30.0</span>
 o.timeout.write   <span class="c"># =&gt; nil</span></code></pre>
@@ -404,7 +404,7 @@ o.timeout.write   <span class="c"># =&gt; nil</span></code></pre>
 
 <p>Set it with <code><a href="../Halite/Options.html#follow:Follow-instance-method">#follow</a></code>/<code><a href="../Halite/Options.html#follow_strict-instance-method">#follow_strict</a></code> keys, but get it call <code><a href="../Halite/Options/Follow.html">Follow</a></code> class.</p>
 
-<pre><code>o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(follow: <span class="n">3</span>, follow_strict: <span class="n">false</span>)
+<pre><code class="language-crystal">o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(follow: <span class="n">3</span>, follow_strict: <span class="n">false</span>)
 o.follow.hops   <span class="c"># =&gt; 3</span>
 o.follow.strict <span class="c"># =&gt; false</span></code></pre>
 
@@ -732,16 +732,16 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#with_features(*features)-instance-method" class="signature"><strong>#with_features</strong>(*features)</a>
+        <a href="#with_features(feature_name:String,**opts)-instance-method" class="signature"><strong>#with_features</strong>(feature_name : String, **opts)</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with the name of features.</p></div>
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with feature name and options.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_features(feature_name:String,**opts)-instance-method" class="signature"><strong>#with_features</strong>(feature_name : String, **opts)</a>
+        <a href="#with_features(*features)-instance-method" class="signature"><strong>#with_features</strong>(*features)</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with feature name and options.</p></div>
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with the name of features.</p></div>
         
       </li>
     
@@ -781,16 +781,16 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#with_logging(logging:Halite::Logging::Abstract)-instance-method" class="signature"><strong>#with_logging</strong>(logging : Halite::Logging::Abstract)</a>
+        <a href="#with_logging(format:String,**opts)-instance-method" class="signature"><strong>#with_logging</strong>(format : String, **opts)</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features(*features)-instance-method">#with_features</a></code>.</p></div>
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> iitself with given format and the options of format.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_logging(format:String,**opts)-instance-method" class="signature"><strong>#with_logging</strong>(format : String, **opts)</a>
+        <a href="#with_logging(logging:Halite::Logging::Abstract)-instance-method" class="signature"><strong>#with_logging</strong>(logging : Halite::Logging::Abstract)</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> iitself with given format and the options of format.</p></div>
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features(feature_name:String,**opts)-instance-method">#with_features</a></code>.</p></div>
         
       </li>
     
@@ -1616,25 +1616,6 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       </div>
     </div>
   
-    <div class="entry-detail" id="with_features(*features)-instance-method">
-      <div class="signature">
-        
-        def <strong>with_features</strong>(*features)
-
-        <a class="method-permalink" href="#with_features(*features)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with the name of features.</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="with_features(feature_name:String,**opts)-instance-method">
       <div class="signature">
         
@@ -1646,6 +1627,25 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         <div class="doc">
           
           <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with feature name and options.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_features(*features)-instance-method">
+      <div class="signature">
+        
+        def <strong>with_features</strong>(*features)
+
+        <a class="method-permalink" href="#with_features(*features)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with the name of features.</p>
         </div>
       
       <br/>
@@ -1704,7 +1704,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
           
           <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given max hops of redirect times.</p>
 
-<pre><code><span class="c"># Automatically following redirects</span>
+<pre><code class="language-crystal"><span class="c"># Automatically following redirects</span>
 options.with_follow
 <span class="c"># A maximum of 3 subsequent redirects</span>
 options.with_follow(<span class="n">3</span>)
@@ -1756,25 +1756,6 @@ options.with_follow(<span class="n">3</span>)</code></pre>
       </div>
     </div>
   
-    <div class="entry-detail" id="with_logging(logging:Halite::Logging::Abstract)-instance-method">
-      <div class="signature">
-        
-        def <strong>with_logging</strong>(logging : <a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a>)
-
-        <a class="method-permalink" href="#with_logging(logging:Halite::Logging::Abstract)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features(*features)-instance-method">#with_features</a></code>.</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="with_logging(format:String,**opts)-instance-method">
       <div class="signature">
         
@@ -1786,6 +1767,25 @@ options.with_follow(<span class="n">3</span>)</code></pre>
         <div class="doc">
           
           <p>Returns <code><a href="../Halite/Options.html">Options</a></code> iitself with given format and the options of format.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_logging(logging:Halite::Logging::Abstract)-instance-method">
+      <div class="signature">
+        
+        def <strong>with_logging</strong>(logging : <a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a>)
+
+        <a class="method-permalink" href="#with_logging(logging:Halite::Logging::Abstract)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features(feature_name:String,**opts)-instance-method">#with_features</a></code>.</p>
         </div>
       
       <br/>

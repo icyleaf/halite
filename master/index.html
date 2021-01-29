@@ -3,23 +3,18 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="generator" content="Crystal Docs 0.35.1">
 <meta name="crystal_docs.project_version" content="master-dev">
 <meta name="crystal_docs.project_name" content="halite">
 
   <meta name="crystal_docs.json_config_url" content="/halite/version.json">
 
 
+
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/doc.js"></script>
 
-<svg class="hidden">
-  <symbol id="octicon-link" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
-  </symbol>
-</svg>
-
-  <meta id="repository-name" content="halite">
+  <meta name="repository-name" content="halite">
   <title>halite master-dev</title>
   <script type="text/javascript">
   CrystalDocs.base_path = "";
@@ -27,6 +22,11 @@
 </head>
 <body>
 
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <div class="search-results" class="hidden">
+  <div class="search-results hidden">
     <ul class="search-list"></ul>
   </div>
 
@@ -328,8 +328,8 @@
       
     </li>
   
-  <li class=" " data-id="halite/HTTP/Params" data-name="http::params">
-      <a href="HTTP/Params.html">Params</a>
+  <li class=" " data-id="halite/URI/Params" data-name="uri::params">
+      <a href="URI/Params.html">Params</a>
       
     </li>
   
@@ -353,17 +353,17 @@
   </svg>
 </a>Halite</h1>
 
-<p><a href="https://github.com/crystal-lang/crystal" target="_blank"><img src="https://img.shields.io/badge/language-crystal-776791.svg" alt="Language"/></a>
-<a href="https://github.com/icyleaf/halite/blob/master/CHANGELOG.md" target="_blank"><img src="https://img.shields.io/github/tag/icyleaf/halite.svg" alt="Tag"/></a>
-<a href="https://github.com/icyleaf/halite/" target="_blank"><img src="https://img.shields.io/badge/source-github-brightgreen.svg" alt="Source"/></a>
-<a href="https://icyleaf.github.io/halite/" target="_blank"><img src="https://img.shields.io/badge/document-api-brightgreen.svg" alt="Document"/></a>
-<a href="https://github.com/icyleaf/halite/actions?query=workflow%3A%22Linux+CI%22" target="_blank"><img src="https://github.com/icyleaf/halite/workflows/Linux%20CI/badge.svg" alt="Build Status"/></a></p>
+<p><a href="https://github.com/crystal-lang/crystal"><img src="https://img.shields.io/badge/language-crystal-776791.svg" alt="Language"/></a>
+<a href="https://github.com/icyleaf/halite/blob/master/CHANGELOG.md"><img src="https://img.shields.io/github/tag/icyleaf/halite.svg" alt="Tag"/></a>
+<a href="https://github.com/icyleaf/halite/"><img src="https://img.shields.io/badge/source-github-brightgreen.svg" alt="Source"/></a>
+<a href="https://icyleaf.github.io/halite/"><img src="https://img.shields.io/badge/document-api-brightgreen.svg" alt="Document"/></a>
+<a href="https://github.com/icyleaf/halite/actions?query=workflow%3A%22Linux+CI%22"><img src="https://github.com/icyleaf/halite/workflows/Linux%20CI/badge.svg" alt="Build Status"/></a></p>
 
-<p>HTTP Requests with a chainable REST API, built-in sessions and middleware written by <a href="https://crystal-lang.org/" target="_blank">Crystal</a>.
-Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http" target="_blank">HTTP</a>/<a href="https://github.com/rest-client/rest-client" target="_blank">RESTClient</a>
-and Python's <a href="https://github.com/requests/requests" target="_blank">requests</a>.</p>
+<p>HTTP Requests with a chainable REST API, built-in sessions and middleware written by <a href="https://crystal-lang.org/">Crystal</a>.
+Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http">HTTP</a>/<a href="https://github.com/rest-client/rest-client">RESTClient</a>
+and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.34.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/e7c74761" target="_blank">#e7c74761</a> (2020-12-28 11:56:11 +0800).</p>
+<p>Build in Crystal version >= <code>v0.34.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/4b6cad8a">#4b6cad8a</a> (2021-01-29 18:13:08 +0800).</p>
 
 <h2><a id="index" class="anchor" href="#index">
   <svg class="octicon-link" aria-hidden="true">
@@ -373,7 +373,7 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
 
 <p>&lt;!-- TOC --></p>
 
-<ul><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#usage" target="_blank">Usage</a></li><ul><li><a href="#making-requests" target="_blank">Making Requests</a></li><li><a href="#passing-parameters" target="_blank">Passing Parameters</a></li><li><a href="#query-string-parameters" target="_blank">Query string parameters</a></li><li><a href="#form-data" target="_blank">Form data</a></li><li><a href="#file-uploads-via-form-data" target="_blank">File uploads (via form data)</a></li><li><a href="#json-data" target="_blank">JSON data</a></li><li><a href="#raw-string" target="_blank">Raw String</a></li><li><a href="#passing-advanced-options" target="_blank">Passing advanced options</a></li><li><a href="#auth" target="_blank">Auth</a></li><li><a href="#user-agent" target="_blank">User Agent</a></li><li><a href="#headers" target="_blank">Headers</a></li><li><a href="#cookies" target="_blank">Cookies</a></li><li><a href="#redirects-and-history" target="_blank">Redirects and History</a></li><li><a href="#timeout" target="_blank">Timeout</a></li><li><a href="#https" target="_blank">HTTPS</a></li><li><a href="#response-handling" target="_blank">Response Handling</a></li><li><a href="#response-content" target="_blank">Response Content</a></li><li><a href="#json-content" target="_blank">JSON Content</a></li><li><a href="#parsing-content" target="_blank">Parsing Content</a></li><li><a href="#binary-data" target="_blank">Binary Data</a></li><li><a href="#error-handling" target="_blank">Error Handling</a></li><li><a href="#raise-for-status-code" target="_blank">Raise for status code</a></li></ul><li><a href="#middleware" target="_blank">Middleware</a></li><ul><li><a href="#write-a-simple-feature" target="_blank">Write a simple feature</a></li><li><a href="#write-a-interceptor" target="_blank">Write a interceptor</a></li></ul><li><a href="#advanced-usage" target="_blank">Advanced Usage</a></li><ul><li><a href="#configuring" target="_blank">Configuring</a></li><li><a href="#endpoint" target="_blank">Endpoint</a></li><li><a href="#sessions" target="_blank">Sessions</a></li><li><a href="#streaming-requests" target="_blank">Streaming Requests</a></li><li><a href="#logging" target="_blank">Logging</a></li><li><a href="#local-cache" target="_blank">Local Cache</a></li><li><a href="#link-headers" target="_blank">Link Headers</a>
+<ul><li><a href="#installation">Installation</a></li><li><a href="#usage">Usage</a></li><ul><li><a href="#making-requests">Making Requests</a></li><li><a href="#passing-parameters">Passing Parameters</a></li><li><a href="#query-string-parameters">Query string parameters</a></li><li><a href="#form-data">Form data</a></li><li><a href="#file-uploads-via-form-data">File uploads (via form data)</a></li><li><a href="#json-data">JSON data</a></li><li><a href="#raw-string">Raw String</a></li><li><a href="#passing-advanced-options">Passing advanced options</a></li><li><a href="#auth">Auth</a></li><li><a href="#user-agent">User Agent</a></li><li><a href="#headers">Headers</a></li><li><a href="#cookies">Cookies</a></li><li><a href="#redirects-and-history">Redirects and History</a></li><li><a href="#timeout">Timeout</a></li><li><a href="#https">HTTPS</a></li><li><a href="#response-handling">Response Handling</a></li><li><a href="#response-content">Response Content</a></li><li><a href="#json-content">JSON Content</a></li><li><a href="#parsing-content">Parsing Content</a></li><li><a href="#binary-data">Binary Data</a></li><li><a href="#error-handling">Error Handling</a></li><li><a href="#raise-for-status-code">Raise for status code</a></li></ul><li><a href="#middleware">Middleware</a></li><ul><li><a href="#write-a-simple-feature">Write a simple feature</a></li><li><a href="#write-a-interceptor">Write a interceptor</a></li></ul><li><a href="#advanced-usage">Advanced Usage</a></li><ul><li><a href="#configuring">Configuring</a></li><li><a href="#endpoint">Endpoint</a></li><li><a href="#sessions">Sessions</a></li><li><a href="#streaming-requests">Streaming Requests</a></li><li><a href="#logging">Logging</a></li><li><a href="#local-cache">Local Cache</a></li><li><a href="#link-headers">Link Headers</a>
 &lt;!-- /TOC --></li></ul></ul>
 
 <h2><a id="installation" class="anchor" href="#installation">
@@ -428,7 +428,7 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
         <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span>
       })</code></pre>
 
-<p>See also all <a href="https://icyleaf.github.io/halite/Halite/Chainable.html" target="_blank">chainable methods</a>.</p>
+<p>See also all <a href="https://icyleaf.github.io/halite/Halite/Chainable.html">chainable methods</a>.</p>
 
 <p>Many other HTTP methods are available as well:</p>
 
@@ -536,7 +536,7 @@ and Python's <a href="https://github.com/requests/requests" target="_blank">requ
   </svg>
 </a>Auth</h4>
 
-<p>Use the <code>#basic_auth</code> method to perform <a href="http://tools.ietf.org/html/rfc2617" target="_blank">HTTP Basic Authentication</a> using a username and password:</p>
+<p>Use the <code>#basic_auth</code> method to perform <a href="http://tools.ietf.org/html/rfc2617">HTTP Basic Authentication</a> using a username and password:</p>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.basic_auth(user: <span class="s">&quot;user&quot;</span>, pass: <span class="s">&quot;p@ss&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 
@@ -736,7 +736,7 @@ tls.private_key <span class="o">=</span> <span class="t">File</span>.expand_path
   </svg>
 </a>Response Handling</h3>
 
-<p>After an HTTP request, <code><a href="Halite/Response.html">Halite::Response</a></code> object have several useful methods. (Also see the <a href="https://icyleaf.github.io/halite/Halite/Response.html" target="_blank">API documentation</a>).</p>
+<p>After an HTTP request, <code><a href="Halite/Response.html">Halite::Response</a></code> object have several useful methods. (Also see the <a href="https://icyleaf.github.io/halite/Halite/Response.html">API documentation</a>).</p>
 
 <ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io only available in streaming requests.</li><li><strong>#status_code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: A <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#links</strong>: A list of <code>Halite::HeaderLink</code> set from headers.</li><li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the <code>#content_type</code>.</li><li><strong>#to_a</strong>: Return a <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_raw</strong>: Return a raw of response as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li><li><strong>#version</strong>: The HTTP version.</li></ul>
 
@@ -804,7 +804,7 @@ r.parse(<span class="s">&quot;yaml&quot;</span>) <span class="c"># or &quot;yml&
   </svg>
 </a>Binary Data</h4>
 
-<p>Store binary data (eg, <code>application/octet-stream</code>) to file, you can use <a href="#streaming-requests" target="_blank">streaming requests</a>:</p>
+<p>Store binary data (eg, <code>application/octet-stream</code>) to file, you can use <a href="#streaming-requests">streaming requests</a>:</p>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;https://github.com/icyleaf/halite/archive/master.zip&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   filename <span class="o">=</span> response.filename || <span class="s">&quot;halite-master.zip&quot;</span>
@@ -862,7 +862,7 @@ in your HTTP client, allowing you to monitor outgoing requests, incoming respons
 
 <p>Available features:</p>
 
-<ul><li><a href="#logging" target="_blank">Logging</a> (Yes, logging is based on feature, cool, aha!)</li><li><a href="#local-cache" target="_blank">Local Cache</a> (local storage, speed up in development)</li></ul>
+<ul><li><a href="#logging">Logging</a> (Yes, logging is based on feature, cool, aha!)</li><li><a href="#local-cache">Local Cache</a> (local storage, speed up in development)</li></ul>
 
 <h3><a id="write-a-simple-feature" class="anchor" href="#write-a-simple-feature">
   <svg class="octicon-link" aria-hidden="true">
@@ -947,7 +947,7 @@ r.status_code               <span class="c"># =&gt; 404</span>
 r.headers[<span class="s">&quot;X-Powered-By&quot;</span>]   <span class="c"># =&gt; Halite</span>
 r.body                      <span class="c"># =&gt; {&quot;user-agent&quot;:&quot;Halite/0.6.0&quot;}</span></code></pre>
 
-<p>For more implementation details about the feature layer, see the <a href="https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2" target="_blank">Feature</a> class and <a href="https://github.com/icyleaf/halite/tree/master/src/halite/features" target="_blank">examples</a> and <a href="https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23" target="_blank">specs</a>.</p>
+<p>For more implementation details about the feature layer, see the <a href="https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2">Feature</a> class and <a href="https://github.com/icyleaf/halite/tree/master/src/halite/features">examples</a> and <a href="https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23">specs</a>.</p>
 
 <h2><a id="advanced-usage" class="anchor" href="#advanced-usage">
   <svg class="octicon-link" aria-hidden="true">
@@ -1006,7 +1006,7 @@ client.get(<span class="s">&quot;/users&quot;</span>)      <span class="c"># GET
   </svg>
 </a>Sessions</h3>
 
-<p>As like <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session()</a>, Halite built-in session by default.</p>
+<p>As like <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects">requests.Session()</a>, Halite built-in session by default.</p>
 
 <p>Let's persist some cookies across requests:</p>
 
@@ -1023,7 +1023,7 @@ client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 <span class="c"># =&gt; 2018-06-25 18:41:07 +08:00 | response | 200    | http://httpbin.org/cookies | application/json</span>
 <span class="c"># =&gt; {&quot;cookies&quot;:{&quot;private_token&quot;:&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;}}</span></code></pre>
 
-<p>All it support with <a href="https://icyleaf.github.io/halite/Halite/Chainable.html" target="_blank">chainable methods</a> in the other examples list in <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects" target="_blank">requests.Session</a>.</p>
+<p>All it support with <a href="https://icyleaf.github.io/halite/Halite/Chainable.html">chainable methods</a> in the other examples list in <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects">requests.Session</a>.</p>
 
 <p>Note, however, that chainable methods will not be persisted across requests, even if using a session. This example will only send the cookies or headers with the first request, but not the second:</p>
 
@@ -1050,7 +1050,7 @@ r.body <span class="c"># =&gt; {&quot;cookies&quot;:{&quot;username&quot;:&quot;
   </svg>
 </a>Streaming Requests</h3>
 
-<p>Similar to <a href="https://crystal-lang.org/api/0.27.0/HTTP/Client.html" target="_blank">HTTP::Client</a> (search keyword "Streaming") usage with a block,
+<p>Similar to <a href="https://crystal-lang.org/api/0.27.0/HTTP/Client.html">HTTP::Client</a> (search keyword "Streaming") usage with a block,
 you can easily use same way, but Halite returns a <code><a href="Halite/Response.html">Halite::Response</a></code> object:</p>
 
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/stream/5&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
@@ -1065,7 +1065,7 @@ you can easily use same way, but Halite returns a <code><a href="Halite/Response
 > <code>body_io</code> is avaiabled as an <code>IO</code> and not reentrant safe. Might throws a "Nil assertion failed" exception if there is no data in the <code>IO</code>
 (such like <code>head</code> requests). Calling this method multiple times causes some of the received data being lost.
 >
-> One more thing, use streaming requests the response will always <a href="#redirects-and-history" target="_blank">enable redirect</a> automatically.</blockquote>
+> One more thing, use streaming requests the response will always <a href="#redirects-and-history">enable redirect</a> automatically.</blockquote>
 
 <h3><a id="logging" class="anchor" href="#logging">
   <svg class="octicon-link" aria-hidden="true">
@@ -1079,7 +1079,7 @@ We can enable per operation logging by configuring them through the chaining API
 <p>By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to <code>STDOUT</code> on DEBUG level.
 You can configuring the following options:</p>
 
-<ul><li><code>logging</code>: Instance your <code><a href="Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code>, check <a href="#use-the-custom-logging" target="_blank">Use the custom logging</a>.</li><li><code>format</code>: Output format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>file</code>: Write to file with path, works with <code>format</code>.</li><li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code>. (append to bottom, create it if file is not exist)</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
+<ul><li><code>logging</code>: Instance your <code><a href="Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code>, check <a href="#use-the-custom-logging">Use the custom logging</a>.</li><li><code>format</code>: Output format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>file</code>: Write to file with path, works with <code>format</code>.</li><li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code>. (append to bottom, create it if file is not exist)</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
 
 <blockquote><strong>NOTE</strong>: <code>format</code> (<code>file</code> and <code>filemode</code>) and <code>logging</code> are conflict, you can not use both.</blockquote>
 
@@ -1115,7 +1115,7 @@ You can configuring the following options:</p>
 
 <p>It has JSON formatted for developer friendly logging.</p>
 
-<pre><code><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>)
+<pre><code class="language-crystal"><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
 
 <h4><a id="write-to-a-log-file" class="anchor" href="#write-to-a-log-file">
@@ -1192,8 +1192,8 @@ r.headers                                                 <span class="c"># =&gt
   </svg>
 </a>Link Headers</h3>
 
-<p>Many HTTP APIs feature <a href="https://tools.ietf.org/html/rfc5988" target="_blank">Link headers</a>. GitHub uses
-these for <a href="https://developer.github.com/v3/#pagination" target="_blank">pagination</a> in their API, for example:</p>
+<p>Many HTTP APIs feature <a href="https://tools.ietf.org/html/rfc5988">Link headers</a>. GitHub uses
+these for <a href="https://developer.github.com/v3/#pagination">pagination</a> in their API, for example:</p>
 
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get <span class="s">&quot;https://api.github.com/users/icyleaf/repos?page=1&amp;per_page=2&quot;</span>
 r.links
@@ -1246,7 +1246,7 @@ r.links[<span class="s">&quot;next&quot;</span>].params
 it would make business sense to sponsor Halite development. Individual users are also welcome to make a one time donation
 if Halite has helped you in your work or personal projects.</p>
 
-<p>You can donate via <a href="https://www.paypal.me/icyleaf/5" target="_blank">Paypal</a>.</p>
+<p>You can donate via <a href="https://www.paypal.me/icyleaf/5">Paypal</a>.</p>
 
 <h2><a id="how-to-contribute" class="anchor" href="#how-to-contribute">
   <svg class="octicon-link" aria-hidden="true">
@@ -1256,7 +1256,7 @@ if Halite has helped you in your work or personal projects.</p>
 
 <p>Your contributions are always welcome! Please submit a pull request or create an issue to add a new question, bug or feature to the list.</p>
 
-<p>All <a href="https://github.com/icyleaf/halite/graphs/contributors" target="_blank">Contributors</a> are on the wall.</p>
+<p>All <a href="https://github.com/icyleaf/halite/graphs/contributors">Contributors</a> are on the wall.</p>
 
 <h2><a id="you-may-also-like" class="anchor" href="#you-may-also-like">
   <svg class="octicon-link" aria-hidden="true">
@@ -1264,7 +1264,7 @@ if Halite has helped you in your work or personal projects.</p>
   </svg>
 </a>You may also like</h2>
 
-<ul><li><a href="https://github.com/icyleaf/totem" target="_blank">totem</a> - Load and parse a configuration file or string in JSON, YAML, dotenv formats.</li><li><a href="https://github.com/icyleaf/markd" target="_blank">markd</a> - Yet another markdown parser built for speed, Compliant to CommonMark specification.</li><li><a href="https://github.com/icyleaf/poncho" target="_blank">poncho</a> - A .env parser/loader improved for performance.</li><li><a href="https://github.com/icyleaf/popcorn" target="_blank">popcorn</a> - Easy and Safe casting from one type to another.</li><li><a href="https://github.com/icyleaf/fast-crystal" target="_blank">fast-crystal</a> - 💨 Writing Fast Crystal 😍 -- Collect Common Crystal idioms.</li></ul>
+<ul><li><a href="https://github.com/icyleaf/totem">totem</a> - Load and parse a configuration file or string in JSON, YAML, dotenv formats.</li><li><a href="https://github.com/icyleaf/markd">markd</a> - Yet another markdown parser built for speed, Compliant to CommonMark specification.</li><li><a href="https://github.com/icyleaf/poncho">poncho</a> - A .env parser/loader improved for performance.</li><li><a href="https://github.com/icyleaf/popcorn">popcorn</a> - Easy and Safe casting from one type to another.</li><li><a href="https://github.com/icyleaf/fast-crystal">fast-crystal</a> - 💨 Writing Fast Crystal 😍 -- Collect Common Crystal idioms.</li></ul>
 
 <h2><a id="license" class="anchor" href="#license">
   <svg class="octicon-link" aria-hidden="true">
@@ -1272,7 +1272,7 @@ if Halite has helped you in your work or personal projects.</p>
   </svg>
 </a>License</h2>
 
-<p><a href="https://github.com/icyleaf/halite/blob/master/LICENSE" target="_blank">MIT License</a> © icyleaf</p>
+<p><a href="https://github.com/icyleaf/halite/blob/master/LICENSE">MIT License</a> © icyleaf</p>
 </div>
 </body>
 </html>
