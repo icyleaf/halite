@@ -56,7 +56,11 @@ module Halite
     # @return `String` with the path, query and fragment combined
     def full_path
       String.build do |str|
-        str << @uri.full_path
+        {% if Crystal::VERSION < "0.36.0" %}
+          str << @uri.full_path
+        {% else %}
+          str << @uri.request_target
+        {% end %}
         if @uri.fragment
           str << "#" << @uri.fragment
         end
