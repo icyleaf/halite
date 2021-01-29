@@ -220,7 +220,7 @@ module Halite
     # Halite.timeout(2.minutes)
     #   .post("http://httpbin.org/post", form: {file: "file.txt"})
     # ```
-    def timeout(timeout : Int32? | Float64? | Time::Span?)
+    def timeout(timeout : (Int32 | Float64 | Time::Span)?)
       timeout ? timeout(timeout, timeout, timeout) : branch
     end
 
