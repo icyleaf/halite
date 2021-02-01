@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - [x] Proxy support
   - [ ] Reuse connection
 
+## [0.10.9] (2021-02-01)
+
+### Fixed
+
+- `timeout` fail to match argument type. [#97](https://github.com/icyleaf/halite/issues/97) (thanks @[oprypin](https://github.com/oprypin))
+- Compatibility with Crystal 0.36.0.
+
 ## [0.10.8] (2020-12-22)
 
 ### Fixed
@@ -344,7 +351,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.8...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.9...HEAD
+[0.10.9]: https://github.com/icyleaf/halite/compare/v0.10.8...v0.10.9
 [0.10.8]: https://github.com/icyleaf/halite/compare/v0.10.7...v0.10.8
 [0.10.7]: https://github.com/icyleaf/halite/compare/v0.10.6...v0.10.7
 [0.10.6]: https://github.com/icyleaf/halite/compare/v0.10.5...v0.10.6
