@@ -106,15 +106,23 @@ describe Halite do
           end
         end
 
-        [nil, 10, {connect: 2, read: 2, write: 2}].each do |timeout|
-          context "with `.timeout(#{timeout.inspect})`" do
-            it "writes the whole body" do
+        context "with `.timeout`" do
+          [nil, 10, 10.0, 10.seconds].each do |timeout|
+            it "writes the whole body with #{timeout.inspect}" do
               body = "“" * 1_000_000
-              response = Halite.post SERVER.api("echo-body"), raw: body
+              response = Halite.timeout(timeout).post SERVER.api("echo-body"), raw: body
 
               response.to_s.should eq(body)
               response.content_length.should eq(body.bytesize)
             end
+          end
+
+          it "writes the whole body with apiece arguments" do
+            body = "“" * 1_000_000
+            response = Halite.timeout(10, 10.0, 10.seconds).post SERVER.api("echo-body"), raw: body
+
+            response.to_s.should eq(body)
+            response.content_length.should eq(body.bytesize)
           end
         end
       end
