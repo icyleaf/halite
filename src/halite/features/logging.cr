@@ -2,6 +2,8 @@ require "log"
 require "colorize"
 require "file_utils"
 
+Log.setup("halite")
+
 module Halite
   # Logging feature
   class Logging < Feature
@@ -30,20 +32,9 @@ module Halite
 
     # Logging format Abstract
     abstract class Abstract
-      def self.new(file : String? = nil, filemode = "a",
-                   skip_request_body = false, skip_response_body = false,
+      def self.new(*, for : String = "halite", skip_request_body = false, skip_response_body = false,
                    skip_benchmark = false, colorize = true)
-        io = if file
-               file = File.expand_path(file)
-               filepath = File.dirname(file)
-               FileUtils.mkdir_p(filepath) unless Dir.exists?(filepath)
-
-               File.new(file, filemode)
-             else
-               STDOUT
-             end
-
-        new(skip_request_body, skip_response_body, skip_benchmark, colorize, io)
+        new(skip_request_body, skip_response_body, skip_benchmark, colorize)
       end
 
       setter logger : Log
@@ -54,22 +45,14 @@ module Halite
 
       @request_time : Time?
 
-      def initialize(@skip_request_body = false, @skip_response_body = false,
-                     @skip_benchmark = false, @colorize = true, @io : IO = STDOUT)
-        backend = Log::IOBackend.new(@io)
-        backend.formatter = default_formatter
-        @logger = Log.new("halite", backend, :debug)
+      def initialize(for : String = "halite", @skip_request_body = false, @skip_response_body = false,
+                     @skip_benchmark = false, @colorize = true)
+        @logger = Log.for(for)
         Colorize.enabled = @colorize
       end
 
       abstract def request(request)
       abstract def response(response)
-
-      protected def default_formatter
-        Log::Formatter.new do |entry, io|
-          io << entry.message
-        end
-      end
 
       protected def human_time(elapsed : Time::Span)
         elapsed = elapsed.to_f

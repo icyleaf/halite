@@ -84,8 +84,6 @@ class Halite::Logging
     end
 
     protected def colorful(message, fore, back)
-      Colorize.enabled = !@io.is_a?(File) && @colorize
-
       message.colorize.fore(fore).back(back)
     end
 

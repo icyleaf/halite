@@ -39,7 +39,8 @@ describe Halite::Logging do
     it "should use File IO" do
       with_tempfile("halite-features-logging") do |file|
         uri = URI.parse("https://httpbin.org/get")
-        writer = Halite::Logging::Common.new(file: file)
+        Log.setup("halite.spec.file", backend: Log::IOBackend.new(File.open(file, "w")))
+        writer = Halite::Logging::Common.new(for: "halite.spec.file")
         logging = Halite::Logging.new(logging: writer)
         logging.writer.should be_a(Halite::Logging::Common)
         logging.request(Halite::Request.new("get", uri))
