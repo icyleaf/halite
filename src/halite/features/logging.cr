@@ -32,11 +32,6 @@ module Halite
 
     # Logging format Abstract
     abstract class Abstract
-      def self.new(*, for : String = "halite", skip_request_body = false, skip_response_body = false,
-                   skip_benchmark = false, colorize = true)
-        new(skip_request_body, skip_response_body, skip_benchmark, colorize)
-      end
-
       setter logger : Log
       getter skip_request_body : Bool
       getter skip_response_body : Bool
@@ -45,7 +40,8 @@ module Halite
 
       @request_time : Time?
 
-      def initialize(for : String = "halite", @skip_request_body = false, @skip_response_body = false,
+      def initialize(*, for : String = "halite",
+                     @skip_request_body = false, @skip_response_body = false,
                      @skip_benchmark = false, @colorize = true)
         @logger = Log.for(for)
         Colorize.enabled = @colorize

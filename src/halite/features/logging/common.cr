@@ -84,6 +84,8 @@ class Halite::Logging
     end
 
     protected def colorful(message, fore, back)
+      Colorize.enabled = @colorize && !!(backend = @logger.backend.as?(Log::IOBackend)) && backend.io.tty?
+
       message.colorize.fore(fore).back(back)
     end
 
