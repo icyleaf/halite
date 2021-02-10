@@ -468,7 +468,8 @@ describe Halite::Options do
       Halite::Logging.register "simple", SimpleLogger
 
       with_tempfile("halite_logger") do |file|
-        options = Halite::Options.new.with_logging(format: "simple", file: file, filemode: "w")
+        Log.setup("halite.tempfile", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "w")))
+        options = Halite::Options.new.with_logging(format: "simple")
         logging = options.features["logging"].as(Halite::Logging)
         logging.writer.should be_a(SimpleLogger)
       end

@@ -12,7 +12,7 @@ HTTP Requests with a chainable REST API, built-in sessions and middleware writte
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client)
 and Python's [requests](https://github.com/requests/requests).
 
-Build in Crystal version >= `v0.34.0`, this document valid with latest commit.
+Build in Crystal version `>= 0.35.0`, this document valid with latest commit.
 
 ## Index
 
@@ -742,12 +742,17 @@ Halite.logging(format: "json")
 
 ```crystal
 # Write plain text to a log file
-Halite.logging(file: "logs/halite.log", skip_benchmark: true, colorize: false)
+Log.setup("halite.file", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "a")))
+Halite.logging(for: "halite.file", skip_benchmark: true, colorize: false)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # Write json data to a log file
-Halite.logging(format: "json", file: "logs/halite.log")
+Log.setup("halite.file", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "a")))
+Halite.logging(format: "json", for: "halite.file")
       .get("http://httpbin.org/get", params: {name: "foobar"})
+
+# Redirect *all* logging from Halite to a file:
+Log.setup("halite", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "a")))
 ```
 
 #### Use the custom logging

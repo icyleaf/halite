@@ -369,24 +369,25 @@ module Halite
     # #### create a http request and log to file
     #
     # ```
-    # Halite.logging(file: "/tmp/halite.log")
+    # Log.setup("halite.file", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "a")))
+    # Halite.logging(for: "halite.file")
     #   .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     #
     # #### Always create new log file and store data to JSON formatted
     #
     # ```
-    # Halite.logging(format: "json", file: "/tmp/halite.log")
+    # Log.setup("halite.file", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "w"))
+    # Halite.logging(for: "halite.file", format: "json")
     #   .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     #
     # Check the log file content: **/tmp/halite.log**
-    def logging(format : String = "common", file : String? = nil, filemode = "a",
+    def logging(format : String = "common", *, for : String = "halite",
                 skip_request_body = false, skip_response_body = false,
                 skip_benchmark = false, colorize = true)
       opts = {
-        file:               file,
-        filemode:           filemode,
+        for:                for,
         skip_request_body:  skip_request_body,
         skip_response_body: skip_response_body,
         skip_benchmark:     skip_benchmark,

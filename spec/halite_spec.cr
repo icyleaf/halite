@@ -541,7 +541,8 @@ describe Halite do
 
     it "sets logging into file" do
       with_tempfile("halite-spec-logging") do |file|
-        client = Halite.logging(file: file, skip_response_body: true)
+        Log.setup("halite.spec.file", backend: Log::IOBackend.new(File.open(file, "a")))
+        client = Halite.logging(for: "halite.spec.file", skip_response_body: true)
         client.options.features.has_key?("logging").should be_true
         client.options.features["logging"].should be_a(Halite::Logging)
         logging = client.options.features["logging"].as(Halite::Logging)
