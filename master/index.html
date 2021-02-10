@@ -363,7 +363,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http">HTTP</a>/<a href="https://github.com/rest-client/rest-client">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
 
-<p>Build in Crystal version >= <code>v0.34.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/3aaf44f1">#3aaf44f1</a> (2021-02-01 12:35:23 +0800).</p>
+<p>Build in Crystal version <code>>= 0.35.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/def93fcd">#def93fcd</a> (2021-02-10 10:22:24 +0800).</p>
 
 <h2><a id="index" class="anchor" href="#index">
   <svg class="octicon-link" aria-hidden="true">
@@ -1125,12 +1125,17 @@ You can configuring the following options:</p>
 </a>Write to a log file</h4>
 
 <pre><code class="language-crystal"><span class="c"># Write plain text to a log file</span>
-<span class="t">Halite</span>.logging(file: <span class="s">&quot;logs/halite.log&quot;</span>, skip_benchmark: <span class="n">true</span>, colorize: <span class="n">false</span>)
+<span class="t">Log</span>.setup(<span class="s">&quot;halite.file&quot;</span>, backend: <span class="t">Log</span><span class="t">::</span><span class="t">IOBackend</span>.<span class="k">new</span>(<span class="t">File</span>.open(<span class="s">&quot;/tmp/halite.log&quot;</span>, <span class="s">&quot;a&quot;</span>)))
+<span class="t">Halite</span>.logging(<span class="k">for</span>: <span class="s">&quot;halite.file&quot;</span>, skip_benchmark: <span class="n">true</span>, colorize: <span class="n">false</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
 
 <span class="c"># Write json data to a log file</span>
-<span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, file: <span class="s">&quot;logs/halite.log&quot;</span>)
-      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
+<span class="t">Log</span>.setup(<span class="s">&quot;halite.file&quot;</span>, backend: <span class="t">Log</span><span class="t">::</span><span class="t">IOBackend</span>.<span class="k">new</span>(<span class="t">File</span>.open(<span class="s">&quot;/tmp/halite.log&quot;</span>, <span class="s">&quot;a&quot;</span>)))
+<span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, <span class="k">for</span>: <span class="s">&quot;halite.file&quot;</span>)
+      .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
+
+<span class="c"># Redirect *all* logging from Halite to a file:</span>
+<span class="t">Log</span>.setup(<span class="s">&quot;halite&quot;</span>, backend: <span class="t">Log</span><span class="t">::</span><span class="t">IOBackend</span>.<span class="k">new</span>(<span class="t">File</span>.open(<span class="s">&quot;/tmp/halite.log&quot;</span>, <span class="s">&quot;a&quot;</span>)))</code></pre>
 
 <h4><a id="use-the-custom-logging" class="anchor" href="#use-the-custom-logging">
   <svg class="octicon-link" aria-hidden="true">

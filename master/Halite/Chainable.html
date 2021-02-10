@@ -555,16 +555,16 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#logging(logging:Halite::Logging::Abstract=Halite::Logging::Common.new)-instance-method" class="signature"><strong>#logging</strong>(logging : Halite::Logging::Abstract = <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Common</span>.<span class="k">new</span>)</a>
+        <a href="#logging(format:String=&quot;common&quot;,*,for:String=&quot;halite&quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method" class="signature"><strong>#logging</strong>(format : String = <span class="s">&quot;common&quot;</span>, *, for : String = <span class="s">&quot;halite&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the logging which it integration from <code><a href="../Halite/Logging.html">Halite::Logging</a></code>.</p></div>
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the file with the path.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#logging(format:String=&quot;common&quot;,file:String?=nil,filemode=&quot;a&quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method" class="signature"><strong>#logging</strong>(format : String = <span class="s">&quot;common&quot;</span>, file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)</a>
+        <a href="#logging(logging:Halite::Logging::Abstract=Halite::Logging::Common.new)-instance-method" class="signature"><strong>#logging</strong>(logging : Halite::Logging::Abstract = <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Common</span>.<span class="k">new</span>)</a>
         
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the file with the path.</p></div>
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the logging which it integration from <code><a href="../Halite/Logging.html">Halite::Logging</a></code>.</p></div>
         
       </li>
     
@@ -1147,6 +1147,56 @@
       </div>
     </div>
   
+    <div class="entry-detail" id="logging(format:String=&quot;common&quot;,*,for:String=&quot;halite&quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method">
+      <div class="signature">
+        
+        def <strong>logging</strong>(format : String = <span class="s">&quot;common&quot;</span>, *, for : String = <span class="s">&quot;halite&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)
+
+        <a class="method-permalink" href="#logging(format:String=&quot;common&quot;,*,for:String=&quot;halite&quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the file with the path.</p>
+
+<h4><a id="json-formatted-logging" class="anchor" href="#json-formatted-logging">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>JSON-formatted logging</h4>
+
+<pre><code class="language-crystal"><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
+
+<h4><a id="create-a-http-request-and-log-to-file" class="anchor" href="#create-a-http-request-and-log-to-file">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>create a http request and log to file</h4>
+
+<pre><code class="language-crystal"><span class="t">Log</span>.setup(<span class="s">&quot;halite.file&quot;</span>, backend: <span class="t">Log</span><span class="t">::</span><span class="t">IOBackend</span>.<span class="k">new</span>(<span class="t">File</span>.open(<span class="s">&quot;/tmp/halite.log&quot;</span>, <span class="s">&quot;a&quot;</span>)))
+<span class="t">Halite</span>.logging(<span class="k">for</span>: <span class="s">&quot;halite.file&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
+
+<h4><a id="always-create-new-log-file-and-store-data-to-json-formatted" class="anchor" href="#always-create-new-log-file-and-store-data-to-json-formatted">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Always create new log file and store data to JSON formatted</h4>
+
+<pre><code class="language-crystal"><span class="t">Log</span>.setup(<span class="s">&quot;halite.file&quot;</span>, backend: <span class="t">Log</span><span class="t">::</span><span class="t">IOBackend</span>.<span class="k">new</span>(<span class="t">File</span>.open(<span class="s">&quot;/tmp/halite.log&quot;</span>, <span class="s">&quot;w&quot;</span>))
+<span class="t">Halite</span>.logging(<span class="k">for</span>: <span class="s">&quot;halite.file&quot;</span>, format: <span class="s">&quot;json&quot;</span>)
+  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
+
+<p>Check the log file content: <strong>/tmp/halite.log</strong></p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="logging(logging:Halite::Logging::Abstract=Halite::Logging::Common.new)-instance-method">
       <div class="signature">
         
@@ -1228,54 +1278,6 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
       </div>
     </div>
   
-    <div class="entry-detail" id="logging(format:String=&quot;common&quot;,file:String?=nil,filemode=&quot;a&quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method">
-      <div class="signature">
-        
-        def <strong>logging</strong>(format : String = <span class="s">&quot;common&quot;</span>, file : String? = <span class="n">nil</span>, filemode = <span class="s">&quot;a&quot;</span>, skip_request_body = <span class="n">false</span>, skip_response_body = <span class="n">false</span>, skip_benchmark = <span class="n">false</span>, colorize = <span class="n">true</span>)
-
-        <a class="method-permalink" href="#logging(format:String=&quot;common&quot;,file:String?=nil,filemode=&quot;a&quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given the file with the path.</p>
-
-<h4><a id="json-formatted-logging" class="anchor" href="#json-formatted-logging">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>JSON-formatted logging</h4>
-
-<pre><code class="language-crystal"><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
-
-<h4><a id="create-a-http-request-and-log-to-file" class="anchor" href="#create-a-http-request-and-log-to-file">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>create a http request and log to file</h4>
-
-<pre><code class="language-crystal"><span class="t">Halite</span>.logging(file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
-
-<h4><a id="always-create-new-log-file-and-store-data-to-json-formatted" class="anchor" href="#always-create-new-log-file-and-store-data-to-json-formatted">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>Always create new log file and store data to JSON formatted</h4>
-
-<pre><code class="language-crystal"><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>, file: <span class="s">&quot;/tmp/halite.log&quot;</span>)
-  .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
-
-<p>Check the log file content: <strong>/tmp/halite.log</strong></p>
-        </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="logging(enable:Bool=true)-instance-method">
       <div class="signature">
         
@@ -1294,7 +1296,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
   </svg>
 </a>Enable logging</h4>
 
-<p>Same as call <code><a href="../Halite/Chainable.html#logging(logging:Halite::Logging::Abstract=Halite::Logging::Common.new)-instance-method">#logging</a></code> method without any argument.</p>
+<p>Same as call <code><a href="../Halite/Chainable.html#logging(format:String=&quot;common&quot;,*,for:String=&quot;halite&quot;,skip_request_body=false,skip_response_body=false,skip_benchmark=false,colorize=true)-instance-method">#logging</a></code> method without any argument.</p>
 
 <pre><code class="language-crystal"><span class="t">Halite</span>.logging.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
 
