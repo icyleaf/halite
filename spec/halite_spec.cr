@@ -38,7 +38,7 @@ describe Halite::Helper do
         ENV["TZ"]?.should be_nil
         t = Time.utc(2021, 2, 10, 22, 5, 13)
         timezone = "Asia/Shanghai"
-        Halite::Helper.to_rfc3339(t, timezone).should eq "2021-02-11T06:05:13+08:00"
+        Halite::Helper.to_rfc3339(t, timezone: timezone).should eq "2021-02-11T06:05:13+08:00"
       end
     end
 
@@ -56,7 +56,7 @@ describe Halite::Helper do
       with_timezone(timezone) do
         ENV["TZ"].should eq timezone
         t = Time.utc(2021, 2, 10, 22, 5, 13)
-        Halite::Helper.to_rfc3339(t, "Europe/Berlin").should eq "2021-02-10T23:05:13+01:00"
+        Halite::Helper.to_rfc3339(t, timezone: "Europe/Berlin").should eq "2021-02-10T23:05:13+01:00"
       end
     end
   end

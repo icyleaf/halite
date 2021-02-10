@@ -2,7 +2,10 @@ require "log"
 require "colorize"
 require "file_utils"
 
-Log.setup("halite")
+Log.setup do |c|
+  backend = Log::IOBackend.new(formatter: Halite::Logging::ShortFormat)
+  c.bind("halite", :info, backend)
+end
 
 module Halite
   # Logging feature
@@ -89,6 +92,22 @@ module Halite
 
       def availables
         @@formats.keys
+      end
+    end
+
+    # Similar to `Log::ShortFormat`
+    #
+    # **NOTE**: It invalid by calling `Log.setup` or `Log.setup_from_env` outside of Halite.
+    #
+    # Copy from https://github.com/crystal-lang/crystal/blob/3c48f311f/src/log/format.cr#L197
+    struct ShortFormat < Log::StaticFormatter
+      def run
+        "#{timestamp} - #{source(before: " ", after: ": ")}#{message}" \
+        "#{data(before: " -- ")}#{context(before: " -- ")}#{exception}"
+      end
+
+      def timestamp
+        Helper.to_rfc3339(@entry.timestamp, @io)
       end
     end
 
