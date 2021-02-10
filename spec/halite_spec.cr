@@ -1,5 +1,67 @@
 require "./spec_helper"
 
+private def without_timezone(&block)
+  with_timezone(nil, &block)
+end
+
+private def with_timezone(timezone : String? = nil, &block)
+  current_timezone = ENV["TZ"]?
+  restore_timezone = false
+
+  if current_timezone && timezone.nil?
+    restore_timezone = true
+    ENV.delete("TZ")
+  end
+
+  if timezone
+    restore_timezone = true
+    ENV["TZ"] = timezone.not_nil!
+  end
+
+  block.call
+
+  ENV["TZ"] = current_timezone if restore_timezone
+end
+
+describe Halite::Helper do
+  describe "#timestamp" do
+    it "should use utc timezone as default location" do
+      without_timezone do
+        ENV["TZ"]?.should be_nil
+        t = Time.utc(2021, 2, 10, 22, 5, 13)
+        Halite::Helper.to_rfc3339(t).should eq "2021-02-10T22:05:13Z"
+      end
+    end
+
+    it "should use given timezone" do
+      without_timezone do
+        ENV["TZ"]?.should be_nil
+        t = Time.utc(2021, 2, 10, 22, 5, 13)
+        timezone = "Asia/Shanghai"
+        Halite::Helper.to_rfc3339(t, timezone).should eq "2021-02-11T06:05:13+08:00"
+      end
+    end
+
+    it "should use `TZ` timezone from ENV" do
+      timezone = "Asia/Shanghai"
+      with_timezone(timezone) do
+        ENV["TZ"].should eq timezone
+        t = Time.utc(2021, 2, 10, 22, 5, 13)
+        Halite::Helper.to_rfc3339(t).should eq "2021-02-11T06:05:13+08:00"
+      end
+    end
+
+    it "should overwrite given timezone" do
+      timezone = "Asia/Shanghai"
+      with_timezone(timezone) do
+        ENV["TZ"].should eq timezone
+        t = Time.utc(2021, 2, 10, 22, 5, 13)
+        Halite::Helper.to_rfc3339(t, "Europe/Berlin").should eq "2021-02-10T23:05:13+01:00"
+      end
+    end
+  end
+end
+
 describe Halite do
   describe ".new" do
     it "returns a instance class" do
