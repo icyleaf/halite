@@ -15,7 +15,7 @@
 <script type="text/javascript" src="../../js/doc.js"></script>
 
   <meta name="repository-name" content="halite">
-  <title>Halite::Request::Data - halite master-dev</title>
+  <title>Halite::Logging::ShortFormat - halite master-dev</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -218,7 +218,7 @@
       
     </li>
   
-  <li class="parent " data-id="halite/Halite/Logging" data-name="halite::logging">
+  <li class="parent open current" data-id="halite/Halite/Logging" data-name="halite::logging">
       <a href="../../Halite/Logging.html">Logging</a>
       
         <ul>
@@ -243,7 +243,7 @@
       
     </li>
   
-  <li class=" " data-id="halite/Halite/Logging/ShortFormat" data-name="halite::logging::shortformat">
+  <li class=" current" data-id="halite/Halite/Logging/ShortFormat" data-name="halite::logging::shortformat">
       <a href="../../Halite/Logging/ShortFormat.html">ShortFormat</a>
       
     </li>
@@ -303,12 +303,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="halite/Halite/Request" data-name="halite::request">
+  <li class="parent " data-id="halite/Halite/Request" data-name="halite::request">
       <a href="../../Halite/Request.html">Request</a>
       
         <ul>
   
-  <li class=" current" data-id="halite/Halite/Request/Data" data-name="halite::request::data">
+  <li class=" " data-id="halite/Halite/Request/Data" data-name="halite::request::data">
       <a href="../../Halite/Request/Data.html">Data</a>
       
     </li>
@@ -357,12 +357,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> Halite::Request::Data
+  <span class="kind">struct</span> Halite::Logging::ShortFormat
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Request/Data.html">Halite::Request::Data</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Halite/Logging/ShortFormat.html">Halite::Logging::ShortFormat</a></li><li class="superclass">Log::StaticFormatter</li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -376,7 +376,11 @@
     Overview
   </h2>
 
-  <p>Request data of body</p>
+  <p>Similar to <code>Log::ShortFormat</code></p>
+
+<p><strong>NOTE</strong>: It invalid by calling <code>Log.setup</code> or <code>Log.setup_from_env</code> outside of Halite.</p>
+
+<p>Copy from https://github.com/crystal-lang/crystal/blob/3c48f311f/src/log/format.cr#L197</p>
 
 
 
@@ -405,23 +409,6 @@
 
 
 
-  <h2>
-    <a id="constructors" class="anchor" href="#constructors">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Constructors
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new(body:String,content_type:String?=nil)-class-method" class="signature"><strong>.new</strong>(body : String, content_type : String? = <span class="n">nil</span>)</a>
-        
-      </li>
-    
-  </ul>
-
 
 
 
@@ -437,12 +424,16 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#body:String-instance-method" class="signature"><strong>#body</strong> : String</a>
+        <a href="#run-instance-method" class="signature"><strong>#run</strong></a>
+        
+          <div class="summary"><p>Subclasses must implement this method to define the output pattern</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#content_type:String?-instance-method" class="signature"><strong>#content_type</strong> : String?</a>
+        <a href="#timestamp-instance-method" class="signature"><strong>#timestamp</strong></a>
+        
+          <div class="summary"><p>Write the entry timestamp in RFC3339 format</p></div>
         
       </li>
     
@@ -484,32 +475,18 @@
 
 
   
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
-
-  <h2>
-    <a id="constructor-detail" class="anchor" href="#constructor-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Constructor Detail
-  </h2>
-  
-    <div class="entry-detail" id="new(body:String,content_type:String?=nil)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(body : String, content_type : String? = <span class="n">nil</span>)
-
-        <a class="method-permalink" href="#new(body:String,content_type:String?=nil)-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
 
 
 
@@ -524,13 +501,22 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="body:String-instance-method">
+    <div class="entry-detail" id="run-instance-method">
       <div class="signature">
         
-        def <strong>body</strong> : String
+        def <strong>run</strong>
 
-        <a class="method-permalink" href="#body:String-instance-method">#</a>
+        <a class="method-permalink" href="#run-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from struct Log::StaticFormatter
+            </div>
+          
+          <p>Subclasses must implement this method to define the output pattern</p>
+        </div>
       
       <br/>
       <div>
@@ -538,13 +524,22 @@
       </div>
     </div>
   
-    <div class="entry-detail" id="content_type:String?-instance-method">
+    <div class="entry-detail" id="timestamp-instance-method">
       <div class="signature">
         
-        def <strong>content_type</strong> : String?
+        def <strong>timestamp</strong>
 
-        <a class="method-permalink" href="#content_type:String?-instance-method">#</a>
+        <a class="method-permalink" href="#timestamp-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from struct Log::StaticFormatter
+            </div>
+          
+          <p>Write the entry timestamp in RFC3339 format</p>
+        </div>
       
       <br/>
       <div>
