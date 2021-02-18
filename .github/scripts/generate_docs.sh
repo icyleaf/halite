@@ -33,8 +33,8 @@ echo "{\"name\": \"master-dev\", \"url\": \"/halite/master/\", \"released\": fal
 for TAG in $(git tag -l | sort -r -V); do
   NAME=$(echo $TAG | awk '{gsub(/^v/, ""); print}')
 
-  # Crystal version 0.31 complie version must great than 0.10.4.
-  if version_gt $NAME "0.10.3"; then
+  # Crystal version 0.35 complie version must great than 0.10.5.
+  if version_gt $NAME "0.10.4"; then
     git checkout -b $NAME $TAG
 
     echo ",{\"name\": \"$NAME\", \"url\": \"/halite/$NAME/\"}" >> docs/version.json
