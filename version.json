@@ -1,5 +1,6 @@
 {"versions": [
 {"name": "master-dev", "url": "/halite/master/", "released": false}
+,{"name": "0.11.0", "url": "/halite/0.11.0/"}
 ,{"name": "0.10.9", "url": "/halite/0.10.9/"}
 ,{"name": "0.10.8", "url": "/halite/0.10.8/"}
 ,{"name": "0.10.7", "url": "/halite/0.10.7/"}
