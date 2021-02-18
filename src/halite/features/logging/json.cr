@@ -60,7 +60,7 @@ class Halite::Logging
       end
 
       {
-        "created_at" => Time::Format::RFC_3339.format(@request_time.not_nil!, 0),
+        "created_at" => Helper.to_rfc3339(@request_time.not_nil!),
         "elapsed"    => elapsed,
         "entry"      => {
           "request"  => @request.not_nil!.to_h,
@@ -80,7 +80,7 @@ class Halite::Logging
           "headers"   => @request.headers.to_flat_h,
           "method"    => @request.verb,
           "url"       => @request.uri.to_s,
-          "timestamp" => Time::Format::RFC_3339.format(Time.local, 0),
+          "timestamp" => Helper.to_rfc3339(Time.utc),
         }
       end
     end
@@ -96,7 +96,7 @@ class Halite::Logging
           "header"       => @response.headers.to_flat_h,
           "status_code"  => @response.status_code,
           "http_version" => @response.version,
-          "timestamp"    => Time::Format::RFC_3339.format(Time.local, 0),
+          "timestamp"    => Helper.to_rfc3339(Time.utc),
         }
       end
     end

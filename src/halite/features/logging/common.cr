@@ -17,7 +17,7 @@ class Halite::Logging
   class Common < Abstract
     def request(request)
       message = String.build do |io|
-        io << "> | request  | " << current_timestamp << colorful_method(request.verb)
+        io << "> | request  | " << colorful_method(request.verb)
         io << "| " << request.uri
         unless request.body.empty? || @skip_request_body
           io << "\n" << request.body
@@ -31,7 +31,7 @@ class Halite::Logging
     def response(response)
       message = String.build do |io|
         content_type = response.content_type || "Unknown MIME"
-        io << "< | response | " << current_timestamp << colorful_status_code(response.status_code)
+        io << "< | response | " << colorful_status_code(response.status_code)
         io << "| " << response.uri
         if !@skip_benchmark && (request_time = @request_time)
           elapsed = Time.utc - request_time
@@ -87,10 +87,6 @@ class Halite::Logging
       Colorize.enabled = !!(@colorize && (backend = @logger.backend.as?(Log::IOBackend)) && backend.io.tty?)
 
       message.colorize.fore(fore).back(back)
-    end
-
-    private def current_timestamp
-      Time::Format::RFC_3339.format(Time.local, 0)
     end
 
     # return `true` if is binary types with MIME type
