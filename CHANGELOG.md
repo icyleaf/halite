@@ -16,6 +16,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - [x] Proxy support
   - [ ] Reuse connection
 
+## [0.11.0] (2021-02-18)
+
+> Finally, the major version was out! Happy new year!
+
+### Changed
+
+- **[breaking changing]** Drop file logging in favor of Crystal's [Log](https://crystal-lang.org/api/0.36.1/Log.html). (removed `.logging(file: )`, use `.logging(for: )` instead)  [#101](https://github.com/icyleaf/halite/pull/101) (thanks @[oprypin](https://github.com/oprypin))
+- Pre-read `TZ` environment value to convert timestamp's timezone during logging output. [#102](https://github.com/icyleaf/halite/pull/102)
+- Crystal 0.34.x support.
+
 ## [0.10.9] (2021-02-01)
 
 ### Fixed
@@ -122,9 +132,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- [API Change] Rename `logger` to `logging`, `with_logger` to `with_logging`. [#52](https://github.com/icyleaf/halite/pull/52)
-- [API Change] Remove `logging` argument in `Halite::Options.new` and `Halite::Client.new`. [#51](https://github.com/icyleaf/halite/pull/51)
-- [API Change] Remove `logging?` method in `Halite::Options`, use `logging` method instead. [#51](https://github.com/icyleaf/halite/pull/51)
+- **[breaking changing]** Rename `logger` to `logging`, `with_logger` to `with_logging`. [#52](https://github.com/icyleaf/halite/pull/52)
+- **[breaking changing]** Remove `logging` argument in `Halite::Options.new` and `Halite::Client.new`. [#51](https://github.com/icyleaf/halite/pull/51)
+- **[breaking changing]** Remove `logging?` method in `Halite::Options`, use `logging` method instead. [#51](https://github.com/icyleaf/halite/pull/51)
 - Change `logging` behavior check if features is exists any class of superclasses is `Halite::Logging` instead of given a Bool type.
 - Rename prefix `X-Cache` to `X-Halite-Cache` in cache feature.
 
@@ -148,7 +158,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- [API Change] Rename argument name `ssl` to `tls` in `Halite::Client`/`Halite::Options`/`Halite::Chainable`.
+- **[breaking changing]** Rename argument name `ssl` to `tls` in `Halite::Client`/`Halite::Options`/`Halite::Chainable`.
 
 ### Fixed
 
@@ -172,7 +182,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- [API Change] Renamed `#to_h` to `#to_flat_h` to avoid confict in `HTTP::Params` extension. [#39](https://github.com/icyleaf/halite/issues/39)
+- **[breaking changing]** Renamed `#to_h` to `#to_flat_h` to avoid confict in `HTTP::Params` extension. [#39](https://github.com/icyleaf/halite/issues/39)
 
 ### Fixed
 
@@ -196,8 +206,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- [API Change] Change instance `Halite::Client` with block behavior. [#33](https://github.com/icyleaf/halite/issues/33)
-- [API Change] Renamed argument name `adapter` to `format` in `#logger` chainable method.
+- **[breaking changing]** Change instance `Halite::Client` with block behavior. [#33](https://github.com/icyleaf/halite/issues/33)
+- **[breaking changing]** Renamed argument name `adapter` to `format` in `#logger` chainable method.
 - Move logger into features.
 
 ### Added
@@ -219,7 +229,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- [API Change] Set `logger` to nil when instance a `Halite::Options`, it throws a `Halite::Error` exception if enable `logging`.
+- **[breaking changing]** Set `logger` to nil when instance a `Halite::Options`, it throws a `Halite::Error` exception if enable `logging`.
 - Change `Halite::Options` accepts argument inside. no effect for users. [#27](https://github.com/icyleaf/halite/pull/27)
 - Wrap all exception class into a module, better for reading document.
 
@@ -237,7 +247,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - New logger system and json logger support, see [#19](https://github.com/icyleaf/halite/pull/19).
-- [API Change] Change verb request behavior:
+- **[breaking changing]** Change verb request behavior:
   - `get`, `head` only accepts `#params` argument.
   - `post`, `put`, `delete`, `patch`, `options` accepts `#params`, `#form`, `#json` and `#raw` arguments.
 
@@ -249,7 +259,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- [API Change] Remove `#mime_type` duplicate with `#content_type` in `Halite::Response`.
+- **[breaking changing]** Remove `#mime_type` duplicate with `#content_type` in `Halite::Response`.
 - Change write log file use append mode by default, it could be change by param.
 - Change logger formatter to easy identify category(request/response).
 
@@ -351,7 +361,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.10.9...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.11.0...HEAD
+[0.11.0]: https://github.com/icyleaf/halite/compare/v0.10.9...v0.11.0
 [0.10.9]: https://github.com/icyleaf/halite/compare/v0.10.8...v0.10.9
 [0.10.8]: https://github.com/icyleaf/halite/compare/v0.10.7...v0.10.8
 [0.10.7]: https://github.com/icyleaf/halite/compare/v0.10.6...v0.10.7
