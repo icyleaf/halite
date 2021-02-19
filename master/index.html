@@ -373,7 +373,7 @@
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http">HTTP</a>/<a href="https://github.com/rest-client/rest-client">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
 
-<p>Build in Crystal version <code>>= 0.35.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/d21d9deb">#d21d9deb</a> (2021-02-18 10:51:25 +0800).</p>
+<p>Build in Crystal version <code>>= 0.35.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/commit/635ee196">#635ee196</a> (2021-02-19 10:43:11 +0800).</p>
 
 <h2><a id="index" class="anchor" href="#index">
   <svg class="octicon-link" aria-hidden="true">
@@ -1060,7 +1060,7 @@ r.body <span class="c"># =&gt; {&quot;cookies&quot;:{&quot;username&quot;:&quot;
   </svg>
 </a>Streaming Requests</h3>
 
-<p>Similar to <a href="https://crystal-lang.org/api/0.27.0/HTTP/Client.html">HTTP::Client</a> (search keyword "Streaming") usage with a block,
+<p>Similar to <a href="https://crystal-lang.org/api/0.36.1/HTTP/Client.html#streaming">HTTP::Client</a> usage with a block,
 you can easily use same way, but Halite returns a <code><a href="Halite/Response.html">Halite::Response</a></code> object:</p>
 
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/stream/5&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
