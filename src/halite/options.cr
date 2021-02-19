@@ -19,12 +19,14 @@ module Halite
   #
   # ### Set/Get timeout
   #
-  # Set it with `connect_timeout`/`read_timeout` keys, but get it call `Timeout` class.
+  # Set it with `connect_timeout`/`read_timeout`/`write_timeout` keys,
+  # but get it call `Timeout` class.
   #
   # ```
   # o = Options.new(connect_timeout: 30, read_timeout: 30)
   # o.timeout.connect # => 30.0
   # o.timeout.read    # => 30.0
+  # o.timeout.write   # => nil
   # ```
   #
   # ### Set/Get follow
@@ -37,7 +39,8 @@ module Halite
   # o.follow.strict # => false
   # ```
   class Options
-    def self.new(headers : (Hash(String, _) | NamedTuple)? = nil,
+    def self.new(endpoint : (String | URI)? = nil,
+                 headers : (Hash(String, _) | NamedTuple)? = nil,
                  cookies : (Hash(String, _) | NamedTuple)? = nil,
                  params : (Hash(String, _) | NamedTuple)? = nil,
                  form : (Hash(String, _) | NamedTuple)? = nil,
@@ -45,6 +48,7 @@ module Halite
                  raw : String? = nil,
                  connect_timeout : (Int32 | Float64 | Time::Span)? = nil,
                  read_timeout : (Int32 | Float64 | Time::Span)? = nil,
+                 write_timeout : (Int32 | Float64 | Time::Span)? = nil,
                  follow : Int32? = nil,
                  follow_strict : Bool? = nil,
                  proxy_host : String? = nil,
@@ -55,15 +59,16 @@ module Halite
       proxy = (host = proxy_host) && (port = proxy_port) ? Proxy.new(host, port, verify: proxy_verify) : nil
 
       new(
+        endpoint: endpoint,
         headers: headers,
         cookies: cookies,
         params: params,
         form: form,
         json: json,
         raw: raw,
-        proxy: proxy,
-        timeout: Timeout.new(connect: connect_timeout, read: read_timeout),
+        timeout: Timeout.new(connect: connect_timeout, read: read_timeout, write: write_timeout),
         follow: Follow.new(hops: follow, strict: follow_strict),
+        proxy: proxy,
         tls: tls,
         features: features
       )
@@ -72,6 +77,7 @@ module Halite
     # Types of options in a Hash
     alias Type = Nil | Symbol | String | Int32 | Int64 | Float64 | Bool | File | Array(Type) | Hash(String, Type)
 
+    property endpoint : URI?
     property headers : HTTP::Headers
     property cookies : HTTP::Cookies
     property params : Hash(String, Type)
@@ -85,6 +91,7 @@ module Halite
     property features : Hash(String, Feature)
 
     def initialize(*,
+                   endpoint : (String | URI)? = nil,
                    headers : (Hash(String, _) | NamedTuple)? = nil,
                    cookies : (Hash(String, _) | NamedTuple)? = nil,
                    params : (Hash(String, _) | NamedTuple)? = nil,
@@ -95,7 +102,8 @@ module Halite
                    @follow = Follow.new,
                    @proxy : Proxy? = nil,
                    @tls : (Bool | OpenSSL::SSL::Context::Client) = false,
-                   @features = Hash(String, Feature).new)
+                   @features = {} of String => Feature)
+      @endpoint = parse_endpoint(endpoint)
       @headers = parse_headers(headers)
       @cookies = parse_cookies(cookies)
       @params = parse_params(params)
@@ -104,6 +112,7 @@ module Halite
     end
 
     def initialize(*,
+                   @endpoint : URI?,
                    @headers : HTTP::Headers,
                    @cookies : HTTP::Cookies,
                    @params : Hash(String, Type),
@@ -115,6 +124,11 @@ module Halite
                    @proxy : Proxy? = nil,
                    @tls : (Bool | OpenSSL::SSL::Context::Client) = false,
                    @features = Hash(String, Feature).new)
+    end
+
+    def with_endpoint(endpoint : String | URI)
+      self.endpoint = endpoint
+      self
     end
 
     # Alias `with_headers` method.
@@ -176,9 +190,13 @@ module Halite
     end
 
     # Returns `Options` self with given connect, read timeout.
-    def with_timeout(connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil) : Halite::Options
+    def with_timeout(connect : (Int32 | Float64 | Time::Span)? = nil,
+                     read : (Int32 | Float64 | Time::Span)? = nil,
+                     write : (Int32 | Float64 | Time::Span)? = nil) : Halite::Options
       @timeout.connect = connect.to_f if connect
       @timeout.read = read.to_f if read
+      @timeout.write = write.to_f if write
+
       self
     end
 
@@ -230,6 +248,12 @@ module Halite
       self
     end
 
+    # Set endpoint of request
+    def endpoint=(endpoint : String)
+      @endpoint = URI.parse(endpoint)
+    end
+
+    # Set headers of request
     def headers=(headers : (Hash(String, _) | NamedTuple))
       @headers = parse_headers(headers)
     end
@@ -252,6 +276,16 @@ module Halite
     # Alias `Timeout.read=`
     def read_timeout=(timeout : Int32 | Float64 | Time::Span)
       @timeout.read = timeout
+    end
+
+    # Alias `Timeout.write`
+    def write_timeout
+      @timeout.write
+    end
+
+    # Alias `Timeout.write=`
+    def write_timeout=(timeout : Int32 | Float64 | Time::Span)
+      @timeout.write = timeout
     end
 
     # Alias `Follow.hops=`
@@ -297,9 +331,9 @@ module Halite
     # Quick enable logging
     #
     # By defaults, use `Logging::Common` as logging output.
-    def logging=(logging : Bool)
-      if logging
-        with_features("logging") unless @features.has_key?("logging")
+    def logging=(enable : Bool)
+      if enable
+        with_features("logging") unless logging
       else
         @features.delete("logging")
       end
@@ -315,10 +349,7 @@ module Halite
 
     # Merge with other `Options` and return self
     def merge!(other : Halite::Options) : Halite::Options
-      @params.merge!(other.params) if other.params
-      @form.merge!(other.form) if other.form
-      @json.merge!(other.json) if other.json
-      @raw = other.raw if other.raw
+      @endpoint = other.endpoint if other.endpoint
 
       @headers.merge!(other.headers)
 
@@ -326,7 +357,7 @@ module Halite
         @cookies << cookie
       end if other.cookies != @cookies
 
-      if other.timeout.connect || other.timeout.read
+      if other.timeout.connect || other.timeout.read || other.timeout.write
         @timeout = other.timeout
       end
 
@@ -343,6 +374,7 @@ module Halite
 
     # Reset options
     def clear! : Halite::Options
+      @endpoint = nil
       @headers = HTTP::Headers.new
       @cookies = HTTP::Cookies.new
       @params = {} of String => Type
@@ -362,6 +394,7 @@ module Halite
     # but not the objects they reference. dup copies the tainted state of obj.
     def dup
       Halite::Options.new(
+        endpoint: @endpoint,
         headers: @headers.dup,
         cookies: @cookies,
         params: @params,
@@ -379,6 +412,7 @@ module Halite
     # Returns this collection as a plain Hash.
     def to_h
       {
+        "endpoint"        => @endpoint,
         "headers"         => @headers.to_h,
         "cookies"         => @cookies.to_h,
         "params"          => @params ? @params.to_h : nil,
@@ -393,6 +427,17 @@ module Halite
         "proxy_port"      => @proxy ? @proxy.port : nil,
         "tls"             => @tls,
       }
+    end
+
+    private def parse_endpoint(endpoint : (String | URI)?) : URI?
+      case endpoint
+      when String
+        URI.parse(endpoint)
+      when URI
+        endpoint.as(URI)
+      else
+        nil
+      end
     end
 
     private def parse_headers(raw : (Hash(String, _) | NamedTuple | HTTP::Headers)?) : HTTP::Headers

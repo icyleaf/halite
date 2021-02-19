@@ -1,6 +1,11 @@
-require "logger"
+require "log"
 require "colorize"
 require "file_utils"
+
+Log.setup do |c|
+  backend = Log::IOBackend.new(formatter: Halite::Logging::ShortFormat)
+  c.bind("halite", :info, backend)
+end
 
 module Halite
   # Logging feature
@@ -30,21 +35,7 @@ module Halite
 
     # Logging format Abstract
     abstract class Abstract
-      def self.new(file : String? = nil, filemode = "a",
-                   skip_request_body = false, skip_response_body = false,
-                   skip_benchmark = false, colorize = true)
-        io = STDOUT
-        if file
-          file = File.expand_path(file)
-          filepath = File.dirname(file)
-          FileUtils.mkdir_p(filepath) unless Dir.exists?(filepath)
-
-          io = File.open(file, filemode)
-        end
-        new(skip_request_body, skip_response_body, skip_benchmark, colorize, io)
-      end
-
-      setter logger : Logger
+      setter logger : Log
       getter skip_request_body : Bool
       getter skip_response_body : Bool
       getter skip_benchmark : Bool
@@ -52,22 +43,15 @@ module Halite
 
       @request_time : Time?
 
-      def initialize(@skip_request_body = false, @skip_response_body = false,
-                     @skip_benchmark = false, @colorize = true, @io : IO = STDOUT)
-        @logger = Logger.new(@io, ::Logger::DEBUG, default_formatter, "halite")
+      def initialize(*, for : String = "halite",
+                     @skip_request_body = false, @skip_response_body = false,
+                     @skip_benchmark = false, @colorize = true)
+        @logger = Log.for(for)
         Colorize.enabled = @colorize
       end
 
-      forward_missing_to @logger
-
       abstract def request(request)
       abstract def response(response)
-
-      protected def default_formatter
-        Logger::Formatter.new do |_, datetime, _, message, io|
-          io << datetime.to_s << " " << message
-        end
-      end
 
       protected def human_time(elapsed : Time::Span)
         elapsed = elapsed.to_f
@@ -108,6 +92,22 @@ module Halite
 
       def availables
         @@formats.keys
+      end
+    end
+
+    # Similar to `Log::ShortFormat`
+    #
+    # **NOTE**: It invalid by calling `Log.setup` or `Log.setup_from_env` outside of Halite.
+    #
+    # Copy from https://github.com/crystal-lang/crystal/blob/3c48f311f/src/log/format.cr#L197
+    struct ShortFormat < Log::StaticFormatter
+      def run
+        "#{timestamp} - #{source(before: " ", after: ": ")}#{message}" \
+        "#{data(before: " -- ")}#{context(before: " -- ")}#{exception}"
+      end
+
+      def timestamp
+        Helper.to_rfc3339(@entry.timestamp, @io)
       end
     end
 

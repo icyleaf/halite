@@ -2,6 +2,8 @@ require "../spec_helper"
 require "../support/mock_server"
 
 describe Halite::Client do
+  # It accepts all chainable methods, see spec/halite_spec.cr
+
   describe "#initialize" do
     it "should initial with nothing" do
       client = Halite::Client.new
@@ -36,12 +38,71 @@ describe Halite::Client do
     end
   end
 
+  describe "#endpoint" do
+    it "should set String from arguments" do
+      client = Halite::Client.new(endpoint: SERVER.endpoint)
+      response = client.get("/")
+      response.status_code.should eq(200)
+    end
+
+    it "should set String from block" do
+      client = Halite::Client.new do
+        endpoint SERVER.endpoint
+      end
+
+      response = client.get("")
+      response.status_code.should eq(200)
+    end
+
+    it "should not overwrite the path of uri if path is empty string" do
+      client = Halite::Client.new do
+        endpoint "#{SERVER.endpoint}/redirect-301"
+      end
+
+      response = client.get("")
+      response.status_code.should eq(301)
+    end
+
+    it "should always overwrite the path of uri if path starts with '/' char" do
+      client = Halite::Client.new do
+        endpoint "#{SERVER.endpoint}/redirect-301"
+      end
+
+      response = client.accept("application/json").get("/")
+      response.status_code.should eq(200)
+      response.to_s.should match(/json/)
+    end
+
+    it "should use default uri by each requests" do
+      client = Halite::Client.new do
+        endpoint SERVER.endpoint
+      end
+
+      response = client.get("anything", params: {"foo" => "bar"})
+      response.parse["url"].should eq("/anything?foo=bar")
+
+      response = client.get("anything", params: {"foo" => "bar"})
+      response.parse["url"].should eq("/anything?foo=bar")
+    end
+
+    it "should resolves uri" do
+      client = Halite::Client.new do
+        endpoint SERVER.endpoint
+      end
+
+      response = Halite.get("#{SERVER.endpoint}/params", params: {foo: "bar"})
+      response.status_code.should eq(200)
+      response.to_s.should eq("Params!")
+    end
+  end
+
   describe "#request" do
     %w[get post put delete head patch options].each do |verb|
       it "should easy to #{verb} request" do
         response = Halite::Client.new.request(verb, SERVER.endpoint)
         response.status_code.should eq(200)
       end
+
       it "should easy to #{verb} request with hash or namedtuple" do
         response = Halite::Client.new.request(verb, SERVER.endpoint, params: {name: "foo"})
         response.status_code.should eq(200)
@@ -52,34 +113,32 @@ describe Halite::Client do
         response.status_code.should eq(200)
       end
 
-      it "should easy to #{verb} streaming request" do
-        data = [] of JSON::Any
-        Halite::Client.new.request(verb, SERVER.api("stream?n=2")) do |response|
-          response.status_code.should eq 200
-          response.headers["Transfer-Encoding"].should eq "chunked"
+      # it "should easy to #{verb} streaming request" do
+      #   data = [] of JSON::Any
+      #   Halite::Client.new.request(verb, SERVER.api("stream?n=2")) do |response|
+      #     response.status_code.should eq 200
+      #     response.headers["Transfer-Encoding"].should eq "chunked"
 
-          if verb != "head"
-            while content = response.body_io.gets
-              data << JSON.parse(content)
-            end
-          else
-            expect_raises Exception, "Nil assertion failed" do
-              response.body_io
-            end
-          end
-        end
+      #     if verb != "head"
+      #       while content = response.body_io.gets
+      #         data << JSON.parse(content)
+      #       end
+      #     else
+      #       expect_raises NilAssertionError do
+      #         response.body_io
+      #       end
+      #     end
+      #   end
 
-        if verb != "head"
-          data.size.should eq 2
-          data.first.as_h["verb"].should eq verb.upcase
-        else
-          data.size.should eq 0
-        end
-      end
+      #   if verb != "head"
+      #     data.size.should eq 2
+      #     data.first.as_h["verb"].should eq verb.upcase
+      #   else
+      #     data.size.should eq 0
+      #   end
+      # end
     end
   end
-
-  # It accepts all chainable methods, see halite_spec.cr
 
   describe "#sessions" do
     it "should store and send cookies" do
@@ -97,6 +156,26 @@ describe Halite::Client do
       r.headers.has_key?("Set-Cookie").should be_false
       r.cookies.size.zero?.should be_true
       r.parse("json").as_h["foo"].should eq("bar")
+    end
+  end
+
+  describe "#multiple" do
+    it "should use independent and share options" do
+      client1 = Halite::Client.new do
+        endpoint SERVER.api("/user_agent")
+        user_agent "foo"
+      end
+
+      client2 = Halite::Client.new do
+        endpoint SERVER.api("/")
+        user_agent "bar"
+      end
+
+      r1 = client1.get("")
+      r1.to_s.should eq("foo")
+
+      r2 = client2.post("")
+      r2.to_s.should eq("<!doctype html><body>Mock Server is running.</body></html>")
     end
   end
 end

@@ -123,7 +123,7 @@ module Halite
         socket = OpenSSL::SSL::Socket::Client.new socket, context: context, sync_close: true, hostname: @request.host
       end
       socket
-    rescue ex : Socket::Error | Errno
+    rescue ex : Socket::Error | RuntimeError
       if using_proxy?
         raise ProxyError.new("Failure to connect proxy address: '#{socket_host}:#{socket_port}'")
       else

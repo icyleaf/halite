@@ -6,19 +6,18 @@
 [![Tag](https://img.shields.io/github/tag/icyleaf/halite.svg)](https://github.com/icyleaf/halite/blob/master/CHANGELOG.md)
 [![Source](https://img.shields.io/badge/source-github-brightgreen.svg)](https://github.com/icyleaf/halite/)
 [![Document](https://img.shields.io/badge/document-api-brightgreen.svg)](https://icyleaf.github.io/halite/)
-[![Build Status](https://img.shields.io/circleci/project/github/icyleaf/halite/master.svg?style=flat)](https://circleci.com/gh/icyleaf/halite)
+[![Build Status](https://github.com/icyleaf/halite/workflows/Linux%20CI/badge.svg)](https://github.com/icyleaf/halite/actions?query=workflow%3A%22Linux+CI%22)
 
 HTTP Requests with a chainable REST API, built-in sessions and middleware written by [Crystal](https://crystal-lang.org/).
 Inspired from the **awesome** Ruby's [HTTP](https://github.com/httprb/http)/[RESTClient](https://github.com/rest-client/rest-client)
 and Python's [requests](https://github.com/requests/requests).
 
-Build in Crystal version >= `v0.25.0`, this document valid with latest commit.
+Build in Crystal version `>= 0.35.0`, this document valid with latest commit.
 
 ## Index
 
 <!-- TOC -->
 
-- [Index](#index)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Making Requests](#making-requests)
@@ -43,25 +42,17 @@ Build in Crystal version >= `v0.25.0`, this document valid with latest commit.
     - [Binary Data](#binary-data)
   - [Error Handling](#error-handling)
     - [Raise for status code](#raise-for-status-code)
+- [Middleware](#middleware)
+  - [Write a simple feature](#write-a-simple-feature)
+  - [Write a interceptor](#write-a-interceptor)
 - [Advanced Usage](#advanced-usage)
   - [Configuring](#configuring)
+  - [Endpoint](#endpoint)
   - [Sessions](#sessions)
   - [Streaming Requests](#streaming-requests)
   - [Logging](#logging)
-    - [JSON-formatted logging](#json-formatted-logging)
-    - [Write to a log file](#write-to-a-log-file)
-    - [Use the custom logging](#use-the-custom-logging)
   - [Local Cache](#local-cache)
-  - [Middlewares](#middlewares)
-    - [Write a simple feature](#write-a-simple-feature)
-    - [Write a interceptor](#write-a-interceptor)
   - [Link Headers](#link-headers)
-- [Help and Discussion](#help-and-discussion)
-- [Donate](#donate)
-- [How to Contribute](#how-to-contribute)
-- [You may also like](#you-may-also-like)
-- [License](#license)
-
 <!-- /TOC -->
 
 ## Installation
@@ -94,7 +85,7 @@ Halite.get("http://httpbin.org/get", params: {
   shard: "halite"
 })
 
-# Also support Array as query params
+# Also support Hash as query params
 Halite.get("http://httpbin.org/get", headers: {
     "Private-Token" => "T0k3n"
   }, params: {
@@ -209,7 +200,7 @@ Halite.post("http://httpbin.org/post",
 Use the `#basic_auth` method to perform [HTTP Basic Authentication](http://tools.ietf.org/html/rfc2617) using a username and password:
 
 ```crystal
-Halite.basic_auth(user: "user", password: "p@ss").get("http://httpbin.org/get")
+Halite.basic_auth(user: "user", pass: "p@ss").get("http://httpbin.org/get")
 
 # We can pass a raw authorization header using the auth method:
 Halite.auth("Bearer dXNlcjpwQHNz").get("http://httpbin.org/get")
@@ -484,10 +475,104 @@ urls.each do |url|
   end
 end
 
-# => "[404] not found error with url: https://httpbin.org/status/404  (Halite::ClientError)"
-# => "[500] internal server error error with url: https://httpbin.org/status/500?foo=bar  (Halite::ServerError)"
+# => "[404] not found error with url: https://httpbin.org/status/404 (Halite::Exception::ClientError)"
+# => "[500] internal server error error with url: https://httpbin.org/status/500?foo=bar (Halite::Exception::ServerError)"
 # => ""
 ```
+
+## Middleware
+
+Halite now has middleware (a.k.a features) support providing a simple way to plug in intermediate custom logic
+in your HTTP client, allowing you to monitor outgoing requests, incoming responses, and use it as an interceptor.
+
+Available features:
+
+- [Logging](#logging) (Yes, logging is based on feature, cool, aha!)
+- [Local Cache](#local-cache) (local storage, speed up in development)
+
+### Write a simple feature
+
+Let's implement simple middleware that prints each request:
+
+```crystal
+class RequestMonister < Halite::Feature
+  @label : String
+  def initialize(**options)
+    @label = options.fetch(:label, "")
+  end
+
+  def request(request) : Halite::Request
+    puts @label
+    puts request.verb
+    puts request.uri
+    puts request.body
+
+    request
+  end
+
+  Halite.register_feature "request_monster", self
+end
+```
+
+Then use it in Halite:
+
+```crystal
+Halite.use("request_monster", label: "testing")
+      .post("http://httpbin.org/post", form: {name: "foo"})
+
+# Or configure to client
+client = Halite::Client.new do
+  use "request_monster", label: "testing"
+end
+
+client.post("http://httpbin.org/post", form: {name: "foo"})
+
+# => testing
+# => POST
+# => http://httpbin.org/post
+# => name=foo
+```
+
+### Write a interceptor
+
+Halite's killer feature is the **interceptor**, Use `Halite::Feature::Chain` to process with two result:
+
+- `next`: perform and run next interceptor
+- `return`: perform and return
+
+So, you can intercept and turn to the following registered features.
+
+```crystal
+class AlwaysNotFound < Halite::Feature
+  def intercept(chain)
+    response = chain.perform
+    response = Halite::Response.new(chain.request.uri, 404, response.body, response.headers)
+    chain.next(response)
+  end
+
+  Halite.register_feature "404", self
+end
+
+class PoweredBy < Halite::Feature
+  def intercept(chain)
+    if response = chain.response
+      response.headers["X-Powered-By"] = "Halite"
+      chain.return(response)
+    else
+      chain
+    end
+  end
+
+  Halite.register_feature "powered_by", self
+end
+
+r = Halite.use("404").use("powered_by").get("http://httpbin.org/user-agent")
+r.status_code               # => 404
+r.headers["X-Powered-By"]   # => Halite
+r.body                      # => {"user-agent":"Halite/0.6.0"}
+```
+
+For more implementation details about the feature layer, see the [Feature](https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features) and [specs](https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23).
 
 ## Advanced Usage
 
@@ -514,6 +599,22 @@ end
 client.accept("application/json")
 
 r = client.get("http://httpbin.org/get")
+```
+
+### Endpoint
+
+No more given endpoint per request, use `endpoint` will make the request URI shorter, you can set it in flexible way:
+
+```crystal
+client = Halite::Client.new do
+  endpoint "https://gitlab.org/api/v4"
+  user_agent "Halite"
+end
+
+client.get("users")       # GET https://gitlab.org/api/v4/users
+
+# You can override the path by using an absolute path
+client.get("/users")      # GET https://gitlab.org/users
 ```
 
 ### Sessions
@@ -548,6 +649,7 @@ r.body # => {"cookies":{"username":"foobar"}}
 
 r = client.get("http://httpbin.org/cookies")
 r.body # => {"cookies":{}}
+```
 
 If you want to manually add cookies, headers (even features etc) to your session, use the methods start with `with_` in `Halite::Options`
 to manipulate them:
@@ -563,7 +665,7 @@ r.body # => {"cookies":{"username":"foobar"}}
 
 ### Streaming Requests
 
-Similar to [HTTP::Client](https://crystal-lang.org/api/0.27.0/HTTP/Client.html) (search keyword "Streaming") usage with a block,
+Similar to [HTTP::Client](https://crystal-lang.org/api/0.36.1/HTTP/Client.html#streaming) usage with a block,
 you can easily use same way, but Halite returns a `Halite::Response` object:
 
 ```crystal
@@ -640,12 +742,17 @@ Halite.logging(format: "json")
 
 ```crystal
 # Write plain text to a log file
-Halite.logging(file: "logs/halite.log", skip_benchmark: true, colorize: false)
+Log.setup("halite.file", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "a")))
+Halite.logging(for: "halite.file", skip_benchmark: true, colorize: false)
       .get("http://httpbin.org/get", params: {name: "foobar"})
 
 # Write json data to a log file
-Halite.logging(format: "json", file: "logs/halite.log")
+Log.setup("halite.file", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "a")))
+Halite.logging(format: "json", for: "halite.file")
       .get("http://httpbin.org/get", params: {name: "foobar"})
+
+# Redirect *all* logging from Halite to a file:
+Log.setup("halite", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "a")))
 ```
 
 #### Use the custom logging
@@ -656,11 +763,11 @@ Here has two methods must be implement: `#request` and `#response`.
 ```crystal
 class CustomLogging < Halite::Logging::Abstract
   def request(request)
-    @logger.info "| >> | %s | %s %s" % [request.verb, request.uri, request.body]
+    @logger.info { "| >> | %s | %s %s" % [request.verb, request.uri, request.body] }
   end
 
   def response(response)
-    @logger.info "| << | %s | %s %s" % [response.status_code, response.uri, response.content_type]
+    @logger.info { "| << | %s | %s %s" % [response.status_code, response.uri, response.content_type] }
   end
 end
 
@@ -703,100 +810,6 @@ Halite.use("cache").get "http://httpbin.org/anything"     # request a HTTP
 r = Halite.use("cache").get "http://httpbin.org/anything" # request from local storage
 r.headers                                                 # => {..., "X-Halite-Cached-At" => "2018-08-30 10:41:14 UTC", "X-Halite-Cached-By" => "Halite", "X-Halite-Cached-Expires-At" => "2018-08-30 10:41:19 UTC", "X-Halite-Cached-Key" => "2bb155e6c8c47627da3d91834eb4249a"}}
 ```
-
-### Middleware
-
-Halite now has middleware (a.k.a features) support providing a simple way to plug in intermediate custom logic
-in your HTTP client, allowing you to monitor outgoing requests, incoming responses, and use it as an interceptor.
-
-Available features:
-
-- logging (Yes, logging is based on feature, cool, aha!)
-- cache (local storage, speed up in development)
-
-#### Write a simple feature
-
-Let's implement simple middleware that prints each request:
-
-```crystal
-class RequestMonister < Halite::Feature
-  @label : String
-  def initialize(**options)
-    @label = options.fetch(:label, "")
-  end
-
-  def request(request) : Halite::Request
-    puts @label
-    puts request.verb
-    puts request.uri
-    puts request.body
-
-    request
-  end
-
-  Halite.register_feature "request_monster", self
-end
-```
-
-Then use it in Halite:
-
-```crystal
-Halite.use("request_monster", label: "testing")
-      .post("http://httpbin.org/post", form: {name: "foo"})
-
-# Or configure to client
-client = Halite::Client.new do
-  use "request_monster", label: "testing"
-end
-
-client.post("http://httpbin.org/post", form: {name: "foo"})
-
-# => testing
-# => POST
-# => http://httpbin.org/post
-# => name=foo
-```
-
-#### Write a interceptor
-
-Halite's killer feature is the **interceptor**, Use `Halite::Feature::Chain` to process with two result:
-
-- `next`: perform and run next interceptor
-- `return`: perform and return
-
-So, you can intercept and turn to the following registered features.
-
-```crystal
-class AlwaysNotFound < Halite::Feature
-  def intercept(chain)
-    response = chain.perform
-    response = Halite::Response.new(chain.request.uri, 404, response.body, response.headers)
-    chain.next(response)
-  end
-
-  Halite.register_feature "404", self
-end
-
-class PoweredBy < Halite::Feature
-  def intercept(chain)
-    if response = chain.response
-      response.headers["X-Powered-By"] = "Halite"
-      chain.return(response)
-    else
-      chain
-    end
-  end
-
-  Halite.register_feature "powered_by", self
-end
-
-r = Halite.use("404").use("powered_by").get("http://httpbin.org/user-agent")
-r.status_code               # => 404
-r.headers["X-Powered-By"]   # => Halite
-r.body                      # => {"user-agent":"Halite/0.6.0"}
-```
-
-For more implementation details about the feature layer, see the [Feature](https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2) class and [examples](https://github.com/icyleaf/halite/tree/master/src/halite/features) and [specs](https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23).
 
 ### Link Headers
 
@@ -853,10 +866,6 @@ You can donate via [Paypal](https://www.paypal.me/icyleaf/5).
 ## How to Contribute
 
 Your contributions are always welcome! Please submit a pull request or create an issue to add a new question, bug or feature to the list.
-
-Here is a throughput graph of the repository for the last few weeks:
-
-[![Throughput Graph](https://graphs.waffle.io/icyleaf/halite/throughput.svg)](https://github.com/icyleaf/halite/issues/)
 
 All [Contributors](https://github.com/icyleaf/halite/graphs/contributors) are on the wall.
 

@@ -1,20 +1,9 @@
 require "spec"
 require "./support/mock_server"
 require "../src/halite"
-{% if Crystal::VERSION < "0.27.0" %}
-  require "tempfile"
-{% end %}
 
 def with_tempfile(filename)
-  {% if Crystal::VERSION < "0.27.0" %}
-    tempfile = Tempfile.new("halite-spec-logging")
-    tempfile.close
-    yield tempfile.path
-    tempfile.delete
-  {% else %}
-    path = File.tempname("halite-spec-logging")
-    yield path
-  {% end %}
+  yield File.tempname(filename)
 end
 
 module TestFeatures
@@ -71,11 +60,11 @@ end
 
 class SimpleLogger < Halite::Logging::Abstract
   def request(request)
-    @logger.info "request"
+    @logger.info { "request" }
   end
 
   def response(response)
-    @logger.info "response"
+    @logger.info { "response" }
   end
 
   Halite::Logging.register "simple", self
@@ -107,12 +96,4 @@ end
 SERVER = MockServer.new
 spawn do
   SERVER.listen
-end
-
-# Wait server a moment
-sleep 1.milliseconds
-
-# Close server
-at_exit do
-  SERVER.close
 end

@@ -44,7 +44,7 @@ class MockServer < HTTP::Server
     BIND_PORT
   end
 
-  def api(path : String = "")
-    File.join(endpoint, path)
+  def api(path : String)
+    URI.parse(endpoint).resolve(path).to_s
   end
 end

@@ -36,9 +36,8 @@ module Halite
     # The payload of request
     getter body : String
 
-    def initialize(verb : String, uri : String, @headers : HTTP::Headers = HTTP::Headers.new, @body : String = "")
+    def initialize(verb : String, @uri : URI, @headers : HTTP::Headers = HTTP::Headers.new, @body : String = "")
       @verb = verb.upcase
-      @uri = normalize_uri(uri)
 
       raise UnsupportedMethodError.new("Unknown method: #{@verb}") unless METHODS.includes?(@verb)
       raise UnsupportedSchemeError.new("Missing scheme: #{@uri}") unless @uri.scheme
@@ -62,14 +61,18 @@ module Halite
 
     # Return  a`URI` with the scheme, user, password, port and host combined
     def domain
-      URI.new(@uri.scheme, @uri.host, @uri.port, nil, nil, @uri.user, @uri.password, nil, @uri.opaque)
+      URI.new(@uri.scheme, @uri.host, @uri.port, "", nil, @uri.user, @uri.password, nil)
     end
 
     # Return a `String` with the path, query and fragment(omit with argument `with_fragment: false`) combined
     def full_path(with_fragment = true)
       String.build do |str|
-        str << @uri.full_path
-        if @uri.fragment && with_fragment
+        {% if Crystal::VERSION < "0.36.0" %}
+          str << @uri.full_path
+        {% else %}
+          str << @uri.request_target
+        {% end %}
+        if @uri.fragment
           str << "#" << @uri.fragment
         end
       end
@@ -93,8 +96,8 @@ module Halite
       PORTS[@scheme] != port ? "#{host}:#{port}" : host
     end
 
-    private def redirect_uri(source : URI, uri : String) : String
-      return source.to_s if uri == '/'
+    private def redirect_uri(source : URI, uri : String) : URI
+      return source if uri == '/'
 
       new_uri = URI.parse(uri)
       # return a new uri with source and relative path
@@ -104,7 +107,7 @@ module Halite
         end
       end
 
-      new_uri.to_s
+      new_uri
     end
 
     # Request data of body

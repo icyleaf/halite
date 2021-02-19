@@ -76,12 +76,15 @@ module Halite
 
     # Parse response body with corresponding MIME type adapter.
     def parse(name : String? = nil)
-      name ||= content_type
-
-      raise Halite::Error.new("No match MIME type: #{name}") unless name
-      raise Halite::UnRegisterMimeTypeError.new("unregister MIME type adapter: #{name}") unless MimeType[name]?
-
-      MimeType[name].decode to_s
+      begin
+        name ||= content_type
+        raise Halite::Error.new("Missing media type") unless name
+        raise Halite::UnRegisterMimeTypeError.new("unregister MIME type adapter: #{name}") unless MimeType[name]?
+        MimeType[name].decode to_s
+      rescue MIME::Error
+        # NOTE: This catch could be remove in Crystal 0.32: https://github.com/crystal-lang/crystal/pull/8464
+        raise Halite::Error.new("Missing media type")
+      end
     end
 
     # Return filename if it exists, else `Nil`.

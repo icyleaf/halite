@@ -2,14 +2,14 @@ require "../spec_helper"
 
 private URL         = "http://example.com"
 private STATUS_CODE = 200
-private HEADERS     = {"Content-Type" => "text/plain; charset=utf-8"}
+private HEADERS     = HTTP::Headers{"Content-Type" => "text/plain; charset=utf-8"}
 private BODY        = "hello world"
 private COOKIES     = "foo=bar; domain=example.com"
 
 private def response(url = URL, status_code = STATUS_CODE, headers = HEADERS, body = BODY)
   Halite::Response.new(
     URI.parse(url),
-    HTTP::Client::Response.new(status_code: status_code, body: body, headers: HTTP::Headers.encode(headers))
+    HTTP::Client::Response.new(status_code: status_code, body: body, headers: headers)
   )
 end
 
@@ -33,19 +33,21 @@ describe Halite::Response do
     end
 
     it "should return content length with number" do
-      r = response(headers: {"Content-Length" => "5"})
+      r = response(headers: HTTP::Headers{"Content-Length" => "5"})
       r.content_length.should eq 5
     end
 
     it "should return invalid Content-Length" do
-      r = response(headers: {"Content-Length" => "foo"})
-      r.content_length.should be_nil
+      r = response(headers: HTTP::Headers{"Content-Length" => "foo"})
+      expect_raises ArgumentError do
+        r.content_length
+      end
     end
   end
 
   describe "#cookies" do
     it "should HTTP::Cookies class" do
-      r = response(headers: {"Set-Cookie" => COOKIES})
+      r = response(headers: HTTP::Headers{"Set-Cookie" => COOKIES})
       r.cookies.class.should eq HTTP::Cookies
       r.cookies["foo"].class.should eq HTTP::Cookie
       r.cookies["foo"].value.should eq "bar"
@@ -70,7 +72,7 @@ describe Halite::Response do
     end
 
     it "should return a list of links" do
-      r = response(headers: {"Link" => %Q{<https://api.github.com/user/repos?page=3&per_page=100>; rel="next"; title="Next Page", </>; rel="http://example.net/foo"}})
+      r = response(headers: HTTP::Headers{"Link" => %Q{<https://api.github.com/user/repos?page=3&per_page=100>; rel="next"; title="Next Page", </>; rel="http://example.net/foo"}})
       r.links.should be_a Hash(String, Halite::HeaderLink)
       if links = r.links
         links.has_key?("next").should be_true
@@ -114,14 +116,14 @@ describe Halite::Response do
   describe "#parse" do
     context "with known content type" do
       it "returns parsed body" do
-        r = response(headers: {"Content-Type" => "application/json;charset=utf-8"}, body: %q{{"foo":"bar"}})
+        r = response(headers: HTTP::Headers{"Content-Type" => "application/json;charset=utf-8"}, body: %q{{"foo":"bar"}})
         r.parse.should eq({"foo" => "bar"})
       end
     end
 
     context "with empty content type" do
       it "raises Halite::UnRegisterMimeTypeError" do
-        r = response(headers: {"Content-Type" => ""})
+        r = response(headers: HTTP::Headers{"Content-Type" => ""})
         expect_raises Halite::Error do
           r.parse
         end
@@ -130,7 +132,7 @@ describe Halite::Response do
 
     context "without content type" do
       it "raises Halite::UnRegisterMimeTypeError" do
-        r = response(headers: {"Etag" => "123123123"})
+        r = response(headers: HTTP::Headers{"Etag" => "123123123"})
         expect_raises Halite::Error do
           r.parse
         end
@@ -139,7 +141,7 @@ describe Halite::Response do
 
     context "with unknown content type" do
       it "raises Halite::UnRegisterMimeTypeError" do
-        r = response(headers: {"Content-Type" => "application/html"})
+        r = response(headers: HTTP::Headers{"Content-Type" => "application/html"})
         expect_raises Halite::UnRegisterMimeTypeError do
           r.parse
         end
@@ -148,12 +150,12 @@ describe Halite::Response do
 
     context "with explicitly given mime type" do
       it "ignores mime_type of response" do
-        r = response(headers: {"Content-Type" => "application/html; charset=utf-8"}, body: %q{{"foo":"bar"}})
+        r = response(headers: HTTP::Headers{"Content-Type" => "application/html; charset=utf-8"}, body: %q{{"foo":"bar"}})
         r.parse("application/json").should eq({"foo" => "bar"})
       end
 
       it "supports MIME type aliases" do
-        r = response(headers: {"Content-Type" => "application/html; charset=utf-8"}, body: %q{{"foo":"bar"}})
+        r = response(headers: HTTP::Headers{"Content-Type" => "application/html; charset=utf-8"}, body: %q{{"foo":"bar"}})
         r.parse("json").should eq({"foo" => "bar"})
       end
     end

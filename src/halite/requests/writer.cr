@@ -86,12 +86,12 @@ module Halite
       end
 
       private def write_chunk(chunk : String)
-        chunk.size.to_s(16, @socket)
+        chunk.size.to_s(@socket, 16)
         @socket << CRLF << chunk << CRLF
       end
 
       private def write_chunk(chunk : Slice(UInt8))
-        chunk.size.to_s(16, @socket)
+        chunk.size.to_s(@socket, 16)
         @socket << CRLF
         @socket.write(chunk)
         @socket << CRLF

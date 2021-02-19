@@ -97,6 +97,17 @@ module Halite
       end
     {% end %}
 
+    # Adds a endpoint to the request.
+    #
+    #
+    # ```
+    # Halite.endpoint("https://httpbin.org")
+    #   .get("/get")
+    # ```
+    def endpoint(endpoint : String | URI) : Halite::Client
+      branch(default_options.with_endpoint(endpoint))
+    end
+
     # Make a request with the given Basic authorization header
     #
     # ```
@@ -106,7 +117,7 @@ module Halite
     #
     # See Also: [http://tools.ietf.org/html/rfc2617](http://tools.ietf.org/html/rfc2617)
     def basic_auth(user : String, pass : String) : Halite::Client
-      auth("Basic " + Base64.encode(user + ":" + pass).chomp)
+      auth("Basic " + Base64.strict_encode(user + ":" + pass))
     end
 
     # Make a request with the given Authorization header
@@ -201,14 +212,16 @@ module Halite
     # How long to wait for the server to send data before giving up, as a int, float or time span.
     # The timeout value will be applied to both the connect and the read timeouts.
     #
+    # Set `nil` to timeout to ignore timeout.
+    #
     # ```
     # Halite.timeout(5.5).get("http://httpbin.org/get")
     # # Or
     # Halite.timeout(2.minutes)
     #   .post("http://httpbin.org/post", form: {file: "file.txt"})
     # ```
-    def timeout(connect_and_read : Int32 | Float64 | Time::Span) : Halite::Client
-      timeout(connect_and_read, connect_and_read)
+    def timeout(timeout : (Int32 | Float64 | Time::Span)?)
+      timeout ? timeout(timeout, timeout, timeout) : branch
     end
 
     # Adds a timeout to the request.
@@ -217,14 +230,16 @@ module Halite
     # The timeout value will be applied to both the connect and the read timeouts.
     #
     # ```
-    # Halite.timeout(3, 3.minutes)
+    # Halite.timeout(3, 3.minutes, 5)
     #   .post("http://httpbin.org/post", form: {file: "file.txt"})
     # # Or
-    # Halite.timeout(3.04, 64)
+    # Halite.timeout(3.04, 64, 10.0)
     #   .get("http://httpbin.org/get")
     # ```
-    def timeout(connect : (Int32 | Float64 | Time::Span)? = nil, read : (Int32 | Float64 | Time::Span)? = nil) : Halite::Client
-      branch(default_options.with_timeout(connect, read))
+    def timeout(connect : (Int32 | Float64 | Time::Span)? = nil,
+                read : (Int32 | Float64 | Time::Span)? = nil,
+                write : (Int32 | Float64 | Time::Span)? = nil)
+      branch(default_options.with_timeout(connect, read, write))
     end
 
     # Returns `Options` self with automatically following redirects.
@@ -319,9 +334,10 @@ module Halite
     # ```
     # Halite.logging(false).get("http://httpbin.org/get")
     # ```
-    def logging(enable = true)
-      default_options.logging = enable
-      branch(default_options)
+    def logging(enable : Bool = true)
+      options = default_options
+      options.logging = enable
+      branch(options)
     end
 
     # Returns `Options` self with given the logging which it integration from `Halite::Logging`.
@@ -400,24 +416,25 @@ module Halite
     # #### create a http request and log to file
     #
     # ```
-    # Halite.logging(file: "/tmp/halite.log")
+    # Log.setup("halite.file", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "a")))
+    # Halite.logging(for: "halite.file")
     #   .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     #
     # #### Always create new log file and store data to JSON formatted
     #
     # ```
-    # Halite.logging(format: "json", file: "/tmp/halite.log")
+    # Log.setup("halite.file", backend: Log::IOBackend.new(File.open("/tmp/halite.log", "w"))
+    # Halite.logging(for: "halite.file", format: "json")
     #   .get("http://httpbin.org/get", params: {name: "foobar"})
     # ```
     #
     # Check the log file content: **/tmp/halite.log**
-    def logging(format = "common", file : String? = nil, filemode = "a",
+    def logging(format : String = "common", *, for : String = "halite",
                 skip_request_body = false, skip_response_body = false,
                 skip_benchmark = false, colorize = true)
       opts = {
-        file:               file,
-        filemode:           filemode,
+        for:                for,
         skip_request_body:  skip_request_body,
         skip_response_body: skip_response_body,
         skip_benchmark:     skip_benchmark,
@@ -541,13 +558,16 @@ module Halite
       Halite::Client.new(options)
     end
 
-    private DEFAULT_OPTIONS = Halite::Options.new
+    # Use with new instance of Halite::Client to load unique options
+    #
+    # Note: append options in Halite::Client#initialize and revoke at #finalize
+    DEFAULT_OPTIONS = {} of UInt64 => Halite::Options
 
     private def default_options
       {% if @type.superclass %}
-        DEFAULT_OPTIONS
+        DEFAULT_OPTIONS[object_id]
       {% else %}
-        DEFAULT_OPTIONS.clear!
+        Halite::Options.new
       {% end %}
     end
 

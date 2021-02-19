@@ -43,7 +43,14 @@ module HTTP
     # ```
     def to_flat_h
       @hash.each_with_object({} of String => String | Array(String)) do |(key, values), obj|
-        obj[key.name] = values.size == 1 ? values[0].as(String) : values.as(Array(String))
+        obj[key.name] = case values
+                        when String
+                          values.as(String)
+                        when Array
+                          values.size == 1 ? values[0].as(String) : values.as(Array(String))
+                        else
+                          raise Halite::Error.new("Not support type `#{values.class} with value: #{values}")
+                        end
       end
     end
   end

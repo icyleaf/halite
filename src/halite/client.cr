@@ -37,6 +37,7 @@ module Halite
     # Halite::Client.new(headers: {"private-token" => "bdf39d82661358f80b31b67e6f89fee4"})
     # ```
     def self.new(*,
+                 endpoint : (String | URI)? = nil,
                  headers : (Hash(String, _) | NamedTuple)? = nil,
                  cookies : (Hash(String, _) | NamedTuple)? = nil,
                  params : (Hash(String, _) | NamedTuple)? = nil,
@@ -47,6 +48,7 @@ module Halite
                  follow = Follow.new,
                  tls : (Bool | OpenSSL::SSL::Context::Client) = false)
       new(Options.new(
+        endpoint: endpoint,
         headers: headers,
         cookies: cookies,
         params: params,
@@ -59,8 +61,6 @@ module Halite
       ))
     end
 
-    property options
-
     # Instance a new client with block
     #
     # ```
@@ -71,16 +71,17 @@ module Halite
     # ```
     def self.new(&block)
       instance = new
-      value = with instance yield
-      if value
-        value.options.merge!(value.oneshot_options)
-        value.oneshot_options.clear!
-        instance = value
+      yield_instance = with instance yield
+      if yield_instance
+        yield_instance.options.merge!(yield_instance.oneshot_options)
+        yield_instance.oneshot_options.clear!
+        instance = yield_instance
       end
 
       instance
     end
 
+    property options
     @connection : Connection?
 
     # Instance a new client
@@ -93,8 +94,14 @@ module Halite
     # client = Halite::Client.new(options)
     # ```
     def initialize(@options = Halite::Options.new)
-      @history = [] of Response
       @connection = nil
+      @history = [] of Response
+
+      DEFAULT_OPTIONS[object_id] = Halite::Options.new
+    end
+
+    def finalize
+      DEFAULT_OPTIONS.delete(object_id)
     end
 
     # Make an HTTP request
@@ -113,11 +120,11 @@ module Halite
     end
 
     # Make an HTTP request
-    def request(verb : String, uri : String, options : Halite::Options? = nil, &block : Halite::Response ->)
-      opts = options ? @options.merge(options.not_nil!) : @options
-      request = build_request(verb, uri, opts)
-      perform(request, opts, &block)
-    end
+    # def request(verb : String, uri : String, options : Halite::Options? = nil, &block : Halite::Response ->)
+    #   opts = options ? @options.merge(options.not_nil!) : @options
+    #   request = build_request(verb, uri, opts)
+    #   perform(request, opts, &block)
+    # end
 
     def close
       @connection.try(&.close)
@@ -151,9 +158,9 @@ module Halite
       conn.send_request
       response = conn.receive_response
       handle_response(request, response, options)
-    rescue ex : IO::Timeout
+    rescue ex : IO::TimeoutError
       raise TimeoutError.new(ex.message)
-    rescue ex : Socket::Error | Errno
+    rescue ex : Socket::Error
       raise ConnectionError.new(ex.message)
     ensure
       close
@@ -201,15 +208,14 @@ module Halite
     end
 
     # Merges query params if needed
-    private def make_request_uri(uri : String, options : Halite::Options) : String
-      uri = URI.parse uri
+    private def make_request_uri(url : String, options : Halite::Options) : URI
+      uri = resolve_uri(url, options)
       if params = options.params
         query = HTTP::Params.encode(params)
-        uri.query = [uri.query, query].compact.join("&") unless query.empty?
+        uri.query = [uri.query, query].compact.join('&') unless query.empty?
       end
 
-      uri.path = "/" if uri.path.to_s.empty?
-      uri.to_s
+      uri
     end
 
     # Merges request headers
@@ -282,8 +288,16 @@ module Halite
 
     # Use in instance/session mode, it will replace same method in `Halite::Chainable`.
     private def branch(options : Halite::Options? = nil) : Halite::Client
-      oneshot_options.merge!(options)
+      oneshot_options.merge!(options) if options
       self
+    end
+
+    private def resolve_uri(url : String, options : Halite::Options) : URI
+      return URI.parse(url) unless endpoint = options.endpoint
+      return endpoint if url.empty?
+
+      endpoint.path += '/' unless endpoint.path.ends_with?('/')
+      endpoint.resolve(url)
     end
 
     # :nodoc:

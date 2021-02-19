@@ -1,21 +1,18 @@
 require "./support/**"
-require "./servers/**"
+require "./clients/**"
 
-module Servers
-  MEMBERS = [] of Hash(String, String | Proc(String, String))
+module Client
+  MEMBERS = [] of NamedTuple(name: String, proc: Proc(String, String))
 end
 
 url = run_server
 
 sleep 1
 
-Benchmark.tach(1_000) do |x|
-  Servers::MEMBERS.each do |server|
-    name = server["name"].as(String)
-    block = server["proc"].as(Proc)
-
-    x.report(name) do
-      block.call(url)
+Benchmark.tach(10_000) do |x|
+  Client::MEMBERS.each do |client|
+    x.report(client["name"]) do
+      client["proc"].call(url)
     end
   end
 end

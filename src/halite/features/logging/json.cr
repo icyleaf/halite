@@ -21,22 +21,22 @@ class Halite::Logging
   # ```
   # {
   #   "created_at": "2018-08-31T16:53:57+08:00:00",
-  #   "entry": {
+  #   "entry":      {
   #     "request": {
-  #       "body": "",
-  #       "headers": { ... },
-  #       "method": "GET",
-  #       "url": "http://httpbin.org/anything",
-  #       "timestamp": "2018-08-31T16:53:59+08:00:00"
+  #       "body":      "",
+  #       "headers":   {...},
+  #       "method":    "GET",
+  #       "url":       "http://httpbin.org/anything",
+  #       "timestamp": "2018-08-31T16:53:59+08:00:00",
   #     },
   #     "response": {
-  #       "body": false,
-  #       "header": { ... },
-  #       "status_code": 200,
+  #       "body":         false,
+  #       "header":       {...},
+  #       "status_code":  200,
   #       "http_version": "HTTP/1.1",
-  #       "timestamp": "2018-08-31T16:53:59+08:00:00"
-  #     }
-  #   }
+  #       "timestamp":    "2018-08-31T16:53:59+08:00:00",
+  #     },
+  #   },
   # }
   # ```
   class JSON < Abstract
@@ -44,29 +44,23 @@ class Halite::Logging
     @response : Response? = nil
 
     def request(request)
-      @request_time = Time.now
+      @request_time = Time.utc
       @request = Request.new(request, @skip_request_body)
     end
 
     def response(response)
       @response = Response.new(response, @skip_response_body)
-      @logger.info raw
-    end
-
-    def default_formatter
-      ::Logger::Formatter.new do |_, _, _, message, io|
-        io << message
-      end
+      @logger.info { raw }
     end
 
     private def raw
       elapsed : String? = nil
       if !@skip_benchmark && (request_time = @request_time)
-        elapsed = human_time(Time.now - request_time)
+        elapsed = human_time(Time.utc - request_time)
       end
 
       {
-        "created_at" => Time::Format::RFC_3339.format(@request_time.not_nil!, 0),
+        "created_at" => Helper.to_rfc3339(@request_time.not_nil!),
         "elapsed"    => elapsed,
         "entry"      => {
           "request"  => @request.not_nil!.to_h,
@@ -86,7 +80,7 @@ class Halite::Logging
           "headers"   => @request.headers.to_flat_h,
           "method"    => @request.verb,
           "url"       => @request.uri.to_s,
-          "timestamp" => Time::Format::RFC_3339.format(Time.now, 0),
+          "timestamp" => Helper.to_rfc3339(Time.utc),
         }
       end
     end
@@ -102,7 +96,7 @@ class Halite::Logging
           "header"       => @response.headers.to_flat_h,
           "status_code"  => @response.status_code,
           "http_version" => @response.version,
-          "timestamp"    => Time::Format::RFC_3339.format(Time.now, 0),
+          "timestamp"    => Helper.to_rfc3339(Time.utc),
         }
       end
     end

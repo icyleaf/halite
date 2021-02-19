@@ -55,18 +55,27 @@ module Halite
     class APIError < ResponseError
       getter uri
       getter status_code
-      getter status_message
+      getter status_message : String? = nil
 
       def initialize(@message : String? = nil, @status_code : Int32? = nil, @uri : URI? = nil)
+        @status_message = build_status_message
         if status_code = @status_code
-          status_message = [HTTP.default_status_message_for(status_code).downcase]
-          status_message << "error"
-          status_message << "with url: #{@uri.not_nil!}" if @uri
-
-          @message ||= "#{status_code} #{status_message.join(" ")} "
+          @message ||= "#{status_code} #{@status_message}"
         end
 
         super(@message)
+      end
+
+      private def build_status_message : String
+        String::Builder.build do |io|
+          if status_code = @status_code
+            io << "#{HTTP::Status.new(status_code).description.to_s.downcase} error"
+          else
+            io << "#{@message || "unknown"} error"
+          end
+
+          io << " with url: #{@uri}" if uri = @uri
+        end.to_s
       end
     end
 

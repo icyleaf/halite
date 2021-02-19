@@ -5,22 +5,21 @@ Benchmarks performed inspired from excon's benchmarking tool.
 ## Environments
 
 - MacBook Pro (Retina, 15-inch, Mid 2015), 2.2 GHz Intel Core i7, 16 GB 1600 MHz DDR3.
-- Crystal 0.26.0 (llvm 6.0.1)
+- Crystal 0.35.1 (2020-06-19) LLVM: 10.0.0
 - Clients
-  - cossack v0.1.4
-  - create v0.14.0
-  - halite v0.6.0
+  - buit-in HTTP::Client
+  - create v0.26.1
+  - halite v0.10.8
 
 ## Result
 
 ```
-Tach times: 1000
+Tach times: 10000
                           Tach                Total
-                       cossack             6.9514ms (fastest)
-                         crest             9.0551ms
-                        halite             7.8958ms
-           halite (persistent)             8.0661ms
-          built-in http client             7.8528ms
+                         crest             8.0365ms
+                        halite             7.9538ms (fastest)
+           halite (persistent)             8.0205ms
+         built-in HTTP::Client             8.0256ms
 ```
 
 ## Test yourself

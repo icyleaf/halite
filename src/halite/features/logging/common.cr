@@ -17,24 +17,24 @@ class Halite::Logging
   class Common < Abstract
     def request(request)
       message = String.build do |io|
-        io << "| request  |" << colorful_method(request.verb)
+        io << "> | request  | " << colorful_method(request.verb)
         io << "| " << request.uri
         unless request.body.empty? || @skip_request_body
           io << "\n" << request.body
         end
       end
 
-      @logger.info message
-      @request_time = Time.now unless @skip_benchmark
+      @logger.info { message }
+      @request_time = Time.utc unless @skip_benchmark
     end
 
     def response(response)
       message = String.build do |io|
-        content_type = response.content_type.nil? ? "Unknown MIME" : response.content_type.not_nil!
-        io << "| response |" << colorful_status_code(response.status_code)
+        content_type = response.content_type || "Unknown MIME"
+        io << "< | response | " << colorful_status_code(response.status_code)
         io << "| " << response.uri
         if !@skip_benchmark && (request_time = @request_time)
-          elapsed = Time.now - request_time
+          elapsed = Time.utc - request_time
           io << " | " << human_time(elapsed)
         end
 
@@ -44,7 +44,7 @@ class Halite::Logging
         end
       end
 
-      @logger.info message
+      @logger.info { message }
     end
 
     protected def colorful_method(method, is_request = true)
@@ -84,7 +84,8 @@ class Halite::Logging
     end
 
     protected def colorful(message, fore, back)
-      Colorize.enabled = !@io.is_a?(File) && @colorize
+      Colorize.enabled = !!(@colorize && (backend = @logger.backend.as?(Log::IOBackend)) && backend.io.tty?)
+
       message.colorize.fore(fore).back(back)
     end
 

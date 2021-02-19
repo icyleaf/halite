@@ -1,5 +1,67 @@
 require "./spec_helper"
 
+private def without_timezone(&block)
+  with_timezone(nil, &block)
+end
+
+private def with_timezone(timezone : String? = nil, &block)
+  current_timezone = ENV["TZ"]?
+  restore_timezone = false
+
+  if current_timezone && timezone.nil?
+    restore_timezone = true
+    ENV.delete("TZ")
+  end
+
+  if timezone
+    restore_timezone = true
+    ENV["TZ"] = timezone.not_nil!
+  end
+
+  block.call
+
+  ENV["TZ"] = current_timezone if restore_timezone
+end
+
+describe Halite::Helper do
+  describe "#timestamp" do
+    it "should use utc timezone as default location" do
+      without_timezone do
+        ENV["TZ"]?.should be_nil
+        t = Time.utc(2021, 2, 10, 22, 5, 13)
+        Halite::Helper.to_rfc3339(t).should eq "2021-02-10T22:05:13Z"
+      end
+    end
+
+    it "should use given timezone" do
+      without_timezone do
+        ENV["TZ"]?.should be_nil
+        t = Time.utc(2021, 2, 10, 22, 5, 13)
+        timezone = "Asia/Shanghai"
+        Halite::Helper.to_rfc3339(t, timezone: timezone).should eq "2021-02-11T06:05:13+08:00"
+      end
+    end
+
+    it "should use `TZ` timezone from ENV" do
+      timezone = "Asia/Shanghai"
+      with_timezone(timezone) do
+        ENV["TZ"].should eq timezone
+        t = Time.utc(2021, 2, 10, 22, 5, 13)
+        Halite::Helper.to_rfc3339(t).should eq "2021-02-11T06:05:13+08:00"
+      end
+    end
+
+    it "should overwrite given timezone" do
+      timezone = "Asia/Shanghai"
+      with_timezone(timezone) do
+        ENV["TZ"].should eq timezone
+        t = Time.utc(2021, 2, 10, 22, 5, 13)
+        Halite::Helper.to_rfc3339(t, timezone: "Europe/Berlin").should eq "2021-02-10T23:05:13+01:00"
+      end
+    end
+  end
+end
+
 describe Halite do
   describe ".new" do
     it "returns a instance class" do
@@ -53,6 +115,22 @@ describe Halite do
         response = Halite.accept("application/json").get(SERVER.endpoint)
         response.to_s.should match(/json/)
       end
+
+      it "is auth" do
+        user = "halite"
+        password = "p@ssword"
+        secret = Base64.strict_encode("#{user}:#{password}")
+        response = Halite.auth(secret).get(SERVER.api("auth"))
+        response.to_s.should eq(secret)
+      end
+
+      it "is basic auth" do
+        user = "halite"
+        password = "p@ssword"
+        credentials = Base64.strict_encode("#{user}:#{password}")
+        response = Halite.basic_auth(user, password).get(SERVER.api("auth"))
+        response.to_s.should eq("Basic #{credentials}")
+      end
     end
 
     context "loading binary data" do
@@ -87,6 +165,26 @@ describe Halite do
               response.to_s.should eq(response_body)
               response.content_length.should eq(response_body.bytesize)
             end
+          end
+        end
+
+        context "with `.timeout`" do
+          [nil, 10, 10.0, 10.seconds].each do |timeout|
+            it "writes the whole body with #{timeout.inspect}" do
+              body = "“" * 1_000_000
+              response = Halite.timeout(timeout).post SERVER.api("echo-body"), raw: body
+
+              response.to_s.should eq(body)
+              response.content_length.should eq(body.bytesize)
+            end
+          end
+
+          it "writes the whole body with apiece arguments" do
+            body = "“" * 1_000_000
+            response = Halite.timeout(10, 10.0, 10.seconds).post SERVER.api("echo-body"), raw: body
+
+            response.to_s.should eq(body)
+            response.content_length.should eq(body.bytesize)
           end
         end
       end
@@ -322,7 +420,7 @@ describe Halite do
               data << JSON.parse(content)
             end
           else
-            expect_raises Exception, "Nil assertion failed" do
+            expect_raises NilAssertionError do
               response.body_io
             end
           end
@@ -404,6 +502,20 @@ describe Halite do
     end
   end
 
+  describe ".endpoint" do
+    it "sets endpoint with String" do
+      endpoint = "https://example.com"
+      client = Halite.endpoint(endpoint)
+      client.options.endpoint.should eq(URI.parse(endpoint))
+    end
+
+    it "sets endpoint with String" do
+      endpoint = URI.parse("https://example.com")
+      client = Halite.endpoint(endpoint)
+      client.options.endpoint.should eq(endpoint)
+    end
+  end
+
   describe ".auth" do
     it "sets Authorization header to the given value" do
       client = Halite.auth("abc")
@@ -437,9 +549,10 @@ describe Halite do
   describe ".timeout" do
     context "without timeout type" do
       it "sets given timeout options" do
-        client = Halite.timeout(connect: 12, read: 6)
-        client.options.timeout.read.should eq(6)
+        client = Halite.timeout(connect: 12, read: 6, write: 36)
         client.options.timeout.connect.should eq(12)
+        client.options.timeout.read.should eq(6)
+        client.options.timeout.write.should eq(36)
       end
     end
   end
@@ -490,7 +603,8 @@ describe Halite do
 
     it "sets logging into file" do
       with_tempfile("halite-spec-logging") do |file|
-        client = Halite.logging(file: file, skip_response_body: true)
+        Log.setup("halite.spec.file", backend: Log::IOBackend.new(File.open(file, "a")))
+        client = Halite.logging(for: "halite.spec.file", skip_response_body: true)
         client.options.features.has_key?("logging").should be_true
         client.options.features["logging"].should be_a(Halite::Logging)
         logging = client.options.features["logging"].as(Halite::Logging)
@@ -501,7 +615,11 @@ describe Halite do
         logging.writer.colorize.should be_true
 
         client.get SERVER.endpoint
-        logs = File.read_lines(file).join("\n")
+
+        # waiting file writes
+        sleep 1
+
+        logs = File.read(file)
         logs.should contain("request")
         logs.should contain("response")
         logs.should_not contain("<!doctype html><body>Mock Server is running.</body></html>")
@@ -596,7 +714,7 @@ describe Halite do
 
     it "should throws a Halite::TimeoutError exception with long time not response" do
       expect_raises Halite::TimeoutError do
-        Halite.timeout(connect: 1.milliseconds).get("http://404notfound.xyz")
+        Halite.timeout(connect: 1.milliseconds).get("http://404notfound.com")
       end
     end
 
