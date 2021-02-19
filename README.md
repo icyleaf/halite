@@ -665,7 +665,7 @@ r.body # => {"cookies":{"username":"foobar"}}
 
 ### Streaming Requests
 
-Similar to [HTTP::Client](https://crystal-lang.org/api/0.27.0/HTTP/Client.html) (search keyword "Streaming") usage with a block,
+Similar to [HTTP::Client](https://crystal-lang.org/api/0.36.1/HTTP/Client.html#streaming) usage with a block,
 you can easily use same way, but Halite returns a `Halite::Response` object:
 
 ```crystal
