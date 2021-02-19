@@ -1,10 +1,10 @@
 require "../spec_helper"
 
 private def parse_it(raw : String, uri : URI? = nil)
-  Halite::HeaderLinkParser.parse(raw, uri)
+  Halite::HeaderLink.parse(raw, uri)
 end
 
-describe Halite::HeaderLinkParser do
+describe Halite::HeaderLink do
   it "should returns only url" do
     links = parse_it("http://example.net/bar")
     links.should be_a Hash(String, Halite::HeaderLink)

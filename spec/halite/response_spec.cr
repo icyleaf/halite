@@ -67,7 +67,7 @@ describe Halite::Response do
 
   describe "#links" do
     # NOTE: more specs in `header_link_spec.cr`.
-    it "should returns nil without Link Header" do
+    it "should return nil without Link Header" do
       response.links.should eq nil
     end
 
@@ -88,6 +88,26 @@ describe Halite::Response do
         links["http://example.net/foo"].params.size.should eq 0
         links["http://example.net/foo"].to_s.should eq "http://example.net/foo"
       end
+    end
+  end
+
+  describe "#rate_limit" do
+    # NOTE: more specs in `rate_limit_spec.cr`.
+    it "should return nil without RateLimit Header" do
+      response.rate_limit.should eq nil
+    end
+
+    it "should return rate limit" do
+      r = response(headers: HTTP::Headers{
+        "X-RateLimit-Limit"     => "5000",
+        "X-RateLimit-Remaining" => "4991",
+        "X-RateLimit-Reset"     => "1613727325",
+      })
+
+      r.rate_limit.should be_a Halite::RateLimit
+      r.rate_limit.not_nil!.limit.should eq 5000
+      r.rate_limit.not_nil!.remaining.should eq 4991
+      r.rate_limit.not_nil!.reset.should eq 1613727325
     end
   end
 

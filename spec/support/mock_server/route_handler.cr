@@ -238,6 +238,13 @@ class MockServer < HTTP::Server
       context
     end
 
+    get "/rate-limit" do |context|
+      context.response.headers["X-RateLimit-Limit"] = "6000"
+      context.response.headers["X-RateLimit-Remaining"] = "5998"
+      context.response.headers["X-RateLimit-Reset"] = "1613727325"
+      context
+    end
+
     # POST
     post "/" do |context|
       context.response.status_code = 200

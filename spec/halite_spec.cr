@@ -189,6 +189,20 @@ describe Halite do
         end
       end
     end
+
+    context "fetching rate-limit headers" do
+      it "should easy to read" do
+        response = Halite.get(SERVER.api("rate-limit"))
+        response.headers["X-RateLimit-Limit"].should eq "6000"
+        response.headers["X-RateLimit-Remaining"].should eq "5998"
+        response.headers["X-RateLimit-Reset"].should eq "1613727325"
+
+        response.rate_limit.should be_a Halite::RateLimit
+        response.rate_limit.not_nil!.limit.should eq 6000
+        response.rate_limit.not_nil!.remaining.should eq 5998
+        response.rate_limit.not_nil!.reset.should eq 1613727325
+      end
+    end
   end
 
   describe ".post" do
