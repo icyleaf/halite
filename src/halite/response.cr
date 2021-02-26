@@ -47,7 +47,13 @@ module Halite
 
     # Return a list of parsed link headers proxies or else nil.
     def links : Hash(String, Halite::HeaderLink)?
-      parse_links_from_headers
+      return unless raw = headers["Link"]?
+
+      HeaderLink.parse(raw, uri)
+    end
+
+    def rate_limit : Halite::RateLimit?
+      RateLimit.parse(headers)
     end
 
     # Raise `Halite::ClientError`/`Halite::ServerError` if one occurred.
@@ -112,12 +118,6 @@ module Halite
 
     def to_s(io)
       io << to_s
-    end
-
-    private def parse_links_from_headers : Hash(String, Halite::HeaderLink)?
-      if raw = headers["Link"]?
-        HeaderLinkParser.parse(raw, uri)
-      end
     end
   end
 end

@@ -1,13 +1,10 @@
 module Halite
-  # Header link parser
+  # HeaderLink
   #
   # ref: [https://tools.ietf.org/html/rfc5988](https://tools.ietf.org/html/rfc5988)
-  class HeaderLinkParser
-    def self.parse(raw : String, uri : URI? = nil)
-      new.parse(raw, uri)
-    end
-
-    def parse(raw : String, uri : URI? = nil) : Hash(String, Halite::HeaderLink)
+  struct HeaderLink
+    # Header link parser
+    def self.parse(raw : String, uri : URI? = nil) : Hash(String, Halite::HeaderLink)
       links = {} of String => HeaderLink
       raw.split(/,\s*</).each do |rel|
         head_link = parse_link(rel, uri)
@@ -16,7 +13,7 @@ module Halite
       links
     end
 
-    private def parse_link(raw, uri)
+    private def self.parse_link(raw, uri)
       params = {} of String => String
       if raw.includes?(";")
         target, attrs = raw.split(";", 2)
@@ -47,12 +44,9 @@ module Halite
         rel = target = raw.gsub(/[<> '\"]/, "").strip
       end
 
-      HeaderLink.new(rel, target, params)
+      new(rel, target, params)
     end
-  end
 
-  # :nodoc:
-  struct HeaderLink
     getter rel, target, params
 
     def initialize(@rel : String, @target : String, @params : Hash(String, String))
