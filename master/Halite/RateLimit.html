@@ -15,7 +15,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="halite">
-  <title>Halite::HeaderLinkParser - halite master-dev</title>
+  <title>Halite::RateLimit - halite master-dev</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -208,8 +208,8 @@
       
     </li>
   
-  <li class=" current" data-id="halite/Halite/HeaderLinkParser" data-name="halite::headerlinkparser">
-      <a href="../Halite/HeaderLinkParser.html">HeaderLinkParser</a>
+  <li class=" " data-id="halite/Halite/HeaderLink" data-name="halite::headerlink">
+      <a href="../Halite/HeaderLink.html">HeaderLink</a>
       
     </li>
   
@@ -298,6 +298,11 @@
       
     </li>
   
+  <li class=" current" data-id="halite/Halite/RateLimit" data-name="halite::ratelimit">
+      <a href="../Halite/RateLimit.html">RateLimit</a>
+      
+    </li>
+  
   <li class=" " data-id="halite/Halite/Redirector" data-name="halite::redirector">
       <a href="../Halite/Redirector.html">Redirector</a>
       
@@ -357,12 +362,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Halite::HeaderLinkParser
+  <span class="kind">struct</span> Halite::RateLimit
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/HeaderLinkParser.html">Halite::HeaderLinkParser</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Halite/RateLimit.html">Halite::RateLimit</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -376,9 +381,13 @@
     Overview
   </h2>
 
-  <p>Header link parser</p>
+  <p>Limit Rate</p>
 
-<p>ref: <a href="https://tools.ietf.org/html/rfc5988">https://tools.ietf.org/html/rfc5988</a></p>
+<p>ref: <a href="https://tools.ietf.org/id/draft-polli-ratelimit-headers-00.html">https://tools.ietf.org/id/draft-polli-ratelimit-headers-00.html</a></p>
+
+<pre><code class="language-crystal"><span class="o">&gt;</span> <span class="t">X</span><span class="o">-</span><span class="t">RateLimit</span><span class="o">-</span><span class="t">Limit</span>: <span class="n">5000</span>
+<span class="o">&gt;</span> <span class="t">X</span><span class="o">-</span><span class="t">RateLimit</span><span class="o">-</span><span class="t">Remaining</span>: <span class="n">4987</span>
+<span class="o">&gt;</span> <span class="t">X</span><span class="o">-</span><span class="t">RateLimit</span><span class="o">-</span><span class="t">Reset</span>: <span class="n">1350085394</span></code></pre>
 
 
 
@@ -405,7 +414,53 @@
 
 
 
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="RATELIMIT_LIMIT">
+        <strong>RATELIMIT_LIMIT</strong> = <code><span class="s">&quot;X-RateLimit-Limit&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="RATELIMIT_REMAINING">
+        <strong>RATELIMIT_REMAINING</strong> = <code><span class="s">&quot;X-RateLimit-Remaining&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="RATELIMIT_RESET">
+        <strong>RATELIMIT_RESET</strong> = <code><span class="s">&quot;X-RateLimit-Reset&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
 
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(limit:Int32?,remaining:Int32?,reset:Int32?)-class-method" class="signature"><strong>.new</strong>(limit : Int32?, remaining : Int32?, reset : Int32?)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -420,7 +475,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#parse(raw:String,uri:URI?=nil)-class-method" class="signature"><strong>.parse</strong>(raw : String, uri : URI? = <span class="n">nil</span>)</a>
+        <a href="#parse(headers:HTTP::Headers)-class-method" class="signature"><strong>.parse</strong>(headers : HTTP::Headers)</a>
         
       </li>
     
@@ -439,7 +494,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#parse(raw:String,uri:URI?=nil):Hash(String,Halite::HeaderLink)-instance-method" class="signature"><strong>#parse</strong>(raw : String, uri : URI? = <span class="n">nil</span>) : Hash(String, Halite::HeaderLink)</a>
+        <a href="#limit:Int32?-instance-method" class="signature"><strong>#limit</strong> : Int32?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#remaining:Int32?-instance-method" class="signature"><strong>#remaining</strong> : Int32?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#reset:Int32?-instance-method" class="signature"><strong>#reset</strong> : Int32?</a>
         
       </li>
     
@@ -471,8 +536,42 @@
 
 
   
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(limit:Int32?,remaining:Int32?,reset:Int32?)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(limit : Int32?, remaining : Int32?, reset : Int32?)
+
+        <a class="method-permalink" href="#new(limit:Int32?,remaining:Int32?,reset:Int32?)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
 
 
 
@@ -485,12 +584,12 @@
     Class Method Detail
   </h2>
   
-    <div class="entry-detail" id="parse(raw:String,uri:URI?=nil)-class-method">
+    <div class="entry-detail" id="parse(headers:HTTP::Headers)-class-method">
       <div class="signature">
         
-        def self.<strong>parse</strong>(raw : String, uri : URI? = <span class="n">nil</span>)
+        def self.<strong>parse</strong>(headers : <a href="../HTTP/Headers.html">HTTP::Headers</a>)
 
-        <a class="method-permalink" href="#parse(raw:String,uri:URI?=nil)-class-method">#</a>
+        <a class="method-permalink" href="#parse(headers:HTTP::Headers)-class-method">#</a>
       </div>
       
       <br/>
@@ -511,12 +610,40 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="parse(raw:String,uri:URI?=nil):Hash(String,Halite::HeaderLink)-instance-method">
+    <div class="entry-detail" id="limit:Int32?-instance-method">
       <div class="signature">
         
-        def <strong>parse</strong>(raw : String, uri : URI? = <span class="n">nil</span>) : Hash(String, Halite::HeaderLink)
+        def <strong>limit</strong> : Int32?
 
-        <a class="method-permalink" href="#parse(raw:String,uri:URI?=nil):Hash(String,Halite::HeaderLink)-instance-method">#</a>
+        <a class="method-permalink" href="#limit:Int32?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="remaining:Int32?-instance-method">
+      <div class="signature">
+        
+        def <strong>remaining</strong> : Int32?
+
+        <a class="method-permalink" href="#remaining:Int32?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="reset:Int32?-instance-method">
+      <div class="signature">
+        
+        def <strong>reset</strong> : Int32?
+
+        <a class="method-permalink" href="#reset:Int32?-instance-method">#</a>
       </div>
       
       <br/>

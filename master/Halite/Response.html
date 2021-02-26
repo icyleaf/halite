@@ -208,8 +208,8 @@
       
     </li>
   
-  <li class=" " data-id="halite/Halite/HeaderLinkParser" data-name="halite::headerlinkparser">
-      <a href="../Halite/HeaderLinkParser.html">HeaderLinkParser</a>
+  <li class=" " data-id="halite/Halite/HeaderLink" data-name="halite::headerlink">
+      <a href="../Halite/HeaderLink.html">HeaderLink</a>
       
     </li>
   
@@ -295,6 +295,11 @@
   
 </ul>
 
+      
+    </li>
+  
+  <li class=" " data-id="halite/Halite/RateLimit" data-name="halite::ratelimit">
+      <a href="../Halite/RateLimit.html">RateLimit</a>
       
     </li>
   
@@ -536,6 +541,11 @@
         <a href="#raise_for_status-instance-method" class="signature"><strong>#raise_for_status</strong></a>
         
           <div class="summary"><p>Raise <code>Halite::ClientError</code>/<code>Halite::ServerError</code> if one occurred.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#rate_limit:Halite::RateLimit?-instance-method" class="signature"><strong>#rate_limit</strong> : Halite::RateLimit?</a>
         
       </li>
     
@@ -974,7 +984,7 @@ given <code>IO</code> object.</p>
     <div class="entry-detail" id="links:Hash(String,Halite::HeaderLink)?-instance-method">
       <div class="signature">
         
-        def <strong>links</strong> : Hash(String, Halite::HeaderLink)?
+        def <strong>links</strong> : Hash(String, <a href="../Halite/HeaderLink.html">Halite::HeaderLink</a>)?
 
         <a class="method-permalink" href="#links:Hash(String,Halite::HeaderLink)?-instance-method">#</a>
       </div>
@@ -1032,6 +1042,20 @@ given <code>IO</code> object.</p>
 <span class="t">Halite</span>.get(<span class="s">&quot;https://httpbin.org/status/301&quot;</span>).raise_for_status
 <span class="c"># =&gt; nil</span></code></pre>
         </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="rate_limit:Halite::RateLimit?-instance-method">
+      <div class="signature">
+        
+        def <strong>rate_limit</strong> : <a href="../Halite/RateLimit.html">Halite::RateLimit</a>?
+
+        <a class="method-permalink" href="#rate_limit:Halite::RateLimit?-instance-method">#</a>
+      </div>
       
       <br/>
       <div>
