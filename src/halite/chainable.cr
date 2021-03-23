@@ -199,7 +199,7 @@ module Halite
     # Make a request with the given cookies
     #
     # ```
-    # cookies = HTTP::Cookies.from_headers(headers)
+    # cookies = HTTP::Cookies.from_client_headers(headers)
     # Halite.cookies(cookies)
     #   .get("http://httpbin.org/get")
     # ```

@@ -34,7 +34,7 @@ module Halite
 
     # Return a `HTTP::Cookies` of parsed cookie headers or else nil.
     def cookies : HTTP::Cookies?
-      cookies = @conn.cookies ? @conn.cookies : HTTP::Cookies.from_headers(@conn.headers)
+      cookies = @conn.cookies ? @conn.cookies : HTTP::Cookies.from_server_headers(@conn.headers)
 
       # Try to fix empty domain
       cookies.map do |cookie|

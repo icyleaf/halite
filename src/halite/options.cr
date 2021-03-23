@@ -161,7 +161,7 @@ module Halite
     def with_cookies(cookie : HTTP::Cookie) : Halite::Options
       cookie_header = HTTP::Headers{"Cookie" => cookie.to_cookie_header}
       @headers.merge!(cookie_header)
-      @cookies.fill_from_headers(@headers)
+      @cookies.fill_from_client_headers(@headers)
       self
     end
 
@@ -412,7 +412,7 @@ module Halite
     end
 
     private def parse_cookies(raw : (Hash(String, _) | NamedTuple | HTTP::Cookies)?) : HTTP::Cookies
-      cookies = HTTP::Cookies.from_headers(@headers)
+      cookies = HTTP::Cookies.from_client_headers(@headers)
       if objects = raw
         objects.each do |key, value|
           cookies[key] = case value
@@ -427,7 +427,7 @@ module Halite
     end
 
     private def parse_cookies(headers : HTTP::Headers) : HTTP::Cookies
-      HTTP::Cookies.from_headers(headers)
+      cookies = HTTP::Cookies.from_client_headers(headers)
     end
 
     {% for attr in %w(params form json) %}
