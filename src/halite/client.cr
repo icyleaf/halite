@@ -266,7 +266,8 @@ module Halite
     # Store cookies for sessions use from response
     private def store_cookies_from_response(response : Halite::Response) : Halite::Response
       return response unless response.headers
-      @options.with_cookies(HTTP::Cookies.from_headers(response.headers))
+
+      @options.with_cookies(HTTP::Cookies.from_server_headers(response.headers))
       response
     end
 
