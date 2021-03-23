@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.35.1">
+<meta name="generator" content="Crystal Docs 0.36.1">
 <meta name="crystal_docs.project_version" content="master-dev">
 <meta name="crystal_docs.project_name" content="halite">
 
@@ -405,6 +405,11 @@
 </a>
     Defined in:
   </h2>
+  
+    
+      halite/chainable.cr
+    
+    <br/>
   
 
 
@@ -828,7 +833,7 @@
           
           <p>Make a request with the given cookies</p>
 
-<pre><code class="language-crystal">cookies <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Cookies</span>.from_headers(headers)
+<pre><code class="language-crystal">cookies <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Cookies</span>.from_client_headers(headers)
 <span class="t">Halite</span>.cookies(cookies)
   .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
         </div>
