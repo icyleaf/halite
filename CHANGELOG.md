@@ -365,7 +365,8 @@ Compatibility with Crystal 0.25
 
 - First beta version.
 
-[Unreleased]: https://github.com/icyleaf/halite/compare/v0.11.0...HEAD
+[Unreleased]: https://github.com/icyleaf/halite/compare/v0.12.0...HEAD
+[0.12.0]: https://github.com/icyleaf/halite/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/icyleaf/halite/compare/v0.10.9...v0.11.0
 [0.10.9]: https://github.com/icyleaf/halite/compare/v0.10.8...v0.10.9
 [0.10.8]: https://github.com/icyleaf/halite/compare/v0.10.7...v0.10.8
