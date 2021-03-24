@@ -4,7 +4,7 @@ require "./halite/ext/*"
 module Halite
   extend Chainable
 
-  VERSION = "0.11.0"
+  VERSION = "0.12.0"
 
   module Helper
     # Parses a `Time` into a [RFC 3339](https://tools.ietf.org/html/rfc3339) datetime format string

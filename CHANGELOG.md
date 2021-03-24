@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - [x] Proxy support
   - [ ] Reuse connection
 
+## [0.12.0] (2021-03-24)
+
+- Compatibility with Crystal 1.0.
+
 ## [0.11.0] (2021-02-18)
 
 > Finally, the major version was out! Happy new year!
