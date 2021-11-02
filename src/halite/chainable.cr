@@ -511,16 +511,13 @@ module Halite
       Halite::Client.new(options)
     end
 
-    # Use with new instance of Halite::Client to load unique options
-    #
-    # Note: append options in Halite::Client#initialize and revoke at #finalize
-    DEFAULT_OPTIONS = {} of UInt64 => Halite::Options
+    private DEFAULT_OPTIONS = Halite::Options.new
 
     private def default_options
       {% if @type.superclass %}
-        DEFAULT_OPTIONS[object_id]
+        @default_options
       {% else %}
-        Halite::Options.new
+        DEFAULT_OPTIONS.clear!
       {% end %}
     end
 
