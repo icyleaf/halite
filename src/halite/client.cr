@@ -80,8 +80,8 @@ module Halite
       instance = new
       yield_instance = with instance yield
       if yield_instance
-        yield_instance.options.merge!(yield_instance.oneshot_options)
-        yield_instance.oneshot_options.clear!
+        # yield_instance.options.merge!(yield_instance.oneshot_options)
+        # yield_instance.oneshot_options.clear!
         instance = yield_instance
       end
 
@@ -99,17 +99,12 @@ module Halite
     # ```
     def initialize(@options = Halite::Options.new)
       @history = [] of Response
-
-      DEFAULT_OPTIONS[object_id] = Halite::Options.new
-    end
-
-    def finalize
-      DEFAULT_OPTIONS.delete(object_id)
+      @default_options = Halite::Options.new(@options)
     end
 
     # Make an HTTP request
     def request(verb : String, uri : String, options : Halite::Options? = nil) : Halite::Response
-      opts = options ? @options.merge(options.not_nil!) : @options
+      opts = options ? @default_options.merge(options.not_nil!) : @default_options
       request = build_request(verb, uri, opts)
       response = perform_chain(request, opts) do
         perform(request, opts)
@@ -124,7 +119,7 @@ module Halite
 
     # Make an HTTP request
     def request(verb : String, uri : String, options : Halite::Options? = nil, &block : Halite::Response ->)
-      opts = options ? @options.merge(options.not_nil!) : @options
+      opts = options ? @default_options.merge(options.not_nil!) : @default_options
       request = build_request(verb, uri, opts)
       perform(request, opts, &block)
     end
@@ -191,7 +186,7 @@ module Halite
       request = Request.new(verb, uri, headers, body_data.body)
 
       # reset options during onshot request, see `default_options` method at the bottom of file.
-      default_options.clear!
+      # default_options.clear!
 
       options.features.reduce(request) do |req, (_, feature)|
         feature.request(req)
@@ -267,15 +262,15 @@ module Halite
     private def store_cookies_from_response(response : Halite::Response) : Halite::Response
       return response unless response.headers
 
-      @options.with_cookies(HTTP::Cookies.from_server_headers(response.headers))
+      @default_options.with_cookies(HTTP::Cookies.from_server_headers(response.headers))
       response
     end
 
-    # Use in instance/session mode, it will replace same method in `Halite::Chainable`.
-    private def branch(options : Halite::Options? = nil) : Halite::Client
-      oneshot_options.merge!(options)
-      self
-    end
+    # # Use in instance/session mode, it will replace same method in `Halite::Chainable`.
+    # private def branch(options : Halite::Options? = nil) : Halite::Client
+    #   oneshot_options.merge!(options)
+    #   self
+    # end
 
     private def resolve_uri(url : String, options : Halite::Options) : URI
       return URI.parse(url) unless endpoint = options.endpoint
@@ -283,22 +278,6 @@ module Halite
 
       endpoint.path += '/' unless endpoint.path.ends_with?('/')
       endpoint.resolve(url)
-    end
-
-    # :nodoc:
-    @oneshot_options : Halite::Options?
-
-    # :nodoc:
-    #
-    # Store options on each request, then it will reset after finish response.
-    #
-    # > It will called in this class method, so it mark be public but not recommend to users.
-    #
-    # It make sure never store any gived headers, cookies, query, form, raw and tls
-    # during each request in instance/session mode.
-    def oneshot_options
-      @oneshot_options ||= Halite::Options.new
-      @oneshot_options.not_nil!
     end
   end
 end

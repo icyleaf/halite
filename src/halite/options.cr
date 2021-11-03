@@ -38,6 +38,10 @@ module Halite
   # o.follow.strict # => false
   # ```
   class Options
+    def self.new(options : Halite::Options)
+      options.is_a?(self) ? options : super
+    end
+
     def self.new(endpoint : (String | URI)? = nil,
                  headers : (Hash(String, _) | NamedTuple)? = nil,
                  cookies : (Hash(String, _) | NamedTuple)? = nil,

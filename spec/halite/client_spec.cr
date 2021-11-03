@@ -81,6 +81,7 @@ describe Halite::Client do
       response = client.get("anything", params: {"foo" => "bar"})
       response.parse["url"].should eq("/anything?foo=bar")
 
+      # try again to make sure endpoint was exists.
       response = client.get("anything", params: {"foo" => "bar"})
       response.parse["url"].should eq("/anything?foo=bar")
     end
