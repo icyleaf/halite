@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.36.1">
+<meta name="generator" content="Crystal Docs 1.1.1">
 <meta name="crystal_docs.project_version" content="0.12.0">
 <meta name="crystal_docs.project_name" content="halite">
 
@@ -382,13 +382,11 @@
   </h2>
 
   <p>Options class</p>
-
 <h3><a id="init-with-splats-options" class="anchor" href="#init-with-splats-options">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Init with splats options</h3>
-
 <pre><code class="language-crystal">o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(
   headers: {
     user_agent: <span class="s">&quot;foobar&quot;</span>
@@ -396,29 +394,23 @@
 }
 o.headers.<span class="k">class</span> <span class="c"># =&gt; HTTP::Headers</span>
 o.cookies.<span class="k">class</span> <span class="c"># =&gt; HTTP::Cookies</span></code></pre>
-
 <h3><a id="setget-timeout" class="anchor" href="#setget-timeout">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Set/Get timeout</h3>
-
 <p>Set it with <code><a href="../Halite/Options.html#connect_timeout-instance-method">#connect_timeout</a></code>/<code><a href="../Halite/Options.html#read_timeout-instance-method">#read_timeout</a></code>/<code><a href="../Halite/Options.html#write_timeout-instance-method">#write_timeout</a></code> keys,
 but get it call <code><a href="../Halite/Options/Timeout.html">Timeout</a></code> class.</p>
-
 <pre><code class="language-crystal">o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(connect_timeout: <span class="n">30</span>, read_timeout: <span class="n">30</span>)
 o.timeout.connect <span class="c"># =&gt; 30.0</span>
 o.timeout.read    <span class="c"># =&gt; 30.0</span>
 o.timeout.write   <span class="c"># =&gt; nil</span></code></pre>
-
 <h3><a id="setget-follow" class="anchor" href="#setget-follow">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Set/Get follow</h3>
-
-<p>Set it with <code><a href="../Halite/Options.html#follow:Follow-instance-method">#follow</a></code>/<code><a href="../Halite/Options.html#follow_strict-instance-method">#follow_strict</a></code> keys, but get it call <code><a href="../Halite/Options/Follow.html">Follow</a></code> class.</p>
-
+<p>Set it with <code><a href="../Halite/Options.html#follow%3AFollow-instance-method">#follow</a></code>/<code><a href="../Halite/Options.html#follow_strict-instance-method">#follow_strict</a></code> keys, but get it call <code><a href="../Halite/Options/Follow.html">Follow</a></code> class.</p>
 <pre><code class="language-crystal">o <span class="o">=</span> <span class="t">Options</span>.<span class="k">new</span>(follow: <span class="n">3</span>, follow_strict: <span class="n">false</span>)
 o.follow.hops   <span class="c"># =&gt; 3</span>
 o.follow.strict <span class="c"># =&gt; false</span></code></pre>
@@ -476,17 +468,17 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(endpoint:String%7CURI?=nil,headers:Hash(String,_)%7CNamedTuple?=nil,cookies:Hash(String,_)%7CNamedTuple?=nil,params:Hash(String,_)%7CNamedTuple?=nil,form:Hash(String,_)%7CNamedTuple?=nil,json:Hash(String,_)%7CNamedTuple?=nil,raw:String?=nil,connect_timeout:Int32%7CFloat64%7CTime::Span?=nil,read_timeout:Int32%7CFloat64%7CTime::Span?=nil,write_timeout:Int32%7CFloat64%7CTime::Span?=nil,follow:Int32?=nil,follow_strict:Bool?=nil,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method" class="signature"><strong>.new</strong>(endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, connect_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, write_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, follow : Int32? = <span class="n">nil</span>, follow_strict : Bool? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)</a>
+        <a href="#new%28endpoint%3AString%7CURI%3F%3Dnil%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Ccookies%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Cconnect_timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread_timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cwrite_timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cfollow%3AInt32%3F%3Dnil%2Cfollow_strict%3ABool%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2Cfeatures%3D%7B%7DofString%3D%3EFeature%29-class-method" class="signature"><strong>.new</strong>(endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, connect_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, write_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, follow : Int32? = <span class="n">nil</span>, follow_strict : Bool? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new(*,endpoint:String%7CURI?=nil,headers:Hash(String,_)%7CNamedTuple?=nil,cookies:Hash(String,_)%7CNamedTuple?=nil,params:Hash(String,_)%7CNamedTuple?=nil,form:Hash(String,_)%7CNamedTuple?=nil,json:Hash(String,_)%7CNamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method" class="signature"><strong>.new</strong>(*, endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)</a>
+        <a href="#new%28%2A%2Cendpoint%3AString%7CURI%3F%3Dnil%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Ccookies%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctimeout%3DTimeout.new%2Cfollow%3DFollow.new%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2Cfeatures%3D%7B%7DofString%3D%3EFeature%29-class-method" class="signature"><strong>.new</strong>(*, endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new(*,endpoint:URI?,headers:HTTP::Headers,cookies:HTTP::Cookies,params:Hash(String,Type),form:Hash(String,Type),json:Hash(String,Type),raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method" class="signature"><strong>.new</strong>(*, endpoint : URI?, headers : HTTP::Headers, cookies : HTTP::Cookies, params : Hash(String, Type), form : Hash(String, Type), json : Hash(String, Type), raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)</a>
+        <a href="#new%28%2A%2Cendpoint%3AURI%3F%2Cheaders%3AHTTP%3A%3AHeaders%2Ccookies%3AHTTP%3A%3ACookies%2Cparams%3AHash%28String%2CType%29%2Cform%3AHash%28String%2CType%29%2Cjson%3AHash%28String%2CType%29%2Craw%3AString%3F%3Dnil%2Ctimeout%3DTimeout.new%2Cfollow%3DFollow.new%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2Cfeatures%3D%7B%7DofString%3D%3EFeature%29-class-method" class="signature"><strong>.new</strong>(*, endpoint : URI?, headers : HTTP::Headers, cookies : HTTP::Cookies, params : Hash(String, Type), form : Hash(String, Type), json : Hash(String, Type), raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)</a>
         
       </li>
     
@@ -507,7 +499,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#clear!:Halite::Options-instance-method" class="signature"><strong>#clear!</strong> : Halite::Options</a>
+        <a href="#clear%21%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#clear!</strong> : Halite::Options</a>
         
           <div class="summary"><p>Reset options</p></div>
         
@@ -516,24 +508,24 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <li class="entry-summary">
         <a href="#connect_timeout-instance-method" class="signature"><strong>#connect_timeout</strong></a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#connect:Float64?-instance-method">Timeout.connect</a></code></p></div>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#connect%3AFloat64%3F-instance-method">Timeout.connect</a></code></p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#connect_timeout=(timeout:Int32%7CFloat64%7CTime::Span)-instance-method" class="signature"><strong>#connect_timeout=</strong>(timeout : Int32 | Float64 | Time::Span)</a>
+        <a href="#connect_timeout%3D%28timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method" class="signature"><strong>#connect_timeout=</strong>(timeout : Int32 | Float64 | Time::Span)</a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#connect=(connect:Int32%7CFloat64%7CTime::Span?)-instance-method">Timeout.connect=</a></code></p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#cookies:HTTP::Cookies-instance-method" class="signature"><strong>#cookies</strong> : HTTP::Cookies</a>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#connect%3D%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method">Timeout.connect=</a></code></p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#cookies=(cookies:HTTP::Cookies)-instance-method" class="signature"><strong>#cookies=</strong>(cookies : HTTP::Cookies)</a>
+        <a href="#cookies%3AHTTP%3A%3ACookies-instance-method" class="signature"><strong>#cookies</strong> : HTTP::Cookies</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#cookies%3D%28cookies%3AHTTP%3A%3ACookies%29-instance-method" class="signature"><strong>#cookies=</strong>(cookies : HTTP::Cookies)</a>
         
       </li>
     
@@ -545,179 +537,179 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#endpoint:URI?-instance-method" class="signature"><strong>#endpoint</strong> : URI?</a>
+        <a href="#endpoint%3AURI%3F-instance-method" class="signature"><strong>#endpoint</strong> : URI?</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#endpoint=(endpoint:URI?)-instance-method" class="signature"><strong>#endpoint=</strong>(endpoint : URI?)</a>
+        <a href="#endpoint%3D%28endpoint%3AURI%3F%29-instance-method" class="signature"><strong>#endpoint=</strong>(endpoint : URI?)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#endpoint=(endpoint:String)-instance-method" class="signature"><strong>#endpoint=</strong>(endpoint : String)</a>
+        <a href="#endpoint%3D%28endpoint%3AString%29-instance-method" class="signature"><strong>#endpoint=</strong>(endpoint : String)</a>
         
           <div class="summary"><p>Set endpoint of request</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#features:Hash(String,Feature)-instance-method" class="signature"><strong>#features</strong> : Hash(String, Feature)</a>
+        <a href="#features%3AHash%28String%2CFeature%29-instance-method" class="signature"><strong>#features</strong> : Hash(String, Feature)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#features=(features:Hash(String,Feature))-instance-method" class="signature"><strong>#features=</strong>(features : Hash(String, Feature))</a>
+        <a href="#features%3D%28features%3AHash%28String%2CFeature%29%29-instance-method" class="signature"><strong>#features=</strong>(features : Hash(String, Feature))</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#follow:Follow-instance-method" class="signature"><strong>#follow</strong> : Follow</a>
+        <a href="#follow%3AFollow-instance-method" class="signature"><strong>#follow</strong> : Follow</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#follow=(follow:Follow)-instance-method" class="signature"><strong>#follow=</strong>(follow : Follow)</a>
+        <a href="#follow%3D%28follow%3AFollow%29-instance-method" class="signature"><strong>#follow=</strong>(follow : Follow)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#follow=(hops:Int32)-instance-method" class="signature"><strong>#follow=</strong>(hops : Int32)</a>
+        <a href="#follow%3D%28hops%3AInt32%29-instance-method" class="signature"><strong>#follow=</strong>(hops : Int32)</a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options/Follow.html#hops=(hops:Int32)-instance-method">Follow.hops=</a></code></p></div>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options/Follow.html#hops%3D%28hops%3AInt32%29-instance-method">Follow.hops=</a></code></p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#follow_strict-instance-method" class="signature"><strong>#follow_strict</strong></a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options/Follow.html#strict:Bool-instance-method">Follow.strict</a></code></p></div>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options/Follow.html#strict%3ABool-instance-method">Follow.strict</a></code></p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#follow_strict=(strict:Bool)-instance-method" class="signature"><strong>#follow_strict=</strong>(strict : Bool)</a>
+        <a href="#follow_strict%3D%28strict%3ABool%29-instance-method" class="signature"><strong>#follow_strict=</strong>(strict : Bool)</a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options/Follow.html#strict=(strict:Bool)-instance-method">Follow.strict=</a></code></p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#form:Hash(String,Type)-instance-method" class="signature"><strong>#form</strong> : Hash(String, Type)</a>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options/Follow.html#strict%3D%28strict%3ABool%29-instance-method">Follow.strict=</a></code></p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#form=(form:Hash(String,Type))-instance-method" class="signature"><strong>#form=</strong>(form : Hash(String, Type))</a>
+        <a href="#form%3AHash%28String%2CType%29-instance-method" class="signature"><strong>#form</strong> : Hash(String, Type)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#headers:HTTP::Headers-instance-method" class="signature"><strong>#headers</strong> : HTTP::Headers</a>
+        <a href="#form%3D%28form%3AHash%28String%2CType%29%29-instance-method" class="signature"><strong>#form=</strong>(form : Hash(String, Type))</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#headers=(headers:Hash(String,_)%7CNamedTuple)-instance-method" class="signature"><strong>#headers=</strong>(headers : Hash(String, _) | NamedTuple)</a>
+        <a href="#headers%3AHTTP%3A%3AHeaders-instance-method" class="signature"><strong>#headers</strong> : HTTP::Headers</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#headers%3D%28headers%3AHTTP%3A%3AHeaders%29-instance-method" class="signature"><strong>#headers=</strong>(headers : HTTP::Headers)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#headers%3D%28headers%3AHash%28String%2C_%29%7CNamedTuple%29-instance-method" class="signature"><strong>#headers=</strong>(headers : Hash(String, _) | NamedTuple)</a>
         
           <div class="summary"><p>Set headers of request</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#headers=(headers:HTTP::Headers)-instance-method" class="signature"><strong>#headers=</strong>(headers : HTTP::Headers)</a>
+        <a href="#json%3AHash%28String%2CType%29-instance-method" class="signature"><strong>#json</strong> : Hash(String, Type)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#json:Hash(String,Type)-instance-method" class="signature"><strong>#json</strong> : Hash(String, Type)</a>
+        <a href="#json%3D%28json%3AHash%28String%2CType%29%29-instance-method" class="signature"><strong>#json=</strong>(json : Hash(String, Type))</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#json=(json:Hash(String,Type))-instance-method" class="signature"><strong>#json=</strong>(json : Hash(String, Type))</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#logging:Bool-instance-method" class="signature"><strong>#logging</strong> : Bool</a>
+        <a href="#logging%3ABool-instance-method" class="signature"><strong>#logging</strong> : Bool</a>
         
           <div class="summary"><p>Get logging status</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#logging=(enable:Bool)-instance-method" class="signature"><strong>#logging=</strong>(enable : Bool)</a>
+        <a href="#logging%3D%28enable%3ABool%29-instance-method" class="signature"><strong>#logging=</strong>(enable : Bool)</a>
         
           <div class="summary"><p>Quick enable logging</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#merge(other:Halite::Options):Halite::Options-instance-method" class="signature"><strong>#merge</strong>(other : Halite::Options) : Halite::Options</a>
+        <a href="#merge%28other%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#merge</strong>(other : Halite::Options) : Halite::Options</a>
         
           <div class="summary"><p>Merge with other <code><a href="../Halite/Options.html">Options</a></code> and return new <code><a href="../Halite/Options.html">Halite::Options</a></code></p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#merge!(other:Halite::Options):Halite::Options-instance-method" class="signature"><strong>#merge!</strong>(other : Halite::Options) : Halite::Options</a>
+        <a href="#merge%21%28other%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#merge!</strong>(other : Halite::Options) : Halite::Options</a>
         
           <div class="summary"><p>Merge with other <code><a href="../Halite/Options.html">Options</a></code> and return self</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#params:Hash(String,Type)-instance-method" class="signature"><strong>#params</strong> : Hash(String, Type)</a>
+        <a href="#params%3AHash%28String%2CType%29-instance-method" class="signature"><strong>#params</strong> : Hash(String, Type)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#params=(params:Hash(String,Type))-instance-method" class="signature"><strong>#params=</strong>(params : Hash(String, Type))</a>
+        <a href="#params%3D%28params%3AHash%28String%2CType%29%29-instance-method" class="signature"><strong>#params=</strong>(params : Hash(String, Type))</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#raw:String?-instance-method" class="signature"><strong>#raw</strong> : String?</a>
+        <a href="#raw%3AString%3F-instance-method" class="signature"><strong>#raw</strong> : String?</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#raw=(raw:String?)-instance-method" class="signature"><strong>#raw=</strong>(raw : String?)</a>
+        <a href="#raw%3D%28raw%3AString%3F%29-instance-method" class="signature"><strong>#raw=</strong>(raw : String?)</a>
         
       </li>
     
       <li class="entry-summary">
         <a href="#read_timeout-instance-method" class="signature"><strong>#read_timeout</strong></a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#read:Float64?-instance-method">Timeout.read</a></code></p></div>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#read%3AFloat64%3F-instance-method">Timeout.read</a></code></p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#read_timeout=(timeout:Int32%7CFloat64%7CTime::Span)-instance-method" class="signature"><strong>#read_timeout=</strong>(timeout : Int32 | Float64 | Time::Span)</a>
+        <a href="#read_timeout%3D%28timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method" class="signature"><strong>#read_timeout=</strong>(timeout : Int32 | Float64 | Time::Span)</a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#read=(read:Int32%7CFloat64%7CTime::Span?)-instance-method">Timeout.read=</a></code></p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#timeout:Timeout-instance-method" class="signature"><strong>#timeout</strong> : Timeout</a>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#read%3D%28read%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method">Timeout.read=</a></code></p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#timeout=(timeout:Timeout)-instance-method" class="signature"><strong>#timeout=</strong>(timeout : Timeout)</a>
+        <a href="#timeout%3ATimeout-instance-method" class="signature"><strong>#timeout</strong> : Timeout</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#tls:OpenSSL::SSL::Context::Client?-instance-method" class="signature"><strong>#tls</strong> : OpenSSL::SSL::Context::Client?</a>
+        <a href="#timeout%3D%28timeout%3ATimeout%29-instance-method" class="signature"><strong>#timeout=</strong>(timeout : Timeout)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#tls=(tls:OpenSSL::SSL::Context::Client?)-instance-method" class="signature"><strong>#tls=</strong>(tls : OpenSSL::SSL::Context::Client?)</a>
+        <a href="#tls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F-instance-method" class="signature"><strong>#tls</strong> : OpenSSL::SSL::Context::Client?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tls%3D%28tls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%29-instance-method" class="signature"><strong>#tls=</strong>(tls : OpenSSL::SSL::Context::Client?)</a>
         
       </li>
     
@@ -729,103 +721,103 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#with_cookies(cookies:Hash(String,_)%7CNamedTuple):Halite::Options-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Options</a>
+        <a href="#with_cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : Hash(String, _) | NamedTuple) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given cookies combined.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_cookies(cookies:HTTP::Cookies):Halite::Options-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : HTTP::Cookies) : Halite::Options</a>
+        <a href="#with_cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(cookies : HTTP::Cookies) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given cookies combined.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_cookies(cookie:HTTP::Cookie):Halite::Options-instance-method" class="signature"><strong>#with_cookies</strong>(cookie : HTTP::Cookie) : Halite::Options</a>
+        <a href="#with_cookies%28cookie%3AHTTP%3A%3ACookie%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(cookie : HTTP::Cookie) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given cookies combined.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_cookies(**cookies):Halite::Options-instance-method" class="signature"><strong>#with_cookies</strong>(**cookies) : Halite::Options</a>
+        <a href="#with_cookies%28%2A%2Acookies%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_cookies</strong>(**cookies) : Halite::Options</a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options.html#with_cookies(**cookies):Halite::Options-instance-method">#with_cookies</a></code> method.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#with_endpoint(endpoint:String%7CURI)-instance-method" class="signature"><strong>#with_endpoint</strong>(endpoint : String | URI)</a>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options.html#with_cookies%28%2A%2Acookies%29%3AHalite%3A%3AOptions-instance-method">#with_cookies</a></code> method.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_features(feature_name:String,**opts)-instance-method" class="signature"><strong>#with_features</strong>(feature_name : String, **opts)</a>
+        <a href="#with_endpoint%28endpoint%3AString%7CURI%29-instance-method" class="signature"><strong>#with_endpoint</strong>(endpoint : String | URI)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_features%28name%3AString%2Copts%3ANamedTuple%29-instance-method" class="signature"><strong>#with_features</strong>(name : String, opts : NamedTuple)</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with feature name and options.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_features(*features)-instance-method" class="signature"><strong>#with_features</strong>(*features)</a>
-        
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with the name of features.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#with_features(name:String,feature:Feature)-instance-method" class="signature"><strong>#with_features</strong>(name : String, feature : Feature)</a>
+        <a href="#with_features%28name%3AString%2Cfeature%3AFeature%29-instance-method" class="signature"><strong>#with_features</strong>(name : String, feature : Feature)</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with feature name and feature.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_features(name:String,opts:NamedTuple)-instance-method" class="signature"><strong>#with_features</strong>(name : String, opts : NamedTuple)</a>
+        <a href="#with_features%28%2Afeatures%29-instance-method" class="signature"><strong>#with_features</strong>(*features)</a>
+        
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with the name of features.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_features%28feature_name%3AString%2C%2A%2Aopts%29-instance-method" class="signature"><strong>#with_features</strong>(feature_name : String, **opts)</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with feature name and options.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_follow(follow=Follow::MAX_HOPS,strict=Follow::STRICT):Halite::Options-instance-method" class="signature"><strong>#with_follow</strong>(follow = <span class="t">Follow</span><span class="t">::</span><span class="t">MAX_HOPS</span>, strict = <span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : Halite::Options</a>
+        <a href="#with_follow%28follow%3DFollow%3A%3AMAX_HOPS%2Cstrict%3DFollow%3A%3ASTRICT%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_follow</strong>(follow = <span class="t">Follow</span><span class="t">::</span><span class="t">MAX_HOPS</span>, strict = <span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given max hops of redirect times.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_headers(headers:Hash(String,_)%7CNamedTuple):Halite::Options-instance-method" class="signature"><strong>#with_headers</strong>(headers : Hash(String, _) | NamedTuple) : Halite::Options</a>
+        <a href="#with_headers%28headers%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_headers</strong>(headers : Hash(String, _) | NamedTuple) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given headers combined.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_headers(**with_headers):Halite::Options-instance-method" class="signature"><strong>#with_headers</strong>(**with_headers) : Halite::Options</a>
+        <a href="#with_headers%28%2A%2Awith_headers%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_headers</strong>(**with_headers) : Halite::Options</a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options.html#with_headers(**with_headers):Halite::Options-instance-method">#with_headers</a></code> method.</p></div>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options.html#with_headers%28%2A%2Awith_headers%29%3AHalite%3A%3AOptions-instance-method">#with_headers</a></code> method.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_logging(format:String,**opts)-instance-method" class="signature"><strong>#with_logging</strong>(format : String, **opts)</a>
+        <a href="#with_logging%28logging%3AHalite%3A%3ALogging%3A%3AAbstract%29-instance-method" class="signature"><strong>#with_logging</strong>(logging : Halite::Logging::Abstract)</a>
+        
+          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features%28name%3AString%2Copts%3ANamedTuple%29-instance-method">#with_features</a></code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_logging%28format%3AString%2C%2A%2Aopts%29-instance-method" class="signature"><strong>#with_logging</strong>(format : String, **opts)</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> iitself with given format and the options of format.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#with_logging(logging:Halite::Logging::Abstract)-instance-method" class="signature"><strong>#with_logging</strong>(logging : Halite::Logging::Abstract)</a>
-        
-          <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features(feature_name:String,**opts)-instance-method">#with_features</a></code>.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#with_timeout(connect:Int32%7CFloat64%7CTime::Span?=nil,read:Int32%7CFloat64%7CTime::Span?=nil,write:Int32%7CFloat64%7CTime::Span?=nil):Halite::Options-instance-method" class="signature"><strong>#with_timeout</strong>(connect : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, write : Int32 | Float64 | Time::Span? = <span class="n">nil</span>) : Halite::Options</a>
+        <a href="#with_timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cwrite%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%29%3AHalite%3A%3AOptions-instance-method" class="signature"><strong>#with_timeout</strong>(connect : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, write : Int32 | Float64 | Time::Span? = <span class="n">nil</span>) : Halite::Options</a>
         
           <div class="summary"><p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given connect, read timeout.</p></div>
         
@@ -834,14 +826,14 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       <li class="entry-summary">
         <a href="#write_timeout-instance-method" class="signature"><strong>#write_timeout</strong></a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#write:Float64?-instance-method">Timeout.write</a></code></p></div>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#write%3AFloat64%3F-instance-method">Timeout.write</a></code></p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#write_timeout=(timeout:Int32%7CFloat64%7CTime::Span)-instance-method" class="signature"><strong>#write_timeout=</strong>(timeout : Int32 | Float64 | Time::Span)</a>
+        <a href="#write_timeout%3D%28timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method" class="signature"><strong>#write_timeout=</strong>(timeout : Int32 | Float64 | Time::Span)</a>
         
-          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#write=(write:Int32%7CFloat64%7CTime::Span?)-instance-method">Timeout.write=</a></code></p></div>
+          <div class="summary"><p>Alias <code><a href="../Halite/Options/Timeout.html#write%3D%28write%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method">Timeout.write=</a></code></p></div>
         
       </li>
     
@@ -885,12 +877,12 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(endpoint:String|URI?=nil,headers:Hash(String,_)|NamedTuple?=nil,cookies:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,connect_timeout:Int32|Float64|Time::Span?=nil,read_timeout:Int32|Float64|Time::Span?=nil,write_timeout:Int32|Float64|Time::Span?=nil,follow:Int32?=nil,follow_strict:Bool?=nil,tls:OpenSSL::SSL::Context::Client?=nil,features={}ofString=>Feature)-class-method">
+    <div class="entry-detail" id="new(endpoint:String|URI?=nil,headers:Hash(String,_)|NamedTuple?=nil,cookies:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,connect_timeout:Int32|Float64|Time::Span?=nil,read_timeout:Int32|Float64|Time::Span?=nil,write_timeout:Int32|Float64|Time::Span?=nil,follow:Int32?=nil,follow_strict:Bool?=nil,tls:OpenSSL::SSL::Context::Client?=nil,features={}ofString=&gt;Feature)-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, connect_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, write_timeout : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, follow : Int32? = <span class="n">nil</span>, follow_strict : Bool? = <span class="n">nil</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)
 
-        <a class="method-permalink" href="#new(endpoint:String%7CURI?=nil,headers:Hash(String,_)%7CNamedTuple?=nil,cookies:Hash(String,_)%7CNamedTuple?=nil,params:Hash(String,_)%7CNamedTuple?=nil,form:Hash(String,_)%7CNamedTuple?=nil,json:Hash(String,_)%7CNamedTuple?=nil,raw:String?=nil,connect_timeout:Int32%7CFloat64%7CTime::Span?=nil,read_timeout:Int32%7CFloat64%7CTime::Span?=nil,write_timeout:Int32%7CFloat64%7CTime::Span?=nil,follow:Int32?=nil,follow_strict:Bool?=nil,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method">#</a>
+        <a class="method-permalink" href="#new%28endpoint%3AString%7CURI%3F%3Dnil%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Ccookies%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Cconnect_timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread_timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cwrite_timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cfollow%3AInt32%3F%3Dnil%2Cfollow_strict%3ABool%3F%3Dnil%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2Cfeatures%3D%7B%7DofString%3D%3EFeature%29-class-method">#</a>
       </div>
       
       <br/>
@@ -899,12 +891,12 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </div>
     </div>
   
-    <div class="entry-detail" id="new(*,endpoint:String|URI?=nil,headers:Hash(String,_)|NamedTuple?=nil,cookies:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features={}ofString=>Feature)-class-method">
+    <div class="entry-detail" id="new(*,endpoint:String|URI?=nil,headers:Hash(String,_)|NamedTuple?=nil,cookies:Hash(String,_)|NamedTuple?=nil,params:Hash(String,_)|NamedTuple?=nil,form:Hash(String,_)|NamedTuple?=nil,json:Hash(String,_)|NamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features={}ofString=&gt;Feature)-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(*, endpoint : String | URI? = <span class="n">nil</span>, headers : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, cookies : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, params : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, form : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, json : Hash(String, _) | NamedTuple? = <span class="n">nil</span>, raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)
 
-        <a class="method-permalink" href="#new(*,endpoint:String%7CURI?=nil,headers:Hash(String,_)%7CNamedTuple?=nil,cookies:Hash(String,_)%7CNamedTuple?=nil,params:Hash(String,_)%7CNamedTuple?=nil,form:Hash(String,_)%7CNamedTuple?=nil,json:Hash(String,_)%7CNamedTuple?=nil,raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method">#</a>
+        <a class="method-permalink" href="#new%28%2A%2Cendpoint%3AString%7CURI%3F%3Dnil%2Cheaders%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Ccookies%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cparams%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cform%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Cjson%3AHash%28String%2C_%29%7CNamedTuple%3F%3Dnil%2Craw%3AString%3F%3Dnil%2Ctimeout%3DTimeout.new%2Cfollow%3DFollow.new%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2Cfeatures%3D%7B%7DofString%3D%3EFeature%29-class-method">#</a>
       </div>
       
       <br/>
@@ -913,12 +905,12 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       </div>
     </div>
   
-    <div class="entry-detail" id="new(*,endpoint:URI?,headers:HTTP::Headers,cookies:HTTP::Cookies,params:Hash(String,Type),form:Hash(String,Type),json:Hash(String,Type),raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features={}ofString=>Feature)-class-method">
+    <div class="entry-detail" id="new(*,endpoint:URI?,headers:HTTP::Headers,cookies:HTTP::Cookies,params:Hash(String,Type),form:Hash(String,Type),json:Hash(String,Type),raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features={}ofString=&gt;Feature)-class-method">
       <div class="signature">
         
         def self.<strong>new</strong>(*, endpoint : URI?, headers : <a href="../HTTP/Headers.html">HTTP::Headers</a>, cookies : HTTP::Cookies, params : Hash(String, <a href="../Halite/Options/Type.html">Type</a>), form : Hash(String, <a href="../Halite/Options/Type.html">Type</a>), json : Hash(String, <a href="../Halite/Options/Type.html">Type</a>), raw : String? = <span class="n">nil</span>, timeout = <span class="t">Timeout</span>.<span class="k">new</span>, follow = <span class="t">Follow</span>.<span class="k">new</span>, tls : OpenSSL::SSL::Context::Client? = <span class="n">nil</span>, features = {} <span class="k">of</span> <span class="t">String</span> => <span class="t">Feature</span>)
 
-        <a class="method-permalink" href="#new(*,endpoint:URI?,headers:HTTP::Headers,cookies:HTTP::Cookies,params:Hash(String,Type),form:Hash(String,Type),json:Hash(String,Type),raw:String?=nil,timeout=Timeout.new,follow=Follow.new,tls:OpenSSL::SSL::Context::Client?=nil,features=%7B%7DofString=%3EFeature)-class-method">#</a>
+        <a class="method-permalink" href="#new%28%2A%2Cendpoint%3AURI%3F%2Cheaders%3AHTTP%3A%3AHeaders%2Ccookies%3AHTTP%3A%3ACookies%2Cparams%3AHash%28String%2CType%29%2Cform%3AHash%28String%2CType%29%2Cjson%3AHash%28String%2CType%29%2Craw%3AString%3F%3Dnil%2Ctimeout%3DTimeout.new%2Cfollow%3DFollow.new%2Ctls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%3Dnil%2Cfeatures%3D%7B%7DofString%3D%3EFeature%29-class-method">#</a>
       </div>
       
       <br/>
@@ -946,7 +938,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
         
         def <strong>clear!</strong> : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#clear!:Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#clear%21%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -970,7 +962,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options/Timeout.html#connect:Float64?-instance-method">Timeout.connect</a></code></p>
+          <p>Alias <code><a href="../Halite/Options/Timeout.html#connect%3AFloat64%3F-instance-method">Timeout.connect</a></code></p>
         </div>
       
       <br/>
@@ -984,12 +976,12 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
         
         def <strong>connect_timeout=</strong>(timeout : Int32 | Float64 | Time::Span)
 
-        <a class="method-permalink" href="#connect_timeout=(timeout:Int32%7CFloat64%7CTime::Span)-instance-method">#</a>
+        <a class="method-permalink" href="#connect_timeout%3D%28timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options/Timeout.html#connect=(connect:Int32%7CFloat64%7CTime::Span?)-instance-method">Timeout.connect=</a></code></p>
+          <p>Alias <code><a href="../Halite/Options/Timeout.html#connect%3D%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method">Timeout.connect=</a></code></p>
         </div>
       
       <br/>
@@ -1003,7 +995,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
         
         def <strong>cookies</strong> : HTTP::Cookies
 
-        <a class="method-permalink" href="#cookies:HTTP::Cookies-instance-method">#</a>
+        <a class="method-permalink" href="#cookies%3AHTTP%3A%3ACookies-instance-method">#</a>
       </div>
       
       <br/>
@@ -1017,7 +1009,7 @@ o.follow.strict <span class="c"># =&gt; false</span></code></pre>
         
         def <strong>cookies=</strong>(cookies : HTTP::Cookies)
 
-        <a class="method-permalink" href="#cookies=(cookies:HTTP::Cookies)-instance-method">#</a>
+        <a class="method-permalink" href="#cookies%3D%28cookies%3AHTTP%3A%3ACookies%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1051,7 +1043,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>endpoint</strong> : URI?
 
-        <a class="method-permalink" href="#endpoint:URI?-instance-method">#</a>
+        <a class="method-permalink" href="#endpoint%3AURI%3F-instance-method">#</a>
       </div>
       
       <br/>
@@ -1065,7 +1057,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>endpoint=</strong>(endpoint : URI?)
 
-        <a class="method-permalink" href="#endpoint=(endpoint:URI?)-instance-method">#</a>
+        <a class="method-permalink" href="#endpoint%3D%28endpoint%3AURI%3F%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1079,7 +1071,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>endpoint=</strong>(endpoint : String)
 
-        <a class="method-permalink" href="#endpoint=(endpoint:String)-instance-method">#</a>
+        <a class="method-permalink" href="#endpoint%3D%28endpoint%3AString%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1098,7 +1090,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>features</strong> : Hash(String, <a href="../Halite/Feature.html">Feature</a>)
 
-        <a class="method-permalink" href="#features:Hash(String,Feature)-instance-method">#</a>
+        <a class="method-permalink" href="#features%3AHash%28String%2CFeature%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1112,7 +1104,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>features=</strong>(features : Hash(String, <a href="../Halite/Feature.html">Feature</a>))
 
-        <a class="method-permalink" href="#features=(features:Hash(String,Feature))-instance-method">#</a>
+        <a class="method-permalink" href="#features%3D%28features%3AHash%28String%2CFeature%29%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1126,7 +1118,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>follow</strong> : <a href="../Halite/Options/Follow.html">Follow</a>
 
-        <a class="method-permalink" href="#follow:Follow-instance-method">#</a>
+        <a class="method-permalink" href="#follow%3AFollow-instance-method">#</a>
       </div>
       
       <br/>
@@ -1140,7 +1132,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>follow=</strong>(follow : <a href="../Halite/Options/Follow.html">Follow</a>)
 
-        <a class="method-permalink" href="#follow=(follow:Follow)-instance-method">#</a>
+        <a class="method-permalink" href="#follow%3D%28follow%3AFollow%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1154,12 +1146,12 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>follow=</strong>(hops : Int32)
 
-        <a class="method-permalink" href="#follow=(hops:Int32)-instance-method">#</a>
+        <a class="method-permalink" href="#follow%3D%28hops%3AInt32%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options/Follow.html#hops=(hops:Int32)-instance-method">Follow.hops=</a></code></p>
+          <p>Alias <code><a href="../Halite/Options/Follow.html#hops%3D%28hops%3AInt32%29-instance-method">Follow.hops=</a></code></p>
         </div>
       
       <br/>
@@ -1178,7 +1170,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options/Follow.html#strict:Bool-instance-method">Follow.strict</a></code></p>
+          <p>Alias <code><a href="../Halite/Options/Follow.html#strict%3ABool-instance-method">Follow.strict</a></code></p>
         </div>
       
       <br/>
@@ -1192,12 +1184,12 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>follow_strict=</strong>(strict : Bool)
 
-        <a class="method-permalink" href="#follow_strict=(strict:Bool)-instance-method">#</a>
+        <a class="method-permalink" href="#follow_strict%3D%28strict%3ABool%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options/Follow.html#strict=(strict:Bool)-instance-method">Follow.strict=</a></code></p>
+          <p>Alias <code><a href="../Halite/Options/Follow.html#strict%3D%28strict%3ABool%29-instance-method">Follow.strict=</a></code></p>
         </div>
       
       <br/>
@@ -1211,7 +1203,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>form</strong> : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)
 
-        <a class="method-permalink" href="#form:Hash(String,Type)-instance-method">#</a>
+        <a class="method-permalink" href="#form%3AHash%28String%2CType%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1225,7 +1217,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>form=</strong>(form : Hash(String, <a href="../Halite/Options/Type.html">Type</a>))
 
-        <a class="method-permalink" href="#form=(form:Hash(String,Type))-instance-method">#</a>
+        <a class="method-permalink" href="#form%3D%28form%3AHash%28String%2CType%29%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1239,7 +1231,21 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>headers</strong> : <a href="../HTTP/Headers.html">HTTP::Headers</a>
 
-        <a class="method-permalink" href="#headers:HTTP::Headers-instance-method">#</a>
+        <a class="method-permalink" href="#headers%3AHTTP%3A%3AHeaders-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="headers=(headers:HTTP::Headers)-instance-method">
+      <div class="signature">
+        
+        def <strong>headers=</strong>(headers : <a href="../HTTP/Headers.html">HTTP::Headers</a>)
+
+        <a class="method-permalink" href="#headers%3D%28headers%3AHTTP%3A%3AHeaders%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1253,7 +1259,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>headers=</strong>(headers : Hash(String, _) | NamedTuple)
 
-        <a class="method-permalink" href="#headers=(headers:Hash(String,_)%7CNamedTuple)-instance-method">#</a>
+        <a class="method-permalink" href="#headers%3D%28headers%3AHash%28String%2C_%29%7CNamedTuple%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1267,26 +1273,12 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       </div>
     </div>
   
-    <div class="entry-detail" id="headers=(headers:HTTP::Headers)-instance-method">
-      <div class="signature">
-        
-        def <strong>headers=</strong>(headers : <a href="../HTTP/Headers.html">HTTP::Headers</a>)
-
-        <a class="method-permalink" href="#headers=(headers:HTTP::Headers)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="json:Hash(String,Type)-instance-method">
       <div class="signature">
         
         def <strong>json</strong> : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)
 
-        <a class="method-permalink" href="#json:Hash(String,Type)-instance-method">#</a>
+        <a class="method-permalink" href="#json%3AHash%28String%2CType%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1300,7 +1292,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>json=</strong>(json : Hash(String, <a href="../Halite/Options/Type.html">Type</a>))
 
-        <a class="method-permalink" href="#json=(json:Hash(String,Type))-instance-method">#</a>
+        <a class="method-permalink" href="#json%3D%28json%3AHash%28String%2CType%29%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1314,7 +1306,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>logging</strong> : Bool
 
-        <a class="method-permalink" href="#logging:Bool-instance-method">#</a>
+        <a class="method-permalink" href="#logging%3ABool-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1333,13 +1325,12 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>logging=</strong>(enable : Bool)
 
-        <a class="method-permalink" href="#logging=(enable:Bool)-instance-method">#</a>
+        <a class="method-permalink" href="#logging%3D%28enable%3ABool%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Quick enable logging</p>
-
 <p>By defaults, use <code><a href="../Halite/Logging/Common.html">Logging::Common</a></code> as logging output.</p>
         </div>
       
@@ -1354,7 +1345,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>merge</strong>(other : <a href="../Halite/Options.html">Halite::Options</a>) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#merge(other:Halite::Options):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#merge%28other%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1373,7 +1364,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>merge!</strong>(other : <a href="../Halite/Options.html">Halite::Options</a>) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#merge!(other:Halite::Options):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#merge%21%28other%3AHalite%3A%3AOptions%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1392,7 +1383,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>params</strong> : Hash(String, <a href="../Halite/Options/Type.html">Type</a>)
 
-        <a class="method-permalink" href="#params:Hash(String,Type)-instance-method">#</a>
+        <a class="method-permalink" href="#params%3AHash%28String%2CType%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1406,7 +1397,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>params=</strong>(params : Hash(String, <a href="../Halite/Options/Type.html">Type</a>))
 
-        <a class="method-permalink" href="#params=(params:Hash(String,Type))-instance-method">#</a>
+        <a class="method-permalink" href="#params%3D%28params%3AHash%28String%2CType%29%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1420,7 +1411,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>raw</strong> : String?
 
-        <a class="method-permalink" href="#raw:String?-instance-method">#</a>
+        <a class="method-permalink" href="#raw%3AString%3F-instance-method">#</a>
       </div>
       
       <br/>
@@ -1434,7 +1425,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>raw=</strong>(raw : String?)
 
-        <a class="method-permalink" href="#raw=(raw:String?)-instance-method">#</a>
+        <a class="method-permalink" href="#raw%3D%28raw%3AString%3F%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1453,7 +1444,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options/Timeout.html#read:Float64?-instance-method">Timeout.read</a></code></p>
+          <p>Alias <code><a href="../Halite/Options/Timeout.html#read%3AFloat64%3F-instance-method">Timeout.read</a></code></p>
         </div>
       
       <br/>
@@ -1467,12 +1458,12 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>read_timeout=</strong>(timeout : Int32 | Float64 | Time::Span)
 
-        <a class="method-permalink" href="#read_timeout=(timeout:Int32%7CFloat64%7CTime::Span)-instance-method">#</a>
+        <a class="method-permalink" href="#read_timeout%3D%28timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options/Timeout.html#read=(read:Int32%7CFloat64%7CTime::Span?)-instance-method">Timeout.read=</a></code></p>
+          <p>Alias <code><a href="../Halite/Options/Timeout.html#read%3D%28read%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method">Timeout.read=</a></code></p>
         </div>
       
       <br/>
@@ -1486,7 +1477,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>timeout</strong> : <a href="../Halite/Options/Timeout.html">Timeout</a>
 
-        <a class="method-permalink" href="#timeout:Timeout-instance-method">#</a>
+        <a class="method-permalink" href="#timeout%3ATimeout-instance-method">#</a>
       </div>
       
       <br/>
@@ -1500,7 +1491,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>timeout=</strong>(timeout : <a href="../Halite/Options/Timeout.html">Timeout</a>)
 
-        <a class="method-permalink" href="#timeout=(timeout:Timeout)-instance-method">#</a>
+        <a class="method-permalink" href="#timeout%3D%28timeout%3ATimeout%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1514,7 +1505,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>tls</strong> : OpenSSL::SSL::Context::Client?
 
-        <a class="method-permalink" href="#tls:OpenSSL::SSL::Context::Client?-instance-method">#</a>
+        <a class="method-permalink" href="#tls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F-instance-method">#</a>
       </div>
       
       <br/>
@@ -1528,7 +1519,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>tls=</strong>(tls : OpenSSL::SSL::Context::Client?)
 
-        <a class="method-permalink" href="#tls=(tls:OpenSSL::SSL::Context::Client?)-instance-method">#</a>
+        <a class="method-permalink" href="#tls%3D%28tls%3AOpenSSL%3A%3ASSL%3A%3AContext%3A%3AClient%3F%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1561,7 +1552,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>with_cookies</strong>(cookies : Hash(String, _) | NamedTuple) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_cookies(cookies:Hash(String,_)%7CNamedTuple):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#with_cookies%28cookies%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1580,7 +1571,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>with_cookies</strong>(cookies : HTTP::Cookies) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_cookies(cookies:HTTP::Cookies):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#with_cookies%28cookies%3AHTTP%3A%3ACookies%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1599,7 +1590,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>with_cookies</strong>(cookie : HTTP::Cookie) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_cookies(cookie:HTTP::Cookie):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#with_cookies%28cookie%3AHTTP%3A%3ACookie%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1618,12 +1609,12 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>with_cookies</strong>(**cookies) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_cookies(**cookies):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#with_cookies%28%2A%2Acookies%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options.html#with_cookies(**cookies):Halite::Options-instance-method">#with_cookies</a></code> method.</p>
+          <p>Alias <code><a href="../Halite/Options.html#with_cookies%28%2A%2Acookies%29%3AHalite%3A%3AOptions-instance-method">#with_cookies</a></code> method.</p>
         </div>
       
       <br/>
@@ -1637,7 +1628,7 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>with_endpoint</strong>(endpoint : String | URI)
 
-        <a class="method-permalink" href="#with_endpoint(endpoint:String%7CURI)-instance-method">#</a>
+        <a class="method-permalink" href="#with_endpoint%28endpoint%3AString%7CURI%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -1646,12 +1637,12 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       </div>
     </div>
   
-    <div class="entry-detail" id="with_features(feature_name:String,**opts)-instance-method">
+    <div class="entry-detail" id="with_features(name:String,opts:NamedTuple)-instance-method">
       <div class="signature">
         
-        def <strong>with_features</strong>(feature_name : String, **opts)
+        def <strong>with_features</strong>(name : String, opts : NamedTuple)
 
-        <a class="method-permalink" href="#with_features(feature_name:String,**opts)-instance-method">#</a>
+        <a class="method-permalink" href="#with_features%28name%3AString%2Copts%3ANamedTuple%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1665,31 +1656,12 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       </div>
     </div>
   
-    <div class="entry-detail" id="with_features(*features)-instance-method">
-      <div class="signature">
-        
-        def <strong>with_features</strong>(*features)
-
-        <a class="method-permalink" href="#with_features(*features)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with the name of features.</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="with_features(name:String,feature:Feature)-instance-method">
       <div class="signature">
         
         def <strong>with_features</strong>(name : String, feature : <a href="../Halite/Feature.html">Feature</a>)
 
-        <a class="method-permalink" href="#with_features(name:String,feature:Feature)-instance-method">#</a>
+        <a class="method-permalink" href="#with_features%28name%3AString%2Cfeature%3AFeature%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1703,12 +1675,31 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
       </div>
     </div>
   
-    <div class="entry-detail" id="with_features(name:String,opts:NamedTuple)-instance-method">
+    <div class="entry-detail" id="with_features(*features)-instance-method">
       <div class="signature">
         
-        def <strong>with_features</strong>(name : String, opts : NamedTuple)
+        def <strong>with_features</strong>(*features)
 
-        <a class="method-permalink" href="#with_features(name:String,opts:NamedTuple)-instance-method">#</a>
+        <a class="method-permalink" href="#with_features%28%2Afeatures%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with the name of features.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_features(feature_name:String,**opts)-instance-method">
+      <div class="signature">
+        
+        def <strong>with_features</strong>(feature_name : String, **opts)
+
+        <a class="method-permalink" href="#with_features%28feature_name%3AString%2C%2A%2Aopts%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1727,13 +1718,12 @@ but not the objects they reference. dup copies the tainted state of obj.</p>
         
         def <strong>with_follow</strong>(follow = <span class="t">Follow</span><span class="t">::</span><span class="t">MAX_HOPS</span>, strict = <span class="t">Follow</span><span class="t">::</span><span class="t">STRICT</span>) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_follow(follow=Follow::MAX_HOPS,strict=Follow::STRICT):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#with_follow%28follow%3DFollow%3A%3AMAX_HOPS%2Cstrict%3DFollow%3A%3ASTRICT%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given max hops of redirect times.</p>
-
 <pre><code class="language-crystal"><span class="c"># Automatically following redirects</span>
 options.with_follow
 <span class="c"># A maximum of 3 subsequent redirects</span>
@@ -1753,7 +1743,7 @@ options.with_follow(<span class="n">3</span>)</code></pre>
         
         def <strong>with_headers</strong>(headers : Hash(String, _) | NamedTuple) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_headers(headers:Hash(String,_)%7CNamedTuple):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#with_headers%28headers%3AHash%28String%2C_%29%7CNamedTuple%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1772,31 +1762,12 @@ options.with_follow(<span class="n">3</span>)</code></pre>
         
         def <strong>with_headers</strong>(**with_headers) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_headers(**with_headers):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#with_headers%28%2A%2Awith_headers%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options.html#with_headers(**with_headers):Halite::Options-instance-method">#with_headers</a></code> method.</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="with_logging(format:String,**opts)-instance-method">
-      <div class="signature">
-        
-        def <strong>with_logging</strong>(format : String, **opts)
-
-        <a class="method-permalink" href="#with_logging(format:String,**opts)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> iitself with given format and the options of format.</p>
+          <p>Alias <code><a href="../Halite/Options.html#with_headers%28%2A%2Awith_headers%29%3AHalite%3A%3AOptions-instance-method">#with_headers</a></code> method.</p>
         </div>
       
       <br/>
@@ -1810,12 +1781,31 @@ options.with_follow(<span class="n">3</span>)</code></pre>
         
         def <strong>with_logging</strong>(logging : <a href="../Halite/Logging/Abstract.html">Halite::Logging::Abstract</a>)
 
-        <a class="method-permalink" href="#with_logging(logging:Halite::Logging::Abstract)-instance-method">#</a>
+        <a class="method-permalink" href="#with_logging%28logging%3AHalite%3A%3ALogging%3A%3AAbstract%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features(feature_name:String,**opts)-instance-method">#with_features</a></code>.</p>
+          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> self with given logging, depend on <code><a href="../Halite/Options.html#with_features%28name%3AString%2Copts%3ANamedTuple%29-instance-method">#with_features</a></code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_logging(format:String,**opts)-instance-method">
+      <div class="signature">
+        
+        def <strong>with_logging</strong>(format : String, **opts)
+
+        <a class="method-permalink" href="#with_logging%28format%3AString%2C%2A%2Aopts%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns <code><a href="../Halite/Options.html">Options</a></code> iitself with given format and the options of format.</p>
         </div>
       
       <br/>
@@ -1829,7 +1819,7 @@ options.with_follow(<span class="n">3</span>)</code></pre>
         
         def <strong>with_timeout</strong>(connect : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, read : Int32 | Float64 | Time::Span? = <span class="n">nil</span>, write : Int32 | Float64 | Time::Span? = <span class="n">nil</span>) : <a href="../Halite/Options.html">Halite::Options</a>
 
-        <a class="method-permalink" href="#with_timeout(connect:Int32%7CFloat64%7CTime::Span?=nil,read:Int32%7CFloat64%7CTime::Span?=nil,write:Int32%7CFloat64%7CTime::Span?=nil):Halite::Options-instance-method">#</a>
+        <a class="method-permalink" href="#with_timeout%28connect%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cread%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%2Cwrite%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%3Dnil%29%3AHalite%3A%3AOptions-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1853,7 +1843,7 @@ options.with_follow(<span class="n">3</span>)</code></pre>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options/Timeout.html#write:Float64?-instance-method">Timeout.write</a></code></p>
+          <p>Alias <code><a href="../Halite/Options/Timeout.html#write%3AFloat64%3F-instance-method">Timeout.write</a></code></p>
         </div>
       
       <br/>
@@ -1867,12 +1857,12 @@ options.with_follow(<span class="n">3</span>)</code></pre>
         
         def <strong>write_timeout=</strong>(timeout : Int32 | Float64 | Time::Span)
 
-        <a class="method-permalink" href="#write_timeout=(timeout:Int32%7CFloat64%7CTime::Span)-instance-method">#</a>
+        <a class="method-permalink" href="#write_timeout%3D%28timeout%3AInt32%7CFloat64%7CTime%3A%3ASpan%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Alias <code><a href="../Halite/Options/Timeout.html#write=(write:Int32%7CFloat64%7CTime::Span?)-instance-method">Timeout.write=</a></code></p>
+          <p>Alias <code><a href="../Halite/Options/Timeout.html#write%3D%28write%3AInt32%7CFloat64%7CTime%3A%3ASpan%3F%29-instance-method">Timeout.write=</a></code></p>
         </div>
       
       <br/>

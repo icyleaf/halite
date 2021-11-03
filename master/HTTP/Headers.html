@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.36.1">
+<meta name="generator" content="Crystal Docs 1.1.1">
 <meta name="crystal_docs.project_version" content="master-dev">
 <meta name="crystal_docs.project_name" content="halite">
 
@@ -442,16 +442,16 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#encode(data:Hash(String,_)%7CNamedTuple):HTTP::Headers-class-method" class="signature"><strong>.encode</strong>(data : Hash(String, _) | NamedTuple) : HTTP::Headers</a>
+        <a href="#encode%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method" class="signature"><strong>.encode</strong>(data : Hash(String, _) | NamedTuple) : HTTP::Headers</a>
         
           <div class="summary"><p>Returns the given key value pairs as HTTP Headers</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#encode(**data)-class-method" class="signature"><strong>.encode</strong>(**data)</a>
+        <a href="#encode%28%2A%2Adata%29-class-method" class="signature"><strong>.encode</strong>(**data)</a>
         
-          <div class="summary"><p>Same as <code><a href="../HTTP/Headers.html#encode(**data)-class-method">#encode</a></code></p></div>
+          <div class="summary"><p>Same as <code><a href="../HTTP/Headers.html#encode%28%2A%2Adata%29-class-method">#encode</a></code></p></div>
         
       </li>
     
@@ -543,15 +543,13 @@
         
         def self.<strong>encode</strong>(data : Hash(String, _) | NamedTuple) : <a href="../HTTP/Headers.html">HTTP::Headers</a>
 
-        <a class="method-permalink" href="#encode(data:Hash(String,_)%7CNamedTuple):HTTP::Headers-class-method">#</a>
+        <a class="method-permalink" href="#encode%28data%3AHash%28String%2C_%29%7CNamedTuple%29%3AHTTP%3A%3AHeaders-class-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Returns the given key value pairs as HTTP Headers</p>
-
 <p>Every parameter added is directly written to an IO, where keys are properly escaped.</p>
-
 <pre><code class="language-crystal"><span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>.encode({
   content_type: <span class="s">&quot;application/json&quot;</span>,
 })
@@ -574,12 +572,12 @@
         
         def self.<strong>encode</strong>(**data)
 
-        <a class="method-permalink" href="#encode(**data)-class-method">#</a>
+        <a class="method-permalink" href="#encode%28%2A%2Adata%29-class-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Same as <code><a href="../HTTP/Headers.html#encode(**data)-class-method">#encode</a></code></p>
+          <p>Same as <code><a href="../HTTP/Headers.html#encode%28%2A%2Adata%29-class-method">#encode</a></code></p>
         </div>
       
       <br/>
@@ -611,7 +609,6 @@
         <div class="doc">
           
           <p>Similar as <code>Hahs#to_h</code> but return <code>String</code> if it has one value of the key.</p>
-
 <pre><code class="language-crystal">headers <span class="o">=</span> <span class="t">HTTP</span><span class="t">::</span><span class="t">Headers</span>{<span class="s">&quot;Accepts&quot;</span> => [<span class="s">&quot;application/json&quot;</span>, <span class="s">&quot;text/html&quot;</span>], <span class="s">&quot;Content-Type&quot;</span> => [<span class="s">&quot;text/html&quot;</span>]}
 headers[<span class="s">&quot;Accepts&quot;</span>]      <span class="c"># =&gt; [&quot;application/json&quot;, &quot;text/html&quot;]</span>
 headers[<span class="s">&quot;Content-Type&quot;</span>] <span class="c"># =&gt; &quot;text/html&quot;</span></code></pre>

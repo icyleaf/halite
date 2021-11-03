@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.36.1">
+<meta name="generator" content="Crystal Docs 1.1.1">
 <meta name="crystal_docs.project_version" content="0.12.0">
 <meta name="crystal_docs.project_name" content="halite">
 
@@ -382,15 +382,20 @@
   </h2>
 
   <p>Cache feature use for caching HTTP response to local storage to speed up in developing stage.</p>
-
 <p>It has the following options:</p>
-
-<ul><li><code><a href="../Halite/Cache.html#file:String?-instance-method">#file</a></code>: Load cache from file. it conflict with <code><a href="../Halite/Cache.html#path:String-instance-method">#path</a></code> and <code><a href="../Halite/Cache.html#expires:Time::Span?-instance-method">#expires</a></code>.</li><li><code><a href="../Halite/Cache.html#path:String-instance-method">#path</a></code>: The path of cache, default is "/tmp/halite/cache/"</li><li><code><a href="../Halite/Cache.html#expires:Time::Span?-instance-method">#expires</a></code>: The expires time of cache, default is never expires.</li><li><code><a href="../Halite/Cache.html#debug:Bool-instance-method">#debug</a></code>: The debug mode of cache, default is <code>true</code></li></ul>
-
+<ul>
+<li><code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code>: Load cache from file. it conflict with <code><a href="../Halite/Cache.html#path%3AString-instance-method">#path</a></code> and <code><a href="../Halite/Cache.html#expires%3ATime%3A%3ASpan%3F-instance-method">#expires</a></code>.</li>
+<li><code><a href="../Halite/Cache.html#path%3AString-instance-method">#path</a></code>: The path of cache, default is &quot;/tmp/halite/cache/&quot;</li>
+<li><code><a href="../Halite/Cache.html#expires%3ATime%3A%3ASpan%3F-instance-method">#expires</a></code>: The expires time of cache, default is never expires.</li>
+<li><code><a href="../Halite/Cache.html#debug%3ABool-instance-method">#debug</a></code>: The debug mode of cache, default is <code>true</code></li>
+</ul>
 <p>With debug mode, cached response it always included some headers information:</p>
-
-<ul><li><code>X-<a href="../Halite.html">Halite</a>-Cached-From</code>: Cache source (cache or file)</li><li><code>X-<a href="../Halite.html">Halite</a>-Cached-Key</code>: Cache key with verb, uri and body (return with cache, not <code><a href="../Halite/Cache.html#file:String?-instance-method">#file</a></code> passed)</li><li><code>X-<a href="../Halite.html">Halite</a>-Cached-At</code>:  Cache created time</li><li><code>X-<a href="../Halite.html">Halite</a>-Cached-Expires-At</code>: Cache expired time (return with cache, not <code><a href="../Halite/Cache.html#file:String?-instance-method">#file</a></code> passed)</li></ul>
-
+<ul>
+<li><code>X-<a href="../Halite.html">Halite</a>-Cached-From</code>: Cache source (cache or file)</li>
+<li><code>X-<a href="../Halite.html">Halite</a>-Cached-Key</code>: Cache key with verb, uri and body (return with cache, not <code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code> passed)</li>
+<li><code>X-<a href="../Halite.html">Halite</a>-Cached-At</code>:  Cache created time</li>
+<li><code>X-<a href="../Halite.html">Halite</a>-Cached-Expires-At</code>: Cache expired time (return with cache, not <code><a href="../Halite/Cache.html#file%3AString%3F-instance-method">#file</a></code> passed)</li>
+</ul>
 <pre><code class="language-crystal"><span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span>     <span class="c"># request a HTTP</span>
 r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span> <span class="c"># request from local storage</span>
 r.headers                                                 <span class="c"># =&gt; {..., &quot;X-Halite-Cached-At&quot; =&gt; &quot;2018-08-30 10:41:14 UTC&quot;, &quot;X-Halite-Cached-By&quot; =&gt; &quot;Halite&quot;, &quot;X-Halite-Cached-Expires-At&quot; =&gt; &quot;2018-08-30 10:41:19 UTC&quot;, &quot;X-Halite-Cached-Key&quot; =&gt; &quot;2bb155e6c8c47627da3d91834eb4249a&quot;}}</span></code></pre>
@@ -457,7 +462,7 @@ r.headers                                                 <span class="c"># =&gt
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(**options)-class-method" class="signature"><strong>.new</strong>(**options)</a>
+        <a href="#new%28%2A%2Aoptions%29-class-method" class="signature"><strong>.new</strong>(**options)</a>
         
           <div class="summary"><p>return a new Cache instance</p></div>
         
@@ -480,27 +485,27 @@ r.headers                                                 <span class="c"># =&gt
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#debug:Bool-instance-method" class="signature"><strong>#debug</strong> : Bool</a>
+        <a href="#debug%3ABool-instance-method" class="signature"><strong>#debug</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#expires:Time::Span?-instance-method" class="signature"><strong>#expires</strong> : Time::Span?</a>
+        <a href="#expires%3ATime%3A%3ASpan%3F-instance-method" class="signature"><strong>#expires</strong> : Time::Span?</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#file:String?-instance-method" class="signature"><strong>#file</strong> : String?</a>
+        <a href="#file%3AString%3F-instance-method" class="signature"><strong>#file</strong> : String?</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#intercept(chain)-instance-method" class="signature"><strong>#intercept</strong>(chain)</a>
+        <a href="#intercept%28chain%29-instance-method" class="signature"><strong>#intercept</strong>(chain)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#path:String-instance-method" class="signature"><strong>#path</strong> : String</a>
+        <a href="#path%3AString-instance-method" class="signature"><strong>#path</strong> : String</a>
         
       </li>
     
@@ -517,17 +522,17 @@ r.headers                                                 <span class="c"># =&gt
   <h3>Instance methods inherited from class <code><a href="../Halite/Feature.html">Halite::Feature</a></code></h3>
   
   
-    <a href="../Halite/Feature.html#intercept(chain:Halite::Feature::Chain):Halite::Feature::Chain-instance-method" class="tooltip">
+    <a href="../Halite/Feature.html#intercept%28chain%3AHalite%3A%3AFeature%3A%3AChain%29%3AHalite%3A%3AFeature%3A%3AChain-instance-method" class="tooltip">
       <span>intercept(chain : Halite::Feature::Chain) : Halite::Feature::Chain</span>
     intercept</a>, 
     
   
-    <a href="../Halite/Feature.html#request(request:Halite::Request):Halite::Request-instance-method" class="tooltip">
+    <a href="../Halite/Feature.html#request%28request%3AHalite%3A%3ARequest%29%3AHalite%3A%3ARequest-instance-method" class="tooltip">
       <span>request(request : Halite::Request) : Halite::Request</span>
     request</a>, 
     
   
-    <a href="../Halite/Feature.html#response(response:Halite::Response):Halite::Response-instance-method" class="tooltip">
+    <a href="../Halite/Feature.html#response%28response%3AHalite%3A%3AResponse%29%3AHalite%3A%3AResponse-instance-method" class="tooltip">
       <span>response(response : Halite::Response) : Halite::Response</span>
     response</a>
     
@@ -539,7 +544,7 @@ r.headers                                                 <span class="c"># =&gt
   <h3>Constructor methods inherited from class <code><a href="../Halite/Feature.html">Halite::Feature</a></code></h3>
   
   
-    <a href="../Halite/Feature.html#new(**options)-class-method" class="tooltip">
+    <a href="../Halite/Feature.html#new%28%2A%2Aoptions%29-class-method" class="tooltip">
       <span>new(**options)</span>
     new</a>
     
@@ -587,16 +592,18 @@ r.headers                                                 <span class="c"># =&gt
         
         def self.<strong>new</strong>(**options)
 
-        <a class="method-permalink" href="#new(**options)-class-method">#</a>
+        <a class="method-permalink" href="#new%28%2A%2Aoptions%29-class-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>return a new Cache instance</p>
-
 <p>Accepts argument:</p>
-
-<ul><li><strong>debug</strong>: <code>Bool</code></li><li><strong>path</strong>: <code>String</code></li><li><strong>expires</strong>: <code>(Int32 | Time::Span)?</code></li></ul>
+<ul>
+<li><strong>debug</strong>: <code>Bool</code></li>
+<li><strong>path</strong>: <code>String</code></li>
+<li><strong>expires</strong>: <code>(Int32 | Time::Span)?</code></li>
+</ul>
         </div>
       
       <br/>
@@ -624,7 +631,7 @@ r.headers                                                 <span class="c"># =&gt
         
         def <strong>debug</strong> : Bool
 
-        <a class="method-permalink" href="#debug:Bool-instance-method">#</a>
+        <a class="method-permalink" href="#debug%3ABool-instance-method">#</a>
       </div>
       
       <br/>
@@ -638,7 +645,7 @@ r.headers                                                 <span class="c"># =&gt
         
         def <strong>expires</strong> : Time::Span?
 
-        <a class="method-permalink" href="#expires:Time::Span?-instance-method">#</a>
+        <a class="method-permalink" href="#expires%3ATime%3A%3ASpan%3F-instance-method">#</a>
       </div>
       
       <br/>
@@ -652,7 +659,7 @@ r.headers                                                 <span class="c"># =&gt
         
         def <strong>file</strong> : String?
 
-        <a class="method-permalink" href="#file:String?-instance-method">#</a>
+        <a class="method-permalink" href="#file%3AString%3F-instance-method">#</a>
       </div>
       
       <br/>
@@ -666,7 +673,7 @@ r.headers                                                 <span class="c"># =&gt
         
         def <strong>intercept</strong>(chain)
 
-        <a class="method-permalink" href="#intercept(chain)-instance-method">#</a>
+        <a class="method-permalink" href="#intercept%28chain%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -680,7 +687,7 @@ r.headers                                                 <span class="c"># =&gt
         
         def <strong>path</strong> : String
 
-        <a class="method-permalink" href="#path:String-instance-method">#</a>
+        <a class="method-permalink" href="#path%3AString-instance-method">#</a>
       </div>
       
       <br/>

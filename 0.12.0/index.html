@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.36.1">
+<meta name="generator" content="Crystal Docs 1.1.1">
 <meta name="crystal_docs.project_version" content="0.12.0">
 <meta name="crystal_docs.project_name" content="halite">
 
@@ -360,65 +360,107 @@
 
 
 <div class="main-content">
-<p><img src="https://github.com/icyleaf/halite/raw/master/halite-logo-small.png" alt="halite-logo"/></p>
-
+<p><img src="https://github.com/icyleaf/halite/raw/master/halite-logo-small.png" alt="halite-logo" /></p>
 <h1><a id="halite" class="anchor" href="#halite">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Halite</h1>
-
-<p><a href="https://github.com/crystal-lang/crystal"><img src="https://img.shields.io/badge/language-crystal-776791.svg" alt="Language"/></a>
-<a href="https://github.com/icyleaf/halite/blob/master/CHANGELOG.md"><img src="https://img.shields.io/github/tag/icyleaf/halite.svg" alt="Tag"/></a>
-<a href="https://github.com/icyleaf/halite/"><img src="https://img.shields.io/badge/source-github-brightgreen.svg" alt="Source"/></a>
-<a href="https://icyleaf.github.io/halite/"><img src="https://img.shields.io/badge/document-api-brightgreen.svg" alt="Document"/></a>
-<a href="https://github.com/icyleaf/halite/actions?query=workflow%3A%22Linux+CI%22"><img src="https://github.com/icyleaf/halite/workflows/Linux%20CI/badge.svg" alt="Build Status"/></a></p>
-
+<p><a href="https://github.com/crystal-lang/crystal"><img src="https://img.shields.io/badge/language-crystal-776791.svg" alt="Language" /></a>
+<a href="https://github.com/icyleaf/halite/blob/master/CHANGELOG.md"><img src="https://img.shields.io/github/tag/icyleaf/halite.svg" alt="Tag" /></a>
+<a href="https://github.com/icyleaf/halite/"><img src="https://img.shields.io/badge/source-github-brightgreen.svg" alt="Source" /></a>
+<a href="https://icyleaf.github.io/halite/"><img src="https://img.shields.io/badge/document-api-brightgreen.svg" alt="Document" /></a>
+<a href="https://github.com/icyleaf/halite/actions?query=workflow:%22Linux+CI%22"><img src="https://github.com/icyleaf/halite/workflows/Linux%20CI/badge.svg" alt="Build Status" /></a></p>
 <p>HTTP Requests with a chainable REST API, built-in sessions and middleware written by <a href="https://crystal-lang.org/">Crystal</a>.
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http">HTTP</a>/<a href="https://github.com/rest-client/rest-client">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
-
 <p>Build in Crystal version <code>>= 1.0.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/blob/master/CHANGELOG.md">v0.12.0</a>.</p>
-
 <h2><a id="index" class="anchor" href="#index">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Index</h2>
-
-<p>&lt;!-- TOC --></p>
-
-<ul><li><a href="#installation">Installation</a></li><li><a href="#usage">Usage</a></li><ul><li><a href="#making-requests">Making Requests</a></li><li><a href="#passing-parameters">Passing Parameters</a></li><li><a href="#query-string-parameters">Query string parameters</a></li><li><a href="#form-data">Form data</a></li><li><a href="#file-uploads-via-form-data">File uploads (via form data)</a></li><li><a href="#json-data">JSON data</a></li><li><a href="#raw-string">Raw String</a></li><li><a href="#passing-advanced-options">Passing advanced options</a></li><li><a href="#auth">Auth</a></li><li><a href="#user-agent">User Agent</a></li><li><a href="#headers">Headers</a></li><li><a href="#cookies">Cookies</a></li><li><a href="#redirects-and-history">Redirects and History</a></li><li><a href="#timeout">Timeout</a></li><li><a href="#https">HTTPS</a></li><li><a href="#response-handling">Response Handling</a></li><li><a href="#response-content">Response Content</a></li><li><a href="#json-content">JSON Content</a></li><li><a href="#parsing-content">Parsing Content</a></li><li><a href="#binary-data">Binary Data</a></li><li><a href="#error-handling">Error Handling</a></li><li><a href="#raise-for-status-code">Raise for status code</a></li></ul><li><a href="#middleware">Middleware</a></li><ul><li><a href="#write-a-simple-feature">Write a simple feature</a></li><li><a href="#write-a-interceptor">Write a interceptor</a></li></ul><li><a href="#advanced-usage">Advanced Usage</a></li><ul><li><a href="#configuring">Configuring</a></li><li><a href="#endpoint">Endpoint</a></li><li><a href="#sessions">Sessions</a></li><li><a href="#streaming-requests">Streaming Requests</a></li><li><a href="#logging">Logging</a></li><li><a href="#local-cache">Local Cache</a></li><li><a href="#link-headers">Link Headers</a>
-&lt;!-- /TOC --></li></ul></ul>
-
+<!-- TOC -->
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#usage">Usage</a>
+<ul>
+<li><a href="#making-requests">Making Requests</a></li>
+<li><a href="#passing-parameters">Passing Parameters</a>
+<ul>
+<li><a href="#query-string-parameters">Query string parameters</a></li>
+<li><a href="#form-data">Form data</a></li>
+<li><a href="#file-uploads-via-form-data">File uploads (via form data)</a></li>
+<li><a href="#json-data">JSON data</a></li>
+<li><a href="#raw-string">Raw String</a></li>
+</ul>
+</li>
+<li><a href="#passing-advanced-options">Passing advanced options</a>
+<ul>
+<li><a href="#auth">Auth</a></li>
+<li><a href="#user-agent">User Agent</a></li>
+<li><a href="#headers">Headers</a></li>
+<li><a href="#cookies">Cookies</a></li>
+<li><a href="#redirects-and-history">Redirects and History</a></li>
+<li><a href="#timeout">Timeout</a></li>
+</ul>
+</li>
+<li><a href="#https">HTTPS</a></li>
+<li><a href="#response-handling">Response Handling</a>
+<ul>
+<li><a href="#response-content">Response Content</a></li>
+<li><a href="#json-content">JSON Content</a></li>
+<li><a href="#parsing-content">Parsing Content</a></li>
+<li><a href="#binary-data">Binary Data</a></li>
+</ul>
+</li>
+<li><a href="#error-handling">Error Handling</a>
+<ul>
+<li><a href="#raise-for-status-code">Raise for status code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#middleware">Middleware</a>
+<ul>
+<li><a href="#write-a-simple-feature">Write a simple feature</a></li>
+<li><a href="#write-a-interceptor">Write a interceptor</a></li>
+</ul>
+</li>
+<li><a href="#advanced-usage">Advanced Usage</a>
+<ul>
+<li><a href="#configuring">Configuring</a></li>
+<li><a href="#endpoint">Endpoint</a></li>
+<li><a href="#sessions">Sessions</a></li>
+<li><a href="#streaming-requests">Streaming Requests</a></li>
+<li><a href="#logging">Logging</a></li>
+<li><a href="#local-cache">Local Cache</a></li>
+<li><a href="#link-headers">Link Headers</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
 <h2><a id="installation" class="anchor" href="#installation">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Installation</h2>
-
 <p>Add this to your application's <code>shard.yml</code>:</p>
-
 <pre><code class="language-yaml">dependencies:
   halite:
     github: icyleaf/halite</code></pre>
-
 <h2><a id="usage" class="anchor" href="#usage">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Usage</h2>
-
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;halite&quot;</span></code></pre>
-
 <h3><a id="making-requests" class="anchor" href="#making-requests">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Making Requests</h3>
-
 <p>Make a GET request:</p>
-
 <pre><code class="language-crystal"><span class="c"># Direct get url</span>
 <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 
@@ -442,54 +484,47 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
         <span class="s">&quot;language&quot;</span> => <span class="s">&quot;crystal&quot;</span>,
         <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span>
       })</code></pre>
-
 <p>See also all <a href="https://icyleaf.github.io/halite/Halite/Chainable.html">chainable methods</a>.</p>
-
 <p>Many other HTTP methods are available as well:</p>
-
-<ul><li><code>get</code></li><li><code>head</code></li><li><code>post</code></li><li><code>put</code></li><li><code>delete</code></li><li><code>patch</code></li><li><code>options</code></li></ul>
-
+<ul>
+<li><code>get</code></li>
+<li><code>head</code></li>
+<li><code>post</code></li>
+<li><code>put</code></li>
+<li><code>delete</code></li>
+<li><code>patch</code></li>
+<li><code>options</code></li>
+</ul>
 <h3><a id="passing-parameters" class="anchor" href="#passing-parameters">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Passing Parameters</h3>
-
 <h4><a id="query-string-parameters" class="anchor" href="#query-string-parameters">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Query string parameters</h4>
-
 <p>Use the <code>params</code> argument to add query string parameters to requests:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
-
 <h4><a id="form-data" class="anchor" href="#form-data">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Form data</h4>
-
 <p>Use the <code>form</code> argument to pass data serialized as form encoded:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
-
 <h4><a id="file-uploads-via-form-data" class="anchor" href="#file-uploads-via-form-data">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>File uploads (via form data)</h4>
-
 <p>To upload files as if form data, construct the form as follows:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {
   <span class="s">&quot;username&quot;</span> => <span class="s">&quot;Quincy&quot;</span>,
   <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/quincy_avatar.png&quot;</span>)
 })</code></pre>
-
 <p>It is possible to upload multiple files:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {
   photos: [
     <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/photo1.png&quot;</span>),
@@ -497,9 +532,7 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
   ],
   album_name: <span class="s">&quot;samples&quot;</span>
 })</code></pre>
-
 <p>Or pass the name with <code>[]</code>:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {
   <span class="s">&quot;photos[]&quot;</span> => [
     <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/photo1.png&quot;</span>),
@@ -507,27 +540,20 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
   ],
   <span class="s">&quot;album_name&quot;</span> => <span class="s">&quot;samples&quot;</span>
 })</code></pre>
-
 <p>Multiple files can also be uploaded using both ways above, it depend on web server.</p>
-
 <h4><a id="json-data" class="anchor" href="#json-data">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>JSON data</h4>
-
 <p>Use the <code>json</code> argument to pass data serialized as body encoded:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, json: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
-
 <h4><a id="raw-string" class="anchor" href="#raw-string">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Raw String</h4>
-
 <p>Use the <code>raw</code> argument to pass raw string as body and set the <code>Content-Type</code> manually:</p>
-
 <pre><code class="language-crystal"><span class="c"># Set content-type to &quot;text/plain&quot; by default</span>
 <span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, raw: <span class="s">&quot;name=Peter+Lee&amp;address=%23123+Happy+Ave&amp;language=C%2B%2B&quot;</span>)
 
@@ -538,50 +564,39 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
   },
   raw: <span class="s">%Q{{&quot;name&quot;:&quot;Peter Lee&quot;,&quot;address&quot;:&quot;23123 Happy Ave&quot;,&quot;language&quot;:&quot;C++&quot;}}</span>
 )</code></pre>
-
 <h3><a id="passing-advanced-options" class="anchor" href="#passing-advanced-options">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Passing advanced options</h3>
-
 <h4><a id="auth" class="anchor" href="#auth">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Auth</h4>
-
 <p>Use the <code>#basic_auth</code> method to perform <a href="http://tools.ietf.org/html/rfc2617">HTTP Basic Authentication</a> using a username and password:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.basic_auth(user: <span class="s">&quot;user&quot;</span>, pass: <span class="s">&quot;p@ss&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 
 <span class="c"># We can pass a raw authorization header using the auth method:</span>
 <span class="t">Halite</span>.auth(<span class="s">&quot;Bearer dXNlcjpwQHNz&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
-
 <h4><a id="user-agent" class="anchor" href="#user-agent">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>User Agent</h4>
-
 <p>Use the <code>#user_agent</code> method to overwrite default one:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.user_agent(<span class="s">&quot;Crystal Client&quot;</span>).get(<span class="s">&quot;http://httpbin.org/user-agent&quot;</span>)</code></pre>
-
 <h4><a id="headers" class="anchor" href="#headers">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Headers</h4>
-
 <p>Here are two way to passing headers data:</p>
-
 <h5><a id="1.-use-the-headers-method" class="anchor" href="#1.-use-the-headers-method">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>1. Use the <code>#headers</code> method</h5>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.headers(private_token: <span class="s">&quot;T0k3n&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 
 <span class="c"># Also support Hash or NamedTuple</span>
@@ -589,97 +604,75 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
 
 <span class="c"># Or</span>
 <span class="t">Halite</span>.headers({ private_token: <span class="s">&quot;T0k3n&quot;</span> }).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
-
 <h5><a id="2.-use-the-headers-argument-in-the-available-request-method" class="anchor" href="#2.-use-the-headers-argument-in-the-available-request-method">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>2. Use the <code>headers</code> argument in the available request method:</h5>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/anything&quot;</span> , headers: { private_token: <span class="s">&quot;T0k3n&quot;</span> })
 
 <span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/anything&quot;</span> , headers: { private_token: <span class="s">&quot;T0k3n&quot;</span> })</code></pre>
-
 <h4><a id="cookies" class="anchor" href="#cookies">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Cookies</h4>
-
 <h5><a id="passing-cookies-in-requests" class="anchor" href="#passing-cookies-in-requests">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Passing cookies in requests</h5>
-
 <p>The <code>Halite.cookies</code> option can be used to configure cookies for a given request:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.cookies(session_cookie: <span class="s">&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
       .get(<span class="s">&quot;http://httpbin.org/headers&quot;</span>)</code></pre>
-
 <h5><a id="get-cookies-in-requests" class="anchor" href="#get-cookies-in-requests">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Get cookies in requests</h5>
-
 <p>To obtain the cookies(cookie jar) for a given response, call the <code>#cookies</code> method:</p>
-
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/cookies?set?session_cookie=6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
 pp r.cookies
 <span class="c"># =&gt; #&lt;HTTP::Cookies:0x10dbed980 @cookies={&quot;session_cookie&quot; =&gt;#&lt;HTTP::Cookie:0x10ec20f00 @domain=nil, @expires=nil, @extension=nil, @http_only=false, @name=&quot;session_cookie&quot;, @path=&quot;/&quot;, @secure=false, @value=&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;&gt;}&gt;</span></code></pre>
-
 <h4><a id="redirects-and-history" class="anchor" href="#redirects-and-history">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Redirects and History</h4>
-
 <h5><a id="automatically-following-redirects" class="anchor" href="#automatically-following-redirects">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Automatically following redirects</h5>
-
 <p>The <code>Halite.follow</code> method can be used for automatically following redirects(Max up to 5 times):</p>
-
 <pre><code class="language-crystal"><span class="c"># Set the cookie and redirect to http://httpbin.org/cookies</span>
 <span class="t">Halite</span>.follow
       .get(<span class="s">&quot;http://httpbin.org/cookies/set/name/foo&quot;</span>)</code></pre>
-
 <h5><a id="limiting-number-of-redirects" class="anchor" href="#limiting-number-of-redirects">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Limiting number of redirects</h5>
-
 <p>As above, set over 5 times, it will raise a <code>Halite::TooManyRedirectsError</code>, but you can change less if you can:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.follow(<span class="n">2</span>)
       .get(<span class="s">&quot;http://httpbin.org/relative-redirect/5&quot;</span>)</code></pre>
-
 <h5><a id="disabling-unsafe-redirects" class="anchor" href="#disabling-unsafe-redirects">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Disabling unsafe redirects</h5>
-
 <p>It only redirects with <code>GET</code>, <code>HEAD</code> request and returns a <code>300</code>, <code>301</code>, <code>302</code> by default, otherwise it will raise a <code>Halite::StateError</code>.
 We can disable it to set <code>:strict</code> to <code>false</code> if we want any method(verb) requests, in which case the <code>GET</code> method(verb) will be used for
 that redirect:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.follow(strict: <span class="n">false</span>)
       .post(<span class="s">&quot;http://httpbin.org/relative-redirect/5&quot;</span>)</code></pre>
-
 <h5><a id="history" class="anchor" href="#history">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>History</h5>
-
 <p><code>Response#history</code> property list contains the <code>Response</code> objects that were created in order to complete the request.
 The list is ordered from the oldest to most recent response.</p>
-
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.follow
           .get(<span class="s">&quot;http://httpbin.org/redirect/3&quot;</span>)
 
@@ -696,30 +689,23 @@ r.history
 <span class="c">#      #&lt;Halite::Response HTTP/1.1 302 FOUND {&quot;Location&quot; =&gt; &quot;/get&quot; ...&gt;,</span>
 <span class="c">#      #&lt;Halite::Response HTTP/1.1 200 OK    {&quot;Content-Type&quot; =&gt; &quot;application/json&quot; ...&gt;</span>
 <span class="c">#    ]</span></code></pre>
-
 <p><strong>NOTE</strong>: It contains the <code>Response</code> object if you use <code>history</code> and HTTP was not a <code>30x</code>, For example:</p>
-
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 r.history.size <span class="c"># =&gt; 0</span>
 
 r <span class="o">=</span> <span class="t">Halite</span>.follow
           .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 r.history.size <span class="c"># =&gt; 1</span></code></pre>
-
 <h4><a id="timeout" class="anchor" href="#timeout">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Timeout</h4>
-
 <p>By default, the Halite does not enforce timeout on a request.
 We can enable per operation timeouts by configuring them through the chaining API.</p>
-
 <p>The <code>connect</code> timeout is the number of seconds Halite will wait for our client to establish a connection to a remote server call on the socket.</p>
-
 <p>Once our client has connected to the server and sent the HTTP request,
 the <code>read</code> timeout is the number of seconds the client will wait for the server to send a response.</p>
-
 <pre><code class="language-crystal"><span class="c"># Separate set connect and read timeout</span>
 <span class="t">Halite</span>.timeout(connect: <span class="n">3.0</span>, read: <span class="n">2</span>.minutes)
       .get(<span class="s">&quot;http://httpbin.org/anything&quot;</span>)
@@ -728,72 +714,69 @@ the <code>read</code> timeout is the number of seconds the client will wait for 
 <span class="c"># The timeout value will be applied to both the connect and the read timeouts.</span>
 <span class="t">Halite</span>.timeout(<span class="n">5</span>)
       .get(<span class="s">&quot;http://httpbin.org/anything&quot;</span>)</code></pre>
-
 <h3><a id="https" class="anchor" href="#https">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>HTTPS</h3>
-
 <p>The Halite supports HTTPS via Crystal's built-in OpenSSL module. All you have to do in order to use HTTPS is pass in an https://-prefixed URL.</p>
-
 <p>To use client certificates, you can pass in a custom <code>OpenSSL::SSL::Context::Client</code> object containing the certificates you wish to use:</p>
-
 <pre><code class="language-crystal">tls <span class="o">=</span> <span class="t">OpenSSL</span><span class="t">::</span><span class="t">SSL</span><span class="t">::</span><span class="t">Context</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
 tls.ca_certificates <span class="o">=</span> <span class="t">File</span>.expand_path(<span class="s">&quot;~/client.crt&quot;</span>)
 tls.private_key <span class="o">=</span> <span class="t">File</span>.expand_path(<span class="s">&quot;~/client.key&quot;</span>)
 
 <span class="t">Halite</span>.get(<span class="s">&quot;https://httpbin.org/anything&quot;</span>, tls: tls)</code></pre>
-
 <h3><a id="response-handling" class="anchor" href="#response-handling">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Response Handling</h3>
-
 <p>After an HTTP request, <code><a href="Halite/Response.html">Halite::Response</a></code> object have several useful methods. (Also see the <a href="https://icyleaf.github.io/halite/Halite/Response.html">API documentation</a>).</p>
-
-<ul><li><strong>#body</strong>: The response body.</li><li><strong>#body_io</strong>: The response body io only available in streaming requests.</li><li><strong>#status_code</strong>: The HTTP status code.</li><li><strong>#content_type</strong>: The content type of the response.</li><li><strong>#content_length</strong>: The content length of the response.</li><li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li><li><strong>#headers</strong>: A <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li><li><strong>#links</strong>: A list of <code><a href="Halite/HeaderLink.html">Halite::HeaderLink</a></code> set from headers.</li><li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the <code>#content_type</code>.</li><li><strong>#to_a</strong>: Return a <code>Hash</code> of status code, response headers and body as a string.</li><li><strong>#to_raw</strong>: Return a raw of response as a string.</li><li><strong>#to_s</strong>: Return response body as a string.</li><li><strong>#version</strong>: The HTTP version.</li></ul>
-
+<ul>
+<li><strong>#body</strong>: The response body.</li>
+<li><strong>#body_io</strong>: The response body io only available in streaming requests.</li>
+<li><strong>#status_code</strong>: The HTTP status code.</li>
+<li><strong>#content_type</strong>: The content type of the response.</li>
+<li><strong>#content_length</strong>: The content length of the response.</li>
+<li><strong>#cookies</strong>: A <code>HTTP::Cookies</code> set by server.</li>
+<li><strong>#headers</strong>: A <code><a href="HTTP/Headers.html">HTTP::Headers</a></code> of the response.</li>
+<li><strong>#links</strong>: A list of <code><a href="Halite/HeaderLink.html">Halite::HeaderLink</a></code> set from headers.</li>
+<li><strong>#parse</strong>: (return value depends on MIME type) parse the body using a parser defined for the <code>#content_type</code>.</li>
+<li><strong>#to_a</strong>: Return a <code>Hash</code> of status code, response headers and body as a string.</li>
+<li><strong>#to_raw</strong>: Return a raw of response as a string.</li>
+<li><strong>#to_s</strong>: Return response body as a string.</li>
+<li><strong>#version</strong>: The HTTP version.</li>
+</ul>
 <h4><a id="response-content" class="anchor" href="#response-content">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Response Content</h4>
-
 <p>We can read the content of the server's response by call <code>#body</code>:</p>
-
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/user-agent&quot;</span>)
 r.body
 <span class="c"># =&gt; {&quot;user-agent&quot;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36&quot;}</span></code></pre>
-
 <p>The <code>gzip</code> and <code>deflate</code> transfer-encodings are automatically decoded for you.
 And requests will automatically decode content from the server. Most unicode charsets are seamlessly decoded.</p>
-
 <h4><a id="json-content" class="anchor" href="#json-content">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>JSON Content</h4>
-
 <p>There’s also a built-in a JSON adapter, in case you’re dealing with JSON data:</p>
-
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/user-agent&quot;</span>)
 r.parse(<span class="s">&quot;json&quot;</span>)
 r.parse <span class="c"># simplily by default</span>
 <span class="c"># =&gt; {</span>
 <span class="c"># =&gt;   &quot;user-agent&quot; =&gt; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36&quot;</span>
 <span class="c"># =&gt; }</span></code></pre>
-
 <h4><a id="parsing-content" class="anchor" href="#parsing-content">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Parsing Content</h4>
-
 <p><code><a href="Halite/Response.html">Halite::Response</a></code> has a MIME type adapter system that you can use a decoder to parse the content,
 we can inherit <code>Halite::MimeTypes::Adapter</code> to make our adapter:</p>
-
 <pre><code class="language-crystal"><span class="c"># Define a MIME type adapter</span>
 <span class="k">class</span> <span class="t">YAMLAdapter</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">MimeType</span><span class="t">::</span><span class="t">Adapter</span>
   <span class="k">def</span> <span class="m">decode</span>(string)
@@ -812,40 +795,37 @@ we can inherit <code>Halite::MimeTypes::Adapter</code> to make our adapter:</p>
 r <span class="o">=</span> <span class="t">Halite</span>.get <span class="s">&quot;https://raw.githubusercontent.com/icyleaf/halite/master/shard.yml&quot;</span>
 r.parse(<span class="s">&quot;yaml&quot;</span>) <span class="c"># or &quot;yml&quot;</span>
 <span class="c"># =&gt; {&quot;name&quot; =&gt; &quot;halite&quot;, &quot;version&quot; =&gt; &quot;0.4.0&quot;, &quot;authors&quot; =&gt; [&quot;icyleaf &lt;icyleaf.cn@gmail.com&gt;&quot;], &quot;crystal&quot; =&gt; &quot;0.25.0&quot;, &quot;license&quot; =&gt; &quot;MIT&quot;}</span></code></pre>
-
 <h4><a id="binary-data" class="anchor" href="#binary-data">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Binary Data</h4>
-
 <p>Store binary data (eg, <code>application/octet-stream</code>) to file, you can use <a href="#streaming-requests">streaming requests</a>:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;https://github.com/icyleaf/halite/archive/master.zip&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   filename <span class="o">=</span> response.filename || <span class="s">&quot;halite-master.zip&quot;</span>
   <span class="t">File</span>.open(filename, <span class="s">&quot;w&quot;</span>) <span class="k">do</span> <span class="o">|</span>file<span class="o">|</span>
     <span class="t">IO</span>.copy(response.body_io, file)
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
-
 <h3><a id="error-handling" class="anchor" href="#error-handling">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Error Handling</h3>
-
-<ul><li>For any status code, a <code><a href="Halite/Response.html">Halite::Response</a></code> will be returned.</li><li>If request timeout, a <code>Halite::TimeoutError</code> will be raised.</li><li>If a request exceeds the configured number of maximum redirections, a <code>Halite::TooManyRedirectsError</code> will raised.</li><li>If request uri is http and configured tls context, a <code>Halite::RequestError</code> will raised.</li><li>If request uri is invalid, a <code>Halite::ConnectionError</code>/<code>Halite::UnsupportedMethodError</code>/<code>Halite::UnsupportedSchemeError</code> will raised.</li></ul>
-
+<ul>
+<li>For any status code, a <code><a href="Halite/Response.html">Halite::Response</a></code> will be returned.</li>
+<li>If request timeout, a <code>Halite::TimeoutError</code> will be raised.</li>
+<li>If a request exceeds the configured number of maximum redirections, a <code>Halite::TooManyRedirectsError</code> will raised.</li>
+<li>If request uri is http and configured tls context, a <code>Halite::RequestError</code> will raised.</li>
+<li>If request uri is invalid, a <code>Halite::ConnectionError</code>/<code>Halite::UnsupportedMethodError</code>/<code>Halite::UnsupportedSchemeError</code> will raised.</li>
+</ul>
 <h4><a id="raise-for-status-code" class="anchor" href="#raise-for-status-code">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Raise for status code</h4>
-
 <p>If we made a bad request(a 4xx client error or a 5xx server error response), we can raise with <code>Halite::Response.raise_for_status</code>.</p>
-
 <p>But, since our <code>status_code</code> was not <code>4xx</code> or <code>5xx</code>, it returns <code>nil</code> when we call it:</p>
-
 <pre><code class="language-crystal">urls <span class="o">=</span> [
   <span class="s">&quot;https://httpbin.org/status/404&quot;</span>,
   <span class="s">&quot;https://httpbin.org/status/500?foo=bar&quot;</span>,
@@ -865,28 +845,24 @@ urls.each <span class="k">do</span> <span class="o">|</span>url<span class="o">|
 <span class="c"># =&gt; &quot;[404] not found error with url: https://httpbin.org/status/404 (Halite::Exception::ClientError)&quot;</span>
 <span class="c"># =&gt; &quot;[500] internal server error error with url: https://httpbin.org/status/500?foo=bar (Halite::Exception::ServerError)&quot;</span>
 <span class="c"># =&gt; &quot;&quot;</span></code></pre>
-
 <h2><a id="middleware" class="anchor" href="#middleware">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Middleware</h2>
-
 <p>Halite now has middleware (a.k.a features) support providing a simple way to plug in intermediate custom logic
 in your HTTP client, allowing you to monitor outgoing requests, incoming responses, and use it as an interceptor.</p>
-
 <p>Available features:</p>
-
-<ul><li><a href="#logging">Logging</a> (Yes, logging is based on feature, cool, aha!)</li><li><a href="#local-cache">Local Cache</a> (local storage, speed up in development)</li></ul>
-
+<ul>
+<li><a href="#logging">Logging</a> (Yes, logging is based on feature, cool, aha!)</li>
+<li><a href="#local-cache">Local Cache</a> (local storage, speed up in development)</li>
+</ul>
 <h3><a id="write-a-simple-feature" class="anchor" href="#write-a-simple-feature">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Write a simple feature</h3>
-
 <p>Let's implement simple middleware that prints each request:</p>
-
 <pre><code class="language-crystal"><span class="k">class</span> <span class="t">RequestMonister</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Feature</span>
   @label : <span class="t">String</span>
   <span class="k">def</span> <span class="m">initialize</span>(<span class="o">**</span>options)
@@ -904,9 +880,7 @@ in your HTTP client, allowing you to monitor outgoing requests, incoming respons
 
   <span class="t">Halite</span>.register_feature <span class="s">&quot;request_monster&quot;</span>, <span class="k">self</span>
 <span class="k">end</span></code></pre>
-
 <p>Then use it in Halite:</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.use(<span class="s">&quot;request_monster&quot;</span>, label: <span class="s">&quot;testing&quot;</span>)
       .post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {name: <span class="s">&quot;foo&quot;</span>})
 
@@ -921,19 +895,17 @@ client.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {n
 <span class="c"># =&gt; POST</span>
 <span class="c"># =&gt; http://httpbin.org/post</span>
 <span class="c"># =&gt; name=foo</span></code></pre>
-
 <h3><a id="write-a-interceptor" class="anchor" href="#write-a-interceptor">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Write a interceptor</h3>
-
 <p>Halite's killer feature is the <strong>interceptor</strong>, Use <code><a href="Halite/Feature/Chain.html">Halite::Feature::Chain</a></code> to process with two result:</p>
-
-<ul><li><code>next</code>: perform and run next interceptor</li><li><code>return</code>: perform and return</li></ul>
-
+<ul>
+<li><code>next</code>: perform and run next interceptor</li>
+<li><code>return</code>: perform and return</li>
+</ul>
 <p>So, you can intercept and turn to the following registered features.</p>
-
 <pre><code class="language-crystal"><span class="k">class</span> <span class="t">AlwaysNotFound</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Feature</span>
   <span class="k">def</span> <span class="m">intercept</span>(chain)
     response <span class="o">=</span> chain.perform
@@ -961,23 +933,18 @@ r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&qu
 r.status_code               <span class="c"># =&gt; 404</span>
 r.headers[<span class="s">&quot;X-Powered-By&quot;</span>]   <span class="c"># =&gt; Halite</span>
 r.body                      <span class="c"># =&gt; {&quot;user-agent&quot;:&quot;Halite/0.6.0&quot;}</span></code></pre>
-
 <p>For more implementation details about the feature layer, see the <a href="https://github.com/icyleaf/halite/blob/master/src/halite/feature.cr#L2">Feature</a> class and <a href="https://github.com/icyleaf/halite/tree/master/src/halite/features">examples</a> and <a href="https://github.com/icyleaf/halite/blob/master/spec/spec_helper.cr#L23">specs</a>.</p>
-
 <h2><a id="advanced-usage" class="anchor" href="#advanced-usage">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Advanced Usage</h2>
-
 <h3><a id="configuring" class="anchor" href="#configuring">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Configuring</h3>
-
 <p>Halite provides a traditional way to instance client, and you can configure any chainable methods with block:</p>
-
 <pre><code class="language-crystal">client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span> <span class="k">do</span>
   <span class="c"># Set basic auth</span>
   basic_auth <span class="s">&quot;username&quot;</span>, <span class="s">&quot;password&quot;</span>
@@ -996,15 +963,12 @@ r.body                      <span class="c"># =&gt; {&quot;user-agent&quot;:&quo
 client.accept(<span class="s">&quot;application/json&quot;</span>)
 
 r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>
-
 <h3><a id="endpoint" class="anchor" href="#endpoint">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Endpoint</h3>
-
 <p>No more given endpoint per request, use <code>endpoint</code> will make the request URI shorter, you can set it in flexible way:</p>
-
 <pre><code class="language-crystal">client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span> <span class="k">do</span>
   endpoint <span class="s">&quot;https://gitlab.org/api/v4&quot;</span>
   user_agent <span class="s">&quot;Halite&quot;</span>
@@ -1014,17 +978,13 @@ client.get(<span class="s">&quot;users&quot;</span>)       <span class="c"># GET
 
 <span class="c"># You can override the path by using an absolute path</span>
 client.get(<span class="s">&quot;/users&quot;</span>)      <span class="c"># GET https://gitlab.org/users</span></code></pre>
-
 <h3><a id="sessions" class="anchor" href="#sessions">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Sessions</h3>
-
 <p>As like <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects">requests.Session()</a>, Halite built-in session by default.</p>
-
 <p>Let's persist some cookies across requests:</p>
-
 <pre><code class="language-crystal">client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
 client.get(<span class="s">&quot;http://httpbin.org/cookies/set?private_token=6abaef100b77808ceb7fe26a3bcff1d0&quot;</span>)
 client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
@@ -1037,69 +997,64 @@ client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 <span class="c"># =&gt; 2018-06-25 18:41:06 +08:00 | request | GET    | http://httpbin.org/cookies</span>
 <span class="c"># =&gt; 2018-06-25 18:41:07 +08:00 | response | 200    | http://httpbin.org/cookies | application/json</span>
 <span class="c"># =&gt; {&quot;cookies&quot;:{&quot;private_token&quot;:&quot;6abaef100b77808ceb7fe26a3bcff1d0&quot;}}</span></code></pre>
-
 <p>All it support with <a href="https://icyleaf.github.io/halite/Halite/Chainable.html">chainable methods</a> in the other examples list in <a href="http://docs.python-requests.org/en/master/user/advanced/#session-objects">requests.Session</a>.</p>
-
 <p>Note, however, that chainable methods will not be persisted across requests, even if using a session. This example will only send the cookies or headers with the first request, but not the second:</p>
-
 <pre><code class="language-crystal">client <span class="o">=</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Client</span>.<span class="k">new</span>
 r <span class="o">=</span> client.cookies(<span class="s">&quot;username&quot;</span>: <span class="s">&quot;foobar&quot;</span>).get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 r.body <span class="c"># =&gt; {&quot;cookies&quot;:{&quot;username&quot;:&quot;foobar&quot;}}</span>
 
 r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 r.body <span class="c"># =&gt; {&quot;cookies&quot;:{}}</span></code></pre>
-
 <p>If you want to manually add cookies, headers (even features etc) to your session, use the methods start with <code>with_</code> in <code><a href="Halite/Options.html">Halite::Options</a></code>
 to manipulate them:</p>
-
 <pre><code class="language-crystal">r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 r.body <span class="c"># =&gt; {&quot;cookies&quot;:{}}</span>
 
 client.options.with_cookie(<span class="s">&quot;username&quot;</span>: <span class="s">&quot;foobar&quot;</span>)
 r <span class="o">=</span> client.get(<span class="s">&quot;http://httpbin.org/cookies&quot;</span>)
 r.body <span class="c"># =&gt; {&quot;cookies&quot;:{&quot;username&quot;:&quot;foobar&quot;}}</span></code></pre>
-
 <h3><a id="streaming-requests" class="anchor" href="#streaming-requests">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Streaming Requests</h3>
-
 <p>Similar to <a href="https://crystal-lang.org/api/0.36.1/HTTP/Client.html#streaming">HTTP::Client</a> usage with a block,
 you can easily use same way, but Halite returns a <code><a href="Halite/Response.html">Halite::Response</a></code> object:</p>
-
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/stream/5&quot;</span>) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   response.status_code                  <span class="c"># =&gt; 200</span>
   response.body_io.each_line <span class="k">do</span> <span class="o">|</span>line<span class="o">|</span>
     puts <span class="t">JSON</span>.parse(line)               <span class="c"># =&gt; {&quot;url&quot; =&gt; &quot;http://httpbin.org/stream/5&quot;, &quot;args&quot; =&gt; {}, &quot;headers&quot; =&gt; {&quot;Host&quot; =&gt; &quot;httpbin.org&quot;, &quot;Connection&quot; =&gt; &quot;close&quot;, &quot;User-Agent&quot; =&gt; &quot;Halite/0.8.0&quot;, &quot;Accept&quot; =&gt; &quot;*/*&quot;, &quot;Accept-Encoding&quot; =&gt; &quot;gzip, deflate&quot;}, &quot;id&quot; =&gt; 0_i64}</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
-
-<blockquote><strong>Warning</strong>:
->
-> <code>body_io</code> is avaiabled as an <code>IO</code> and not reentrant safe. Might throws a "Nil assertion failed" exception if there is no data in the <code>IO</code>
-(such like <code>head</code> requests). Calling this method multiple times causes some of the received data being lost.
->
-> One more thing, use streaming requests the response will always <a href="#redirects-and-history">enable redirect</a> automatically.</blockquote>
-
+<blockquote>
+<p><strong>Warning</strong>:</p>
+<p><code>body_io</code> is avaiabled as an <code>IO</code> and not reentrant safe. Might throws a &quot;Nil assertion failed&quot; exception if there is no data in the <code>IO</code>
+(such like <code>head</code> requests). Calling this method multiple times causes some of the received data being lost.</p>
+<p>One more thing, use streaming requests the response will always <a href="#redirects-and-history">enable redirect</a> automatically.</p>
+</blockquote>
 <h3><a id="logging" class="anchor" href="#logging">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Logging</h3>
-
 <p>Halite does not enable logging on each request and response too.
 We can enable per operation logging by configuring them through the chaining API.</p>
-
 <p>By default, Halite will logging all outgoing HTTP requests and their responses(without binary stream) to <code>STDOUT</code> on DEBUG level.
 You can configuring the following options:</p>
-
-<ul><li><code>logging</code>: Instance your <code><a href="Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code>, check <a href="#use-the-custom-logging">Use the custom logging</a>.</li><li><code>format</code>: Output format, built-in <code>common</code> and <code>json</code>, you can write your own.</li><li><code>file</code>: Write to file with path, works with <code>format</code>.</li><li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code>. (append to bottom, create it if file is not exist)</li><li><code>skip_request_body</code>: By default is <code>false</code>.</li><li><code>skip_response_body</code>: By default is <code>false</code>.</li><li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li><li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li></ul>
-
-<blockquote><strong>NOTE</strong>: <code>format</code> (<code>file</code> and <code>filemode</code>) and <code>logging</code> are conflict, you can not use both.</blockquote>
-
+<ul>
+<li><code>logging</code>: Instance your <code><a href="Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code>, check <a href="#use-the-custom-logging">Use the custom logging</a>.</li>
+<li><code>format</code>: Output format, built-in <code>common</code> and <code>json</code>, you can write your own.</li>
+<li><code>file</code>: Write to file with path, works with <code>format</code>.</li>
+<li><code>filemode</code>: Write file mode, works with <code>format</code>, by default is <code>a</code>. (append to bottom, create it if file is not exist)</li>
+<li><code>skip_request_body</code>: By default is <code>false</code>.</li>
+<li><code>skip_response_body</code>: By default is <code>false</code>.</li>
+<li><code>skip_benchmark</code>: Display elapsed time, by default is <code>false</code>.</li>
+<li><code>colorize</code>: Enable colorize in terminal, only apply in <code>common</code> format, by default is <code>true</code>.</li>
+</ul>
+<blockquote>
+<p><strong>NOTE</strong>: <code>format</code> (<code>file</code> and <code>filemode</code>) and <code>logging</code> are conflict, you can not use both.</p>
+</blockquote>
 <p>Let's try with it:</p>
-
 <pre><code class="language-crystal"><span class="c"># Logging json request</span>
 <span class="t">Halite</span>.logging
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})
@@ -1121,24 +1076,19 @@ You can configuring the following options:</p>
 
 <span class="c"># =&gt; 2018-08-28 14:33:19 +08:00 | request  | POST   | http://httpbin.org/post</span>
 <span class="c"># =&gt; 2018-08-28 14:33:21 +08:00 | response | 200    | http://httpbin.org/post | 1.61s | application/json</span></code></pre>
-
 <h4><a id="json-formatted-logging" class="anchor" href="#json-formatted-logging">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>JSON-formatted logging</h4>
-
 <p>It has JSON formatted for developer friendly logging.</p>
-
 <pre><code class="language-crystal"><span class="t">Halite</span>.logging(format: <span class="s">&quot;json&quot;</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {name: <span class="s">&quot;foobar&quot;</span>})</code></pre>
-
 <h4><a id="write-to-a-log-file" class="anchor" href="#write-to-a-log-file">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Write to a log file</h4>
-
 <pre><code class="language-crystal"><span class="c"># Write plain text to a log file</span>
 <span class="t">Log</span>.setup(<span class="s">&quot;halite.file&quot;</span>, backend: <span class="t">Log</span><span class="t">::</span><span class="t">IOBackend</span>.<span class="k">new</span>(<span class="t">File</span>.open(<span class="s">&quot;/tmp/halite.log&quot;</span>, <span class="s">&quot;a&quot;</span>)))
 <span class="t">Halite</span>.logging(<span class="k">for</span>: <span class="s">&quot;halite.file&quot;</span>, skip_benchmark: <span class="n">true</span>, colorize: <span class="n">false</span>)
@@ -1151,16 +1101,13 @@ You can configuring the following options:</p>
 
 <span class="c"># Redirect *all* logging from Halite to a file:</span>
 <span class="t">Log</span>.setup(<span class="s">&quot;halite&quot;</span>, backend: <span class="t">Log</span><span class="t">::</span><span class="t">IOBackend</span>.<span class="k">new</span>(<span class="t">File</span>.open(<span class="s">&quot;/tmp/halite.log&quot;</span>, <span class="s">&quot;a&quot;</span>)))</code></pre>
-
 <h4><a id="use-the-custom-logging" class="anchor" href="#use-the-custom-logging">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Use the custom logging</h4>
-
 <p>Creating the custom logging by integration <code><a href="Halite/Logging/Abstract.html">Halite::Logging::Abstract</a></code> abstract class.
 Here has two methods must be implement: <code>#request</code> and <code>#response</code>.</p>
-
 <pre><code class="language-crystal"><span class="k">class</span> <span class="t">CustomLogging</span> <span class="o">&lt;</span> <span class="t">Halite</span><span class="t">::</span><span class="t">Logging</span><span class="t">::</span><span class="t">Abstract</span>
   <span class="k">def</span> <span class="m">request</span>(request)
     @logger.info { <span class="s">&quot;| &gt;&gt; | %s | %s %s&quot;</span> <span class="o">%</span> [request.verb, request.uri, request.body] }
@@ -1183,38 +1130,38 @@ Here has two methods must be implement: <code>#request</code> and <code>#respons
 
 <span class="c"># =&gt; 2017-12-13 16:40:13 +08:00 | &gt;&gt; | GET | http://httpbin.org/get?name=foobar</span>
 <span class="c"># =&gt; 2017-12-13 16:40:15 +08:00 | &lt;&lt; | 200 | http://httpbin.org/get?name=foobar application/json</span></code></pre>
-
 <h3><a id="local-cache" class="anchor" href="#local-cache">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Local Cache</h3>
-
 <p>Local cache feature is caching responses easily with Halite through an chainable method that is simple and elegant
 yet powerful. Its aim is to focus on the HTTP part of caching and do not worrying about how stuff stored, api rate limiting
 even works without network(offline).</p>
-
 <p>It has the following options:</p>
-
-<ul><li><code>file</code>: Load cache from file. it conflict with <code>path</code> and <code>expires</code>.</li><li><code>path</code>: The path of cache, default is "/tmp/halite/cache/"</li><li><code>expires</code>: The expires time of cache, default is never expires.</li><li><code>debug</code>: The debug mode of cache, default is <code>true</code></li></ul>
-
+<ul>
+<li><code>file</code>: Load cache from file. it conflict with <code>path</code> and <code>expires</code>.</li>
+<li><code>path</code>: The path of cache, default is &quot;/tmp/halite/cache/&quot;</li>
+<li><code>expires</code>: The expires time of cache, default is never expires.</li>
+<li><code>debug</code>: The debug mode of cache, default is <code>true</code></li>
+</ul>
 <p>With debug mode, cached response it always included some headers information:</p>
-
-<ul><li><code>X-<a href="Halite.html">Halite</a>-Cached-From</code>: Cache source (cache or file)</li><li><code>X-<a href="Halite.html">Halite</a>-Cached-Key</code>: Cache key with verb, uri and body (return with cache, not <code>file</code> passed)</li><li><code>X-<a href="Halite.html">Halite</a>-Cached-At</code>:  Cache created time</li><li><code>X-<a href="Halite.html">Halite</a>-Cached-Expires-At</code>: Cache expired time (return with cache, not <code>file</code> passed)</li></ul>
-
+<ul>
+<li><code>X-<a href="Halite.html">Halite</a>-Cached-From</code>: Cache source (cache or file)</li>
+<li><code>X-<a href="Halite.html">Halite</a>-Cached-Key</code>: Cache key with verb, uri and body (return with cache, not <code>file</code> passed)</li>
+<li><code>X-<a href="Halite.html">Halite</a>-Cached-At</code>:  Cache created time</li>
+<li><code>X-<a href="Halite.html">Halite</a>-Cached-Expires-At</code>: Cache expired time (return with cache, not <code>file</code> passed)</li>
+</ul>
 <pre><code class="language-crystal"><span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span>     <span class="c"># request a HTTP</span>
 r <span class="o">=</span> <span class="t">Halite</span>.use(<span class="s">&quot;cache&quot;</span>).get <span class="s">&quot;http://httpbin.org/anything&quot;</span> <span class="c"># request from local storage</span>
 r.headers                                                 <span class="c"># =&gt; {..., &quot;X-Halite-Cached-At&quot; =&gt; &quot;2018-08-30 10:41:14 UTC&quot;, &quot;X-Halite-Cached-By&quot; =&gt; &quot;Halite&quot;, &quot;X-Halite-Cached-Expires-At&quot; =&gt; &quot;2018-08-30 10:41:19 UTC&quot;, &quot;X-Halite-Cached-Key&quot; =&gt; &quot;2bb155e6c8c47627da3d91834eb4249a&quot;}}</span></code></pre>
-
 <h3><a id="link-headers" class="anchor" href="#link-headers">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Link Headers</h3>
-
 <p>Many HTTP APIs feature <a href="https://tools.ietf.org/html/rfc5988">Link headers</a>. GitHub uses
 these for <a href="https://developer.github.com/v3/#pagination">pagination</a> in their API, for example:</p>
-
 <pre><code class="language-crystal">r <span class="o">=</span> <span class="t">Halite</span>.get <span class="s">&quot;https://api.github.com/users/icyleaf/repos?page=1&amp;per_page=2&quot;</span>
 r.links
 <span class="c"># =&gt; {&quot;next&quot; =&gt;</span>
@@ -1233,65 +1180,52 @@ r.links[<span class="s">&quot;next&quot;</span>]
 
 r.links[<span class="s">&quot;next&quot;</span>].params
 <span class="c"># =&gt; {}</span></code></pre>
-
 <h2><a id="help-and-discussion" class="anchor" href="#help-and-discussion">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Help and Discussion</h2>
-
 <p>You can browse the API documents:</p>
-
 <p>https://icyleaf.github.io/halite/</p>
-
 <p>You can browse the all chainable methods:</p>
-
 <p>https://icyleaf.github.io/halite/Halite/Chainable.html</p>
-
 <p>You can browse the Changelog:</p>
-
 <p>https://github.com/icyleaf/halite/blob/master/CHANGELOG.md</p>
-
 <p>If you have found a bug, please create a issue here:</p>
-
 <p>https://github.com/icyleaf/halite/issues/new</p>
-
 <h2><a id="donate" class="anchor" href="#donate">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Donate</h2>
-
 <p>Halite is a open source, collaboratively funded project. If you run a business and are using Halite in a revenue-generating product,
 it would make business sense to sponsor Halite development. Individual users are also welcome to make a one time donation
 if Halite has helped you in your work or personal projects.</p>
-
 <p>You can donate via <a href="https://www.paypal.me/icyleaf/5">Paypal</a>.</p>
-
 <h2><a id="how-to-contribute" class="anchor" href="#how-to-contribute">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>How to Contribute</h2>
-
 <p>Your contributions are always welcome! Please submit a pull request or create an issue to add a new question, bug or feature to the list.</p>
-
 <p>All <a href="https://github.com/icyleaf/halite/graphs/contributors">Contributors</a> are on the wall.</p>
-
 <h2><a id="you-may-also-like" class="anchor" href="#you-may-also-like">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>You may also like</h2>
-
-<ul><li><a href="https://github.com/icyleaf/totem">totem</a> - Load and parse a configuration file or string in JSON, YAML, dotenv formats.</li><li><a href="https://github.com/icyleaf/markd">markd</a> - Yet another markdown parser built for speed, Compliant to CommonMark specification.</li><li><a href="https://github.com/icyleaf/poncho">poncho</a> - A .env parser/loader improved for performance.</li><li><a href="https://github.com/icyleaf/popcorn">popcorn</a> - Easy and Safe casting from one type to another.</li><li><a href="https://github.com/icyleaf/fast-crystal">fast-crystal</a> - 💨 Writing Fast Crystal 😍 -- Collect Common Crystal idioms.</li></ul>
-
+<ul>
+<li><a href="https://github.com/icyleaf/totem">totem</a> - Load and parse a configuration file or string in JSON, YAML, dotenv formats.</li>
+<li><a href="https://github.com/icyleaf/markd">markd</a> - Yet another markdown parser built for speed, Compliant to CommonMark specification.</li>
+<li><a href="https://github.com/icyleaf/poncho">poncho</a> - A .env parser/loader improved for performance.</li>
+<li><a href="https://github.com/icyleaf/popcorn">popcorn</a> - Easy and Safe casting from one type to another.</li>
+<li><a href="https://github.com/icyleaf/fast-crystal">fast-crystal</a> - 💨 Writing Fast Crystal 😍 -- Collect Common Crystal idioms.</li>
+</ul>
 <h2><a id="license" class="anchor" href="#license">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>License</h2>
-
 <p><a href="https://github.com/icyleaf/halite/blob/master/LICENSE">MIT License</a> © icyleaf</p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.36.1">
+<meta name="generator" content="Crystal Docs 1.1.1">
 <meta name="crystal_docs.project_version" content="0.12.0">
 <meta name="crystal_docs.project_name" content="halite">
 
@@ -442,21 +442,21 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#encode(named_tuple:NamedTuple):String-class-method" class="signature"><strong>.encode</strong>(named_tuple : NamedTuple) : String</a>
+        <a href="#encode%28named_tuple%3ANamedTuple%29%3AString-class-method" class="signature"><strong>.encode</strong>(named_tuple : NamedTuple) : String</a>
         
           <div class="summary"><p>Returns the given key value pairs as a url-encoded query.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#encode(hash:Hash):String-class-method" class="signature"><strong>.encode</strong>(hash : Hash) : String</a>
+        <a href="#encode%28hash%3AHash%29%3AString-class-method" class="signature"><strong>.encode</strong>(hash : Hash) : String</a>
         
           <div class="summary"><p>Returns the given key value pairs as a url-encoded query.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#encode(**named_tuple):String-class-method" class="signature"><strong>.encode</strong>(**named_tuple) : String</a>
+        <a href="#encode%28%2A%2Anamed_tuple%29%3AString-class-method" class="signature"><strong>.encode</strong>(**named_tuple) : String</a>
         
           <div class="summary"><p>Returns the given key value pairs as a url-encoded query.</p></div>
         
@@ -531,15 +531,13 @@
         
         def self.<strong>encode</strong>(named_tuple : NamedTuple) : String
 
-        <a class="method-permalink" href="#encode(named_tuple:NamedTuple):String-class-method">#</a>
+        <a class="method-permalink" href="#encode%28named_tuple%3ANamedTuple%29%3AString-class-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Returns the given key value pairs as a url-encoded query.</p>
-
 <p>Every parameter added is directly written to an IO, where keys and values are properly escaped.</p>
-
 <pre><code class="language-crystal"><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.encode({
   name: <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
   skill: [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
@@ -562,15 +560,13 @@
         
         def self.<strong>encode</strong>(hash : Hash) : String
 
-        <a class="method-permalink" href="#encode(hash:Hash):String-class-method">#</a>
+        <a class="method-permalink" href="#encode%28hash%3AHash%29%3AString-class-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Returns the given key value pairs as a url-encoded query.</p>
-
 <p>Every parameter added is directly written to an IO, where keys and values are properly escaped.</p>
-
 <pre><code class="language-crystal"><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.encode({
   <span class="s">&quot;name&quot;</span>    => <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
   <span class="s">&quot;skill&quot;</span>   => [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
@@ -593,15 +589,13 @@
         
         def self.<strong>encode</strong>(**named_tuple) : String
 
-        <a class="method-permalink" href="#encode(**named_tuple):String-class-method">#</a>
+        <a class="method-permalink" href="#encode%28%2A%2Anamed_tuple%29%3AString-class-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Returns the given key value pairs as a url-encoded query.</p>
-
 <p>Every parameter added is directly written to an IO, where keys and values are properly escaped.</p>
-
 <pre><code class="language-crystal"><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.encode(
   name: <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
   skill: [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
