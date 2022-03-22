@@ -855,14 +855,6 @@ If you have found a bug, please create a issue here:
 
 https://github.com/icyleaf/halite/issues/new
 
-## Donate
-
-Halite is a open source, collaboratively funded project. If you run a business and are using Halite in a revenue-generating product,
-it would make business sense to sponsor Halite development. Individual users are also welcome to make a one time donation
-if Halite has helped you in your work or personal projects.
-
-You can donate via [Paypal](https://www.paypal.me/icyleaf/5).
-
 ## How to Contribute
 
 Your contributions are always welcome! Please submit a pull request or create an issue to add a new question, bug or feature to the list.
