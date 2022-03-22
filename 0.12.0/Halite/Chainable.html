@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.1.1">
+<meta name="generator" content="Crystal Docs 1.2.2">
 <meta name="crystal_docs.project_version" content="0.12.0">
 <meta name="crystal_docs.project_name" content="halite">
 
@@ -427,7 +427,7 @@
   <dl>
     
       <dt class="entry-const" id="DEFAULT_OPTIONS">
-        <strong>DEFAULT_OPTIONS</strong> = <code>{} <span class="k">of</span> <span class="t">UInt64</span> => <span class="t">Halite</span><span class="t">::</span><span class="t">Options</span></code>
+        <strong>DEFAULT_OPTIONS</strong> = <code>{} <span class="k">of</span> <span class="t">UInt64</span> =&gt; <span class="t">Halite</span><span class="t">::</span><span class="t">Options</span></code>
       </dt>
       
       <dd class="entry-const-doc">
@@ -1192,10 +1192,10 @@
   </svg>
 </a>Simple logging</h4>
 <pre><code class="language-crystal">Halite.logging
-  .get("http://httpbin.org/get", params: {name: "foobar"})
+  .get(&quot;http://httpbin.org/get&quot;, params: {name: &quot;foobar&quot;})
 
-=> 2018-08-28 14:33:19 +08:00 | request  | POST   | http://httpbin.org/post
-=> 2018-08-28 14:33:21 +08:00 | response | 200    | http://httpbin.org/post | 1.61s | application/json
+=&gt; 2018-08-28 14:33:19 +08:00 | request  | POST   | http://httpbin.org/post
+=&gt; 2018-08-28 14:33:21 +08:00 | response | 200    | http://httpbin.org/post | 1.61s | application/json
 { ... }</code></pre>
 <h4><a id="logger-configuration" class="anchor" href="#logger-configuration">
   <svg class="octicon-link" aria-hidden="true">
@@ -1582,9 +1582,9 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
 <p>This method will be executed with oneshot request.</p>
 </blockquote>
 <pre><code class="language-crystal"><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/get&quot;</span>, <span class="t">Halite</span><span class="t">::</span><span class="t">Options</span>.<span class="k">new</span>(
-  <span class="s">&quot;headers&quot;</span> <span class="o">=</span> { <span class="s">&quot;user_agent&quot;</span> => <span class="s">&quot;halite&quot;</span> },
-  <span class="s">&quot;params&quot;</span> => { <span class="s">&quot;nickname&quot;</span> => <span class="s">&quot;foo&quot;</span> },
-  <span class="s">&quot;form&quot;</span> => { <span class="s">&quot;username&quot;</span> => <span class="s">&quot;bar&quot;</span> },
+  <span class="s">&quot;headers&quot;</span> <span class="o">=</span> { <span class="s">&quot;user_agent&quot;</span> =&gt; <span class="s">&quot;halite&quot;</span> },
+  <span class="s">&quot;params&quot;</span> =&gt; { <span class="s">&quot;nickname&quot;</span> =&gt; <span class="s">&quot;foo&quot;</span> },
+  <span class="s">&quot;form&quot;</span> =&gt; { <span class="s">&quot;username&quot;</span> =&gt; <span class="s">&quot;bar&quot;</span> },
 )</code></pre>
         </div>
       
@@ -1606,9 +1606,9 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
           
           <p>Make an HTTP request with the given verb</p>
 <pre><code class="language-crystal"><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/get&quot;</span>, {
-  <span class="s">&quot;headers&quot;</span> <span class="o">=</span> { <span class="s">&quot;user_agent&quot;</span> => <span class="s">&quot;halite&quot;</span> },
-  <span class="s">&quot;params&quot;</span> => { <span class="s">&quot;nickname&quot;</span> => <span class="s">&quot;foo&quot;</span> },
-  <span class="s">&quot;form&quot;</span> => { <span class="s">&quot;username&quot;</span> => <span class="s">&quot;bar&quot;</span> },
+  <span class="s">&quot;headers&quot;</span> <span class="o">=</span> { <span class="s">&quot;user_agent&quot;</span> =&gt; <span class="s">&quot;halite&quot;</span> },
+  <span class="s">&quot;params&quot;</span> =&gt; { <span class="s">&quot;nickname&quot;</span> =&gt; <span class="s">&quot;foo&quot;</span> },
+  <span class="s">&quot;form&quot;</span> =&gt; { <span class="s">&quot;username&quot;</span> =&gt; <span class="s">&quot;bar&quot;</span> },
 })</code></pre>
         </div>
       
@@ -1660,7 +1660,7 @@ Here has two methods must be implement: <code><a href="../Halite/Chainable.html#
 <blockquote>
 <p>This method will be executed with oneshot request.</p>
 </blockquote>
-<pre><code class="language-crystal"><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/stream/3&quot;</span>, headers: {<span class="s">&quot;user-agent&quot;</span> => <span class="s">&quot;halite&quot;</span>}) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
+<pre><code class="language-crystal"><span class="t">Halite</span>.request(<span class="s">&quot;get&quot;</span>, <span class="s">&quot;http://httpbin.org/stream/3&quot;</span>, headers: {<span class="s">&quot;user-agent&quot;</span> =&gt; <span class="s">&quot;halite&quot;</span>}) <span class="k">do</span> <span class="o">|</span>response<span class="o">|</span>
   puts response.status_code
   <span class="k">while</span> line <span class="o">=</span> response.body_io.gets
     puts line

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.1.1">
+<meta name="generator" content="Crystal Docs 1.2.2">
 <meta name="crystal_docs.project_version" content="0.12.1">
 <meta name="crystal_docs.project_name" content="halite">
 
@@ -374,7 +374,7 @@
 <p>HTTP Requests with a chainable REST API, built-in sessions and middleware written by <a href="https://crystal-lang.org/">Crystal</a>.
 Inspired from the <strong>awesome</strong> Ruby's <a href="https://github.com/httprb/http">HTTP</a>/<a href="https://github.com/rest-client/rest-client">RESTClient</a>
 and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
-<p>Build in Crystal version <code>>= 1.0.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/blob/master/CHANGELOG.md">v0.12.1</a>.</p>
+<p>Build in Crystal version <code>&gt;= 1.0.0</code>, this document valid with <a href="https://github.com/icyleaf/halite/blob/master/CHANGELOG.md">v0.12.1</a>.</p>
 <h2><a id="index" class="anchor" href="#index">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -472,17 +472,17 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
 
 <span class="c"># Also support Hash as query params</span>
 <span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, headers: {
-    <span class="s">&quot;Private-Token&quot;</span> => <span class="s">&quot;T0k3n&quot;</span>
+    <span class="s">&quot;Private-Token&quot;</span> =&gt; <span class="s">&quot;T0k3n&quot;</span>
   }, params: {
-    <span class="s">&quot;language&quot;</span> => <span class="s">&quot;crystal&quot;</span>,
-    <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span>
+    <span class="s">&quot;language&quot;</span> =&gt; <span class="s">&quot;crystal&quot;</span>,
+    <span class="s">&quot;shard&quot;</span> =&gt; <span class="s">&quot;halite&quot;</span>
   })
 
 <span class="c"># And support chainable</span>
 <span class="t">Halite</span>.header(private_token: <span class="s">&quot;T0k3n&quot;</span>)
       .get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: {
-        <span class="s">&quot;language&quot;</span> => <span class="s">&quot;crystal&quot;</span>,
-        <span class="s">&quot;shard&quot;</span> => <span class="s">&quot;halite&quot;</span>
+        <span class="s">&quot;language&quot;</span> =&gt; <span class="s">&quot;crystal&quot;</span>,
+        <span class="s">&quot;shard&quot;</span> =&gt; <span class="s">&quot;halite&quot;</span>
       })</code></pre>
 <p>See also all <a href="https://icyleaf.github.io/halite/Halite/Chainable.html">chainable methods</a>.</p>
 <p>Many other HTTP methods are available as well:</p>
@@ -506,14 +506,14 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
   </svg>
 </a>Query string parameters</h4>
 <p>Use the <code>params</code> argument to add query string parameters to requests:</p>
-<pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;http://httpbin.org/get&quot;</span>, params: { <span class="s">&quot;firstname&quot;</span> =&gt; <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> =&gt; <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
 <h4><a id="form-data" class="anchor" href="#form-data">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Form data</h4>
 <p>Use the <code>form</code> argument to pass data serialized as form encoded:</p>
-<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: { <span class="s">&quot;firstname&quot;</span> =&gt; <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> =&gt; <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
 <h4><a id="file-uploads-via-form-data" class="anchor" href="#file-uploads-via-form-data">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -521,8 +521,8 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
 </a>File uploads (via form data)</h4>
 <p>To upload files as if form data, construct the form as follows:</p>
 <pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {
-  <span class="s">&quot;username&quot;</span> => <span class="s">&quot;Quincy&quot;</span>,
-  <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/quincy_avatar.png&quot;</span>)
+  <span class="s">&quot;username&quot;</span> =&gt; <span class="s">&quot;Quincy&quot;</span>,
+  <span class="s">&quot;avatar&quot;</span> =&gt; <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/quincy_avatar.png&quot;</span>)
 })</code></pre>
 <p>It is possible to upload multiple files:</p>
 <pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {
@@ -534,11 +534,11 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
 })</code></pre>
 <p>Or pass the name with <code>[]</code>:</p>
 <pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, form: {
-  <span class="s">&quot;photos[]&quot;</span> => [
+  <span class="s">&quot;photos[]&quot;</span> =&gt; [
     <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/photo1.png&quot;</span>),
     <span class="t">File</span>.open(<span class="s">&quot;/Users/icyleaf/photo2.png&quot;</span>)
   ],
-  <span class="s">&quot;album_name&quot;</span> => <span class="s">&quot;samples&quot;</span>
+  <span class="s">&quot;album_name&quot;</span> =&gt; <span class="s">&quot;samples&quot;</span>
 })</code></pre>
 <p>Multiple files can also be uploaded using both ways above, it depend on web server.</p>
 <h4><a id="json-data" class="anchor" href="#json-data">
@@ -547,7 +547,7 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
   </svg>
 </a>JSON data</h4>
 <p>Use the <code>json</code> argument to pass data serialized as body encoded:</p>
-<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, json: { <span class="s">&quot;firstname&quot;</span> => <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> => <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
+<pre><code class="language-crystal"><span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>, json: { <span class="s">&quot;firstname&quot;</span> =&gt; <span class="s">&quot;Olen&quot;</span>, <span class="s">&quot;lastname&quot;</span> =&gt; <span class="s">&quot;Rosenbaum&quot;</span> })</code></pre>
 <h4><a id="raw-string" class="anchor" href="#raw-string">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -560,7 +560,7 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
 <span class="c"># Set content-type manually</span>
 <span class="t">Halite</span>.post(<span class="s">&quot;http://httpbin.org/post&quot;</span>,
   headers: {
-    <span class="s">&quot;content-type&quot;</span> => <span class="s">&quot;application/json&quot;</span>
+    <span class="s">&quot;content-type&quot;</span> =&gt; <span class="s">&quot;application/json&quot;</span>
   },
   raw: <span class="s">%Q{{&quot;name&quot;:&quot;Peter Lee&quot;,&quot;address&quot;:&quot;23123 Happy Ave&quot;,&quot;language&quot;:&quot;C++&quot;}}</span>
 )</code></pre>
@@ -600,7 +600,7 @@ and Python's <a href="https://github.com/requests/requests">requests</a>.</p>
 <pre><code class="language-crystal"><span class="t">Halite</span>.headers(private_token: <span class="s">&quot;T0k3n&quot;</span>).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 
 <span class="c"># Also support Hash or NamedTuple</span>
-<span class="t">Halite</span>.headers({ <span class="s">&quot;private_token&quot;</span> => <span class="s">&quot;T0k3n&quot;</span> }).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
+<span class="t">Halite</span>.headers({ <span class="s">&quot;private_token&quot;</span> =&gt; <span class="s">&quot;T0k3n&quot;</span> }).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)
 
 <span class="c"># Or</span>
 <span class="t">Halite</span>.headers({ private_token: <span class="s">&quot;T0k3n&quot;</span> }).get(<span class="s">&quot;http://httpbin.org/get&quot;</span>)</code></pre>

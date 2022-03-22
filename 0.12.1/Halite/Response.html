@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.1.1">
+<meta name="generator" content="Crystal Docs 1.2.2">
 <meta name="crystal_docs.project_version" content="0.12.1">
 <meta name="crystal_docs.project_name" content="halite">
 
@@ -1036,7 +1036,7 @@ given <code>IO</code> object.</p>
 <pre><code class="language-crystal"><span class="t">Halite</span>.get(<span class="s">&quot;https://httpbin.org/status/404&quot;</span>).raise_for_status
 <span class="c"># =&gt; Unhandled exception: 404 not found error with url: https://httpbin.org/status/404  (Halite::ClientError)</span>
 
-<span class="t">Halite</span>.get(<span class="s">&quot;https://httpbin.org/status/500&quot;</span>, params: {<span class="s">&quot;foo&quot;</span> => <span class="s">&quot;bar&quot;</span>}).raise_for_status
+<span class="t">Halite</span>.get(<span class="s">&quot;https://httpbin.org/status/500&quot;</span>, params: {<span class="s">&quot;foo&quot;</span> =&gt; <span class="s">&quot;bar&quot;</span>}).raise_for_status
 <span class="c"># =&gt; Unhandled exception: 500 internal server error error with url: https://httpbin.org/status/500?foo=bar  (Halite::ServerError)</span>
 
 <span class="t">Halite</span>.get(<span class="s">&quot;https://httpbin.org/status/301&quot;</span>).raise_for_status

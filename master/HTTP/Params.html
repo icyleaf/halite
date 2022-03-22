@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.1.1">
+<meta name="generator" content="Crystal Docs 1.2.2">
 <meta name="crystal_docs.project_version" content="master-dev">
 <meta name="crystal_docs.project_name" content="halite">
 
@@ -568,12 +568,12 @@
           <p>Returns the given key value pairs as a url-encoded query.</p>
 <p>Every parameter added is directly written to an IO, where keys and values are properly escaped.</p>
 <pre><code class="language-crystal"><span class="t">HTTP</span><span class="t">::</span><span class="t">Params</span>.encode({
-  <span class="s">&quot;name&quot;</span>    => <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
-  <span class="s">&quot;skill&quot;</span>   => [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
-  <span class="s">&quot;company&quot;</span> => {
-    <span class="s">&quot;name&quot;</span> => <span class="s">&quot;Keeling Inc&quot;</span>,
+  <span class="s">&quot;name&quot;</span>    =&gt; <span class="s">&quot;Lizeth Gusikowski&quot;</span>,
+  <span class="s">&quot;skill&quot;</span>   =&gt; [<span class="s">&quot;ruby&quot;</span>, <span class="s">&quot;crystal&quot;</span>],
+  <span class="s">&quot;company&quot;</span> =&gt; {
+    <span class="s">&quot;name&quot;</span> =&gt; <span class="s">&quot;Keeling Inc&quot;</span>,
   },
-  <span class="s">&quot;avatar&quot;</span> => <span class="t">File</span>.open(<span class="s">&quot;avatar_big.png&quot;</span>),
+  <span class="s">&quot;avatar&quot;</span> =&gt; <span class="t">File</span>.open(<span class="s">&quot;avatar_big.png&quot;</span>),
 })
 <span class="c"># =&gt; &quot;name=Lizeth+Gusikowski&amp;skill=ruby&amp;skill=crystal&amp;company=%7B%22name%22+%3D%3E+%22Keeling+Inc%22%7D&amp;avatar=avatar_big.png&quot;</span></code></pre>
         </div>
